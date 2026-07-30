@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tenang.in Dashboard — Lihat ringkasan perkembangan mood, streak, badge pencapaian, dan insight personal.">
+  <meta name="theme-color" content="#3B72C4">
+  <title>Dashboard — Tenang.in</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Lexend:wght@300;400;500;600;700;800&family=Urbanist:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="container container-md">
+
+      <!-- Header -->
+      <section style="padding:var(--space-xl) 0;">
+        <h1 style="font-size:var(--h2-size); font-weight:700; display:flex; align-items:center; gap:10px;">
+          <span class="material-symbols-rounded text-primary" style="font-size:32px;">bar_chart</span>
+          <span>Dashboard</span>
+        </h1>
+        <p style="color:rgba(255,255,255,0.75); margin-top:var(--space-xs);">Ringkasan perjalanan refleksimu</p>
+      </section>
+
+      <!-- Daily Quote -->
+      <section id="dashboard-quote">
+        <!-- Filled by JS -->
+      </section>
+
+      <!-- Mini Chart -->
+      <section style="margin-top:var(--space-xl);">
+        <h2 style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
+          <span class="material-symbols-rounded" style="font-size:22px;">show_chart</span>
+          <span>Mood 7 Hari Terakhir</span>
+        </h2>
+        <div class="card" style="padding:var(--space-lg);">
+          <div id="dashboard-chart"></div>
+        </div>
+      </section>
+
+      <!-- Mini Contribution Grid -->
+      <section style="margin-top:var(--space-xl);">
+        <h2 style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
+          <span class="material-symbols-rounded" style="font-size:22px;">calendar_month</span>
+          <span>Kalender Mood Bulan Ini</span>
+        </h2>
+        <div class="card" style="padding:var(--space-lg);">
+          <div id="dashboard-grid"></div>
+        </div>
+      </section>
+
+      <!-- Stats -->
+      <section style="margin-top:var(--space-xl);" id="dashboard-stats">
+        <!-- Filled by JS -->
+      </section>
+
+      <!-- Badges -->
+      <section style="margin-top:var(--space-xl); padding-bottom:var(--space-xl);" id="dashboard-badges">
+        <!-- Filled by JS -->
+      </section>
+
+      <!-- Quick Actions -->
+      <section style="padding-bottom:var(--space-2xl);">
+        <div class="quick-grid">
+          <a href="mood-tracker.html" class="quick-card">
+            <span class="material-symbols-rounded text-primary" style="font-size:32px;">sentiment_satisfied</span>
+            <span class="quick-card-title">Check-in Mood</span>
+          </a>
+          <a href="jurnal.html" class="quick-card">
+            <span class="material-symbols-rounded text-primary" style="font-size:32px;">edit_note</span>
+            <span class="quick-card-title">Tulis Jurnal</span>
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/charts.js"></script>
+  <script src="assets/js/teman-chat.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/dashboard.js"></script>
+</body>
+</html>

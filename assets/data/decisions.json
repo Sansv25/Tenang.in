@@ -1,0 +1,330 @@
+{
+  "initial": {
+    "greeting_default": "Hai! Aku Teman 👋 Aku di sini buat nemenin kamu refleksi. Mau mulai dari mana?",
+    "greeting_happy": "Hai! Kelihatannya mood kamu lagi bagus hari ini 😊 Senang dengarnya! Mau cerita apa?",
+    "greeting_sad": "Hai... Aku lihat hari ini mungkin berat buat kamu. Nggak apa-apa, aku di sini. Mau ngobrol?",
+    "greeting_neutral": "Hai! Gimana kabarmu hari ini? Aku Teman, siap dengerin kamu 💙"
+  },
+  "disclaimer": "⚠️ Teman membantu refleksi diri, bukan pengganti konsultasi profesional. Jika kamu merasa butuh bantuan lebih, jangan ragu hubungi profesional.",
+  "tree": {
+    "root": {
+      "message": null,
+      "options": [
+        { "text": "😔 Aku lagi nggak baik-baik aja", "next": "not_okay" },
+        { "text": "😊 Aku lagi senang!", "next": "happy" },
+        { "text": "🤔 Aku bingung sama perasaanku", "next": "confused" },
+        { "text": "💡 Kasih aku tips dong", "next": "tips" },
+        { "text": "📝 Aku mau refleksi diri", "next": "reflect" }
+      ]
+    },
+    "not_okay": {
+      "message": "Terima kasih sudah mau cerita 💙 Nggak apa-apa merasa nggak baik. Boleh aku tahu lebih lanjut?",
+      "options": [
+        { "text": "😰 Aku merasa cemas / khawatir", "next": "anxious" },
+        { "text": "😢 Aku merasa sedih", "next": "feeling_sad" },
+        { "text": "😤 Aku merasa kesal / marah", "next": "angry" },
+        { "text": "😞 Aku merasa kesepian", "next": "lonely" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "anxious": {
+      "message": "Kecemasan itu sinyal dari tubuhmu bahwa ada sesuatu yang perlu diperhatikan. Itu wajar 💙\n\nCoba teknik grounding ini: Sebutkan 5 hal yang bisa kamu lihat, 4 yang bisa disentuh, 3 yang didengar, 2 yang dicium, 1 yang dirasa.\n\nMau coba apa selanjutnya?",
+      "options": [
+        { "text": "🧘 Latihan pernapasan", "next": "breathing" },
+        { "text": "📝 Tulis yang bikin cemas di jurnal", "next": "suggest_journal" },
+        { "text": "📞 Aku butuh bicara dengan profesional", "next": "professional_help" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "feeling_sad": {
+      "message": "Sedih itu manusiawi, dan kamu berani mengakuinya — itu sudah langkah yang besar 💙\n\nKadang kita nggak perlu tahu kenapa sedih. Yang penting, kamu nggak harus melewati ini sendirian.",
+      "options": [
+        { "text": "💭 Aku mau cerita lebih lanjut", "next": "sad_deeper" },
+        { "text": "📝 Mungkin aku mau tulis di jurnal", "next": "suggest_journal" },
+        { "text": "🌟 Kasih aku sesuatu yang positif", "next": "positive_affirmation" },
+        { "text": "📞 Aku merasa ini serius, butuh bantuan", "next": "professional_help" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "sad_deeper": {
+      "message": "Aku dengerin kamu 💙 Kadang yang kita butuhkan cuma ruang untuk merasakan perasaan kita tanpa dihakimi.\n\nIngat: perasaan ini sementara. Kamu sudah melewati hari-hari berat sebelumnya, dan kamu lebih kuat dari yang kamu kira.",
+      "options": [
+        { "text": "🙏 Terima kasih, Teman", "next": "closing_care" },
+        { "text": "📝 Aku mau tulis perasaanku", "next": "suggest_journal" },
+        { "text": "📞 Aku butuh bantuan profesional", "next": "professional_help" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "angry": {
+      "message": "Marah itu emosi yang valid — artinya ada sesuatu yang penting buat kamu yang terasa dilanggar.\n\nSebelum bereaksi, coba tarik napas dalam 4 detik, tahan 4 detik, hembuskan 4 detik. Ulangi 3 kali.\n\nSudah lebih tenang?",
+      "options": [
+        { "text": "😌 Iya, lumayan", "next": "calm_after_anger" },
+        { "text": "😤 Masih kesal", "next": "still_angry" },
+        { "text": "📝 Mau tulis di jurnal aja", "next": "suggest_journal" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "calm_after_anger": {
+      "message": "Bagus! 💙 Sekarang coba pikirin: apa yang sebenarnya bikin kamu kesal? Kadang di balik marah ada perasaan lain — kecewa, takut, atau lelah.\n\nMenulis bisa bantu kamu memproses ini.",
+      "options": [
+        { "text": "📝 Oke, aku mau coba tulis", "next": "suggest_journal" },
+        { "text": "💡 Kasih tips mengelola emosi", "next": "anger_tips" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "still_angry": {
+      "message": "Nggak apa-apa, emosi butuh waktu untuk diproses. Jangan paksa dirimu untuk langsung 'baik-baik aja'.\n\nYang penting sekarang: jangan ambil keputusan besar saat masih emosi. Istirahat dulu, ya 💙",
+      "options": [
+        { "text": "💡 Kasih tips mengelola emosi", "next": "anger_tips" },
+        { "text": "🙏 Oke, terima kasih Teman", "next": "closing_care" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "anger_tips": {
+      "message": "Beberapa tips mengelola emosi marah:\n\n🏃 Gerakkan tubuh — jalan kaki, push-up, atau stretching\n✍️ Tulis apa yang kamu rasakan tanpa sensor\n🎵 Dengerin musik yang match sama mood\n🧊 Pegang es batu — sensasi fisik bisa 'reset' emosi\n⏰ Beri diri waktu 20 menit sebelum merespon",
+      "options": [
+        { "text": "🙏 Terima kasih, helpful banget!", "next": "closing_positive" },
+        { "text": "📝 Mau coba tulis di jurnal", "next": "suggest_journal" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "lonely": {
+      "message": "Kesepian itu bisa terasa bahkan saat dikelilingi orang 💙 Perasaan itu valid.\n\nKamu nggak sendirian dalam merasa sendirian. Banyak remaja merasakan hal yang sama, terutama di era digital ini.",
+      "options": [
+        { "text": "💭 Cerita lebih lanjut", "next": "lonely_deeper" },
+        { "text": "💡 Tips untuk mengatasi rasa sepi", "next": "lonely_tips" },
+        { "text": "📞 Aku butuh bicara dengan seseorang", "next": "professional_help" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "lonely_deeper": {
+      "message": "Terkadang rasa sepi datang karena kita merasa nggak benar-benar 'dimengerti'. Kamu layak punya koneksi yang genuine 💙\n\nSatu langkah kecil: coba hubungi satu orang yang dulu bikin kamu nyaman. Kadang mereka juga menunggu kabar darimu.",
+      "options": [
+        { "text": "🙏 Terima kasih, aku mau coba", "next": "closing_positive" },
+        { "text": "📝 Mau tulis perasaanku dulu", "next": "suggest_journal" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "lonely_tips": {
+      "message": "Tips mengatasi rasa kesepian:\n\n📱 Kirim pesan ke satu teman — mulai dari yang kecil\n🎯 Ikut komunitas/klub yang sesuai minatmu\n📝 Tulis surat untuk dirimu sendiri\n🤝 Volunteer — membantu orang lain menciptakan koneksi\n💙 Ingat: kualitas > kuantitas dalam pertemanan",
+      "options": [
+        { "text": "🙏 Terima kasih, Teman", "next": "closing_positive" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "happy": {
+      "message": "Yeay! Senang dengar kamu lagi happy! 🎉 Momen bahagia itu berharga — yuk kita rayakan!",
+      "options": [
+        { "text": "📝 Aku mau tulis momen ini biar nggak lupa", "next": "suggest_journal_happy" },
+        { "text": "🌟 Apa yang bikin aku senang hari ini", "next": "happy_explore" },
+        { "text": "💡 Tips menjaga mood baik", "next": "maintain_happy" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "happy_explore": {
+      "message": "Mengenali sumber kebahagiaanmu itu penting! 💛 Saat tahu apa yang bikin kamu senang, kamu bisa lebih sering melakukannya.\n\nCoba pikirin: apakah ini dari orang, aktivitas, pencapaian, atau momen kecil?",
+      "options": [
+        { "text": "📝 Mau tulis di jurnal biar ingat", "next": "suggest_journal_happy" },
+        { "text": "📊 Cek mood tracker ku", "next": "suggest_mood_tracker" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "maintain_happy": {
+      "message": "Tips menjaga mood baik:\n\n☀️ Jaga ritme tidur yang konsisten\n🏃 Gerak badan minimal 15 menit sehari\n📝 Journaling gratitude setiap malam\n📱 Batasi screen time sebelum tidur\n🤝 Luangkan waktu untuk orang yang kamu sayangi\n💧 Cukupi air putih & nutrisi",
+      "options": [
+        { "text": "🙏 Thanks, Teman!", "next": "closing_positive" },
+        { "text": "📊 Mau cek perkembangan mood ku", "next": "suggest_mood_tracker" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "confused": {
+      "message": "Bingung sama perasaan sendiri itu lebih umum dari yang kamu kira 💙 Emosi itu kompleks — kadang kita merasa beberapa hal sekaligus.",
+      "options": [
+        { "text": "🎭 Aku merasa banyak emosi sekaligus", "next": "mixed_emotions" },
+        { "text": "😶 Aku merasa mati rasa / kosong", "next": "numb" },
+        { "text": "🔄 Mood-ku naik turun nggak jelas", "next": "mood_swings" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "mixed_emotions": {
+      "message": "Merasa beberapa emosi sekaligus itu normal! Kamu bisa senang dan sedih di saat bersamaan 💙\n\nCoba latihan ini: tutup mata, tarik napas, dan tanyakan 'emosi mana yang paling kuat sekarang?'\n\nNggak perlu label semuanya. Cukup satu yang paling terasa.",
+      "options": [
+        { "text": "📝 Mau coba tulis di jurnal", "next": "suggest_journal" },
+        { "text": "📊 Cek mood tracker", "next": "suggest_mood_tracker" },
+        { "text": "🙏 Terima kasih, ini membantu", "next": "closing_care" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "numb": {
+      "message": "Merasa 'kosong' kadang adalah cara tubuhmu melindungi diri dari emosi yang terlalu berat 💙\n\nIni bukan berarti kamu rusak. Tubuhmu sedang istirahat dari perasaan.\n\nCoba mulai dari hal kecil: pegang sesuatu yang punya tekstur, atau minum air hangat. Rasakan sensasinya.",
+      "options": [
+        { "text": "💡 Tips untuk 'merasa' lagi", "next": "numb_tips" },
+        { "text": "📞 Ini sudah lama, aku butuh bantuan", "next": "professional_help" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "numb_tips": {
+      "message": "Tips saat merasa mati rasa:\n\n🧊 Sensasi fisik: pegang es, cuci muka air dingin\n🎵 Dengerin lagu yang biasanya bikin kamu nangis/senang\n🎨 Gambar/coret-coret bebas tanpa mikir\n🚶 Jalan kaki keluar, rasakan angin\n📝 Tulis apapun yang ada di pikiran, tanpa filter\n\nKalau ini berlangsung lama, nggak apa-apa minta bantuan profesional ya 💙",
+      "options": [
+        { "text": "📝 Mau coba tulis di jurnal", "next": "suggest_journal" },
+        { "text": "📞 Aku mau cari bantuan profesional", "next": "professional_help" },
+        { "text": "🙏 Terima kasih, Teman", "next": "closing_care" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "mood_swings": {
+      "message": "Mood yang naik-turun itu sangat umum di usia remaja — hormonal, tekanan sosial, dan banyak hal lain bisa mempengaruhi 💙\n\nYang penting: kamu menyadari polanya. Itu sudah langkah besar!",
+      "options": [
+        { "text": "📊 Aku mau track mood-ku", "next": "suggest_mood_tracker" },
+        { "text": "💡 Tips stabilkan mood", "next": "mood_stability_tips" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "mood_stability_tips": {
+      "message": "Tips menstabilkan mood:\n\n😴 Tidur 7-9 jam — ini fondasi segalanya\n🍎 Makan teratur, hindari skip meals\n📱 Kurangi doom scrolling\n🏃 Gerak badan teratur\n📝 Track mood harian — lihat polanya\n🧘 Latihan mindfulness 5 menit per hari\n\nKonsistensi kecil > perubahan besar yang nggak sustainable",
+      "options": [
+        { "text": "📊 Mau mulai track mood", "next": "suggest_mood_tracker" },
+        { "text": "🙏 Terima kasih!", "next": "closing_positive" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "tips": {
+      "message": "Aku punya beberapa tips untukmu! Mau tips tentang apa?",
+      "options": [
+        { "text": "😴 Tips tidur lebih baik", "next": "tips_sleep" },
+        { "text": "😰 Tips mengatasi kecemasan", "next": "tips_anxiety" },
+        { "text": "📱 Tips digital wellbeing", "next": "tips_digital" },
+        { "text": "💪 Tips self-care harian", "next": "tips_selfcare" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "tips_sleep": {
+      "message": "Tips Tidur Lebih Baik 😴\n\n🌙 Tetapkan jam tidur yang konsisten\n📱 Jauhkan HP 30 menit sebelum tidur\n🌡️ Kamar yang sejuk dan gelap\n☕ Hindari kafein setelah jam 3 sore\n📝 Tulis 3 hal yang disyukuri sebelum tidur\n🧘 Coba teknik relaksasi otot progresif\n📖 Baca buku (bukan layar!) sebelum tidur",
+      "options": [
+        { "text": "🙏 Terima kasih!", "next": "closing_positive" },
+        { "text": "💡 Tips lainnya", "next": "tips" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "tips_anxiety": {
+      "message": "Tips Mengatasi Kecemasan 😰\n\n🫁 Teknik napas 4-7-8: hirup 4 detik, tahan 7, hembuskan 8\n🖐️ Grounding 5-4-3-2-1: gunakan 5 indra\n✍️ Tulis kekhawatiranmu — pisahkan yang bisa vs nggak bisa dikontrol\n⏰ 'Worry window': 10 menit khusus untuk cemas, lalu stop\n🚶 Jalan kaki — gerakan membantu 'reset' pikiran\n💬 Bicara dengan seseorang yang kamu percaya",
+      "options": [
+        { "text": "🧘 Latihan pernapasan sekarang", "next": "breathing" },
+        { "text": "🙏 Terima kasih!", "next": "closing_positive" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "tips_digital": {
+      "message": "Tips Digital Wellbeing 📱\n\n⏰ Set batas waktu untuk sosial media\n🔕 Matikan notifikasi yang nggak penting\n📵 No phone zone: meja makan & kamar tidur\n🧹 Unfollow akun yang bikin kamu nggak nyaman\n📰 Batasi konsumsi berita negatif\n🌅 Jangan cek HP dalam 30 menit pertama bangun\n📝 Ganti scrolling dengan journaling",
+      "options": [
+        { "text": "🙏 Thanks, mau coba!", "next": "closing_positive" },
+        { "text": "💡 Tips lainnya", "next": "tips" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "tips_selfcare": {
+      "message": "Tips Self-Care Harian 💪\n\n💧 Minum air putih yang cukup\n🏃 15 menit gerak badan\n☀️ Paparan sinar matahari pagi\n📝 Journaling 5 menit\n🎵 Dengerin musik yang kamu suka\n🤝 Hubungi satu orang yang kamu sayangi\n😴 Tidur cukup — ini bukan kemewahan, ini kebutuhan",
+      "options": [
+        { "text": "🙏 Terima kasih!", "next": "closing_positive" },
+        { "text": "📝 Mau mulai journaling", "next": "suggest_journal" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "reflect": {
+      "message": "Refleksi diri itu langkah yang berani 💙 Mau refleksi tentang apa?",
+      "options": [
+        { "text": "📝 Mau tulis jurnal hari ini", "next": "suggest_journal" },
+        { "text": "🧠 Kenali tipe kepribadianku", "next": "suggest_kenali" },
+        { "text": "📊 Lihat perkembangan mood-ku", "next": "suggest_mood_tracker" },
+        { "text": "🎯 Temukan gaya refleksiku", "next": "suggest_profil" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "breathing": {
+      "message": "Yuk, latihan pernapasan bersama! 🧘\n\n1️⃣ Duduk nyaman, tutup mata\n2️⃣ Hirup napas dalam... 4 detik\n3️⃣ Tahan... 7 detik\n4️⃣ Hembuskan pelan... 8 detik\n\nUlangi 3-4 kali. Rasakan tubuhmu jadi lebih rileks.\n\nBagaimana rasanya?",
+      "options": [
+        { "text": "😌 Lebih tenang sekarang", "next": "closing_positive" },
+        { "text": "😕 Masih belum tenang", "next": "breathing_more" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "breathing_more": {
+      "message": "Nggak apa-apa, butuh latihan 💙 Coba lagi pelan-pelan — nggak ada yang salah kalau belum langsung terasa.\n\nAlternatif: coba teknik 'body scan' — dari ujung kaki ke kepala, sadari tiap bagian tubuhmu. Rilekskan yang tegang.",
+      "options": [
+        { "text": "📝 Mau coba tulis perasaanku", "next": "suggest_journal" },
+        { "text": "📞 Aku butuh bicara dengan seseorang", "next": "professional_help" },
+        { "text": "🙏 Terima kasih, Teman", "next": "closing_care" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "suggest_journal": {
+      "message": "Menulis bisa membantu kamu memproses perasaan 📝\n\nKamu bisa mulai dari prompt yang sudah aku siapkan, atau tulis bebas — yang penting, jujur sama dirimu sendiri.\n\n💙 Semua tulisanmu privat dan tersimpan hanya di perangkatmu.",
+      "options": [
+        { "text": "✏️ Buka Ruang Jurnal", "next": "_navigate_jurnal" },
+        { "text": "🙏 Nanti aja, terima kasih", "next": "closing_care" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "suggest_journal_happy": {
+      "message": "Ide bagus! 📝 Menulis momen bahagia itu kayak bikin 'tabungan kebahagiaan' — nanti di hari yang berat, kamu bisa baca lagi dan ingat bahwa hari baik itu ada.\n\n💛 Yuk, abadikan momen ini!",
+      "options": [
+        { "text": "✏️ Buka Ruang Jurnal", "next": "_navigate_jurnal" },
+        { "text": "🙏 Nanti aja, thanks!", "next": "closing_positive" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "suggest_mood_tracker": {
+      "message": "Mood Tracker bisa bantu kamu melihat pola emosimu dari waktu ke waktu 📊\n\nDengan tracking rutin, kamu bisa mulai mengenali: apa yang biasanya bikin mood naik atau turun.",
+      "options": [
+        { "text": "📊 Buka Mood Tracker", "next": "_navigate_mood" },
+        { "text": "🙏 Nanti aja", "next": "closing_care" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "suggest_kenali": {
+      "message": "Kuis Kenali Dirimu akan membantu kamu memahami tipe kepribadianmu melalui 12 pertanyaan sederhana 🧠\n\nHasilnya bisa memberikan insight tentang cara kamu berpikir, merasa, dan berinteraksi.",
+      "options": [
+        { "text": "🧠 Mulai Kuis", "next": "_navigate_kenali" },
+        { "text": "🙏 Nanti aja", "next": "closing_care" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "suggest_profil": {
+      "message": "Dengan menemukan gaya refleksimu, Tenang.in bisa menyesuaikan pengalaman khusus untukmu 🎯\n\nCuma 7 pertanyaan singkat!",
+      "options": [
+        { "text": "🎯 Mulai Kuis Profil", "next": "_navigate_profil" },
+        { "text": "🙏 Nanti aja", "next": "closing_care" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "professional_help": {
+      "message": "Kamu sangat berani mau mencari bantuan 💙 Itu bukan kelemahan, itu kekuatan.\n\n📞 Hotline Kesehatan Jiwa: 119 ext. 8\n📱 Into The Light: 021-7884-5555\n💬 Sejiwa: 119 ext. 8\n🌐 Halodoc — konsultasi psikolog online\n\nJangan ragu untuk menghubungi mereka ya. Kamu layak mendapat bantuan.",
+      "options": [
+        { "text": "🙏 Terima kasih, Teman", "next": "closing_care" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "positive_affirmation": {
+      "message": "💙 Kamu lebih kuat dari yang kamu kira.\n🌟 Kamu layak bahagia.\n🌱 Setiap hari adalah kesempatan baru.\n💪 Progress, bukan perfection.\n🤗 Kamu nggak sendirian.\n\nPilih satu yang paling resonates sama kamu, dan ingat itu di hari-hari berat 💙",
+      "options": [
+        { "text": "📝 Mau tulis ini di jurnal", "next": "suggest_journal" },
+        { "text": "🙏 Terima kasih, aku butuh ini", "next": "closing_care" },
+        { "text": "🔙 Kembali ke awal", "next": "root" }
+      ]
+    },
+    "closing_positive": {
+      "message": "Senang bisa ngobrol sama kamu! 🎉 Ingat, aku selalu di sini kapanpun kamu butuh. Semoga harimu menyenangkan! 💛",
+      "options": [
+        { "text": "👋 Sampai nanti, Teman!", "next": "_close" },
+        { "text": "🔙 Mau ngobrol lagi", "next": "root" }
+      ]
+    },
+    "closing_care": {
+      "message": "Aku selalu di sini buat kamu 💙 Kapanpun kamu butuh teman ngobrol, klik aku lagi ya.\n\nJaga dirimu baik-baik. Kamu penting. 🤗",
+      "options": [
+        { "text": "💙 Terima kasih, Teman", "next": "_close" },
+        { "text": "🔙 Mau ngobrol lagi", "next": "root" }
+      ]
+    }
+  }
+}

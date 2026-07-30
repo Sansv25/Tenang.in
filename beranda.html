@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Tenang.in Beranda — Check-in mood harian instan, bento grid refleksi diri, dan interaksi privat dengan Teman AI dalam antarmuka wellness bersih dan tenang.">
+  <meta name="theme-color" content="#3B72C4">
+  <title>Beranda — Tenang.in</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Lexend:wght@300;400;500;600;700;800&family=Urbanist:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/beranda.css">
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <div class="container">
+
+      <!-- ======= HERO GREETING FLOATING (UNWRAPPED & CENTERED) ======= -->
+      <header class="dashboard-hero-floating">
+        <h1 class="greeting-text" id="greeting-text">Selamat Datang! 👋</h1>
+        <p class="greeting-sub">
+          Bagaimana suasana hati dan pikiranmu saat ini? Tenang.in hadir mendampingi setiap langkahmu.
+        </p>
+
+        <!-- Status Streak & Mood Today (Dipindah ke Tengah Bawah Teks) -->
+        <div class="hero-badges-row">
+          <div id="mood-today-summary" style="display:flex; align-items:center; gap:8px;"></div>
+          <div class="streak-badge-floating" id="streak-display" style="display:inline-flex;">
+            <span class="material-symbols-rounded fire-icon">local_fire_department</span>
+            <span><span id="streak-count" style="color:#FBBF24;">0</span> hari beruntun</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- ======= NEW USER NUDGE ======= -->
+      <div class="nudge-banner" id="new-user-nudge">
+        <div class="nudge-banner-icon">
+          <span class="material-symbols-rounded" style="font-size:30px; color:#0284C7;">auto_awesome</span>
+        </div>
+        <div class="nudge-banner-text">
+          <div class="nudge-banner-title">Selamat datang di Tenang.in</div>
+          <div class="nudge-banner-desc">Mulai dengan check-in mood pertamamu, lalu lengkapi profilmu untuk pengalaman
+            yang lebih personal.</div>
+        </div>
+        <a href="profil.html" class="btn btn-sm" style="font-weight:700;">Isi Profil</a>
+      </div>
+
+      <!-- ======= INTERACTIVE INSTANT MOOD PICKER (WHITE WELLNESS CARD) ======= -->
+      <section class="dashboard-mood-card">
+        <div class="dashboard-mood-header">
+          <div class="mood-title-wrap">
+            <div class="mood-title-icon">
+              <span class="material-symbols-rounded" style="font-size:28px;">sentiment_very_satisfied</span>
+            </div>
+            <div>
+              <h2>Check-In Mood Hari Ini</h2>
+              <p>Pilih emosi yang menggambarkan rasamu saat ini untuk mencatatnya dengan instan.</p>
+            </div>
+          </div>
+          <div>
+            <button class="btn-mood-cta" id="checkin-cta-btn" onclick="showCheckInModal()">
+              <span class="material-symbols-rounded" style="font-size:18px;">add_circle</span>
+              <span>Buka Form Lengkap</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="mood-grid">
+          <div class="mood-card-item mood-1" onclick="showCheckInModal(1)">
+            <span class="material-symbols-rounded mood-card-icon"
+              style="color:var(--mood-1);">sentiment_very_dissatisfied</span>
+            <div>
+              <div class="mood-card-label">Buruk</div>
+              <div class="mood-card-sub">Sangat Berat</div>
+            </div>
+          </div>
+
+          <div class="mood-card-item mood-2" onclick="showCheckInModal(2)">
+            <span class="material-symbols-rounded mood-card-icon"
+              style="color:var(--mood-2);">sentiment_dissatisfied</span>
+            <div>
+              <div class="mood-card-label">Kurang</div>
+              <div class="mood-card-sub">Kurang Oke</div>
+            </div>
+          </div>
+
+          <div class="mood-card-item mood-3" onclick="showCheckInModal(3)">
+            <span class="material-symbols-rounded mood-card-icon" style="color:var(--mood-3);">sentiment_neutral</span>
+            <div>
+              <div class="mood-card-label">Biasa</div>
+              <div class="mood-card-sub">Normal & Stabil</div>
+            </div>
+          </div>
+
+          <div class="mood-card-item mood-4" onclick="showCheckInModal(4)">
+            <span class="material-symbols-rounded mood-card-icon"
+              style="color:var(--mood-4);">sentiment_satisfied</span>
+            <div>
+              <div class="mood-card-label">Baik</div>
+              <div class="mood-card-sub">Damai & Positif</div>
+            </div>
+          </div>
+
+          <div class="mood-card-item mood-5" onclick="showCheckInModal(5)">
+            <span class="material-symbols-rounded mood-card-icon"
+              style="color:var(--mood-5);">sentiment_very_satisfied</span>
+            <div>
+              <div class="mood-card-label">Luar Biasa</div>
+              <div class="mood-card-sub">Sangat Bahagia</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======= INTERACTIVE INSPIRATION & WISDOM (CLEAN WHITE) ======= -->
+      <section class="inspiration-card-premium" id="inspiration-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div style="display:flex; align-items:center; gap:8px; font-weight:800; color:#0284C7; font-size:0.95rem;">
+            <span class="material-symbols-rounded" style="font-size:24px;">spa</span>
+            <span>Ruang Wisdom & Inspirasi Harian</span>
+          </div>
+          <button class="btn-rotate-quote" onclick="rotateInspiration()" aria-label="Ganti kutipan inspiratif">
+            <span class="material-symbols-rounded rotate-icon">refresh</span>
+            <span>Inspirasi Baru</span>
+          </button>
+        </div>
+        <div class="quote-content">
+          <div class="quote-text" id="interactive-quote-text">"Kamu tidak harus sempurna setiap saat. Hadir dan
+            mengamati perasaanmu sudah merupakan satu langkah besar."</div>
+          <div class="quote-author" id="interactive-quote-author">— Refleksi Harian</div>
+        </div>
+      </section>
+
+      <!-- Daily tip dynamically populated by home.js -->
+      <section id="daily-tip" style="margin-bottom:var(--space-2xl);"></section>
+
+      <!-- ======= BENTO GRID QUICK ACCESS (ALL WHITE CARDS) ======= -->
+      <section class="bento-container">
+        <div style="margin-bottom:var(--space-lg); display:flex; align-items:center; gap:8px;">
+          <span class="material-symbols-rounded text-primary"
+            style="font-size:28px; color:#FFFFFF !important;">explore</span>
+          <h2 style="font-size:1.5rem; font-weight:800; color:#FFFFFF; margin:0;">Eksplorasi Fitur Refleksi</h2>
+        </div>
+
+        <div class="bento-grid">
+          <!-- Item 1: Mood Tracker -->
+          <a href="mood-tracker.html" class="bento-item" id="quick-mood">
+            <div class="bento-top">
+              <div class="bento-icon-box" style="background: #EFF6FF;">
+                <span class="material-symbols-rounded" style="font-size:32px; color:#3B82F6;">sentiment_satisfied</span>
+              </div>
+              <span class="bento-badge" style="color:#0284C7; background:#E0F2FE; border:1px solid #BAE6FD;">🔥
+                Populer</span>
+            </div>
+            <div>
+              <div class="bento-title">Mood Tracker 📈</div>
+              <div class="bento-desc">Lihat kalender emosi harianmu, analisis pola perubahan perasaan, dan grafik
+                statistik mood kamu setiap minggu.</div>
+            </div>
+          </a>
+
+          <!-- Item 2: Ruang Jurnal -->
+          <a href="jurnal.html" class="bento-item" id="quick-jurnal">
+            <div class="bento-top">
+              <div class="bento-icon-box" style="background: #ECFDF5;">
+                <span class="material-symbols-rounded" style="font-size:32px; color:#10B981;">edit_note</span>
+              </div>
+              <span class="bento-badge" style="color:#059669; background:#D1FAE5; border:1px solid #A7F3D0;">📝
+                Harian</span>
+            </div>
+            <div>
+              <div class="bento-title">Ruang Jurnal ✨</div>
+              <div class="bento-desc">Tuangkan cerita dan keluh kesahmu dengan bantuan panduan prompt interaktif yang
+                dipersonalisasi sesuai perasaanmu.</div>
+            </div>
+          </a>
+
+          <!-- Item 3: Kenali Dirimu -->
+          <a href="kenali.html" class="bento-item" id="quick-kenali">
+            <div class="bento-top">
+              <div class="bento-icon-box" style="background: #FFFBEB;">
+                <span class="material-symbols-rounded" style="font-size:32px; color:#F59E0B;">psychology</span>
+              </div>
+              <span class="bento-badge" style="color:#B45309; background:#FEF3C7; border:1px solid #FDE68A;">🧠
+                Psikologi</span>
+            </div>
+            <div>
+              <div class="bento-title">Kenali Dirimu 💡</div>
+              <div class="bento-desc">Temukan tipe kepribadianmu dan rekomendasi teknik perawatan diri (self-care)
+                melalui tes mandiri 12 pertanyaan.</div>
+            </div>
+          </a>
+
+          <!-- Item 4: Dashboard -->
+          <a href="dashboard.html" class="bento-item" id="quick-dashboard">
+            <div class="bento-top">
+              <div class="bento-icon-box" style="background: #F3E8FF;">
+                <span class="material-symbols-rounded" style="font-size:32px; color:#8B5CF6;">bar_chart</span>
+              </div>
+              <span class="bento-badge" style="color:#7E22CE; background:#F3E8FF; border:1px solid #E9D5FF;">🏆
+                Medali</span>
+            </div>
+            <div>
+              <div class="bento-title">Rangkuman & Badge 🚀</div>
+              <div class="bento-desc">Pantau kemajuan pencapaian medali refleksi, hitung rekor konsistensi streak, dan
+                amati sejauh mana kamu berkembang.</div>
+            </div>
+          </a>
+
+          <!-- Item 5: Wide Card for Teman AI (Clean White with Soft Lavender Tone) -->
+          <a href="javascript:void(0)" onclick="TemanChat.open()" class="bento-item bento-wide" id="quick-teman-ai">
+            <div class="bento-top">
+              <div class="bento-icon-box" style="background: #F3E8FF;">
+                <span class="material-symbols-rounded" style="font-size:34px; color:#9333EA;">smart_toy</span>
+              </div>
+              <span class="bento-badge bento-badge-ai">🤖 AI COMPANION 24/7</span>
+            </div>
+            <div style="margin-top:var(--space-md);">
+              <div class="bento-title" style="font-size:1.35rem;">Teman AI Companion 💙</div>
+              <div class="bento-desc" style="max-width: 680px;">
+                Merasa butuh teman bercerita saat ini juga? Ngobrol santai tanpa rasa takut dihakimi bersama Teman AI.
+                Dipersonalisasi khusus sesuai kondisi emosimu hari ini, 100% offline dan privat di perangkatmu.
+              </div>
+              <div class="btn-ai-start" style="margin-top: var(--space-lg);">
+                <span>Mulai Sesi Curhat Sekarang</span>
+                <span class="material-symbols-rounded" style="font-size:18px;">arrow_forward</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ======= BOTTOM LOGOUT FOOTER SECTION ======= -->
+      <section class="beranda-footer-section">
+        <p class="beranda-footer-desc">
+          Ruang amanmu selalu terjaga privasinya. Seluruh catatan refleksi dan mood disimpan di perangkat lokal secara
+          mandiri tanpa server eksternal.
+        </p>
+        <button id="logout-btn" class="btn-logout-footer" onclick="handleLogout()" aria-label="Keluar Sesi">
+          <span class="material-symbols-rounded">logout</span>
+          <span>Keluar dari Akun</span>
+        </button>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ======= OPTIMIZED CHECK-IN MODAL ======= -->
+  <div class="modal-overlay" id="checkin-modal"
+    style="backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); z-index: 10000 !important; padding: 16px;">
+    <div class="modal"
+      style="max-width: 520px; width: 100%; background: #FFFFFF; border: 1px solid #E2E8F0; color: #0F172A; border-radius: 26px; padding: 28px 24px; box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.4); max-height: 88vh; overflow-y: auto;">
+      <div class="modal-header"
+        style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+        <h2 style="font-size: 1.25rem; font-weight: 850; color: #0F172A; margin: 0; letter-spacing: -0.02em;">Bagaimana
+          perasaanmu hari ini?</h2>
+        <button class="modal-close" onclick="closeCheckInModal()"
+          style="width: 36px; height: 36px; border-radius: 50%; background: #F1F5F9; border: none; color: #64748B; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s;"><span
+            class="material-symbols-rounded">close</span></button>
+      </div>
+
+      <!-- Responsive Wrapping Mood Selector -->
+      <div class="emoji-selector" id="checkin-emojis" style="margin-bottom: 8px;">
+        <button class="emoji-btn" onclick="selectMood(1)">
+          <span class="material-symbols-rounded"
+            style="font-size:32px; color:var(--mood-1);">sentiment_very_dissatisfied</span>
+          <span class="emoji-label">Buruk</span>
+        </button>
+        <button class="emoji-btn" onclick="selectMood(2)">
+          <span class="material-symbols-rounded"
+            style="font-size:32px; color:var(--mood-2);">sentiment_dissatisfied</span>
+          <span class="emoji-label">Kurang</span>
+        </button>
+        <button class="emoji-btn" onclick="selectMood(3)">
+          <span class="material-symbols-rounded" style="font-size:32px; color:var(--mood-3);">sentiment_neutral</span>
+          <span class="emoji-label">Biasa</span>
+        </button>
+        <button class="emoji-btn" onclick="selectMood(4)">
+          <span class="material-symbols-rounded" style="font-size:32px; color:var(--mood-4);">sentiment_satisfied</span>
+          <span class="emoji-label">Baik</span>
+        </button>
+        <button class="emoji-btn" onclick="selectMood(5)">
+          <span class="material-symbols-rounded"
+            style="font-size:32px; color:var(--mood-5);">sentiment_very_satisfied</span>
+          <span class="emoji-label">Luar Biasa</span>
+        </button>
+      </div>
+
+      <!-- Tags -->
+      <div id="checkin-tags-section"
+        style="display:none; margin-top: 18px; border-top: 1px solid #F1F5F9; padding-top: 16px;">
+        <p style="font-size: 0.85rem; font-weight: 750; color: #475569; margin-bottom: 12px; text-align: center;">Apa
+          yang sedang kamu rasakan? (opsional)</p>
+        <div class="tag-container" style="justify-content: center; gap: 8px;">
+          <button type="button" class="tag-chip" onclick="toggleTag('cemas', this)">Cemas</button>
+          <button type="button" class="tag-chip" onclick="toggleTag('stres', this)">Stres</button>
+          <button type="button" class="tag-chip" onclick="toggleTag('kesepian', this)">Kesepian</button>
+          <button type="button" class="tag-chip" onclick="toggleTag('lelah', this)">Lelah</button>
+          <button type="button" class="tag-chip" onclick="toggleTag('bersyukur', this)">Bersyukur</button>
+          <button type="button" class="tag-chip" onclick="toggleTag('semangat', this)">Semangat</button>
+          <button type="button" class="tag-chip" onclick="toggleTag('tenang', this)">Tenang</button>
+          <button type="button" class="tag-chip" onclick="toggleTag('bingung', this)">Bingung</button>
+        </div>
+
+        <!-- Quick Note -->
+        <div style="margin-top: 16px;">
+          <textarea id="checkin-note" class="input textarea" placeholder="Catatan singkat mengenai harimu (opsional)..."
+            style="min-height: 85px; background: #F8FAFC; border: 1.5px solid #E2E8F0; color: #0F172A; border-radius: 16px; padding: 14px; width: 100%; box-sizing: border-box; font-family: inherit; font-size: 0.9rem;"></textarea>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div style="margin-top: 22px;">
+        <button class="btn btn-primary btn-full" onclick="submitCheckIn()"
+          style="font-weight: 850; padding: 14px; background: #0F172A; color: #FFFFFF; border-color: #0F172A; border-radius: 16px; font-size: 1rem; box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25); cursor: pointer;">Simpan
+          Check-in</button>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/charts.js"></script>
+  <script src="assets/js/teman-chat.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/home.js"></script>
+</body>
+
+</html>

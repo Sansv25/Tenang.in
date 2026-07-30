@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "text": "Apa satu hal kecil yang membuatmu tersenyum hari ini?",
+    "mood_context": ["happy", "neutral"],
+    "category": "gratitude"
+  },
+  {
+    "id": 2,
+    "text": "Kalau perasaanmu hari ini punya warna, warna apa itu? Kenapa?",
+    "mood_context": ["all"],
+    "category": "reflection"
+  },
+  {
+    "id": 3,
+    "text": "Apa yang sedang membebani pikiranmu belakangan ini?",
+    "mood_context": ["sad", "anxious"],
+    "category": "release"
+  },
+  {
+    "id": 4,
+    "text": "Ceritakan satu momen hari ini yang ingin kamu ingat.",
+    "mood_context": ["happy", "neutral"],
+    "category": "memory"
+  },
+  {
+    "id": 5,
+    "text": "Apa yang akan kamu katakan ke dirimu yang kemarin?",
+    "mood_context": ["all"],
+    "category": "self-compassion"
+  },
+  {
+    "id": 6,
+    "text": "Siapa orang yang membuatmu merasa aman? Apa yang mereka lakukan?",
+    "mood_context": ["sad", "lonely"],
+    "category": "connection"
+  },
+  {
+    "id": 7,
+    "text": "Apa satu kebiasaan kecil yang ingin kamu mulai minggu ini?",
+    "mood_context": ["neutral", "happy"],
+    "category": "growth"
+  },
+  {
+    "id": 8,
+    "text": "Tulis tiga hal yang kamu syukuri hari ini, sekecil apapun.",
+    "mood_context": ["all"],
+    "category": "gratitude"
+  },
+  {
+    "id": 9,
+    "text": "Apa yang membuatmu cemas belakangan ini? Mana yang bisa kamu kontrol?",
+    "mood_context": ["anxious", "stressed"],
+    "category": "release"
+  },
+  {
+    "id": 10,
+    "text": "Kalau kamu bisa bicara ke dirimu yang 5 tahun lalu, apa yang akan kamu bilang?",
+    "mood_context": ["all"],
+    "category": "reflection"
+  },
+  {
+    "id": 11,
+    "text": "Apa satu hal baik yang sudah kamu lakukan untuk dirimu sendiri hari ini?",
+    "mood_context": ["all"],
+    "category": "self-compassion"
+  },
+  {
+    "id": 12,
+    "text": "Bagaimana perasaanmu tentang besok? Apa yang kamu harapkan?",
+    "mood_context": ["neutral", "happy"],
+    "category": "hope"
+  },
+  {
+    "id": 13,
+    "text": "Apa satu hal yang ingin kamu lepaskan dari pikiranmu malam ini?",
+    "mood_context": ["anxious", "sad", "stressed"],
+    "category": "release"
+  },
+  {
+    "id": 14,
+    "text": "Ceritakan tentang tempat yang membuatmu merasa tenang. Seperti apa rasanya?",
+    "mood_context": ["all"],
+    "category": "calm"
+  },
+  {
+    "id": 15,
+    "text": "Apa kekuatan dirimu yang sering kamu lupakan?",
+    "mood_context": ["sad", "neutral"],
+    "category": "self-compassion"
+  }
+]

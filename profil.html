@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tenang.in Profil — Temukan gaya refleksi yang cocok dan personalisasi pengalamanmu.">
+  <meta name="theme-color" content="#3B72C4">
+  <title>Profil — Tenang.in</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Lexend:wght@300;400;500;600;700;800&family=Urbanist:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="container container-md">
+
+      <!-- Intro -->
+      <section id="profil-intro" style="padding:var(--space-3xl) 0; text-align:center;">
+        <div style="margin-bottom:var(--space-lg);">
+          <span class="material-symbols-rounded" style="font-size:64px; color:var(--secondary-accent);">tune</span>
+        </div>
+        <h1 style="font-size:var(--h2-size); font-weight:800; margin-bottom:var(--space-md);">Profil Refleksimu</h1>
+        <p style="font-size:1.0625rem; color:rgba(255,255,255,0.75); max-width:480px; margin:0 auto var(--space-xl); line-height:1.7;">
+          Jawab 7 pertanyaan untuk menemukan gaya refleksi yang paling cocok untukmu. Tenang.in akan menyesuaikan pengalaman berdasarkan hasilnya!
+        </p>
+
+        <div class="card" style="max-width:440px; margin:0 auto var(--space-2xl); padding:var(--space-xl); text-align:left;">
+          <h3 style="font-weight:700; margin-bottom:var(--space-md); color:var(--text-on-white); text-align:center;">4 Gaya Refleksi</h3>
+          <div style="display:flex; flex-direction:column; gap:var(--space-md);">
+            <div style="display:flex; align-items:center; gap:var(--space-md);">
+              <span class="material-symbols-rounded text-primary" style="font-size:28px;">dark_mode</span>
+              <div>
+                <div style="font-weight:600; color:var(--text-on-white);">Reflektif Malam</div>
+                <div style="font-size:var(--caption-size); color:var(--text-secondary);">Quote filosofis, prompt mendalam</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:var(--space-md);">
+              <span class="material-symbols-rounded text-primary" style="font-size:28px;">wb_sunny</span>
+              <div>
+                <div style="font-weight:600; color:var(--text-on-white);">Aktif Pagi</div>
+                <div style="font-size:var(--caption-size); color:var(--text-secondary);">Quote semangat, tips rutinitas</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:var(--space-md);">
+              <span class="material-symbols-rounded text-primary" style="font-size:28px;">chat_bubble</span>
+              <div>
+                <div style="font-weight:600; color:var(--text-on-white);">Ekspresif</div>
+                <div style="font-size:var(--caption-size); color:var(--text-secondary);">Teman lebih aktif, sharing-friendly</div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:var(--space-md);">
+              <span class="material-symbols-rounded text-primary" style="font-size:28px;">task_alt</span>
+              <div>
+                <div style="font-weight:600; color:var(--text-on-white);">Terstruktur</div>
+                <div style="font-size:var(--caption-size); color:var(--text-secondary);">Dashboard, tracking, goal setting</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-white btn-lg" onclick="startProfilQuiz()" style="font-weight:700;">
+          <span class="material-symbols-rounded">play_arrow</span>
+          Mulai Kuis Profil
+        </button>
+        <p style="font-size:var(--caption-size); color:rgba(255,255,255,0.6); margin-top:var(--space-md);">Sekitar 2-3 menit</p>
+      </section>
+
+      <!-- Quiz Area -->
+      <section id="profil-quiz" style="display:none; min-height:60vh; padding:var(--space-xl) 0;">
+        <div id="profil-quiz-content">
+          <!-- Filled by JS -->
+        </div>
+      </section>
+
+      <!-- Result Area -->
+      <section id="profil-result" style="display:none; padding:var(--space-xl) 0;">
+        <!-- Filled by JS -->
+      </section>
+
+      <!-- Profile Card -->
+      <section id="profil-card-section" style="display:none; padding-bottom:var(--space-xl);">
+        <!-- Filled by JS -->
+      </section>
+
+    </div>
+  </div>
+
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/charts.js"></script>
+  <script src="assets/js/teman-chat.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/profil.js"></script>
+</body>
+</html>

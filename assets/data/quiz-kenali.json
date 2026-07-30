@@ -1,0 +1,180 @@
+{
+  "title": "Kenali Dirimu",
+  "description": "Jawab 12 pertanyaan untuk mengenali tipe kepribadianmu",
+  "dimensions": [
+    { "id": "IE", "label_low": "Introvert", "label_high": "Ekstrovert" },
+    { "id": "TF", "label_low": "Thinker", "label_high": "Feeler" }
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "text": "Di akhir pekan, kamu lebih suka...",
+      "dimension": "IE",
+      "options": [
+        { "text": "Menghabiskan waktu sendiri di kamar, baca buku atau nonton", "score": -1 },
+        { "text": "Keluar bareng teman-teman, ngobrol seru", "score": 1 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Saat menghadapi masalah, kamu cenderung...",
+      "dimension": "TF",
+      "options": [
+        { "text": "Analisis dulu, cari solusi logis step by step", "score": -1 },
+        { "text": "Ikuti perasaan dan intuisi, dengarkan hati", "score": 1 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "Di kelas, kamu lebih nyaman...",
+      "dimension": "IE",
+      "options": [
+        { "text": "Kerja individu, fokus sendiri", "score": -1 },
+        { "text": "Diskusi kelompok, brainstorming bareng", "score": 1 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "Saat temanmu curhat soal masalahnya, kamu biasanya...",
+      "dimension": "TF",
+      "options": [
+        { "text": "Kasih saran praktis dan solusi konkret", "score": -1 },
+        { "text": "Dengerin dulu, validasi perasaannya", "score": 1 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "Kalau harus presentasi di depan kelas...",
+      "dimension": "IE",
+      "options": [
+        { "text": "Agak nervous, lebih suka nulis daripada ngomong", "score": -1 },
+        { "text": "Excited! Suka jadi pusat perhatian", "score": 1 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "Dalam memilih film atau series, kamu lebih tertarik...",
+      "dimension": "TF",
+      "options": [
+        { "text": "Plot twist cerdas, misteri, sci-fi", "score": -1 },
+        { "text": "Drama emosional, romance, slice of life", "score": 1 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "Setelah acara ramai seharian, kamu merasa...",
+      "dimension": "IE",
+      "options": [
+        { "text": "Butuh waktu sendiri untuk recharge", "score": -1 },
+        { "text": "Masih penuh energi, mau lanjut!", "score": 1 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "Saat harus ambil keputusan penting...",
+      "dimension": "TF",
+      "options": [
+        { "text": "Buat daftar pro-kontra, pertimbangkan fakta", "score": -1 },
+        { "text": "Ikuti feeling, pilih yang terasa paling benar", "score": 1 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "Di lingkungan baru, kamu biasanya...",
+      "dimension": "IE",
+      "options": [
+        { "text": "Observasi dulu, baru pelan-pelan buka diri", "score": -1 },
+        { "text": "Langsung kenalan dan ngobrol sama orang baru", "score": 1 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "Yang paling bikin kamu kesal adalah...",
+      "dimension": "TF",
+      "options": [
+        { "text": "Orang yang nggak logis atau nggak efisien", "score": -1 },
+        { "text": "Orang yang nggak peka atau cuek sama perasaan orang", "score": 1 }
+      ]
+    },
+    {
+      "id": 11,
+      "text": "Cara kamu me-recharge energi yang paling efektif...",
+      "dimension": "IE",
+      "options": [
+        { "text": "Me-time: journaling, musik, atau hobi sendiri", "score": -1 },
+        { "text": "Hangout: ngobrol, ketemu orang, aktivitas bareng", "score": 1 }
+      ]
+    },
+    {
+      "id": 12,
+      "text": "Menurutmu, kekuatan terbesarmu adalah...",
+      "dimension": "TF",
+      "options": [
+        { "text": "Kemampuan berpikir jernih dan problem-solving", "score": -1 },
+        { "text": "Kemampuan memahami dan merasakan emosi orang lain", "score": 1 }
+      ]
+    }
+  ],
+  "results": {
+    "IT": {
+      "emoji": "dark_mode",
+      "icon": "dark_mode",
+      "name": "Pemikir Tenang",
+      "tagline": "Introvert + Thinker",
+      "description": "Kamu adalah pemikir yang mendalam dan analitis. Kamu suka merenungkan segala sesuatu secara logis dan mendalam. Waktu sendiri adalah sumber energimu — bukan karena anti-sosial, tapi karena di sanalah kamu berpikir paling jernih. Kamu punya kemampuan luar biasa untuk melihat detail yang orang lain lewatkan.",
+      "strengths": ["Analitis dan detail", "Mandiri dan fokus", "Pemikir strategis", "Tenang di bawah tekanan"],
+      "tips": [
+        "Arahkan overthinking dengan journaling terstruktur",
+        "Buat daftar kekhawatiran — tandai yang bisa dikontrol",
+        "Waktu sendiri adalah cara mengisi ulang energi, bukan anti-sosial",
+        "Teknik 'worry window': 10 menit khusus untuk khawatir, lalu tutup",
+        "Kamu tidak harus punya jawaban untuk semua hal"
+      ]
+    },
+    "IF": {
+      "emoji": "favorite",
+      "icon": "favorite",
+      "name": "Perasa Mendalam",
+      "tagline": "Introvert + Feeler",
+      "description": "Kamu punya kedalaman emosi yang luar biasa. Kamu merasakan segala sesuatu lebih intens dari kebanyakan orang — dan itu adalah kekuatanmu. Kamu empatik, peka, dan punya intuisi yang tajam. Kreativitasmu sering muncul dari perasaan yang kamu alami.",
+      "strengths": ["Empatik dan peka", "Kreatif dan imajinatif", "Pendengar yang baik", "Intuitif dan mendalam"],
+      "tips": [
+        "Perasaanmu yang dalam adalah kekuatan, bukan kelemahan",
+        "Teknik grounding 5-4-3-2-1 saat emosi overwhelming",
+        "Batasi waktu scrolling — konten orang lain mempengaruhi mood tanpa disadari",
+        "Self-compassion: perlakukan dirimu seperti sahabat terbaikmu",
+        "Tidak semua perasaan perlu dibagikan — jurnal untuk memproses dulu"
+      ]
+    },
+    "ET": {
+      "emoji": "bolt",
+      "icon": "bolt",
+      "name": "Pemimpin Aktif",
+      "tagline": "Ekstrovert + Thinker",
+      "description": "Kamu adalah orang yang penuh energi dengan pikiran yang tajam. Kamu suka tantangan, cepat mengambil keputusan, dan natural dalam memimpin. Orang-orang di sekitarmu sering merasa terinspirasi oleh energi dan ketegasanmu.",
+      "strengths": ["Tegas dan decisive", "Natural leader", "Problem-solver efektif", "Energik dan motivatif"],
+      "tips": [
+        "Ubah kecemasan jadi langkah konkret sekecil apapun",
+        "Istirahat aktif lebih cocok: jalan kaki, olahraga ringan",
+        "Bilang tidak adalah skill produktivitas, bukan kelemahan",
+        "Jadwalkan waktu diam — otak aktif juga butuh jeda",
+        "Energimu besar — isi ulang dengan tidur cukup dan makan bergizi"
+      ]
+    },
+    "EF": {
+      "emoji": "auto_awesome",
+      "icon": "auto_awesome",
+      "name": "Jiwa Sosial",
+      "tagline": "Ekstrovert + Feeler",
+      "description": "Kamu adalah orang yang hangat, ekspresif, dan penuh semangat. Kamu mudah terhubung dengan orang lain dan sering jadi 'penyemangat' di kelompokmu. Kemampuanmu memahami perasaan orang lain membuat kamu dicari sebagai tempat bercerita.",
+      "strengths": ["Hangat dan ekspresif", "Mudah berteman", "Penyemangat alami", "Komunikator yang baik"],
+      "tips": [
+        "Kamu mudah merasakan emosi orang lain — jangan sampai menyerap beban mereka",
+        "Bedakan empati vs mengambil alih beban orang lain",
+        "Tarik napas sebelum bereaksi terhadap situasi emosional",
+        "Kamu tidak harus selalu jadi 'penyemangat' — kamu juga berhak lelah",
+        "Pilih circle yang memberi energi, bukan hanya menguras energimu"
+      ]
+    }
+  }
+}

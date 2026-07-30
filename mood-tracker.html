@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tenang.in Mood Tracker — Lacak mood harianmu, lihat pola emosi dalam chart, dan dapatkan insight personal.">
+  <meta name="theme-color" content="#3B72C4">
+  <title>Mood Tracker — Tenang.in</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Lexend:wght@300;400;500;600;700;800&family=Urbanist:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="container container-md">
+
+      <!-- Header -->
+      <section style="padding:var(--space-xl) 0;">
+        <h1 style="font-size:var(--h2-size); font-weight:700; display:flex; align-items:center; gap:10px;">
+          <span class="material-symbols-rounded text-primary" style="font-size:32px;">sentiment_satisfied</span>
+          <span>Mood Tracker</span>
+        </h1>
+        <p style="color:rgba(255,255,255,0.75); margin-top:var(--space-xs);">Lacak emosimu dan kenali polanya</p>
+      </section>
+
+      <!-- Mood Form -->
+      <section id="mood-form-section">
+        <div class="card" style="padding:var(--space-2xl);">
+          <h3 style="font-weight:700; margin-bottom:var(--space-lg); text-align:center; color:var(--text-on-white);">Bagaimana perasaanmu hari ini?</h3>
+          <div class="emoji-selector" id="mood-emojis">
+            <button class="emoji-btn" onclick="selectMoodTracker(1)">
+              <span class="material-symbols-rounded" style="font-size:32px; color:var(--mood-1);">sentiment_very_dissatisfied</span>
+              <span class="emoji-label">Buruk</span>
+            </button>
+            <button class="emoji-btn" onclick="selectMoodTracker(2)">
+              <span class="material-symbols-rounded" style="font-size:32px; color:var(--mood-2);">sentiment_dissatisfied</span>
+              <span class="emoji-label">Kurang</span>
+            </button>
+            <button class="emoji-btn" onclick="selectMoodTracker(3)">
+              <span class="material-symbols-rounded" style="font-size:32px; color:var(--mood-3);">sentiment_neutral</span>
+              <span class="emoji-label">Biasa</span>
+            </button>
+            <button class="emoji-btn" onclick="selectMoodTracker(4)">
+              <span class="material-symbols-rounded" style="font-size:32px; color:var(--mood-4);">sentiment_satisfied</span>
+              <span class="emoji-label">Baik</span>
+            </button>
+            <button class="emoji-btn" onclick="selectMoodTracker(5)">
+              <span class="material-symbols-rounded" style="font-size:32px; color:var(--mood-5);">sentiment_very_satisfied</span>
+              <span class="emoji-label">Luar Biasa</span>
+            </button>
+          </div>
+          <div id="mood-tags-area" style="display:none; margin-top:var(--space-lg);">
+            <p style="font-size:0.875rem; font-weight:600; color:var(--text-secondary); margin-bottom:var(--space-sm);">Tag (opsional)</p>
+            <div class="tag-container">
+              <button class="tag-chip" onclick="toggleMoodTag('cemas', this)">Cemas</button>
+              <button class="tag-chip" onclick="toggleMoodTag('stres', this)">Stres</button>
+              <button class="tag-chip" onclick="toggleMoodTag('kesepian', this)">Kesepian</button>
+              <button class="tag-chip" onclick="toggleMoodTag('lelah', this)">Lelah</button>
+              <button class="tag-chip" onclick="toggleMoodTag('bersyukur', this)">Bersyukur</button>
+              <button class="tag-chip" onclick="toggleMoodTag('semangat', this)">Semangat</button>
+              <button class="tag-chip" onclick="toggleMoodTag('tenang', this)">Tenang</button>
+              <button class="tag-chip" onclick="toggleMoodTag('bingung', this)">Bingung</button>
+            </div>
+            <textarea id="mood-note" class="input textarea" placeholder="Catatan (opsional)..." style="margin-top:var(--space-md); min-height:80px;"></textarea>
+            <button class="btn btn-primary btn-full" style="margin-top:var(--space-md);" onclick="submitMoodTracker()">Simpan Mood</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Chart -->
+      <section style="margin-top:var(--space-xl);">
+        <h2 style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
+          <span class="material-symbols-rounded" style="font-size:22px;">show_chart</span>
+          <span>Mood 7 Hari Terakhir</span>
+        </h2>
+        <div class="card" style="padding:var(--space-lg);">
+          <div id="mood-chart"></div>
+        </div>
+      </section>
+
+      <!-- Contribution Grid -->
+      <section style="margin-top:var(--space-xl);">
+        <h2 style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
+          <span class="material-symbols-rounded" style="font-size:22px;">calendar_month</span>
+          <span>Riwayat Mood</span>
+        </h2>
+        <div class="card" style="padding:var(--space-lg);">
+          <div id="mood-grid"></div>
+          <div style="display:flex; gap:var(--space-md); margin-top:var(--space-lg); justify-content:center; flex-wrap:wrap; padding-top:var(--space-sm); border-top:1px solid var(--card-border);">
+            <div style="display:flex; align-items:center; gap:4px; font-size:0.6875rem; color:var(--text-secondary);">
+              <div style="width:12px;height:12px;border-radius:3px;background:var(--mood-1);"></div> Buruk
+            </div>
+            <div style="display:flex; align-items:center; gap:4px; font-size:0.6875rem; color:var(--text-secondary);">
+              <div style="width:12px;height:12px;border-radius:3px;background:var(--mood-2);"></div> Kurang
+            </div>
+            <div style="display:flex; align-items:center; gap:4px; font-size:0.6875rem; color:var(--text-secondary);">
+              <div style="width:12px;height:12px;border-radius:3px;background:var(--mood-3);"></div> Biasa
+            </div>
+            <div style="display:flex; align-items:center; gap:4px; font-size:0.6875rem; color:var(--text-secondary);">
+              <div style="width:12px;height:12px;border-radius:3px;background:var(--mood-4);"></div> Baik
+            </div>
+            <div style="display:flex; align-items:center; gap:4px; font-size:0.6875rem; color:var(--text-secondary);">
+              <div style="width:12px;height:12px;border-radius:3px;background:var(--mood-5);"></div> Luar Biasa
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Insights -->
+      <section style="margin-top:var(--space-xl); padding-bottom:var(--space-xl);" id="mood-insights">
+        <!-- Filled by JS -->
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Low Mood Modal -->
+  <div class="modal-overlay" id="low-mood-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white);">Kamu tidak sendirian</h2>
+        <button class="modal-close" onclick="closeLowMoodModal()"><span class="material-symbols-rounded">close</span></button>
+      </div>
+      <p style="color:var(--text-secondary); line-height:1.6; margin-bottom:var(--space-lg);">
+        Kami lihat mood-mu sedang kurang baik. Itu wajar dan valid. Jika kamu merasa butuh bantuan, jangan ragu untuk menghubungi layanan profesional:
+      </p>
+      <div style="display:flex; flex-direction:column; gap:var(--space-sm);">
+        <a href="tel:119" class="btn btn-primary btn-full" style="justify-content:flex-start;">
+          <span class="material-symbols-rounded">call</span>
+          Hotline 119 ext. 8
+        </a>
+        <a href="tel:02178845555" class="btn btn-secondary btn-full" style="justify-content:flex-start; color:var(--primary-accent);">
+          <span class="material-symbols-rounded">phone_iphone</span>
+          Into The Light: 021-7884-5555
+        </a>
+        <button class="btn btn-ghost btn-full" onclick="closeLowMoodModal(); TemanChat.open();" style="color:var(--primary-accent);">
+          <span class="material-symbols-rounded">chat</span>
+          Ngobrol dengan Teman
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/animations.js"></script>
+  <script src="assets/js/charts.js"></script>
+  <script src="assets/js/teman-chat.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/mood-tracker.js"></script>
+</body>
+</html>

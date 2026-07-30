@@ -1,0 +1,114 @@
+{
+  "title": "Profil Refleksimu",
+  "description": "Jawab 7 pertanyaan untuk menemukan gaya refleksi yang cocok untukmu",
+  "questions": [
+    {
+      "id": 1,
+      "text": "Kapan kamu paling sering merenung atau berpikir dalam?",
+      "options": [
+        { "text": "Malam hari, saat semuanya tenang", "scores": { "malam": 2 } },
+        { "text": "Pagi hari, saat pikiran masih segar", "scores": { "pagi": 2 } },
+        { "text": "Kapanpun ada yang menggangguku", "scores": { "ekspresif": 2 } },
+        { "text": "Saat aku menyusun jadwal atau to-do list", "scores": { "terstruktur": 2 } }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "Cara kamu mengekspresikan perasaan yang paling nyaman?",
+      "options": [
+        { "text": "Menulis di jurnal atau catatan pribadi", "scores": { "malam": 1, "terstruktur": 1 } },
+        { "text": "Cerita langsung ke orang terdekat", "scores": { "ekspresif": 2 } },
+        { "text": "Olahraga atau aktivitas fisik", "scores": { "pagi": 2 } },
+        { "text": "Bikin checklist untuk menyelesaikan masalah", "scores": { "terstruktur": 2 } }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "Tipe konten self-care yang paling menarik buatmu?",
+      "options": [
+        { "text": "Quote filosofis yang bikin mikir", "scores": { "malam": 2 } },
+        { "text": "Tips produktivitas dan morning routine", "scores": { "pagi": 2 } },
+        { "text": "Podcast atau video cerita pengalaman orang", "scores": { "ekspresif": 2 } },
+        { "text": "Artikel tentang habit tracking dan goal setting", "scores": { "terstruktur": 2 } }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "Saat mood kamu lagi down, kamu biasanya...",
+      "options": [
+        { "text": "Menyendiri, dengerin musik, merenungkan", "scores": { "malam": 2 } },
+        { "text": "Bangun lebih pagi, coba rutinitas baru", "scores": { "pagi": 2 } },
+        { "text": "Hubungi teman, butuh didengar", "scores": { "ekspresif": 2 } },
+        { "text": "Bikin rencana perbaikan, tulis target", "scores": { "terstruktur": 2 } }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "Apa yang bikin kamu merasa 'accomplished' di akhir hari?",
+      "options": [
+        { "text": "Punya waktu tenang untuk refleksi", "scores": { "malam": 2 } },
+        { "text": "Bangun on-time dan produktif sejak pagi", "scores": { "pagi": 2 } },
+        { "text": "Quality time dan percakapan bermakna", "scores": { "ekspresif": 2 } },
+        { "text": "Semua to-do list terceklis", "scores": { "terstruktur": 2 } }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "Kalau Tenang.in bisa kirim satu notifikasi per hari, kapan waktu terbaiknya?",
+      "options": [
+        { "text": "Malam, sebelum tidur — waktu wind-down", "scores": { "malam": 2 } },
+        { "text": "Pagi, saat baru bangun — mulai hari dengan positif", "scores": { "pagi": 2 } },
+        { "text": "Random — surprise yang bikin hari lebih hidup", "scores": { "ekspresif": 2 } },
+        { "text": "Sore — waktu review dan planning besok", "scores": { "terstruktur": 2 } }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "Satu kata yang paling menggambarkan dirimu saat ini?",
+      "options": [
+        { "text": "Kontemplatif", "scores": { "malam": 2 } },
+        { "text": "Energik", "scores": { "pagi": 2 } },
+        { "text": "Ekspresif", "scores": { "ekspresif": 2 } },
+        { "text": "Terorganisir", "scores": { "terstruktur": 2 } }
+      ]
+    }
+  ],
+  "results": {
+    "malam": {
+      "emoji": "dark_mode",
+      "icon": "dark_mode",
+      "name": "Reflektif Malam",
+      "description": "Kamu menemukan ketenangan dan kedalaman di malam hari. Saat dunia sunyi, pikiranmu justru paling jernih. Kamu adalah tipe yang suka merenungkan makna di balik kejadian sehari-hari.",
+      "impact": "Quote malam hari, prompt filosofis mendalam",
+      "accent_color": "#6366F1",
+      "recommendations": ["Jurnal malam hari", "Mood check-in sebelum tidur", "Prompt refleksi mendalam"]
+    },
+    "pagi": {
+      "emoji": "wb_sunny",
+      "icon": "wb_sunny",
+      "name": "Aktif Pagi",
+      "description": "Kamu paling bersemangat di pagi hari! Energimu tinggi saat memulai hari baru, dan kamu suka rutinitas yang memberi struktur pada harimu. Self-care bagimu adalah action — bergerak, berkeringat, produktif.",
+      "impact": "Quote semangat pagi, tips rutinitas positif",
+      "accent_color": "#F59E0B",
+      "recommendations": ["Morning check-in", "Rutinitas pagi", "Tips olahraga & energi"]
+    },
+    "ekspresif": {
+      "emoji": "chat_bubble",
+      "icon": "chat_bubble",
+      "name": "Ekspresif",
+      "description": "Kamu butuh mengekspresikan apa yang kamu rasakan — dan itu sehat! Bercerita adalah caramu memproses emosi. Kamu merasa lebih baik setelah bicara, menulis, atau sharing dengan orang yang kamu percaya.",
+      "impact": "Teman lebih sering buka percakapan, prompt ekspresif",
+      "accent_color": "#EC4899",
+      "recommendations": ["Chat dengan Teman", "Jurnal ekspresif", "Sharing perasaan"]
+    },
+    "terstruktur": {
+      "emoji": "task_alt",
+      "icon": "task_alt",
+      "name": "Terstruktur",
+      "description": "Kamu suka hal-hal yang terorganisir dan terukur. Progress bar, checklist, dan data adalah motivasimu. Kamu merasa lebih tenang saat punya rencana yang jelas dan tahu apa yang harus dilakukan.",
+      "impact": "Dashboard prominent, tips produktivitas, tracking detail",
+      "accent_color": "#10B981",
+      "recommendations": ["Dashboard & statistik", "Streak tracking", "Goal setting"]
+    }
+  }
+}
