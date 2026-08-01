@@ -49,34 +49,45 @@ function startProfilQuiz() {
   renderProfilQuestion();
 }
 
-// ---- Render Question ----
+// ---- Render Questions (Slides) ----
 function renderProfilQuestion() {
-  const q = profilData.questions[profilQuestion];
-  const total = profilData.questions.length;
-  const progress = ((profilQuestion) / total) * 100;
-
-  const container = document.getElementById('profil-quiz-content');
+  const container = document.getElementById('profil-questions');
+  const progressSection = document.getElementById('quiz-progress-section');
   if (!container) return;
 
-  container.innerHTML = `
-    <div class="quiz-progress">
-      <span class="quiz-progress-text" style="color:var(--text-on-blue);">${profilQuestion + 1}/${total}</span>
-      <div class="progress-bar-container" style="flex:1;">
-        <div class="progress-bar" style="width:${progress}%;"></div>
-      </div>
-    </div>
+  container.innerHTML = '';
+  if (progressSection) progressSection.style.display = 'block';
+  updateProfilProgressBar();
 
-    <div class="card-elevated" style="margin-top:var(--space-xl);">
-      <h2 class="quiz-question" style="color:var(--text-on-white);">${q.text}</h2>
-      <div style="display:flex; flex-direction:column; gap:var(--space-md);">
+  profilData.questions.forEach((q, index) => {
+    const slide = document.createElement('div');
+    slide.className = `quiz-slide ${index === 0 ? 'active' : 'next'}`;
+    slide.dataset.index = index;
+
+    slide.innerHTML = `
+      <h3 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white); text-align:center; margin-bottom:var(--space-xl);">
+        ${q.text}
+      </h3>
+      <div style="display:flex; flex-direction:column; gap:var(--space-md); width:100%; max-width:400px; margin:0 auto;">
         ${q.options.map((opt, i) => `
-          <button class="quiz-option" onclick="selectProfilAnswer(${i})">
+          <button class="btn btn-secondary btn-full quiz-option" style="justify-content:flex-start; padding:1rem;" onclick="selectProfilAnswer(${i})">
             ${opt.text}
           </button>
         `).join('')}
       </div>
-    </div>
-  `;
+    `;
+    container.appendChild(slide);
+  });
+}
+
+function updateProfilProgressBar() {
+  const textEl = document.getElementById('profil-progress-text');
+  const barEl = document.getElementById('profil-progress-bar');
+  if (textEl && barEl) {
+    textEl.textContent = `${profilQuestion + 1} / ${profilData.questions.length}`;
+    const percent = ((profilQuestion + 1) / profilData.questions.length) * 100;
+    barEl.style.width = `${percent}%`;
+  }
 }
 
 // ---- Select Answer ----
@@ -89,15 +100,20 @@ function selectProfilAnswer(optIndex) {
     profilScores[key] = (profilScores[key] || 0) + val;
   }
 
+  const slides = document.querySelectorAll('#profil-questions .quiz-slide');
+  const currentSlide = slides[profilQuestion];
+
   // Mark selected
-  const buttons = document.querySelectorAll('.quiz-option');
+  const buttons = currentSlide.querySelectorAll('.quiz-option');
   buttons[optIndex].classList.add('selected');
   buttons.forEach(b => b.style.pointerEvents = 'none');
 
   setTimeout(() => {
-    profilQuestion++;
-    if (profilQuestion < profilData.questions.length) {
-      renderProfilQuestion();
+    if (profilQuestion < profilData.questions.length - 1) {
+      currentSlide.classList.replace('active', 'prev');
+      profilQuestion++;
+      updateProfilProgressBar();
+      slides[profilQuestion].classList.replace('next', 'active');
     } else {
       calculateProfilResult();
     }
@@ -198,9 +214,12 @@ function renderProfileCard(type, result) {
 
   cardSection.innerHTML = `
     <div class="card" style="padding:var(--space-xl); margin-top:var(--space-2xl);">
-      <h3 style="font-weight:700; margin-bottom:var(--space-lg); color:var(--text-on-white); display:flex; align-items:center; gap:8px;">
-        <span class="material-symbols-rounded text-primary" style="font-size:24px;">person</span>
-        <span>Profil Kamu</span>
+      <h3 style="font-weight:700; margin-bottom:var(--space-lg); color:var(--text-on-white); display:flex; align-items:center; justify-content:space-between;">
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="material-symbols-rounded text-primary" style="font-size:24px;">person</span>
+          <span>Profil Kamu</span>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="showShareResultModal('${result.name}', '${iconName}')"><span class="material-symbols-rounded">share</span></button>
       </h3>
 
       <!-- Name Input -->
@@ -250,3 +269,22 @@ function saveName() {
     Animations.showToast('Nama tersimpan!', 'success');
   }
 }
+
+window.showShareResultModal = function(title, emoji) {
+  const modal = document.getElementById('share-result-modal');
+  if (modal) {
+    document.getElementById('share-result-title').textContent = title;
+    if (emoji && document.getElementById('share-result-emoji')) {
+      document.getElementById('share-result-emoji').innerHTML = `<span class="material-symbols-rounded" style="font-size:3.5rem;">${emoji}</span>`;
+    }
+    modal.classList.add('active');
+  }
+};
+
+window.simulateResultShare = function() {
+  Animations.showToast('Memproses gambar...', 'info');
+  setTimeout(() => {
+    document.getElementById('share-result-modal').classList.remove('active');
+    Animations.showToast('Hasil berhasil dibagikan!', 'success');
+  }, 1500);
+};

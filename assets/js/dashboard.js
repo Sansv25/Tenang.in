@@ -136,7 +136,7 @@ function renderBadges() {
     <div class="card" style="padding:var(--space-xl);">
       <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(90px, 1fr)); gap:var(--space-lg); justify-items:center;">
         ${badges.map(b => `
-          <div style="text-align:center;">
+          <div style="text-align:center; cursor:pointer; transition:transform 0.2s;" onclick="openBadgeDetail('${b.id}')" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
             <div class="badge ${b.earned ? 'badge-earned' : 'badge-locked'}" title="${b.description}">
               <span class="material-symbols-rounded" style="font-size:28px; color:${b.earned ? 'var(--primary-accent)' : 'var(--text-muted)'};">${b.icon || b.emoji || 'star'}</span>
             </div>
@@ -146,6 +146,31 @@ function renderBadges() {
       </div>
     </div>
   `;
+}
+
+// ---- Badge Detail Modal ----
+function openBadgeDetail(id) {
+  const badges = Storage.getBadges();
+  const badge = badges.find(b => b.id === id);
+  if (!badge) return;
+
+  const modal = document.getElementById('badge-detail-modal');
+  document.getElementById('badge-detail-symbol').textContent = badge.icon || badge.emoji || 'star';
+  document.getElementById('badge-detail-icon').style.color = badge.earned ? 'var(--primary-accent)' : 'var(--text-muted)';
+  document.getElementById('badge-detail-title').textContent = badge.name;
+  
+  const statusEl = document.getElementById('badge-detail-status');
+  if (badge.earned) {
+    statusEl.textContent = '✨ Badge Terbuka';
+    statusEl.style.color = 'var(--success)';
+  } else {
+    statusEl.textContent = '🔒 Badge Terkunci';
+    statusEl.style.color = 'var(--text-secondary)';
+  }
+  
+  document.getElementById('badge-detail-desc').textContent = badge.description;
+  
+  modal.classList.add('active');
 }
 
 // ---- Mini Contribution Grid ----

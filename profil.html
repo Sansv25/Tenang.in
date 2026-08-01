@@ -70,8 +70,19 @@
 
       <!-- Quiz Area -->
       <section id="profil-quiz" style="display:none; min-height:60vh; padding:var(--space-xl) 0;">
-        <div id="profil-quiz-content">
-          <!-- Filled by JS -->
+        <!-- Progress Bar -->
+        <div style="margin-bottom:var(--space-xl);" id="quiz-progress-section" style="display:none;">
+          <div class="quiz-progress-text">
+            <span>Progres Kuis</span>
+            <span id="profil-progress-text">0/10</span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="profil-progress-bar" style="width:0%;"></div>
+          </div>
+        </div>
+        
+        <div id="profil-questions" class="quiz-container" style="min-height:380px;">
+          <!-- Slide questions will be injected here -->
         </div>
       </section>
 
@@ -88,7 +99,30 @@
     </div>
   </div>
 
+  <!-- Share Result Modal -->
+  <div class="modal-overlay" id="share-result-modal">
+    <div class="modal" style="max-width:440px;">
+      <div class="modal-header">
+        <h2 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white);">Bagikan Profil Diri</h2>
+        <button class="modal-close" onclick="document.getElementById('share-result-modal').classList.remove('active');"><span class="material-symbols-rounded">close</span></button>
+      </div>
+      <div class="share-card-preview" style="margin-bottom:var(--space-lg);">
+        <h3 style="font-size:1.25rem; font-weight:800; color:var(--text-on-white); margin-bottom:var(--space-xs);">Tipe Fokus Psikologis</h3>
+        <div style="font-size:3.5rem; margin:var(--space-md) 0;" id="share-result-emoji">🧠</div>
+        <h2 style="font-size:1.75rem; color:var(--text-on-white); margin-bottom:var(--space-sm);" id="share-result-title">Tipe</h2>
+        <p style="color:rgba(255,255,255,0.8); font-size:0.875rem;">Saya mengidentifikasi titik fokus pikiran saya melalui Tenang.in. Sebuah langkah kecil untuk peduli pada diri sendiri.</p>
+        <div style="font-size:0.75rem; font-weight:700; color:var(--text-on-white); margin-top:var(--space-xl); opacity:0.6;">Tenang.in App</div>
+      </div>
+      <div style="display:flex; gap:var(--space-md);">
+        <button class="btn btn-secondary btn-full" onclick="simulateResultShare()"><span class="material-symbols-rounded">download</span> Simpan</button>
+        <button class="btn btn-primary btn-full" onclick="simulateResultShare()"><span class="material-symbols-rounded">share</span> Bagikan</button>
+      </div>
+    </div>
+  </div>
+
   <script src="assets/js/storage.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/settings.js"></script>
   <script src="assets/js/animations.js"></script>
   <script src="assets/js/charts.js"></script>
   <script src="assets/js/teman-chat.js"></script>

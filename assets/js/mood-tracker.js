@@ -2,6 +2,45 @@
    Tenang.in — Mood Tracker Script
    ============================================= */
 
+// ---- Global functions for Modals ----
+window.showShareChartModal = function() {
+  const modal = document.getElementById('share-chart-modal');
+  if (modal) modal.classList.add('active');
+};
+
+window.simulateShare = function() {
+  Animations.showToast('Memproses gambar...', 'info');
+  setTimeout(() => {
+    document.getElementById('share-chart-modal').classList.remove('active');
+    Animations.showToast('Grafik berhasil dibagikan!', 'success');
+  }, 1500);
+};
+
+window.changeShareTheme = function(theme) {
+  const gradients = {
+    blue: 'linear-gradient(135deg, #2D5BA8, #7EC8E3)',
+    sunset: 'linear-gradient(135deg, #FF512F, #DD2476)',
+    midnight: 'linear-gradient(135deg, #0f2027, #203a43, #2c5364)',
+    forest: 'linear-gradient(135deg, #11998e, #38ef7d)',
+    purple: 'linear-gradient(135deg, #8E2DE2, #4A00E0)'
+  };
+  
+  const previewCard = document.getElementById('share-card-preview');
+  if (previewCard && gradients[theme]) {
+    previewCard.style.background = gradients[theme];
+  }
+  
+  // Highlight active button
+  const buttons = document.querySelectorAll('#share-theme-selector button');
+  buttons.forEach(btn => {
+    btn.style.transform = 'scale(1)';
+    btn.style.border = '2px solid transparent';
+  });
+  const activeBtn = event.currentTarget;
+  activeBtn.style.transform = 'scale(1.1)';
+  activeBtn.style.border = '2px solid #fff';
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
   await Main.initPage('mood');
   renderMoodForm();
@@ -87,8 +126,10 @@ function submitMoodTracker() {
   Animations.showToast('Mood tersimpan!', 'success');
   Animations.checkAchievements();
 
-  // Check low mood
-  if (moodLevel <= 2) {
+  // Check low mood or time capsule interventions
+  if (typeof window.checkTimeCapsuleIntervention === 'function') {
+    window.checkTimeCapsuleIntervention(moodLevel);
+  } else if (moodLevel <= 2) {
     showLowMoodPopup();
   }
 

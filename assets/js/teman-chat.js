@@ -19,7 +19,7 @@ const TemanChat = (() => {
 
   // ---- Get Context-Aware Greeting ----
   const getGreeting = () => {
-    if (!decisionData) return 'Hai! Aku Teman 👋';
+    if (!decisionData) return (typeof I18n !== 'undefined') ? I18n.t('teman.greeting') : 'Hai! Aku Teman';
     const mood = Storage.getMoodToday();
     const initial = decisionData.initial;
 
@@ -167,7 +167,7 @@ const TemanChat = (() => {
         profil: 'profil.html'
       };
       setTimeout(() => {
-        addBubble('Aku arahkan kamu ke sana ya! 💙', 'teman');
+        addBubble((typeof I18n !== 'undefined') ? I18n.t('teman.redirect') : 'Aku arahkan kamu ke sana ya!', 'teman');
         setTimeout(() => {
           window.location.href = pages[page] || 'beranda.html';
         }, 800);

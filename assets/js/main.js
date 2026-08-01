@@ -32,7 +32,7 @@ const Main = (() => {
         </svg>
         <h1 style="font-size:2.5rem; margin-top:1rem; font-weight:800; letter-spacing:-0.02em;">Tenang.in</h1>
       </div>
-      <p class="welcome-tagline">Ruang amanmu untuk refleksi diri 💙</p>
+      <p class="welcome-tagline" data-i18n="welcome.tagline">Ruang amanmu untuk refleksi diri</p>
     `;
     document.body.appendChild(overlay);
 
@@ -97,8 +97,9 @@ const Main = (() => {
         ${items.map(item => {
           if (item.isAction) {
             return `
-              <button class="bottom-nav-action" onclick="if(typeof showCheckInModal === 'function'){ showCheckInModal(); } else { window.location.href='beranda.html'; }" aria-label="Quick Action">
-                <span class="material-symbols-rounded">add</span>
+              <button class="bottom-nav-action" onclick="if(typeof showCheckInModal === 'function'){ showCheckInModal(); } else { window.location.href='beranda.html'; }" aria-label="Catat Mood">
+                <span class="material-symbols-rounded">edit</span>
+                <span style="font-size: 0.75rem; font-weight: 600;">Catat</span>
               </button>
             `;
           }
@@ -163,13 +164,189 @@ const Main = (() => {
     const name = Storage.getUserName();
     let greeting = '';
 
-    if (hour < 11) greeting = 'Selamat Pagi';
-    else if (hour < 15) greeting = 'Selamat Siang';
-    else if (hour < 18) greeting = 'Selamat Sore';
-    else greeting = 'Selamat Malam';
+    if (hour < 11) greeting = (typeof I18n !== 'undefined') ? I18n.t('beranda.greeting.morning') : 'Selamat Pagi';
+    else if (hour < 15) greeting = (typeof I18n !== 'undefined') ? I18n.t('beranda.greeting.afternoon') : 'Selamat Siang';
+    else if (hour < 18) greeting = (typeof I18n !== 'undefined') ? I18n.t('beranda.greeting.evening') : 'Selamat Sore';
+    else greeting = (typeof I18n !== 'undefined') ? I18n.t('beranda.greeting.night') : 'Selamat Malam';
 
-    return name ? `${greeting}, ${name}! 👋` : `${greeting}! 👋`;
+    return name ? `${greeting}, ${name}!` : `${greeting}!`;
   };
+
+
+
+  // ---- Time Capsule Intervention Engine ----
+  window.checkTimeCapsuleIntervention = function(level) {
+    if (level >= 4) {
+      const lastPrompt = localStorage.getItem('tenang_last_capsule_prompt');
+      const today = Storage.todayKey();
+      if (lastPrompt !== today) {
+        localStorage.setItem('tenang_last_capsule_prompt', today);
+        setTimeout(() => showWriteCapsuleModal(), 1200);
+      }
+    } else if (level <= 2) {
+      const capsule = Storage.getRandomCapsule();
+      if (capsule) {
+        setTimeout(() => showReadCapsuleModal(capsule), 1200);
+      } else {
+        setTimeout(() => showLowMoodRecommendationModal(), 1200);
+      }
+    }
+  };
+
+  function showWriteCapsuleModal() {
+    let modal = document.getElementById('time-capsule-write-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'time-capsule-write-modal';
+      modal.className = 'modal-overlay';
+      modal.innerHTML = `
+        <div class="modal" style="max-width:460px; background:linear-gradient(135deg, #1E293B, #0F172A); border:1px solid rgba(255,255,255,0.15); box-shadow:0 15px 35px rgba(0,0,0,0.5);">
+          <div class="modal-header">
+            <h3 style="font-weight:800; color:#fff; display:flex; align-items:center; gap:8px;">
+              <span class="material-symbols-rounded" style="color:#F59E0B; font-size:26px;">history_edu</span>
+              Kapsul Waktu untuk Dirimu
+            </h3>
+            <button class="modal-close" onclick="document.getElementById('time-capsule-write-modal').classList.remove('active');"><span class="material-symbols-rounded">close</span></button>
+          </div>
+          <p style="color:rgba(255,255,255,0.85); font-size:0.9rem; margin-top:6px; line-height:1.5;">
+            Mumpung mood kamu lagi <b>Baik / Luar Biasa</b> hari ini, mau tinggalkan pesan semangat untuk dirimu sendiri jika suatu hari nanti kamu merasa down?
+          </p>
+          <div style="margin-top:16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <span style="font-size:0.8rem; font-weight:700; color:rgba(255,255,255,0.7);">Isi Pesan Motivasi:</span>
+            <button id="btn-generate-ai" type="button" onclick="window.generateAICapsule()" style="background:linear-gradient(135deg, rgba(139,92,246,0.25), rgba(79,70,229,0.25)); border:1px solid rgba(139, 92, 246, 0.6); color:#DDD6FE; border-radius:20px; padding:5px 14px; font-size:0.75rem; font-weight:700; display:inline-flex; align-items:center; gap:6px; cursor:pointer; box-shadow:0 0 15px rgba(139, 92, 246, 0.3); transition:all 0.2s;">
+              <span class="material-symbols-rounded" style="font-size:16px; color:#A78BFA;">auto_awesome</span>
+              <span>Generate ala Teman AI</span>
+            </button>
+          </div>
+          <textarea id="capsule-input-msg" class="input textarea" placeholder="Ketik manual di sini atau klik 'Generate ala Teman AI' di atas untuk dibuatkan kata-kata indah secara otomatis..." style="margin-top:8px; min-height:120px; background:rgba(0,0,0,0.3); color:#fff; border:1px solid rgba(255,255,255,0.2); border-radius:10px; font-size:0.9rem; line-height:1.6; padding:12px;"></textarea>
+          <div style="display:flex; gap:12px; margin-top:22px;">
+            <button class="btn btn-secondary btn-full" style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); color:#fff; font-weight:600;" onclick="document.getElementById('time-capsule-write-modal').classList.remove('active');">Nanti Saja</button>
+            <button class="btn btn-primary btn-full" style="background:linear-gradient(135deg, #F59E0B, #D97706); border:none; color:#fff; font-weight:700; box-shadow:0 4px 15px rgba(245,158,11,0.4);" onclick="submitTimeCapsule()">
+              <span class="material-symbols-rounded" style="font-size:18px;">lock_clock</span> Simpan ke Kapsul
+            </button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+    modal.classList.add('active');
+  }
+
+  window.generateAICapsule = function() {
+    const textarea = document.getElementById('capsule-input-msg');
+    const btn = document.getElementById('btn-generate-ai');
+    if (!textarea) return;
+
+    const messages = [
+      "Hei kamu di masa depan! Aku menulis pesan ini saat mood-ku sedang luar biasa baik hari ini. Aku cuma mau ingetin: masa sulit itu wajar dan pasti berlalu. Buktinya hari ini aku bisa sebahagia ini. Tarik napas yang dalam, kamu pasti bisa melewati badai saat ini!",
+      "Pesan hangat dari dirimu yang sedang damai hari ini: Jangan terlalu keras pada dirimu sendiri ya. Kamu udah berjuang sejauh ini dan itu hebat banget! Kalau capai, tidak apa-apa istirahat dulu. Badai pasti berlalu, dan hari sejuk seperti ini akan datang lagi.",
+      "Ingat ya: mendung tidak berarti langit runtuh! Saat surat ini ditulis, hatiku sedang penuh rasa damai dan syukur. Ayo rasakan kembali ketenangan itu perlahan-lahan. Lelah sesekali sangat manusiawi, kamu jauh lebih tangguh dari rasa takutmu!",
+      "Dari aku yang sedang bangga dan bersemangat hari ini: Saat kamu membaca ini, mungkin kepalamu sedang bising atau hatimu sedih. Tapi ingat berapa banyak ujian di masa lalu yang dulu kamu kira tak bisa terlewati, nyatanya kita berhasil sampai di sini! Kamu sanggup melewati ini.",
+      "Kolaborasi pesan antara Teman AI & Dirimu hari ini: Segala kegelapan yang kamu rasakan sekarang adalah proses istirahat bagi jiwamu. Jangan menghukum diri atas hal yang di luar kendalimu. Kita pasti kan kembali tersenyum lega seperti saat pesan ini ditulis!"
+    ];
+
+    const chosen = messages[Math.floor(Math.random() * messages.length)];
+
+    if (btn) {
+      btn.disabled = true;
+      btn.innerHTML = `<span class="material-symbols-rounded" style="font-size:16px; color:#C4B5FD;">hourglass_top</span> <span>Teman AI merangkai kata...</span>`;
+    }
+
+    textarea.value = "";
+    let i = 0;
+    const typeInterval = setInterval(() => {
+      textarea.value += chosen.charAt(i);
+      i++;
+      textarea.scrollTop = textarea.scrollHeight;
+      if (i >= chosen.length) {
+        clearInterval(typeInterval);
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = `<span class="material-symbols-rounded" style="font-size:16px; color:#A78BFA;">auto_awesome</span> <span>Ganti Inspirasi Lain (AI)</span>`;
+        }
+        if (typeof Animations !== 'undefined') {
+          Animations.showToast('Pesan berhasil dirangkai oleh Teman AI! Kamu bisa mengubah kata-katanya sesukamu.', 'success');
+        }
+      }
+    }, 16);
+  };
+
+  window.submitTimeCapsule = function() {
+    const textarea = document.getElementById('capsule-input-msg');
+    if (textarea && textarea.value.trim()) {
+      Storage.saveTimeCapsule(textarea.value.trim());
+      document.getElementById('time-capsule-write-modal')?.classList.remove('active');
+      if (typeof Animations !== 'undefined') {
+        Animations.showToast('Pesan rahasiamu berhasil dikunci dalam kapsul waktu!', 'success');
+      }
+    } else {
+      if (typeof Animations !== 'undefined') {
+        Animations.showToast('Tuliskan sedikit kata motivasi terlebih dahulu ya.', 'warning');
+      }
+    }
+  };
+
+  function showReadCapsuleModal(capsule) {
+    let modal = document.getElementById('time-capsule-read-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'time-capsule-read-modal';
+      modal.className = 'modal-overlay';
+      modal.innerHTML = `
+        <div class="modal" style="max-width:440px; background:linear-gradient(135deg, #1E293B, #0F172A); border:1px solid rgba(244,63,94,0.3); box-shadow:0 0 30px rgba(244,63,94,0.2);">
+          <div class="modal-header">
+            <h3 style="font-weight:800; color:#F43F5E; display:flex; align-items:center; gap:8px;">
+              <span class="material-symbols-rounded" style="color:#F43F5E;">drafts</span>
+              Surat dari Dirimu di Masa Lalu
+            </h3>
+            <button class="modal-close" onclick="document.getElementById('time-capsule-read-modal').classList.remove('active');"><span class="material-symbols-rounded">close</span></button>
+          </div>
+          <p style="color:rgba(255,255,255,0.75); font-size:0.85rem; margin-top:4px;">
+            Saat kamu merasa harimu berat hari ini, dirimu dari tanggal <b id="read-capsule-date" style="color:#fff;"></b> pernah mengirimkan pesan ini khusus untukmu:
+          </p>
+          <div style="margin:20px 0; padding:16px; background:rgba(255,255,255,0.05); border-left:4px solid #F43F5E; border-radius:8px; font-style:italic; color:#fff; font-size:1rem; line-height:1.6;" id="read-capsule-content"></div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <button class="btn btn-full" style="background:linear-gradient(135deg, #F97316, #D97706); color:#fff; border:none; font-weight:700;" onclick="document.getElementById('time-capsule-read-modal').classList.remove('active'); window.location.href='jurnal.html';">
+              <span class="material-symbols-rounded">local_fire_department</span> Lepas Emosimu via "Bakar Beban" di Jurnal
+            </button>
+            <button class="btn btn-ghost btn-full" style="color:rgba(255,255,255,0.7);" onclick="document.getElementById('time-capsule-read-modal').classList.remove('active');">Tutup & Resapi Pesan Ini</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+    const dateEl = modal.querySelector('#read-capsule-date');
+    const contentEl = modal.querySelector('#read-capsule-content');
+    if (dateEl) dateEl.innerText = capsule.date;
+    if (contentEl) contentEl.innerText = `"${capsule.message}"`;
+    modal.classList.add('active');
+  }
+
+  function showLowMoodRecommendationModal() {
+    let modal = document.getElementById('low-mood-rec-modal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'low-mood-rec-modal';
+      modal.className = 'modal-overlay';
+      modal.innerHTML = `
+        <div class="modal" style="max-width:420px; text-align:center;">
+          <span class="material-symbols-rounded" style="font-size:48px; color:#F43F5E;">favorite</span>
+          <h3 style="font-weight:800; color:#fff; margin-top:8px;">Harimu Sedang Berat?</h3>
+          <p style="color:rgba(255,255,255,0.8); font-size:0.875rem; margin-top:8px; line-height:1.5;">
+            Tidak apa-apa, kamu tidak sendiri. Cobalah fitur katarsis kami yang bisa langsung melegakan perasaanmu saat ini:
+          </p>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:20px;">
+            <button class="btn btn-full" style="background:linear-gradient(135deg, #F97316, #D97706); color:#fff; border:none; font-weight:700;" onclick="document.getElementById('low-mood-rec-modal').classList.remove('active'); window.location.href='jurnal.html';">
+              <span class="material-symbols-rounded">local_fire_department</span> Coba "Bakar Beban" di Jurnal
+            </button>
+            <button class="btn btn-ghost btn-sm" style="margin-top:4px; color:var(--text-secondary);" onclick="document.getElementById('low-mood-rec-modal').classList.remove('active');">Nanti Saja, Aku Cukup Istirahat</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+    modal.classList.add('active');
+  }
 
   // ---- Init Page ----
   const initPage = async (pageName, options = {}) => {
@@ -184,6 +361,11 @@ const Main = (() => {
     if (showTeman) await TemanChat.init();
 
     Animations.init();
+    
+    // Apply theme after navbar is dynamically created so it gets the correct background
+    if (typeof Settings !== 'undefined' && Settings.applyTheme) {
+      Settings.applyTheme();
+    }
   };
 
   return { initPage, getGreetingText, logoSVG };

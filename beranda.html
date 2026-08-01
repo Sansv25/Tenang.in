@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/beranda.css">
+  <link rel="stylesheet" href="assets/css/settings.css">
 </head>
 
 <body>
@@ -25,9 +26,14 @@
     <div class="container">
 
       <!-- ======= HERO GREETING FLOATING (UNWRAPPED & CENTERED) ======= -->
-      <header class="dashboard-hero-floating">
-        <h1 class="greeting-text" id="greeting-text">Selamat Datang! 👋</h1>
-        <p class="greeting-sub">
+      <header class="dashboard-hero-floating" style="position:relative;">
+        <div class="header-action-row" style="position:absolute; top:0; right:0;">
+          <button class="header-action-btn has-notif" onclick="Settings.renderNotifications()" aria-label="Notifikasi">
+            <span class="material-symbols-rounded">notifications</span>
+          </button>
+        </div>
+        <h1 class="greeting-text" id="greeting-text" data-i18n="beranda.greeting.morning">Selamat Datang!</h1>
+        <p class="greeting-sub" data-i18n="beranda.subtitle">
           Bagaimana suasana hati dan pikiranmu saat ini? Tenang.in hadir mendampingi setiap langkahmu.
         </p>
 
@@ -74,7 +80,7 @@
           </div>
         </div>
 
-        <div class="mood-grid">
+        <div class="mood-grid" id="mood-grid-container">
           <div class="mood-card-item mood-1" onclick="showCheckInModal(1)">
             <span class="material-symbols-rounded mood-card-icon"
               style="color:var(--mood-1);">sentiment_very_dissatisfied</span>
@@ -119,6 +125,10 @@
             </div>
           </div>
         </div>
+        
+        <!-- Empty State: Already Checked In (Rendered Dynamically) -->
+        <div id="mood-checked-in-state" style="display:none; text-align:center; padding:var(--space-lg) 0;">
+        </div>
       </section>
 
       <!-- ======= INTERACTIVE INSPIRATION & WISDOM (CLEAN WHITE) ======= -->
@@ -158,11 +168,11 @@
               <div class="bento-icon-box" style="background: #EFF6FF;">
                 <span class="material-symbols-rounded" style="font-size:32px; color:#3B82F6;">sentiment_satisfied</span>
               </div>
-              <span class="bento-badge" style="color:#0284C7; background:#E0F2FE; border:1px solid #BAE6FD;">🔥
-                Populer</span>
+              <span class="bento-badge" style="color:#0284C7; background:#E0F2FE; border:1px solid #BAE6FD;"><span class="material-symbols-rounded" style="font-size:14px;">trending_up</span>
+                <span data-i18n="beranda.bento.mood.badge">Populer</span></span>
             </div>
             <div>
-              <div class="bento-title">Mood Tracker 📈</div>
+              <div class="bento-title" data-i18n="beranda.bento.mood.title">Mood Tracker</div>
               <div class="bento-desc">Lihat kalender emosi harianmu, analisis pola perubahan perasaan, dan grafik
                 statistik mood kamu setiap minggu.</div>
             </div>
@@ -174,11 +184,11 @@
               <div class="bento-icon-box" style="background: #ECFDF5;">
                 <span class="material-symbols-rounded" style="font-size:32px; color:#10B981;">edit_note</span>
               </div>
-              <span class="bento-badge" style="color:#059669; background:#D1FAE5; border:1px solid #A7F3D0;">📝
-                Harian</span>
+              <span class="bento-badge" style="color:#059669; background:#D1FAE5; border:1px solid #A7F3D0;"><span class="material-symbols-rounded" style="font-size:14px;">event_available</span>
+                <span data-i18n="beranda.bento.journal.badge">Harian</span></span>
             </div>
             <div>
-              <div class="bento-title">Ruang Jurnal ✨</div>
+              <div class="bento-title" data-i18n="beranda.bento.journal.title">Ruang Jurnal</div>
               <div class="bento-desc">Tuangkan cerita dan keluh kesahmu dengan bantuan panduan prompt interaktif yang
                 dipersonalisasi sesuai perasaanmu.</div>
             </div>
@@ -190,11 +200,11 @@
               <div class="bento-icon-box" style="background: #FFFBEB;">
                 <span class="material-symbols-rounded" style="font-size:32px; color:#F59E0B;">psychology</span>
               </div>
-              <span class="bento-badge" style="color:#B45309; background:#FEF3C7; border:1px solid #FDE68A;">🧠
-                Psikologi</span>
+              <span class="bento-badge" style="color:#B45309; background:#FEF3C7; border:1px solid #FDE68A;"><span class="material-symbols-rounded" style="font-size:14px;">neurology</span>
+                <span data-i18n="beranda.bento.kenali.badge">Psikologi</span></span>
             </div>
             <div>
-              <div class="bento-title">Kenali Dirimu 💡</div>
+              <div class="bento-title" data-i18n="beranda.bento.kenali.title">Kenali Dirimu</div>
               <div class="bento-desc">Temukan tipe kepribadianmu dan rekomendasi teknik perawatan diri (self-care)
                 melalui tes mandiri 12 pertanyaan.</div>
             </div>
@@ -206,11 +216,11 @@
               <div class="bento-icon-box" style="background: #F3E8FF;">
                 <span class="material-symbols-rounded" style="font-size:32px; color:#8B5CF6;">bar_chart</span>
               </div>
-              <span class="bento-badge" style="color:#7E22CE; background:#F3E8FF; border:1px solid #E9D5FF;">🏆
-                Medali</span>
+              <span class="bento-badge" style="color:#7E22CE; background:#F3E8FF; border:1px solid #E9D5FF;"><span class="material-symbols-rounded" style="font-size:14px;">emoji_events</span>
+                <span data-i18n="beranda.bento.dashboard.badge">Medali</span></span>
             </div>
             <div>
-              <div class="bento-title">Rangkuman & Badge 🚀</div>
+              <div class="bento-title" data-i18n="beranda.bento.dashboard.title">Rangkuman & Badge</div>
               <div class="bento-desc">Pantau kemajuan pencapaian medali refleksi, hitung rekor konsistensi streak, dan
                 amati sejauh mana kamu berkembang.</div>
             </div>
@@ -222,10 +232,10 @@
               <div class="bento-icon-box" style="background: #F3E8FF;">
                 <span class="material-symbols-rounded" style="font-size:34px; color:#9333EA;">smart_toy</span>
               </div>
-              <span class="bento-badge bento-badge-ai">🤖 AI COMPANION 24/7</span>
+              <span class="bento-badge bento-badge-ai"><span class="material-symbols-rounded" style="font-size:14px;">smart_toy</span> <span data-i18n="beranda.bento.teman.badge">AI COMPANION 24/7</span></span>
             </div>
             <div style="margin-top:var(--space-md);">
-              <div class="bento-title" style="font-size:1.35rem;">Teman AI Companion 💙</div>
+              <div class="bento-title" style="font-size:1.35rem;" data-i18n="beranda.bento.teman.title">Teman AI Companion</div>
               <div class="bento-desc" style="max-width: 680px;">
                 Merasa butuh teman bercerita saat ini juga? Ngobrol santai tanpa rasa takut dihakimi bersama Teman AI.
                 Dipersonalisasi khusus sesuai kondisi emosimu hari ini, 100% offline dan privat di perangkatmu.
@@ -241,14 +251,9 @@
 
       <!-- ======= BOTTOM LOGOUT FOOTER SECTION ======= -->
       <section class="beranda-footer-section">
-        <p class="beranda-footer-desc">
-          Ruang amanmu selalu terjaga privasinya. Seluruh catatan refleksi dan mood disimpan di perangkat lokal secara
-          mandiri tanpa server eksternal.
+        <p class="beranda-footer-desc" data-i18n="beranda.footer.privacy">
+          Ruang amanmu selalu terjaga privasinya. Seluruh catatan refleksi dan mood disimpan di perangkat lokal secara mandiri tanpa server eksternal.
         </p>
-        <button id="logout-btn" class="btn-logout-footer" onclick="handleLogout()" aria-label="Keluar Sesi">
-          <span class="material-symbols-rounded">logout</span>
-          <span>Keluar dari Akun</span>
-        </button>
       </section>
 
     </div>
@@ -327,8 +332,21 @@
     </div>
   </div>
 
+  <!-- ======= STREAK MILESTONE MODAL ======= -->
+  <div class="modal-overlay" id="streak-modal">
+    <div class="modal" style="text-align:center; max-width:400px; padding:var(--space-2xl);">
+      <span class="material-symbols-rounded text-warning modal-breathing-icon" style="font-size:72px; margin-bottom:var(--space-md);">local_fire_department</span>
+      <h2 style="font-size:1.75rem; font-weight:850; margin-bottom:var(--space-xs); color:var(--text-on-white);">Luar Biasa!</h2>
+      <p style="color:rgba(255,255,255,0.8); font-size:1.0625rem; line-height:1.6; margin-bottom:var(--space-xl);">
+        Kamu berhasil mencapai <strong id="streak-modal-count" style="color:var(--warning); font-size:1.25rem;">3</strong> hari streak refleksi. Terus pertahankan kebiasaan baik ini ya!
+      </p>
+      <button class="btn btn-primary btn-full" onclick="document.getElementById('streak-modal').classList.remove('active');" style="font-weight:700;">Lanjutkan</button>
+    </div>
+  </div>
 
   <script src="assets/js/storage.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/settings.js"></script>
   <script src="assets/js/animations.js"></script>
   <script src="assets/js/charts.js"></script>
   <script src="assets/js/teman-chat.js"></script>

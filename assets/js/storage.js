@@ -241,10 +241,25 @@ const Storage = (() => {
     ];
   };
 
+  // ---- Time Capsules (Pesan untuk Masa Depan) ----
+  const getTimeCapsules = () => getJSON('tenang_time_capsules', []);
+  
+  const saveTimeCapsule = (message) => {
+    const capsules = getTimeCapsules();
+    capsules.push({ id: Date.now(), message, date: todayKey() });
+    setJSON('tenang_time_capsules', capsules);
+  };
+  
+  const getRandomCapsule = () => {
+    const capsules = getTimeCapsules();
+    if (capsules.length === 0) return null;
+    return capsules[Math.floor(Math.random() * capsules.length)];
+  };
+
   // ---- Data Reset (for testing) ----
   const resetAll = () => {
     const keys = ['tenang_moods','tenang_journals','tenang_quiz_kenali','tenang_quiz_profil',
-                  'tenang_username','tenang_isReturning','tenang_teman_sessions'];
+                  'tenang_username','tenang_isReturning','tenang_teman_sessions','tenang_time_capsules'];
     keys.forEach(k => localStorage.removeItem(k));
     sessionStorage.clear();
   };
@@ -257,6 +272,7 @@ const Storage = (() => {
     setUserName, getUserName,
     isNewUser, setReturning,
     incrementTemanSessions, getTemanSessions,
+    getTimeCapsules, saveTimeCapsule, getRandomCapsule,
     getBadges, resetAll, todayKey
   };
 })();

@@ -141,6 +141,22 @@
   background: rgba(255, 255, 255, 0.25);
 }
 
+/* Ensure buttons inside modals adapt properly to modal background color */
+.modal .btn-secondary {
+  background: var(--card-subtle);
+  color: var(--text-on-white);
+  border: 1px solid rgba(130, 150, 180, 0.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.modal .btn-secondary:hover {
+  background: rgba(45, 91, 168, 0.08);
+  color: var(--primary-accent);
+  border-color: var(--primary-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(45, 91, 168, 0.12);
+}
+
 .btn-white {
   background: var(--card-surface);
   color: var(--primary-accent);
@@ -1396,4 +1412,137 @@
   display: flex;
   gap: var(--space-md);
   justify-content: center;
+}
+
+/* ---- Goal Additions ---- */
+.modal-breathing-icon {
+  animation: breathing 3s ease-in-out infinite;
+  display: inline-block;
+}
+
+@keyframes breathing {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; filter: drop-shadow(0 0 12px rgba(126, 200, 227, 0.6)); }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+.share-card-preview {
+  background: var(--gradient-hero);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl) var(--space-xl);
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.share-card-preview::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%; width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+  z-index: 1;
+}
+
+.share-card-preview > * {
+  position: relative;
+  z-index: 2;
+}
+
+.quiz-progress-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-on-blue);
+  margin-bottom: var(--space-xs);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ---- 3D Realistic Burning Card Styles ---- */
+.burn-3d-wrapper {
+  perspective: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 12px 10px;
+  min-height: 280px;
+}
+
+.realistic-paper-card {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  min-height: 220px;
+  background: linear-gradient(135deg, #FFFDF0 0%, #F6EFC2 60%, #EADC92 100%);
+  border: 1px solid #D1C588;
+  border-radius: 10px;
+  padding: 28px 32px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(180, 150, 80, 0.25);
+  transform-style: preserve-3d;
+  transform: rotateX(5deg) translateZ(0);
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.realistic-paper-card:hover {
+  transform: rotateX(7deg) translateY(-5px);
+  box-shadow: 0 20px 45px rgba(249, 115, 22, 0.4), inset 0 0 40px rgba(180, 150, 80, 0.35);
+}
+
+.realistic-paper-card.is-burning {
+  cursor: default;
+  pointer-events: none;
+  animation: paperCurl3D 4.2s forwards cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes paperCurl3D {
+  0% {
+    transform: rotateX(5deg) scale(1) translateY(0);
+    opacity: 1;
+  }
+  25% {
+    transform: rotateX(15deg) scale(0.99) translateY(-6px);
+    drop-shadow: 0 0 25px rgba(249, 115, 22, 0.7);
+    opacity: 1;
+  }
+  70% {
+    transform: rotateX(40deg) scale(0.94) translateY(-22px);
+    opacity: 0.95;
+  }
+  100% {
+    transform: rotateX(58deg) scale(0.85) translateY(-45px);
+    opacity: 0;
+    filter: blur(8px);
+  }
+}
+
+.paper-char-overlay {
+  position: absolute;
+  top: 0;
+  left: -5%;
+  width: 110%;
+  height: 120%;
+  background: linear-gradient(0deg, 
+    #050305 0%, 
+    #180C06 52%, 
+    rgba(249, 115, 22, 0.95) 76%, 
+    rgba(255, 220, 100, 0.85) 90%, 
+    transparent 100%
+  );
+  transform: translateY(105%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.realistic-paper-card.is-burning .paper-char-overlay {
+  animation: charSlideUp 3.8s forwards cubic-bezier(0.3, 0, 0.7, 1);
+}
+
+@keyframes charSlideUp {
+  0% { transform: translateY(105%); }
+  25% { transform: translateY(82%); }
+  70% { transform: translateY(18%); }
+  100% { transform: translateY(-8%); }
 }

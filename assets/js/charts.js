@@ -21,8 +21,8 @@ const Charts = (() => {
   };
 
   const moodEmoji = (level) => {
-    const emojis = { 1: '😢', 2: '😔', 3: '😐', 4: '😊', 5: '😄' };
-    return emojis[level] || '😐';
+    const emojis = { 1: '<span class="material-symbols-rounded">sentiment_very_dissatisfied</span>', 2: '<span class="material-symbols-rounded">sentiment_dissatisfied</span>', 3: '<span class="material-symbols-rounded">sentiment_neutral</span>', 4: '<span class="material-symbols-rounded">sentiment_satisfied</span>', 5: '<span class="material-symbols-rounded">sentiment_very_satisfied</span>' };
+    return emojis[level] || '<span class="material-symbols-rounded">sentiment_neutral</span>';
   };
 
   // ---- Line Chart (7 days) ----

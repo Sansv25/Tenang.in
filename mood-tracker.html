@@ -12,18 +12,27 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/settings.css">
 </head>
 <body>
   <div class="page-wrapper">
     <div class="container container-md">
 
-      <!-- Header -->
       <section style="padding:var(--space-xl) 0;">
-        <h1 style="font-size:var(--h2-size); font-weight:700; display:flex; align-items:center; gap:10px;">
-          <span class="material-symbols-rounded text-primary" style="font-size:32px;">sentiment_satisfied</span>
-          <span>Mood Tracker</span>
-        </h1>
-        <p style="color:rgba(255,255,255,0.75); margin-top:var(--space-xs);">Lacak emosimu dan kenali polanya</p>
+        <div style="display:flex; align-items:flex-start; justify-content:space-between;">
+          <div>
+            <h1 style="font-size:var(--h2-size); font-weight:700; display:flex; align-items:center; gap:10px;">
+              <span class="material-symbols-rounded text-primary" style="font-size:32px;">sentiment_satisfied</span>
+              <span data-i18n="mood.title">Mood Tracker</span>
+            </h1>
+            <p style="color:rgba(255,255,255,0.75); margin-top:var(--space-xs);" data-i18n="mood.subtitle">Lacak emosimu dan kenali polanya</p>
+          </div>
+          <div class="header-action-row">
+            <button class="header-action-btn" onclick="Settings.open()" aria-label="Settings">
+              <span class="material-symbols-rounded">settings</span>
+            </button>
+          </div>
+        </div>
       </section>
 
       <!-- Mood Form -->
@@ -72,10 +81,16 @@
 
       <!-- Chart -->
       <section style="margin-top:var(--space-xl);">
-        <h2 style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
-          <span class="material-symbols-rounded" style="font-size:22px;">show_chart</span>
-          <span>Mood 7 Hari Terakhir</span>
-        </h2>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-md);">
+          <h2 style="font-size:var(--h3-size); font-weight:600; color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
+            <span class="material-symbols-rounded" style="font-size:22px;">show_chart</span>
+            <span>Mood 7 Hari Terakhir</span>
+          </h2>
+          <button class="btn btn-ghost btn-sm" onclick="showShareChartModal()">
+            <span class="material-symbols-rounded" style="font-size:18px;">share</span>
+            <span>Bagikan</span>
+          </button>
+        </div>
         <div class="card" style="padding:var(--space-lg);">
           <div id="mood-chart"></div>
         </div>
@@ -144,7 +159,98 @@
     </div>
   </div>
 
+  <!-- Share Chart Modal -->
+  <div class="modal-overlay" id="share-chart-modal">
+    <div class="modal" style="max-width:440px;">
+      <div class="modal-header">
+        <h2 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white);">Bagikan Grafik Mood</h2>
+        <button class="modal-close" onclick="document.getElementById('share-chart-modal').classList.remove('active');"><span class="material-symbols-rounded">close</span></button>
+      </div>
+
+      <!-- Color Customization -->
+      <div style="margin-bottom:var(--space-md); text-align:center;">
+        <p style="font-size:0.875rem; color:var(--text-secondary); margin-bottom:var(--space-sm); font-weight:600;">Sesuaikan Warna Tema</p>
+        <div style="display:flex; justify-content:center; gap:12px;" id="share-theme-selector">
+          <button onclick="changeShareTheme('blue')" style="width:32px; height:32px; border-radius:50%; border:2px solid #fff; cursor:pointer; background: linear-gradient(135deg, #2D5BA8, #7EC8E3); box-shadow:0 2px 8px rgba(0,0,0,0.3); transform:scale(1.1);"></button>
+          <button onclick="changeShareTheme('sunset')" style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #FF512F, #DD2476); box-shadow:0 2px 8px rgba(0,0,0,0.3);"></button>
+          <button onclick="changeShareTheme('midnight')" style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); box-shadow:0 2px 8px rgba(0,0,0,0.3);"></button>
+          <button onclick="changeShareTheme('forest')" style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #11998e, #38ef7d); box-shadow:0 2px 8px rgba(0,0,0,0.3);"></button>
+          <button onclick="changeShareTheme('purple')" style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #8E2DE2, #4A00E0); box-shadow:0 2px 8px rgba(0,0,0,0.3);"></button>
+        </div>
+      </div>
+
+      <div id="share-card-preview" class="share-card-preview" style="margin-bottom:var(--space-lg); background: linear-gradient(135deg, #2D5BA8, #7EC8E3); transition: background 0.5s ease; padding:var(--space-xl); display:flex; flex-direction:column; gap:16px;">
+        <!-- Header -->
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+          <div style="text-align:left;">
+            <h3 style="font-size:1.25rem; font-weight:800; color:#fff; text-shadow:0 2px 4px rgba(0,0,0,0.2); line-height:1.2;">Rekap<br>Perasaanku</h3>
+          </div>
+          <div style="background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:20px; color:#fff; font-size:0.75rem; font-weight:700; display:flex; align-items:center; gap:4px; backdrop-filter:blur(5px);">
+            <span class="material-symbols-rounded" style="font-size:14px;">local_fire_department</span>
+            14 Hari Streak
+          </div>
+        </div>
+        
+        <!-- Big Stat -->
+        <div style="text-align:left; background:rgba(255,255,255,0.1); padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; gap:12px;">
+          <div style="width:48px; height:48px; border-radius:50%; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center;">
+            <span class="material-symbols-rounded" style="font-size:28px; color:#fff;">psychology_alt</span>
+          </div>
+          <div>
+            <div style="font-size:1.5rem; font-weight:800; color:#fff;">85% Lebih Tenang</div>
+            <div style="font-size:0.875rem; color:rgba(255,255,255,0.9);">Minggu ini jauh lebih baik dari sebelumnya.</div>
+          </div>
+        </div>
+
+        <!-- Fake Chart -->
+        <div style="text-align:left;">
+          <div style="font-size:0.75rem; font-weight:600; color:rgba(255,255,255,0.8); margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">Fluktuasi Mood</div>
+          <div id="share-chart-mockup" style="height:80px; display:flex; align-items:flex-end; justify-content:space-between; gap:6px;">
+            <div style="flex:1; height:40%; background:linear-gradient(to top, rgba(255,255,255,0.4), rgba(255,255,255,0.9)); border-radius:4px;"></div>
+            <div style="flex:1; height:60%; background:linear-gradient(to top, rgba(255,255,255,0.4), rgba(255,255,255,0.9)); border-radius:4px;"></div>
+            <div style="flex:1; height:20%; background:linear-gradient(to top, rgba(255,255,255,0.2), rgba(255,255,255,0.5)); border-radius:4px;"></div>
+            <div style="flex:1; height:80%; background:linear-gradient(to top, rgba(255,255,255,0.5), #fff); border-radius:4px; box-shadow:0 0 10px rgba(255,255,255,0.5);"></div>
+            <div style="flex:1; height:50%; background:linear-gradient(to top, rgba(255,255,255,0.4), rgba(255,255,255,0.9)); border-radius:4px;"></div>
+            <div style="flex:1; height:30%; background:linear-gradient(to top, rgba(255,255,255,0.3), rgba(255,255,255,0.7)); border-radius:4px;"></div>
+            <div style="flex:1; height:90%; background:linear-gradient(to top, rgba(255,255,255,0.8), #fff); border-radius:4px; box-shadow:0 0 12px rgba(255,255,255,0.6);"></div>
+          </div>
+        </div>
+
+        <!-- Top Emotions -->
+        <div style="text-align:left;">
+          <div style="font-size:0.75rem; font-weight:600; color:rgba(255,255,255,0.8); margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">Emosi Dominan</div>
+          <div style="display:flex; gap:8px;">
+            <span style="background:rgba(255,255,255,0.2); padding:4px 10px; border-radius:12px; color:#fff; font-size:0.8125rem; font-weight:600; display:flex; align-items:center; gap:4px;">
+              <span class="material-symbols-rounded" style="font-size:16px;">self_improvement</span> Damai
+            </span>
+            <span style="background:rgba(255,255,255,0.2); padding:4px 10px; border-radius:12px; color:#fff; font-size:0.8125rem; font-weight:600; display:flex; align-items:center; gap:4px;">
+              <span class="material-symbols-rounded" style="font-size:16px;">sentiment_satisfied</span> Senang
+            </span>
+          </div>
+        </div>
+        
+        <!-- Promo Footer -->
+        <div style="border-top:1px dashed rgba(255,255,255,0.3); padding-top:12px; margin-top:4px; display:flex; justify-content:space-between; align-items:center;">
+          <div style="text-align:left;">
+            <div style="font-size:0.875rem; font-weight:800; color:#fff;">Tenang.in</div>
+            <div style="font-size:0.65rem; font-weight:600; color:rgba(255,255,255,0.8);">Ruang aman untuk mentalmu.</div>
+          </div>
+          <div style="width:36px; height:36px; background:rgba(255,255,255,0.2); border-radius:10px; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px);">
+            <span class="material-symbols-rounded" style="color:#fff; font-size:22px;">spa</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:var(--space-md);">
+        <button class="btn btn-secondary btn-full" onclick="simulateShare()"><span class="material-symbols-rounded">download</span> Unduh</button>
+        <button class="btn btn-primary btn-full" onclick="simulateShare()"><span class="material-symbols-rounded">share</span> Bagikan</button>
+      </div>
+    </div>
+  </div>
+
   <script src="assets/js/storage.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/settings.js"></script>
   <script src="assets/js/animations.js"></script>
   <script src="assets/js/charts.js"></script>
   <script src="assets/js/teman-chat.js"></script>

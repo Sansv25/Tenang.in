@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/landing.css">
+  <link rel="stylesheet" href="assets/css/settings.css">
 </head>
 
 <body class="landing-page preloader-active">
@@ -804,6 +805,8 @@
   </div>
 
   <script src="assets/js/storage.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/settings.js"></script>
   <script src="assets/js/animations.js"></script>
   <script src="assets/js/charts.js"></script>
   <script src="assets/js/teman-chat.js"></script>
@@ -811,6 +814,7 @@
   <script src="assets/js/landing.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
+      Settings.renderLandingLangDropdown();
       Main.initPage('landing', { showNav: false, showFooter: false, showTeman: true, showWelcome: true });
     });
   </script>
