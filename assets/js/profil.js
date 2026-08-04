@@ -219,14 +219,14 @@ function renderProfileCard(type, result) {
           <span class="material-symbols-rounded text-primary" style="font-size:24px;">person</span>
           <span>Profil Kamu</span>
         </div>
-        <button class="btn btn-ghost btn-sm" onclick="showShareResultModal('${result.name}', '${iconName}')"><span class="material-symbols-rounded">share</span></button>
+        <button class="btn btn-ghost btn-sm" onclick="showShareResultModal('${escapeHTML(result.name)}', '${iconName}')" aria-label="Bagikan Hasil Profil"><span class="material-symbols-rounded">share</span></button>
       </h3>
 
       <!-- Name Input -->
       <div style="margin-bottom:var(--space-lg);">
         <label style="font-size:0.875rem; font-weight:600; color:var(--text-secondary); display:block; margin-bottom:var(--space-sm);">Nama (opsional)</label>
         <div style="display:flex; gap:var(--space-sm);">
-          <input type="text" class="input" id="profil-name" value="${name}" placeholder="Masukkan namamu..." style="flex:1;">
+          <input type="text" class="input" id="profil-name" value="${escapeHTML(name)}" placeholder="Masukkan namamu..." style="flex:1;">
           <button class="btn btn-primary btn-sm" onclick="saveName()">Simpan</button>
         </div>
       </div>

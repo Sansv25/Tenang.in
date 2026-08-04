@@ -159,11 +159,18 @@ function renderJournalList() {
 
   if (journals.length === 0) {
     listEl.innerHTML = `
-      <div class="empty-state card">
-        <div class="empty-state-icon">
-          <span class="material-symbols-rounded text-secondary" style="font-size:48px;">edit_note</span>
+      <div class="card p-8 text-center border-2 border-dashed rounded-2xl my-4" style="border-color:#7EC8E3; background:linear-gradient(180deg, #FFFFFF 0%, #F0F5FF 100%);">
+        <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center shadow-md" style="background:#5B8FD4;">
+          <span class="material-symbols-rounded" style="font-size:36px; color:#FFFFFF;">auto_stories</span>
         </div>
-        <p class="empty-state-text" style="color:var(--text-secondary);">Belum ada jurnal. Tulis refleksi pertamamu!</p>
+        <h3 class="font-bold text-lg mb-2" style="color:#1A2F4E;">Ruang Jurnalmu Masih Kosong</h3>
+        <p class="text-sm max-w-sm mx-auto mb-6 leading-relaxed" style="color:#6B8DB5;">
+          Hari ini bisa menjadi lembaran barumu. Tuangkan pikiran, kecemasan, atau rasa syukurmu dengan nyaman dan privat.
+        </p>
+        <button onclick="const el = document.getElementById('jurnal-content'); if(el) { el.focus(); el.scrollIntoView({behavior:'smooth'}); }" class="btn btn-primary inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold shadow-md hover:opacity-95 transition" style="background:#2D5BA8; color:#FFFFFF;">
+          <span class="material-symbols-rounded" style="font-size:18px;">edit_note</span>
+          <span>Tulis Refleksi Pertama</span>
+        </button>
       </div>
     `;
     return;
@@ -182,9 +189,9 @@ function renderJournalList() {
             <span class="material-symbols-rounded" style="font-size:18px;">delete</span>
           </button>
         </div>
-        ${j.prompt ? `<p style="font-size:0.75rem; color:var(--primary-accent); margin-top:var(--space-xs); font-style:italic;">Prompt: ${j.prompt.substring(0, 60)}...</p>` : ''}
-        <p class="journal-preview">${j.content}</p>
-        ${j.tags.length ? `<div class="journal-tags">${j.tags.map(t => `<span class="journal-tag">${t}</span>`).join('')}</div>` : ''}
+        ${j.prompt ? `<p style="font-size:0.75rem; color:var(--primary-accent); margin-top:var(--space-xs); font-style:italic;">Prompt: ${escapeHTML(j.prompt.substring(0, 60))}...</p>` : ''}
+        <p class="journal-preview">${escapeHTML(j.content)}</p>
+        ${j.tags.length ? `<div class="journal-tags">${j.tags.map(t => `<span class="journal-tag">${escapeHTML(t)}</span>`).join('')}</div>` : ''}
       </div>
     `;
   }).join('');

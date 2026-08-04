@@ -262,8 +262,10 @@ p { line-height: var(--line-height); }
 .container {
   width: 100% !important;
   max-width: 1080px !important;
-  margin: 0 auto !important;
-  padding: 0 var(--space-lg) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: var(--space-lg) !important;
+  padding-right: var(--space-lg) !important;
   box-sizing: border-box !important;
 }
 

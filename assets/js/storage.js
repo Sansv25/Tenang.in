@@ -3,6 +3,17 @@
    Central data layer for all pages
    ============================================= */
 
+// ---- Global XSS Sanitizer Helper ----
+window.escapeHTML = function(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+};
+
 const Storage = (() => {
   // ---- Helpers ----
   const getJSON = (key, fallback = null) => {
@@ -13,7 +24,14 @@ const Storage = (() => {
   };
 
   const setJSON = (key, value) => {
-    localStorage.setItem(key, JSON.stringify(value));
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+    } catch (e) {
+      console.error('Gagal menyimpan data ke localStorage:', e);
+      if (typeof Animations !== 'undefined' && typeof Animations.showToast === 'function') {
+        Animations.showToast('Peringatan: Penyimpanan peramban penuh atau terbatas.', 'warning');
+      }
+    }
   };
 
   const todayKey = () => {

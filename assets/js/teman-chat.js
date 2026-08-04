@@ -64,11 +64,11 @@ const TemanChat = (() => {
       <div class="teman-chat-body" id="teman-chat-body"></div>
       <div class="chat-options" id="teman-chat-options"></div>
       <div class="teman-chat-input-bar">
-        <button type="button" class="teman-input-btn teman-attach-btn" disabled aria-label="Tambah file" title="Segera hadir">
-          <span class="material-symbols-rounded" style="font-size:22px;">add_photo_alternate</span>
+        <button type="button" class="teman-input-btn" id="teman-voice-btn" aria-label="Input Suara dengan Web Speech" title="Bicara ke Teman (Voice-to-Text)">
+          <span class="material-symbols-rounded" style="font-size:22px; color:var(--primary-accent);">mic</span>
         </button>
-        <input type="text" class="teman-input-field" placeholder="Ketik pesan..." disabled>
-        <button type="button" class="teman-input-btn teman-send-btn" disabled aria-label="Kirim pesan" title="Segera hadir">
+        <input type="text" class="teman-input-field" id="teman-text-input" placeholder="Pilih opsi di atas atau tekan mik..." readonly style="background:var(--card-subtle); color:var(--text-secondary); cursor:default;">
+        <button type="button" class="teman-input-btn teman-send-btn" id="teman-send-btn" aria-label="Kirim pesan" disabled>
           <span class="material-symbols-rounded" style="font-size:22px;">send</span>
         </button>
       </div>
@@ -192,11 +192,20 @@ const TemanChat = (() => {
     }, 500);
   };
 
-  // ---- Voice Input (Web Speech API) ----
-  const initVoice = () => {
+  // ---- Voice Input (Web Speech API with Defensive Fallback) ----
+  const setupVoice = () => {
+    const voiceBtn = document.getElementById('teman-voice-btn');
+    if (!voiceBtn) return;
+
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
-      return null;
+      voiceBtn.addEventListener('click', () => {
+        if (typeof Animations !== 'undefined' && typeof Animations.showToast === 'function') {
+          Animations.showToast('Maaf, peramban ini belum mendukung Web Speech API (Input Suara). Silakan pilih opsi obrolan di atas.', 'warning', 4500);
+        }
+      });
+      voiceBtn.style.opacity = '0.6';
+      return;
     }
 
     const recognition = new SpeechRecognition();
@@ -204,7 +213,53 @@ const TemanChat = (() => {
     recognition.continuous = false;
     recognition.interimResults = false;
 
-    return recognition;
+    let isListening = false;
+
+    voiceBtn.addEventListener('click', () => {
+      if (isListening) {
+        try { recognition.stop(); } catch(e) {}
+        return;
+      }
+      try {
+        recognition.start();
+        isListening = true;
+        voiceBtn.innerHTML = `<span class="material-symbols-rounded animate-pulse" style="font-size:22px; color:#EF4444;">mic</span>`;
+        if (typeof Animations !== 'undefined' && typeof Animations.showToast === 'function') {
+          Animations.showToast('Mendengarkan... Katakan perasaan atau ceritamu!', 'info', 3500);
+        }
+      } catch (e) {
+        isListening = false;
+        if (typeof Animations !== 'undefined' && typeof Animations.showToast === 'function') {
+          Animations.showToast('Gagal mengaktifkan mikrofon atau sesi masih berjalan.', 'warning');
+        }
+      }
+    });
+
+    recognition.onresult = (event) => {
+      isListening = false;
+      voiceBtn.innerHTML = `<span class="material-symbols-rounded" style="font-size:22px; color:var(--primary-accent);">mic</span>`;
+      const transcript = event.results[0][0].transcript;
+      if (transcript && transcript.trim()) {
+        const cleanText = typeof window.escapeHTML === 'function' ? window.escapeHTML(transcript) : transcript;
+        addBubble(`(Suara): ${cleanText}`, 'user');
+        setTimeout(() => {
+          addBubble('Terimakasih sudah berbagi cerita secara langsung lewat suara! Agar Teman bisa mendampingimu dengan tepat, silakan pilih opsi refleksi di atas ya.', 'teman');
+        }, 600);
+      }
+    };
+
+    recognition.onerror = () => {
+      isListening = false;
+      voiceBtn.innerHTML = `<span class="material-symbols-rounded" style="font-size:22px; color:var(--primary-accent);">mic</span>`;
+      if (typeof Animations !== 'undefined' && typeof Animations.showToast === 'function') {
+        Animations.showToast('Suara tidak terdengar atau izin mikrofon belum dikonfirmasi peramban.', 'warning');
+      }
+    };
+
+    recognition.onend = () => {
+      isListening = false;
+      voiceBtn.innerHTML = `<span class="material-symbols-rounded" style="font-size:22px; color:var(--primary-accent);">mic</span>`;
+    };
   };
 
   // ---- Reset Conversation ----
@@ -220,6 +275,7 @@ const TemanChat = (() => {
   const init = async () => {
     await loadDecisions();
     createChatUI();
+    setupVoice();
   };
 
   return { init, open, close, toggle, reset };

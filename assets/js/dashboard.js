@@ -73,6 +73,7 @@ function renderStats() {
   const journalCount = Storage.getJournalCount();
   const temanSessions = Storage.getTemanSessions();
   const moodAvg = Storage.getMoodAverage(7);
+  const moodCount = Storage.getMoods().length;
 
   const moodIcons = {
     1: 'sentiment_very_dissatisfied',
@@ -83,7 +84,30 @@ function renderStats() {
   };
   const avgIcon = moodAvg > 0 ? moodIcons[Math.round(moodAvg)] || 'sentiment_neutral' : 'sentiment_neutral';
 
-  statsEl.innerHTML = `
+  let emptyBannerHTML = '';
+  if (moodCount === 0 && journalCount === 0) {
+    emptyBannerHTML = `
+      <div class="card p-6 md:p-8 mb-6 rounded-2xl border border-solid shadow-md" style="border-color:#7EC8E3; background:linear-gradient(135deg, #FFFFFF 0%, #F0F5FF 100%);">
+        <div class="flex flex-col md:flex-row items-center gap-5 text-center md:text-left">
+          <div class="w-14 h-14 rounded-full flex items-center justify-center shrink-0 shadow" style="background:#5B8FD4;">
+            <span class="material-symbols-rounded" style="font-size:32px; color:#FFFFFF;">rocket_launch</span>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-bold text-lg mb-1" style="color:#1A2F4E;">Dashboard Analisamu Masih Kosong</h3>
+            <p class="text-sm leading-relaxed" style="color:#6B8DB5;">
+              Mulai catat check-in mood pertamamu hari ini atau tuangkan cerita di Jurnal agar grafik dan statistik pribadimu aktif di sini!
+            </p>
+          </div>
+          <a href="beranda.html" class="btn btn-primary inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold shadow hover:opacity-95 transition whitespace-nowrap" style="background:#2D5BA8; color:#FFFFFF; text-decoration:none;">
+            <span class="material-symbols-rounded" style="font-size:18px;">add_circle</span>
+            <span>Mulai Check-In</span>
+          </a>
+        </div>
+      </div>
+    `;
+  }
+
+  statsEl.innerHTML = emptyBannerHTML + `
     <div class="grid md\\:grid-2" style="grid-template-columns: repeat(2, 1fr); gap:var(--space-md);">
       <div class="card stat-card">
         <div style="display:flex; justify-content:center; align-items:center; gap:6px; margin-bottom:4px;">

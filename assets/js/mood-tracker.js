@@ -82,8 +82,8 @@ function renderMoodForm() {
         </div>
         <h3 style="font-weight:700; margin-bottom:var(--space-xs); color:var(--text-on-white);">${labels[today.level]}</h3>
         <p style="font-size:var(--caption-size); color:var(--text-secondary);">Mood hari ini sudah tercatat</p>
-        ${today.tags.length ? `<div class="journal-tags" style="justify-content:center; margin-top:var(--space-md);">${today.tags.map(t => `<span class="journal-tag">${t}</span>`).join('')}</div>` : ''}
-        ${today.note ? `<p style="font-size:0.875rem; color:var(--text-secondary); margin-top:var(--space-sm); font-style:italic;">"${today.note}"</p>` : ''}
+        ${today.tags.length ? `<div class="journal-tags" style="justify-content:center; margin-top:var(--space-md);">${today.tags.map(t => `<span class="journal-tag">${escapeHTML(t)}</span>`).join('')}</div>` : ''}
+        ${today.note ? `<p style="font-size:0.875rem; color:var(--text-secondary); margin-top:var(--space-sm); font-style:italic;">"${escapeHTML(today.note)}"</p>` : ''}
         <button class="btn btn-sm btn-ghost" style="margin-top:var(--space-lg); color:var(--primary-accent);" onclick="resetTodayMood()">Ubah Mood Hari Ini</button>
       </div>
     `;

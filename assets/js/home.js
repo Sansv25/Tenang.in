@@ -24,8 +24,13 @@ async function initializeHome() {
   const logoutBtn = document.getElementById('logout-btn');
   if (logoutBtn) logoutBtn.style.display = 'inline-flex';
 
+  // ---- Check First-Time Onboarding ----
+  if (typeof Onboarding !== 'undefined') {
+    Onboarding.init();
+  }
+
   // ---- Check if already checked in today ----
-  if (Storage.isFirstVisitToday()) {
+  if (Storage.isFirstVisitToday() && localStorage.getItem('isNewUser') !== null) {
     showCheckInModal();
   }
 
@@ -193,12 +198,12 @@ function updateMoodSummary() {
 
       const tagsHTML = mood.tags && mood.tags.length > 0
         ? `<div style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:16px 0;">
-             ${mood.tags.map(t => `<span style="background:rgba(15,23,42,0.06); border:1px solid rgba(15,23,42,0.15); color:#334155; font-size:0.75rem; font-weight:600; padding:4px 12px; border-radius:16px;">#${t}</span>`).join('')}
+             ${mood.tags.map(t => `<span style="background:rgba(15,23,42,0.06); border:1px solid rgba(15,23,42,0.15); color:#334155; font-size:0.75rem; font-weight:600; padding:4px 12px; border-radius:16px;">#${escapeHTML(t)}</span>`).join('')}
            </div>`
         : '';
 
       const noteHTML = mood.note
-        ? `<div style="margin:16px auto; max-width:420px; padding:12px 16px; background:#F8FAFC; border-left:4px solid ${colors[mood.level]}; border-radius:6px; color:#475569; font-size:0.9rem; font-style:italic; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,0.05);">"${mood.note}"</div>`
+        ? `<div style="margin:16px auto; max-width:420px; padding:12px 16px; background:#F8FAFC; border-left:4px solid ${colors[mood.level]}; border-radius:6px; color:#475569; font-size:0.9rem; font-style:italic; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,0.05);">"${escapeHTML(mood.note)}"</div>`
         : '';
 
       checkedInState.innerHTML = `
@@ -335,3 +340,253 @@ function rotateInspiration() {
     container.classList.remove('fading');
   }, 250);
 }
+
+// ---- First-Time Onboarding Modal Engine (Vanilla JS State Management & Interactive Selections) ----
+const Onboarding = (() => {
+  let currentStep = 0;
+  
+  // Interactive Onboarding State
+  let state = {
+    gender: localStorage.getItem('tenang_user_gender') || 'Netral',
+    goals: []
+  };
+  try {
+    const savedGoals = localStorage.getItem('tenang_user_goals');
+    if (savedGoals) state.goals = JSON.parse(savedGoals);
+  } catch (e) { state.goals = []; }
+
+  if (state.goals.length === 0) {
+    state.goals = ['Mengelola Stres & Cemas']; // Default choice
+  }
+
+  const checkAndShow = () => {
+    const isNewUser = localStorage.getItem('isNewUser');
+    if (isNewUser === null || isNewUser === undefined || isNewUser === '') {
+      setTimeout(() => {
+        open();
+      }, 700);
+    }
+  };
+
+  const open = () => {
+    const modal = document.getElementById('onboarding-modal');
+    const card = document.getElementById('onboarding-card');
+    if (!modal || !card) return;
+    
+    modal.style.display = 'flex';
+    setTimeout(() => {
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modal.classList.add('opacity-100');
+      card.classList.remove('scale-95');
+      card.classList.add('scale-100');
+    }, 50);
+
+    currentStep = 0;
+    renderSlide();
+  };
+
+  const close = () => {
+    const modal = document.getElementById('onboarding-modal');
+    const card = document.getElementById('onboarding-card');
+    if (!modal || !card) return;
+
+    modal.classList.remove('opacity-100');
+    modal.classList.add('opacity-0', 'pointer-events-none');
+    card.classList.remove('scale-100');
+    card.classList.add('scale-95');
+
+    setTimeout(() => {
+      modal.style.display = 'none';
+      if (Storage && typeof Storage.isFirstVisitToday === 'function' && Storage.isFirstVisitToday() && typeof showCheckInModal === 'function') {
+        showCheckInModal();
+      }
+    }, 500);
+  };
+
+  const complete = () => {
+    localStorage.setItem('isNewUser', 'false');
+    localStorage.setItem('tenang_user_gender', state.gender);
+    localStorage.setItem('tenang_user_goals', JSON.stringify(state.goals));
+    close();
+    if (typeof Animations !== 'undefined' && typeof Animations.showToast === 'function') {
+      Animations.showToast('Selamat datang! Ruang amanmu siap digunakan.', 'success', 4000);
+    }
+  };
+
+  const selectGender = (val) => {
+    state.gender = val;
+    localStorage.setItem('tenang_user_gender', val);
+    renderSlide();
+  };
+
+  const toggleGoal = (goalText) => {
+    const index = state.goals.indexOf(goalText);
+    if (index > -1) {
+      if (state.goals.length > 1) { // keep at least one selected
+        state.goals.splice(index, 1);
+      }
+    } else {
+      state.goals.push(goalText);
+    }
+    localStorage.setItem('tenang_user_goals', JSON.stringify(state.goals));
+    renderSlide();
+  };
+
+  const nextSlide = () => {
+    if (currentStep < 2) {
+      currentStep++;
+      renderSlide();
+    } else {
+      complete();
+    }
+  };
+
+  const prevSlide = () => {
+    if (currentStep > 0) {
+      currentStep--;
+      renderSlide();
+    }
+  };
+
+  const renderSlide = () => {
+    const contentEl = document.getElementById('onboarding-slide-content');
+    const prevBtn = document.getElementById('onboarding-prev-btn');
+    const nextBtn = document.getElementById('onboarding-next-btn');
+    const dots = document.querySelectorAll('.onboarding-dot');
+    if (!contentEl) return;
+
+    let html = '';
+
+    if (currentStep === 0) {
+      // Step 1: Welcome & Gender Selection
+      html = `
+        <div class="w-14 h-14 md:w-16 md:h-16 rounded-full mx-auto mb-4 flex items-center justify-center shadow-sm" style="background: rgba(91, 143, 212, 0.15);">
+          <span class="material-symbols-rounded text-2xl md:text-3xl" style="color: #5B8FD4;">waving_hand</span>
+        </div>
+        <h3 class="text-xl md:text-2xl font-extrabold mb-2 px-2 leading-tight" style="color: #1A2F4E;">
+          Selamat Datang di Tenang.in
+        </h3>
+        <p class="text-xs md:text-sm max-w-xs mx-auto mb-5 leading-relaxed" style="color: #6B8DB5;">
+          Agar Teman AI dapat menyapa dan berinteraksi lebih personal, apa panggilan atau gender yang kamu nyaman?
+        </p>
+        <div class="grid grid-cols-3 gap-2 md:gap-3 w-full max-w-sm">
+          ${[
+            { val: 'Laki-laki', label: 'Laki-laki', icon: 'man' },
+            { val: 'Perempuan', label: 'Perempuan', icon: 'woman' },
+            { val: 'Netral', label: 'Netral / Privasi', icon: 'person' }
+          ].map(opt => {
+            const isSelected = state.gender === opt.val;
+            const cardStyle = isSelected
+              ? 'border-2 border-[#5B8FD4] bg-[#F0F6FF] text-[#2D5BA8] font-bold shadow-md'
+              : 'border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100';
+            return `
+              <button type="button" onclick="Onboarding.selectGender('${opt.val}')" class="p-3 rounded-2xl transition flex flex-col items-center justify-center gap-1 cursor-pointer ${cardStyle}">
+                <span class="material-symbols-rounded text-2xl" style="color: ${isSelected ? '#5B8FD4' : '#94A3B8'};">${opt.icon}</span>
+                <span class="text-[11px] md:text-xs leading-tight">${opt.label}</span>
+              </button>
+            `;
+          }).join('')}
+        </div>
+      `;
+    } else if (currentStep === 1) {
+      // Step 2: Primary Goals Selection
+      const availableGoals = [
+        { text: 'Mengelola Stres & Cemas', icon: 'self_improvement' },
+        { text: 'Konsistensi Catat Mood & Emosi', icon: 'mood' },
+        { text: 'Teman Bercerita Tanpa Menghakimi', icon: 'forum' },
+        { text: 'Refleksi & Belajar Memahami Diri', icon: 'menu_book' }
+      ];
+      html = `
+        <div class="w-14 h-14 md:w-16 md:h-16 rounded-full mx-auto mb-4 flex items-center justify-center shadow-sm" style="background: rgba(126, 200, 227, 0.18);">
+          <span class="material-symbols-rounded text-2xl md:text-3xl" style="color: #4AA4C6;">track_changes</span>
+        </div>
+        <h3 class="text-xl md:text-2xl font-extrabold mb-2 px-2 leading-tight" style="color: #1A2F4E;">
+          Apa fokus utamamu saat ini?
+        </h3>
+        <p class="text-xs md:text-sm max-w-xs mx-auto mb-4 leading-relaxed" style="color: #6B8DB5;">
+          Pilih satu atau lebih fokus refleksi agar pengalamanmu lebih terarah.
+        </p>
+        <div class="flex flex-col gap-2.5 w-full max-w-sm text-left">
+          ${availableGoals.map(g => {
+            const isSelected = state.goals.includes(g.text);
+            const btnStyle = isSelected
+              ? 'border-2 border-[#5B8FD4] bg-[#F0F6FF] text-[#1A2F4E] font-bold shadow-sm'
+              : 'border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100';
+            return `
+              <button type="button" onclick="Onboarding.toggleGoal('${g.text}')" class="px-4 py-3 rounded-2xl transition flex items-center justify-between cursor-pointer ${btnStyle}">
+                <div class="flex items-center gap-3">
+                  <span class="material-symbols-rounded text-xl" style="color: ${isSelected ? '#5B8FD4' : '#94A3B8'};">${g.icon}</span>
+                  <span class="text-xs md:text-sm">${g.text}</span>
+                </div>
+                <span class="material-symbols-rounded text-lg" style="color: ${isSelected ? '#5B8FD4' : '#CBD5E1'};">${isSelected ? 'check_circle' : 'radio_button_unchecked'}</span>
+              </button>
+            `;
+          }).join('')}
+        </div>
+      `;
+    } else {
+      // Step 3: Ready
+      html = `
+        <div class="w-20 h-20 md:w-24 md:h-24 rounded-full mx-auto mb-5 flex items-center justify-center shadow-md transform transition duration-500 hover:rotate-12" style="background: linear-gradient(135deg, #F0F6FF 0%, #E2EFFE 100%); border: 2px solid #D2E4FF;">
+          <span class="material-symbols-rounded" style="font-size: 48px; color: #2D5BA8;">rocket_launch</span>
+        </div>
+        <h3 class="text-xl md:text-2xl font-extrabold mb-3 px-2 leading-tight" style="color: #1A2F4E;">
+          Kamu Sudah Siap Melangkah!
+        </h3>
+        <p class="text-xs md:text-sm max-w-sm mx-auto mb-4 leading-relaxed" style="color: #6B8DB5;">
+          Preferensimu telah diselaraskan. Ruang refleksi ini adalah milikmu seutuhnya.
+        </p>
+        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 max-w-xs mx-auto text-center flex items-center gap-2.5">
+          <span class="material-symbols-rounded text-emerald-500 flex-shrink-0" style="font-size:24px;">enhanced_encryption</span>
+          <p class="text-[11px] text-slate-500 text-left leading-tight">
+            <strong>100% Privat & Aman:</strong> Seluruh catatan emosi dan obrolan Teman AI disandikan & tersimpan di perangkatmu.
+          </p>
+        </div>
+      `;
+    }
+
+    // Smooth update
+    contentEl.style.opacity = '0';
+    setTimeout(() => {
+      contentEl.innerHTML = html;
+      contentEl.style.opacity = '1';
+    }, 120);
+
+    // Update Dots
+    dots.forEach((dot, index) => {
+      if (index === currentStep) {
+        dot.style.background = '#5B8FD4';
+        dot.style.width = '24px';
+        dot.classList.remove('bg-slate-200');
+      } else {
+        dot.style.background = '';
+        dot.style.width = '10px';
+        dot.classList.add('bg-slate-200');
+      }
+    });
+
+    // Update Prev Button
+    if (prevBtn) {
+      if (currentStep === 0) {
+        prevBtn.classList.add('opacity-0', 'pointer-events-none');
+      } else {
+        prevBtn.classList.remove('opacity-0', 'pointer-events-none');
+      }
+    }
+
+    // Update Next Button
+    if (nextBtn) {
+      if (currentStep === 2) {
+        nextBtn.innerHTML = `<span>Mulai Perjalananku</span><span class="material-symbols-rounded" style="font-size:18px;">check_circle</span>`;
+        nextBtn.style.background = '#2D5BA8';
+      } else {
+        nextBtn.innerHTML = `<span>Lanjut</span><span class="material-symbols-rounded" style="font-size:18px;">arrow_forward</span>`;
+        nextBtn.style.background = '#5B8FD4';
+      }
+    }
+  };
+
+  return { init: checkAndShow, open, close, complete, nextSlide, prevSlide, selectGender, toggleGoal };
+})();
+
+window.Onboarding = Onboarding;
