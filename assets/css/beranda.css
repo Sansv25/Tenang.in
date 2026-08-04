@@ -134,8 +134,17 @@
 }
 
 @keyframes pulseFire {
-  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(234, 88, 12, 0.5)); }
-  50% { transform: scale(1.15); filter: drop-shadow(0 0 6px rgba(234, 88, 12, 0.8)); }
+
+  0%,
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 2px rgba(234, 88, 12, 0.5));
+  }
+
+  50% {
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 6px rgba(234, 88, 12, 0.8));
+  }
 }
 
 /* ---- Override Nudge Banner to Clean White ---- */
@@ -273,11 +282,35 @@
 }
 
 /* Clean Pastel Glows by Mood Level */
-.mood-1:hover { background: #FFF1F2; border-color: #FDA4AF; box-shadow: 0 8px 20px rgba(244, 63, 94, 0.15); }
-.mood-2:hover { background: #FFF7ED; border-color: #FDBA74; box-shadow: 0 8px 20px rgba(249, 115, 22, 0.15); }
-.mood-3:hover { background: #F0F9FF; border-color: #7DD3FC; box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15); }
-.mood-4:hover { background: #ECFDF5; border-color: #6EE7B7; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15); }
-.mood-5:hover { background: #FAF5FF; border-color: #C084FC; box-shadow: 0 8px 20px rgba(168, 85, 247, 0.2); }
+.mood-1:hover {
+  background: #FFF1F2;
+  border-color: #FDA4AF;
+  box-shadow: 0 8px 20px rgba(244, 63, 94, 0.15);
+}
+
+.mood-2:hover {
+  background: #FFF7ED;
+  border-color: #FDBA74;
+  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.15);
+}
+
+.mood-3:hover {
+  background: #F0F9FF;
+  border-color: #7DD3FC;
+  box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
+}
+
+.mood-4:hover {
+  background: #ECFDF5;
+  border-color: #6EE7B7;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
+}
+
+.mood-5:hover {
+  background: #FAF5FF;
+  border-color: #C084FC;
+  box-shadow: 0 8px 20px rgba(168, 85, 247, 0.2);
+}
 
 .mood-card-icon {
   font-size: 36px;
@@ -532,6 +565,7 @@
    Based on ergonomic principles from top wellness mobile UI
    ======================================================== */
 @media (max-width: 640px) {
+
   /* 1. Ultra-compact, relaxing card padding on mobile */
   .dashboard-hero-box {
     padding: 16px !important;
@@ -539,7 +573,7 @@
     margin-top: 4px !important;
     margin-bottom: 14px !important;
   }
-  
+
   .dashboard-hero-content {
     flex-direction: column;
     align-items: flex-start;
@@ -553,7 +587,7 @@
     line-height: 1.25;
     letter-spacing: -0.01em;
   }
-  
+
   .greeting-sub {
     font-size: 0.82rem !important;
     line-height: 1.45;
@@ -581,12 +615,12 @@
     padding: 6px 12px !important;
     font-size: 0.75rem !important;
   }
-  
+
   .streak-badge {
     padding: 5px 12px !important;
     font-size: 0.75rem !important;
   }
-  
+
   .hero-status-tag {
     padding: 4px 10px !important;
     font-size: 0.72rem !important;
@@ -613,7 +647,8 @@
 
   .mood-title-wrap p {
     font-size: 0.78rem !important;
-    display: none; /* Keep header super clean on small phone screens! */
+    display: none;
+    /* Keep header super clean on small phone screens! */
   }
 
   .mood-title-icon {
@@ -638,7 +673,7 @@
     border-radius: 12px !important;
     gap: 4px !important;
   }
-  
+
   /* On small mobile, hide sub-labels to avoid text squishing in 5 columns */
   .mood-card-sub {
     display: none !important;
@@ -660,7 +695,7 @@
     border-radius: 18px !important;
     margin-bottom: 14px !important;
   }
-  
+
   .quote-text {
     font-size: 0.95rem !important;
     line-height: 1.5;
@@ -690,21 +725,21 @@
   .bento-wide {
     grid-column: span 1 !important;
   }
-  
+
   .bento-icon-box {
     width: 42px !important;
     height: 42px !important;
   }
-  
+
   .bento-title {
     font-size: 1.08rem !important;
   }
-  
+
   .bento-desc {
     font-size: 0.8rem !important;
     line-height: 1.45;
   }
-  
+
   .btn-ai-start {
     padding: 7px 16px !important;
     font-size: 0.78rem !important;
@@ -715,11 +750,11 @@
     border-radius: 18px !important;
     margin-bottom: 14px !important;
   }
-  
+
   .nudge-banner-title {
     font-size: 1.08rem !important;
   }
-  
+
   .nudge-banner-desc {
     font-size: 0.8rem !important;
   }
@@ -840,23 +875,27 @@
   .dashboard-hero-floating {
     padding: 10px 12px 20px !important;
   }
+
   .dashboard-hero-floating .greeting-text {
     font-size: 1.6rem !important;
   }
+
   .dashboard-hero-floating .greeting-sub {
     font-size: 0.88rem !important;
     margin-bottom: 18px !important;
   }
+
   .streak-badge-floating {
     padding: 6px 16px !important;
     font-size: 0.82rem !important;
   }
+
   .beranda-footer-section {
     padding: 20px 12px 6px !important;
   }
+
   .btn-logout-footer {
     padding: 10px 22px !important;
     font-size: 0.88rem !important;
   }
 }
-

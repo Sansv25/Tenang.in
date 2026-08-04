@@ -5,27 +5,27 @@
 document.addEventListener('DOMContentLoaded', () => {
   // ---- Preloader (Loading Screen) Logic ----
   const preloader = document.getElementById('preloader');
-  
+
   if (preloader) {
     const finishPreloader = () => {
       preloader.classList.add('fade-out');
-      
+
       // Scroll to top so page starts at the very top
       window.scrollTo(0, 0);
-      
+
       // Let body scroll again
       document.body.classList.remove('preloader-active');
-      
+
       // Remove element from DOM after transition
       setTimeout(() => {
         preloader.style.display = 'none';
-        
+
         // Trigger reveal for hero elements immediately
         const heroReveals = document.querySelectorAll('#hero .reveal');
         heroReveals.forEach(el => el.classList.add('active'));
       }, 800);
     };
-    
+
     // Simple 1.5 second delay then fade out
     setTimeout(finishPreloader, 1500);
   } else {
@@ -163,7 +163,7 @@ function handleMulaiSekarang() {
 function showAuthModal() {
   const modal = document.getElementById('auth-modal');
   if (modal) modal.classList.add('active');
-  
+
   // Reset fields
   const usernameInput = document.getElementById('auth-username');
   const passwordInput = document.getElementById('auth-password');
@@ -197,7 +197,7 @@ function switchAuthTab(tab) {
     if (authSubtitle) authSubtitle.textContent = 'Mari lanjutkan perjalanan refleksi dirimu.';
     if (dividerText) dividerText.textContent = 'ATAU MASUK DENGAN USERNAME';
     if (authBtn) authBtn.textContent = 'Masuk';
-    
+
     if (confirmGroup) confirmGroup.style.display = 'none';
     if (confirmInput) confirmInput.required = false;
     if (forgotWrap) forgotWrap.style.display = 'block';
@@ -210,7 +210,7 @@ function switchAuthTab(tab) {
     if (authSubtitle) authSubtitle.textContent = 'Mulai langkah awal ruang amanmu hari ini.';
     if (dividerText) dividerText.textContent = 'ATAU DAFTAR DENGAN USERNAME';
     if (authBtn) authBtn.textContent = 'Daftar Sekarang';
-    
+
     if (confirmGroup) confirmGroup.style.display = 'block';
     if (confirmInput) confirmInput.required = true;
     if (forgotWrap) forgotWrap.style.display = 'none';
@@ -317,7 +317,7 @@ function togglePasswordVisibility(inputId, btn) {
 function handleSocialAuth(provider) {
   const simulatedUsername = `Teman_${provider}_${Math.floor(100 + Math.random() * 900)}`;
   Animations.showToast(`Menghubungkan ke ${provider}...`, 'info', 1500);
-  
+
   setTimeout(() => {
     localStorage.setItem('tenang_logged_in_user', simulatedUsername);
     localStorage.setItem('tenang_username', simulatedUsername);

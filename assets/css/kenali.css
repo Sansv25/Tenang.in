@@ -1,0 +1,1081 @@
+/* =============================================
+   Tenang.in — Kenali Dirimu Premium Page Styles
+   On-theme blue/cyan palette + glassmorphism
+   ============================================= */
+
+/* ---- Kenali Page Ambient Background ---- */
+.kenali-page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.kenali-page-bg .orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: kenaliOrbFloat 12s ease-in-out infinite;
+}
+
+.kenali-page-bg .orb-1 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.25), transparent 70%);
+  top: -100px;
+  right: -80px;
+  animation-delay: 0s;
+}
+
+.kenali-page-bg .orb-2 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.2), transparent 70%);
+  bottom: -80px;
+  left: -60px;
+  animation-delay: -4s;
+}
+
+.kenali-page-bg .orb-3 {
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(81, 152, 222, 0.18), transparent 70%);
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  animation-delay: -8s;
+}
+
+@keyframes kenaliOrbFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+
+/* ---- Intro Section ---- */
+.kenali-intro {
+  padding: var(--space-3xl) 0 var(--space-2xl);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.kenali-intro-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-xl);
+}
+
+.kenali-intro-icon .icon-ring {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  border: 2px solid rgba(56, 189, 248, 0.3);
+  animation: kenaliPulseRing 3s ease-in-out infinite;
+}
+
+.kenali-intro-icon .icon-ring-2 {
+  position: absolute;
+  inset: -24px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(56, 189, 248, 0.15);
+  animation: kenaliPulseRing 3s ease-in-out infinite 0.5s;
+}
+
+.kenali-intro-icon .icon-glow {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(56, 189, 248, 0.15));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 40px rgba(37, 99, 235, 0.2), 0 0 80px rgba(56, 189, 248, 0.1);
+}
+
+.kenali-intro-icon .icon-glow .material-symbols-rounded {
+  font-size: 48px;
+  color: var(--secondary-accent);
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+}
+
+@keyframes kenaliPulseRing {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.15); opacity: 0.5; }
+}
+
+.kenali-intro h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  margin-bottom: var(--space-sm);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #FFFFFF, var(--secondary-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.kenali-intro-subtitle {
+  font-size: clamp(0.95rem, 2vw, 1.125rem);
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 500px;
+  margin: 0 auto var(--space-2xl);
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* ---- Personality Types Preview Cards (Glassmorphism) ---- */
+.personality-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  max-width: 520px;
+  margin: 0 auto var(--space-2xl);
+}
+
+.personality-preview-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg) var(--space-md);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-sm);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.personality-preview-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-xl);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.personality-preview-card:nth-child(1)::before {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), transparent 70%);
+}
+.personality-preview-card:nth-child(2)::before {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), transparent 70%);
+}
+.personality-preview-card:nth-child(3)::before {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), transparent 70%);
+}
+.personality-preview-card:nth-child(4)::before {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), transparent 70%);
+}
+
+.personality-preview-card:hover::before {
+  opacity: 1;
+}
+
+.personality-preview-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.personality-preview-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.personality-preview-card:nth-child(1) .personality-preview-icon {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.08));
+}
+.personality-preview-card:nth-child(2) .personality-preview-icon {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.08));
+}
+.personality-preview-card:nth-child(3) .personality-preview-icon {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.08));
+}
+.personality-preview-card:nth-child(4) .personality-preview-icon {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.08));
+}
+
+.personality-preview-icon .material-symbols-rounded {
+  font-size: 28px;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.personality-preview-card:nth-child(1) .personality-preview-icon .material-symbols-rounded { color: #60A5FA; }
+.personality-preview-card:nth-child(2) .personality-preview-icon .material-symbols-rounded { color: #38BDF8; }
+.personality-preview-card:nth-child(3) .personality-preview-icon .material-symbols-rounded { color: #FBBF24; }
+.personality-preview-card:nth-child(4) .personality-preview-icon .material-symbols-rounded { color: #34D399; }
+
+.personality-preview-name {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  position: relative;
+  z-index: 1;
+  line-height: 1.3;
+}
+
+.personality-preview-tag {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Start Quiz Button (On-theme blue) ---- */
+.kenali-start-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 28px rgba(37, 99, 235, 0.4), 0 0 0 0 rgba(37, 99, 235, 0);
+  position: relative;
+  overflow: hidden;
+}
+
+.kenali-start-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.15));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.kenali-start-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 36px rgba(37, 99, 235, 0.5), 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+.kenali-start-btn:hover::before {
+  opacity: 1;
+}
+
+.kenali-start-btn:active {
+  transform: translateY(0) scale(1);
+}
+
+.kenali-start-btn .material-symbols-rounded {
+  font-size: 22px;
+  transition: transform 0.3s ease;
+}
+
+.kenali-start-btn:hover .material-symbols-rounded {
+  transform: translateX(3px);
+}
+
+.kenali-time-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: var(--space-lg);
+}
+
+.kenali-time-hint .material-symbols-rounded {
+  font-size: 16px;
+}
+
+/* ---- Quiz Section ---- */
+.kenali-quiz-section {
+  display: none;
+  min-height: 60vh;
+  padding: var(--space-xl) 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Enhanced Progress Bar (On-theme) ---- */
+.kenali-progress-wrapper {
+  margin-bottom: var(--space-2xl);
+}
+
+.kenali-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+}
+
+.kenali-progress-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.kenali-progress-label .material-symbols-rounded {
+  font-size: 16px;
+  color: var(--secondary-accent);
+}
+
+.kenali-progress-count {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--secondary-accent);
+}
+
+.kenali-progress-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+}
+
+.kenali-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2563EB, #38BDF8, #5198DE);
+  background-size: 200% 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: kenaliProgressShimmer 3s ease-in-out infinite;
+  position: relative;
+}
+
+.kenali-progress-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--secondary-accent);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+}
+
+@keyframes kenaliProgressShimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ---- Quiz Step Dots ---- */
+.kenali-step-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: var(--space-md);
+}
+
+.kenali-step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+}
+
+.kenali-step-dot.active {
+  background: var(--secondary-accent);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);
+  transform: scale(1.3);
+}
+
+.kenali-step-dot.completed {
+  background: rgba(56, 189, 248, 0.5);
+}
+
+/* ---- Quiz Card Container ---- */
+.kenali-quiz-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+}
+
+/* ---- Enhanced Quiz Slide ---- */
+.kenali-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+}
+
+.kenali-slide.active {
+  position: relative;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.kenali-slide.prev {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.kenali-slide.next {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.kenali-question-number {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--secondary-accent);
+  margin-bottom: var(--space-lg);
+}
+
+.kenali-question-text {
+  font-size: clamp(1.15rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  line-height: 1.5;
+  max-width: 520px;
+  letter-spacing: -0.01em;
+}
+
+.kenali-options-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: 480px;
+}
+
+/* ---- Enhanced Quiz Option Buttons (Glassmorphism) ---- */
+.kenali-option {
+  width: 100%;
+  padding: 1.125rem 1.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  position: relative;
+  overflow: hidden;
+}
+
+.kenali-option::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.06), rgba(56, 189, 248, 0.04));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.kenali-option-letter {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.6);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.kenali-option:hover {
+  transform: translateY(-2px) scale(1.01);
+  border-color: rgba(56, 189, 248, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
+}
+
+.kenali-option:hover::before {
+  opacity: 1;
+}
+
+.kenali-option:hover .kenali-option-letter {
+  background: rgba(37, 99, 235, 0.2);
+  border-color: rgba(37, 99, 235, 0.35);
+  color: var(--secondary-accent);
+}
+
+.kenali-option.selected {
+  border-color: var(--primary-accent);
+  background: rgba(37, 99, 235, 0.12);
+  box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
+}
+
+.kenali-option.selected .kenali-option-letter {
+  background: var(--primary-accent);
+  border-color: var(--primary-accent);
+  color: #FFFFFF;
+}
+
+.kenali-option.selected::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--primary-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- Result Section ---- */
+.kenali-result-section {
+  display: none;
+  padding: var(--space-xl) 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Result Hero Card (Glassmorphism) ---- */
+.kenali-result-hero {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-3xl) var(--space-2xl);
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+}
+
+.kenali-result-hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.06) 0%, transparent 50%);
+  animation: kenaliResultGlow 8s ease-in-out infinite;
+}
+
+@keyframes kenaliResultGlow {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -20px); }
+}
+
+.kenali-result-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.kenali-result-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-lg);
+}
+
+.kenali-result-icon-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Dynamic color per personality type — on-theme */
+.kenali-result-icon-circle.type-it {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.05));
+  box-shadow: 0 0 50px rgba(37, 99, 235, 0.2);
+}
+.kenali-result-icon-circle.type-if {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.05));
+  box-shadow: 0 0 50px rgba(56, 189, 248, 0.2);
+}
+.kenali-result-icon-circle.type-et {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.05));
+  box-shadow: 0 0 50px rgba(245, 158, 11, 0.2);
+}
+.kenali-result-icon-circle.type-ef {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));
+  box-shadow: 0 0 50px rgba(16, 185, 129, 0.2);
+}
+
+.kenali-result-icon-circle .material-symbols-rounded {
+  font-size: 48px;
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+}
+
+.kenali-result-icon-circle.type-it .material-symbols-rounded { color: #60A5FA; }
+.kenali-result-icon-circle.type-if .material-symbols-rounded { color: #38BDF8; }
+.kenali-result-icon-circle.type-et .material-symbols-rounded { color: #FBBF24; }
+.kenali-result-icon-circle.type-ef .material-symbols-rounded { color: #34D399; }
+
+.kenali-result-name {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  margin-bottom: var(--space-xs);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+
+.kenali-result-tagline {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: var(--space-xl);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 18px;
+  border-radius: var(--radius-full);
+}
+
+.kenali-result-tagline.type-it {
+  background: rgba(37, 99, 235, 0.15);
+  color: #60A5FA;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+}
+.kenali-result-tagline.type-if {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38BDF8;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+.kenali-result-tagline.type-et {
+  background: rgba(245, 158, 11, 0.15);
+  color: #FBBF24;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+.kenali-result-tagline.type-ef {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.kenali-result-desc {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.75;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ---- Result Detail Cards (Glassmorphism) ---- */
+.kenali-result-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.kenali-detail-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.3s ease;
+}
+
+.kenali-detail-card:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.kenali-detail-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.kenali-detail-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kenali-detail-icon.icon-dimension {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(37, 99, 235, 0.1));
+}
+
+.kenali-detail-icon.icon-dimension .material-symbols-rounded {
+  font-size: 22px;
+  color: var(--secondary-accent);
+}
+
+.kenali-detail-icon.icon-strength {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.08));
+}
+
+.kenali-detail-icon.icon-strength .material-symbols-rounded {
+  font-size: 22px;
+  color: #FBBF24;
+}
+
+.kenali-detail-icon.icon-tips {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.08));
+}
+
+.kenali-detail-icon.icon-tips .material-symbols-rounded {
+  font-size: 22px;
+  color: #34D399;
+}
+
+.kenali-detail-title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+/* ---- Enhanced Dimension Bars (On-theme) ---- */
+.kenali-dimension-item {
+  margin-bottom: var(--space-xl);
+}
+
+.kenali-dimension-item:last-child {
+  margin-bottom: 0;
+}
+
+.kenali-dimension-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+}
+
+.kenali-dimension-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.kenali-dimension-track {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+}
+
+.kenali-dimension-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.kenali-dimension-fill.fill-ie {
+  background: linear-gradient(90deg, #2563EB, #60A5FA, #38BDF8);
+}
+
+.kenali-dimension-fill.fill-tf {
+  background: linear-gradient(90deg, #F59E0B, #FBBF24, #38BDF8);
+}
+
+.kenali-dimension-result-text {
+  text-align: center;
+  margin-top: var(--space-sm);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ---- Strength Chips (On-theme warm amber) ---- */
+.kenali-strength-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.kenali-strength-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.5rem 1rem;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #FBBF24;
+  transition: all 0.25s ease;
+}
+
+.kenali-strength-chip .material-symbols-rounded {
+  font-size: 16px;
+}
+
+.kenali-strength-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
+}
+
+/* ---- Tips List ---- */
+.kenali-tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.kenali-tip-item {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+}
+
+.kenali-tip-number {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #34D399;
+  flex-shrink: 0;
+}
+
+.kenali-tip-text {
+  font-size: 0.9375rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.65;
+}
+
+/* ---- Result Action Buttons (On-theme) ---- */
+.kenali-result-actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-bottom: var(--space-2xl);
+}
+
+.kenali-btn-share {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.875rem 1.75rem;
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+}
+
+.kenali-btn-share:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(37, 99, 235, 0.4);
+}
+
+.kenali-btn-retake {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.875rem 1.75rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-full);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.kenali-btn-retake:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+/* ---- Entrance Animations ---- */
+.kenali-fade-in {
+  animation: kenaliFadeUp 0.6s ease forwards;
+}
+
+.kenali-fade-in-delay-1 { animation-delay: 0.1s; opacity: 0; }
+.kenali-fade-in-delay-2 { animation-delay: 0.2s; opacity: 0; }
+.kenali-fade-in-delay-3 { animation-delay: 0.3s; opacity: 0; }
+.kenali-fade-in-delay-4 { animation-delay: 0.4s; opacity: 0; }
+
+@keyframes kenaliFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Share Modal Enhanced (On-theme blue gradient) ---- */
+.kenali-share-preview {
+  background: linear-gradient(135deg, #1E4780 0%, #2B5EA0 50%, #3B72C4 100%);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl) var(--space-xl);
+  text-align: center;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: var(--space-lg);
+}
+
+.kenali-share-preview::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 50%);
+  z-index: 0;
+}
+
+.kenali-share-preview > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Mobile Responsive ---- */
+@media (max-width: 640px) {
+  .kenali-intro {
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .personality-grid {
+    gap: var(--space-sm);
+  }
+
+  .personality-preview-card {
+    padding: var(--space-md) var(--space-sm);
+  }
+
+  .personality-preview-name {
+    font-size: 0.8125rem;
+  }
+
+  .personality-preview-tag {
+    font-size: 0.6875rem;
+  }
+
+  .personality-preview-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .personality-preview-icon .material-symbols-rounded {
+    font-size: 24px;
+  }
+
+  .kenali-start-btn {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+  }
+
+  .kenali-question-text {
+    font-size: 1.1rem;
+  }
+
+  .kenali-option {
+    padding: 0.875rem 1.125rem;
+    font-size: 0.875rem;
+  }
+
+  .kenali-option-letter {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8125rem;
+  }
+
+  .kenali-quiz-card {
+    min-height: 380px;
+  }
+
+  .kenali-result-hero {
+    padding: var(--space-2xl) var(--space-lg);
+  }
+
+  .kenali-result-name {
+    font-size: 1.75rem;
+  }
+
+  .kenali-detail-card {
+    padding: var(--space-lg);
+  }
+
+  .kenali-result-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .kenali-btn-share,
+  .kenali-btn-retake {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .personality-grid {
+    grid-template-columns: 1fr;
+    max-width: 280px;
+  }
+
+  .personality-preview-card {
+    flex-direction: row;
+    text-align: left;
+    gap: var(--space-md);
+    padding: var(--space-md);
+  }
+}

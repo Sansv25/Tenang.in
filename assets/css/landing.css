@@ -1520,7 +1520,7 @@ body.preloader-active {
   color: #FFFFFF;
   letter-spacing: -0.04em;
   line-height: 1.05;
-  font-family: 'Outfit', 'Lexend', sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -1699,11 +1699,173 @@ body.preloader-active {
 }
 
 /* ==========================================================================
+   DESKTOP PC (CENTERED VERTICAL HERO: SMALLER TEXT & VISIBLE IPHONE NO-SCROLL)
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .hero {
+    min-height: 100vh;
+    padding: 65px var(--space-xl) 15px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .hero-text-center {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin-bottom: 8px !important;
+    max-width: 800px !important;
+    z-index: 15;
+  }
+
+  .hero-badge {
+    margin-bottom: 0.5rem !important;
+  }
+
+  .hero-title-stage {
+    margin: 0 auto 0.5rem !important;
+    display: flex;
+    justify-content: center !important;
+    width: 100%;
+    max-width: 600px !important;
+  }
+
+  /* Perkecil teks sesuai permintaan agar muat bersusun vertikal bersama iPhone */
+  .interactive-hero-title {
+    align-items: center !important;
+    font-size: clamp(1.8rem, 2.5vw, 2.5rem) !important;
+    line-height: 1.05 !important;
+    gap: 0 !important;
+  }
+
+  .hero-subtitle {
+    text-align: center !important;
+    margin: 0 auto 0.75rem !important;
+    max-width: 480px !important;
+    font-size: 0.9rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .hero-actions {
+    justify-content: center !important;
+    gap: var(--space-sm) !important;
+    margin-bottom: 0 !important;
+  }
+
+  .hero-actions .btn {
+    padding: 0.55rem 1.4rem !important;
+    font-size: 0.92rem !important;
+  }
+
+  /* iPhone 16 Mockup tepat di bawah tombol - Ukuran dipadatkan agar TIDAK ada yang terpotong di bawah */
+  .hero-mockup-centered-wrapper {
+    width: 100%;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: relative;
+  }
+
+  .hero-mockup-wrapper {
+    margin: 5px auto 0 !important;
+    max-width: 230px !important;
+    width: 100%;
+    transform: none !important;
+    z-index: 20;
+  }
+
+  .hero-mockup-image {
+    max-height: 35vh !important;
+    object-fit: contain;
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+  }
+
+  /* Posisi floating glassmorphic badges di sekeliling ponsel */
+  .badge-1 {
+    top: 10% !important;
+    left: -150px !important;
+    transform: scale(0.82) !important;
+  }
+  .badge-2 {
+    top: 22% !important;
+    right: -145px !important;
+    transform: scale(0.82) !important;
+  }
+  .badge-3 {
+    bottom: 24% !important;
+    left: -140px !important;
+    transform: scale(0.82) !important;
+  }
+  .badge-4 {
+    bottom: 14% !important;
+    right: -135px !important;
+    transform: scale(0.82) !important;
+  }
+
+  /* Posisi floating cards dilebarkan ke samping agar TIDAK menutupi atau bertabrakan dengan huruf di judul */
+  .float-top-left {
+    top: -80px !important;
+    left: -460px !important;
+    transform: scale(0.8) !important;
+  }
+  .float-top-right {
+    top: -75px !important;
+    left: 280px !important;
+    transform: scale(0.8) !important;
+  }
+  .float-mid-left {
+    top: -5px !important;
+    left: -510px !important;
+    transform: scale(0.8) !important;
+  }
+  .float-mid-right {
+    top: 10px !important;
+    left: 330px !important;
+    transform: scale(0.8) !important;
+  }
+  .float-bottom-left {
+    top: 80px !important;
+    left: -440px !important;
+    transform: scale(0.8) !important;
+  }
+  .float-bottom-right {
+    top: 85px !important;
+    left: 270px !important;
+    transform: scale(0.8) !important;
+  }
+}
+
+@media (min-width: 1400px) {
+  .interactive-hero-title {
+    font-size: 3rem !important;
+  }
+  .hero-mockup-wrapper {
+    max-width: 270px !important;
+  }
+  .hero-mockup-image {
+    max-height: 40vh !important;
+  }
+}
+
+/* ==========================================================================
    COMPREHENSIVE RESPONSIVE OVERRIDES (Tablet → Mobile → Small Phone)
    ========================================================================== */
 
-/* ---- TABLET (max-width: 1024px) ---- */
-@media (max-width: 1024px) {
+/* ---- TABLET (max-width: 1023px) ---- */
+@media (max-width: 1023px) {
   .interactive-hero-title {
     font-size: clamp(2.2rem, 5.5vw, 3.6rem);
   }

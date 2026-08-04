@@ -128,7 +128,7 @@ function updateStreakDisplay() {
   if (streakContainer && streak > 0) {
     streakContainer.style.display = 'inline-flex';
   }
-  
+
   // Show streak milestone modal if hitting milestones
   const milestoneKey = `tenang_streak_milestone_${streak}`;
   if ([3, 7, 14, 21, 30].includes(streak) && !localStorage.getItem(milestoneKey)) {
@@ -155,7 +155,7 @@ function updateMoodSummary() {
   const gridContainer = document.getElementById('mood-grid-container');
   const checkedInState = document.getElementById('mood-checked-in-state');
   const checkinCtaBtn = document.getElementById('checkin-cta-btn');
-  
+
   if (mood) {
     const icons = {
       1: 'sentiment_very_dissatisfied',
@@ -186,18 +186,18 @@ function updateMoodSummary() {
         <span style="font-size:0.8125rem; font-weight:600; color:var(--text-on-blue);">${labels[mood.level].split(' · ')[0]}</span>
       `;
     }
-    
+
     if (gridContainer && checkedInState) {
       gridContainer.style.display = 'none';
       checkedInState.style.display = 'block';
 
-      const tagsHTML = mood.tags && mood.tags.length > 0 
+      const tagsHTML = mood.tags && mood.tags.length > 0
         ? `<div style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:16px 0;">
              ${mood.tags.map(t => `<span style="background:rgba(15,23,42,0.06); border:1px solid rgba(15,23,42,0.15); color:#334155; font-size:0.75rem; font-weight:600; padding:4px 12px; border-radius:16px;">#${t}</span>`).join('')}
-           </div>` 
+           </div>`
         : '';
-        
-      const noteHTML = mood.note 
+
+      const noteHTML = mood.note
         ? `<div style="margin:16px auto; max-width:420px; padding:12px 16px; background:#F8FAFC; border-left:4px solid ${colors[mood.level]}; border-radius:6px; color:#475569; font-size:0.9rem; font-style:italic; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,0.05);">"${mood.note}"</div>`
         : '';
 
@@ -248,7 +248,7 @@ function updateMoodSummary() {
   }
 }
 
-window.resetMoodInHome = function() {
+window.resetMoodInHome = function () {
   const gridContainer = document.getElementById('mood-grid-container');
   const checkedInState = document.getElementById('mood-checked-in-state');
   const checkinCtaBtn = document.getElementById('checkin-cta-btn');
@@ -289,7 +289,7 @@ async function loadDailyTip() {
         <p style="font-size:0.9375rem; line-height:1.65; color:var(--text-on-white);">${tipSet.daily[dayIndex]}</p>
       </div>
     `;
-  } catch(e) {
+  } catch (e) {
     tipEl.innerHTML = `
       <div class="insight-card">
         <div class="insight-card-header">

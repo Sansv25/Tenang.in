@@ -76,7 +76,7 @@ function renderMoodForm() {
     };
     const labels = { 1: 'Buruk', 2: 'Kurang Baik', 3: 'Biasa', 4: 'Baik', 5: 'Luar Biasa' };
     formEl.innerHTML = `
-      <div class="card text-center" style="padding:var(--space-2xl);">
+      <div class="card text-center" style="padding: 1.5rem 1.75rem;">
         <div style="margin-bottom:var(--space-sm);">
           <span class="material-symbols-rounded" style="font-size:48px; color:${colors[today.level]};">${icons[today.level]}</span>
         </div>
@@ -153,7 +153,7 @@ function resetTodayMood() {
 
 function getMoodFormHTML() {
   return `
-    <div class="card" style="padding:var(--space-2xl);">
+    <div class="card" style="padding: 1.5rem 1.75rem;">
       <h3 style="font-weight:700; margin-bottom:var(--space-lg); text-align:center; color:var(--text-on-white);">Bagaimana perasaanmu hari ini?</h3>
       <div class="emoji-selector" id="mood-emojis">
         <button class="emoji-btn" onclick="selectMoodTracker(1)">
@@ -221,6 +221,40 @@ function navigateGridMonth(direction) {
   renderContributionGrid();
 }
 
+// ---- Demo: Simulate check-in for progress ----
+function demoAddCheckin() {
+  const moods = Storage.getMoods();
+  if (moods.length >= 3) return;
+
+  // Create a mood entry with a past date so it doesn't overwrite today's entry
+  const daysBack = moods.length + 1;
+  const pastDate = new Date();
+  pastDate.setDate(pastDate.getDate() - daysBack);
+  const dateKey = `${pastDate.getFullYear()}-${String(pastDate.getMonth() + 1).padStart(2, '0')}-${String(pastDate.getDate()).padStart(2, '0')}`;
+
+  // Only add if this date doesn't already exist
+  if (!moods.find(m => m.date === dateKey)) {
+    const randomLevel = Math.floor(Math.random() * 3) + 3; // level 3-5
+    const tagOptions = ['tenang', 'bersyukur', 'semangat', 'lelah', 'cemas'];
+    const randomTags = [tagOptions[Math.floor(Math.random() * tagOptions.length)]];
+
+    moods.push({
+      date: dateKey,
+      timestamp: pastDate.getTime(),
+      level: randomLevel,
+      tags: randomTags,
+      note: ''
+    });
+    localStorage.setItem('tenang_moods', JSON.stringify(moods));
+  }
+
+  // Re-render everything
+  renderInsights();
+  renderChart();
+  renderContributionGrid();
+  Animations.showToast(`Progress: ${Math.min(moods.length, 3)}/3 Check-in!`, 'success');
+}
+
 // ---- Render Insights ----
 function renderInsights() {
   const insightEl = document.getElementById('mood-insights');
@@ -237,7 +271,7 @@ function renderInsights() {
             <span class="material-symbols-rounded text-primary" style="font-size:24px;">psychology</span>
             <span>Kemajuan Insight AI</span>
           </div>
-          <span class="tag-chip selected" style="font-size:0.75rem;">${moods.length}/3 Check-in</span>
+          <span class="tag-chip selected" style="font-size:0.75rem; cursor:pointer; transition:transform 0.15s, box-shadow 0.15s;" onclick="demoAddCheckin()" onmouseenter="this.style.transform='scale(1.08)';this.style.boxShadow='0 2px 12px rgba(37,99,235,0.25)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'" title="Klik untuk menambah progress demo">${moods.length}/3 Check-in</span>
         </div>
         <p style="font-size:0.9375rem; color:var(--text-on-white); line-height:1.6; margin-bottom:var(--space-md);">
           Lakukan ${needed} check-in lagi untuk membuka analisa kecenderungan emosi dan saran personal dari Teman AI.
@@ -257,40 +291,195 @@ function renderInsights() {
   const avg = Storage.getMoodAverage(7);
   const dominantTag = Storage.getDominantTag();
   const streak = Storage.getStreak();
+  const history = Storage.getMoodHistory(7);
 
-  let insightText = '';
+  // Determine mood trend (improving / declining / stable)
+  let trendIcon = 'trending_flat';
+  let trendLabel = 'Stabil';
+  let trendColor = '#3B82F6';
+  if (history.length >= 2) {
+    const recentHalf = history.slice(Math.floor(history.length / 2));
+    const olderHalf = history.slice(0, Math.floor(history.length / 2));
+    const recentAvg = recentHalf.reduce((a, m) => a + m.level, 0) / recentHalf.length;
+    const olderAvg = olderHalf.reduce((a, m) => a + m.level, 0) / olderHalf.length;
+    if (recentAvg > olderAvg + 0.3) {
+      trendIcon = 'trending_up'; trendLabel = 'Meningkat'; trendColor = '#10B981';
+    } else if (recentAvg < olderAvg - 0.3) {
+      trendIcon = 'trending_down'; trendLabel = 'Menurun'; trendColor = '#EF4444';
+    }
+  }
+
+  // AI Analysis text based on avg
+  let aiAnalysis = '';
+  let aiAdvice = [];
+  let moodEmoji = '';
+  let moodStatus = '';
+  let statusColor = '';
+
   if (avg >= 4) {
-    insightText = 'Mood-mu secara keseluruhan cukup baik minggu ini! Terus jaga kebiasaan positifmu.';
+    moodEmoji = 'sentiment_very_satisfied';
+    moodStatus = 'Sangat Baik';
+    statusColor = '#10B981';
+    aiAnalysis = 'Berdasarkan data check-in kamu, kondisi emosionalmu secara keseluruhan sangat positif. Kamu menunjukkan pola mood yang sehat dan stabil. Ini menandakan kamu memiliki mekanisme coping yang baik.';
+    aiAdvice = [
+      { icon: 'self_improvement', text: 'Pertahankan rutinitas positifmu saat ini — konsistensi adalah kunci kesehatan mental jangka panjang.' },
+      { icon: 'group', text: 'Bagikan energi positifmu kepada orang di sekitarmu. Kebaikan kecil bisa berdampak besar.' },
+      { icon: 'edit_note', text: 'Coba tuliskan 3 hal yang kamu syukuri hari ini di jurnal untuk memperkuat pola pikir positif.' }
+    ];
   } else if (avg >= 3) {
-    insightText = 'Mood-mu cenderung biasa akhir-akhir ini. Coba luangkan waktu untuk hal yang membuatmu tenang.';
+    moodEmoji = 'sentiment_neutral';
+    moodStatus = 'Cukup Stabil';
+    statusColor = '#F59E0B';
+    aiAnalysis = 'Mood-mu cenderung netral dan stabil minggu ini. Ini bukan hal buruk, tapi ada ruang untuk meningkatkan kualitas emosimu. Perhatikan pola aktivitas yang mempengaruhi perasaanmu.';
+    aiAdvice = [
+      { icon: 'directions_walk', text: 'Kurangi waktu di depan layar dan tambahkan 15 menit jalan kaki di luar rumah setiap hari.' },
+      { icon: 'bedtime', text: 'Pastikan tidur cukup 7-8 jam. Kurang tidur sering menjadi penyebab mood yang datar.' },
+      { icon: 'music_note', text: 'Coba dengarkan musik yang kamu sukai atau lakukan hobi yang sudah lama tidak kamu sentuh.' }
+    ];
   } else {
-    insightText = 'Sepertinya belakangan ini cukup berat untukmu. Ingat, tidak apa-apa untuk beristirahat dan minta bantuan.';
+    moodEmoji = 'sentiment_dissatisfied';
+    moodStatus = 'Perlu Perhatian';
+    statusColor = '#EF4444';
+    aiAnalysis = 'Data menunjukkan mood-mu sedang dalam fase rendah. Ini wajar dan bukan tanda kelemahan. Yang penting adalah kamu tetap hadir dan mencatat perasaanmu — itu sudah langkah yang sangat berani.';
+    aiAdvice = [
+      { icon: 'spa', text: 'Kurangi tekanan pada dirimu sendiri. Istirahat bukan berarti menyerah, tapi mengisi ulang energi.' },
+      { icon: 'chat_bubble', text: 'Ceritakan perasaanmu kepada seseorang yang kamu percaya, atau gunakan fitur Teman AI di Tenang.in.' },
+      { icon: 'local_florist', text: 'Lakukan satu hal kecil yang membuatmu senang hari ini — minum teh hangat, dengarkan lagu favorit, atau jalan-jalan sebentar.' }
+    ];
   }
 
+  // Tag-specific insight
+  let tagInsight = '';
   if (dominantTag) {
-    insightText += ` Tag yang sering muncul saat mood rendah: "${dominantTag}".`;
+    const tagAdvice = {
+      'cemas': 'Rasa cemas sering muncul dalam datamu. Coba teknik pernapasan 4-7-8: tarik napas 4 detik, tahan 7 detik, buang 8 detik.',
+      'stres': 'Stres mendominasi emosimu akhir-akhir ini. Prioritaskan tugas-tugasmu dan jangan ragu untuk bilang "tidak" pada hal yang berlebihan.',
+      'kesepian': 'Kamu sering merasa kesepian. Coba hubungi satu teman lama hari ini — koneksi kecil bisa membuat perbedaan besar.',
+      'lelah': 'Kelelahan terdeteksi sebagai pola berulang. Evaluasi beban kerjamu dan pastikan ada waktu istirahat yang cukup.',
+      'bersyukur': 'Rasa syukur sering muncul — ini tanda positif! Terus latih gratitude journaling untuk memperkuat mindset ini.',
+      'semangat': 'Semangatmu terlihat dari data! Channel energi ini untuk membangun kebiasaan baru yang positif.',
+      'tenang': 'Ketenangan menjadi emosi dominanmu. Ini fondasi yang bagus untuk kesehatan mental jangka panjang.',
+      'bingung': 'Perasaan bingung sering muncul. Coba luangkan waktu 10 menit untuk journaling — menulis bisa membantu menjernihkan pikiran.'
+    };
+    tagInsight = tagAdvice[dominantTag] || `Tag "${dominantTag}" sering muncul dalam catatan emosimu.`;
   }
+
+  // Mood level distribution
+  const moodCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+  moods.forEach(m => { moodCounts[m.level] = (moodCounts[m.level] || 0) + 1; });
+  const maxCount = Math.max(...Object.values(moodCounts), 1);
 
   insightEl.innerHTML = `
-    <div class="insight-card">
-      <div class="insight-card-header">
-        <span class="material-symbols-rounded" style="color:var(--primary-accent); font-size:22px;">insights</span>
-        <span>Insight Mingguan</span>
+    <div class="insight-card" style="border:none; padding:0; overflow:hidden; border-radius:16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
+      
+      <!-- Header -->
+      <div style="background:linear-gradient(135deg, #1E3A5F, #2563EB); padding:20px 24px; display:flex; align-items:center; justify-content:space-between;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span class="material-symbols-rounded" style="color:#fff; font-size:24px;">neurology</span>
+          <span style="color:#fff; font-weight:700; font-size:1rem;">Analisa Teman AI</span>
+        </div>
+        <span style="background:rgba(255,255,255,0.2); backdrop-filter:blur(8px); color:#fff; font-size:0.7rem; font-weight:600; padding:4px 12px; border-radius:20px;">
+          <span class="material-symbols-rounded" style="font-size:14px; vertical-align:middle;">auto_awesome</span>
+          Diperbarui Hari Ini
+        </span>
       </div>
-      <p style="font-size:0.9375rem; line-height:1.65; color:var(--text-on-white);">${insightText}</p>
-      <div style="display:flex; gap:var(--space-lg); margin-top:var(--space-lg);">
-        <div>
-          <div style="font-size:1.5rem; font-weight:700; color:var(--primary-accent);">${avg}</div>
-          <div style="font-size:var(--caption-size); color:var(--text-secondary);">Rata-rata</div>
+
+      <div style="padding:20px 24px;">
+
+        <!-- Status & Trend Row -->
+        <div style="display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap;">
+          <div style="flex:1; min-width:140px; background:${statusColor}12; border:1px solid ${statusColor}30; border-radius:12px; padding:14px 16px; display:flex; align-items:center; gap:12px;">
+            <span class="material-symbols-rounded" style="font-size:32px; color:${statusColor};">${moodEmoji}</span>
+            <div>
+              <div style="font-size:0.7rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.5px;">Status Emosi</div>
+              <div style="font-size:1rem; font-weight:700; color:${statusColor};">${moodStatus}</div>
+            </div>
+          </div>
+          <div style="flex:1; min-width:140px; background:${trendColor}12; border:1px solid ${trendColor}30; border-radius:12px; padding:14px 16px; display:flex; align-items:center; gap:12px;">
+            <span class="material-symbols-rounded" style="font-size:32px; color:${trendColor};">${trendIcon}</span>
+            <div>
+              <div style="font-size:0.7rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.5px;">Tren Mood</div>
+              <div style="font-size:1rem; font-weight:700; color:${trendColor};">${trendLabel}</div>
+            </div>
+          </div>
         </div>
-        <div>
-          <div style="font-size:1.5rem; font-weight:700; color:var(--warning);">${streak} Hari</div>
-          <div style="font-size:var(--caption-size); color:var(--text-secondary);">Streak</div>
+
+        <!-- AI Analysis -->
+        <div style="background:linear-gradient(135deg, #EEF2FF, #F0F9FF); border-radius:12px; padding:16px; margin-bottom:20px; border-left:4px solid #2563EB;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+            <span class="material-symbols-rounded" style="font-size:18px; color:#2563EB;">psychology</span>
+            <span style="font-size:0.8rem; font-weight:700; color:#2563EB; text-transform:uppercase; letter-spacing:0.5px;">Analisa AI</span>
+          </div>
+          <p style="font-size:0.9rem; line-height:1.7; color:#334155; margin:0;">${aiAnalysis}</p>
         </div>
-        <div>
-          <div style="font-size:1.5rem; font-weight:700; color:var(--success);">${moods.length}</div>
-          <div style="font-size:var(--caption-size); color:var(--text-secondary);">Total check-in</div>
+
+        ${tagInsight ? `
+        <!-- Tag Insight -->
+        <div style="background:#FFF7ED; border-radius:12px; padding:14px 16px; margin-bottom:20px; border-left:4px solid #F59E0B;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+            <span class="material-symbols-rounded" style="font-size:18px; color:#F59E0B;">label</span>
+            <span style="font-size:0.8rem; font-weight:700; color:#B45309;">Pola Emosi Terdeteksi: "${dominantTag}"</span>
+          </div>
+          <p style="font-size:0.875rem; line-height:1.6; color:#78350F; margin:0;">${tagInsight}</p>
         </div>
+        ` : ''}
+
+        <!-- AI Recommendations -->
+        <div style="margin-bottom:20px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+            <span class="material-symbols-rounded" style="font-size:20px; color:#10B981;">tips_and_updates</span>
+            <span style="font-size:0.875rem; font-weight:700; color:var(--text-on-white);">Saran Personal dari Teman AI</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            ${aiAdvice.map((a, i) => `
+              <div style="display:flex; align-items:flex-start; gap:12px; padding:12px 14px; background:var(--bg-soft, #F8FAFC); border-radius:10px; border:1px solid rgba(0,0,0,0.05); transition:transform 0.15s;" onmouseenter="this.style.transform='translateX(4px)'" onmouseleave="this.style.transform='translateX(0)'">
+                <div style="min-width:36px; height:36px; border-radius:10px; background:${['#EEF2FF','#ECFDF5','#FFF7ED'][i]}; display:flex; align-items:center; justify-content:center;">
+                  <span class="material-symbols-rounded" style="font-size:20px; color:${['#2563EB','#10B981','#F59E0B'][i]};">${a.icon}</span>
+                </div>
+                <p style="font-size:0.85rem; line-height:1.6; color:#475569; margin:0; padding-top:2px;">${a.text}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Mood Distribution -->
+        <div style="background:var(--bg-soft, #F8FAFC); border-radius:12px; padding:16px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px;">
+            <span class="material-symbols-rounded" style="font-size:18px; color:#6366F1;">bar_chart</span>
+            <span style="font-size:0.8rem; font-weight:700; color:var(--text-on-white);">Distribusi Mood</span>
+          </div>
+          <div style="display:flex; align-items:flex-end; gap:8px; height:60px; margin-bottom:8px;">
+            ${[1,2,3,4,5].map(level => {
+              const count = moodCounts[level];
+              const height = Math.max((count / maxCount) * 100, 8);
+              const colors = { 1: '#EF4444', 2: '#F97316', 3: '#3B82F6', 4: '#10B981', 5: '#8B5CF6' };
+              return `<div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;">
+                <span style="font-size:0.65rem; font-weight:600; color:${colors[level]};">${count}</span>
+                <div style="width:100%; height:${height}%; background:${colors[level]}; border-radius:6px 6px 2px 2px; min-height:4px; transition:height 0.3s;"></div>
+              </div>`;
+            }).join('')}
+          </div>
+          <div style="display:flex; gap:8px;">
+            ${['😢','😟','😐','😊','🤩'].map(e => `<div style="flex:1; text-align:center; font-size:1rem;">${e}</div>`).join('')}
+          </div>
+        </div>
+
+        <!-- Stats Row -->
+        <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap;">
+          <div style="flex:1; min-width:80px; text-align:center; padding:12px 8px; background:rgba(37,99,235,0.06); border-radius:10px;">
+            <div style="font-size:1.5rem; font-weight:800; color:var(--primary-accent);">${avg}</div>
+            <div style="font-size:0.7rem; color:var(--text-secondary); font-weight:600;">Rata-rata</div>
+          </div>
+          <div style="flex:1; min-width:80px; text-align:center; padding:12px 8px; background:rgba(245,158,11,0.06); border-radius:10px;">
+            <div style="font-size:1.5rem; font-weight:800; color:var(--warning);">${streak}</div>
+            <div style="font-size:0.7rem; color:var(--text-secondary); font-weight:600;">Hari Streak</div>
+          </div>
+          <div style="flex:1; min-width:80px; text-align:center; padding:12px 8px; background:rgba(16,185,129,0.06); border-radius:10px;">
+            <div style="font-size:1.5rem; font-weight:800; color:var(--success);">${moods.length}</div>
+            <div style="font-size:0.7rem; color:var(--text-secondary); font-weight:600;">Total Check-in</div>
+          </div>
+        </div>
+
       </div>
     </div>
   `;

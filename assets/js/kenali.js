@@ -1,5 +1,6 @@
 /* =============================================
    Tenang.in — Kenali Dirimu Quiz Script
+   Premium visual experience with rich animations
    ============================================= */
 
 let quizData = null;
@@ -54,7 +55,28 @@ function startKenaliQuiz() {
 
   currentQuestion = 0;
   scores = { IE: 0, TF: 0 };
+  renderStepDots();
   renderQuestions();
+}
+
+// ---- Render Step Dots ----
+function renderStepDots() {
+  const dotsContainer = document.getElementById('kenali-step-dots');
+  if (!dotsContainer || !quizData) return;
+
+  dotsContainer.innerHTML = quizData.questions.map((_, i) =>
+    `<div class="kenali-step-dot ${i === 0 ? 'active' : ''}" data-step="${i}"></div>`
+  ).join('');
+}
+
+// ---- Update Step Dots ----
+function updateStepDots() {
+  const dots = document.querySelectorAll('.kenali-step-dot');
+  dots.forEach((dot, i) => {
+    dot.classList.remove('active', 'completed');
+    if (i < currentQuestion) dot.classList.add('completed');
+    if (i === currentQuestion) dot.classList.add('active');
+  });
 }
 
 // ---- Render Questions (Slides) ----
@@ -67,19 +89,24 @@ function renderQuestions() {
   if (progressSection) progressSection.style.display = 'block';
   updateProgressBar();
 
+  const optionLetters = ['A', 'B'];
+
   quizData.questions.forEach((q, index) => {
     const slide = document.createElement('div');
-    slide.className = `quiz-slide ${index === 0 ? 'active' : 'next'}`;
+    slide.className = `kenali-slide ${index === 0 ? 'active' : 'next'}`;
     slide.dataset.index = index;
 
     slide.innerHTML = `
-      <h3 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white); text-align:center; margin-bottom:var(--space-xl);">
-        ${q.text}
-      </h3>
-      <div style="display:flex; flex-direction:column; gap:var(--space-md); width:100%; max-width:400px; margin:0 auto;">
+      <div class="kenali-question-number">
+        <span class="material-symbols-rounded" style="font-size:14px;">quiz</span>
+        Pertanyaan ${index + 1} dari ${quizData.questions.length}
+      </div>
+      <h3 class="kenali-question-text">${q.text}</h3>
+      <div class="kenali-options-wrap">
         ${q.options.map((opt, i) => `
-          <button class="btn btn-secondary btn-full quiz-option" style="justify-content:flex-start; padding:1rem;" onclick="selectKenaliAnswer(${i})">
-            ${opt.text}
+          <button class="kenali-option quiz-option" onclick="selectKenaliAnswer(${i})">
+            <span class="kenali-option-letter">${optionLetters[i]}</span>
+            <span>${opt.text}</span>
           </button>
         `).join('')}
       </div>
@@ -96,6 +123,7 @@ function updateProgressBar() {
     const percent = ((currentQuestion + 1) / quizData.questions.length) * 100;
     barEl.style.width = `${percent}%`;
   }
+  updateStepDots();
 }
 
 function selectKenaliAnswer(optIndex) {
@@ -105,7 +133,7 @@ function selectKenaliAnswer(optIndex) {
   // Add score
   scores[q.dimension] += option.score;
 
-  const slides = document.querySelectorAll('#kenali-questions .quiz-slide');
+  const slides = document.querySelectorAll('#kenali-questions .kenali-slide');
   const currentSlide = slides[currentQuestion];
   
   // Mark selected with animation
@@ -122,7 +150,7 @@ function selectKenaliAnswer(optIndex) {
     } else {
       calculateResult();
     }
-  }, 400);
+  }, 450);
 }
 
 // ---- Calculate Result ----
@@ -137,6 +165,14 @@ function calculateResult() {
 
   showResult(type, scores, true);
 }
+
+// ---- Type Color Map (On-theme palette) ----
+const typeColorMap = {
+  IT: { class: 'type-it', accent: '#60A5FA', gradient: 'linear-gradient(135deg, #2563EB, #60A5FA)' },
+  IF: { class: 'type-if', accent: '#38BDF8', gradient: 'linear-gradient(135deg, #0EA5E9, #38BDF8)' },
+  ET: { class: 'type-et', accent: '#FBBF24', gradient: 'linear-gradient(135deg, #F59E0B, #FBBF24)' },
+  EF: { class: 'type-ef', accent: '#34D399', gradient: 'linear-gradient(135deg, #10B981, #34D399)' }
+};
 
 // ---- Show Result ----
 function showResult(type, resultScores, isNew = true) {
@@ -153,92 +189,182 @@ function showResult(type, resultScores, isNew = true) {
   if (resultSection) resultSection.style.display = 'block';
 
   const iconName = result.icon || result.emoji || 'psychology';
+  const typeClass = typeColorMap[type]?.class || 'type-it';
+  const typeAccent = typeColorMap[type]?.accent || '#818CF8';
 
   if (isNew) {
     Animations.showCelebration(iconName, `Kamu adalah ${result.name}!`);
   }
 
+  // Calculate dimension percentages
+  const iePercent = Math.round(((resultScores.IE + 6) / 12) * 100);
+  const tfPercent = Math.round(((resultScores.TF + 6) / 12) * 100);
+  const ieText = iePercent < 50 ? 'Cenderung Introvert' : iePercent > 50 ? 'Cenderung Ekstrovert' : 'Seimbang';
+  const tfText = tfPercent < 50 ? 'Cenderung Thinker' : tfPercent > 50 ? 'Cenderung Feeler' : 'Seimbang';
+
   resultSection.innerHTML = `
-    <div class="card-elevated" style="text-align:center; margin-bottom:var(--space-xl);">
-      <div style="margin-bottom:var(--space-md);">
-        <span class="material-symbols-rounded text-primary" style="font-size:64px;">${iconName}</span>
+    <!-- Result Hero Card -->
+    <div class="kenali-result-hero kenali-fade-in">
+      <div class="kenali-result-icon-wrap">
+        <div class="kenali-result-icon-circle ${typeClass}">
+          <span class="material-symbols-rounded">${iconName}</span>
+        </div>
       </div>
-      <h2 style="font-size:var(--h2-size); font-weight:800; margin-bottom:var(--space-xs); color:var(--text-on-white);">${result.name}</h2>
-      <p style="font-size:0.9375rem; color:var(--primary-accent); font-weight:600; margin-bottom:var(--space-lg);">${result.tagline}</p>
-      <p style="font-size:var(--body-size); color:var(--text-on-white); line-height:1.7; max-width:500px; margin:0 auto;">${result.description}</p>
+      <h2 class="kenali-result-name">${result.name}</h2>
+      <span class="kenali-result-tagline ${typeClass}">${result.tagline}</span>
+      <p class="kenali-result-desc">${result.description}</p>
     </div>
 
-    <!-- Dimension Bars -->
-    <div class="card" style="margin-bottom:var(--space-xl); padding:var(--space-xl);">
-      <h3 style="font-weight:600; margin-bottom:var(--space-lg); text-align:center; color:var(--text-on-white);">Dimensi Kepribadianmu</h3>
-      <div id="kenali-dimension-bars"></div>
-    </div>
-
-    <!-- Strengths -->
-    <div class="card" style="margin-bottom:var(--space-xl); padding:var(--space-xl);">
-      <h3 style="font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-white); display:flex; align-items:center; gap:8px;">
-        <span class="material-symbols-rounded text-primary" style="font-size:22px;">star</span>
-        <span>Kekuatanmu</span>
-      </h3>
-      <div style="display:flex; flex-wrap:wrap; gap:var(--space-sm);">
-        ${result.strengths.map(s => `<span class="tag-chip selected" style="pointer-events:none;">${s}</span>`).join('')}
-      </div>
-    </div>
-
-    <!-- Tips -->
-    <div class="card" style="margin-bottom:var(--space-xl); padding:var(--space-xl);">
-      <h3 style="font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-white); display:flex; align-items:center; gap:8px;">
-        <span class="material-symbols-rounded text-primary" style="font-size:22px;">lightbulb</span>
-        <span>Tips untuk ${result.name}</span>
-      </h3>
-      <div style="display:flex; flex-direction:column; gap:var(--space-md);">
-        ${result.tips.map((tip, i) => `
-          <div style="display:flex; gap:var(--space-md); align-items:flex-start;">
-            <span style="width:28px; height:28px; border-radius:var(--radius-full); background:rgba(37,99,235,0.1); display:flex; align-items:center; justify-content:center; font-size:0.8125rem; font-weight:700; color:var(--primary-accent); flex-shrink:0;">${i+1}</span>
-            <p style="font-size:0.9375rem; color:var(--text-on-white); line-height:1.6;">${tip}</p>
+    <!-- Detail Cards -->
+    <div class="kenali-result-cards">
+      <!-- Dimension Bars -->
+      <div class="kenali-detail-card kenali-fade-in kenali-fade-in-delay-1">
+        <div class="kenali-detail-header">
+          <div class="kenali-detail-icon icon-dimension">
+            <span class="material-symbols-rounded">tune</span>
           </div>
-        `).join('')}
+          <span class="kenali-detail-title">Dimensi Kepribadianmu</span>
+        </div>
+        <div class="kenali-dimension-item">
+          <div class="kenali-dimension-labels">
+            <span class="kenali-dimension-label">Introvert</span>
+            <span class="kenali-dimension-label">Ekstrovert</span>
+          </div>
+          <div class="kenali-dimension-track">
+            <div class="kenali-dimension-fill fill-ie" id="dim-ie-bar" style="width:0%;"></div>
+          </div>
+          <div class="kenali-dimension-result-text">${ieText}</div>
+        </div>
+        <div class="kenali-dimension-item">
+          <div class="kenali-dimension-labels">
+            <span class="kenali-dimension-label">Thinker</span>
+            <span class="kenali-dimension-label">Feeler</span>
+          </div>
+          <div class="kenali-dimension-track">
+            <div class="kenali-dimension-fill fill-tf" id="dim-tf-bar" style="width:0%;"></div>
+          </div>
+          <div class="kenali-dimension-result-text">${tfText}</div>
+        </div>
+      </div>
+
+      <!-- Strengths -->
+      <div class="kenali-detail-card kenali-fade-in kenali-fade-in-delay-2">
+        <div class="kenali-detail-header">
+          <div class="kenali-detail-icon icon-strength">
+            <span class="material-symbols-rounded">star</span>
+          </div>
+          <span class="kenali-detail-title">Kekuatanmu</span>
+        </div>
+        <div class="kenali-strength-chips">
+          ${result.strengths.map(s => `
+            <span class="kenali-strength-chip">
+              <span class="material-symbols-rounded">check_circle</span>
+              ${s}
+            </span>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- Tips -->
+      <div class="kenali-detail-card kenali-fade-in kenali-fade-in-delay-3">
+        <div class="kenali-detail-header">
+          <div class="kenali-detail-icon icon-tips">
+            <span class="material-symbols-rounded">lightbulb</span>
+          </div>
+          <span class="kenali-detail-title">Tips untuk ${result.name}</span>
+        </div>
+        <div class="kenali-tips-list">
+          ${result.tips.map((tip, i) => `
+            <div class="kenali-tip-item">
+              <span class="kenali-tip-number">${i + 1}</span>
+              <p class="kenali-tip-text">${tip}</p>
+            </div>
+          `).join('')}
+        </div>
       </div>
     </div>
 
-    <!-- Actions -->
-    <div style="display:flex; gap:var(--space-md); justify-content:center; flex-wrap:wrap; padding-bottom:var(--space-xl);">
-      <button class="btn btn-white" onclick="shareResult('${result.name}')">
+    <!-- Action Buttons -->
+    <div class="kenali-result-actions kenali-fade-in kenali-fade-in-delay-4">
+      <button class="kenali-btn-share" onclick="shareResult('${type}')">
         <span class="material-symbols-rounded">share</span>
         Bagikan Hasilku
       </button>
-      <button class="btn btn-secondary" style="color:var(--text-on-blue);" onclick="retakeQuiz()">
+      <button class="kenali-btn-retake" onclick="retakeQuiz()">
         <span class="material-symbols-rounded">refresh</span>
         Ulangi Kuis
       </button>
     </div>
   `;
 
-  // Render dimension bars
-  const barsEl = document.getElementById('kenali-dimension-bars');
-  if (barsEl) {
-    Charts.createDimensionBars(barsEl, resultScores);
+  // Animate dimension bars after a short delay
+  setTimeout(() => {
+    const ieBar = document.getElementById('dim-ie-bar');
+    const tfBar = document.getElementById('dim-tf-bar');
+    if (ieBar) ieBar.style.width = `${iePercent}%`;
+    if (tfBar) tfBar.style.width = `${tfPercent}%`;
+  }, 300);
+
+  // Update share modal preview data (Mood Tracker style)
+  const shareEmoji = document.getElementById('share-result-emoji');
+  const shareTitle = document.getElementById('share-result-title');
+  const shareTagline = document.getElementById('share-result-tagline');
+  const shareStrengths = document.getElementById('share-result-strengths');
+  const shareDesc = document.getElementById('share-result-desc-short');
+
+  if (shareEmoji) shareEmoji.textContent = iconName;
+  if (shareTitle) shareTitle.textContent = result.name;
+  if (shareTagline) shareTagline.textContent = result.tagline || 'Kenali Dirimu';
+  if (shareDesc && result.description) {
+    const firstSentence = result.description.split('.')[0] + '.';
+    shareDesc.textContent = `"${firstSentence}"`;
+  }
+  if (shareStrengths && Array.isArray(result.strengths)) {
+    shareStrengths.innerHTML = result.strengths.slice(0, 3).map(s => `
+      <span style="background:rgba(255,255,255,0.2); padding:4px 10px; border-radius:12px; color:#fff; font-size:0.8125rem; font-weight:600; display:flex; align-items:center; gap:4px;">
+        <span class="material-symbols-rounded" style="font-size:16px;">star</span> ${s}
+      </span>
+    `).join('');
   }
 }
 
-// ---- Share Result ----
-async function shareResult(name) {
-  const text = `Hasil kuis Kenali Dirimu di Tenang.in: Aku adalah "${name}"! Coba juga di tenang.in`;
-
-  if (navigator.share) {
-    try {
-      await navigator.share({ title: 'Tenang.in — Kenali Dirimu', text });
-    } catch(e) { /* cancelled */ }
+// ---- Share Result (Opens Mood-Tracker Style Modal) ----
+function shareResult(typeOrName) {
+  const modal = document.getElementById('share-result-modal');
+  if (modal) {
+    modal.classList.add('active');
   } else {
-    // Fallback: copy to clipboard
-    try {
-      await navigator.clipboard.writeText(text);
-      Animations.showToast('Disalin ke clipboard!', 'success');
-    } catch {
-      Animations.showToast('Nggak bisa share di browser ini', 'warning');
-    }
+    Animations.showToast('Membuka menu bagikan...', 'info');
   }
 }
+
+// ---- Theme Switcher for Share Modal ----
+window.changeKenaliShareTheme = function(theme, e) {
+  const gradients = {
+    blue: 'linear-gradient(135deg, #2D5BA8, #7EC8E3)',
+    ocean: 'linear-gradient(135deg, #1E4780, #38BDF8)',
+    sunset: 'linear-gradient(135deg, #FF512F, #DD2476)',
+    midnight: 'linear-gradient(135deg, #0f2027, #203a43, #2c5364)',
+    forest: 'linear-gradient(135deg, #11998e, #38ef7d)'
+  };
+  
+  const previewCard = document.getElementById('kenali-share-card-preview');
+  if (previewCard && gradients[theme]) {
+    previewCard.style.background = gradients[theme];
+  }
+  
+  const buttons = document.querySelectorAll('#kenali-theme-selector button');
+  buttons.forEach(btn => {
+    btn.style.transform = 'scale(1)';
+    btn.style.border = '2px solid transparent';
+  });
+  
+  const activeBtn = e ? e.currentTarget : (window.event ? window.event.currentTarget : null);
+  if (activeBtn) {
+    activeBtn.style.transform = 'scale(1.1)';
+    activeBtn.style.border = '2px solid #fff';
+  }
+};
 
 // ---- Retake Quiz ----
 function retakeQuiz() {
@@ -246,3 +372,13 @@ function retakeQuiz() {
   if (resultSection) resultSection.style.display = 'none';
   startKenaliQuiz();
 }
+
+// ---- Simulate Share (for modal buttons) ----
+window.simulateResultShare = window.simulateResultShare || function() {
+  Animations.showToast('Memproses gambar...', 'info');
+  setTimeout(() => {
+    const modal = document.getElementById('share-result-modal');
+    if (modal) modal.classList.remove('active');
+    Animations.showToast('Hasil kuis berhasil dibagikan!', 'success');
+  }, 1500);
+};

@@ -18,7 +18,7 @@ const Storage = (() => {
 
   const todayKey = () => {
     const d = new Date();
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   };
 
   const daysBetween = (d1, d2) => {
@@ -92,7 +92,7 @@ const Storage = (() => {
     let checkDate = new Date();
 
     for (const dateStr of sortedDates) {
-      const expected = `${checkDate.getFullYear()}-${String(checkDate.getMonth()+1).padStart(2,'0')}-${String(checkDate.getDate()).padStart(2,'0')}`;
+      const expected = `${checkDate.getFullYear()}-${String(checkDate.getMonth() + 1).padStart(2, '0')}-${String(checkDate.getDate()).padStart(2, '0')}`;
       if (dateStr === expected) {
         streak++;
         checkDate.setDate(checkDate.getDate() - 1);
@@ -243,13 +243,13 @@ const Storage = (() => {
 
   // ---- Time Capsules (Pesan untuk Masa Depan) ----
   const getTimeCapsules = () => getJSON('tenang_time_capsules', []);
-  
+
   const saveTimeCapsule = (message) => {
     const capsules = getTimeCapsules();
     capsules.push({ id: Date.now(), message, date: todayKey() });
     setJSON('tenang_time_capsules', capsules);
   };
-  
+
   const getRandomCapsule = () => {
     const capsules = getTimeCapsules();
     if (capsules.length === 0) return null;
@@ -258,8 +258,8 @@ const Storage = (() => {
 
   // ---- Data Reset (for testing) ----
   const resetAll = () => {
-    const keys = ['tenang_moods','tenang_journals','tenang_quiz_kenali','tenang_quiz_profil',
-                  'tenang_username','tenang_isReturning','tenang_teman_sessions','tenang_time_capsules'];
+    const keys = ['tenang_moods', 'tenang_journals', 'tenang_quiz_kenali', 'tenang_quiz_profil',
+      'tenang_username', 'tenang_isReturning', 'tenang_teman_sessions', 'tenang_time_capsules'];
     keys.forEach(k => localStorage.removeItem(k));
     sessionStorage.clear();
   };

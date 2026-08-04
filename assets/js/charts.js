@@ -29,8 +29,8 @@ const Charts = (() => {
   const createLineChart = (container, data, options = {}) => {
     const {
       width = 600,
-      height = 250,
-      padding = { top: 35, right: 35, bottom: 40, left: 45 },
+      height = 190,
+      padding = { top: 28, right: 25, bottom: 30, left: 35 },
       showDots = true,
       showArea = true,
       showLabels = true
@@ -41,11 +41,11 @@ const Charts = (() => {
 
     if (!data || data.length === 0) {
       container.innerHTML = `
-        <div class="empty-state" style="padding:var(--space-2xl) var(--space-md);">
+        <div class="empty-state" style="padding:var(--space-xl) var(--space-md);">
           <div class="empty-state-icon">
-            <span class="material-symbols-rounded text-muted" style="font-size:48px;">bar_chart</span>
+            <span class="material-symbols-rounded text-muted" style="font-size:38px;">bar_chart</span>
           </div>
-          <p class="empty-state-text" style="color:var(--text-secondary);">Belum ada data mood. Mulai check-in hari ini!</p>
+          <p class="empty-state-text" style="color:var(--text-secondary); font-size:0.875rem;">Belum ada data mood. Mulai check-in hari ini!</p>
         </div>`;
       return;
     }
@@ -89,7 +89,7 @@ const Charts = (() => {
       const date = new Date(p.date);
       const dayName = days[date.getDay()];
       return `
-        <text x="${p.x}" y="${height - 10}" text-anchor="middle" fill="#475569" font-size="12" font-weight="600" font-family="Plus Jakarta Sans">${dayName}</text>
+        <text x="${p.x}" y="${height - 8}" text-anchor="middle" fill="#475569" font-size="11" font-weight="600" font-family="Plus Jakarta Sans">${dayName}</text>
       `;
     }).join('') : '';
 
@@ -97,7 +97,7 @@ const Charts = (() => {
     const yLabelsHTML = [1,2,3,4,5].map(level => {
       const y = padding.top + chartH - ((level - 1) / 4) * chartH;
       return `
-        <text x="${padding.left - 12}" y="${y + 4}" text-anchor="end" fill="#64748B" font-size="11" font-weight="600" font-family="Plus Jakarta Sans">${level}</text>
+        <text x="${padding.left - 10}" y="${y + 3.5}" text-anchor="end" fill="#64748B" font-size="10" font-weight="600" font-family="Plus Jakarta Sans">${level}</text>
         <line x1="${padding.left}" y1="${y}" x2="${width - padding.right}" y2="${y}" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4 4"/>
       `;
     }).join('');
@@ -109,12 +109,12 @@ const Charts = (() => {
       return `
         <g class="chart-point-group">
           <!-- Glow halo -->
-          <circle cx="${p.x}" cy="${p.y}" r="10" fill="${col}" opacity="0.2"/>
+          <circle cx="${p.x}" cy="${p.y}" r="8" fill="${col}" opacity="0.15"/>
           <!-- Solid dot -->
-          <circle cx="${p.x}" cy="${p.y}" r="6" fill="${col}" stroke="#FFFFFF" stroke-width="2.5" class="chart-dot"/>
+          <circle cx="${p.x}" cy="${p.y}" r="4.5" fill="${col}" stroke="#FFFFFF" stroke-width="2" class="chart-dot"/>
           <!-- Tooltip badge above point -->
-          <rect x="${p.x - 30}" y="${p.y - 28}" width="60" height="20" rx="10" fill="#0F172A" opacity="0.9"/>
-          <text x="${p.x}" y="${p.y - 14}" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="600" font-family="Plus Jakarta Sans">${labelText}</text>
+          <rect x="${p.x - 26}" y="${p.y - 23}" width="52" height="17" rx="8.5" fill="#0F172A" opacity="0.92"/>
+          <text x="${p.x}" y="${p.y - 11.5}" text-anchor="middle" fill="#FFFFFF" font-size="9.5" font-weight="600" font-family="Plus Jakarta Sans">${labelText}</text>
         </g>
       `;
     }).join('') : '';
@@ -122,16 +122,16 @@ const Charts = (() => {
     const gradientId = 'lineGradient_' + Math.random().toString(36).substring(2, 9);
 
     container.innerHTML = `
-      <svg viewBox="0 0 ${width} ${height}" width="100%" preserveAspectRatio="xMidYMid meet" style="overflow:visible;">
+      <svg viewBox="0 0 ${width} ${height}" width="100%" preserveAspectRatio="xMidYMid meet" style="max-height: 220px; width: 100%; height: auto; overflow:visible; display: block; margin: 0 auto;">
         <defs>
           <linearGradient id="${gradientId}" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#2563EB" stop-opacity="0.25"/>
+            <stop offset="0%" stop-color="#2563EB" stop-opacity="0.22"/>
             <stop offset="100%" stop-color="#2563EB" stop-opacity="0.0"/>
           </linearGradient>
         </defs>
         ${yLabelsHTML}
         ${showArea && areaD ? `<path d="${areaD}" fill="url(#${gradientId})"/>` : ''}
-        ${pathD ? `<path d="${pathD}" fill="none" stroke="#2563EB" stroke-width="3" stroke-linecap="round" ${points.length === 1 ? 'stroke-dasharray="6 6"' : ''}/>` : ''}
+        ${pathD ? `<path d="${pathD}" fill="none" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" ${points.length === 1 ? 'stroke-dasharray="6 6"' : ''}/>` : ''}
         ${dotsHTML}
         ${labelsHTML}
       </svg>
@@ -308,8 +308,8 @@ const Charts = (() => {
   const createMiniChart = (container, data) => {
     createLineChart(container, data, {
       width: 400,
-      height: 150,
-      padding: { top: 25, right: 15, bottom: 30, left: 35 },
+      height: 120,
+      padding: { top: 22, right: 15, bottom: 24, left: 30 },
       showArea: true,
       showDots: true,
       showLabels: true

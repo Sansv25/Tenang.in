@@ -3,59 +3,59 @@
    v2.0 — Material Icons, refined palette
    ============================================= */
 
-/* Google Fonts (Outfit, Lexend, Urbanist) + Material Symbols */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Lexend:wght@300;400;500;600;700;800&family=Urbanist:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap');
+/* Google Fonts (Plus Jakarta Sans) + Material Symbols */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 /* ---- CSS Variables ---- */
 :root {
-  /* Primary Colors — refined mental health blue palette */
-  --bg-primary: #3B72C4;
-  --bg-primary-light: #4F84D4;
+  /* Primary Colors — refined mental health blue palette & Tenang.in rules */
+  --bg-primary: #5B8FD4;
+  --bg-primary-light: #7EC8E3;
   --bg-section-dark: #2B5EA0;
   --bg-deep: #1E4780;
   --card-surface: #FFFFFF;
   --card-subtle: #F8FAFC;
   --card-dark: #0F172A;
   --card-border: rgba(226, 232, 240, 0.8);
-  --primary-accent: #2563EB;
-  --primary-hover: #1D4ED8;
-  --secondary-accent: #38BDF8;
+  --primary-accent: #2D5BA8;
+  --primary-hover: #1E4482;
+  --secondary-accent: #7EC8E3;
 
-  /* Text Colors — High Contrast WCAG AAA */
+  /* Text Colors — High Contrast & Tenang.in rules */
   --text-on-blue: #FFFFFF;
-  --text-on-white: #0F172A;
+  --text-on-white: #1A2F4E;
   --text-secondary: #475569;
   --text-muted: #94A3B8;
   --text-on-dark: #FFFFFF;
 
   /* Status Colors */
-  --success: #10B981;
-  --success-light: rgba(16, 185, 129, 0.1);
-  --warning: #F59E0B;
-  --warning-light: rgba(245, 158, 11, 0.1);
-  --danger: #EF4444;
-  --danger-light: rgba(239, 68, 68, 0.1);
-  --info: #38BDF8;
-  --info-light: rgba(56, 189, 248, 0.1);
+  --success: #5BC4A0;
+  --success-light: rgba(91, 196, 160, 0.15);
+  --warning: #F5A66D;
+  --warning-light: rgba(245, 166, 109, 0.15);
+  --danger: #F5A66D;
+  --danger-light: rgba(245, 166, 109, 0.15);
+  --info: #7EC8E3;
+  --info-light: rgba(126, 200, 227, 0.15);
 
   /* Gradient */
-  --gradient-hero: linear-gradient(135deg, #5198DE 0%, #3270BF 50%, #2B5EA0 100%);
-  --gradient-hero-animated: linear-gradient(270deg, #5198DE, #3270BF, #4A8FD6, #3A75BA);
+  --gradient-hero: linear-gradient(135deg, #7EC8E3 0%, #5B8FD4 50%, #2D5BA8 100%);
+  --gradient-hero-animated: linear-gradient(270deg, #7EC8E3, #5B8FD4, #4A8FD6, #2D5BA8);
   --gradient-card: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
-  --gradient-accent: linear-gradient(135deg, #5198DE, #2D6BC5);
+  --gradient-accent: linear-gradient(135deg, #7EC8E3, #2D5BA8);
 
-  /* Mood Colors — softer, muted tones */
-  --mood-1: #E07070;
-  --mood-2: #F0A060;
+  /* Mood Colors — Tenang.in rules: Muted Orange for Warning/Low, NO red */
+  --mood-1: #F5A66D;
+  --mood-2: #F7B584;
   --mood-3: #E8C84A;
-  --mood-4: #6EC6E8;
-  --mood-5: #4EC4A0;
+  --mood-4: #7EC8E3;
+  --mood-5: #5BC4A0;
 
-  /* Typography (Outfit, Urbanist & Lexend) */
-  --font-family: 'Outfit', 'Urbanist', 'Lexend', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-heading: 'Outfit', 'Urbanist', -apple-system, sans-serif;
-  --font-reading: 'Lexend', 'Outfit', -apple-system, sans-serif;
+  /* Typography (Plus Jakarta Sans) */
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-reading: 'Plus Jakarta Sans', -apple-system, sans-serif;
   --h1-size: clamp(1.8rem, 4.5vw, 2.85rem);
   --h2-size: clamp(1.4rem, 3vw, 1.85rem);
   --h3-size: clamp(1.1rem, 2.2vw, 1.25rem);
@@ -260,14 +260,15 @@ p { line-height: var(--line-height); }
 
 /* ---- Layout Helpers ---- */
 .container {
-  width: 100%;
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 var(--space-lg);
+  width: 100% !important;
+  max-width: 1080px !important;
+  margin: 0 auto !important;
+  padding: 0 var(--space-lg) !important;
+  box-sizing: border-box !important;
 }
 
-.container-sm { max-width: 600px; }
-.container-md { max-width: 760px; }
+.container-sm { max-width: 540px !important; width: 100% !important; margin: 0 auto !important; }
+.container-md { max-width: 680px !important; width: 100% !important; margin: 0 auto !important; }
 
 .section { padding: var(--space-3xl) 0; }
 .section-dark { background-color: var(--bg-section-dark); }
