@@ -59,56 +59,121 @@
         </div>
       </section>
 
-      <!-- Daily Quote -->
-      <section id="dashboard-quote">
-        <!-- Filled by JS -->
-      </section>
+      <!-- Section 4: Empty State -->
+      <div id="empty-state" style="display:none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 20px; background: rgba(255, 255, 255, 0.96); border-radius: 24px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2); margin: 30px 0 50px;">
+        <span class="material-icons" style="font-size:72px; color:var(--bg-primary, #5B8FD4); margin-bottom: 16px;">
+          bar_chart
+        </span>
+        <h3 style="font-size: 1.5rem; font-weight: 800; color: #1A2F4E; margin-bottom: 8px;">Datamu masih sedikit</h3>
+        <p style="color: #64748B; max-width: 420px; line-height: 1.6; margin-bottom: 24px; font-size: 1rem;">Check-in mood beberapa hari lagi, nanti kamu bisa lihat polamu di sini.</p>
+        <a href="mood-tracker.html" class="btn-primary" style="background: #2D5BA8; color: white; font-weight: 750; padding: 14px 28px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 16px rgba(45, 91, 168, 0.35); text-decoration: none; transition: transform 0.2s;">
+          <span class="material-icons" style="font-size: 20px; color: white;">sentiment_satisfied</span>
+          <span>Check-in Sekarang</span>
+        </a>
+      </div>
 
-      <!-- Mini Chart -->
-      <section style="margin-top:var(--space-xl);">
-        <h2 style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
-          <span class="material-symbols-rounded" style="font-size:22px;">show_chart</span>
-          <span>Mood 7 Hari Terakhir</span>
-        </h2>
-        <div class="card" style="padding:var(--space-lg);">
-          <div id="dashboard-chart"></div>
-        </div>
-      </section>
+      <!-- Dashboard Main Content Container -->
+      <div id="dashboard-content">
+        <!-- Section 1: Daily Quote -->
+        <section id="dashboard-quote" style="margin-top: var(--space-md);">
+          <div class="quote-card">
+            <span class="material-icons" style="font-size: 36px; color: #5B8FD4; display: block; margin-bottom: 8px;">format_quote</span>
+            <p id="daily-quote" class="quote-text" style="font-size: 1.15rem; font-weight: 700; margin: 8px 0 16px; line-height: 1.6; color: #1A2F4E;"><!-- diisi JS --></p>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px solid #F1F5F9; padding-top: 16px;">
+              <small class="quote-label" style="color: #64748B; font-weight: 700; font-size: 0.85rem;">Kutipan Harian untuk Kamu</small>
+              <button id="mark-done-btn" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 999px; background: #EEF3F9; color: #2D5BA8; font-weight: 750; font-size: 0.85rem; transition: all 0.2s; cursor: pointer; border: none;">
+                <span class="material-icons" style="font-size: 18px;">check</span> Tandai selesai
+              </button>
+            </div>
+          </div>
+        </section>
 
-      <!-- Mini Contribution Grid -->
-      <section style="margin-top:var(--space-xl);">
-        <h2 style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
-          <span class="material-symbols-rounded" style="font-size:22px;">calendar_month</span>
-          <span>Kalender Mood Bulan Ini</span>
-        </h2>
-        <div class="card" style="padding:var(--space-lg);">
-          <div id="dashboard-grid"></div>
-        </div>
-      </section>
+        <!-- Mini Chart -->
+        <section style="margin-top:var(--space-xl);">
+          <h2 style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
+            <span class="material-symbols-rounded" style="font-size:22px;">show_chart</span>
+            <span>Mood 7 Hari Terakhir</span>
+          </h2>
+          <div class="card" style="padding:var(--space-lg); background: white; border-radius: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);">
+            <div id="dashboard-chart"></div>
+          </div>
+        </section>
 
-      <!-- Stats -->
-      <section style="margin-top:var(--space-xl);" id="dashboard-stats">
-        <!-- Filled by JS -->
-      </section>
+        <!-- Section 2: Statistik Cards (4 card grid) -->
+        <section style="margin-top:var(--space-xl);">
+          <h2 style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
+            <span class="material-symbols-rounded" style="font-size:22px;">insights</span>
+            <span>Statistik & Ringkasan</span>
+          </h2>
+          <div class="stat-grid" id="dashboard-stats-grid">
+            <!-- Card 1: Streak -->
+            <div class="stat-card">
+              <span class="material-icons">local_fire_department</span>
+              <div class="stat-number" id="stat-streak">0</div>
+              <div class="stat-label">Hari Streak</div>
+            </div>
 
-      <!-- Badges -->
-      <section style="margin-top:var(--space-xl); padding-bottom:var(--space-xl);" id="dashboard-badges">
-        <!-- Filled by JS -->
-      </section>
+            <!-- Card 2: Mood rata-rata -->
+            <div class="stat-card">
+              <span class="material-icons">sentiment_satisfied</span>
+              <div class="stat-number" id="stat-avg-mood">-</div>
+              <div class="stat-label">Mood Rata-rata Minggu Ini</div>
+            </div>
 
-      <!-- Quick Actions -->
-      <section style="padding-bottom:var(--space-2xl);">
-        <div class="quick-grid">
-          <a href="mood-tracker.html" class="quick-card">
-            <span class="material-symbols-rounded text-primary" style="font-size:32px;">sentiment_satisfied</span>
-            <span class="quick-card-title">Check-in Mood</span>
-          </a>
-          <a href="jurnal.html" class="quick-card">
-            <span class="material-symbols-rounded text-primary" style="font-size:32px;">edit_note</span>
-            <span class="quick-card-title">Tulis Jurnal</span>
-          </a>
-        </div>
-      </section>
+            <!-- Card 3: Total jurnal -->
+            <div class="stat-card">
+              <span class="material-icons">edit_note</span>
+              <div class="stat-number" id="stat-journal">0</div>
+              <div class="stat-label">Entri Jurnal Bulan Ini</div>
+            </div>
+
+            <!-- Card 4: Sesi Teman -->
+            <div class="stat-card">
+              <span class="material-icons">smart_toy</span>
+              <div class="stat-number" id="stat-teman">0</div>
+              <div class="stat-label">Sesi Teman</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 3: Badge Pencapaian -->
+        <section style="margin-top:var(--space-xl);" id="dashboard-badges">
+          <h2 style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
+            <span class="material-symbols-rounded" style="font-size:22px;">military_tech</span>
+            <span>Badge Pencapaian</span>
+          </h2>
+          <div class="card" style="padding: 24px; background: white; border-radius: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);">
+            <div class="badge-grid" id="badge-grid">
+              <!-- diisi JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Mini Contribution Grid (Kalender Mood) -->
+        <section style="margin-top:var(--space-xl);">
+          <h2 style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
+            <span class="material-symbols-rounded" style="font-size:22px;">calendar_month</span>
+            <span>Kalender Mood Bulan Ini</span>
+          </h2>
+          <div class="card" style="padding:var(--space-lg); background: white; border-radius: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);">
+            <div id="dashboard-grid"></div>
+          </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section style="margin-top: var(--space-xl); padding-bottom:var(--space-2xl);">
+          <div class="quick-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+            <a href="mood-tracker.html" class="quick-card" style="display: flex; align-items: center; gap: 14px; padding: 20px; background: white; border-radius: 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.1); color: #1A2F4E; text-decoration: none; font-weight: 750; transition: transform 0.2s;">
+              <span class="material-symbols-rounded text-primary" style="font-size:36px; color: #5B8FD4;">sentiment_satisfied</span>
+              <span class="quick-card-title">Check-in Mood</span>
+            </a>
+            <a href="jurnal.html" class="quick-card" style="display: flex; align-items: center; gap: 14px; padding: 20px; background: white; border-radius: 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.1); color: #1A2F4E; text-decoration: none; font-weight: 750; transition: transform 0.2s;">
+              <span class="material-symbols-rounded text-primary" style="font-size:36px; color: #5B8FD4;">edit_note</span>
+              <span class="quick-card-title">Tulis Jurnal</span>
+            </a>
+          </div>
+        </section>
+      </div>
 
     </div>
   </div>

@@ -152,12 +152,87 @@ document.addEventListener('DOMContentLoaded', () => {
 let currentAuthTab = 'login';
 
 function handleMulaiSekarang() {
-  const loggedInUser = localStorage.getItem('tenang_logged_in_user');
-  if (loggedInUser) {
+  const isReturning = localStorage.getItem('tenang_returning') || localStorage.getItem('tenang_isReturning') || localStorage.getItem('tenang_logged_in_user');
+  if (isReturning) {
     window.location.href = 'beranda.html';
   } else {
-    showAuthModal();
+    // Tampilkan onboarding modal
+    const modal = document.getElementById('onboarding-modal');
+    if (modal) {
+      modal.style.display = 'flex';
+    } else {
+      showAuthModal();
+    }
   }
+}
+
+// ---- Onboarding Modal Navigation Logic ----
+let currentStep = 1;
+const totalSteps = 3;
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Event listeners untuk tombol mulai sekarang
+  document.querySelectorAll('.btn-mulai-sekarang').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      handleMulaiSekarang();
+    });
+  });
+
+  // Pilihan goal pada step 3
+  document.querySelectorAll('.onboarding-choices .choice-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.onboarding-choices .choice-btn').forEach(b => b.classList.remove('selected'));
+      this.classList.add('selected');
+      localStorage.setItem('tenang_user_goal', this.getAttribute('data-value') || '');
+    });
+  });
+
+  const nextBtn = document.getElementById('onboarding-next');
+  const backBtn = document.getElementById('onboarding-back');
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      if (currentStep < totalSteps) {
+        const curStepEl = document.querySelector(`[data-step="${currentStep}"]`);
+        if (curStepEl) curStepEl.style.display = 'none';
+        currentStep++;
+        const nextStepEl = document.querySelector(`[data-step="${currentStep}"]`);
+        if (nextStepEl) nextStepEl.style.display = 'flex';
+        updateDots();
+        if (backBtn) backBtn.style.display = currentStep > 1 ? 'inline-block' : 'none';
+        if (currentStep === totalSteps) {
+          nextBtn.textContent = 'Mulai →';
+        }
+      } else {
+        // Last step — save to localStorage and redirect
+        localStorage.setItem('tenang_returning', 'true');
+        localStorage.setItem('tenang_isReturning', 'true');
+        const modal = document.getElementById('onboarding-modal');
+        if (modal) modal.style.display = 'none';
+        window.location.href = 'beranda.html';
+      }
+    });
+  }
+
+  if (backBtn) {
+    backBtn.addEventListener('click', () => {
+      const curStepEl = document.querySelector(`[data-step="${currentStep}"]`);
+      if (curStepEl) curStepEl.style.display = 'none';
+      currentStep--;
+      const prevStepEl = document.querySelector(`[data-step="${currentStep}"]`);
+      if (prevStepEl) prevStepEl.style.display = 'flex';
+      updateDots();
+      backBtn.style.display = currentStep > 1 ? 'inline-block' : 'none';
+      if (nextBtn) nextBtn.textContent = 'Lanjut →';
+    });
+  }
+});
+
+function updateDots() {
+  document.querySelectorAll('.step-dots .dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i < currentStep);
+  });
 }
 
 function showAuthModal() {

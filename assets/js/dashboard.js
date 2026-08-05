@@ -3,7 +3,10 @@
    ============================================= */
 
 document.addEventListener('DOMContentLoaded', async () => {
-  await Main.initPage('dashboard');
+  if (typeof Main !== 'undefined' && Main.initPage) {
+    await Main.initPage('dashboard');
+  }
+  checkEmptyState();
   renderQuote();
   renderMiniChart();
   renderStats();
@@ -11,188 +14,264 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderMiniGrid();
 });
 
-// ---- Daily Quote ----
-async function renderQuote() {
-  const quoteEl = document.getElementById('dashboard-quote');
-  if (!quoteEl) return;
+// ---- Empty State Check ----
+function checkEmptyState() {
+  const moodHistory = JSON.parse(localStorage.getItem('tenang_moods') || '[]');
+  const emptyEl = document.getElementById('empty-state');
+  const contentEl = document.getElementById('dashboard-content');
+  if (!moodHistory.length) {
+    if (emptyEl) emptyEl.style.display = 'flex';
+    if (contentEl) contentEl.style.display = 'none';
+  } else {
+    if (emptyEl) emptyEl.style.display = 'none';
+    if (contentEl) contentEl.style.display = 'block';
+  }
+}
 
-  try {
-    const res = await fetch('assets/data/tips.json');
-    const tips = await res.json();
+// ---- Helpers for Rules & Statistics ----
+function getDominantTag(moods) {
+  const tagCount = {};
+  (moods || []).forEach(m => {
+    (m.tags || []).forEach(t => {
+      tagCount[t] = (tagCount[t] || 0) + 1;
+    });
+  });
+  let maxTag = null, maxCount = 0;
+  for (const [tag, count] of Object.entries(tagCount)) {
+    if (count > maxCount) { maxTag = tag; maxCount = count; }
+  }
+  return maxTag;
+}
 
-    const kenaliType = Storage.getKenaliType();
-    const streak = Storage.getStreak();
-    const mood = Storage.getMoodToday();
-
-    let tipSet = kenaliType && tips[kenaliType] ? tips[kenaliType] : tips.default;
-    const dayIndex = new Date().getDate() % tipSet.daily.length;
-    const tip = tipSet.daily[dayIndex];
-
-    let prefix = '';
-    if (mood) {
-      if (mood.level >= 4) prefix = 'Mood-mu hari ini bagus! ';
-      else if (mood.level <= 2) prefix = 'Hari ini mungkin berat, tapi ingat: ';
+function getStreak(moods) {
+  if (typeof Storage !== 'undefined' && Storage.getStreak) {
+    return Storage.getStreak();
+  }
+  if (!moods || moods.length === 0) return 0;
+  const sortedDates = [...new Set(moods.map(m => m.date))].sort().reverse();
+  let streak = 0;
+  let checkDate = new Date();
+  for (const dateStr of sortedDates) {
+    const expected = `${checkDate.getFullYear()}-${String(checkDate.getMonth() + 1).padStart(2, '0')}-${String(checkDate.getDate()).padStart(2, '0')}`;
+    if (dateStr === expected) {
+      streak++;
+      checkDate.setDate(checkDate.getDate() - 1);
+    } else {
+      break;
     }
-    if (streak >= 7) prefix = '7 hari konsisten! ';
-    else if (streak >= 3) prefix = 'Streak ' + streak + ' hari! ';
+  }
+  return streak;
+}
 
-    const iconName = tipSet.emoji || 'format_quote';
+function getJournalCount() {
+  const journals = JSON.parse(localStorage.getItem('tenang_journals') || '[]');
+  return journals.length;
+}
 
-    quoteEl.innerHTML = `
-      <div class="card" style="padding:var(--space-xl); text-align:center; border-left:4px solid var(--primary-accent);">
-        <div style="font-size:0.8125rem; font-weight:600; color:var(--primary-accent); margin-bottom:var(--space-sm); display:flex; align-items:center; justify-content:center; gap:6px;">
-          <span class="material-symbols-rounded" style="font-size:20px;">${iconName}</span>
-          <span>Quote Harian — ${tipSet.name}</span>
-        </div>
-        <p style="font-size:1.125rem; font-weight:500; line-height:1.7; color:var(--text-on-white);">${prefix}${tip}</p>
-      </div>
-    `;
-  } catch(e) {
-    quoteEl.innerHTML = `
-      <div class="card" style="padding:var(--space-xl); text-align:center; border-left:4px solid var(--primary-accent);">
-        <p style="font-size:1.125rem; color:var(--text-on-white);">Kamu lebih kuat dari yang kamu kira.</p>
-      </div>
-    `;
+function getJournalCountThisMonth() {
+  const journals = JSON.parse(localStorage.getItem('tenang_journals') || '[]');
+  const now = new Date();
+  const curMonth = now.getMonth();
+  const curYear = now.getFullYear();
+  return journals.filter(j => {
+    const d = j.timestamp ? new Date(j.timestamp) : (j.date ? new Date(j.date) : new Date());
+    return d.getMonth() === curMonth && d.getFullYear() === curYear;
+  }).length;
+}
+
+// ---- Daily Quote (Rule-based) ----
+function getDailyQuote() {
+  const moodHistory = JSON.parse(localStorage.getItem('tenang_moods') || '[]');
+  const dominantTag = getDominantTag(moodHistory);
+  const streak = getStreak(moodHistory);
+  const userType = localStorage.getItem('tenang_user_type') || (typeof Storage !== 'undefined' ? Storage.getUserType() : null);
+  const hour = new Date().getHours();
+
+  const lastMoods = moodHistory.slice(-3).map(m => m.score !== undefined ? m.score : (m.level || 3));
+  const avgMood = lastMoods.length ? lastMoods.reduce((a,b) => a+b, 0) / lastMoods.length : 3;
+
+  if (dominantTag === 'Lelah' && moodHistory.slice(-2).every(m => (m.tags || []).includes('Lelah')))
+    return "Hari ini kamu bisa coba tidur lebih awal. Tubuh yang istirahat cukup akan membawa pikiran yang lebih jernih. 🌙";
+  if (avgMood <= 2 && lastMoods.length >= 3)
+    return "Kamu sudah melewati hari-hari berat. Itu butuh kekuatan yang luar biasa. Bangga sama dirimu. 💙";
+  if (streak >= 5)
+    return `${streak} hari berturut-turut check-in — kamu luar biasa konsisten! 🔥`;
+  if (userType === 'malam' && hour >= 20)
+    return "Malam yang tenang untuk pikiran yang jernih. Selamat merenung. 🌙";
+  if (userType === 'pagi' && hour < 12)
+    return "Pagi yang bagus untuk memulai hari dengan niat yang baik. ☀️";
+  if (!moodHistory.length)
+    return "Mulai check-in mood hari ini untuk melihat perjalananmu di sini.";
+  return "Setiap hari adalah kesempatan baru untuk mengenal dirimu lebih dalam. ✨";
+}
+
+function renderQuote() {
+  const quoteTextEl = document.getElementById('daily-quote');
+  if (quoteTextEl) {
+    quoteTextEl.textContent = getDailyQuote();
+  }
+  const markDoneBtn = document.getElementById('mark-done-btn');
+  if (markDoneBtn) {
+    const today = typeof Storage !== 'undefined' ? Storage.todayKey() : new Date().toISOString().split('T')[0];
+    if (localStorage.getItem('tenang_quote_done_' + today)) {
+      markDoneBtn.innerHTML = '<span class="material-icons" style="font-size:18px;">done_all</span> Selesai dibaca';
+      markDoneBtn.style.background = '#DCFCE7';
+      markDoneBtn.style.color = '#15803D';
+      markDoneBtn.disabled = true;
+    }
+    markDoneBtn.addEventListener('click', () => {
+      localStorage.setItem('tenang_quote_done_' + today, 'true');
+      markDoneBtn.innerHTML = '<span class="material-icons" style="font-size:18px;">done_all</span> Selesai dibaca';
+      markDoneBtn.style.background = '#DCFCE7';
+      markDoneBtn.style.color = '#15803D';
+      markDoneBtn.disabled = true;
+      if (typeof Animations !== 'undefined' && Animations.showToast) {
+        Animations.showToast('Kutipan harian selesai dibaca ✨', 'success');
+      }
+    });
   }
 }
 
 // ---- Mini Chart ----
 function renderMiniChart() {
   const chartEl = document.getElementById('dashboard-chart');
-  if (!chartEl) return;
-  const history = Storage.getMoodHistory(7);
+  if (!chartEl || typeof Charts === 'undefined' || !Charts.createMiniChart) return;
+  const history = typeof Storage !== 'undefined' ? Storage.getMoodHistory(7) : [];
   Charts.createMiniChart(chartEl, history);
 }
 
-// ---- Stats ----
+// ---- Statistik Cards ----
 function renderStats() {
-  const statsEl = document.getElementById('dashboard-stats');
-  if (!statsEl) return;
+  const moodHistory = JSON.parse(localStorage.getItem('tenang_moods') || '[]');
+  
+  const streakEl = document.getElementById('stat-streak');
+  if (streakEl) streakEl.textContent = getStreak(moodHistory);
+  
+  const journalEl = document.getElementById('stat-journal');
+  if (journalEl) journalEl.textContent = getJournalCountThisMonth();
+  
+  const temanEl = document.getElementById('stat-teman');
+  if (temanEl) temanEl.textContent = parseInt(localStorage.getItem('tenang_teman_sessions') || '0');
 
-  const streak = Storage.getStreak();
-  const journalCount = Storage.getJournalCount();
-  const temanSessions = Storage.getTemanSessions();
-  const moodAvg = Storage.getMoodAverage(7);
-  const moodCount = Storage.getMoods().length;
+  // Mood rata-rata minggu ini (emoji)
+  const weekMoods = moodHistory.slice(-7).map(m => m.score !== undefined ? m.score : (m.level || 0));
+  const avg = weekMoods.length ? 
+    Math.round(weekMoods.reduce((a,b) => a+b, 0) / weekMoods.length) : 0;
+  const avgEmojis = ['-', '😫', '😔', '😐', '🙂', '😄'];
+  
+  const avgMoodEl = document.getElementById('stat-avg-mood');
+  if (avgMoodEl) avgMoodEl.textContent = avgEmojis[avg] || '-';
+}
 
-  const moodIcons = {
-    1: 'sentiment_very_dissatisfied',
-    2: 'sentiment_dissatisfied',
-    3: 'sentiment_neutral',
-    4: 'sentiment_satisfied',
-    5: 'sentiment_very_satisfied'
-  };
-  const avgIcon = moodAvg > 0 ? moodIcons[Math.round(moodAvg)] || 'sentiment_neutral' : 'sentiment_neutral';
+// ---- Badge Pencapaian ----
+const badges = [
+  {
+    id: 'first-checkin',
+    icon: 'eco',
+    name: 'Langkah Pertama',
+    desc: 'Check-in mood pertama kali',
+    condition: () => {
+      const moodHistory = JSON.parse(localStorage.getItem('tenang_moods') || '[]');
+      return moodHistory.length >= 1;
+    }
+  },
+  {
+    id: 'streak-3',
+    icon: 'local_fire_department',
+    name: '3 Hari Berturut',
+    desc: 'Check-in 3 hari berturut-turut',
+    condition: () => {
+      const moodHistory = JSON.parse(localStorage.getItem('tenang_moods') || '[]');
+      return getStreak(moodHistory) >= 3;
+    }
+  },
+  {
+    id: 'streak-7',
+    icon: 'star',
+    name: '7 Hari Konsisten',
+    desc: 'Check-in 7 hari berturut-turut',
+    condition: () => {
+      const moodHistory = JSON.parse(localStorage.getItem('tenang_moods') || '[]');
+      return getStreak(moodHistory) >= 7;
+    }
+  },
+  {
+    id: 'journal-5',
+    icon: 'edit_note',
+    name: 'Penulis Pemula',
+    desc: '5 entri jurnal',
+    condition: () => getJournalCount() >= 5
+  },
+  {
+    id: 'journal-15',
+    icon: 'menu_book',
+    name: 'Penulis Aktif',
+    desc: '15 entri jurnal',
+    condition: () => getJournalCount() >= 15
+  },
+  {
+    id: 'profile-done',
+    icon: 'person',
+    name: 'Sudah Kenal Diri',
+    desc: 'Selesaikan kuis Profil',
+    condition: () => !!(localStorage.getItem('tenang_user_type') || (typeof Storage !== 'undefined' && Storage.getQuizResult('profil')))
+  },
+  {
+    id: 'kenali-done',
+    icon: 'psychology',
+    name: 'Sudah Kenali Dirimu',
+    desc: 'Selesaikan kuis Kenali Dirimu',
+    condition: () => !!(localStorage.getItem('tenang_personality_type') || (typeof Storage !== 'undefined' && Storage.getQuizResult('kenali')))
+  }
+];
 
-  let emptyBannerHTML = '';
-  if (moodCount === 0 && journalCount === 0) {
-    emptyBannerHTML = `
-      <div class="card p-6 md:p-8 mb-6 rounded-2xl border border-solid shadow-md" style="border-color:#7EC8E3; background:linear-gradient(135deg, #FFFFFF 0%, #F0F5FF 100%);">
-        <div class="flex flex-col md:flex-row items-center gap-5 text-center md:text-left">
-          <div class="w-14 h-14 rounded-full flex items-center justify-center shrink-0 shadow" style="background:#5B8FD4;">
-            <span class="material-symbols-rounded" style="font-size:32px; color:#FFFFFF;">rocket_launch</span>
-          </div>
-          <div class="flex-1">
-            <h3 class="font-bold text-lg mb-1" style="color:#1A2F4E;">Dashboard Analisamu Masih Kosong</h3>
-            <p class="text-sm leading-relaxed" style="color:#6B8DB5;">
-              Mulai catat check-in mood pertamamu hari ini atau tuangkan cerita di Jurnal agar grafik dan statistik pribadimu aktif di sini!
-            </p>
-          </div>
-          <a href="beranda.html" class="btn btn-primary inline-flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-bold shadow hover:opacity-95 transition whitespace-nowrap" style="background:#2D5BA8; color:#FFFFFF; text-decoration:none;">
-            <span class="material-symbols-rounded" style="font-size:18px;">add_circle</span>
-            <span>Mulai Check-In</span>
-          </a>
+function renderBadges() {
+  const container = document.getElementById('badge-grid');
+  if (!container) return;
+  container.innerHTML = '';
+  badges.forEach(badge => {
+    const unlocked = badge.condition();
+    container.innerHTML += `
+      <div class="badge-item ${unlocked ? 'unlocked' : 'locked'}" 
+           title="${badge.desc}" onclick="openBadgeDetail('${badge.id}')">
+        <div class="badge-circle">
+          <span class="material-icons">${unlocked ? badge.icon : 'lock'}</span>
         </div>
+        <span class="badge-name">${badge.name}</span>
       </div>
     `;
-  }
-
-  statsEl.innerHTML = emptyBannerHTML + `
-    <div class="grid md\\:grid-2" style="grid-template-columns: repeat(2, 1fr); gap:var(--space-md);">
-      <div class="card stat-card">
-        <div style="display:flex; justify-content:center; align-items:center; gap:6px; margin-bottom:4px;">
-          <span class="material-symbols-rounded text-warning" style="font-size:28px;">local_fire_department</span>
-          <span class="stat-number" style="color:var(--warning); margin:0;">${streak}</span>
-        </div>
-        <div class="stat-label">Hari Streak</div>
-      </div>
-      <div class="card stat-card">
-        <div style="display:flex; justify-content:center; align-items:center; gap:6px; margin-bottom:4px;">
-          <span class="material-symbols-rounded text-primary" style="font-size:28px;">edit_note</span>
-          <span class="stat-number" style="margin:0;">${journalCount}</span>
-        </div>
-        <div class="stat-label">Total Jurnal</div>
-      </div>
-      <div class="card stat-card">
-        <div style="display:flex; justify-content:center; align-items:center; gap:6px; margin-bottom:4px;">
-          <span class="material-symbols-rounded text-primary" style="font-size:28px;">smart_toy</span>
-          <span class="stat-number" style="margin:0;">${temanSessions}</span>
-        </div>
-        <div class="stat-label">Sesi Teman</div>
-      </div>
-      <div class="card stat-card">
-        <div style="display:flex; justify-content:center; align-items:center; gap:6px; margin-bottom:4px;">
-          <span class="material-symbols-rounded text-primary" style="font-size:28px;">${avgIcon}</span>
-          <span class="stat-number" style="margin:0;">${moodAvg || '—'}</span>
-        </div>
-        <div class="stat-label">Rata-rata Mood (7 hari)</div>
-      </div>
-    </div>
-  `;
+  });
 }
 
-// ---- Badges ----
-function renderBadges() {
-  const badgeEl = document.getElementById('dashboard-badges');
-  if (!badgeEl) return;
-
-  const badges = Storage.getBadges();
-  const earned = badges.filter(b => b.earned).length;
-
-  badgeEl.innerHTML = `
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-md);">
-      <h2 style="font-size:var(--h3-size); font-weight:600; color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
-        <span class="material-symbols-rounded" style="font-size:22px;">military_tech</span>
-        <span>Pencapaian Badge</span>
-      </h2>
-      <span style="font-size:var(--caption-size); color:rgba(255,255,255,0.7);">${earned}/${badges.length} terbuka</span>
-    </div>
-    <div class="card" style="padding:var(--space-xl);">
-      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(90px, 1fr)); gap:var(--space-lg); justify-items:center;">
-        ${badges.map(b => `
-          <div style="text-align:center; cursor:pointer; transition:transform 0.2s;" onclick="openBadgeDetail('${b.id}')" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            <div class="badge ${b.earned ? 'badge-earned' : 'badge-locked'}" title="${b.description}">
-              <span class="material-symbols-rounded" style="font-size:28px; color:${b.earned ? 'var(--primary-accent)' : 'var(--text-muted)'};">${b.icon || b.emoji || 'star'}</span>
-            </div>
-            <div class="badge-name" style="color:var(--text-on-white); font-weight:500; ${b.earned ? '' : 'opacity:0.5;'}">${b.name}</div>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-  `;
-}
-
-// ---- Badge Detail Modal ----
 function openBadgeDetail(id) {
-  const badges = Storage.getBadges();
   const badge = badges.find(b => b.id === id);
   if (!badge) return;
 
   const modal = document.getElementById('badge-detail-modal');
-  document.getElementById('badge-detail-symbol').textContent = badge.icon || badge.emoji || 'star';
-  document.getElementById('badge-detail-icon').style.color = badge.earned ? 'var(--primary-accent)' : 'var(--text-muted)';
-  document.getElementById('badge-detail-title').textContent = badge.name;
+  if (!modal) return;
+  const unlocked = badge.condition();
+  const symbolEl = document.getElementById('badge-detail-symbol');
+  if (symbolEl) symbolEl.textContent = unlocked ? badge.icon : 'lock';
+  
+  const iconWrap = document.getElementById('badge-detail-icon');
+  if (iconWrap) iconWrap.style.color = unlocked ? '#5B8FD4' : '#94A3B8';
+  
+  const titleEl = document.getElementById('badge-detail-title');
+  if (titleEl) titleEl.textContent = badge.name;
   
   const statusEl = document.getElementById('badge-detail-status');
-  if (badge.earned) {
-    statusEl.textContent = '✨ Badge Terbuka';
-    statusEl.style.color = 'var(--success)';
-  } else {
-    statusEl.textContent = '🔒 Badge Terkunci';
-    statusEl.style.color = 'var(--text-secondary)';
+  if (statusEl) {
+    if (unlocked) {
+      statusEl.textContent = '✨ Badge Terbuka';
+      statusEl.style.color = '#5BC4A0';
+    } else {
+      statusEl.textContent = '🔒 Badge Terkunci';
+      statusEl.style.color = '#94A3B8';
+    }
   }
   
-  document.getElementById('badge-detail-desc').textContent = badge.description;
+  const descEl = document.getElementById('badge-detail-desc');
+  if (descEl) descEl.textContent = badge.desc;
   
   modal.classList.add('active');
 }
@@ -202,14 +281,13 @@ let gridMonthOffset = 0;
 
 function renderMiniGrid() {
   const gridEl = document.getElementById('dashboard-grid');
-  if (!gridEl) return;
-  const moods = Storage.getMoods();
+  if (!gridEl || typeof Charts === 'undefined' || !Charts.createContributionGrid) return;
+  const moods = typeof Storage !== 'undefined' ? Storage.getMoods() : [];
   Charts.createContributionGrid(gridEl, moods, 35, gridMonthOffset);
 }
 
 function navigateGridMonth(direction) {
   gridMonthOffset += direction;
-  // Don't allow going past current month
   if (gridMonthOffset > 0) gridMonthOffset = 0;
   renderMiniGrid();
 }

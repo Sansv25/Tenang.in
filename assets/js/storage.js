@@ -52,7 +52,8 @@ const Storage = (() => {
     const entry = {
       date: todayKey(),
       timestamp: Date.now(),
-      level: data.level,       // 1-5
+      level: data.score !== undefined ? data.score : (data.level || 3),       // 1-5
+      score: data.score !== undefined ? data.score : (data.level || 3),
       tags: data.tags || [],
       note: data.note || ''
     };
@@ -77,7 +78,7 @@ const Storage = (() => {
   const getMoodAverage = (n = 7) => {
     const history = getMoodHistory(n);
     if (history.length === 0) return 0;
-    const sum = history.reduce((a, m) => a + m.level, 0);
+    const sum = history.reduce((a, m) => a + (m.score !== undefined ? m.score : (m.level || 0)), 0);
     return Math.round((sum / history.length) * 10) / 10;
   };
 
@@ -154,6 +155,12 @@ const Storage = (() => {
       ...result,
       completedAt: Date.now()
     });
+    if (type === 'profil' && result.type) {
+      localStorage.setItem('tenang_user_type', result.type);
+    }
+    if (type === 'kenali' && result.type) {
+      localStorage.setItem('tenang_personality_type', result.type);
+    }
   };
 
   const getQuizResult = (type) => {
@@ -162,11 +169,15 @@ const Storage = (() => {
 
   // ---- User Profile ----
   const getUserType = () => {
+    const stored = localStorage.getItem('tenang_user_type');
+    if (stored) return stored;
     const profil = getQuizResult('profil');
     return profil ? profil.type : null;
   };
 
   const getKenaliType = () => {
+    const stored = localStorage.getItem('tenang_personality_type');
+    if (stored) return stored;
     const kenali = getQuizResult('kenali');
     return kenali ? kenali.type : null;
   };
@@ -181,11 +192,12 @@ const Storage = (() => {
 
   // ---- First Time Journey ----
   const isNewUser = () => {
-    return !localStorage.getItem('tenang_isReturning');
+    return !localStorage.getItem('tenang_returning') && !localStorage.getItem('tenang_isReturning');
   };
 
   const setReturning = () => {
     localStorage.setItem('tenang_isReturning', 'true');
+    localStorage.setItem('tenang_returning', 'true');
   };
 
   // ---- Teman Chat Sessions ----
