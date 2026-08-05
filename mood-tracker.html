@@ -203,33 +203,33 @@
         </div>
       </div>
 
-      <div id="share-card-preview" class="share-card-preview" style="margin-bottom:var(--space-lg); background: linear-gradient(135deg, #2D5BA8, #7EC8E3); transition: background 0.5s ease; padding:var(--space-xl); display:flex; flex-direction:column; gap:16px;">
+      <div id="share-card-preview" class="share-card-preview" style="background: linear-gradient(135deg, #2D5BA8, #7EC8E3); transition: background 0.5s ease; text-align:left;">
         <!-- Header -->
-        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">
           <div style="text-align:left;">
-            <h3 style="font-size:1.25rem; font-weight:800; color:#fff; text-shadow:0 2px 4px rgba(0,0,0,0.2); line-height:1.2;">Rekap<br>Perasaanku</h3>
+            <h3 style="font-size:clamp(1.05rem, 4vw, 1.18rem); font-weight:850; color:#fff; text-shadow:0 2px 4px rgba(0,0,0,0.2); line-height:1.2; margin:0;">Rekap<br>Perasaanku</h3>
           </div>
-          <div style="background:rgba(255,255,255,0.2); padding:4px 12px; border-radius:20px; color:#fff; font-size:0.75rem; font-weight:700; display:flex; align-items:center; gap:4px; backdrop-filter:blur(5px);">
+          <div style="background:rgba(255,255,255,0.2); padding:3px 10px; border-radius:999px; color:#fff; font-size:0.7rem; font-weight:750; display:inline-flex; align-items:center; gap:4px; backdrop-filter:blur(5px); flex-shrink:0; white-space:nowrap;">
             <span class="material-symbols-rounded" style="font-size:14px;">local_fire_department</span>
-            14 Hari Streak
+            <span>14 Hari Streak</span>
           </div>
         </div>
         
         <!-- Big Stat -->
-        <div style="text-align:left; background:rgba(255,255,255,0.1); padding:16px; border-radius:12px; border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; gap:12px;">
-          <div style="width:48px; height:48px; border-radius:50%; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center;">
-            <span class="material-symbols-rounded" style="font-size:28px; color:#fff;">psychology_alt</span>
+        <div style="text-align:left; background:rgba(255,255,255,0.12); padding:10px 12px; border-radius:12px; border:1px solid rgba(255,255,255,0.22); display:flex; align-items:center; gap:12px; margin: 2px 0;">
+          <div style="width:42px; height:42px; border-radius:50%; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <span class="material-symbols-rounded" style="font-size:24px; color:#fff;">psychology_alt</span>
           </div>
-          <div>
-            <div style="font-size:1.5rem; font-weight:800; color:#fff;">85% Lebih Tenang</div>
-            <div style="font-size:0.875rem; color:rgba(255,255,255,0.9);">Minggu ini jauh lebih baik dari sebelumnya.</div>
+          <div style="overflow:hidden;">
+            <div style="font-size:clamp(1.1rem, 4vw, 1.25rem); font-weight:850; color:#fff; line-height:1.15; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">85% Lebih Tenang</div>
+            <div style="font-size:0.78rem; color:rgba(255,255,255,0.9); font-weight:600; margin-top:2px;">Minggu ini jauh lebih baik dari sebelumnya.</div>
           </div>
         </div>
 
         <!-- Fake Chart -->
-        <div style="text-align:left;">
-          <div style="font-size:0.75rem; font-weight:600; color:rgba(255,255,255,0.8); margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">Fluktuasi Mood</div>
-          <div id="share-chart-mockup" style="height:80px; display:flex; align-items:flex-end; justify-content:space-between; gap:6px;">
+        <div style="text-align:left; margin: 2px 0;">
+          <div style="font-size:0.7rem; font-weight:750; color:rgba(255,255,255,0.85); margin-bottom:4px; text-transform:uppercase; letter-spacing:0.8px;">Fluktuasi Mood</div>
+          <div id="share-chart-mockup" style="height:48px; display:flex; align-items:flex-end; justify-content:space-between; gap:6px;">
             <div style="flex:1; height:40%; background:linear-gradient(to top, rgba(255,255,255,0.4), rgba(255,255,255,0.9)); border-radius:4px;"></div>
             <div style="flex:1; height:60%; background:linear-gradient(to top, rgba(255,255,255,0.4), rgba(255,255,255,0.9)); border-radius:4px;"></div>
             <div style="flex:1; height:20%; background:linear-gradient(to top, rgba(255,255,255,0.2), rgba(255,255,255,0.5)); border-radius:4px;"></div>
@@ -242,25 +242,25 @@
 
         <!-- Top Emotions -->
         <div style="text-align:left;">
-          <div style="font-size:0.75rem; font-weight:600; color:rgba(255,255,255,0.8); margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">Emosi Dominan</div>
-          <div style="display:flex; gap:8px;">
-            <span style="background:rgba(255,255,255,0.2); padding:4px 10px; border-radius:12px; color:#fff; font-size:0.8125rem; font-weight:600; display:flex; align-items:center; gap:4px;">
-              <span class="material-symbols-rounded" style="font-size:16px;">self_improvement</span> Damai
+          <div style="font-size:0.7rem; font-weight:750; color:rgba(255,255,255,0.85); margin-bottom:5px; text-transform:uppercase; letter-spacing:0.8px;">Emosi Dominan</div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
+            <span style="background:rgba(255,255,255,0.22); padding:3px 9px; border-radius:10px; color:#fff; font-size:0.75rem; font-weight:700; display:inline-flex; align-items:center; gap:4px; white-space:nowrap;">
+              <span class="material-symbols-rounded" style="font-size:14px;">self_improvement</span> Damai
             </span>
-            <span style="background:rgba(255,255,255,0.2); padding:4px 10px; border-radius:12px; color:#fff; font-size:0.8125rem; font-weight:600; display:flex; align-items:center; gap:4px;">
-              <span class="material-symbols-rounded" style="font-size:16px;">sentiment_satisfied</span> Senang
+            <span style="background:rgba(255,255,255,0.22); padding:3px 9px; border-radius:10px; color:#fff; font-size:0.75rem; font-weight:700; display:inline-flex; align-items:center; gap:4px; white-space:nowrap;">
+              <span class="material-symbols-rounded" style="font-size:14px;">sentiment_satisfied</span> Senang
             </span>
           </div>
         </div>
         
         <!-- Promo Footer -->
-        <div style="border-top:1px dashed rgba(255,255,255,0.3); padding-top:12px; margin-top:4px; display:flex; justify-content:space-between; align-items:center;">
+        <div style="border-top:1px dashed rgba(255,255,255,0.35); padding-top:8px; margin-top:2px; display:flex; justify-content:space-between; align-items:center;">
           <div style="text-align:left;">
-            <div style="font-size:0.875rem; font-weight:800; color:#fff;">Tenang.in</div>
-            <div style="font-size:0.65rem; font-weight:600; color:rgba(255,255,255,0.8);">Ruang aman untuk mentalmu.</div>
+            <div style="font-size:0.85rem; font-weight:850; color:#fff;">Tenang.in</div>
+            <div style="font-size:0.65rem; font-weight:650; color:rgba(255,255,255,0.8);">Ruang aman untuk mentalmu.</div>
           </div>
-          <div style="width:36px; height:36px; background:rgba(255,255,255,0.2); border-radius:10px; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px);">
-            <span class="material-symbols-rounded" style="color:#fff; font-size:22px;">spa</span>
+          <div style="width:32px; height:32px; background:rgba(255,255,255,0.2); border-radius:10px; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px); flex-shrink:0;">
+            <span class="material-symbols-rounded" style="color:#fff; font-size:18px;">spa</span>
           </div>
         </div>
       </div>

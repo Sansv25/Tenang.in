@@ -3,6 +3,13 @@
    ============================================= */
 
 document.addEventListener('DOMContentLoaded', async () => {
+  // Guard for landing page (index.html) if home.js is loaded there
+  const isLandingPage = document.querySelector('.hero') !== null || window.location.pathname.endsWith('index.html') || (window.location.pathname === '/' || window.location.pathname.endsWith('/'));
+  if (isLandingPage && !document.title.toLowerCase().includes('beranda')) {
+    if (typeof renderWeeklyMoodSummary === 'function') renderWeeklyMoodSummary();
+    return;
+  }
+
   await Main.initPage('home');
 
   const loggedInUser = localStorage.getItem('tenang_logged_in_user');
@@ -48,6 +55,7 @@ async function initializeHome() {
 
   // ---- Quick Card Mood Summary ----
   updateMoodSummary();
+  renderWeeklyMoodSummary();
 
   // ---- Update CTA button if already checked in ----
   updateCTAButton();
@@ -110,6 +118,7 @@ function submitCheckIn() {
   Animations.checkAchievements();
   updateStreakDisplay();
   updateMoodSummary();
+  renderWeeklyMoodSummary();
   updateCTAButton();
   Animations.showToast('Mood hari ini tersimpan!', 'success');
 
@@ -306,6 +315,204 @@ async function loadDailyTip() {
     `;
   }
 }
+
+// ---- High-Impact Innovation: Weekly Mood Summary & Contextual Insight (INVENTION 2026) ----
+async function renderWeeklyMoodSummary() {
+  const container = document.getElementById('weekly-mood-summary-section');
+  if (!container) return;
+
+  let moodHistory = [];
+  try {
+    const raw = localStorage.getItem('tenang_moods');
+    moodHistory = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(moodHistory)) moodHistory = [];
+  } catch(e) {
+    moodHistory = [];
+  }
+
+  const safeText = (str) => {
+    if (typeof escapeHTML === 'function') return escapeHTML(str);
+    return String(str || '').replace(/[&<>"']/g, m => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[m]));
+  };
+
+  // Deteksi tema tempat komponen dijalankan (Landing vs Dashboard)
+  const isLanding = document.querySelector('.hero') !== null || window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/');
+  const theme = {
+    cardBg: isLanding ? 'rgba(255, 255, 255, 0.04)' : '#FFFFFF',
+    cardBorder: isLanding ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid #E2E8F0',
+    cardBlur: isLanding ? 'backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);' : '',
+    textColor: isLanding ? '#FFFFFF' : '#1A2F4E',
+    subTextColor: isLanding ? 'rgba(255, 255, 255, 0.75)' : '#64748B',
+    boxBg: isLanding ? 'rgba(255, 255, 255, 0.05)' : '#F8FAFC',
+    boxBorder: isLanding ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #E2E8F0',
+    chipBg: isLanding ? 'rgba(126, 200, 227, 0.15)' : '#EEF3F9',
+    chipBorder: isLanding ? '1px solid rgba(126, 200, 227, 0.3)' : '1px solid #7EC8E3',
+    chipColor: isLanding ? '#7EC8E3' : '#2D5BA8',
+    tipBg: isLanding ? 'rgba(45, 91, 168, 0.35)' : 'linear-gradient(135deg, #EEF3F9 0%, #E0F2FE 100%)',
+    tipBorder: isLanding ? '1px solid rgba(126, 200, 227, 0.3)' : '1.5px solid #7EC8E3',
+    tipText: isLanding ? '#FFFFFF' : '#1A2F4E',
+    btnDetailBg: isLanding ? 'rgba(255, 255, 255, 0.1)' : '#F8FAFC',
+    btnDetailBorder: isLanding ? '1px solid rgba(255, 255, 255, 0.2)' : '1.5px solid #CBD5E1',
+    btnDetailColor: isLanding ? '#FFFFFF' : '#1E293B',
+    emptyBorder: isLanding ? '1px dashed rgba(255, 255, 255, 0.2)' : '2px dashed #CBD5E1'
+  };
+
+  // Jika data mood belum cukup (user baru / kosong) -> Tampilkan Motivative Empty State
+  if (!moodHistory.length) {
+    container.innerHTML = `
+      <div style="background: ${theme.cardBg}; border: ${theme.emptyBorder}; ${theme.cardBlur} border-radius: 28px; padding: clamp(24px, 5vw, 36px) clamp(16px, 4vw, 28px); text-align: center; box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.25); color: ${theme.textColor};">
+        <div style="width: clamp(56px, 12vw, 72px); height: clamp(56px, 12vw, 72px); border-radius: 50%; background: ${isLanding ? 'rgba(91, 143, 212, 0.2)' : '#EEF3F9'}; border: 2px solid #5B8FD4; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 8px 20px rgba(91, 143, 212, 0.2);">
+          <span class="material-symbols-rounded" style="font-size: clamp(30px, 7vw, 38px); color: ${isLanding ? '#7EC8E3' : '#2D5BA8'};">insights</span>
+        </div>
+        <span style="display: inline-block; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: ${theme.chipColor}; background: ${theme.chipBg}; border: ${theme.chipBorder}; padding: 4px 14px; border-radius: 999px; margin-bottom: 12px;">Rangkuman Emosi Mingguan</span>
+        <h3 style="font-size: clamp(1.25rem, 4vw, 1.5rem); font-weight: 850; color: ${theme.textColor}; margin: 0;">Jejak Emosimu Belum Terukir</h3>
+        <p style="color: ${theme.subTextColor}; font-size: clamp(0.88rem, 2.5vw, 0.95rem); line-height: 1.6; max-width: 500px; margin: 10px auto 24px;">
+          Setiap perasaanmu berharga dan layak dicatat. Mulai check-in mood pertamamu hari ini untuk membuka analisis emosi mendalam dan tips refleksi yang disesuaikan khusus untukmu.
+        </p>
+        <button type="button" onclick="typeof showCheckInModal === 'function' ? showCheckInModal() : (typeof handleMulaiSekarang === 'function' ? handleMulaiSekarang() : window.location.href='beranda.html')" style="background: #2D5BA8; color: #FFFFFF; border: none; padding: clamp(12px, 3vw, 14px) clamp(24px, 5vw, 32px); border-radius: 999px; font-weight: 800; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 8px 24px rgba(45, 91, 168, 0.35); transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">
+          <span class="material-symbols-rounded" style="font-size: 22px;">sentiment_very_satisfied</span>
+          Mulai Check-in Pertamaku
+        </button>
+      </div>
+    `;
+    return;
+  }
+
+  // Ambil data 7 hari terakhir / minggu ini
+  const now = new Date();
+  const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+  const weekMoods = moodHistory.filter(m => {
+    try {
+      const d = m.date ? new Date(m.date) : (m.timestamp ? new Date(m.timestamp) : now);
+      return d >= oneWeekAgo && !isNaN(d.getTime());
+    } catch(e) { return false; }
+  });
+  const itemsToAnalyze = weekMoods.length ? weekMoods : moodHistory.slice(-7);
+
+  // Hitung frekuensi tag
+  const tagCounts = {};
+  itemsToAnalyze.forEach(m => {
+    if (Array.isArray(m.tags)) {
+      m.tags.forEach(t => {
+        const tag = (t || '').toLowerCase().trim();
+        if (tag) tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+      });
+    }
+  });
+  let dominantTag = '';
+  let maxCount = -1;
+  for (const [t, count] of Object.entries(tagCounts)) {
+    if (count > maxCount) { maxCount = count; dominantTag = t; }
+  }
+  const allTopTags = Object.keys(tagCounts).slice(0, 5);
+
+  // Hitung mood rata-rata (1-5)
+  const totalScore = itemsToAnalyze.reduce((sum, m) => sum + (Number(m.level || m.score) || 3), 0);
+  const avgScore = Math.round(totalScore / itemsToAnalyze.length);
+  const emojiMap = { 1: '😫 Buruk', 2: '😔 Kurang', 3: '😐 Biasa', 4: '🙂 Baik', 5: '😄 Luar Biasa' };
+  const colorMap = { 1: '#EF4444', 2: '#F97316', 3: '#3B82F6', 4: '#10B981', 5: '#8B5CF6' };
+
+  // Generate Pesan Insight Kontekstual yang Hangat
+  let insightMsg = 'Konsistensi dalam mencatat perasaan adalah kunci utama menuju ketenangan mental. Terus perhatikan kesadaran dirimu setiap hari.';
+  if (dominantTag === 'lelah') {
+    insightMsg = 'Minggu ini kamu cukup sering merasa lelah. Tubuh dan pikiranmu sedang meminta hak istirahatnya yang layak. Beri jeda pada rutinitasmu dan istirahatlah tanpa rasa salah.';
+  } else if (dominantTag === 'cemas' || dominantTag === 'stres' || dominantTag === 'bingung') {
+    insightMsg = 'Ada gelombang ketegangan dan kecemasan minggu ini. Ingatlah bahwa emosi adalah cuaca sesaat; langit jiwamu tetap lapang dan kuat melaluinya. Perlahan lepaskan apa yang tak bisa kamu kontrol.';
+  } else if (dominantTag === 'kesepian') {
+    insightMsg = 'Rasa sepi sempet menghantuimu minggu ini. Ingat bahwa berduaan dengan diri sendiri juga merupakan ruang pemeliharaan kekuatan baru, dan Teman AI maupun tim profesional selalu siap mendengar ceritamu.';
+  } else if (dominantTag === 'bersyukur' || dominantTag === 'semangat' || dominantTag === 'tenang') {
+    insightMsg = 'Pola emosimu didominasi oleh ketenangan dan energi positif yang luar biasa. Kembangkan terus rasa syukur ini dan bagikan cahaya damaimu kepada lingkungan di sekitarmu!';
+  } else if (avgScore <= 2) {
+    insightMsg = 'Minggu ini terasa cukup menantang bagimu. Kamu luar biasa tangguh karena telah berani menghadapi hari-hari berat ini tanpa menyerah. Tetaplah melangkah perlahan.';
+  }
+
+  // Ambil 1 tips cepat dari data/tips.json berdasarkan tipe kepribadian atau tag dominan
+  let quickTip = 'Luangkan waktu 5 menit hari ini untuk meremaskan bahu, menarik napas panjang, dan tersenyum pada dirimu di cermin.';
+  try {
+    const res = await fetch('assets/data/tips.json');
+    if (res.ok) {
+      const tipsData = await res.json();
+      const userType = localStorage.getItem('tenang_personality_type') || (typeof Storage !== 'undefined' && Storage.getKenaliType ? Storage.getKenaliType() : null) || 'default';
+      const tipList = (tipsData[userType] && tipsData[userType].daily) ? tipsData[userType].daily : (tipsData.default?.daily || []);
+      if (tipList && tipList.length > 0) {
+        const tipIdx = Math.floor(Math.random() * tipList.length);
+        quickTip = tipList[tipIdx];
+      }
+    }
+  } catch(e) {}
+
+  const tagChipsHTML = allTopTags.length ? allTopTags.map(t => `<span style="background: ${theme.chipBg}; border: ${theme.chipBorder}; color: ${theme.chipColor}; font-size: 0.75rem; font-weight: 750; padding: 5px 12px; border-radius: 16px;">#${safeText(t)}</span>`).join('') : `<span style="color: ${theme.subTextColor}; font-size: 0.8rem; font-style: italic;">Belum ada tag yang dipilih minggu ini</span>`;
+
+  container.innerHTML = `
+    <div style="background: ${theme.cardBg}; border: ${theme.cardBorder}; ${theme.cardBlur} border-radius: 28px; padding: clamp(22px, 5vw, 32px); box-shadow: 0 18px 45px -15px rgba(0, 0, 0, 0.25); color: ${theme.textColor};">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 24px; border-bottom: 1.5px solid rgba(255,255,255,0.1); padding-bottom: 18px;">
+        <div style="display: flex; align-items: center; gap: clamp(10px, 3vw, 14px);">
+          <div style="width: clamp(44px, 10vw, 52px); height: clamp(44px, 10vw, 52px); border-radius: 16px; background: #5B8FD4; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 18px rgba(91, 143, 212, 0.4); flex-shrink: 0;">
+            <span class="material-symbols-rounded" style="font-size: clamp(24px, 6vw, 30px); color: #FFFFFF;">query_stats</span>
+          </div>
+          <div>
+            <span style="display: inline-block; font-size: 0.7rem; font-weight: 850; text-transform: uppercase; letter-spacing: 1px; color: ${theme.chipColor}; background: ${theme.chipBg}; border: ${theme.chipBorder}; padding: 3px 10px; border-radius: 8px; margin-bottom: 4px;">Analisis Emosi Mingguan</span>
+            <h2 style="font-size: clamp(1.2rem, 3.5vw, 1.45rem); font-weight: 850; color: ${theme.textColor}; margin: 0;">Rangkuman Emosimu Minggu Ini</h2>
+          </div>
+        </div>
+        <a href="dashboard.html" style="text-decoration: none; background: ${theme.btnDetailBg}; border: ${theme.btnDetailBorder}; color: ${theme.btnDetailColor}; font-weight: 750; font-size: 0.85rem; padding: 10px 16px; border-radius: 14px; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+          <span>Detail Statistik</span>
+          <span class="material-symbols-rounded" style="font-size: 18px;">chevron_right</span>
+        </a>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: clamp(14px, 3vw, 20px); margin-bottom: 24px;">
+        <!-- Box 1: Status & Tag Teratas -->
+        <div style="background: ${theme.boxBg}; border: ${theme.boxBorder}; border-radius: 20px; padding: clamp(18px, 4vw, 22px);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <span style="font-size: 0.85rem; font-weight: 700; color: ${theme.subTextColor};">Tren Mood Rata-Rata</span>
+            <span style="font-size: 0.95rem; font-weight: 850; color: ${colorMap[avgScore] || '#3B82F6'}; background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 12px;">${emojiMap[avgScore] || 'Neutral'}</span>
+          </div>
+          <div style="font-size: 0.85rem; font-weight: 700; color: ${theme.subTextColor}; margin: 16px 0 10px;">Emosi / Tag Paling Sering Dirasakan:</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            ${tagChipsHTML}
+          </div>
+        </div>
+
+        <!-- Box 2: Insight Kontekstual -->
+        <div style="background: ${theme.boxBg}; border: ${theme.boxBorder}; border-left: 5px solid #2D5BA8; border-radius: 20px; padding: clamp(18px, 4vw, 22px); display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; font-weight: 800; color: ${isLanding ? '#7EC8E3' : '#2D5BA8'}; font-size: 0.9rem; margin-bottom: 8px;">
+              <span class="material-symbols-rounded" style="font-size: 22px;">psychology</span>
+              <span>Insight Refleksi Untukmu</span>
+            </div>
+            <p style="font-size: clamp(0.88rem, 2.5vw, 0.9375rem); color: ${isLanding ? 'rgba(255,255,255,0.9)' : '#334155'}; line-height: 1.6; font-style: italic; margin: 0;">
+              "${safeText(insightMsg)}"
+            </p>
+          </div>
+          <div style="margin-top: 14px; font-size: 0.785rem; font-weight: 700; color: ${theme.subTextColor};">
+            ✨ Berdasarkan ${itemsToAnalyze.length} catatan check-in mood terakhir
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Tip Bar -->
+      <div style="background: ${theme.tipBg}; border: ${theme.tipBorder}; border-radius: 18px; padding: 16px clamp(16px, 4vw, 20px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 12px; flex: 1; min-width: 240px;">
+          <div style="width: 40px; height: 40px; border-radius: 12px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            <span class="material-symbols-rounded" style="color: #F59E0B; font-size: 24px;">lightbulb</span>
+          </div>
+          <div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: ${isLanding ? '#FDE68A' : '#2D5BA8'}; text-transform: uppercase; letter-spacing: 0.5px;">Tips Praktis Hari Ini</div>
+            <div style="font-size: clamp(0.85rem, 2.5vw, 0.9rem); font-weight: 700; color: ${theme.tipText};">${safeText(quickTip)}</div>
+          </div>
+        </div>
+        <button onclick="window.location.href='kenali.html'" style="background: #2D5BA8; color: #FFFFFF; border: none; padding: 8px 16px; border-radius: 12px; font-size: 0.8rem; font-weight: 750; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25); transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+          <span>Eksplorasi Tips</span>
+          <span class="material-symbols-rounded" style="font-size: 16px;">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+  `;
+}
+window.renderWeeklyMoodSummary = renderWeeklyMoodSummary;
 
 // ---- Interactive Inspiration & Prompt Rotator ----
 const inspirationList = [

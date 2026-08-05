@@ -362,11 +362,44 @@ const Main = (() => {
 
     Animations.init();
     
-    // Apply theme after navbar is dynamically created so it gets the correct background
     if (typeof Settings !== 'undefined' && Settings.applyTheme) {
       Settings.applyTheme();
     }
   };
+
+  // ---- Universal Clipboard Copy Helper for Emergency Numbers ----
+  window.copyEmergencyNumber = function(number, label) {
+    try {
+      if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(number).then(() => {
+          if (typeof Animations !== 'undefined' && Animations.showToast) {
+            Animations.showToast(`Nomor ${label} (${number}) disalin ke papan klip!`, 'success', 3500);
+          }
+        }).catch(() => fallbackCopy(number, label));
+      } else {
+        fallbackCopy(number, label);
+      }
+    } catch(e) {
+      fallbackCopy(number, label);
+    }
+  };
+
+  function fallbackCopy(text, label) {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.left = "-99999px";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try {
+      document.execCommand('copy');
+      if (typeof Animations !== 'undefined' && Animations.showToast) {
+        Animations.showToast(`Nomor ${label} (${text}) disalin ke papan klip!`, 'success', 3500);
+      }
+    } catch (err) {}
+    document.body.removeChild(ta);
+  }
 
   return { initPage, getGreetingText, logoSVG };
 })();

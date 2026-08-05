@@ -130,12 +130,34 @@
         <h2 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white);">Bagikan Profil Diri</h2>
         <button class="modal-close" onclick="document.getElementById('share-result-modal').classList.remove('active');"><span class="material-symbols-rounded">close</span></button>
       </div>
-      <div class="share-card-preview" style="margin-bottom:var(--space-lg);">
-        <h3 style="font-size:1.25rem; font-weight:800; color:var(--text-on-white); margin-bottom:var(--space-xs);">Tipe Fokus Psikologis</h3>
-        <div style="font-size:3.5rem; margin:var(--space-md) 0;" id="share-result-emoji">🧠</div>
-        <h2 style="font-size:1.75rem; color:var(--text-on-white); margin-bottom:var(--space-sm);" id="share-result-title">Tipe</h2>
-        <p style="color:rgba(255,255,255,0.8); font-size:0.875rem;">Saya mengidentifikasi titik fokus pikiran saya melalui Tenang.in. Sebuah langkah kecil untuk peduli pada diri sendiri.</p>
-        <div style="font-size:0.75rem; font-weight:700; color:var(--text-on-white); margin-top:var(--space-xl); opacity:0.6;">Tenang.in App</div>
+      <div class="share-card-preview" style="background: linear-gradient(135deg, #2D5BA8, #7EC8E3); text-align:left;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">
+          <h3 style="font-size:clamp(1.05rem, 4vw, 1.18rem); font-weight:850; color:#fff; text-shadow:0 2px 4px rgba(0,0,0,0.2); line-height:1.2; margin:0;">Profil<br>Refleksiku</h3>
+          <div style="background:rgba(255,255,255,0.2); padding:3px 10px; border-radius:999px; color:#fff; font-size:0.7rem; font-weight:750; display:inline-flex; align-items:center; gap:4px; backdrop-filter:blur(5px); flex-shrink:0; white-space:nowrap;">
+            <span class="material-symbols-rounded" style="font-size:14px;">tune</span>
+            <span>Profil Diri</span>
+          </div>
+        </div>
+
+        <div style="text-align:center; margin: 8px 0;">
+          <div style="font-size:3.2rem; line-height:1; margin-bottom:8px;" id="share-result-emoji">🧠</div>
+          <h2 style="font-size:clamp(1.2rem, 5vw, 1.5rem); font-weight:850; color:#fff; margin:0;" id="share-result-title">Tipe Fokus</h2>
+        </div>
+
+        <p style="color:rgba(255,255,255,0.92); font-size:0.78rem; line-height:1.45; font-style:italic; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; margin:0;">
+          "Saya mengidentifikasi gaya refleksi diri melalui Tenang.in. Sebuah langkah kecil untuk lebih peka dan peduli pada diri sendiri."
+        </p>
+
+        <!-- Promo Footer -->
+        <div style="border-top:1px dashed rgba(255,255,255,0.35); padding-top:8px; margin-top:4px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-size:0.85rem; font-weight:850; color:#fff;">Tenang.in</div>
+            <div style="font-size:0.65rem; font-weight:650; color:rgba(255,255,255,0.8);">Ruang aman untuk mentalmu.</div>
+          </div>
+          <div style="width:32px; height:32px; background:rgba(255,255,255,0.2); border-radius:10px; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px); flex-shrink:0;">
+            <span class="material-symbols-rounded" style="color:#fff; font-size:18px;">spa</span>
+          </div>
+        </div>
       </div>
       <div style="display:flex; gap:var(--space-md);">
         <button class="btn btn-secondary btn-full" onclick="simulateResultShare()"><span class="material-symbols-rounded">download</span> Simpan</button>

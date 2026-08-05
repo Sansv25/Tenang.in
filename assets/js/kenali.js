@@ -321,8 +321,8 @@ function showResult(type, resultScores, isNew = true) {
   }
   if (shareStrengths && Array.isArray(result.strengths)) {
     shareStrengths.innerHTML = result.strengths.slice(0, 3).map(s => `
-      <span style="background:rgba(255,255,255,0.2); padding:4px 10px; border-radius:12px; color:#fff; font-size:0.8125rem; font-weight:600; display:flex; align-items:center; gap:4px;">
-        <span class="material-symbols-rounded" style="font-size:16px;">star</span> ${s}
+      <span style="background:rgba(255,255,255,0.22); padding:3px 9px; border-radius:10px; color:#fff; font-size:0.75rem; font-weight:700; display:inline-flex; align-items:center; gap:4px; white-space:nowrap;">
+        <span class="material-symbols-rounded" style="font-size:14px;">star</span> ${s}
       </span>
     `).join('');
   }

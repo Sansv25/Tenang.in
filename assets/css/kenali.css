@@ -962,14 +962,21 @@
 /* ---- Share Modal Enhanced (On-theme blue gradient) ---- */
 .kenali-share-preview {
   background: linear-gradient(135deg, #1E4780 0%, #2B5EA0 50%, #3B72C4 100%);
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 4 / 5;
+  margin: 0 auto 1.25rem auto !important;
+  padding: clamp(14px, 4vw, 22px) clamp(16px, 4.5vw, 22px) !important;
   border-radius: var(--radius-xl);
-  padding: var(--space-2xl) var(--space-xl);
   text-align: center;
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
   position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .kenali-share-preview::before {

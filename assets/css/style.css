@@ -900,28 +900,17 @@ p { line-height: var(--line-height); }
     gap: 12px !important;
   }
 
-  /* Keep section nav links visible on mobile in ultra compact font! */
+  /* On mobile screens (< 768px), hide section links for an uncluttered header layout */
   .landing-nav-links {
-    display: flex !important;
-    gap: 12px !important;
-  }
-
-  .landing-link {
-    font-size: 0.78rem !important;
-    font-weight: 750 !important;
-    padding: 2px 0 !important;
+    display: none !important;
   }
 
   .btn-rounded-start {
-    padding: 7px 15px !important;
-    font-size: 0.78rem !important;
-    gap: 4px !important;
+    padding: 8px 18px !important;
+    font-size: 0.85rem !important;
+    gap: 6px !important;
     border-radius: 9999px !important;
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2) !important;
-  }
-
-  .btn-rounded-start .btn-arrow-icon {
-    display: none !important; /* Hide arrow on small screens to conserve horizontal width for section links! */
   }
 
   .hero {
@@ -930,14 +919,13 @@ p { line-height: var(--line-height); }
 }
 
 @media (max-width: 420px) {
-  /* On very small phones under 420px, optimize link text spacing and font sizes */
   .landing-navbar-inner {
-    padding: 0 12px !important;
+    padding: 0 16px !important;
   }
   
   .landing-logo {
-    font-size: 1.02rem !important;
-    gap: 5px !important;
+    font-size: 1.1rem !important;
+    gap: 6px !important;
   }
   
   .landing-logo svg {
@@ -945,17 +933,9 @@ p { line-height: var(--line-height); }
     height: 24px !important;
   }
   
-  .landing-nav-links {
-    gap: 8px !important;
-  }
-  
-  .landing-link {
-    font-size: 0.72rem !important;
-  }
-  
   .btn-rounded-start {
-    padding: 6px 12px !important;
-    font-size: 0.73rem !important;
+    padding: 7px 15px !important;
+    font-size: 0.8rem !important;
   }
 }
 
