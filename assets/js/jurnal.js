@@ -213,8 +213,7 @@ function openJournal(id) {
   document.getElementById('jurnal-read-content').textContent = journal.content;
 
   const tagsEl = document.getElementById('jurnal-read-tags');
-  tagsEl.innerHTML = journal.tags.map(t => `<span class="journal-tag">${t}</span>`).join('');
-
+  tagsEl.innerHTML = journal.tags.map(t => `<span class="journal-tag">${typeof window.escapeHTML === 'function' ? window.escapeHTML(t) : t}</span>`).join('');
   modal.classList.add('active');
 }
 

@@ -161,7 +161,7 @@
     <div class="modal">
       <div class="modal-header">
         <h2 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white);">Kamu tidak sendirian</h2>
-        <button class="modal-close" onclick="closeLowMoodModal()"><span class="material-symbols-rounded">close</span></button>
+        <button class="modal-close" onclick="closeLowMoodModal()" aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
       </div>
       <p style="color:var(--text-secondary); line-height:1.6; margin-bottom:var(--space-lg);">
         Kami lihat mood-mu sedang kurang baik. Itu wajar dan valid. Jika kamu merasa butuh bantuan, jangan ragu untuk menghubungi layanan profesional:
@@ -188,18 +188,18 @@
     <div class="modal" style="max-width:440px;">
       <div class="modal-header">
         <h2 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white);">Bagikan Grafik Mood</h2>
-        <button class="modal-close" onclick="document.getElementById('share-chart-modal').classList.remove('active');"><span class="material-symbols-rounded">close</span></button>
+        <button class="modal-close" onclick="document.getElementById('share-chart-modal').classList.remove('active');" aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
       </div>
 
       <!-- Color Customization -->
       <div style="margin-bottom:var(--space-md); text-align:center;">
         <p style="font-size:0.875rem; color:var(--text-secondary); margin-bottom:var(--space-sm); font-weight:600;">Sesuaikan Warna Tema</p>
         <div style="display:flex; justify-content:center; gap:12px;" id="share-theme-selector">
-          <button onclick="changeShareTheme('blue')" style="width:32px; height:32px; border-radius:50%; border:2px solid #fff; cursor:pointer; background: linear-gradient(135deg, #2D5BA8, #7EC8E3); box-shadow:0 2px 8px rgba(0,0,0,0.3); transform:scale(1.1);"></button>
-          <button onclick="changeShareTheme('sunset')" style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #FF512F, #DD2476); box-shadow:0 2px 8px rgba(0,0,0,0.3);"></button>
-          <button onclick="changeShareTheme('midnight')" style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); box-shadow:0 2px 8px rgba(0,0,0,0.3);"></button>
-          <button onclick="changeShareTheme('forest')" style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #11998e, #38ef7d); box-shadow:0 2px 8px rgba(0,0,0,0.3);"></button>
-          <button onclick="changeShareTheme('purple')" style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #8E2DE2, #4A00E0); box-shadow:0 2px 8px rgba(0,0,0,0.3);"></button>
+          <button onclick="changeShareTheme('blue')" style="width:32px; height:32px; border-radius:50%; border:2px solid #fff; cursor:pointer; background: linear-gradient(135deg, #2D5BA8, #7EC8E3); box-shadow:0 2px 8px rgba(0,0,0,0.3); transform:scale(1.1);" aria-label="Tema Biru"></button>
+          <button onclick="changeShareTheme('sunset')" style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #FF512F, #DD2476); box-shadow:0 2px 8px rgba(0,0,0,0.3);" aria-label="Tema Senja"></button>
+          <button onclick="changeShareTheme('midnight')" style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); box-shadow:0 2px 8px rgba(0,0,0,0.3);" aria-label="Tema Malam"></button>
+          <button onclick="changeShareTheme('forest')" style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #11998e, #38ef7d); box-shadow:0 2px 8px rgba(0,0,0,0.3);" aria-label="Tema Hutan"></button>
+          <button onclick="changeShareTheme('purple')" style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #8E2DE2, #4A00E0); box-shadow:0 2px 8px rgba(0,0,0,0.3);" aria-label="Tema Ungu"></button>
         </div>
       </div>
 

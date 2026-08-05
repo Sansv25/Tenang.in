@@ -30,7 +30,7 @@ const Charts = (() => {
     const {
       width = 600,
       height = 190,
-      padding = { top: 28, right: 25, bottom: 30, left: 35 },
+      padding = { top: 32, right: 45, bottom: 30, left: 42 },
       showDots = true,
       showArea = true,
       showLabels = true
@@ -106,15 +106,18 @@ const Charts = (() => {
     const dotsHTML = showDots ? points.map(p => {
       const col = moodColor(p.level);
       const labelText = moodLabel(p.level);
+      const badgeW = labelText.length > 6 ? 80 : 54;
+      const badgeX = Math.max(6, Math.min(width - badgeW - 6, p.x - badgeW / 2));
+      const badgeCenter = badgeX + badgeW / 2;
       return `
         <g class="chart-point-group">
           <!-- Glow halo -->
           <circle cx="${p.x}" cy="${p.y}" r="8" fill="${col}" opacity="0.15"/>
           <!-- Solid dot -->
           <circle cx="${p.x}" cy="${p.y}" r="4.5" fill="${col}" stroke="#FFFFFF" stroke-width="2" class="chart-dot"/>
-          <!-- Tooltip badge above point -->
-          <rect x="${p.x - 26}" y="${p.y - 23}" width="52" height="17" rx="8.5" fill="#0F172A" opacity="0.92"/>
-          <text x="${p.x}" y="${p.y - 11.5}" text-anchor="middle" fill="#FFFFFF" font-size="9.5" font-weight="600" font-family="Plus Jakarta Sans">${labelText}</text>
+          <!-- Tooltip badge above point with generous padding & boundary clamp -->
+          <rect x="${badgeX}" y="${p.y - 26}" width="${badgeW}" height="20" rx="10" fill="#0F172A" opacity="0.94" style="filter: drop-shadow(0 2px 5px rgba(0,0,0,0.18));"/>
+          <text x="${badgeCenter}" y="${p.y - 12.5}" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="700" font-family="Plus Jakarta Sans">${labelText}</text>
         </g>
       `;
     }).join('') : '';
@@ -173,8 +176,10 @@ const Charts = (() => {
       const moodClr = mood ? moodColor(mood.level) : '';
       const tags = mood && mood.tags && mood.tags.length ? mood.tags.join(', ') : '';
       const note = mood && mood.note ? mood.note : '';
+      const safeTags = typeof window.escapeHTML === 'function' ? window.escapeHTML(tags) : String(tags).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+      const safeNote = typeof window.escapeHTML === 'function' ? window.escapeHTML(note) : String(note).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
 
-      const dataAttrs = `data-level="${level}" data-date="${dateKey}" data-formatted="${formattedDate}" data-mood-label="${moodLbl}" data-mood-color="${moodClr}" data-tags="${tags}" data-note="${note}"`;
+      const dataAttrs = `data-level="${level}" data-date="${dateKey}" data-formatted="${formattedDate}" data-mood-label="${moodLbl}" data-mood-color="${moodClr}" data-tags="${safeTags}" data-note="${safeNote}"`;
 
       dateCells.push(`
         <div class="contribution-cell${isToday ? ' contribution-cell-today' : ''}${isFuture ? ' contribution-cell-future' : ''}" ${dataAttrs}>
@@ -231,8 +236,8 @@ const Charts = (() => {
             <span class="material-symbols-rounded" style="font-size:18px;">${icons[level] || ''}</span>
             <span>${moodLbl}</span>
           </div>`;
-          if (tags) content += `<div class="contribution-tooltip-tags">${tags}</div>`;
-          if (note) content += `<div class="contribution-tooltip-note">"${note}"</div>`;
+          if (tags) content += `<div class="contribution-tooltip-tags">${typeof window.escapeHTML === 'function' ? window.escapeHTML(tags) : tags}</div>`;
+          if (note) content += `<div class="contribution-tooltip-note">"${typeof window.escapeHTML === 'function' ? window.escapeHTML(note) : note}"</div>`;
         } else {
           content += `<div class="contribution-tooltip-empty">Belum check-in</div>`;
         }
@@ -307,9 +312,9 @@ const Charts = (() => {
   // ---- Mini Chart (for Dashboard) ----
   const createMiniChart = (container, data) => {
     createLineChart(container, data, {
-      width: 400,
-      height: 120,
-      padding: { top: 22, right: 15, bottom: 24, left: 30 },
+      width: 440,
+      height: 130,
+      padding: { top: 30, right: 45, bottom: 26, left: 42 },
       showArea: true,
       showDots: true,
       showLabels: true

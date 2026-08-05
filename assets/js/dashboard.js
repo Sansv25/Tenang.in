@@ -14,9 +14,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderMiniGrid();
 });
 
+// ---- Defensive Storage Parsing Helper ----
+function safeGetJSON(key, defaultVal = []) {
+  try {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : defaultVal;
+  } catch(e) {
+    console.warn(`[Defensive Parsing] Error parsing localStorage key "${key}":`, e);
+    return defaultVal;
+  }
+}
+
 // ---- Empty State Check ----
 function checkEmptyState() {
-  const moodHistory = JSON.parse(localStorage.getItem('tenang_moods') || '[]');
+  const moodHistory = safeGetJSON('tenang_moods', []);
   const emptyEl = document.getElementById('empty-state');
   const contentEl = document.getElementById('dashboard-content');
   if (!moodHistory.length) {
@@ -64,12 +75,12 @@ function getStreak(moods) {
 }
 
 function getJournalCount() {
-  const journals = JSON.parse(localStorage.getItem('tenang_journals') || '[]');
+  const journals = safeGetJSON('tenang_journals', []);
   return journals.length;
 }
 
 function getJournalCountThisMonth() {
-  const journals = JSON.parse(localStorage.getItem('tenang_journals') || '[]');
+  const journals = safeGetJSON('tenang_journals', []);
   const now = new Date();
   const curMonth = now.getMonth();
   const curYear = now.getFullYear();
@@ -81,7 +92,7 @@ function getJournalCountThisMonth() {
 
 // ---- Daily Quote (Rule-based) ----
 function getDailyQuote() {
-  const moodHistory = JSON.parse(localStorage.getItem('tenang_moods') || '[]');
+  const moodHistory = safeGetJSON('tenang_moods', []);
   const dominantTag = getDominantTag(moodHistory);
   const streak = getStreak(moodHistory);
   const userType = localStorage.getItem('tenang_user_type') || (typeof Storage !== 'undefined' ? Storage.getUserType() : null);
@@ -142,7 +153,7 @@ function renderMiniChart() {
 
 // ---- Statistik Cards ----
 function renderStats() {
-  const moodHistory = JSON.parse(localStorage.getItem('tenang_moods') || '[]');
+  const moodHistory = safeGetJSON('tenang_moods', []);
   
   const streakEl = document.getElementById('stat-streak');
   if (streakEl) streakEl.textContent = getStreak(moodHistory);
@@ -153,14 +164,28 @@ function renderStats() {
   const temanEl = document.getElementById('stat-teman');
   if (temanEl) temanEl.textContent = parseInt(localStorage.getItem('tenang_teman_sessions') || '0');
 
-  // Mood rata-rata minggu ini (emoji)
-  const weekMoods = moodHistory.slice(-7).map(m => m.score !== undefined ? m.score : (m.level || 0));
+  // Mood rata-rata minggu ini (rich badge)
+  const weekMoods = moodHistory.slice(-7).map(m => m.score !== undefined ? m.score : (m.level || 0)).filter(s => s > 0);
   const avg = weekMoods.length ? 
     Math.round(weekMoods.reduce((a,b) => a+b, 0) / weekMoods.length) : 0;
-  const avgEmojis = ['-', '😫', '😔', '😐', '🙂', '😄'];
+  
+  const avgLabels = ['Belum Ada', 'Buruk', 'Kurang', 'Biasa', 'Baik', 'Sangat Baik'];
+  const avgIcons = ['help_outline', 'sentiment_very_dissatisfied', 'sentiment_dissatisfied', 'sentiment_neutral', 'sentiment_satisfied', 'sentiment_very_satisfied'];
+  const avgColors = ['#64748B', '#EF4444', '#F97316', '#FBBF24', '#10B981', '#3B82F6'];
   
   const avgMoodEl = document.getElementById('stat-avg-mood');
-  if (avgMoodEl) avgMoodEl.textContent = avgEmojis[avg] || '-';
+  if (avgMoodEl) {
+    if (avg === 0 || !weekMoods.length) {
+      avgMoodEl.innerHTML = `<span style="font-size:1.4rem; color:#64748B; font-weight:750;">-</span>`;
+    } else {
+      const floatAvg = (weekMoods.reduce((a,b) => a+b, 0) / weekMoods.length).toFixed(1);
+      avgMoodEl.innerHTML = `
+        <div style="display:inline-flex; align-items:center; justify-content:center; gap:6px; background:${avgColors[avg]}15; color:${avgColors[avg]}; border: 1.5px solid ${avgColors[avg]}40; padding: 4px 14px; border-radius:24px; box-shadow:0 2px 6px rgba(0,0,0,0.05); margin-top:2px;">
+          <span class="material-symbols-rounded" style="font-size:24px; color:${avgColors[avg]}; margin:0;">${avgIcons[avg]}</span>
+          <span style="font-size:1.15rem; font-weight:800; letter-spacing:-0.02em; color:${avgColors[avg]};">${avgLabels[avg]} (${floatAvg})</span>
+        </div>`;
+    }
+  }
 }
 
 // ---- Badge Pencapaian ----
@@ -171,7 +196,7 @@ const badges = [
     name: 'Langkah Pertama',
     desc: 'Check-in mood pertama kali',
     condition: () => {
-      const moodHistory = JSON.parse(localStorage.getItem('tenang_moods') || '[]');
+      const moodHistory = safeGetJSON('tenang_moods', []);
       return moodHistory.length >= 1;
     }
   },
@@ -181,7 +206,7 @@ const badges = [
     name: '3 Hari Berturut',
     desc: 'Check-in 3 hari berturut-turut',
     condition: () => {
-      const moodHistory = JSON.parse(localStorage.getItem('tenang_moods') || '[]');
+      const moodHistory = safeGetJSON('tenang_moods', []);
       return getStreak(moodHistory) >= 3;
     }
   },
@@ -191,7 +216,7 @@ const badges = [
     name: '7 Hari Konsisten',
     desc: 'Check-in 7 hari berturut-turut',
     condition: () => {
-      const moodHistory = JSON.parse(localStorage.getItem('tenang_moods') || '[]');
+      const moodHistory = safeGetJSON('tenang_moods', []);
       return getStreak(moodHistory) >= 7;
     }
   },

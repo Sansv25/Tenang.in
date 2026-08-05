@@ -181,7 +181,7 @@
         <div>
           <span class="journal-date" id="jurnal-read-date"></span>
         </div>
-        <button class="modal-close" onclick="closeJurnalModal()"><span class="material-symbols-rounded">close</span></button>
+        <button class="modal-close" onclick="closeJurnalModal()" aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
       </div>
       <p id="jurnal-read-prompt" style="font-size:0.8125rem; color:var(--primary-accent); font-style:italic; margin-bottom:var(--space-md);"></p>
       <p id="jurnal-read-content" style="font-size:var(--body-size); line-height:1.8; color:var(--text-on-white); white-space:pre-wrap;"></p>
@@ -211,7 +211,7 @@
     <div class="modal" style="max-width:440px;">
       <div class="modal-header">
         <h2 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white);">Pilih Topik Refleksi</h2>
-        <button class="modal-close" onclick="document.getElementById('prompt-category-modal').classList.remove('active');"><span class="material-symbols-rounded">close</span></button>
+        <button class="modal-close" onclick="document.getElementById('prompt-category-modal').classList.remove('active');" aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
       </div>
       <div style="display:flex; flex-direction:column; gap:var(--space-md);">
         <button class="btn btn-secondary btn-full" style="justify-content:flex-start; padding: 14px 18px; font-weight: 700; font-size: 1rem; gap: 12px;" onclick="changePromptCategory('gratitude')">

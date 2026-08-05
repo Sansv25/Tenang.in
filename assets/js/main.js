@@ -206,7 +206,7 @@ const Main = (() => {
               <span class="material-symbols-rounded" style="color:#F59E0B; font-size:26px;">history_edu</span>
               Kapsul Waktu untuk Dirimu
             </h3>
-            <button class="modal-close" onclick="document.getElementById('time-capsule-write-modal').classList.remove('active');"><span class="material-symbols-rounded">close</span></button>
+            <button class="modal-close" onclick="document.getElementById('time-capsule-write-modal').classList.remove('active');" aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
           </div>
           <p style="color:rgba(255,255,255,0.85); font-size:0.9rem; margin-top:6px; line-height:1.5;">
             Mumpung mood kamu lagi <b>Baik / Luar Biasa</b> hari ini, mau tinggalkan pesan semangat untuk dirimu sendiri jika suatu hari nanti kamu merasa down?
@@ -299,7 +299,7 @@ const Main = (() => {
               <span class="material-symbols-rounded" style="color:#F43F5E;">drafts</span>
               Surat dari Dirimu di Masa Lalu
             </h3>
-            <button class="modal-close" onclick="document.getElementById('time-capsule-read-modal').classList.remove('active');"><span class="material-symbols-rounded">close</span></button>
+            <button class="modal-close" onclick="document.getElementById('time-capsule-read-modal').classList.remove('active');" aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
           </div>
           <p style="color:rgba(255,255,255,0.75); font-size:0.85rem; margin-top:4px;">
             Saat kamu merasa harimu berat hari ini, dirimu dari tanggal <b id="read-capsule-date" style="color:#fff;"></b> pernah mengirimkan pesan ini khusus untukmu:
@@ -365,6 +365,25 @@ const Main = (() => {
     if (typeof Settings !== 'undefined' && Settings.applyTheme) {
       Settings.applyTheme();
     }
+
+    // ---- Global ESC Key Listener for Accessibility (a11y) ----
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' || e.keyCode === 27) {
+        document.querySelectorAll('.modal-overlay.active, .welcome-modal-overlay.active').forEach(modal => {
+          modal.classList.remove('active');
+        });
+        const onboardingModal = document.getElementById('interactive-onboarding-modal');
+        if (onboardingModal && onboardingModal.classList.contains('active')) {
+          onboardingModal.classList.remove('active');
+        }
+        if (typeof TemanChat !== 'undefined' && typeof TemanChat.close === 'function') {
+          const chatContainer = document.getElementById('teman-chat');
+          if (chatContainer && chatContainer.classList.contains('active')) {
+            TemanChat.close();
+          }
+        }
+      }
+    });
   };
 
   // ---- Universal Clipboard Copy Helper for Emergency Numbers ----
