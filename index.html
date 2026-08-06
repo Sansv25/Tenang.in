@@ -42,7 +42,7 @@
   <link rel="stylesheet" href="assets/css/settings.css">
 </head>
 
-<body class="landing-page preloader-active">
+<body class="landing-page preloader-active bg-gradient-to-b from-[#5B8FD4] via-[#3D6BAF] to-[#0B1528] min-h-screen text-white overflow-x-hidden">
 
   <!-- ======= PRELOADER (LOADING SCREEN) ======= -->
   <div class="preloader" id="preloader">
@@ -430,12 +430,7 @@
     </div>
   </section>
 
-  <!-- ======= RANGKUMAN EMOSIMU MINGGUAN INI (INVENTION 2026 HIGH-IMPACT SECTION) ======= -->
-  <section class="weekly-mood-summary-section reveal" data-reveal="fade-up" style="padding: clamp(30px, 5vw, 60px) 0; background: var(--bg-section-dark, #2B5EA0); position: relative; z-index: 5;">
-    <div class="container" id="weekly-mood-summary-section">
-      <!-- Akan diisi secara dinamis oleh home.js dengan try-catch & sanitasi teks -->
-    </div>
-  </section>
+
 
   <!-- ======= FEATURES SECTION ======= -->
   <section class="features-section" id="features">
@@ -505,6 +500,27 @@
 
   <!-- ======= HOW IT WORKS ======= -->
   <section class="how-section" id="how">
+    <!-- Ornamen Siluet Burung (Background di Kiri) -->
+    <div class="birds-ornament-container birds-left" aria-hidden="true" style="top: 25px; left: 4%;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" class="birds-svg">
+        <!-- Burung 1 (Pusat, Ukuran Sedang) -->
+        <path class="bird-path bird-1" d="M 50 100 C 65 85, 85 88, 100 105 C 115 88, 135 85, 150 100 C 135 96, 115 106, 100 120 C 85 106, 65 96, 50 100 Z" fill="url(#birdGradient)" />
+        
+        <!-- Burung 2 (Kanan Atas, Ukuran Paling Besar) -->
+        <path class="bird-path bird-2" d="M 120 40 C 140 20, 165 24, 185 45 C 205 24, 230 20, 250 40 C 230 35, 205 48, 185 65 C 165 48, 140 35, 120 40 Z" fill="url(#birdGradient)" transform="scale(0.8) translate(50, -10)" />
+        
+        <!-- Burung 3 (Kiri Bawah, Ukuran Paling Kecil) -->
+        <path class="bird-path bird-3" d="M 20 150 C 28 138, 40 140, 48 152 C 56 140, 68 138, 76 150 C 68 147, 56 154, 48 162 C 40 154, 28 147, 20 150 Z" fill="url(#birdGradient)" />
+
+        <defs>
+          <linearGradient id="birdGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#E0F2FE" stop-opacity="0.85" />
+            <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.45" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
     <div class="container">
       <div class="section-header reveal" data-reveal="fade-up">
         <span class="section-label">Cara Kerja</span>
@@ -536,11 +552,30 @@
   <!-- ======= TEMAN INTRO ======= -->
   <section class="teman-section" id="teman-ai">
     <div class="teman-section-overlay"></div>
+
+    <!-- Ornamen Siluet Burung (Background di Kanan) -->
+    <div class="birds-ornament-container" aria-hidden="true" style="top: 25px; right: 4%;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" class="birds-svg">
+        <!-- Burung 1 (Pusat, Ukuran Sedang) -->
+        <path class="bird-path bird-1" d="M 50 100 C 65 85, 85 88, 100 105 C 115 88, 135 85, 150 100 C 135 96, 115 106, 100 120 C 85 106, 65 96, 50 100 Z" fill="url(#birdGradient2)" />
+        
+        <!-- Burung 2 (Kanan Atas, Ukuran Paling Besar) -->
+        <path class="bird-path bird-2" d="M 120 40 C 140 20, 165 24, 185 45 C 205 24, 230 20, 250 40 C 230 35, 205 48, 185 65 C 165 48, 140 35, 120 40 Z" fill="url(#birdGradient2)" transform="scale(0.8) translate(50, -10)" />
+
+        <defs>
+          <linearGradient id="birdGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#E0F2FE" stop-opacity="0.85" />
+            <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.45" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
     <div class="container">
       <div class="teman-intro">
         <div class="teman-avatar-wrapper reveal" data-reveal="fade-right">
           <div class="teman-avatar">
-            <span class="material-symbols-rounded" style="font-size:48px; color:white;">smart_toy</span>
+            <img src="assets/img/bot.png" alt="Teman AI Companion" class="teman-avatar-img">
           </div>
         </div>
         <div class="teman-text-wrapper reveal" data-reveal="fade-left">
@@ -573,11 +608,16 @@
   </section>
 
   <!-- ======= BENTO STATS DASHBOARD SECTION (BEFORE CTA) ======= -->
-  <section class="bento-stats-section" id="statistik-komunitas">
+  <section class="bento-stats-section relative" id="statistik-komunitas">
     <!-- Calm Interactive Particle Background Canvas -->
     <canvas id="calmParticles"></canvas>
+    
+    <!-- ======= AMBIENT AURA GLOW BACKGROUND (SEAMLESS DIFFUSED LIGHT) ======= -->
+    <div class="absolute top-1/3 left-1/4 w-[30rem] h-[30rem] bg-blue-500/10 rounded-full mix-blend-screen filter blur-[180px] pointer-events-none z-0" aria-hidden="true"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-[32rem] h-[32rem] bg-cyan-400/10 rounded-full mix-blend-screen filter blur-[180px] animate-pulse pointer-events-none z-0" aria-hidden="true"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[34rem] h-[34rem] bg-indigo-500/10 rounded-full mix-blend-screen filter blur-[180px] pointer-events-none z-0" aria-hidden="true"></div>
 
-    <div class="container">
+    <div class="container relative z-10">
       <div class="section-header reveal" data-reveal="fade-up" style="margin-bottom: 48px;">
         <span class="section-label" style="background: rgba(56, 189, 248, 0.15); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.35);">Dampak & Statistik</span>
         <h2 class="section-title" style="color: #FFFFFF;">Eksplorasi Pertumbuhan & Ruang Aman Remaja</h2>
@@ -648,7 +688,10 @@
             <p style="font-size: 1.05rem; font-weight: 800; color: #FFFFFF; margin: 0; line-height: 1.35;">
               "Apa 1 hal kecil yang bikin kamu merasa lebih tenang dan tersenyum hari ini?"
             </p>
-            <span style="background: rgba(129, 140, 248, 0.18); color: #A5B4FC; border: 1px solid rgba(129, 140, 248, 0.35); padding: 4px 12px; border-radius: 99px; font-size: 0.78rem; font-weight: 800; display: inline-block; margin-top: 4px;">💡 Sangat Membantu</span>
+            <span style="background: rgba(129, 140, 248, 0.18); color: #A5B4FC; border: 1px solid rgba(129, 140, 248, 0.35); padding: 4px 12px; border-radius: 99px; font-size: 0.78rem; font-weight: 800; display: inline-flex; align-items: center; gap: 4px; margin-top: 4px;">
+              <span class="material-symbols-rounded" style="font-size: 15px; color: #A5B4FC;">lightbulb</span>
+              <span>Sangat Membantu</span>
+            </span>
           </div>
         </div>
 
@@ -658,24 +701,31 @@
             <p class="stat-lbl-top">RUANG AMAN BERSAMA</p>
             <div class="stat-bignum-wrap">
               <span class="stat-bignum" style="color:#FFFFFF;">8.500<span style="color:#38BDF8;">+</span></span>
-              <span style="font-size: 1.25rem; font-weight: 800; color: #7DD3FC;">Remaja Merasa Terbantu ✨</span>
+              <span style="font-size: 1.25rem; font-weight: 800; color: #7DD3FC; display: inline-flex; align-items: center; gap: 6px;">
+                <span>Remaja Merasa Terbantu</span>
+                <span class="material-symbols-rounded" style="font-size: 20px; color: #38BDF8;">auto_awesome</span>
+              </span>
             </div>
             <p class="stat-subtext" style="max-width: 550px; font-size: 0.95rem; line-height: 1.6; margin-top: 10px;">
               Sebuah rumah digital di mana perasaanmu dihargai sepenuhnya. Tanpa takut dihakimi, tanpa rasa insecure, kamu bebas berdamai dengan hari-harimu.
             </p>
 
             <div class="reward-pills-row" style="margin-top: 24px;">
-              <span class="reward-pill-btn" style="cursor: default; border-color: #38BDF8; color: #7DD3FC; background: rgba(56, 189, 248, 0.12);">
-                <span>🌿 Tanpa Dihakimi</span>
+              <span class="reward-pill-btn" style="cursor: default; border-color: rgba(56, 189, 248, 0.35); color: #7DD3FC; background: rgba(56, 189, 248, 0.12);">
+                <span class="material-symbols-rounded" style="font-size: 16px; color: #38BDF8;">spa</span>
+                <span>Tanpa Dihakimi</span>
               </span>
-              <span class="reward-pill-btn" style="cursor: default; border-color: #818CF8; color: #A5B4FC; background: rgba(129, 140, 248, 0.12);">
-                <span>🕊️ Tempat Curhat Nyaman</span>
+              <span class="reward-pill-btn" style="cursor: default; border-color: rgba(129, 140, 248, 0.35); color: #A5B4FC; background: rgba(129, 140, 248, 0.12);">
+                <span class="material-symbols-rounded" style="font-size: 16px; color: #818CF8;">forum</span>
+                <span>Tempat Curhat Nyaman</span>
               </span>
-              <span class="reward-pill-btn" style="cursor: default; border-color: #60A5FA; color: #93C5FD; background: rgba(96, 165, 250, 0.12);">
-                <span>✨ Bebas Jadi Diri Sendiri</span>
+              <span class="reward-pill-btn" style="cursor: default; border-color: rgba(96, 165, 250, 0.35); color: #93C5FD; background: rgba(96, 165, 250, 0.12);">
+                <span class="material-symbols-rounded" style="font-size: 16px; color: #60A5FA;">self_improvement</span>
+                <span>Bebas Jadi Diri Sendiri</span>
               </span>
-              <span class="reward-pill-btn" style="cursor: default; border-color: #A855F7; color: #D8B4FE; background: rgba(168, 85, 247, 0.12);">
-                <span>💙 Aman & Menenangkan</span>
+              <span class="reward-pill-btn" style="cursor: default; border-color: rgba(168, 85, 247, 0.35); color: #D8B4FE; background: rgba(168, 85, 247, 0.12);">
+                <span class="material-symbols-rounded" style="font-size: 16px; color: #C084FC;">verified_user</span>
+                <span>Aman & Menenangkan</span>
               </span>
             </div>
           </div>
@@ -690,8 +740,26 @@
   </section>
 
   <!-- ======= AKSES BANTUAN & KONTAK DARURAT (CRISIS HELPLINE SECTION) ======= -->
-  <section id="bantuan" class="reveal" data-reveal="fade-up" style="padding: clamp(50px, 7vw, 80px) 0; background: linear-gradient(180deg, #0A1532 0%, #0D1C40 50%, #060D1E 100%); color: #FFFFFF; position: relative; z-index: 2;">
-    <div class="container">
+  <section id="bantuan" class="reveal" data-reveal="fade-up" style="padding: clamp(50px, 7vw, 80px) 0; color: #FFFFFF; position: relative; z-index: 2; overflow: hidden;">
+    <!-- ======= FIREFLIES BACKGROUND (KUNANG-KUNANG ENGINE) ======= -->
+    <div class="fireflies-container" aria-hidden="true">
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+      <div class="firefly"></div>
+    </div>
+    <div class="container" style="position: relative; z-index: 2;">
       <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); backdrop-filter: blur(16px); border-radius: 28px; padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 36px); box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.4);">
         <div style="text-align: center; max-width: 720px; margin: 0 auto 32px;">
           <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 850; text-transform: uppercase; letter-spacing: 1.5px; color: #7EC8E3; background: rgba(126, 200, 227, 0.15); border: 1px solid rgba(126, 200, 227, 0.3); padding: 5px 14px; border-radius: 999px; margin-bottom: 14px;">
@@ -764,26 +832,6 @@
               </button>
             </div>
           </div>
-
-          <!-- Card 4: Into The Light Indonesia -->
-          <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: clamp(18px, 4vw, 24px); transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; justify-content: space-between;" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='rgba(126, 200, 227, 0.4)'; this.style.boxShadow='0 12px 28px -6px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='none'; this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none';">
-            <div>
-              <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(147, 51, 234, 0.2); border: 1px solid rgba(147, 51, 234, 0.4); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
-                <span class="material-symbols-rounded" style="color: #C084FC; font-size: 26px;">support_agent</span>
-              </div>
-              <h3 style="font-size: 1.15rem; font-weight: 800; color: #FFFFFF; margin: 0;">Into The Light</h3>
-              <p style="font-size: 0.85rem; font-weight: 600; color: #C084FC; margin: 4px 0 12px;">Edukasi & Advokasi Pencegahan Bunuh Diri</p>
-              <div style="font-size: 1.1rem; font-weight: 850; color: #FFFFFF; margin-bottom: 18px;">intothelightid.org</div>
-            </div>
-            <div style="display: flex; gap: 8px;">
-              <a href="https://www.intothelightid.org/tentang-bunuh-diri/layanan-konseling/" target="_blank" rel="noopener" style="flex: 1; text-decoration: none; text-align: center; background: #2D5BA8; color: #FFFFFF; font-weight: 750; font-size: 0.88rem; padding: 11px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-                <span class="material-symbols-rounded" style="font-size: 18px;">open_in_new</span> Bantuan
-              </a>
-              <button type="button" onclick="copyEmergencyNumber('https://www.intothelightid.org', 'Website Into The Light')" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #FFFFFF; font-weight: 700; padding: 11px 15px; border-radius: 14px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s;" title="Salin Tautan" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-                <span class="material-symbols-rounded" style="font-size: 18px;">content_copy</span>
-              </button>
-            </div>
-          </div>
         </div>
 
         <!-- Disclaimer Ramah -->
@@ -797,11 +845,25 @@
     </div>
   </section>
 
-  <!-- ======= CTA SECTION ======= -->
-  <section class="cta-banner-section reveal" data-reveal="zoom-in">
-    <div class="cta-banner-bg"></div>
-    <div class="cta-banner-overlay"></div>
-    <div class="cta-banner-content text-center">
+  <!-- ======= CTA MOUNTAIN PARALLAX SECTION ======= -->
+  <section class="cta-mountain-section reveal" data-reveal="zoom-in">
+    <div class="mountain-parallax-container" aria-hidden="true">
+      <!-- Full Moon (Bulan Purnama) in top-right corner -->
+      <div class="full-moon-wrapper">
+        <div class="full-moon">
+          <div class="moon-crater crater-1"></div>
+          <div class="moon-crater crater-2"></div>
+          <div class="moon-crater crater-3"></div>
+          <div class="moon-glow-aura"></div>
+        </div>
+      </div>
+
+      <div class="mountain-layer layer-back"></div>
+      <div class="mountain-layer layer-mid"></div>
+      <div class="mountain-layer layer-front"></div>
+    </div>
+
+    <div class="cta-content cta-banner-content text-center">
       <h2 class="cta-banner-title">Siap mulai perjalanan refleksi dirimu?</h2>
       <p class="cta-banner-subtitle">Kamu tidak harus sempurna. Kamu tidak harus baik-baik saja setiap hari. Yang
         penting, kamu hadir — dan itu sudah cukup.</p>

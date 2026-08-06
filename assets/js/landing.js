@@ -126,8 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }, {
-      rootMargin: '0px 0px -60px 0px', // Trigger slightly before element is in view
-      threshold: 0.15
+      rootMargin: '0px 0px 150px 0px', // Trigger 150px before entering viewport
+      threshold: 0.01
     });
 
     // Observe elements (exclude hero section reveals, as they are triggered by preloader)
@@ -490,4 +490,126 @@ function initCalmParticles() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initCalmParticles();
+});
+
+// ---- Mountain Parallax 3-Layer (Chroma Key Green-Removal & Interaction Engine) ----
+document.addEventListener('DOMContentLoaded', () => {
+  const ctaSection = document.querySelector('.cta-mountain-section');
+  const layerBack = document.querySelector('.layer-back');
+  const layerMid = document.querySelector('.layer-mid');
+  const layerFront = document.querySelector('.layer-front');
+  const fullMoon = document.querySelector('.full-moon-wrapper');
+
+  if (!ctaSection || !layerBack || !layerMid || !layerFront) return;
+
+  // ---- Chroma Key Engine (Remove #05f904 neon green screen & edge fringing) ----
+  function applyChromaKeyToLayer(layer, imgPath) {
+    const img = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.src = imgPath;
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+
+      for (let i = 0; i < data.length; i += 4) {
+        const r = data[i];
+        let g = data[i + 1];
+        const b = data[i + 2];
+        const a = data[i + 3];
+
+        if (a === 0) continue; // Already transparent
+
+        const maxRB = Math.max(r, b);
+
+        // Deteksi warna hijau layar (#05f904) dan tepian green halo
+        if (g > maxRB * 1.02 && (g - maxRB) > 8) {
+          const excess = g - maxRB;
+
+          // Spill Suppression: Netralisir bias hijau menjadi warna gelap/netral alami
+          data[i + 1] = Math.floor(maxRB * 0.95);
+
+          // Chroma Key: Jadikan latar belakang dan tepian hijau ber-gradasi mulus menuju transparan (alpha = 0)
+          if (excess > 12) {
+            const fade = Math.max(0, 1 - ((excess - 12) / 22));
+            data[i + 3] = Math.floor(a * fade);
+          }
+        }
+      }
+
+      ctx.putImageData(imageData, 0, 0);
+      layer.style.backgroundImage = `url("${canvas.toDataURL('image/png')}")`;
+    };
+  }
+
+  // Terapkan chroma key pada ketiga lapisan gambar gunung
+  applyChromaKeyToLayer(layerBack, 'assets/img/mountain-back.png');
+  applyChromaKeyToLayer(layerMid, 'assets/img/mountain-mid.png');
+  applyChromaKeyToLayer(layerFront, 'assets/img/mountain-front.png');
+
+  let mouseX = 0;
+  let mouseY = 0;
+  let targetMouseX = 0;
+  let targetMouseY = 0;
+
+  // Track cursor inside CTA section for dynamic interactive 3D depth
+  ctaSection.addEventListener('mousemove', (e) => {
+    const rect = ctaSection.getBoundingClientRect();
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    targetMouseX = ((e.clientX - rect.left) - centerX) / centerX;
+    targetMouseY = ((e.clientY - rect.top) - centerY) / centerY;
+  });
+
+  ctaSection.addEventListener('mouseleave', () => {
+    targetMouseX = 0;
+    targetMouseY = 0;
+  });
+
+  // Animation loop combining Scroll Parallax + Mouse Parallax
+  function updateParallax() {
+    const rect = ctaSection.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+
+    // Check if CTA section is inside viewport
+    if (rect.top <= viewportHeight && rect.bottom >= 0) {
+      // Normalisasi posisi scroll section di kisaran -0.5 hingga +0.5 (tepat bernilai 0 saat di tengah layar)
+      const scrollProgress = ((viewportHeight - rect.top) / (viewportHeight + rect.height)) - 0.5;
+
+      // Smooth cursor interpolation (lerp)
+      mouseX += (targetMouseX - mouseX) * 0.08;
+      mouseY += (targetMouseY - mouseY) * 0.08;
+
+      // Full Moon (Celestial Parallax - furthest depth movement in the night sky)
+      if (fullMoon) {
+        const moonY = (scrollProgress * -65) + (mouseY * 18);
+        const moonX = mouseX * -30;
+        fullMoon.style.transform = `translate3d(${moonX}px, ${moonY}px, 0)`;
+      }
+
+      // Layer Back (Bergerak vertikal dengan aman dalam rentang +-25px tanpa terperosok ke luar batas layar)
+      const backY = (scrollProgress * -50) + (mouseY * 15);
+      const backX = mouseX * -25;
+      layerBack.style.transform = `translate3d(${backX}px, ${backY}px, 0) scale(1.04)`;
+
+      // Layer Mid (Medium depth shift)
+      const midY = (scrollProgress * -25) + (mouseY * 8);
+      const midX = mouseX * -15;
+      layerMid.style.transform = `translate3d(${midX}px, ${midY}px, 0) scale(1.02)`;
+
+      // Layer Front (Foreground layer, bergemang halus di dasar)
+      const frontY = (scrollProgress * -10) + (mouseY * 4);
+      const frontX = mouseX * -6;
+      layerFront.style.transform = `translate3d(${frontX}px, ${frontY}px, 0) scale(1.01)`;
+    }
+
+    requestAnimationFrame(updateParallax);
+  }
+
+  updateParallax();
 });

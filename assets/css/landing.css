@@ -1011,6 +1011,19 @@ body.preloader-active {
 /* ---- Stats Section ---- */
 .stats-section {
   padding: var(--space-3xl) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  position: relative;
+}
+
+.stats-section::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.45), transparent);
+  pointer-events: none;
 }
 
 .stats-grid {
@@ -1052,7 +1065,9 @@ body.preloader-active {
 /* ---- Features Section ---- */
 .features-section {
   padding: var(--space-3xl) 0;
-  background: var(--bg-section-dark);
+  background: transparent !important;
+  border-top: none !important;
+  border-bottom: none !important;
 }
 
 .section-header {
@@ -1123,15 +1138,22 @@ body.preloader-active {
 }
 
 .feature-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-md);
-  background: rgba(126, 200, 227, 0.15);
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.08) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
   margin-bottom: var(--space-lg);
+}
+
+.feature-icon span.material-symbols-rounded {
+  color: #FFFFFF !important;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 2px 4px rgba(0, 0, 0, 0.4);
+  font-size: 28px !important;
 }
 
 .feature-title {
@@ -1148,7 +1170,109 @@ body.preloader-active {
 
 /* ---- How It Works ---- */
 .how-section {
+  position: relative;
   padding: var(--space-3xl) 0;
+}
+
+.birds-ornament-container {
+  position: absolute;
+  top: 20px;
+  right: 5%;
+  width: 260px;
+  height: 240px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+  filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.45));
+  animation: birdsDrift 16s ease-in-out infinite alternate;
+}
+
+.birds-ornament-container.birds-left {
+  left: 5%;
+  right: auto;
+}
+
+.birds-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.bird-path {
+  transform-origin: center;
+  will-change: transform;
+}
+
+.bird-1 {
+  animation: birdSoar1 6.5s ease-in-out infinite alternate;
+}
+
+.bird-2 {
+  animation: birdSoar2 8.5s ease-in-out infinite alternate;
+  animation-delay: 1.2s;
+}
+
+.bird-3 {
+  animation: birdSoar3 5.5s ease-in-out infinite alternate;
+  animation-delay: 2.2s;
+}
+
+@keyframes birdsDrift {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-18px, -22px, 0) rotate(-2deg);
+  }
+  100% {
+    transform: translate3d(14px, -38px, 0) rotate(2.5deg);
+  }
+}
+
+@keyframes birdSoar1 {
+  0% {
+    transform: scale(1) translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.06, 0.86) translateY(-9px) rotate(-3deg);
+  }
+  100% {
+    transform: scale(0.95, 1.05) translateY(7px) rotate(2deg);
+  }
+}
+
+@keyframes birdSoar2 {
+  0% {
+    transform: scale(0.8) translate(50px, -10px) rotate(0deg);
+  }
+  50% {
+    transform: scale(0.84, 0.72) translate(48px, -19px) rotate(-4deg);
+  }
+  100% {
+    transform: scale(0.76, 0.85) translate(53px, -5px) rotate(3deg);
+  }
+}
+
+@keyframes birdSoar3 {
+  0% {
+    transform: scale(1) translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.09, 0.81) translateY(-11px) rotate(4deg);
+  }
+  100% {
+    transform: scale(0.91, 1.09) translateY(6px) rotate(-2deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .birds-ornament-container {
+    top: 10px;
+    right: 2%;
+    width: 170px;
+    height: 160px;
+    opacity: 0.22;
+  }
 }
 
 .steps-container {
@@ -1210,24 +1334,14 @@ body.preloader-active {
 /* ---- Teman Intro Section (Premium Layered Gradient — No JS Canvas) ---- */
 .teman-section {
   position: relative;
-  background:
-    radial-gradient(ellipse 60% 70% at 18% 45%, rgba(56, 189, 248, 0.13) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 60% at 80% 75%, rgba(129, 140, 248, 0.10) 0%, transparent 65%),
-    radial-gradient(ellipse 40% 50% at 55% 20%, rgba(125, 211, 252, 0.06) 0%, transparent 60%),
-    linear-gradient(180deg, #060D1E 0%, #0B1736 40%, #0E1F45 70%, #0A1532 100%);
-  padding: var(--space-3xl) 0;
-  overflow: hidden;
+  background: transparent !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  padding: clamp(60px, 8vw, 100px) 0;
 }
 
-/* Soft ambient overlay for extra depth */
 .teman-section-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 15% 50%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
-    radial-gradient(circle at 85% 30%, rgba(129, 140, 248, 0.06) 0%, transparent 40%);
-  z-index: 0;
-  pointer-events: none;
+  display: none;
 }
 
 .teman-section .container {
@@ -1255,17 +1369,27 @@ body.preloader-active {
 }
 
 .teman-avatar {
-  width: 200px;
-  height: 200px;
+  width: 260px;
+  height: 260px;
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, rgba(126, 200, 227, 0.2), rgba(45, 91, 168, 0.3));
+  background: linear-gradient(135deg, rgba(126, 200, 227, 0.22), rgba(45, 91, 168, 0.35));
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 5rem;
   margin: 0 auto;
   box-shadow: var(--shadow-glow);
   position: relative;
+  padding: 0;
+}
+
+.teman-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.5));
+  position: relative;
+  z-index: 2;
+  transform: scale(1.4);
 }
 
 .teman-avatar::before {
@@ -1313,6 +1437,11 @@ body.preloader-active {
   gap: var(--space-md);
   font-size: 0.9375rem;
   color: rgba(255, 255, 255, 0.9);
+}
+
+.teman-feature-item span.material-symbols-rounded {
+  color: #38BDF8 !important;
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
 }
 
 /* ---- CTA Banner Section ---- */
@@ -1403,7 +1532,11 @@ body.preloader-active {
 
 /* ---- Landing-specific footer adjustments ---- */
 .landing-page .footer {
-  background: rgba(15, 23, 42, 0.8);
+  background: #0B1528 !important;
+  border-top: none !important;
+  box-shadow: 0 -30px 50px rgba(11, 21, 40, 0.98);
+  position: relative;
+  z-index: 5;
 }
 
 /* Landing page has no bottom nav, so move chatbot button down */
@@ -1415,10 +1548,9 @@ body.preloader-active {
    BENTO STATS DASHBOARD & AMBIENT PARTICLE BACKGROUND (OCEAN MIDNIGHT GLASS)
    ========================================================================== */
 .bento-stats-section {
-  padding: var(--space-3xl) 0;
+  padding: clamp(60px, 8vw, 110px) 0;
   position: relative;
-  overflow: hidden;
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0) 0%, rgba(10, 17, 40, 0.95) 15%, rgba(10, 17, 40, 1) 100%);
+  background: transparent !important;
 }
 
 #calmParticles {
@@ -1432,30 +1564,9 @@ body.preloader-active {
   opacity: 0.85;
 }
 
-.bento-stats-section::before {
-  content: '';
-  position: absolute;
-  top: 30%;
-  right: -10%;
-  width: 700px;
-  height: 700px;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 65%);
-  filter: blur(80px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.bento-stats-section::after {
-  content: '';
-  position: absolute;
-  bottom: 10%;
-  left: -10%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(129, 140, 248, 0.1) 0%, transparent 65%);
-  filter: blur(90px);
-  pointer-events: none;
-  z-index: 0;
+#weekly-mood-summary-section:empty,
+.weekly-mood-summary-section:empty {
+  display: none !important;
 }
 
 .bento-stats-grid {
@@ -1468,16 +1579,16 @@ body.preloader-active {
 
 /* Midnight Ocean Glass Card Base */
 .stat-card-emerald, .stat-card-ocean {
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.9) 100%);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1.5px solid rgba(56, 189, 248, 0.2);
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
   border-radius: 28px;
   padding: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.12);
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
@@ -1485,8 +1596,9 @@ body.preloader-active {
 
 .stat-card-emerald:hover, .stat-card-ocean:hover {
   transform: translateY(-6px);
-  border-color: rgba(56, 189, 248, 0.55);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.55), 0 0 35px rgba(56, 189, 248, 0.15);
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(56, 189, 248, 0.45) !important;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35), 0 0 30px rgba(56, 189, 248, 0.15);
 }
 
 .stat-span-2 {
@@ -1571,7 +1683,7 @@ body.preloader-active {
 
 .stat-bar-bar {
   width: 100%;
-  background: linear-gradient(180deg, #38BDF8 0%, #3B82F6 50%, #1E293B 100%);
+  background: linear-gradient(180deg, #38BDF8 0%, #3B82F6 50%, rgba(30, 58, 110, 0.6) 100%);
   border-radius: 8px 8px 4px 4px;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1596,8 +1708,10 @@ body.preloader-active {
 
 /* Dark Inner Contrast Card */
 .dark-inner-card {
-  background: rgba(8, 14, 26, 0.75);
-  border: 1px solid rgba(56, 189, 248, 0.18);
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 20px;
   padding: 20px 22px;
   margin-top: 22px;
@@ -1605,7 +1719,7 @@ body.preloader-active {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.05);
 }
 
 .inner-sub {
@@ -1626,10 +1740,10 @@ body.preloader-active {
 }
 
 .reward-pill-btn {
-  background: rgba(30, 41, 59, 0.6);
-  border: 1.5px solid rgba(56, 189, 248, 0.25);
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
   border-radius: 99px;
-  padding: 9px 20px;
+  padding: 8px 18px;
   font-size: 0.88rem;
   font-weight: 780;
   color: #E2E8F0;
@@ -1637,6 +1751,8 @@ body.preloader-active {
   transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
+  gap: 6px;
+}
   gap: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
@@ -2004,9 +2120,10 @@ body.preloader-active {
   }
 
   .teman-avatar {
-    width: 120px;
-    height: 120px;
+    width: 180px;
+    height: 180px;
     margin: 0 auto;
+    padding: 0;
   }
 
   .teman-avatar .material-symbols-rounded {
@@ -2200,55 +2317,56 @@ body.preloader-active {
 
 .cloud {
   position: absolute;
-  filter: blur(12px);
+  filter: blur(10px);
   will-change: transform;
+  opacity: 0.85;
 }
 
 .cloud-1 {
-  top: 8%;
-  left: -2%;
-  width: 320px;
-  animation: floatDrift1 22s ease-in-out infinite alternate;
+  top: 6%;
+  left: -8%;
+  width: 360px;
+  animation: cloudFloatX1 35s ease-in-out infinite alternate;
 }
 
 .cloud-2 {
-  top: 18%;
-  right: -3%;
-  width: 380px;
-  animation: floatDrift2 26s ease-in-out infinite alternate;
+  top: 15%;
+  right: -5%;
+  width: 420px;
+  animation: cloudFloatX2 40s ease-in-out infinite alternate;
 }
 
 .cloud-3 {
   bottom: 12%;
-  left: 18%;
-  width: 280px;
-  animation: floatDrift3 24s ease-in-out infinite alternate;
+  left: 14%;
+  width: 300px;
+  animation: cloudFloatX3 36s ease-in-out infinite alternate;
 }
 
-@keyframes floatDrift1 {
+@keyframes cloudFloatX1 {
   0% {
-    transform: translate(0, 0) scale(1);
+    transform: translate3d(-30px, 0, 0) scale(1);
   }
   100% {
-    transform: translate(40px, -15px) scale(1.05);
-  }
-}
-
-@keyframes floatDrift2 {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-  100% {
-    transform: translate(-45px, 20px) scale(1.08);
+    transform: translate3d(130px, -8px, 0) scale(1.06);
   }
 }
 
-@keyframes floatDrift3 {
+@keyframes cloudFloatX2 {
   0% {
-    transform: translate(0, 0) scale(1);
+    transform: translate3d(50px, 0, 0) scale(1.04);
   }
   100% {
-    transform: translate(35px, 25px) scale(1.04);
+    transform: translate3d(-140px, 12px, 0) scale(1);
+  }
+}
+
+@keyframes cloudFloatX3 {
+  0% {
+    transform: translate3d(-50px, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(100px, 10px, 0) scale(1.04);
   }
 }
 
@@ -2265,4 +2383,268 @@ body.preloader-active {
     width: 200px;
     bottom: 10%;
   }
+}
+
+/* =============================================
+   Seamless Background Color Flow & Mountain Parallax
+   ============================================= */
+body.landing-page,
+body {
+  background: linear-gradient(
+    180deg,
+    #5B8FD4 0%,
+    #4E82C7 14%,
+    #3D6BAF 28%,
+    #2E568E 42%,
+    #214272 56%,
+    #162C50 70%,
+    #0E1E38 85%,
+    #0B1528 100%
+  ) !important;
+  min-height: 100vh;
+  color: #ffffff;
+}
+
+/* Master seamless override to prevent any abrupt horizontal divider lines or sudden color jumps */
+.landing-page section {
+  background: transparent !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.landing-page .hero,
+.features-section,
+.how-section,
+.teman-section,
+.bento-stats-section,
+.weekly-mood-summary-section {
+  background: transparent !important;
+  animation: none !important;
+}
+
+.cta-mountain-section {
+  position: relative;
+  padding: 140px var(--space-lg) 180px;
+  background: transparent !important;
+  border-bottom: none !important;
+  min-height: 650px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mountain-parallax-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* =============================================
+   Full Moon (Bulan Purnama in Top Right Corner)
+   ============================================= */
+.full-moon-wrapper {
+  position: absolute;
+  top: 75px;
+  right: 12%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.full-moon {
+  position: relative;
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #FFFFFF 0%, #F0F9FF 35%, #E0F2FE 70%, #BAE6FD 100%);
+  box-shadow:
+    0 0 25px rgba(255, 255, 255, 0.95),
+    0 0 50px rgba(186, 230, 253, 0.75),
+    0 0 85px rgba(56, 189, 248, 0.45),
+    0 0 140px rgba(56, 189, 248, 0.25);
+  animation: moonPulse 6s ease-in-out infinite alternate;
+}
+
+.moon-crater {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(186, 230, 253, 0.35);
+  box-shadow: inset 1px 1px 3px rgba(14, 116, 144, 0.25);
+}
+
+.moon-crater.crater-1 {
+  top: 22%;
+  left: 22%;
+  width: 15px;
+  height: 15px;
+  opacity: 0.5;
+}
+
+.moon-crater.crater-2 {
+  top: 55%;
+  left: 45%;
+  width: 22px;
+  height: 22px;
+  opacity: 0.4;
+}
+
+.moon-crater.crater-3 {
+  top: 32%;
+  left: 62%;
+  width: 12px;
+  height: 12px;
+  opacity: 0.45;
+}
+
+.moon-glow-aura {
+  position: absolute;
+  inset: -25px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(224, 242, 254, 0.35) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+@keyframes moonPulse {
+  0% {
+    box-shadow:
+      0 0 25px rgba(255, 255, 255, 0.9),
+      0 0 50px rgba(186, 230, 253, 0.7),
+      0 0 85px rgba(56, 189, 248, 0.45),
+      0 0 140px rgba(56, 189, 248, 0.25);
+    transform: translateY(0);
+  }
+  100% {
+    box-shadow:
+      0 0 35px rgba(255, 255, 255, 1),
+      0 0 65px rgba(186, 230, 253, 0.88),
+      0 0 110px rgba(56, 189, 248, 0.6),
+      0 0 170px rgba(56, 189, 248, 0.35);
+    transform: translateY(-4px);
+  }
+}
+
+@media (max-width: 768px) {
+  .full-moon-wrapper {
+    top: 40px;
+    right: 8%;
+  }
+  .full-moon {
+    width: 60px;
+    height: 60px;
+  }
+  .moon-crater.crater-1 { width: 10px; height: 10px; }
+  .moon-crater.crater-2 { width: 14px; height: 14px; }
+  .moon-crater.crater-3 { width: 8px; height: 8px; }
+}
+
+.mountain-layer {
+  position: absolute;
+  bottom: -20px;
+  left: -3%;
+  width: 106%;
+  height: calc(100% + 40px);
+  min-height: 720px;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: cover;
+  will-change: transform;
+  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.mountain-layer.layer-back {
+  background-image: url('../img/mountain-back.png');
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
+  bottom: -30px;
+  z-index: 1;
+  opacity: 0.95;
+}
+
+.mountain-layer.layer-mid {
+  background-image: url('../img/mountain-mid.png');
+  bottom: -15px;
+  z-index: 2;
+  height: 85%;
+  min-height: 612px;
+  background-repeat: repeat-x;
+  background-position: bottom center;
+  background-size: auto 100%;
+}
+
+.mountain-layer.layer-front {
+  background-image: url('../img/mountain-front.png');
+  bottom: -10px;
+  z-index: 3;
+}
+
+.cta-content {
+  position: relative;
+  z-index: 10;
+}
+
+/* =============================================
+   Fireflies Animation Engine (Kunang-Kunang in Emergency Section)
+   ============================================= */
+#bantuan .container {
+  position: relative;
+  z-index: 10 !important;
+}
+
+.fireflies-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.firefly {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #FDF500;
+  box-shadow: 0 0 10px #FDF500, 0 0 20px #FFD700, 0 0 35px #96E6A1;
+  opacity: 0;
+  animation: fireflyGlow 4s ease-in-out infinite alternate, fireflyDrift 15s ease-in-out infinite;
+}
+
+/* Positioned exclusively along the outer left and right flanks so they never cross or float inside the main card area */
+.firefly:nth-child(1)  { top: 15%; left: 8%; animation-duration: 3.2s, 14s; animation-delay: 0.1s, 0s; }
+.firefly:nth-child(2)  { top: 25%; left: 86%; animation-duration: 4.1s, 16s; animation-delay: 0.7s, 2s; }
+.firefly:nth-child(3)  { top: 70%; left: 6%; animation-duration: 3.5s, 18s; animation-delay: 1.2s, 1s; }
+.firefly:nth-child(4)  { top: 40%; left: 91%; animation-duration: 2.8s, 12s; animation-delay: 0.3s, 3s; }
+.firefly:nth-child(5)  { top: 85%; left: 84%; animation-duration: 4.5s, 19s; animation-delay: 1.5s, 0.5s; }
+.firefly:nth-child(6)  { top: 10%; left: 5%; animation-duration: 3.8s, 15s; animation-delay: 0.9s, 4s; }
+.firefly:nth-child(7)  { top: 60%; left: 93%; animation-duration: 3.1s, 17s; animation-delay: 2.1s, 1.5s; }
+.firefly:nth-child(8)  { top: 50%; left: 10%; animation-duration: 4.2s, 14s; animation-delay: 1.8s, 2.5s; }
+.firefly:nth-child(9)  { top: 80%; left: 7%; animation-duration: 3.4s, 16s; animation-delay: 0.5s, 3.5s; }
+.firefly:nth-child(10) { top: 30%; left: 89%; animation-duration: 4.0s, 13s; animation-delay: 2.4s, 1.2s; }
+.firefly:nth-child(11) { top: 20%; left: 4%; animation-duration: 3.6s, 18s; animation-delay: 1.1s, 0.8s; }
+.firefly:nth-child(12) { top: 65%; left: 87%; animation-duration: 2.9s, 15s; animation-delay: 0.4s, 2.2s; }
+.firefly:nth-child(13) { top: 75%; left: 95%; animation-duration: 4.3s, 20s; animation-delay: 1.9s, 4.2s; }
+.firefly:nth-child(14) { top: 45%; left: 94%; animation-duration: 3.7s, 16s; animation-delay: 2.7s, 1.7s; }
+.firefly:nth-child(15) { top: 90%; left: 9%; animation-duration: 3.3s, 14s; animation-delay: 0.8s, 2.9s; }
+
+@keyframes fireflyGlow {
+  0%   { opacity: 0.15; transform: scale(0.6); }
+  50%  { opacity: 1;    transform: scale(1.35); }
+  100% { opacity: 0.25; transform: scale(0.8); }
+}
+
+@keyframes fireflyDrift {
+  0%   { transform: translate3d(0, 0, 0); }
+  25%  { transform: translate3d(15px, -35px, 0); }
+  50%  { transform: translate3d(-10px, -60px, 0); }
+  75%  { transform: translate3d(-18px, -25px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
