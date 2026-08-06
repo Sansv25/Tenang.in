@@ -115,25 +115,35 @@ document.addEventListener('DOMContentLoaded', () => {
     statElements.forEach(el => statsObserver.observe(el));
   }
 
-  // ---- Vanilla Scroll Reveal Engine ----
-  const revealElements = document.querySelectorAll('.reveal');
-  if (revealElements.length > 0) {
-    const revealObserver = new IntersectionObserver((entries) => {
+  // ---- Custom AOS (Animate On Scroll) Pure Vanilla Engine ----
+  const aosElements = document.querySelectorAll('[data-aos], .reveal');
+  if (aosElements.length > 0) {
+    const aosObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          revealObserver.unobserve(entry.target);
+          const el = entry.target;
+          const delay = el.getAttribute('data-aos-delay') || el.style.getPropertyValue('--reveal-delay');
+          const delayMs = delay ? parseInt(String(delay).replace('ms', ''), 10) : 0;
+
+          if (delayMs > 0) {
+            el.style.transitionDelay = `${delayMs}ms`;
+            setTimeout(() => {
+              el.classList.add('aos-animate', 'active');
+            }, delayMs);
+          } else {
+            el.classList.add('aos-animate', 'active');
+          }
+          aosObserver.unobserve(el);
         }
       });
     }, {
-      rootMargin: '0px 0px 150px 0px', // Trigger 150px before entering viewport
-      threshold: 0.01
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.05
     });
 
-    // Observe elements (exclude hero section reveals, as they are triggered by preloader)
-    revealElements.forEach(el => {
+    aosElements.forEach(el => {
       if (!el.closest('#hero')) {
-        revealObserver.observe(el);
+        aosObserver.observe(el);
       }
     });
   }
@@ -488,8 +498,163 @@ function initCalmParticles() {
   animate();
 }
 
+// ---- Natural Serpentine Aurora Ribbon Arc & Twinkling Stars Canvas Engine ----
+function initAuroraCanvas() {
+  const canvas = document.getElementById('auroraCanvas');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let width, height;
+
+  // Star Particles (Minimal & Elegant)
+  const stars = [];
+  const numStars = 45;
+
+  function resize() {
+    const parent = canvas.parentElement;
+    width = parent ? parent.offsetWidth : window.innerWidth;
+    height = parent ? parent.offsetHeight : 600;
+    canvas.width = width;
+    canvas.height = height;
+
+    stars.length = 0;
+    for (let i = 0; i < numStars; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.3 + 0.5,
+        alpha: Math.random(),
+        speed: Math.random() * 0.02 + 0.008,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  // 2 Natural Asynchronous Auroral Arcs (Well-Separated Vertical Distance)
+  const arcs = [
+    {
+      // Primary Upper Snake Ribbon (Bright Glowing Base -> Thin Upward Shaft)
+      yBaseRatio: 0.32,
+      freqX: 0.0014,
+      freqX2: 0.0031,
+      phaseShift: 0,
+      ampY: 75,
+      ampY2: 38,
+      speed: 0.0006,
+      rayHeightUp: 170,
+      rayHeightDown: 30,
+      alphaScale: 0.95,
+      rayFreq1: 0.05,
+      rayFreq2: 0.095,
+      colorStops: [
+        { stop: 0.0, color: 'rgba(0, 0, 0, 0)' },
+        { stop: 0.1, color: 'rgba(16, 185, 129, 0.25)' },  // Soft Downward Bleed
+        { stop: 0.22, color: 'rgba(0, 245, 212, 0.98)' }, // Sharp Peak Bright Base Edge
+        { stop: 0.45, color: 'rgba(56, 189, 248, 0.55)' }, // Mid Shaft - Thinner Cyan
+        { stop: 0.68, color: 'rgba(168, 85, 247, 0.28)' }, // Upper Shaft - Very Thin Violet
+        { stop: 0.88, color: 'rgba(236, 72, 153, 0.08)' },  // Top Tips - Faint Whisper Pink
+        { stop: 1.0, color: 'rgba(0, 0, 0, 0)' }           // Space Dissipation
+      ]
+    },
+    {
+      // Secondary Lower Soft Ribbon (Shifted Lower Down for Wide Distance)
+      yBaseRatio: 0.64,
+      freqX: 0.0026,
+      freqX2: 0.0046,
+      phaseShift: Math.PI * 0.75,
+      ampY: 55,
+      ampY2: 25,
+      speed: -0.00045,
+      rayHeightUp: 125,
+      rayHeightDown: 20,
+      alphaScale: 0.65,
+      rayFreq1: 0.038,
+      rayFreq2: 0.072,
+      colorStops: [
+        { stop: 0.0, color: 'rgba(0, 0, 0, 0)' },
+        { stop: 0.12, color: 'rgba(14, 165, 233, 0.18)' },
+        { stop: 0.25, color: 'rgba(56, 189, 248, 0.90)' }, // Peak Base Edge
+        { stop: 0.5, color: 'rgba(99, 102, 241, 0.42)' },  // Thinner Mid Shaft
+        { stop: 0.75, color: 'rgba(168, 85, 247, 0.16)' }, // Faint Upper Tips
+        { stop: 0.92, color: 'rgba(192, 132, 252, 0.05)' },// Mist Top Fade
+        { stop: 1.0, color: 'rgba(0, 0, 0, 0)' }
+      ]
+    }
+  ];
+
+  let time = 0;
+
+  function draw() {
+    time += 1;
+    ctx.clearRect(0, 0, width, height);
+
+    // 1. Draw Subtle Twinkling Stars
+    for (let i = 0; i < stars.length; i++) {
+      const s = stars[i];
+      s.phase += s.speed;
+      const currentAlpha = 0.15 + (Math.sin(s.phase) + 1) * 0.35;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${currentAlpha})`;
+      ctx.shadowBlur = 4;
+      ctx.shadowColor = 'rgba(255, 255, 255, 0.7)';
+      ctx.fill();
+      ctx.restore();
+    }
+
+    // 2. Draw Natural Serpentine Ribbon Arcs with Vertical Rays Pulled Up & Down
+    ctx.save();
+    ctx.globalCompositeOperation = 'screen';
+
+    arcs.forEach(arc => {
+      const step = 2.5; // Narrow step for sharp combed vertical ray filaments
+
+      // Asynchronous Spine position calculator for organic non-parallel snake curves
+      function getSpineY(x) {
+        return height * arc.yBaseRatio +
+               Math.sin(x * arc.freqX + time * arc.speed * 10 + arc.phaseShift) * arc.ampY +
+               Math.cos(x * arc.freqX2 - time * arc.speed * 8 + arc.phaseShift * 1.5) * arc.ampY2;
+      }
+
+      for (let x = -20; x < width + 20; x += step) {
+        const yBase = getSpineY(x);
+
+        // Dynamic vertical ray height pulled UP & bleeding DOWN
+        const rayUp = arc.rayHeightUp + Math.sin(x * arc.rayFreq1 + time * 0.02) * 55 + Math.cos(x * arc.rayFreq2 - time * 0.015) * 35;
+        const rayDown = arc.rayHeightDown + Math.sin(x * 0.07 - time * 0.01) * 18;
+
+        // Combed vertical ray filament intensity variation
+        const rayAlpha = (0.35 + 0.65 * Math.pow(Math.sin(x * 0.065 + time * 0.025), 2)) * arc.alphaScale;
+
+        // Linear gradient drawn STRICTLY VERTICAL along Y-axis (from bottom to top)
+        const gradient = ctx.createLinearGradient(x, yBase + rayDown, x, yBase - rayUp);
+        arc.colorStops.forEach(cs => {
+          gradient.addColorStop(cs.stop, cs.color);
+        });
+
+        ctx.save();
+        ctx.fillStyle = gradient;
+        ctx.globalAlpha = rayAlpha;
+        ctx.fillRect(x - step / 2, yBase - rayUp, step + 0.8, rayUp + rayDown);
+        ctx.restore();
+      }
+    });
+
+    ctx.restore();
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initCalmParticles();
+  initAuroraCanvas();
 });
 
 // ---- Mountain Parallax 3-Layer (Chroma Key Green-Removal & Interaction Engine) ----
@@ -557,19 +722,20 @@ document.addEventListener('DOMContentLoaded', () => {
   let targetMouseX = 0;
   let targetMouseY = 0;
 
-  // Track cursor inside CTA section for dynamic interactive 3D depth
-  ctaSection.addEventListener('mousemove', (e) => {
+  // Track cursor movement for dynamic interactive 3D parallax depth
+  window.addEventListener('mousemove', (e) => {
     const rect = ctaSection.getBoundingClientRect();
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    targetMouseX = ((e.clientX - rect.left) - centerX) / centerX;
-    targetMouseY = ((e.clientY - rect.top) - centerY) / centerY;
+    if (rect.top <= window.innerHeight && rect.bottom >= 0) {
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      targetMouseX = (e.clientX - centerX) / centerX;
+      targetMouseY = (e.clientY - centerY) / centerY;
+    }
   });
 
-  ctaSection.addEventListener('mouseleave', () => {
-    targetMouseX = 0;
-    targetMouseY = 0;
-  });
+  let backAosOffset = 120;
+  let midAosOffset = 120;
+  let frontAosOffset = 120;
 
   // Animation loop combining Scroll Parallax + Mouse Parallax
   function updateParallax() {
@@ -585,6 +751,15 @@ document.addEventListener('DOMContentLoaded', () => {
       mouseX += (targetMouseX - mouseX) * 0.08;
       mouseY += (targetMouseY - mouseY) * 0.08;
 
+      // Lerp AOS Y entrance offsets for each mountain layer (120px -> 0px)
+      const backTarget = (layerBack.classList.contains('aos-animate') || layerBack.classList.contains('active')) ? 0 : 120;
+      const midTarget = (layerMid.classList.contains('aos-animate') || layerMid.classList.contains('active')) ? 0 : 120;
+      const frontTarget = (layerFront.classList.contains('aos-animate') || layerFront.classList.contains('active')) ? 0 : 120;
+
+      backAosOffset += (backTarget - backAosOffset) * 0.05;
+      midAosOffset += (midTarget - midAosOffset) * 0.05;
+      frontAosOffset += (frontTarget - frontAosOffset) * 0.05;
+
       // Full Moon (Celestial Parallax - furthest depth movement in the night sky)
       if (fullMoon) {
         const moonY = (scrollProgress * -65) + (mouseY * 18);
@@ -593,17 +768,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Layer Back (Bergerak vertikal dengan aman dalam rentang +-25px tanpa terperosok ke luar batas layar)
-      const backY = (scrollProgress * -50) + (mouseY * 15);
+      const backY = (scrollProgress * -50) + (mouseY * 15) + backAosOffset;
       const backX = mouseX * -25;
       layerBack.style.transform = `translate3d(${backX}px, ${backY}px, 0) scale(1.04)`;
 
       // Layer Mid (Medium depth shift)
-      const midY = (scrollProgress * -25) + (mouseY * 8);
+      const midY = (scrollProgress * -25) + (mouseY * 8) + midAosOffset;
       const midX = mouseX * -15;
       layerMid.style.transform = `translate3d(${midX}px, ${midY}px, 0) scale(1.02)`;
 
       // Layer Front (Foreground layer, bergemang halus di dasar)
-      const frontY = (scrollProgress * -10) + (mouseY * 4);
+      const frontY = (scrollProgress * -10) + (mouseY * 4) + frontAosOffset;
       const frontX = mouseX * -6;
       layerFront.style.transform = `translate3d(${frontX}px, ${frontY}px, 0) scale(1.01)`;
     }

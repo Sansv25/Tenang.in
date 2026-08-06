@@ -414,15 +414,15 @@
   <section class="stats-section">
     <div class="container">
       <div class="stats-grid">
-        <div class="stat-item reveal" data-reveal="fade-up" style="--reveal-delay: 100ms;">
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
           <div class="stat-value"><span data-count="1500">0</span><span class="stat-suffix">+</span></div>
           <div class="stat-desc">Remaja sudah mulai refleksi diri</div>
         </div>
-        <div class="stat-item reveal" data-reveal="fade-up" style="--reveal-delay: 250ms;">
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="250">
           <div class="stat-value"><span data-count="5000">0</span><span class="stat-suffix">+</span></div>
           <div class="stat-desc">Mood check-in tercatat</div>
         </div>
-        <div class="stat-item reveal" data-reveal="fade-up" style="--reveal-delay: 400ms;">
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
           <div class="stat-value"><span data-count="100">0</span><span class="stat-suffix">%</span></div>
           <div class="stat-desc">Privat & gratis selamanya</div>
         </div>
@@ -434,15 +434,18 @@
 
   <!-- ======= FEATURES SECTION ======= -->
   <section class="features-section" id="features">
-    <div class="container">
-      <div class="section-header reveal" data-reveal="fade-up">
-        <span class="section-label">Fitur Unggulan</span>
-        <h2 class="section-title">Semua yang kamu butuhkan untuk refleksi diri</h2>
-        <p class="section-subtitle">Dirancang khusus untuk remaja Indonesia, dengan pendekatan yang hangat dan aman.</p>
+    <!-- Realistic Aurora Curtains & Twinkling Stars Canvas -->
+    <canvas id="auroraCanvas" class="aurora-canvas" aria-hidden="true"></canvas>
+
+    <div class="container relative z-10">
+      <div class="section-header">
+        <span class="section-label" data-aos="fade-down" data-aos-delay="50">Fitur Unggulan</span>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="150">Semua yang kamu butuhkan untuk refleksi diri</h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="250">Dirancang khusus untuk remaja Indonesia, dengan pendekatan yang hangat dan aman.</p>
       </div>
 
       <div class="features-grid">
-        <div class="feature-card reveal" data-reveal="fade-up" style="--reveal-delay: 100ms;">
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
           <div class="feature-icon">
             <span class="material-symbols-rounded text-primary">sentiment_satisfied</span>
           </div>
@@ -451,7 +454,7 @@
             visual yang mudah dipahami.</p>
         </div>
 
-        <div class="feature-card reveal" data-reveal="fade-up" style="--reveal-delay: 200ms;">
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
           <div class="feature-icon">
             <span class="material-symbols-rounded text-primary">edit_note</span>
           </div>
@@ -460,7 +463,7 @@
             hari ini.</p>
         </div>
 
-        <div class="feature-card reveal" data-reveal="fade-up" style="--reveal-delay: 300ms;">
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
           <div class="feature-icon">
             <span class="material-symbols-rounded text-primary">psychology</span>
           </div>
@@ -469,7 +472,7 @@
             personal.</p>
         </div>
 
-        <div class="feature-card reveal" data-reveal="fade-up" style="--reveal-delay: 100ms;">
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
           <div class="feature-icon">
             <span class="material-symbols-rounded text-primary">smart_toy</span>
           </div>
@@ -478,7 +481,7 @@
             bicara yang aman.</p>
         </div>
 
-        <div class="feature-card reveal" data-reveal="fade-up" style="--reveal-delay: 200ms;">
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
           <div class="feature-icon">
             <span class="material-symbols-rounded text-primary">bar_chart</span>
           </div>
@@ -487,7 +490,7 @@
             data mood-mu.</p>
         </div>
 
-        <div class="feature-card reveal" data-reveal="fade-up" style="--reveal-delay: 300ms;">
+        <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
           <div class="feature-icon">
             <span class="material-symbols-rounded text-primary">verified_user</span>
           </div>
@@ -522,25 +525,25 @@
     </div>
 
     <div class="container">
-      <div class="section-header reveal" data-reveal="fade-up">
-        <span class="section-label">Cara Kerja</span>
-        <h2 class="section-title">3 langkah menuju kesehatan mental yang lebih baik</h2>
+      <div class="section-header">
+        <span class="section-label" data-aos="fade-down" data-aos-delay="50">Cara Kerja</span>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="150">3 langkah menuju kesehatan mental yang lebih baik</h2>
       </div>
 
       <div class="steps-container">
-        <div class="step-card reveal" data-reveal="fade-up" style="--reveal-delay: 100ms;">
+        <div class="step-card" data-aos="fade-up" data-aos-delay="100">
           <div class="step-number">1</div>
           <h3 class="step-title">Check-in Harian</h3>
           <p class="step-desc">Pilih mood yang menggambarkan perasaanmu hari ini. Cuma butuh 10 detik!</p>
         </div>
 
-        <div class="step-card reveal" data-reveal="fade-up" style="--reveal-delay: 250ms;">
+        <div class="step-card" data-aos="fade-up" data-aos-delay="250">
           <div class="step-number">2</div>
           <h3 class="step-title">Refleksi & Jurnal</h3>
           <p class="step-desc">Tulis perasaanmu dengan panduan prompt atau ngobrol bareng Teman AI.</p>
         </div>
 
-        <div class="step-card reveal" data-reveal="fade-up" style="--reveal-delay: 400ms;">
+        <div class="step-card" data-aos="fade-up" data-aos-delay="400">
           <div class="step-number">3</div>
           <h3 class="step-title">Kenali Polamu</h3>
           <p class="step-desc">Lihat insight dari pola mood-mu dan dapatkan tips yang relevan untuk kondisimu.</p>
@@ -573,12 +576,12 @@
 
     <div class="container">
       <div class="teman-intro">
-        <div class="teman-avatar-wrapper reveal" data-reveal="fade-right">
+        <div class="teman-avatar-wrapper" data-aos="fade-right" data-aos-delay="100">
           <div class="teman-avatar">
             <img src="assets/img/bot.png" alt="Teman AI Companion" class="teman-avatar-img">
           </div>
         </div>
-        <div class="teman-text-wrapper reveal" data-reveal="fade-left">
+        <div class="teman-text-wrapper" data-aos="fade-left" data-aos-delay="200">
           <h2 class="teman-intro-title">Kenalan dengan Teman</h2>
           <p class="teman-intro-desc">
             Teman adalah AI companion yang dirancang untuk mendampingimu refleksi diri. Dia bisa membantu kamu menyortir
@@ -618,7 +621,7 @@
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[34rem] h-[34rem] bg-indigo-500/10 rounded-full mix-blend-screen filter blur-[180px] pointer-events-none z-0" aria-hidden="true"></div>
 
     <div class="container relative z-10">
-      <div class="section-header reveal" data-reveal="fade-up" style="margin-bottom: 48px;">
+      <div class="section-header" data-aos="fade-up" style="margin-bottom: 48px;">
         <span class="section-label" style="background: rgba(56, 189, 248, 0.15); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.35);">Dampak & Statistik</span>
         <h2 class="section-title" style="color: #FFFFFF;">Eksplorasi Pertumbuhan & Ruang Aman Remaja</h2>
         <p class="section-subtitle" style="color: #94A3B8;">Pantau bagaimana ribuan remaja Indonesia saling bertumbuh dan rutin bercermin diri tanpa rasa takut dihakimi.</p>
@@ -626,7 +629,7 @@
 
       <div class="bento-stats-grid">
         <!-- BOX 1 (Top Left, 2-Column Wide): Total Check-in Mood & Bar Chart -->
-        <div class="stat-card-ocean stat-span-2 reveal" data-reveal="fade-up" style="--reveal-delay: 100ms;">
+        <div class="stat-card-ocean stat-span-2" data-aos="fade-up" data-aos-delay="100">
           <div>
             <p class="stat-lbl-top">TOTAL CHECK-IN EMOSI</p>
             <div class="stat-bignum-wrap">
@@ -657,7 +660,7 @@
         </div>
 
         <!-- BOX 2 (Top Right, 1-Column): Teman AI Companion 24/7 -->
-        <div class="stat-card-ocean reveal" data-reveal="fade-up" style="--reveal-delay: 200ms;">
+        <div class="stat-card-ocean" data-aos="fade-up" data-aos-delay="200">
           <div>
             <p class="stat-lbl-top">TEMAN DENGAR AI</p>
             <div class="stat-bignum" style="font-size: 2.8rem;">24 / 7</div>
@@ -676,7 +679,7 @@
         </div>
 
         <!-- BOX 3 (Bottom Left, 1-Column): Panduan Topik Jurnal (Prompts) -->
-        <div class="stat-card-ocean reveal" data-reveal="fade-up" style="--reveal-delay: 150ms;">
+        <div class="stat-card-ocean" data-aos="fade-up" data-aos-delay="150">
           <div>
             <p class="stat-lbl-top">PANDUAN PERTANYAAN</p>
             <div class="stat-bignum">30<span style="color:#38BDF8;">+</span></div>
@@ -696,7 +699,7 @@
         </div>
 
         <!-- BOX 4 (Bottom Right/Center, 2-Column Wide): Ruang Aman Bersama & Tag Kenyamanan -->
-        <div class="stat-card-ocean stat-span-2 reveal" data-reveal="fade-up" style="--reveal-delay: 250ms;">
+        <div class="stat-card-ocean stat-span-2" data-aos="fade-up" data-aos-delay="250">
           <div>
             <p class="stat-lbl-top">RUANG AMAN BERSAMA</p>
             <div class="stat-bignum-wrap">
@@ -740,7 +743,7 @@
   </section>
 
   <!-- ======= AKSES BANTUAN & KONTAK DARURAT (CRISIS HELPLINE SECTION) ======= -->
-  <section id="bantuan" class="reveal" data-reveal="fade-up" style="padding: clamp(50px, 7vw, 80px) 0; color: #FFFFFF; position: relative; z-index: 2; overflow: hidden;">
+  <section id="bantuan" data-aos="fade-up" style="padding: clamp(50px, 7vw, 80px) 0; color: #FFFFFF; position: relative; z-index: 2; overflow: hidden;">
     <!-- ======= FIREFLIES BACKGROUND (KUNANG-KUNANG ENGINE) ======= -->
     <div class="fireflies-container" aria-hidden="true">
       <div class="firefly"></div>
@@ -774,7 +777,7 @@
 
         <div class="emergency-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px;">
           <!-- Card 1: Kemenkes RI -->
-          <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: clamp(18px, 4vw, 24px); transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; justify-content: space-between;" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='rgba(126, 200, 227, 0.4)'; this.style.boxShadow='0 12px 28px -6px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='none'; this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none';">
+          <div data-aos="fade-up" data-aos-delay="100" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: clamp(18px, 4vw, 24px); transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; justify-content: space-between;" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='rgba(126, 200, 227, 0.4)'; this.style.boxShadow='0 12px 28px -6px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='none'; this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none';">
             <div>
               <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(2, 132, 199, 0.2); border: 1px solid rgba(2, 132, 199, 0.4); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
                 <span class="material-symbols-rounded" style="color: #38BDF8; font-size: 26px;">call_end</span>
@@ -794,7 +797,7 @@
           </div>
 
           <!-- Card 2: Layanan SEJIWA -->
-          <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: clamp(18px, 4vw, 24px); transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; justify-content: space-between;" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='rgba(126, 200, 227, 0.4)'; this.style.boxShadow='0 12px 28px -6px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='none'; this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none';">
+          <div data-aos="fade-up" data-aos-delay="200" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: clamp(18px, 4vw, 24px); transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; justify-content: space-between;" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='rgba(126, 200, 227, 0.4)'; this.style.boxShadow='0 12px 28px -6px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='none'; this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none';">
             <div>
               <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(22, 163, 74, 0.2); border: 1px solid rgba(22, 163, 74, 0.4); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
                 <span class="material-symbols-rounded" style="color: #4ADE80; font-size: 26px;">health_and_safety</span>
@@ -814,7 +817,7 @@
           </div>
 
           <!-- Card 3: Yayasan Pulih -->
-          <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: clamp(18px, 4vw, 24px); transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; justify-content: space-between;" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='rgba(126, 200, 227, 0.4)'; this.style.boxShadow='0 12px 28px -6px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='none'; this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none';">
+          <div data-aos="fade-up" data-aos-delay="300" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: clamp(18px, 4vw, 24px); transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; justify-content: space-between;" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='rgba(126, 200, 227, 0.4)'; this.style.boxShadow='0 12px 28px -6px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='none'; this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none';">
             <div>
               <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(217, 119, 6, 0.2); border: 1px solid rgba(217, 119, 6, 0.4); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
                 <span class="material-symbols-rounded" style="color: #FBBF24; font-size: 26px;">forum</span>
@@ -835,7 +838,7 @@
         </div>
 
         <!-- Disclaimer Ramah -->
-        <div style="margin-top: 28px; padding: 16px 22px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 18px; display: flex; align-items: center; gap: 14px; text-align: left;">
+        <div data-aos="fade-up" data-aos-delay="400" style="margin-top: 28px; padding: 16px 22px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 18px; display: flex; align-items: center; gap: 14px; text-align: left;">
           <span class="material-symbols-rounded" style="font-size: 28px; color: #7EC8E3; flex-shrink: 0;">verified</span>
           <p style="margin: 0; font-size: clamp(0.85rem, 2vw, 0.95rem); color: rgba(255, 255, 255, 0.85); font-weight: 600; line-height: 1.6;">
             <strong style="color: #FFFFFF;">Tenang.in membantu refleksi mandiri. Untuk kondisi darurat, tim profesional selalu siap membantumu.</strong>
@@ -846,10 +849,10 @@
   </section>
 
   <!-- ======= CTA MOUNTAIN PARALLAX SECTION ======= -->
-  <section class="cta-mountain-section reveal" data-reveal="zoom-in">
+  <section class="cta-mountain-section" id="cta-section">
     <div class="mountain-parallax-container" aria-hidden="true">
       <!-- Full Moon (Bulan Purnama) in top-right corner -->
-      <div class="full-moon-wrapper">
+      <div class="full-moon-wrapper" data-aos="zoom-in" data-aos-delay="550">
         <div class="full-moon">
           <div class="moon-crater crater-1"></div>
           <div class="moon-crater crater-2"></div>
@@ -858,12 +861,12 @@
         </div>
       </div>
 
-      <div class="mountain-layer layer-back"></div>
-      <div class="mountain-layer layer-mid"></div>
-      <div class="mountain-layer layer-front"></div>
+      <div class="mountain-layer layer-back" data-aos="fade-up" data-aos-delay="100"></div>
+      <div class="mountain-layer layer-mid" data-aos="fade-up" data-aos-delay="250"></div>
+      <div class="mountain-layer layer-front" data-aos="fade-up" data-aos-delay="400"></div>
     </div>
 
-    <div class="cta-content cta-banner-content text-center">
+    <div class="cta-content cta-banner-content text-center" data-aos="fade-up" data-aos-delay="700">
       <h2 class="cta-banner-title">Siap mulai perjalanan refleksi dirimu?</h2>
       <p class="cta-banner-subtitle">Kamu tidak harus sempurna. Kamu tidak harus baik-baik saja setiap hari. Yang
         penting, kamu hadir — dan itu sudah cukup.</p>
