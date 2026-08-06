@@ -156,14 +156,14 @@ body.preloader-active {
 .hero {
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   position: relative;
   overflow: hidden;
   background: var(--gradient-hero-animated);
   background-size: 400% 400%;
   animation: gradientShift 8s ease infinite;
-  padding: 100px var(--space-lg) 0;
+  padding: 210px var(--space-lg) 60px;
 }
 
 .hero-container {
@@ -309,7 +309,7 @@ body.preloader-active {
   font-size: var(--caption-size);
   font-weight: 550;
   color: rgba(255, 255, 255, 0.9);
-  margin-bottom: var(--space-xl);
+  margin-bottom: 1.25rem;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
@@ -319,7 +319,7 @@ body.preloader-active {
   position: relative;
   width: 100%;
   max-width: 760px;
-  margin: 0 auto var(--space-2xl);
+  margin: 0 auto 1.25rem;
   display: flex;
   justify-content: center;
   perspective: 1000px;
@@ -532,33 +532,33 @@ body.preloader-active {
 
 /* Floating Positioning (Around Center Zero Point - Spread Outwards to Avoid Text Overlap) */
 .float-top-left {
-  top: -185px;
+  top: -30px;
   left: -540px;
 }
 
 .float-top-right {
-  top: -175px;
-  left: 330px;
+  top: -20px;
+  left: 320px;
 }
 
 .float-mid-left {
-  top: -15px;
+  top: 95px;
   left: -610px;
 }
 
 .float-mid-right {
-  top: 10px;
+  top: 105px;
   left: 380px;
 }
 
 .float-bottom-left {
-  top: 155px;
+  top: 220px;
   left: -510px;
 }
 
 .float-bottom-right {
-  top: 160px;
-  left: 320px;
+  top: 230px;
+  left: 300px;
 }
 
 /* Independent Floating Animations for Lifelike Dynamic Effect */
@@ -664,7 +664,7 @@ body.preloader-active {
 
   .hero-title-stage {
     min-height: auto;
-    margin-bottom: var(--space-xl);
+    margin-bottom: 1.25rem;
   }
 }
 
@@ -2384,6 +2384,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden !important;
 }
 
 .mountain-parallax-container {
@@ -2394,6 +2395,7 @@ body {
   height: 100%;
   pointer-events: none;
   z-index: 1;
+  overflow: hidden !important;
 }
 
 /* =============================================

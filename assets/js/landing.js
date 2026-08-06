@@ -161,18 +161,15 @@ document.addEventListener('DOMContentLoaded', () => {
 // ---- Auth Actions (Login / Register Popup) ----
 let currentAuthTab = 'login';
 
-function handleMulaiSekarang() {
-  const isReturning = localStorage.getItem('tenang_returning') || localStorage.getItem('tenang_isReturning') || localStorage.getItem('tenang_logged_in_user');
-  if (isReturning) {
+function handleMulaiSekarang(e) {
+  if (e && typeof e.preventDefault === 'function') {
+    e.preventDefault();
+  }
+  const loggedInUser = localStorage.getItem('tenang_logged_in_user') || localStorage.getItem('tenang_active_user') || localStorage.getItem('tenang_user_id');
+  if (loggedInUser) {
     window.location.href = 'beranda.html';
   } else {
-    // Tampilkan onboarding modal
-    const modal = document.getElementById('onboarding-modal');
-    if (modal) {
-      modal.style.display = 'flex';
-    } else {
-      showAuthModal();
-    }
+    showAuthModal();
   }
 }
 
