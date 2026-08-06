@@ -302,7 +302,7 @@
 
           </div>
 
-          <!-- Interactive Typography 3 Lines -->
+          <!-- Interactive Typography 3 Lines (Desktop) -->
           <h1 class="hero-title interactive-hero-title" id="interactive-hero-title">
             <span class="interactive-line" data-target="emotion">
               <span class="line-text">Kenali Emosimu</span>
@@ -314,11 +314,22 @@
               <span class="line-text">Temukan Ketenangan</span>
             </span>
           </h1>
+
+          <!-- Concise Single-Line Main Headline (Tablet & Mobile) -->
+          <h1 class="hero-title mobile-hero-title">
+            Temukan Ketenangan Dirimu
+          </h1>
         </div>
 
-        <p class="hero-subtitle">
+        <!-- Desktop Subtitle -->
+        <p class="hero-subtitle desktop-hero-subtitle">
           Tenang.in membantu kamu mengenali pola emosi, merefleksikan diri melalui jurnal, dan mendapatkan insight
           personal — semua tersimpan privat di perangkatmu.
+        </p>
+
+        <!-- Concise Mobile & Tablet Subtitle -->
+        <p class="hero-subtitle mobile-hero-subtitle">
+          Mengenali emosi dan merefleksikan diri dengan aman — 100% privat di perangkatmu.
         </p>
 
         <div class="hero-actions">
@@ -556,7 +567,7 @@
   <section class="teman-section" id="teman-ai">
     <div class="teman-section-overlay"></div>
 
-    <!-- Ornamen Siluet Burung (Background di Kanan) -->
+    <!-- Ornamen Siluet Burung (Background di Kanan Atas) -->
     <div class="birds-ornament-container" aria-hidden="true" style="top: 25px; right: 4%;">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" class="birds-svg">
         <!-- Burung 1 (Pusat, Ukuran Sedang) -->
@@ -567,6 +578,27 @@
 
         <defs>
           <linearGradient id="birdGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#E0F2FE" stop-opacity="0.85" />
+            <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.45" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <!-- Ornamen Siluet Burung (Background di Kiri Bawah) -->
+    <div class="birds-ornament-container birds-left" aria-hidden="true" style="bottom: 25px; top: auto; left: 4%;">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" class="birds-svg">
+        <!-- Burung 1 (Pusat, Ukuran Sedang) -->
+        <path class="bird-path bird-1" d="M 50 100 C 65 85, 85 88, 100 105 C 115 88, 135 85, 150 100 C 135 96, 115 106, 100 120 C 85 106, 65 96, 50 100 Z" fill="url(#birdGradient3)" />
+        
+        <!-- Burung 2 (Kanan Atas, Ukuran Paling Besar) -->
+        <path class="bird-path bird-2" d="M 120 40 C 140 20, 165 24, 185 45 C 205 24, 230 20, 250 40 C 230 35, 205 48, 185 65 C 165 48, 140 35, 120 40 Z" fill="url(#birdGradient3)" transform="scale(0.8) translate(50, -10)" />
+        
+        <!-- Burung 3 (Kiri Bawah, Ukuran Paling Kecil) -->
+        <path class="bird-path bird-3" d="M 20 150 C 28 138, 40 140, 48 152 C 56 140, 68 138, 76 150 C 68 147, 56 154, 48 162 C 40 154, 28 147, 20 150 Z" fill="url(#birdGradient3)" />
+
+        <defs>
+          <linearGradient id="birdGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#E0F2FE" stop-opacity="0.85" />
             <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.45" />
           </linearGradient>
@@ -621,10 +653,10 @@
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[34rem] h-[34rem] bg-indigo-500/10 rounded-full mix-blend-screen filter blur-[180px] pointer-events-none z-0" aria-hidden="true"></div>
 
     <div class="container relative z-10">
-      <div class="section-header" data-aos="fade-up" style="margin-bottom: 48px;">
-        <span class="section-label" style="background: rgba(56, 189, 248, 0.15); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.35);">Dampak & Statistik</span>
-        <h2 class="section-title" style="color: #FFFFFF;">Eksplorasi Pertumbuhan & Ruang Aman Remaja</h2>
-        <p class="section-subtitle" style="color: #94A3B8;">Pantau bagaimana ribuan remaja Indonesia saling bertumbuh dan rutin bercermin diri tanpa rasa takut dihakimi.</p>
+      <div class="section-header" data-aos="fade-up">
+        <span class="section-label">Dampak & Statistik</span>
+        <h2 class="section-title">Eksplorasi Pertumbuhan & Ruang Aman Remaja</h2>
+        <p class="section-subtitle">Pantau bagaimana ribuan remaja Indonesia saling bertumbuh dan rutin bercermin diri tanpa rasa takut dihakimi.</p>
       </div>
 
       <div class="bento-stats-grid">
@@ -743,7 +775,7 @@
   </section>
 
   <!-- ======= AKSES BANTUAN & KONTAK DARURAT (CRISIS HELPLINE SECTION) ======= -->
-  <section id="bantuan" data-aos="fade-up" style="padding: clamp(50px, 7vw, 80px) 0; color: #FFFFFF; position: relative; z-index: 2; overflow: hidden;">
+  <section id="bantuan" class="bantuan-section" data-aos="fade-up">
     <!-- ======= FIREFLIES BACKGROUND (KUNANG-KUNANG ENGINE) ======= -->
     <div class="fireflies-container" aria-hidden="true">
       <div class="firefly"></div>
@@ -762,76 +794,76 @@
       <div class="firefly"></div>
       <div class="firefly"></div>
     </div>
-    <div class="container" style="position: relative; z-index: 2;">
-      <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); backdrop-filter: blur(16px); border-radius: 28px; padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 36px); box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.4);">
-        <div style="text-align: center; max-width: 720px; margin: 0 auto 32px;">
-          <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 850; text-transform: uppercase; letter-spacing: 1.5px; color: #7EC8E3; background: rgba(126, 200, 227, 0.15); border: 1px solid rgba(126, 200, 227, 0.3); padding: 5px 14px; border-radius: 999px; margin-bottom: 14px;">
-            <span class="material-symbols-rounded" style="font-size: 16px; color: #7EC8E3;">emergency</span>
+    <div class="container relative z-10">
+      <div class="crisis-box">
+        <div class="section-header">
+          <span class="section-label">
+            <span class="material-symbols-rounded" style="font-size: 16px;">emergency</span>
             Layanan Bantuan Profesional 24/7
           </span>
-          <h2 style="font-size: clamp(1.65rem, 4vw, 2.25rem); font-weight: 850; color: #FFFFFF; margin: 0 0 12px; letter-spacing: -0.02em;">Akses Bantuan & Kontak Darurat</h2>
-          <p style="color: rgba(255, 255, 255, 0.8); font-size: clamp(0.9rem, 2.5vw, 1.05rem); line-height: 1.6; margin: 0;">
+          <h2 class="section-title">Akses Bantuan & Kontak Darurat</h2>
+          <p class="section-subtitle">
             Kamu tidak pernah berjalan sendirian. Jika sewaktu-waktu merasa terbebani, memiliki kecemasan hebat, atau berada dalam situasi krisis emosional, tim konselor dan profesional Indonesia siap merangkulmu.
           </p>
         </div>
 
-        <div class="emergency-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px;">
+        <div class="emergency-grid">
           <!-- Card 1: Kemenkes RI -->
-          <div data-aos="fade-up" data-aos-delay="100" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: clamp(18px, 4vw, 24px); transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; justify-content: space-between;" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='rgba(126, 200, 227, 0.4)'; this.style.boxShadow='0 12px 28px -6px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='none'; this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none';">
+          <div class="emergency-card" data-aos="fade-up" data-aos-delay="100">
             <div>
-              <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(2, 132, 199, 0.2); border: 1px solid rgba(2, 132, 199, 0.4); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
-                <span class="material-symbols-rounded" style="color: #38BDF8; font-size: 26px;">call_end</span>
+              <div class="emergency-icon-wrap icon-cyan">
+                <span class="material-symbols-rounded">call_end</span>
               </div>
-              <h3 style="font-size: 1.15rem; font-weight: 800; color: #FFFFFF; margin: 0;">Hotline Kemenkes RI</h3>
-              <p style="font-size: 0.85rem; font-weight: 600; color: #7EC8E3; margin: 4px 0 12px;">Layanan Kesehatan Jiwa Darurat 24 Jam</p>
-              <div style="font-size: 1.4rem; font-weight: 850; color: #FFFFFF; margin-bottom: 18px;">119 <span style="font-size: 0.85rem; font-weight: 700; color: rgba(255,255,255,0.6);">ext. 8</span></div>
+              <h3 class="emergency-card-title">Hotline Kemenkes RI</h3>
+              <p class="emergency-card-sub text-cyan">Layanan Kesehatan Jiwa Darurat 24 Jam</p>
+              <div class="emergency-number">119 <span class="emergency-ext">ext. 8</span></div>
             </div>
-            <div style="display: flex; gap: 8px;">
-              <a href="tel:119" style="flex: 1; text-decoration: none; text-align: center; background: #2D5BA8; color: #FFFFFF; font-weight: 750; font-size: 0.88rem; padding: 11px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-                <span class="material-symbols-rounded" style="font-size: 18px;">call</span> Telepon
+            <div class="emergency-btn-group">
+              <a href="tel:119" class="btn-emergency-action btn-blue">
+                <span class="material-symbols-rounded">call</span> Telepon
               </a>
-              <button type="button" onclick="copyEmergencyNumber('119', 'Hotline Kemenkes 119')" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #FFFFFF; font-weight: 700; padding: 11px 15px; border-radius: 14px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s;" title="Salin Nomor" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-                <span class="material-symbols-rounded" style="font-size: 18px;">content_copy</span>
+              <button type="button" class="btn-copy-num" onclick="copyEmergencyNumber('119', 'Hotline Kemenkes 119')" title="Salin Nomor">
+                <span class="material-symbols-rounded">content_copy</span>
               </button>
             </div>
           </div>
 
           <!-- Card 2: Layanan SEJIWA -->
-          <div data-aos="fade-up" data-aos-delay="200" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: clamp(18px, 4vw, 24px); transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; justify-content: space-between;" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='rgba(126, 200, 227, 0.4)'; this.style.boxShadow='0 12px 28px -6px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='none'; this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none';">
+          <div class="emergency-card" data-aos="fade-up" data-aos-delay="200">
             <div>
-              <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(22, 163, 74, 0.2); border: 1px solid rgba(22, 163, 74, 0.4); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
-                <span class="material-symbols-rounded" style="color: #4ADE80; font-size: 26px;">health_and_safety</span>
+              <div class="emergency-icon-wrap icon-emerald">
+                <span class="material-symbols-rounded">health_and_safety</span>
               </div>
-              <h3 style="font-size: 1.15rem; font-weight: 800; color: #FFFFFF; margin: 0;">Layanan SEJIWA</h3>
-              <p style="font-size: 0.85rem; font-weight: 600; color: #4ADE80; margin: 4px 0 12px;">HIMPSI & Kantor Staf Presiden</p>
-              <div style="font-size: 1.25rem; font-weight: 850; color: #FFFFFF; margin-bottom: 18px;">0811-9700-119</div>
+              <h3 class="emergency-card-title">Layanan SEJIWA</h3>
+              <p class="emergency-card-sub text-emerald">HIMPSI & Kantor Staf Presiden</p>
+              <div class="emergency-number">0811-9700-119</div>
             </div>
-            <div style="display: flex; gap: 8px;">
-              <a href="tel:08119700119" style="flex: 1; text-decoration: none; text-align: center; background: #2D5BA8; color: #FFFFFF; font-weight: 750; font-size: 0.88rem; padding: 11px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-                <span class="material-symbols-rounded" style="font-size: 18px;">call</span> Telepon
+            <div class="emergency-btn-group">
+              <a href="tel:08119700119" class="btn-emergency-action btn-blue">
+                <span class="material-symbols-rounded">call</span> Telepon
               </a>
-              <button type="button" onclick="copyEmergencyNumber('08119700119', 'Layanan SEJIWA')" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #FFFFFF; font-weight: 700; padding: 11px 15px; border-radius: 14px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s;" title="Salin Nomor" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-                <span class="material-symbols-rounded" style="font-size: 18px;">content_copy</span>
+              <button type="button" class="btn-copy-num" onclick="copyEmergencyNumber('08119700119', 'Layanan SEJIWA')" title="Salin Nomor">
+                <span class="material-symbols-rounded">content_copy</span>
               </button>
             </div>
           </div>
 
           <!-- Card 3: Yayasan Pulih -->
-          <div data-aos="fade-up" data-aos-delay="300" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: clamp(18px, 4vw, 24px); transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; justify-content: space-between;" onmouseover="this.style.transform='translateY(-4px)'; this.style.borderColor='rgba(126, 200, 227, 0.4)'; this.style.boxShadow='0 12px 28px -6px rgba(0,0,0,0.3)';" onmouseout="this.style.transform='none'; this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.boxShadow='none';">
+          <div class="emergency-card" data-aos="fade-up" data-aos-delay="300">
             <div>
-              <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(217, 119, 6, 0.2); border: 1px solid rgba(217, 119, 6, 0.4); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
-                <span class="material-symbols-rounded" style="color: #FBBF24; font-size: 26px;">forum</span>
+              <div class="emergency-icon-wrap icon-amber">
+                <span class="material-symbols-rounded">forum</span>
               </div>
-              <h3 style="font-size: 1.15rem; font-weight: 800; color: #FFFFFF; margin: 0;">LSM Yayasan Pulih</h3>
-              <p style="font-size: 0.85rem; font-weight: 600; color: #FBBF24; margin: 4px 0 12px;">Konseling Psikologi & Pemulihan Trauma</p>
-              <div style="font-size: 1.25rem; font-weight: 850; color: #FFFFFF; margin-bottom: 18px;">0811-8456-724</div>
+              <h3 class="emergency-card-title">LSM Yayasan Pulih</h3>
+              <p class="emergency-card-sub text-amber">Konseling Psikologi & Pemulihan Trauma</p>
+              <div class="emergency-number">0811-8456-724</div>
             </div>
-            <div style="display: flex; gap: 8px;">
-              <a href="https://wa.me/628118456724" target="_blank" rel="noopener" style="flex: 1; text-decoration: none; text-align: center; background: #16A34A; color: #FFFFFF; font-weight: 750; font-size: 0.88rem; padding: 11px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3); transition: opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
-                <span class="material-symbols-rounded" style="font-size: 18px;">chat</span> WhatsApp
+            <div class="emergency-btn-group">
+              <a href="https://wa.me/628118456724" target="_blank" rel="noopener" class="btn-emergency-action btn-green">
+                <span class="material-symbols-rounded">chat</span> WhatsApp
               </a>
-              <button type="button" onclick="copyEmergencyNumber('08118456724', 'Yayasan Pulih')" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #FFFFFF; font-weight: 700; padding: 11px 15px; border-radius: 14px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s;" title="Salin Nomor" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-                <span class="material-symbols-rounded" style="font-size: 18px;">content_copy</span>
+              <button type="button" class="btn-copy-num" onclick="copyEmergencyNumber('08118456724', 'Yayasan Pulih')" title="Salin Nomor">
+                <span class="material-symbols-rounded">content_copy</span>
               </button>
             </div>
           </div>
