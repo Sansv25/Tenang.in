@@ -258,7 +258,7 @@
       ]
     },
     "suggest_journal": {
-      "message": "Menulis bisa membantu kamu memproses perasaan 📝\n\nKamu bisa mulai dari prompt yang sudah aku siapkan, atau tulis bebas — yang penting, jujur sama dirimu sendiri.\n\n💙 Semua tulisanmu privat dan tersimpan hanya di perangkatmu.",
+      "message": "Menulis bisa membantu kamu memproses perasaan 📝\n\nKamu bisa mulai dari prompt yang sudah aku siapkan, atau tulis bebas — yang penting, jujur sama dirimu sendiri.\n\n💙 Semua tulisanmu privat dan terjaga keamanannya.",
       "options": [
         { "text": "✏️ Buka Ruang Jurnal", "next": "_navigate_jurnal" },
         { "text": "🙏 Nanti aja, terima kasih", "next": "closing_care" },

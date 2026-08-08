@@ -752,7 +752,7 @@ const Onboarding = (() => {
         <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 max-w-xs mx-auto text-center flex items-center gap-2.5">
           <span class="material-symbols-rounded text-emerald-500 flex-shrink-0" style="font-size:24px;">enhanced_encryption</span>
           <p class="text-[11px] text-slate-500 text-left leading-tight">
-            <strong>100% Privat & Aman:</strong> Seluruh catatan emosi dan obrolan Teman AI disandikan & tersimpan di perangkatmu.
+            <strong>100% Privat & Aman:</strong> Seluruh catatan emosi dan obrolan Teman AI disandikan & terjaga privasinya.
           </p>
         </div>
       `;

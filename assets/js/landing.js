@@ -785,3 +785,127 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateParallax();
 });
+
+// ---- Interactive Teman AI Robot & 3 Synchronized Auto-Rotating Speech Bubbles ----
+function initInteractiveRobotBubble() {
+  const stageEl = document.getElementById('teman-avatar-stage');
+
+  const bubbleLeft = document.getElementById('robot-bubble-left');
+  const iconLeft = document.getElementById('robot-icon-left');
+  const textLeft = document.getElementById('robot-text-left');
+
+  const bubbleRight = document.getElementById('robot-bubble-right');
+  const iconRight = document.getElementById('robot-icon-right');
+  const textRight = document.getElementById('robot-text-right');
+
+  const bubbleBottom = document.getElementById('robot-bubble-bottom');
+  const iconBottom = document.getElementById('robot-icon-bottom');
+  const textBottom = document.getElementById('robot-text-bottom');
+
+  if (!stageEl || !textLeft || !textRight || !textBottom) return;
+
+  // 3 Distinct sets of curated warm, empathetic phrases for Indonesian teens
+  const phrasesLeft = [
+    { icon: '👋', text: 'Bagaimana perasaanmu hari ini?' },
+    { icon: '☀️', text: 'Selamat datang di ruang amanmu!' },
+    { icon: '🌱', text: 'Sempatkan napas sejenak ya...' },
+    { icon: '💙', text: 'Kamu sudah berusaha keras hari ini!' },
+    { icon: '🌸', text: 'Semua emosimu valid & berharga.' }
+  ];
+
+  const phrasesRight = [
+    { icon: '📝', text: 'Coba fitur jurnal harian kami!' },
+    { icon: '🎨', text: 'Mood-mu hari ini warna apa?' },
+    { icon: '💡', text: 'Punya beban pikiran hari ini?' },
+    { icon: '✨', text: 'Yuk ekspresikan perasaanmu!' },
+    { icon: '🔮', text: 'Kenali tipe kepribadianmu!' }
+  ];
+
+  const phrasesBottom = [
+    { icon: '🤖', text: 'Aku siap dengerin 24/7!' },
+    { icon: '💬', text: 'Bebas curhat tanpa takut dihakimi.' },
+    { icon: '🤝', text: 'Aku di sini nemenin langkahmu.' },
+    { icon: '🛡️', text: 'Ruang privat 100% aman untukmu.' },
+    { icon: '🤗', text: 'Selalu ada tempat untuk cerita.' }
+  ];
+
+  let currentIndex = 0;
+  let timer = null;
+
+  function switchAllPhrases() {
+    currentIndex = (currentIndex + 1) % 5;
+
+    // Staggered smooth pop animations
+    if (bubbleLeft) bubbleLeft.classList.add('bubble-updating');
+    setTimeout(() => { if (bubbleRight) bubbleRight.classList.add('bubble-updating'); }, 100);
+    setTimeout(() => { if (bubbleBottom) bubbleBottom.classList.add('bubble-updating'); }, 200);
+
+    setTimeout(() => {
+      // Update Left
+      if (iconLeft && textLeft) {
+        iconLeft.textContent = phrasesLeft[currentIndex].icon;
+        textLeft.textContent = phrasesLeft[currentIndex].text;
+      }
+      if (bubbleLeft) {
+        bubbleLeft.classList.remove('bubble-updating');
+        bubbleLeft.classList.add('bubble-updated');
+        setTimeout(() => bubbleLeft.classList.remove('bubble-updated'), 450);
+      }
+
+      // Update Right
+      if (iconRight && textRight) {
+        iconRight.textContent = phrasesRight[currentIndex].icon;
+        textRight.textContent = phrasesRight[currentIndex].text;
+      }
+      if (bubbleRight) {
+        bubbleRight.classList.remove('bubble-updating');
+        bubbleRight.classList.add('bubble-updated');
+        setTimeout(() => bubbleRight.classList.remove('bubble-updated'), 450);
+      }
+
+      // Update Bottom
+      if (iconBottom && textBottom) {
+        iconBottom.textContent = phrasesBottom[currentIndex].icon;
+        textBottom.textContent = phrasesBottom[currentIndex].text;
+      }
+      if (bubbleBottom) {
+        bubbleBottom.classList.remove('bubble-updating');
+        bubbleBottom.classList.add('bubble-updated');
+        setTimeout(() => bubbleBottom.classList.remove('bubble-updated'), 450);
+      }
+    }, 280);
+  }
+
+  function startAutoCycle() {
+    stopAutoCycle();
+    timer = setInterval(() => {
+      switchAllPhrases();
+    }, 3800);
+  }
+
+  function stopAutoCycle() {
+    if (timer) clearInterval(timer);
+  }
+
+  function triggerInteractiveBounce() {
+    stopAutoCycle();
+    switchAllPhrases();
+    stageEl.classList.add('robot-clicked');
+    setTimeout(() => stageEl.classList.remove('robot-clicked'), 600);
+    startAutoCycle();
+  }
+
+  // Attach interactive click listeners to stage and all bubbles
+  stageEl.addEventListener('click', triggerInteractiveBounce);
+  if (bubbleLeft) bubbleLeft.addEventListener('click', (e) => { e.stopPropagation(); triggerInteractiveBounce(); });
+  if (bubbleRight) bubbleRight.addEventListener('click', (e) => { e.stopPropagation(); triggerInteractiveBounce(); });
+  if (bubbleBottom) bubbleBottom.addEventListener('click', (e) => { e.stopPropagation(); triggerInteractiveBounce(); });
+
+  // Start loop
+  startAutoCycle();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initInteractiveRobotBubble();
+});
+

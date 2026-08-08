@@ -149,7 +149,7 @@ const Main = (() => {
         <div class="footer-bottom">
           <p class="footer-disclaimer">
             <span class="material-symbols-rounded">warning</span>
-            <span>Tenang.in adalah ruang refleksi diri dan bukan pengganti konsultasi profesional. Jika kamu merasa butuh bantuan lebih, jangan ragu menghubungi psikolog atau konselor profesional. Semua data tersimpan hanya di perangkatmu (localStorage).</span>
+            <span>Tenang.in adalah ruang refleksi diri dan bukan pengganti konsultasi profesional. Jika kamu merasa butuh bantuan lebih, jangan ragu menghubungi psikolog atau konselor profesional. Seluruh data terenkripsi dan terjaga privasinya.</span>
           </p>
           <p style="font-size:0.75rem; color:rgba(255,255,255,0.4);">© 2026 Tenang.in</p>
         </div>
