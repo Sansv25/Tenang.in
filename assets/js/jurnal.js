@@ -397,9 +397,6 @@ window.simulateBurn = function() {
       void stage3D.offsetWidth;
       stage3D.style.opacity = '1';
       stage3D.style.transform = 'translateY(0)';
-      if (typeof Animations !== 'undefined') {
-        Animations.showToast('Kartu tersiap! Klik pada kartu untuk menyalakan api katarsis.', 'info');
-      }
     }, 400);
   }
 };
@@ -424,9 +421,6 @@ window.igniteCardFire = function() {
   }
 
   if (canvas) runFireCanvasEngine(canvas);
-  if (typeof Animations !== 'undefined') {
-    Animations.showToast('Kobaran api katarsis menyala!', 'success');
-  }
 
   setTimeout(() => {
     if (stage3D) {
@@ -443,9 +437,6 @@ window.igniteCardFire = function() {
         void msg.offsetWidth;
         msg.style.opacity = '1';
         msg.style.transform = 'translateY(0)';
-        if (typeof Animations !== 'undefined') {
-          Animations.showToast('Beban dan kecemasanmu telah musnah menjadi abu!', 'success');
-        }
       }
     }, 450);
   }, 4200);

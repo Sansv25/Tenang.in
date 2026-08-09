@@ -548,15 +548,41 @@
   font-size: 16px !important;
 }
 
-#mood-today-summary span {
-  color: #334155 !important;
-  font-weight: 700 !important;
-  font-size: 0.82rem !important;
+#mood-today-summary,
+.mood-badge-floating {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 8px 20px;
+  border-radius: 50px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.25s ease;
 }
 
-#mood-today-summary .material-symbols-rounded {
-  color: #0284C7 !important;
-  font-size: 24px !important;
+#mood-today-summary:hover,
+.mood-badge-floating:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+#mood-today-summary:empty {
+  display: none !important;
+}
+
+#mood-today-summary span,
+.mood-badge-floating span {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+  font-size: 0.88rem !important;
+}
+
+#mood-today-summary .material-symbols-rounded,
+.mood-badge-floating .material-symbols-rounded {
+  font-size: 20px !important;
 }
 
 
@@ -765,7 +791,7 @@
    ============================================= */
 .dashboard-hero-floating {
   text-align: center;
-  padding: 15px 16px 28px;
+  padding: 36px 16px 28px;
   max-width: 820px;
   margin: 0 auto;
   position: relative;
@@ -777,7 +803,7 @@
   font-size: clamp(1.85rem, 5vw, 2.8rem) !important;
   font-weight: 850 !important;
   line-height: 1.25 !important;
-  margin: 10px 0 !important;
+  margin: 22px 0 10px !important;
   letter-spacing: -0.03em;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
@@ -873,11 +899,29 @@
 
 @media (max-width: 640px) {
   .dashboard-hero-floating {
-    padding: 10px 12px 20px !important;
+    padding: 32px 12px 20px !important;
   }
 
   .dashboard-hero-floating .greeting-text {
-    font-size: 1.6rem !important;
+    font-size: 1.55rem !important;
+    margin-top: 18px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .dashboard-hero-floating .greeting-sub {
+    font-size: 0.88rem !important;
+    margin-bottom: 18px !important;
+  }
+
+  .streak-badge-floating,
+  #mood-today-summary,
+  .mood-badge-floating {
+    padding: 6px 16px !important;
+  }
+
+  #mood-today-summary span,
+  .mood-badge-floating span {
+    font-size: 0.82rem !important;
   }
 
   .dashboard-hero-floating .greeting-sub {
@@ -897,5 +941,43 @@
   .btn-logout-footer {
     padding: 10px 22px !important;
     font-size: 0.88rem !important;
+  }
+
+  .weekly-detail-link {
+    padding: 8px 10px !important;
+    border-radius: 12px !important;
+  }
+
+  .weekly-detail-link .desktop-btn-label {
+    display: none !important;
+  }
+
+  .weekly-summary-card {
+    padding: 16px 14px !important;
+    border-radius: 20px !important;
+  }
+
+  .weekly-summary-header {
+    margin-bottom: 14px !important;
+    padding-bottom: 12px !important;
+  }
+
+  .weekly-summary-grid {
+    gap: 12px !important;
+    margin-bottom: 0 !important;
+  }
+
+  .weekly-box-trend,
+  .weekly-box-insight {
+    padding: 14px 14px !important;
+    border-radius: 16px !important;
+  }
+
+  .weekly-insight-sub {
+    display: none !important;
+  }
+
+  .weekly-tips-box {
+    display: none !important;
   }
 }

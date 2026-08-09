@@ -195,9 +195,10 @@ function updateMoodSummary() {
     const labels = { 1: 'Buruk · Sangat Berat', 2: 'Kurang · Kurang Oke', 3: 'Biasa · Normal & Stabil', 4: 'Baik · Damai & Positif', 5: 'Luar Biasa · Sangat Bahagia' };
 
     if (summaryEl) {
+      summaryEl.className = 'mood-badge-floating';
       summaryEl.innerHTML = `
-        <span class="material-symbols-rounded" style="font-size:24px; color:${colors[mood.level]};">${icons[mood.level]}</span>
-        <span style="font-size:0.8125rem; font-weight:600; color:var(--text-on-blue);">${labels[mood.level].split(' · ')[0]}</span>
+        <span class="material-symbols-rounded" style="font-size:20px; color:${colors[mood.level]} !important;">${icons[mood.level]}</span>
+        <span style="font-size:0.88rem; font-weight:700; color:#FFFFFF !important;">${labels[mood.level].split(' · ')[0]}</span>
       `;
     }
 
@@ -280,39 +281,46 @@ function updateCTAButton() {
 }
 
 // ---- Load Daily Tip ----
+const FALLBACK_TIPS = {
+  "IT": { "emoji": "dark_mode", "name": "Pemikir Tenang", "daily": [ "Overthinking bukan kelemahanmu — itu tanda kamu peduli. Arahkan energi itu ke jurnal hari ini.", "Waktu sendiri bukan anti-sosial. Itu caramu mengisi ulang.", "Kamu nggak harus punya jawaban untuk semua hal. Kadang cukup hadirkan pertanyaan yang tepat.", "Pikiran yang berat bisa diringankan dengan menuliskannya. Coba buka jurnal hari ini.", "Buat daftar kekhawatiranmu — tandai mana yang bisa kamu kontrol. Lepaskan yang sisanya." ] },
+  "IF": { "emoji": "favorite", "name": "Perasa Mendalam", "daily": [ "Perasaanmu yang dalam adalah kekuatan, bukan kelemahan. Jangan pernah ragu merasakannya.", "Self-compassion: hari ini, perlakukan dirimu seperti kamu memperlakukan sahabat terbaikmu.", "Batasi scrolling hari ini. Perasaan orang lain di timeline bisa mempengaruhimu tanpa sadar.", "Saat emosi terasa overwhelming, coba grounding 5-4-3-2-1: lihat 5 benda, sentuh 4, dengar 3, cium 2, rasa 1.", "Tidak semua perasaan harus dibagikan. Jurnal adalah ruang amanmu untuk memproses." ] },
+  "ET": { "emoji": "bolt", "name": "Pemimpin Aktif", "daily": [ "Ubah kecemasan jadi aksi. Langkah kecil hari ini > rencana besar yang nggak dimulai.", "Bilang 'tidak' adalah skill. Kamu nggak harus iya-kan semua hal.", "Energimu besar — tapi jangan lupa isi ulang. Tidur cukup malam ini, ya.", "Jadwalkan 10 menit waktu diam hari ini. Otak aktif juga butuh jeda.", "Istirahat aktif cocok buat kamu — jalan kaki 15 menit bisa reset pikiran." ] },
+  "EF": { "emoji": "auto_awesome", "name": "Jiwa Sosial", "daily": [ "Kamu mudah merasakan emosi orang lain. Hari ini, cek dulu: ini perasaanku atau perasaan orang?", "Kamu nggak harus selalu jadi 'penyemangat'. Kamu juga berhak lelah dan istirahat.", "Tarik napas sebelum bereaksi. Jeda 3 detik bisa mengubah reaksi jadi respons.", "Pilih circle yang memberi energi, bukan hanya menguras. Kamu layak itu.", "Empati itu kekuatanmu. Tapi bedakan antara memahami beban orang lain vs menanggungnya." ] },
+  "default": { "emoji": "lightbulb", "name": "Untukmu", "daily": [ "Hari ini adalah kesempatan baru. Mulai dari hal kecil yang membuatmu tersenyum.", "Kamu nggak harus baik-baik aja setiap hari. Yang penting, kamu hadir.", "Progress, bukan perfection. Langkah kecil tetap langkah.", "Jaga dirimu hari ini — minum air, gerak badan, dan beri waktu untuk dirimu.", "Kamu lebih kuat dari yang kamu kira. Buktinya, kamu masih di sini." ] }
+};
+
+function renderTipContent(tips) {
+  const tipEl = document.getElementById('daily-tip');
+  if (!tipEl) return;
+  const kenaliType = typeof Storage !== 'undefined' && typeof Storage.getKenaliType === 'function' ? Storage.getKenaliType() : null;
+  const tipSet = kenaliType && tips[kenaliType] ? tips[kenaliType] : tips.default;
+  const dayIndex = new Date().getDate() % tipSet.daily.length;
+  const iconName = tipSet.emoji || 'lightbulb';
+
+  tipEl.innerHTML = `
+    <div class="insight-card">
+      <div class="insight-card-header">
+        <span class="material-symbols-rounded" style="color:var(--primary-accent); font-size:22px;">${iconName}</span>
+        <span>Tips untuk ${tipSet.name}</span>
+      </div>
+      <p style="font-size:0.9375rem; line-height:1.65; color:var(--text-on-white);">${tipSet.daily[dayIndex]}</p>
+    </div>
+  `;
+}
+
 async function loadDailyTip() {
   const tipEl = document.getElementById('daily-tip');
   if (!tipEl) return;
 
+  // Render synchronously with fallback first for Zero-CLS
+  renderTipContent(FALLBACK_TIPS);
+
   try {
     const res = await fetch('assets/data/tips.json');
     const tips = await res.json();
-
-    const kenaliType = Storage.getKenaliType();
-    const tipSet = kenaliType && tips[kenaliType] ? tips[kenaliType] : tips.default;
-    const dayIndex = new Date().getDate() % tipSet.daily.length;
-
-    const iconName = tipSet.emoji || 'lightbulb';
-
-    tipEl.innerHTML = `
-      <div class="insight-card">
-        <div class="insight-card-header">
-          <span class="material-symbols-rounded" style="color:var(--primary-accent); font-size:22px;">${iconName}</span>
-          <span>Tips untuk ${tipSet.name}</span>
-        </div>
-        <p style="font-size:0.9375rem; line-height:1.65; color:var(--text-on-white);">${tipSet.daily[dayIndex]}</p>
-      </div>
-    `;
+    renderTipContent(tips);
   } catch (e) {
-    tipEl.innerHTML = `
-      <div class="insight-card">
-        <div class="insight-card-header">
-          <span class="material-symbols-rounded" style="color:var(--primary-accent); font-size:22px;">lightbulb</span>
-          <span>Tips Hari Ini</span>
-        </div>
-        <p style="font-size:0.9375rem; line-height:1.65; color:var(--text-on-white);">Hari ini adalah kesempatan baru. Mulai dari hal kecil yang membuatmu tersenyum.</p>
-      </div>
-    `;
+    // Already rendered fallback synchronously
   }
 }
 
@@ -447,27 +455,27 @@ async function renderWeeklyMoodSummary() {
   const tagChipsHTML = allTopTags.length ? allTopTags.map(t => `<span style="background: ${theme.chipBg}; border: ${theme.chipBorder}; color: ${theme.chipColor}; font-size: 0.75rem; font-weight: 750; padding: 6px 14px; border-radius: 20px; display: inline-block;">#${safeText(t)}</span>`).join('') : `<span style="color: ${theme.subTextColor}; font-size: 0.8rem; font-style: italic;">Belum ada tag yang dipilih minggu ini</span>`;
 
   container.innerHTML = `
-    <div style="background: ${theme.cardBg}; border: ${theme.cardBorder}; ${theme.cardBlur} border-radius: 28px; padding: clamp(20px, 4vw, 36px); box-shadow: 0 18px 45px -15px rgba(0, 0, 0, 0.25); color: ${theme.textColor}; overflow: hidden;">
-      <div style="display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; border-bottom: 1.5px solid rgba(255,255,255,0.1); padding-bottom: 20px;">
-        <div style="display: flex; align-items: center; gap: clamp(12px, 3vw, 16px); flex: 1; min-width: 240px;">
-          <div style="width: clamp(46px, 11vw, 54px); height: clamp(46px, 11vw, 54px); border-radius: 16px; background: #5B8FD4; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 18px rgba(91, 143, 212, 0.35); flex-shrink: 0;">
-            <span class="material-symbols-rounded" style="font-size: clamp(26px, 6vw, 30px); color: #FFFFFF;">query_stats</span>
+    <div class="weekly-summary-card" style="background: ${theme.cardBg}; border: ${theme.cardBorder}; ${theme.cardBlur} border-radius: 28px; padding: clamp(20px, 4vw, 36px); box-shadow: 0 18px 45px -15px rgba(0, 0, 0, 0.25); color: ${theme.textColor}; overflow: hidden;">
+      <div class="weekly-summary-header" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 24px; border-bottom: 1.5px solid rgba(255,255,255,0.1); padding-bottom: 20px;">
+        <div style="display: flex; align-items: center; gap: clamp(10px, 3vw, 16px); flex: 1; min-width: 0;">
+          <div style="width: clamp(42px, 10vw, 54px); height: clamp(42px, 10vw, 54px); border-radius: 16px; background: #5B8FD4; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 18px rgba(91, 143, 212, 0.35); flex-shrink: 0;">
+            <span class="material-symbols-rounded" style="font-size: clamp(24px, 5.5vw, 30px); color: #FFFFFF;">query_stats</span>
           </div>
-          <div style="flex: 1;">
+          <div style="flex: 1; min-width: 0;">
             <div style="font-size: 0.72rem; font-weight: 850; text-transform: uppercase; letter-spacing: 0.8px; color: ${theme.chipColor}; margin-bottom: 3px;">Analisis Emosi Mingguan</div>
-            <h2 style="font-size: clamp(1.15rem, 3.8vw, 1.45rem); font-weight: 850; color: ${theme.textColor}; margin: 0; line-height: 1.25;">Rangkuman Emosimu Minggu Ini</h2>
+            <h2 style="font-size: clamp(1.05rem, 3.8vw, 1.45rem); font-weight: 850; color: ${theme.textColor}; margin: 0; line-height: 1.25;">Rangkuman Emosimu Minggu Ini</h2>
           </div>
         </div>
-        <div style="width: auto; max-width: max-content; display: flex; align-items: center;">
-          <a href="dashboard.html" style="text-decoration: none; background: ${theme.btnDetailBg}; border: ${theme.btnDetailBorder}; color: ${theme.btnDetailColor}; font-weight: 750; font-size: 0.85rem; padding: 10px 16px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: opacity 0.2s; white-space: nowrap;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-            <span>Detail Statistik</span>
-            <span class="material-symbols-rounded" style="font-size: 18px;">chevron_right</span>
+        <div style="flex-shrink: 0;">
+          <a href="dashboard.html" class="weekly-detail-link" style="text-decoration: none; background: ${theme.btnDetailBg}; border: ${theme.btnDetailBorder}; color: ${theme.btnDetailColor}; font-weight: 750; font-size: 0.85rem; padding: 10px 16px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: opacity 0.2s; white-space: nowrap;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'" title="Detail Statistik">
+            <span class="desktop-btn-label">Detail Statistik</span>
+            <span class="material-symbols-rounded" style="font-size: 20px;">chevron_right</span>
           </a>
         </div>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: clamp(16px, 3vw, 22px); margin-bottom: 24px;">
-        <div style="background: ${theme.boxBg}; border: ${theme.boxBorder}; border-radius: 22px; padding: clamp(20px, 4vw, 26px); display: flex; flex-direction: column; justify-content: flex-start;">
+      <div class="weekly-summary-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: clamp(16px, 3vw, 22px); margin-bottom: 24px;">
+        <div class="weekly-box-trend" style="background: ${theme.boxBg}; border: ${theme.boxBorder}; border-radius: 22px; padding: clamp(20px, 4vw, 26px); display: flex; flex-direction: column; justify-content: flex-start;">
           <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding-bottom: 16px; border-bottom: 1px solid rgba(126, 200, 227, 0.15); margin-bottom: 16px;">
             <span style="font-size: 0.88rem; font-weight: 750; color: ${theme.subTextColor};">Tren Mood Rata-Rata</span>
             <div style="display: inline-flex; align-items: center; gap: 6px; background: ${colorMap[avgScore] || '#3B82F6'}1A; color: ${colorMap[avgScore] || '#3B82F6'}; border: 1.5px solid ${colorMap[avgScore] || '#3B82F6'}50; padding: 5px 14px; border-radius: 20px; font-weight: 800; font-size: 0.9rem; white-space: nowrap;">
@@ -481,7 +489,7 @@ async function renderWeeklyMoodSummary() {
           </div>
         </div>
 
-        <div style="background: ${theme.boxBg}; border: ${theme.boxBorder}; border-left: 5px solid #2D5BA8; border-radius: 22px; padding: clamp(20px, 4vw, 26px); display: flex; flex-direction: column; justify-content: space-between;">
+        <div class="weekly-box-insight" style="background: ${theme.boxBg}; border: ${theme.boxBorder}; border-left: 5px solid #2D5BA8; border-radius: 22px; padding: clamp(20px, 4vw, 26px); display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <div style="display: flex; align-items: center; gap: 8px; font-weight: 800; color: ${isLanding ? '#7EC8E3' : '#2D5BA8'}; font-size: 0.92rem; margin-bottom: 12px;">
               <span class="material-symbols-rounded" style="font-size: 22px;">psychology</span>
@@ -491,14 +499,14 @@ async function renderWeeklyMoodSummary() {
               "${safeText(insightMsg)}"
             </p>
           </div>
-          <div style="margin-top: 18px; font-size: 0.78rem; font-weight: 750; color: ${theme.subTextColor}; display: flex; align-items: center; gap: 6px;">
+          <div class="weekly-insight-sub" style="margin-top: 18px; font-size: 0.78rem; font-weight: 750; color: ${theme.subTextColor}; display: flex; align-items: center; gap: 6px;">
             <span class="material-symbols-rounded" style="font-size: 16px; color: ${isLanding ? '#7EC8E3' : '#2D5BA8'};">analytics</span>
             <span>Berdasarkan ${itemsToAnalyze.length} catatan check-in mood terakhir</span>
           </div>
         </div>
       </div>
 
-      <div style="background: ${theme.tipBg}; border: ${theme.tipBorder}; border-radius: 20px; padding: 18px clamp(18px, 4vw, 24px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+      <div class="weekly-tips-box" style="background: ${theme.tipBg}; border: ${theme.tipBorder}; border-radius: 20px; padding: 18px clamp(18px, 4vw, 24px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
         <div style="display: flex; align-items: center; gap: 14px; flex: 1; min-width: 240px;">
           <div style="width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
             <span class="material-symbols-rounded" style="color: #F59E0B; font-size: 26px;">lightbulb</span>

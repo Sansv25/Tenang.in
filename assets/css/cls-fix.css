@@ -1,0 +1,332 @@
+/* =============================================
+   Tenang.in — CLS (Cumulative Layout Shift) Fixes
+   Applies to all non-index pages
+   v2.0 — Safe, well-audited, no side-effects
+   ============================================= */
+
+/* ---- 1. Icon Font Stability ---- */
+/* Prevent Material Symbols from causing layout shift.
+   Using inline-flex with min-size prevents the "icon pop"
+   where icons load from 0px to full size, shifting content. */
+.material-symbols-rounded,
+.material-icons {
+  /* Force consistent sizing during font swap period */
+  min-width: 1em;
+  min-height: 1em;
+  /* Prevent fallback character from shifting adjacent content */
+  overflow: hidden;
+  /* Stabilize vertical alignment */
+  line-height: 1;
+  vertical-align: middle;
+  /* Ensure consistent block-level behavior */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---- 2. Skeleton Pulse Animation ---- */
+@keyframes cls-skeleton-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes cls-skeleton-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Reusable skeleton class for JS to apply during loading */
+.cls-skeleton {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  animation: cls-skeleton-pulse 1.5s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.cls-skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  animation: cls-skeleton-shimmer 1.8s ease-in-out infinite;
+}
+
+/* ---- Synchronous Layout Stabilization for beranda.html ---- */
+html.not-new-user #new-user-nudge {
+  display: none !important;
+}
+
+html.already-checked-in #mood-grid-container {
+  display: none !important;
+}
+
+html.already-checked-in #mood-checked-in-state {
+  display: block !important;
+}
+
+html.already-checked-in #checkin-cta-btn {
+  display: none !important;
+}
+
+/* ---- 3. Reserve Space for JS-Injected Content Sections ---- */
+/* These :empty rules activate BEFORE JS runs and reserve space,
+   preventing the classic "content appears and pushes layout" CLS. */
+
+/* Beranda: daily-tip section — filled by home.js */
+#daily-tip:empty {
+  min-height: 145px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  margin-bottom: var(--space-2xl, 3rem);
+}
+
+/* Beranda: weekly mood summary — filled by home.js (Reserves 365px to prevent inspiration card CLS) */
+#weekly-mood-summary-section {
+  min-height: 365px;
+}
+
+#weekly-mood-summary-section:empty {
+  min-height: 365px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 28px;
+}
+
+/* Beranda: mood-today-summary badge row */
+#mood-today-summary:empty {
+  min-width: 80px;
+  min-height: 28px;
+  display: inline-flex;
+}
+
+/* Dashboard: daily quote text — filled by dashboard.js */
+#daily-quote:empty {
+  min-height: 60px;
+}
+
+/* Dashboard: badge grid — filled by dashboard.js */
+#badge-grid:empty {
+  min-height: 160px;
+}
+
+/* Dashboard: mood contribution calendar */
+#dashboard-grid:empty {
+  min-height: 200px;
+}
+
+/* Dashboard: mood chart container */
+#dashboard-chart:empty {
+  min-height: 200px;
+  background: rgba(91, 143, 212, 0.04);
+  border-radius: 12px;
+}
+
+/* Mood Tracker: mood chart */
+#mood-chart:empty {
+  min-height: 200px;
+  background: rgba(91, 143, 212, 0.04);
+  border-radius: 12px;
+}
+
+/* Mood Tracker: contribution grid */
+#mood-grid:empty {
+  min-height: 200px;
+}
+
+/* Mood Tracker: insights section — filled by mood-tracker.js */
+#mood-insights:empty {
+  min-height: 110px;
+}
+
+/* Jurnal: daily prompt section — filled by jurnal.js */
+#jurnal-prompt:empty {
+  min-height: 120px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  margin-bottom: var(--space-md, 1rem);
+}
+
+/* Jurnal: journal history list — filled by jurnal.js */
+#jurnal-list:empty {
+  min-height: 60px;
+}
+
+/* Kenali: quiz question card area — filled by kenali.js */
+#kenali-questions:empty {
+  min-height: 300px;
+}
+
+/* Kenali: step dots container */
+#kenali-step-dots:empty {
+  min-height: 20px;
+}
+
+/* Profil: quiz questions container */
+#profil-questions:empty {
+  min-height: 380px;
+}
+
+/* ---- 4. Chart Container Height Stabilization ---- */
+/* All chart containers get a minimum height to prevent
+   the zero-to-full-height CLS when charts render */
+#mood-chart,
+#dashboard-chart {
+  min-height: 200px;
+}
+
+/* ---- 5. Hero Section Stability (Beranda) ---- */
+
+/* Reserve space for dynamic greeting text before i18n JS runs */
+#greeting-text {
+  min-height: 1.2em;
+}
+
+/* Hero badge row: always reserves its height */
+.hero-badges-row {
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Streak badge: reserve minimum width/height before JS populates */
+#streak-display {
+  min-width: 110px;
+  min-height: 30px;
+}
+
+/* ---- 6. Bottom Nav — Stable Padding Reservation ---- */
+/* Ensure page content never underlaps the bottom nav on mobile.
+   This prevents CLS when the bottom nav appears after JS loads.
+   We use !important to override any JS-set inline styles. */
+@media (max-width: 768px) {
+  .page-wrapper {
+    /* 64px capsule height + 20px offset + safe area (for notched phones) */
+    padding-bottom: calc(64px + 20px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+/* ---- 7. Navbar Space Reservation (Desktop) ---- */
+/* Prevent content jumping down when the fixed navbar renders */
+@media (min-width: 769px) {
+  .page-wrapper {
+    /* 64px navbar height + 8px gap */
+    padding-top: calc(64px + 8px) !important;
+  }
+}
+
+/* ---- 8. Scroll Reveal Animation CLS Fix ---- */
+/* The .reveal classes use opacity:0 + transform for animation.
+   This is SAFE for CLS (element still occupies layout space),
+   unlike display:none which removes element from flow.
+   We only ensure visibility:visible to prevent any collapse. */
+.reveal,
+.reveal-left,
+.reveal-right,
+.reveal-scale {
+  /* visibility:visible ensures the element still occupies space.
+     DO NOT set display:none — that causes CLS.
+     The existing opacity:0 in style.css handles initial hide state. */
+  visibility: visible;
+}
+
+/* NOTE: Do NOT override .reveal.visible here — let style.css
+   handle the full opacity+transform transition animation. */
+
+
+/* ---- 9. Transform Containment — Prevent Hover Reflow ---- */
+/* Card hover transforms (translateY) can cause CLS if they
+   shift sibling elements. Use transform-style to isolate. */
+.card,
+.bento-item,
+.stat-card,
+.personality-preview-card,
+.bento-item {
+  /* Promote to composited layer — transform won't affect layout flow */
+  will-change: transform;
+  /* Stabilize rendering context */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ---- 10. Floating Elements — Stable Positioning ---- */
+
+/* Teman chat button: promote to GPU layer to prevent paint shifts */
+.teman-floating {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Bottom nav: ensure it never causes reflow */
+.bottom-nav {
+  will-change: transform;
+}
+
+/* ---- 11. Image Stability ---- */
+/* Prevent any dynamically inserted image from causing CLS */
+img {
+  /* Always declare aspect-ratio or width/height on images */
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---- 12. Heading Rendering Stabilization ---- */
+/* Only set font-smoothing to prevent sub-pixel rendering shifts
+   between fallback font and web font. Do NOT set line-height here
+   as it could override page-specific heading values. */
+h1, h2, h3, h4, h5, h6 {
+  /* Prevent sub-pixel shifts during font loading */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---- 13. Modal Stability ---- */
+/* Modals should never cause scroll-bar induced layout shifts */
+.modal-overlay.active ~ body,
+body.no-scroll {
+  overflow: hidden;
+  /* Prevent scrollbar-width CLS */
+  scrollbar-gutter: stable;
+}
+
+/* ---- 14. Kenali Page Specific: Intro Icon Stability ---- */
+/* Prevent the icon ring pulse animation from causing CLS
+   by ensuring the container doesn't flex-shrink during animation */
+.kenali-intro-icon {
+  /* Prevent shrink in flex containers during ring animation */
+  flex-shrink: 0;
+  /* Ensure absolute children (rings) don't affect layout */
+  position: relative;
+}
+
+/* ---- 15. Dashboard Empty State — Prevent Layout Pop ---- */
+#empty-state {
+  /* Smooth appearance, don't cause layout shift */
+  transition: opacity 0.25s ease;
+}
+
+/* ---- 16. Page-Specific Minimum Heights for Stability ---- */
+/* These ensure sections never collapse to 0 before content loads */
+
+/* Dashboard content area */
+#dashboard-content {
+  min-height: 400px;
+}
+
+/* Kenali quiz section — never collapses */
+#kenali-quiz {
+  /* Start hidden but reserve space */
+  min-height: 0;
+}
+
+/* Kenali result section */
+#kenali-result {
+  min-height: 0;
+}

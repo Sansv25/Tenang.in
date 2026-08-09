@@ -82,6 +82,8 @@ const Main = (() => {
 
   // ---- Bottom Nav (Mobile - Matte Black Capsule) ----
   const createBottomNav = (activePage = '') => {
+    if (document.querySelector('.bottom-nav')) return;
+
     const items = [
       { href: 'beranda.html', label: 'Home', id: 'home', icon: 'grid_view' },
       { href: 'mood-tracker.html', label: 'Mood', id: 'mood', icon: 'sentiment_satisfied' },
@@ -329,17 +331,17 @@ const Main = (() => {
       modal.id = 'low-mood-rec-modal';
       modal.className = 'modal-overlay';
       modal.innerHTML = `
-        <div class="modal" style="max-width:420px; text-align:center;">
+        <div class="modal" style="max-width:420px; text-align:center; background:linear-gradient(135deg, #1E293B, #0F172A); border:1px solid rgba(244,63,94,0.3); box-shadow:0 15px 35px rgba(0,0,0,0.5);">
           <span class="material-symbols-rounded" style="font-size:48px; color:#F43F5E;">favorite</span>
           <h3 style="font-weight:800; color:#fff; margin-top:8px;">Harimu Sedang Berat?</h3>
-          <p style="color:rgba(255,255,255,0.8); font-size:0.875rem; margin-top:8px; line-height:1.5;">
+          <p style="color:rgba(255,255,255,0.85); font-size:0.875rem; margin-top:8px; line-height:1.5;">
             Tidak apa-apa, kamu tidak sendiri. Cobalah fitur katarsis kami yang bisa langsung melegakan perasaanmu saat ini:
           </p>
           <div style="display:flex; flex-direction:column; gap:10px; margin-top:20px;">
-            <button class="btn btn-full" style="background:linear-gradient(135deg, #F97316, #D97706); color:#fff; border:none; font-weight:700;" onclick="document.getElementById('low-mood-rec-modal').classList.remove('active'); window.location.href='jurnal.html';">
+            <button class="btn btn-full" style="background:linear-gradient(135deg, #F97316, #D97706); color:#fff; border:none; font-weight:700; box-shadow:0 4px 15px rgba(249,115,22,0.35);" onclick="document.getElementById('low-mood-rec-modal').classList.remove('active'); window.location.href='jurnal.html';">
               <span class="material-symbols-rounded">local_fire_department</span> Coba "Bakar Beban" di Jurnal
             </button>
-            <button class="btn btn-ghost btn-sm" style="margin-top:4px; color:var(--text-secondary);" onclick="document.getElementById('low-mood-rec-modal').classList.remove('active');">Nanti Saja, Aku Cukup Istirahat</button>
+            <button class="btn btn-ghost btn-sm" style="margin-top:4px; color:rgba(255,255,255,0.7);" onclick="document.getElementById('low-mood-rec-modal').classList.remove('active');">Nanti Saja, Aku Cukup Istirahat</button>
           </div>
         </div>
       `;

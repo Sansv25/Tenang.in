@@ -397,7 +397,7 @@ function togglePasswordVisibility(inputId, btn) {
 }
 
 function handleSocialAuth(provider) {
-  const simulatedUsername = `Teman_${provider}_${Math.floor(100 + Math.random() * 900)}`;
+  const simulatedUsername = 'Sanjaya';
   Animations.showToast(`Menghubungkan ke ${provider}...`, 'info', 1500);
 
   setTimeout(() => {

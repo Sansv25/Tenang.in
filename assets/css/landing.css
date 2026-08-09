@@ -647,9 +647,11 @@ body.preloader-active {
   }
 }
 
-/* Mobile & Tablet Single-Line Main Headline */
-.mobile-hero-title {
-  display: none;
+/* Mobile & Tablet Floating Icon Badges Hidden ONLY on Full Desktop (> 1400px) */
+@media (min-width: 1401px) {
+  .mobile-floating-icons {
+    display: none !important;
+  }
 }
 
 /* Hide floating cards on iPad Pro, Tablets & Laptops (< 1400px) so text & CTA are 100% clean and un-crowded */
@@ -667,6 +669,10 @@ body.preloader-active {
     min-height: auto;
     margin-bottom: 1.25rem;
   }
+}
+
+.mobile-hero-title {
+  display: none;
 }
 
 @media (max-width: 1100px) {
@@ -1099,9 +1105,102 @@ body.preloader-active {
 /* ---- App Showcase Section (Phone Mockup + Side Floating Pills) ---- */
 .showcase-section {
   position: relative;
-  padding: clamp(60px, 7vw, 110px) 0;
-  background: transparent !important;
+  padding: clamp(75px, 8.5vw, 130px) 0 clamp(90px, 9.5vw, 140px);
+  background: linear-gradient(180deg, rgba(91, 143, 212, 0.12) 0%, rgba(61, 107, 175, 0.28) 55%, rgba(30, 58, 110, 0.42) 100%);
   overflow: hidden;
+}
+
+/* Moving SVG Clouds for Showcase Section (Hero Cloud Style) */
+.showcase-clouds-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.showcase-cloud {
+  position: absolute;
+  filter: blur(12px);
+  will-change: transform;
+  opacity: 0.85;
+}
+
+.showcase-cloud-1 {
+  top: 4%;
+  left: -5%;
+  width: 380px;
+  animation: cloudFloatX1 35s ease-in-out infinite alternate;
+}
+
+.showcase-cloud-2 {
+  top: 22%;
+  right: -4%;
+  width: 440px;
+  animation: cloudFloatX2 40s ease-in-out infinite alternate;
+}
+
+.showcase-cloud-3 {
+  bottom: 14%;
+  left: 6%;
+  width: 330px;
+  animation: cloudFloatX3 36s ease-in-out infinite alternate;
+}
+
+.showcase-cloud-4 {
+  bottom: 4%;
+  right: 8%;
+  width: 360px;
+  animation: cloudFloatX1 42s ease-in-out infinite alternate-reverse;
+}
+
+/* Ambient Glow Orbs for Ultra-Smooth Section Color Blending */
+.showcase-ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.showcase-ambient-glow.glow-top {
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(126, 200, 227, 0.22) 0%, rgba(91, 143, 212, 0) 70%);
+  filter: blur(80px);
+}
+
+.showcase-ambient-glow.glow-bottom {
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(61, 107, 175, 0.45) 0%, rgba(11, 21, 40, 0) 75%);
+  filter: blur(95px);
+}
+
+@media (max-width: 768px) {
+  .showcase-cloud-1 {
+    width: 220px;
+    top: 2%;
+  }
+  .showcase-cloud-2 {
+    width: 260px;
+    top: 15%;
+  }
+  .showcase-cloud-3 {
+    width: 200px;
+    bottom: 12%;
+  }
+  .showcase-cloud-4 {
+    width: 220px;
+    bottom: 3%;
+  }
 }
 
 .showcase-container {
@@ -1366,6 +1465,11 @@ body.preloader-active {
     flex-wrap: wrap;
     justify-content: center;
     gap: 16px;
+  }
+
+  /* Sembunyikan kolom pill sebelah kanan pada tampilan mobile / layar kecil */
+  .showcase-right {
+    display: none !important;
   }
 
   .showcase-center {
@@ -2557,9 +2661,108 @@ body.preloader-active {
   }
 }
 
-/* ==========================================================================
-   COMPREHENSIVE RESPONSIVE OVERRIDES (Tablet → Mobile → Small Phone)
-   ========================================================================== */
+/* ---- TABLET & LAPTOP REPLACEMENT FLOATING ICONS (< 1400px) ---- */
+@media (max-width: 1400px) {
+  .hero-text-center {
+    position: relative;
+  }
+
+  .mobile-floating-icons {
+    display: block !important;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .mobile-float-item {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1.5px solid rgba(255, 255, 255, 0.38);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32), inset 0 1px 1.5px rgba(255, 255, 255, 0.5), 0 0 22px rgba(255, 255, 255, 0.18);
+    will-change: transform;
+  }
+
+  .mobile-float-item .material-symbols-rounded {
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.35));
+  }
+
+  /* 1. Top Left */
+  .mobile-float-top-left {
+    width: 46px;
+    height: 46px;
+    border-radius: 16px;
+    top: -10px;
+    left: 4%;
+    transform: rotate(-6deg);
+    animation: mobileFloatTL 5.8s ease-in-out infinite alternate;
+  }
+
+  .mobile-float-top-left .material-symbols-rounded {
+    font-size: 23px;
+  }
+
+  /* 2. Top Right */
+  .mobile-float-top-right {
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    top: 16px;
+    right: 5%;
+    transform: rotate(8deg);
+    animation: mobileFloatTR 4.4s ease-in-out infinite alternate;
+  }
+
+  .mobile-float-top-right .material-symbols-rounded {
+    font-size: 20px;
+  }
+
+  /* 3. Bottom Left (Below left button, zero overlap) */
+  .mobile-float-bottom-left {
+    width: 42px;
+    height: 42px;
+    border-radius: 15px;
+    bottom: -64px;
+    left: 4%;
+    transform: rotate(-8deg);
+    animation: mobileFloatBL 6.2s ease-in-out infinite alternate;
+  }
+
+  .mobile-float-bottom-left .material-symbols-rounded {
+    font-size: 21px;
+  }
+
+  /* 4. Bottom Off-Center (Below button row center, zero overlap) */
+  .mobile-float-bottom-center {
+    width: 44px;
+    height: 44px;
+    border-radius: 16px;
+    bottom: -88px;
+    left: 45%;
+    transform: rotate(4deg);
+    animation: mobileFloatBC 5.1s ease-in-out infinite alternate;
+  }
+
+  .mobile-float-bottom-center .material-symbols-rounded {
+    font-size: 22px;
+  }
+
+  /* 5. Bottom Right (Below right button, zero overlap) */
+  .mobile-float-bottom-right {
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    bottom: -60px;
+    right: 5%;
+    transform: rotate(-5deg);
+    animation: mobileFloatBR 5.5s ease-in-out infinite alternate;
+  }
+}
 
 /* ---- TABLET (max-width: 1023px) ---- */
 @media (max-width: 1023px) {
@@ -2593,6 +2796,151 @@ body.preloader-active {
 
 /* ---- MOBILE (max-width: 768px) ---- */
 @media (max-width: 768px) {
+  /* Perfect vertical & horizontal centering for hero section on mobile */
+  .hero {
+    min-height: calc(100vh - 64px);
+    padding: 105px var(--space-md) 55px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-container {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-text-center {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .hero-title-stage {
+    min-height: auto;
+    margin-bottom: 0.85rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .mobile-hero-title {
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+
+  .mobile-hero-subtitle {
+    text-align: center !important;
+    margin: 0 auto 1.5rem !important;
+  }
+
+  .hero-actions {
+    justify-content: center !important;
+    width: 100%;
+  }
+
+  /* Mobile Ambient Floating Icon Badges Stage */
+  .mobile-floating-icons {
+    display: block !important;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  /* Organic Asymmetrical Floating Icon Badges */
+  .mobile-float-item {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1.5px solid rgba(255, 255, 255, 0.38);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32), inset 0 1px 1.5px rgba(255, 255, 255, 0.5), 0 0 22px rgba(255, 255, 255, 0.18);
+    will-change: transform;
+  }
+
+  .mobile-float-item .material-symbols-rounded {
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.35));
+  }
+
+  /* 1. Top Left (Asymmetrical higher, rotated -6deg, 46px) */
+  .mobile-float-top-left {
+    width: 46px;
+    height: 46px;
+    border-radius: 16px;
+    top: -10px;
+    left: 4%;
+    transform: rotate(-6deg);
+    animation: mobileFloatTL 5.8s ease-in-out infinite alternate;
+  }
+
+  .mobile-float-top-left .material-symbols-rounded {
+    font-size: 23px;
+  }
+
+  /* 2. Top Right (Asymmetrical lower near title shoulder, rotated 8deg, 40px) */
+  .mobile-float-top-right {
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    top: 16px;
+    right: 5%;
+    transform: rotate(8deg);
+    animation: mobileFloatTR 4.4s ease-in-out infinite alternate;
+  }
+
+  .mobile-float-top-right .material-symbols-rounded {
+    font-size: 20px;
+  }
+
+  /* 3. Bottom Left (Below left button, zero overlap, tilted -8deg, 42px) */
+  .mobile-float-bottom-left {
+    width: 42px;
+    height: 42px;
+    border-radius: 15px;
+    bottom: -64px;
+    left: 4%;
+    transform: rotate(-8deg);
+    animation: mobileFloatBL 6.2s ease-in-out infinite alternate;
+  }
+
+  .mobile-float-bottom-left .material-symbols-rounded {
+    font-size: 21px;
+  }
+
+  /* 4. Bottom Off-Center (Below button row center, zero overlap, tilted 4deg, 44px) */
+  .mobile-float-bottom-center {
+    width: 44px;
+    height: 44px;
+    border-radius: 16px;
+    bottom: -88px;
+    left: 45%;
+    transform: rotate(4deg);
+    animation: mobileFloatBC 5.1s ease-in-out infinite alternate;
+  }
+
+  .mobile-float-bottom-center .material-symbols-rounded {
+    font-size: 22px;
+  }
+
+  /* 5. Bottom Right (Below right button, zero overlap, tilted -5deg, 40px) */
+  .mobile-float-bottom-right {
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    bottom: -60px;
+    right: 5%;
+    transform: rotate(-5deg);
+    animation: mobileFloatBR 5.5s ease-in-out infinite alternate;
+  }
+
+  .mobile-float-bottom-right .material-symbols-rounded {
+    font-size: 20px;
+  }
+
   /* Global section spacing tightened */
   .features-section,
   .how-section,
@@ -2613,11 +2961,6 @@ body.preloader-active {
   /* Floating hover cards: hide ALL on mobile to prevent overlap */
   .floating-icons-stage {
     display: none !important;
-  }
-
-  .hero-title-stage {
-    min-height: auto;
-    margin-bottom: var(--space-md);
   }
 
   /* Hero actions compact */
@@ -2789,14 +3132,83 @@ body.preloader-active {
 
 /* ---- SMALL PHONE (max-width: 480px) ---- */
 @media (max-width: 480px) {
+  .hero {
+    padding: 95px var(--space-md) 45px !important;
+  }
+
   .mobile-hero-title {
-    font-size: clamp(1.6rem, 7vw, 2.2rem) !important;
+    font-size: clamp(1.85rem, 8vw, 2.4rem) !important;
+    text-align: center !important;
+    margin: 0 auto !important;
   }
 
   .mobile-hero-subtitle {
-    font-size: 0.88rem !important;
+    font-size: 0.9rem !important;
     max-width: 320px !important;
+    text-align: center !important;
+    margin: 0 auto 1.5rem !important;
   }
+
+  .mobile-float-item {
+    width: 38px;
+    height: 38px;
+    border-radius: 14px;
+  }
+
+  .mobile-float-item .material-symbols-rounded {
+    font-size: 19px;
+  }
+
+  .mobile-float-top-left {
+    top: -12px;
+    left: 4%;
+  }
+
+  .mobile-float-top-right {
+    top: 14px;
+    right: 4%;
+  }
+
+  .mobile-float-bottom-left {
+    bottom: -64px;
+    left: 4%;
+  }
+
+  .mobile-float-bottom-center {
+    bottom: -88px;
+    left: 40%;
+  }
+
+  .mobile-float-bottom-right {
+    bottom: -60px;
+    right: 4%;
+  }
+
+/* Organic Multi-Axis Floating Animations (Safe Inset Boundaries & Downward Drift) */
+@keyframes mobileFloatTL {
+  0% { transform: translate3d(0, 0, 0) rotate(-6deg) scale(1); }
+  100% { transform: translate3d(-3px, -10px, 0) rotate(4deg) scale(1.05); }
+}
+
+@keyframes mobileFloatTR {
+  0% { transform: translate3d(0, 0, 0) rotate(8deg) scale(1); }
+  100% { transform: translate3d(4px, -9px, 0) rotate(-6deg) scale(0.95); }
+}
+
+@keyframes mobileFloatBL {
+  0% { transform: translate3d(0, 0, 0) rotate(-8deg) scale(1); }
+  100% { transform: translate3d(-4px, 8px, 0) rotate(-14deg) scale(1.06); }
+}
+
+@keyframes mobileFloatBC {
+  0% { transform: translate3d(0, 0, 0) rotate(4deg) scale(1); }
+  100% { transform: translate3d(6px, 8px, 0) rotate(-4deg) scale(1.04); }
+}
+
+@keyframes mobileFloatBR {
+  0% { transform: translate3d(0, 0, 0) rotate(-5deg) scale(1); }
+  100% { transform: translate3d(4px, 9px, 0) rotate(7deg) scale(0.96); }
+}
 
   .hero-badge {
     font-size: 0.65rem;
@@ -3008,7 +3420,6 @@ body {
 .landing-page section,
 .landing-page .section,
 .landing-page .stats-section,
-.landing-page .showcase-section,
 .landing-page .features-section,
 .landing-page .how-section,
 .landing-page .teman-section,

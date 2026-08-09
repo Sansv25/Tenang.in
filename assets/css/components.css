@@ -385,71 +385,137 @@
   color: var(--text-on-white);
 }
 
-/* ---- Toast Notifications ---- */
+/* ---- Ultra-Premium Glassmorphic Toast Notifications ---- */
 .toast-container {
   position: fixed;
-  top: var(--space-xl);
-  right: var(--space-lg);
+  top: 24px;
+  right: 24px;
   z-index: var(--z-toast);
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  align-items: flex-end;
+  gap: 12px;
   pointer-events: none;
 }
 
 @media (max-width: 768px) {
   .toast-container {
-    left: var(--space-lg);
-    right: var(--space-lg);
-    top: 80px;
+    top: calc(20px + env(safe-area-inset-top, 0px));
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: calc(100% - 32px);
+    max-width: 420px;
+    align-items: center;
   }
 }
 
 .toast {
-  background: var(--card-surface);
-  color: var(--text-on-white);
-  padding: var(--space-md) var(--space-lg);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  color: #FFFFFF;
+  padding: 10px 20px 10px 12px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
-  gap: var(--space-md);
-  font-size: 0.9375rem;
-  font-weight: 500;
+  gap: 12px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   pointer-events: auto;
-  animation: toastSlideIn 0.4s var(--transition-spring) forwards;
-  max-width: 400px;
+  animation: toastSpringIn 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  max-width: 420px;
+  width: max-content;
+  box-sizing: border-box;
 }
 
 .toast.toast-out {
-  animation: toastSlideOut 0.3s ease forwards;
+  animation: toastSpringOut 0.3s cubic-bezier(0.4, 0, 1, 1) forwards;
 }
 
-.toast-icon {
-  font-size: 1.25rem;
+.toast-icon-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 
-.toast-success { border-left: 4px solid var(--success); }
-.toast-warning { border-left: 4px solid var(--warning); }
-.toast-info { border-left: 4px solid var(--secondary-accent); }
-
-@keyframes toastSlideIn {
-  from { transform: translateX(100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+.toast-icon {
+  font-size: 18px;
 }
 
-@keyframes toastSlideOut {
-  from { transform: translateX(0); opacity: 1; }
-  to { transform: translateX(100%); opacity: 0; }
+.toast-message {
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Toast Color Themes */
+.toast-success {
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.2);
+}
+.toast-success .toast-icon-badge {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(5, 150, 105, 0.5));
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  color: #34D399;
+}
+
+.toast-warning {
+  border-color: rgba(245, 158, 11, 0.35);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(245, 158, 11, 0.2);
+}
+.toast-warning .toast-icon-badge {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.3), rgba(217, 119, 6, 0.5));
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  color: #FBBF24;
+}
+
+.toast-info {
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.2);
+}
+.toast-info .toast-icon-badge {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.3), rgba(37, 99, 235, 0.5));
+  border: 1px solid rgba(56, 189, 248, 0.5);
+  color: #38BDF8;
+}
+
+@keyframes toastSpringIn {
+  0% { transform: translateY(-30px) scale(0.85); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@keyframes toastSpringOut {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-20px) scale(0.85); opacity: 0; }
 }
 
 /* ---- Chat Bubble (Teman) ---- */
 .teman-floating {
   position: fixed;
-  bottom: 96px;
+  bottom: calc(90px + env(safe-area-inset-bottom, 0px));
   right: var(--space-lg);
   z-index: var(--z-floating);
+}
+
+@media (max-width: 768px) {
+  .teman-floating {
+    bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
+    right: 14px !important;
+  }
+
+  .teman-btn {
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 1.35rem !important;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45) !important;
+  }
 }
 
 @media (min-width: 769px) {
@@ -1483,30 +1549,64 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 24px 12px 10px;
-  min-height: 280px;
+  padding: 16px 8px 10px;
+  min-height: 240px;
 }
 
 .realistic-paper-card {
   position: relative;
   width: 100%;
   max-width: 520px;
-  min-height: 220px;
+  aspect-ratio: 1.85 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: linear-gradient(135deg, #FFFDF0 0%, #F6EFC2 60%, #EADC92 100%);
   border: 1px solid #D1C588;
   border-radius: 10px;
-  padding: 28px 32px;
+  padding: 22px 26px;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(180, 150, 80, 0.25);
   transform-style: preserve-3d;
   transform: rotateX(5deg) translateZ(0);
   transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   overflow: hidden;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .realistic-paper-card:hover {
   transform: rotateX(7deg) translateY(-5px);
   box-shadow: 0 20px 45px rgba(249, 115, 22, 0.4), inset 0 0 40px rgba(180, 150, 80, 0.35);
+}
+
+@media (max-width: 640px) {
+  .burn-3d-wrapper {
+    padding: 8px 4px 6px;
+    min-height: 170px;
+  }
+
+  .realistic-paper-card {
+    aspect-ratio: 1.85 / 1 !important;
+    padding: 12px 14px !important;
+  }
+
+  .realistic-paper-card-header {
+    padding-bottom: 6px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .realistic-paper-card-header span {
+    font-size: 0.65rem !important;
+    letter-spacing: 1px !important;
+  }
+
+  #paper-card-content {
+    font-size: clamp(0.72rem, 2.7vw, 0.95rem) !important;
+    line-height: 1.45 !important;
+    min-height: unset !important;
+    max-height: 100px !important;
+    overflow-y: auto !important;
+  }
 }
 
 .realistic-paper-card.is-burning {

@@ -64,8 +64,10 @@ const Animations = (() => {
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
     toast.innerHTML = `
-      <span class="material-symbols-rounded toast-icon">${icons[type] || icons.info}</span>
-      <span>${message}</span>
+      <div class="toast-icon-badge">
+        <span class="material-symbols-rounded toast-icon">${icons[type] || icons.info}</span>
+      </div>
+      <span class="toast-message">${message}</span>
     `;
     container.appendChild(toast);
 

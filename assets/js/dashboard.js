@@ -176,13 +176,13 @@ function renderStats() {
   const avgMoodEl = document.getElementById('stat-avg-mood');
   if (avgMoodEl) {
     if (avg === 0 || !weekMoods.length) {
-      avgMoodEl.innerHTML = `<span style="font-size:1.4rem; color:#64748B; font-weight:750;">-</span>`;
+      avgMoodEl.innerHTML = `<span style="font-size:2rem; font-weight:850; color:#64748B;">-</span>`;
     } else {
       const floatAvg = (weekMoods.reduce((a,b) => a+b, 0) / weekMoods.length).toFixed(1);
       avgMoodEl.innerHTML = `
-        <div style="display:inline-flex; align-items:center; justify-content:center; gap:6px; background:${avgColors[avg]}15; color:${avgColors[avg]}; border: 1.5px solid ${avgColors[avg]}40; padding: 4px 14px; border-radius:24px; box-shadow:0 2px 6px rgba(0,0,0,0.05); margin-top:2px;">
-          <span class="material-symbols-rounded" style="font-size:24px; color:${avgColors[avg]}; margin:0;">${avgIcons[avg]}</span>
-          <span style="font-size:1.15rem; font-weight:800; letter-spacing:-0.02em; color:${avgColors[avg]};">${avgLabels[avg]} (${floatAvg})</span>
+        <div style="display:flex; align-items:center; justify-content:center; gap:6px; margin: 4px 0;">
+          <span style="font-size: 2.2rem; font-weight: 850; color: ${avgColors[avg]}; line-height: 1;">${floatAvg}</span>
+          <span style="font-size: 0.72rem; font-weight: 800; color: ${avgColors[avg]}; background: ${avgColors[avg]}1A; border: 1px solid ${avgColors[avg]}40; padding: 2px 8px; border-radius: 10px; white-space: nowrap;">${avgLabels[avg]}</span>
         </div>`;
     }
   }
