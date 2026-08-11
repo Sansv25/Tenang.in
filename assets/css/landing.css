@@ -1435,39 +1435,102 @@ body.preloader-active {
 }
 
 /* Responsive Showcase Layout */
-@media (max-width: 1200px) {
+@media (max-width: 1200px) and (min-width: 769px) {
   .showcase-container {
-    grid-template-columns: minmax(0, 1fr) 380px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) clamp(270px, 32vw, 360px) minmax(0, 1fr);
+    gap: clamp(6px, 1.5vw, 18px);
+  }
+
+  .showcase-column {
+    gap: 24px;
+  }
+
+  .showcase-pill {
+    padding: 5px 6px 5px 11px;
+    gap: 8px;
+  }
+
+  .showcase-pill-text {
+    font-size: 0.74rem;
+  }
+
+  .showcase-pill-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .showcase-pill-icon .material-symbols-rounded {
+    font-size: 13px;
+  }
+
+  .showcase-pill-badge {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+  }
+
+  .showcase-pill-badge .material-symbols-rounded {
+    font-size: 12px;
+  }
+
+  /* Smaller stagger offset on tablet to avoid horizontal overflow */
+  .showcase-left .showcase-pill:nth-child(1).aos-animate,
+  .showcase-left .showcase-pill:nth-child(1).active {
+    transform: translateX(10px) scale(1);
+  }
+
+  .showcase-left .showcase-pill:nth-child(2).aos-animate,
+  .showcase-left .showcase-pill:nth-child(2).active {
+    transform: translateX(-6px) scale(1);
+  }
+
+  .showcase-left .showcase-pill:nth-child(3).aos-animate,
+  .showcase-left .showcase-pill:nth-child(3).active {
+    transform: translateX(12px) scale(1);
+  }
+
+  .showcase-right .showcase-pill:nth-child(1).aos-animate,
+  .showcase-right .showcase-pill:nth-child(1).active {
+    transform: translateX(-10px) scale(1);
+  }
+
+  .showcase-right .showcase-pill:nth-child(2).aos-animate,
+  .showcase-right .showcase-pill:nth-child(2).active {
+    transform: translateX(6px) scale(1);
+  }
+
+  .showcase-right .showcase-pill:nth-child(3).aos-animate,
+  .showcase-right .showcase-pill:nth-child(3).active {
+    transform: translateX(-8px) scale(1);
   }
 }
 
-@media (max-width: 991px) {
+@media (max-width: 768px) {
   .showcase-container {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 24px;
   }
 
   [data-aos="emerge-left"],
   [data-aos="emerge-right"] {
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
 
   .showcase-left .showcase-pill.aos-animate,
-  .showcase-left .showcase-pill.active,
-  .showcase-right .showcase-pill.aos-animate,
-  .showcase-right .showcase-pill.active {
+  .showcase-left .showcase-pill.active {
     transform: translateY(0) !important;
   }
 
   .showcase-column {
     align-items: center !important;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 16px;
+    flex-direction: column;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+    gap: 12px;
   }
 
-  /* Sembunyikan kolom pill sebelah kanan pada tampilan mobile / layar kecil */
+  /* Sembunyikan kolom pill kanan pada mobile agar tampil tepat 3 pill utama di bawah iPhone */
   .showcase-right {
     display: none !important;
   }
@@ -1477,7 +1540,7 @@ body.preloader-active {
   }
 
   .showcase-phone-stage {
-    max-width: 340px;
+    max-width: 290px;
   }
 }
 
@@ -1485,16 +1548,16 @@ body.preloader-active {
   .showcase-pill {
     width: 100%;
     justify-content: space-between;
-    padding: 6px 8px 6px 12px;
+    padding: 8px 12px;
   }
 
   .showcase-pill-text {
-    font-size: 0.78rem;
+    font-size: 0.82rem;
     white-space: normal;
   }
 
   .showcase-phone-stage {
-    max-width: 270px;
+    max-width: 250px;
   }
 }
 
