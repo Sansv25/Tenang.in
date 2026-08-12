@@ -77,8 +77,8 @@ function renderMoodForm() {
     const labels = { 1: 'Buruk', 2: 'Kurang Baik', 3: 'Biasa', 4: 'Baik', 5: 'Luar Biasa' };
     formEl.innerHTML = `
       <div class="card text-center" style="padding: 1.5rem 1.75rem;">
-        <div style="margin-bottom:var(--space-sm);">
-          <span class="material-symbols-rounded" style="font-size:48px; color:${colors[today.level]};">${icons[today.level]}</span>
+        <div style="margin-bottom:var(--space-sm); display:flex; justify-content:center;">
+          <img src="assets/img/maskots/mascot-mood-${today.level}.png" alt="${labels[today.level]}" style="width:200px; height:200px; object-fit:contain; transform:scale(1.4); filter:drop-shadow(0 12px 30px rgba(0,0,0,0.18)); margin:-20px auto -10px;">
         </div>
         <h3 style="font-weight:700; margin-bottom:var(--space-xs); color:var(--text-on-white);">${labels[today.level]}</h3>
         <p style="font-size:var(--caption-size); color:var(--text-secondary);">Mood hari ini sudah tercatat</p>
@@ -157,23 +157,23 @@ function getMoodFormHTML() {
       <h3 style="font-weight:700; margin-bottom:var(--space-lg); text-align:center; color:var(--text-on-white);">Bagaimana perasaanmu hari ini?</h3>
       <div class="emoji-selector" id="mood-emojis">
         <button class="emoji-btn" onclick="selectMoodTracker(1)">
-          <span class="material-symbols-rounded" style="font-size:32px; color:var(--mood-1);">sentiment_very_dissatisfied</span>
+          <img src="assets/img/maskots/mascot-mood-1.png" alt="Buruk" class="emoji-mascot-img">
           <span class="emoji-label">Buruk</span>
         </button>
         <button class="emoji-btn" onclick="selectMoodTracker(2)">
-          <span class="material-symbols-rounded" style="font-size:32px; color:var(--mood-2);">sentiment_dissatisfied</span>
+          <img src="assets/img/maskots/mascot-mood-2.png" alt="Kurang" class="emoji-mascot-img">
           <span class="emoji-label">Kurang</span>
         </button>
         <button class="emoji-btn" onclick="selectMoodTracker(3)">
-          <span class="material-symbols-rounded" style="font-size:32px; color:var(--mood-3);">sentiment_neutral</span>
+          <img src="assets/img/maskots/mascot-mood-3.png" alt="Biasa" class="emoji-mascot-img">
           <span class="emoji-label">Biasa</span>
         </button>
         <button class="emoji-btn" onclick="selectMoodTracker(4)">
-          <span class="material-symbols-rounded" style="font-size:32px; color:var(--mood-4);">sentiment_satisfied</span>
+          <img src="assets/img/maskots/mascot-mood-4.png" alt="Baik" class="emoji-mascot-img">
           <span class="emoji-label">Baik</span>
         </button>
         <button class="emoji-btn" onclick="selectMoodTracker(5)">
-          <span class="material-symbols-rounded" style="font-size:32px; color:var(--mood-5);">sentiment_very_satisfied</span>
+          <img src="assets/img/maskots/mascot-mood-5.png" alt="Luar Biasa" class="emoji-mascot-img">
           <span class="emoji-label">Luar Biasa</span>
         </button>
       </div>
@@ -374,8 +374,8 @@ function renderInsights() {
       
       <!-- Header -->
       <div style="background:linear-gradient(135deg, #1E3A5F, #2563EB); padding:20px 24px; display:flex; align-items:center; justify-content:space-between;">
-        <div style="display:flex; align-items:center; gap:10px;">
-          <span class="material-symbols-rounded" style="color:#fff; font-size:24px;">neurology</span>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <img src="assets/img/maskots/mascot-listening.png" alt="Teman AI" style="width:34px; height:34px; object-fit:contain; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.15));">
           <span style="color:#fff; font-weight:700; font-size:1rem;">Analisa Teman AI</span>
         </div>
         <span style="background:rgba(255,255,255,0.2); backdrop-filter:blur(8px); color:#fff; font-size:0.7rem; font-weight:600; padding:4px 12px; border-radius:20px;">

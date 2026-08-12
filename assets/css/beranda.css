@@ -317,6 +317,27 @@
   transition: transform 0.3s ease;
 }
 
+.mood-card-mascot-img {
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+  transform: scale(1.28);
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.14));
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.mood-card-item:hover .mood-card-mascot-img {
+  transform: scale(1.42) rotate(6deg);
+}
+
+@media (max-width: 640px) {
+  .mood-card-mascot-img {
+    width: 68px;
+    height: 68px;
+    transform: scale(1.2);
+  }
+}
+
 .mood-card-item:hover .mood-card-icon {
   transform: scale(1.15) rotate(6deg);
 }

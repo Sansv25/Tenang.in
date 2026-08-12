@@ -38,8 +38,8 @@ async function loadPrompt() {
 
     promptEl.innerHTML = `
       <div class="card" style="padding:var(--space-lg); border-left:4px solid var(--primary-accent);">
-        <div style="font-size:0.8125rem; font-weight:600; color:var(--primary-accent); margin-bottom:var(--space-xs); display:flex; align-items:center; gap:6px;">
-          <span class="material-symbols-rounded" style="font-size:18px;">lightbulb</span>
+        <div style="font-size:0.8125rem; font-weight:600; color:var(--primary-accent); margin-bottom:var(--space-xs); display:flex; align-items:center; gap:8px;">
+          <img src="assets/img/maskots/mascot-confused.png" alt="Milo Reflecting" style="width:24px; height:24px; object-fit:contain;">
           <span>Prompt Hari Ini</span>
         </div>
         <p style="font-size:1.0625rem; font-weight:500; line-height:1.6; color:var(--text-on-white);">${prompt.text}</p>

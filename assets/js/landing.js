@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Pilihan goal pada step 3
   document.querySelectorAll('.onboarding-choices .choice-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
+    btn.addEventListener('click', function () {
       document.querySelectorAll('.onboarding-choices .choice-btn').forEach(b => b.classList.remove('selected'));
       this.classList.add('selected');
       localStorage.setItem('tenang_user_goal', this.getAttribute('data-value') || '');
@@ -614,8 +614,8 @@ function initAuroraCanvas() {
       // Asynchronous Spine position calculator for organic non-parallel snake curves
       function getSpineY(x) {
         return height * arc.yBaseRatio +
-               Math.sin(x * arc.freqX + time * arc.speed * 10 + arc.phaseShift) * arc.ampY +
-               Math.cos(x * arc.freqX2 - time * arc.speed * 8 + arc.phaseShift * 1.5) * arc.ampY2;
+          Math.sin(x * arc.freqX + time * arc.speed * 10 + arc.phaseShift) * arc.ampY +
+          Math.cos(x * arc.freqX2 - time * arc.speed * 8 + arc.phaseShift * 1.5) * arc.ampY2;
       }
 
       for (let x = -20; x < width + 20; x += step) {

@@ -207,7 +207,7 @@ function showResult(type, resultScores, isNew = true) {
     <div class="kenali-result-hero kenali-fade-in">
       <div class="kenali-result-icon-wrap">
         <div class="kenali-result-icon-circle ${typeClass}">
-          <span class="material-symbols-rounded">${iconName}</span>
+          <img src="assets/img/maskots/mascot-cheerful.png" alt="${result.name}" style="width:56px; height:56px; object-fit:contain; filter:drop-shadow(0 4px 8px rgba(0,0,0,0.15));">
         </div>
       </div>
       <h2 class="kenali-result-name">${result.name}</h2>

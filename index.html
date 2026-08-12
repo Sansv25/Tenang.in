@@ -3,15 +3,15 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="description"
     content="Tenang.in — Ruang digital untuk membantu remaja mengenali pola emosi, merefleksikan diri, dan merasa tidak sendirian. 100% privat dan gratis.">
   <meta name="theme-color" content="#5B8FD4">
   <title>Tenang.in — Ruang Amanmu untuk Refleksi Diri</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -42,7 +42,8 @@
   <link rel="stylesheet" href="assets/css/settings.css">
 </head>
 
-<body class="landing-page preloader-active bg-gradient-to-b from-[#5B8FD4] via-[#3D6BAF] to-[#0B1528] min-h-screen text-white overflow-x-hidden">
+<body
+  class="landing-page preloader-active bg-gradient-to-b from-[#5B8FD4] via-[#3D6BAF] to-[#0B1528] min-h-screen text-white overflow-x-hidden">
 
   <!-- ======= PRELOADER (LOADING SCREEN) ======= -->
   <div class="preloader" id="preloader">
@@ -85,7 +86,8 @@
           <a href="#teman-ai" class="landing-link">Teman AI</a>
           <a href="#bantuan" class="landing-link" style="color:#FDE68A; font-weight:700;">Bantuan</a>
         </nav>
-        <a href="javascript:void(0)" class="btn-rounded-start btn-mulai-sekarang" onclick="handleMulaiSekarang(event)" aria-label="Mulai Refleksi Sekarang">
+        <a href="javascript:void(0)" class="btn-rounded-start btn-mulai-sekarang" onclick="handleMulaiSekarang(event)"
+          aria-label="Mulai Refleksi Sekarang">
           <span>Mulai</span>
           <span class="material-symbols-rounded btn-arrow-icon">arrow_forward</span>
         </a>
@@ -145,49 +147,29 @@
 
             <!-- STATE 1: CALM & ZEN (DEFAULT STATE) -->
             <div class="icon-group state-calm active" data-group="calm">
-              <div class="hover-card float-top-left float-anim-1">
-                <div class="hover-card-img-wrap">
-                  <img
-                    src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=200&auto=format&fit=crop&q=80"
-                    alt="Zen Leaf">
-                </div>
-                <div class="hover-card-text">
-                  <span class="hover-card-title">Ketenangan Alami 🌿</span>
-                  <span class="hover-card-sub">Damai dalam tubuh & pikiran</span>
-                </div>
+              <div class="hover-pill float-top-left float-anim-1">
+                <span class="material-symbols-rounded icon-badge" style="color: #86EFAC;">spa</span>
+                <span>Ketenangan Alami</span>
               </div>
 
-              <div class="hover-card float-top-right float-anim-2">
-                <div class="hover-card-img-wrap">
-                  <img
-                    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&auto=format&fit=crop&q=80"
-                    alt="Water Ripples">
-                </div>
-                <div class="hover-card-text">
-                  <span class="hover-card-title">Inner Peace ✨</span>
-                  <span class="hover-card-sub">Ruang bebas bernapas</span>
-                </div>
+              <div class="hover-pill float-top-right float-anim-2">
+                <span class="material-symbols-rounded icon-badge" style="color: #FDE68A;">self_improvement</span>
+                <span>Inner Peace</span>
               </div>
 
               <div class="hover-pill float-mid-left float-anim-3">
-                <span class="material-symbols-rounded icon-badge text-success">self_improvement</span>
-                <span>Tarik Napas Dalam 🧘</span>
+                <span class="material-symbols-rounded icon-badge" style="color: #FCD34D;">air</span>
+                <span>Tarik Napas Dalam</span>
               </div>
 
               <div class="hover-pill float-mid-right float-anim-4">
-                <span class="material-symbols-rounded icon-badge text-primary">spa</span>
-                <span>Kenyamanan Hati 🍃</span>
+                <span class="material-symbols-rounded icon-badge" style="color: #F97316;">spa</span>
+                <span>Kenyamanan Hati</span>
               </div>
 
-              <div class="hover-card mini float-bottom-left float-anim-5">
-                <div class="hover-card-img-wrap">
-                  <img
-                    src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=200&auto=format&fit=crop&q=80"
-                    alt="Peaceful Forest">
-                </div>
-                <div class="hover-card-text">
-                  <span class="hover-card-title">Harmoni Diri 🌲</span>
-                </div>
+              <div class="hover-pill float-bottom-left float-anim-5">
+                <span class="material-symbols-rounded icon-badge" style="color: #F9A8D4;">forest</span>
+                <span>Harmoni Diri</span>
               </div>
 
               <div class="hover-pill float-bottom-right float-anim-6">
@@ -198,100 +180,67 @@
 
             <!-- STATE 2: EMOTION & MOOD TRACKER -->
             <div class="icon-group state-emotion" data-group="emotion">
-              <div class="hover-card float-top-left float-anim-2">
-                <div class="hover-card-emoji">😊</div>
-                <div class="hover-card-text">
-                  <span class="hover-card-title">Mood Hari Ini</span>
-                  <span class="hover-card-sub" style="color: #60A5FA; font-weight: 700;">Positif & Terbuka ✨</span>
-                </div>
+              <div class="hover-pill float-top-left float-anim-2">
+                <span class="material-symbols-rounded icon-badge" style="color: #FDE68A;">sentiment_very_satisfied</span>
+                <span>Mood Hari Ini</span>
               </div>
 
-              <div class="hover-card float-top-right float-anim-3">
-                <div class="hover-card-img-wrap">
-                  <img
-                    src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=200&auto=format&fit=crop&q=80"
-                    alt="Warm Light">
-                </div>
-                <div class="hover-card-text">
-                  <span class="hover-card-title">Kenali Pola Emosimu ☀️</span>
-                  <span class="hover-card-sub">Tanpa rasa dihakimi</span>
-                </div>
+              <div class="hover-pill float-top-right float-anim-3">
+                <span class="material-symbols-rounded icon-badge" style="color: #FCA5A5;">sunny</span>
+                <span>Kenali Pola Emosimu</span>
               </div>
 
               <div class="hover-pill float-mid-left float-anim-1">
-                <span class="material-symbols-rounded icon-badge text-warning">local_fire_department</span>
-                <span>Konsisten 7 Hari Streak 🔥</span>
+                <span class="material-symbols-rounded icon-badge" style="color: #FB923C;">local_fire_department</span>
+                <span>Konsisten 7 Hari Streak</span>
               </div>
 
               <div class="hover-pill float-mid-right float-anim-5">
-                <span class="material-symbols-rounded icon-badge text-primary">sentiment_very_satisfied</span>
+                <span class="material-symbols-rounded icon-badge" style="color: #34D399;">sentiment_very_satisfied</span>
                 <span>Ekspresikan Sejujur-jujurnya</span>
               </div>
 
               <div class="hover-pill float-bottom-left float-anim-4">
-                <span class="material-symbols-rounded icon-badge text-primary">insights</span>
-                <span>Chart Visual Emosi Harian 📊</span>
+                <span class="material-symbols-rounded icon-badge" style="color: #FB923C;">insights</span>
+                <span>Chart Visual Emosi Harian</span>
               </div>
 
-              <div class="hover-card mini float-bottom-right float-anim-6">
-                <div class="hover-card-img-wrap">
-                  <img
-                    src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=200&auto=format&fit=crop&q=80"
-                    alt="Warm sunset">
-                </div>
-                <div class="hover-card-text">
-                  <span class="hover-card-title">Pahami Hatimu 💛</span>
-                </div>
+              <div class="hover-pill float-bottom-right float-anim-6">
+                <span class="material-symbols-rounded icon-badge" style="color: #FCD34D;">favorite</span>
+                <span>Pahami Hatimu</span>
               </div>
             </div>
 
             <!-- STATE 3: JOURNAL & TEMAN AI -->
             <div class="icon-group state-journal" data-group="journal">
-              <div class="hover-card float-top-left float-anim-3">
-                <div class="hover-card-img-wrap">
-                  <img
-                    src="https://images.unsplash.com/photo-1517842645767-c639042777db?w=200&auto=format&fit=crop&q=80"
-                    alt="Journaling">
-                </div>
-                <div class="hover-card-text">
-                  <span class="hover-card-title">Tulis Jurnal Harian 📝</span>
-                  <span class="hover-card-sub">Lepaskan seluruh bebanmu</span>
-                </div>
+              <div class="hover-pill float-top-left float-anim-3">
+                <span class="material-symbols-rounded icon-badge" style="color: #F9A8D4;">edit_note</span>
+                <span>Tulis Jurnal Harian</span>
               </div>
 
-              <div class="hover-card float-top-right float-anim-1">
-                <div class="hover-card-emoji"
-                  style="background: linear-gradient(135deg, #3B72C4, #8B5CF6); color: white;">🤖</div>
-                <div class="hover-card-text">
-                  <span class="hover-card-title">Teman AI Aktif</span>
-                  <span class="hover-card-sub">Siap mendengarkanmu 24/7</span>
-                </div>
+              <div class="hover-pill float-top-right float-anim-1">
+                <span class="material-symbols-rounded icon-badge" style="color: #FCD34D;">smart_toy</span>
+                <span>Teman AI Aktif</span>
               </div>
 
               <div class="hover-pill float-mid-left float-anim-4">
-                <span class="material-symbols-rounded icon-badge" style="color: #10B981;">lock</span>
-                <span>Privasi & Keamanan Terjamin 🔒</span>
+                <span class="material-symbols-rounded icon-badge" style="color: #34D399;">lock</span>
+                <span>Privasi & Keamanan Terjamin</span>
               </div>
 
               <div class="hover-pill float-mid-right float-anim-2">
                 <span class="material-symbols-rounded icon-badge text-warning">lightbulb</span>
-                <span>Prompt Panduan yang Hangat 💡</span>
+                <span>Prompt Panduan yang Hangat</span>
               </div>
 
-              <div class="hover-card mini float-bottom-left float-anim-6">
-                <div class="hover-card-img-wrap">
-                  <img
-                    src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=200&auto=format&fit=crop&q=80"
-                    alt="Open Book">
-                </div>
-                <div class="hover-card-text">
-                  <span class="hover-card-title">Ruang Bercerita 📖</span>
-                </div>
+              <div class="hover-pill float-bottom-left float-anim-6">
+                <span class="material-symbols-rounded icon-badge" style="color: #F472B6;">menu_book</span>
+                <span>Ruang Bercerita</span>
               </div>
 
               <div class="hover-pill float-bottom-right float-anim-5">
-                <span class="material-symbols-rounded icon-badge text-primary">support_agent</span>
-                <span>Bebas dari Stigma 🌿</span>
+                <span class="material-symbols-rounded icon-badge" style="color: #86EFAC;">support_agent</span>
+                <span>Bebas dari Stigma</span>
               </div>
             </div>
 
@@ -328,8 +277,8 @@
         </p>
 
         <div class="hero-actions">
-          <a href="javascript:void(0)" onclick="handleMulaiSekarang(event)" class="btn btn-white btn-lg btn-mulai-sekarang"
-            style="font-weight:700;">
+          <a href="javascript:void(0)" onclick="handleMulaiSekarang(event)"
+            class="btn btn-white btn-lg btn-mulai-sekarang" style="font-weight:700;">
             <span>Mulai Sekarang</span>
             <span class="material-symbols-rounded">arrow_forward</span>
           </a>
@@ -417,7 +366,8 @@
     <!-- Moving SVG Clouds Background (Hero Style) -->
     <div class="clouds-bg showcase-clouds-bg" aria-hidden="true">
       <svg class="cloud showcase-cloud showcase-cloud-1" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
-        <path d="M30 90 A 35 35 0 0 1 60 40 A 45 45 0 0 1 140 40 A 35 35 0 0 1 170 90 Z" fill="url(#showcaseCloudGrad1)" />
+        <path d="M30 90 A 35 35 0 0 1 60 40 A 45 45 0 0 1 140 40 A 35 35 0 0 1 170 90 Z"
+          fill="url(#showcaseCloudGrad1)" />
         <defs>
           <linearGradient id="showcaseCloudGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45" />
@@ -427,7 +377,8 @@
       </svg>
 
       <svg class="cloud showcase-cloud showcase-cloud-2" viewBox="0 0 220 130" xmlns="http://www.w3.org/2000/svg">
-        <path d="M35 95 A 40 40 0 0 1 70 45 A 50 50 0 0 1 155 45 A 40 40 0 0 1 190 95 Z" fill="url(#showcaseCloudGrad2)" />
+        <path d="M35 95 A 40 40 0 0 1 70 45 A 50 50 0 0 1 155 45 A 40 40 0 0 1 190 95 Z"
+          fill="url(#showcaseCloudGrad2)" />
         <defs>
           <linearGradient id="showcaseCloudGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55" />
@@ -437,11 +388,13 @@
       </svg>
 
       <svg class="cloud showcase-cloud showcase-cloud-3" viewBox="0 0 180 110" xmlns="http://www.w3.org/2000/svg">
-        <path d="M25 80 A 30 30 0 0 1 50 35 A 40 40 0 0 1 125 35 A 30 30 0 0 1 155 80 Z" fill="url(#showcaseCloudGrad1)" />
+        <path d="M25 80 A 30 30 0 0 1 50 35 A 40 40 0 0 1 125 35 A 30 30 0 0 1 155 80 Z"
+          fill="url(#showcaseCloudGrad1)" />
       </svg>
 
       <svg class="cloud showcase-cloud showcase-cloud-4" viewBox="0 0 210 125" xmlns="http://www.w3.org/2000/svg">
-        <path d="M32 92 A 38 38 0 0 1 65 42 A 48 48 0 0 1 150 42 A 38 38 0 0 1 182 92 Z" fill="url(#showcaseCloudGrad2)" />
+        <path d="M32 92 A 38 38 0 0 1 65 42 A 48 48 0 0 1 150 42 A 38 38 0 0 1 182 92 Z"
+          fill="url(#showcaseCloudGrad2)" />
       </svg>
     </div>
 
@@ -453,7 +406,8 @@
       <div class="section-header" data-aos="fade-up">
         <span class="section-label">PENGALAMAN DIGITAL</span>
         <h2 class="section-title">Aplikasi Responsif, Cepat & Privat</h2>
-        <p class="section-subtitle">Dirancang khusus dengan performa tinggi dan perlindungan enkripsi privasi di setiap waktu.</p>
+        <p class="section-subtitle">Dirancang khusus dengan performa tinggi dan perlindungan enkripsi privasi di setiap
+          waktu.</p>
       </div>
 
       <div class="showcase-container">
@@ -542,8 +496,10 @@
     <div class="container relative z-10">
       <div class="section-header">
         <span class="section-label" data-aos="fade-down" data-aos-delay="50">Fitur Unggulan</span>
-        <h2 class="section-title" data-aos="fade-up" data-aos-delay="150">Semua yang kamu butuhkan untuk refleksi diri</h2>
-        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="250">Dirancang khusus untuk remaja Indonesia, dengan pendekatan yang hangat dan aman.</p>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="150">Semua yang kamu butuhkan untuk refleksi diri
+        </h2>
+        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="250">Dirancang khusus untuk remaja Indonesia,
+          dengan pendekatan yang hangat dan aman.</p>
       </div>
 
       <div class="features-grid">
@@ -597,7 +553,8 @@
             <span class="material-symbols-rounded text-primary">verified_user</span>
           </div>
           <h3 class="feature-title">Ruang Aman Pribadimu</h3>
-          <p class="feature-desc">Bebas mencatat apa pun kecemasanmu tanpa ragu, karena tempat curhat dan refleksi diri ini didesain khusus hanya untuk ketenanganmu.</p>
+          <p class="feature-desc">Bebas mencatat apa pun kecemasanmu tanpa ragu, karena tempat curhat dan refleksi diri
+            ini didesain khusus hanya untuk ketenanganmu.</p>
         </div>
       </div>
     </div>
@@ -609,13 +566,19 @@
     <div class="birds-ornament-container birds-left" aria-hidden="true" style="top: 25px; left: 4%;">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" class="birds-svg">
         <!-- Burung 1 (Pusat, Ukuran Sedang) -->
-        <path class="bird-path bird-1" d="M 50 100 C 65 85, 85 88, 100 105 C 115 88, 135 85, 150 100 C 135 96, 115 106, 100 120 C 85 106, 65 96, 50 100 Z" fill="url(#birdGradient)" />
-        
+        <path class="bird-path bird-1"
+          d="M 50 100 C 65 85, 85 88, 100 105 C 115 88, 135 85, 150 100 C 135 96, 115 106, 100 120 C 85 106, 65 96, 50 100 Z"
+          fill="url(#birdGradient)" />
+
         <!-- Burung 2 (Kanan Atas, Ukuran Paling Besar) -->
-        <path class="bird-path bird-2" d="M 120 40 C 140 20, 165 24, 185 45 C 205 24, 230 20, 250 40 C 230 35, 205 48, 185 65 C 165 48, 140 35, 120 40 Z" fill="url(#birdGradient)" transform="scale(0.8) translate(50, -10)" />
-        
+        <path class="bird-path bird-2"
+          d="M 120 40 C 140 20, 165 24, 185 45 C 205 24, 230 20, 250 40 C 230 35, 205 48, 185 65 C 165 48, 140 35, 120 40 Z"
+          fill="url(#birdGradient)" transform="scale(0.8) translate(50, -10)" />
+
         <!-- Burung 3 (Kiri Bawah, Ukuran Paling Kecil) -->
-        <path class="bird-path bird-3" d="M 20 150 C 28 138, 40 140, 48 152 C 56 140, 68 138, 76 150 C 68 147, 56 154, 48 162 C 40 154, 28 147, 20 150 Z" fill="url(#birdGradient)" />
+        <path class="bird-path bird-3"
+          d="M 20 150 C 28 138, 40 140, 48 152 C 56 140, 68 138, 76 150 C 68 147, 56 154, 48 162 C 40 154, 28 147, 20 150 Z"
+          fill="url(#birdGradient)" />
 
         <defs>
           <linearGradient id="birdGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -629,7 +592,8 @@
     <div class="container">
       <div class="section-header">
         <span class="section-label" data-aos="fade-down" data-aos-delay="50">Cara Kerja</span>
-        <h2 class="section-title" data-aos="fade-up" data-aos-delay="150">3 langkah menuju kesehatan mental yang lebih baik</h2>
+        <h2 class="section-title" data-aos="fade-up" data-aos-delay="150">3 langkah menuju kesehatan mental yang lebih
+          baik</h2>
       </div>
 
       <div class="steps-container">
@@ -666,10 +630,14 @@
     <div class="birds-ornament-container" aria-hidden="true" style="top: 25px; right: 4%;">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" class="birds-svg">
         <!-- Burung 1 (Pusat, Ukuran Sedang) -->
-        <path class="bird-path bird-1" d="M 50 100 C 65 85, 85 88, 100 105 C 115 88, 135 85, 150 100 C 135 96, 115 106, 100 120 C 85 106, 65 96, 50 100 Z" fill="url(#birdGradient2)" />
-        
+        <path class="bird-path bird-1"
+          d="M 50 100 C 65 85, 85 88, 100 105 C 115 88, 135 85, 150 100 C 135 96, 115 106, 100 120 C 85 106, 65 96, 50 100 Z"
+          fill="url(#birdGradient2)" />
+
         <!-- Burung 2 (Kanan Atas, Ukuran Paling Besar) -->
-        <path class="bird-path bird-2" d="M 120 40 C 140 20, 165 24, 185 45 C 205 24, 230 20, 250 40 C 230 35, 205 48, 185 65 C 165 48, 140 35, 120 40 Z" fill="url(#birdGradient2)" transform="scale(0.8) translate(50, -10)" />
+        <path class="bird-path bird-2"
+          d="M 120 40 C 140 20, 165 24, 185 45 C 205 24, 230 20, 250 40 C 230 35, 205 48, 185 65 C 165 48, 140 35, 120 40 Z"
+          fill="url(#birdGradient2)" transform="scale(0.8) translate(50, -10)" />
 
         <defs>
           <linearGradient id="birdGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -684,13 +652,19 @@
     <div class="birds-ornament-container birds-left" aria-hidden="true" style="bottom: 25px; top: auto; left: 4%;">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" class="birds-svg">
         <!-- Burung 1 (Pusat, Ukuran Sedang) -->
-        <path class="bird-path bird-1" d="M 50 100 C 65 85, 85 88, 100 105 C 115 88, 135 85, 150 100 C 135 96, 115 106, 100 120 C 85 106, 65 96, 50 100 Z" fill="url(#birdGradient3)" />
-        
+        <path class="bird-path bird-1"
+          d="M 50 100 C 65 85, 85 88, 100 105 C 115 88, 135 85, 150 100 C 135 96, 115 106, 100 120 C 85 106, 65 96, 50 100 Z"
+          fill="url(#birdGradient3)" />
+
         <!-- Burung 2 (Kanan Atas, Ukuran Paling Besar) -->
-        <path class="bird-path bird-2" d="M 120 40 C 140 20, 165 24, 185 45 C 205 24, 230 20, 250 40 C 230 35, 205 48, 185 65 C 165 48, 140 35, 120 40 Z" fill="url(#birdGradient3)" transform="scale(0.8) translate(50, -10)" />
-        
+        <path class="bird-path bird-2"
+          d="M 120 40 C 140 20, 165 24, 185 45 C 205 24, 230 20, 250 40 C 230 35, 205 48, 185 65 C 165 48, 140 35, 120 40 Z"
+          fill="url(#birdGradient3)" transform="scale(0.8) translate(50, -10)" />
+
         <!-- Burung 3 (Kiri Bawah, Ukuran Paling Kecil) -->
-        <path class="bird-path bird-3" d="M 20 150 C 28 138, 40 140, 48 152 C 56 140, 68 138, 76 150 C 68 147, 56 154, 48 162 C 40 154, 28 147, 20 150 Z" fill="url(#birdGradient3)" />
+        <path class="bird-path bird-3"
+          d="M 20 150 C 28 138, 40 140, 48 152 C 56 140, 68 138, 76 150 C 68 147, 56 154, 48 162 C 40 154, 28 147, 20 150 Z"
+          fill="url(#birdGradient3)" />
 
         <defs>
           <linearGradient id="birdGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -779,7 +753,8 @@
 
           <!-- CTA Button -->
           <div class="teman-cta-wrapper">
-            <a href="javascript:void(0)" onclick="handleMulaiSekarang(event)" class="btn btn-white btn-lg btn-mulai-sekarang teman-cta-btn">
+            <a href="javascript:void(0)" onclick="handleMulaiSekarang(event)"
+              class="btn btn-white btn-lg btn-mulai-sekarang teman-cta-btn">
               <span data-i18n="landing.teman.cta">Ayo Mulai Ngobrol</span>
               <span class="material-symbols-rounded">arrow_forward</span>
             </a>
@@ -793,17 +768,24 @@
   <section class="bento-stats-section relative" id="statistik-komunitas">
     <!-- Calm Interactive Particle Background Canvas -->
     <canvas id="calmParticles"></canvas>
-    
+
     <!-- ======= AMBIENT AURA GLOW BACKGROUND (SEAMLESS DIFFUSED LIGHT) ======= -->
-    <div class="absolute top-1/3 left-1/4 w-[30rem] h-[30rem] bg-cyan-500/10 rounded-full mix-blend-screen filter blur-[180px] pointer-events-none z-0" aria-hidden="true"></div>
-    <div class="absolute bottom-1/4 right-1/4 w-[32rem] h-[32rem] bg-sky-400/10 rounded-full mix-blend-screen filter blur-[180px] animate-pulse pointer-events-none z-0" aria-hidden="true"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[34rem] h-[34rem] bg-blue-500/10 rounded-full mix-blend-screen filter blur-[180px] pointer-events-none z-0" aria-hidden="true"></div>
+    <div
+      class="absolute top-1/3 left-1/4 w-[30rem] h-[30rem] bg-cyan-500/10 rounded-full mix-blend-screen filter blur-[180px] pointer-events-none z-0"
+      aria-hidden="true"></div>
+    <div
+      class="absolute bottom-1/4 right-1/4 w-[32rem] h-[32rem] bg-sky-400/10 rounded-full mix-blend-screen filter blur-[180px] animate-pulse pointer-events-none z-0"
+      aria-hidden="true"></div>
+    <div
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[34rem] h-[34rem] bg-blue-500/10 rounded-full mix-blend-screen filter blur-[180px] pointer-events-none z-0"
+      aria-hidden="true"></div>
 
     <div class="container relative z-10">
       <div class="section-header" data-aos="fade-up">
         <span class="section-label">Dampak & Statistik</span>
         <h2 class="section-title">Eksplorasi Pertumbuhan & Ruang Aman Remaja</h2>
-        <p class="section-subtitle">Pantau bagaimana ribuan remaja Indonesia saling bertumbuh dan rutin bercermin diri tanpa rasa takut dihakimi.</p>
+        <p class="section-subtitle">Pantau bagaimana ribuan remaja Indonesia saling bertumbuh dan rutin bercermin diri
+          tanpa rasa takut dihakimi.</p>
       </div>
 
       <div class="bento-stats-grid">
@@ -823,18 +805,44 @@
 
           <!-- 12-Month Bar Chart -->
           <div class="stat-chart-container">
-            <div class="stat-bar-item"><div class="stat-bar-bar" style="height: 38%;"></div><span class="stat-bar-lbl">Jan</span></div>
-            <div class="stat-bar-item"><div class="stat-bar-bar" style="height: 48%;"></div><span class="stat-bar-lbl">Feb</span></div>
-            <div class="stat-bar-item"><div class="stat-bar-bar" style="height: 42%;"></div><span class="stat-bar-lbl">Mar</span></div>
-            <div class="stat-bar-item"><div class="stat-bar-bar" style="height: 65%;"></div><span class="stat-bar-lbl">Apr</span></div>
-            <div class="stat-bar-item"><div class="stat-bar-bar" style="height: 45%;"></div><span class="stat-bar-lbl">Mei</span></div>
-            <div class="stat-bar-item"><div class="stat-bar-bar" style="height: 60%;"></div><span class="stat-bar-lbl">Jun</span></div>
-            <div class="stat-bar-item"><div class="stat-bar-bar" style="height: 55%;"></div><span class="stat-bar-lbl">Jul</span></div>
-            <div class="stat-bar-item"><div class="stat-bar-bar" style="height: 72%;"></div><span class="stat-bar-lbl">Ags</span></div>
-            <div class="stat-bar-item"><div class="stat-bar-bar" style="height: 68%;"></div><span class="stat-bar-lbl">Sep</span></div>
-            <div class="stat-bar-item"><div class="stat-bar-bar" style="height: 85%;"></div><span class="stat-bar-lbl">Okt</span></div>
-            <div class="stat-bar-item"><div class="stat-bar-bar" style="height: 78%;"></div><span class="stat-bar-lbl">Nov</span></div>
-            <div class="stat-bar-item"><div class="stat-bar-bar" style="height: 96%; background: linear-gradient(180deg, #7DD3FC 0%, #38BDF8 100%); box-shadow: 0 0 16px rgba(56, 189, 248, 0.65);"></div><span class="stat-bar-lbl" style="color:#FFFFFF; font-weight:850;">Des</span></div>
+            <div class="stat-bar-item">
+              <div class="stat-bar-bar" style="height: 38%;"></div><span class="stat-bar-lbl">Jan</span>
+            </div>
+            <div class="stat-bar-item">
+              <div class="stat-bar-bar" style="height: 48%;"></div><span class="stat-bar-lbl">Feb</span>
+            </div>
+            <div class="stat-bar-item">
+              <div class="stat-bar-bar" style="height: 42%;"></div><span class="stat-bar-lbl">Mar</span>
+            </div>
+            <div class="stat-bar-item">
+              <div class="stat-bar-bar" style="height: 65%;"></div><span class="stat-bar-lbl">Apr</span>
+            </div>
+            <div class="stat-bar-item">
+              <div class="stat-bar-bar" style="height: 45%;"></div><span class="stat-bar-lbl">Mei</span>
+            </div>
+            <div class="stat-bar-item">
+              <div class="stat-bar-bar" style="height: 60%;"></div><span class="stat-bar-lbl">Jun</span>
+            </div>
+            <div class="stat-bar-item">
+              <div class="stat-bar-bar" style="height: 55%;"></div><span class="stat-bar-lbl">Jul</span>
+            </div>
+            <div class="stat-bar-item">
+              <div class="stat-bar-bar" style="height: 72%;"></div><span class="stat-bar-lbl">Ags</span>
+            </div>
+            <div class="stat-bar-item">
+              <div class="stat-bar-bar" style="height: 68%;"></div><span class="stat-bar-lbl">Sep</span>
+            </div>
+            <div class="stat-bar-item">
+              <div class="stat-bar-bar" style="height: 85%;"></div><span class="stat-bar-lbl">Okt</span>
+            </div>
+            <div class="stat-bar-item">
+              <div class="stat-bar-bar" style="height: 78%;"></div><span class="stat-bar-lbl">Nov</span>
+            </div>
+            <div class="stat-bar-item">
+              <div class="stat-bar-bar"
+                style="height: 96%; background: linear-gradient(180deg, #7DD3FC 0%, #38BDF8 100%); box-shadow: 0 0 16px rgba(56, 189, 248, 0.65);">
+              </div><span class="stat-bar-lbl" style="color:#FFFFFF; font-weight:850;">Des</span>
+            </div>
           </div>
         </div>
 
@@ -846,12 +854,17 @@
             <p class="stat-subtext">selalu hadir mendengarkan kapan pun kamu merasa butuh curhat</p>
           </div>
 
-          <div class="dark-inner-card" style="margin-top: 28px; flex-direction: column; align-items: flex-start; gap: 12px;">
+          <div class="dark-inner-card"
+            style="margin-top: 28px; flex-direction: column; align-items: flex-start; gap: 12px;">
             <div style="display:flex; align-items:center; gap: 8px;">
-              <span class="status-dot" style="background: #38BDF8; box-shadow: 0 0 10px #38BDF8; width:10px; height:10px; border-radius:50%; display:inline-block;"></span>
-              <span style="font-size: 0.82rem; font-weight: 800; color: #7DD3FC; text-transform: uppercase; letter-spacing:0.05em;">Aktif & Siap Dengar</span>
+              <span class="status-dot"
+                style="background: #38BDF8; box-shadow: 0 0 10px #38BDF8; width:10px; height:10px; border-radius:50%; display:inline-block;"></span>
+              <span
+                style="font-size: 0.82rem; font-weight: 800; color: #7DD3FC; text-transform: uppercase; letter-spacing:0.05em;">Aktif
+                & Siap Dengar</span>
             </div>
-            <p style="font-size: 0.95rem; font-weight: 700; color: #FFFFFF; margin: 0; line-height: 1.4; font-style: italic;">
+            <p
+              style="font-size: 0.95rem; font-weight: 700; color: #FFFFFF; margin: 0; line-height: 1.4; font-style: italic;">
               "Hai! Harimu lagi terasa berat ya? Sini cerita, kamu nggak sendirian kok..."
             </p>
           </div>
@@ -865,12 +878,14 @@
             <p class="stat-subtext">topik pertanyaan hangat agar kamu nggak pernah bingung pas nulis</p>
           </div>
 
-          <div class="dark-inner-card" style="margin-top: 28px; flex-direction: column; align-items: flex-start; gap: 10px;">
+          <div class="dark-inner-card"
+            style="margin-top: 28px; flex-direction: column; align-items: flex-start; gap: 10px;">
             <p class="inner-sub">PROMPT FAVORIT REMAJA</p>
             <p style="font-size: 1.05rem; font-weight: 800; color: #FFFFFF; margin: 0; line-height: 1.35;">
               "Apa 1 hal kecil yang bikin kamu merasa lebih tenang dan tersenyum hari ini?"
             </p>
-            <span style="background: rgba(129, 140, 248, 0.18); color: #A5B4FC; border: 1px solid rgba(129, 140, 248, 0.35); padding: 4px 12px; border-radius: 99px; font-size: 0.78rem; font-weight: 800; display: inline-flex; align-items: center; gap: 4px; margin-top: 4px;">
+            <span
+              style="background: rgba(129, 140, 248, 0.18); color: #A5B4FC; border: 1px solid rgba(129, 140, 248, 0.35); padding: 4px 12px; border-radius: 99px; font-size: 0.78rem; font-weight: 800; display: inline-flex; align-items: center; gap: 4px; margin-top: 4px;">
               <span class="material-symbols-rounded" style="font-size: 15px; color: #A5B4FC;">lightbulb</span>
               <span>Sangat Membantu</span>
             </span>
@@ -883,36 +898,43 @@
             <p class="stat-lbl-top">RUANG AMAN BERSAMA</p>
             <div class="stat-bignum-wrap">
               <span class="stat-bignum" style="color:#FFFFFF;">8.500<span style="color:#38BDF8;">+</span></span>
-              <span style="font-size: 1.25rem; font-weight: 800; color: #7DD3FC; display: inline-flex; align-items: center; gap: 6px;">
+              <span
+                style="font-size: 1.25rem; font-weight: 800; color: #7DD3FC; display: inline-flex; align-items: center; gap: 6px;">
                 <span>Remaja Merasa Terbantu</span>
                 <span class="material-symbols-rounded" style="font-size: 20px; color: #38BDF8;">auto_awesome</span>
               </span>
             </div>
             <p class="stat-subtext" style="max-width: 550px; font-size: 0.95rem; line-height: 1.6; margin-top: 10px;">
-              Sebuah rumah digital di mana perasaanmu dihargai sepenuhnya. Tanpa takut dihakimi, tanpa rasa insecure, kamu bebas berdamai dengan hari-harimu.
+              Sebuah rumah digital di mana perasaanmu dihargai sepenuhnya. Tanpa takut dihakimi, tanpa rasa insecure,
+              kamu bebas berdamai dengan hari-harimu.
             </p>
 
             <div class="reward-pills-row" style="margin-top: 24px;">
-              <span class="reward-pill-btn" style="cursor: default; border-color: rgba(56, 189, 248, 0.35); color: #7DD3FC; background: rgba(56, 189, 248, 0.12);">
+              <span class="reward-pill-btn"
+                style="cursor: default; border-color: rgba(56, 189, 248, 0.35); color: #7DD3FC; background: rgba(56, 189, 248, 0.12);">
                 <span class="material-symbols-rounded" style="font-size: 16px; color: #38BDF8;">spa</span>
                 <span>Tanpa Dihakimi</span>
               </span>
-              <span class="reward-pill-btn" style="cursor: default; border-color: rgba(129, 140, 248, 0.35); color: #A5B4FC; background: rgba(129, 140, 248, 0.12);">
+              <span class="reward-pill-btn"
+                style="cursor: default; border-color: rgba(129, 140, 248, 0.35); color: #A5B4FC; background: rgba(129, 140, 248, 0.12);">
                 <span class="material-symbols-rounded" style="font-size: 16px; color: #818CF8;">forum</span>
                 <span>Tempat Curhat Nyaman</span>
               </span>
-              <span class="reward-pill-btn" style="cursor: default; border-color: rgba(96, 165, 250, 0.35); color: #93C5FD; background: rgba(96, 165, 250, 0.12);">
+              <span class="reward-pill-btn"
+                style="cursor: default; border-color: rgba(96, 165, 250, 0.35); color: #93C5FD; background: rgba(96, 165, 250, 0.12);">
                 <span class="material-symbols-rounded" style="font-size: 16px; color: #60A5FA;">self_improvement</span>
                 <span>Bebas Jadi Diri Sendiri</span>
               </span>
-              <span class="reward-pill-btn" style="cursor: default; border-color: rgba(168, 85, 247, 0.35); color: #D8B4FE; background: rgba(168, 85, 247, 0.12);">
+              <span class="reward-pill-btn"
+                style="cursor: default; border-color: rgba(168, 85, 247, 0.35); color: #D8B4FE; background: rgba(168, 85, 247, 0.12);">
                 <span class="material-symbols-rounded" style="font-size: 16px; color: #C084FC;">verified_user</span>
                 <span>Aman & Menenangkan</span>
               </span>
             </div>
           </div>
 
-          <a href="javascript:void(0)" onclick="handleMulaiSekarang(event)" class="btn-link-ocean btn-mulai-sekarang" style="margin-top: 20px;">
+          <a href="javascript:void(0)" onclick="handleMulaiSekarang(event)" class="btn-link-ocean btn-mulai-sekarang"
+            style="margin-top: 20px;">
             <span>Mulai check-in harimu sekarang</span>
             <span class="material-symbols-rounded" style="font-size: 18px;">arrow_forward</span>
           </a>
@@ -950,7 +972,8 @@
           </span>
           <h2 class="section-title">Akses Bantuan & Kontak Darurat</h2>
           <p class="section-subtitle">
-            Kamu tidak pernah berjalan sendirian. Jika sewaktu-waktu merasa terbebani, memiliki kecemasan hebat, atau berada dalam situasi krisis emosional, tim konselor dan profesional Indonesia siap merangkulmu.
+            Kamu tidak pernah berjalan sendirian. Jika sewaktu-waktu merasa terbebani, memiliki kecemasan hebat, atau
+            berada dalam situasi krisis emosional, tim konselor dan profesional Indonesia siap merangkulmu.
           </p>
         </div>
 
@@ -969,7 +992,8 @@
               <a href="tel:119" class="btn-emergency-action btn-blue">
                 <span class="material-symbols-rounded">call</span> Telepon
               </a>
-              <button type="button" class="btn-copy-num" onclick="copyEmergencyNumber('119', 'Hotline Kemenkes 119')" title="Salin Nomor">
+              <button type="button" class="btn-copy-num" onclick="copyEmergencyNumber('119', 'Hotline Kemenkes 119')"
+                title="Salin Nomor">
                 <span class="material-symbols-rounded">content_copy</span>
               </button>
             </div>
@@ -989,7 +1013,8 @@
               <a href="tel:08119700119" class="btn-emergency-action btn-blue">
                 <span class="material-symbols-rounded">call</span> Telepon
               </a>
-              <button type="button" class="btn-copy-num" onclick="copyEmergencyNumber('08119700119', 'Layanan SEJIWA')" title="Salin Nomor">
+              <button type="button" class="btn-copy-num" onclick="copyEmergencyNumber('08119700119', 'Layanan SEJIWA')"
+                title="Salin Nomor">
                 <span class="material-symbols-rounded">content_copy</span>
               </button>
             </div>
@@ -1006,10 +1031,12 @@
               <div class="emergency-number">0811-8456-724</div>
             </div>
             <div class="emergency-btn-group">
-              <a href="https://wa.me/628118456724" target="_blank" rel="noopener" class="btn-emergency-action btn-green">
+              <a href="https://wa.me/628118456724" target="_blank" rel="noopener"
+                class="btn-emergency-action btn-green">
                 <span class="material-symbols-rounded">chat</span> WhatsApp
               </a>
-              <button type="button" class="btn-copy-num" onclick="copyEmergencyNumber('08118456724', 'Yayasan Pulih')" title="Salin Nomor">
+              <button type="button" class="btn-copy-num" onclick="copyEmergencyNumber('08118456724', 'Yayasan Pulih')"
+                title="Salin Nomor">
                 <span class="material-symbols-rounded">content_copy</span>
               </button>
             </div>
@@ -1017,10 +1044,14 @@
         </div>
 
         <!-- Disclaimer Ramah -->
-        <div data-aos="fade-up" data-aos-delay="00" style="margin-top: 28px; padding: 16px 22px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 18px; display: flex; align-items: center; gap: 14px; text-align: left;">
-          <span class="material-symbols-rounded" style="font-size: 28px; color: #7EC8E3; flex-shrink: 0;">verified</span>
-          <p style="margin: 0; font-size: clamp(0.85rem, 2vw, 0.95rem); color: rgba(255, 255, 255, 0.85); font-weight: 600; line-height: 1.6;">
-            <strong style="color: #FFFFFF;">Tenang.in membantu refleksi mandiri. Untuk kondisi darurat, tim profesional selalu siap membantumu.</strong>
+        <div data-aos="fade-up" data-aos-delay="00"
+          style="margin-top: 28px; padding: 16px 22px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 18px; display: flex; align-items: center; gap: 14px; text-align: left;">
+          <span class="material-symbols-rounded"
+            style="font-size: 28px; color: #7EC8E3; flex-shrink: 0;">verified</span>
+          <p
+            style="margin: 0; font-size: clamp(0.85rem, 2vw, 0.95rem); color: rgba(255, 255, 255, 0.85); font-weight: 600; line-height: 1.6;">
+            <strong style="color: #FFFFFF;">Tenang.in membantu refleksi mandiri. Untuk kondisi darurat, tim profesional
+              selalu siap membantumu.</strong>
           </p>
         </div>
       </div>

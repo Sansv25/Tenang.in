@@ -65,9 +65,7 @@
 
       <!-- Section 4: Empty State -->
       <div id="empty-state" style="display:none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 20px; background: rgba(255, 255, 255, 0.96); border-radius: 24px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2); margin: 30px 0 50px;">
-        <span class="material-icons" style="font-size:72px; color:var(--bg-primary, #5B8FD4); margin-bottom: 16px;">
-          bar_chart
-        </span>
+        <img src="assets/img/maskots/mascot-confused.png" alt="Milo Mascot" style="width:80px; height:80px; object-fit:contain; margin-bottom:16px; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.1));">
         <h3 style="font-size: 1.5rem; font-weight: 800; color: #1A2F4E; margin-bottom: 8px;">Datamu masih sedikit</h3>
         <p style="color: #64748B; max-width: 420px; line-height: 1.6; margin-bottom: 24px; font-size: 1rem;">Check-in mood beberapa hari lagi, nanti kamu bisa lihat polamu di sini.</p>
         <a href="mood-tracker.html" class="btn-primary" style="background: #2D5BA8; color: white; font-weight: 750; padding: 14px 28px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 16px rgba(45, 91, 168, 0.35); text-decoration: none; transition: transform 0.2s;">
@@ -80,11 +78,10 @@
       <div id="dashboard-content">
         <!-- Section 1: Daily Quote -->
         <section id="dashboard-quote" style="margin-top: var(--space-md);">
-          <div class="quote-card">
-            <span class="material-icons" style="font-size: 36px; color: #5B8FD4; display: block; margin-bottom: 8px;">format_quote</span>
-            <p id="daily-quote" class="quote-text" style="font-size: 1.15rem; font-weight: 700; margin: 8px 0 16px; line-height: 1.6; color: #1A2F4E;"><!-- diisi JS --></p>
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; border-top: 1px solid #F1F5F9; padding-top: 16px;">
-              <small class="quote-label" style="color: #64748B; font-weight: 700; font-size: 0.85rem;">Kutipan Harian untuk Kamu</small>
+          <div class="quote-card" style="display:flex; gap:16px; align-items:flex-start;">
+            <img src="assets/img/maskots/mascot-greeting.png" alt="Teman AI Mascot" style="width:48px; height:48px; object-fit:contain; flex-shrink:0; filter:drop-shadow(0 2px 6px rgba(0,0,0,0.1));">
+            <div style="flex:1;">
+              <p id="daily-quote" class="quote-text" style="font-size: 1.15rem; font-weight: 700; margin: 0 0 16px; line-height: 1.6; color: #1A2F4E;"><!-- diisi JS --></p>
               <button id="mark-done-btn" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 999px; background: #EEF3F9; color: #2D5BA8; font-weight: 750; font-size: 0.85rem; transition: all 0.2s; cursor: pointer; border: none;">
                 <span class="material-icons" style="font-size: 18px;">check</span> Tandai selesai
               </button>
@@ -139,7 +136,6 @@
             </div>
           </div>
         </section>
-
         <!-- Section 3: Badge Pencapaian -->
         <section style="margin-top:var(--space-xl);" id="dashboard-badges">
           <h2 style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">

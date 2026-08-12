@@ -36,8 +36,8 @@ const TemanChat = (() => {
     floatingDiv.className = 'teman-floating';
     floatingDiv.id = 'teman-floating';
     floatingDiv.innerHTML = `
-      <button class="teman-btn" id="teman-toggle-btn" aria-label="Chat dengan Teman">
-        <span class="material-symbols-rounded" style="font-size:28px;">smart_toy</span>
+      <button class="teman-btn" id="teman-toggle-btn" aria-label="Chat dengan Teman" title="Chat dengan Teman AI">
+        <img src="assets/img/maskots/mascot-listening.png" alt="Teman AI Mascot" class="teman-btn-mascot-img">
       </button>
     `;
     document.body.appendChild(floatingDiv);
@@ -50,7 +50,7 @@ const TemanChat = (() => {
       <div class="teman-chat-header">
         <div class="teman-chat-header-info">
           <div class="teman-avatar-sm">
-            <span class="material-symbols-rounded" style="font-size:20px; color:white;">smart_toy</span>
+            <img src="assets/img/maskots/mascot-greeting.png" alt="Teman Avatar" class="teman-avatar-img-sm">
           </div>
           <div>
             <div style="font-weight:600;font-size:0.9375rem;">Teman</div>
