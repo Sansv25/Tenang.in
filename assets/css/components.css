@@ -526,6 +526,67 @@
   z-index: var(--z-floating);
 }
 
+.emoji-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 12px;
+  border-radius: var(--radius-lg);
+  background: var(--card-subtle);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  border: 2px solid transparent;
+  flex: 1 1 calc(20% - 10px);
+  min-width: 105px;
+  max-width: 155px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 520px) {
+  .emoji-selector {
+    gap: 8px;
+    padding: 12px 0;
+  }
+  .emoji-btn {
+    flex: 1 1 calc(33.33% - 8px);
+    min-width: 95px;
+    max-width: 135px;
+    padding: 14px 8px;
+  }
+}
+
+.emoji-btn:hover {
+  transform: scale(1.08);
+  box-shadow: var(--shadow-md);
+}
+
+.emoji-btn.selected {
+  border-color: var(--primary-accent) !important;
+  background: rgba(37, 99, 235, 0.12) !important;
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.25);
+}
+
+.emoji-btn .emoji {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.emoji-btn .emoji-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 800;
+}
+
+/* ---- Tag Chips ---- */
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
 @media (max-width: 768px) {
   .teman-floating {
     bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
@@ -533,16 +594,16 @@
   }
 
   .teman-btn {
-    width: 64px !important;
-    height: 64px !important;
+    width: 72px !important;
+    height: 72px !important;
     padding: 0 !important;
-    box-shadow: 0 6px 22px rgba(37, 99, 235, 0.45) !important;
+    box-shadow: 0 8px 26px rgba(37, 99, 235, 0.5) !important;
   }
 
   .teman-btn-mascot-img {
-    width: 90px !important;
-    height: 90px !important;
-    transform: scale(1.5) !important;
+    width: 120px !important;
+    height: 120px !important;
+    transform: scale(1.9) !important;
   }
 }
 
@@ -553,25 +614,25 @@
 }
 
 .teman-btn {
-  width: 72px;
-  height: 72px;
+  width: 80px;
+  height: 80px;
   padding: 0;
   border-radius: var(--radius-full);
   background: linear-gradient(135deg, #38BDF8 0%, #2563EB 100%);
-  border: 2px solid rgba(255, 255, 255, 0.6);
+  border: 2.5px solid rgba(255, 255, 255, 0.7);
   color: var(--text-on-blue);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 26px rgba(37, 99, 235, 0.5), 0 0 24px rgba(56, 189, 248, 0.35);
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.55), 0 0 28px rgba(56, 189, 248, 0.4);
   transition: all var(--transition-base);
   position: relative;
   overflow: visible;
 }
 
 .teman-btn:hover {
-  transform: scale(1.08);
-  box-shadow: 0 10px 32px rgba(37, 99, 235, 0.65), 0 0 30px rgba(56, 189, 248, 0.55);
+  transform: scale(1.1);
+  box-shadow: 0 12px 38px rgba(37, 99, 235, 0.7), 0 0 35px rgba(56, 189, 248, 0.6);
 }
 
 .teman-btn::before {
@@ -592,37 +653,38 @@
 
 /* ---- Emoji Mascot Selector ---- */
 .emoji-mascot-img {
-  width: 76px;
-  height: 76px;
+  width: 105px;
+  height: 105px;
   object-fit: contain;
-  transform: scale(1.3);
-  filter: drop-shadow(0 3px 8px rgba(0,0,0,0.14));
+  transform: scale(1.5);
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.16));
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .emoji-btn:hover .emoji-mascot-img {
-  transform: scale(1.45) rotate(5deg);
+  transform: scale(1.7) rotate(6deg);
 }
 
 @media (max-width: 520px) {
   .emoji-mascot-img {
-    width: 62px;
-    height: 62px;
-    transform: scale(1.22);
+    width: 85px;
+    height: 85px;
+    transform: scale(1.4);
   }
 }
 
 .teman-btn-mascot-img {
-  width: 104px;
-  height: 104px;
+  width: 140px;
+  height: 140px;
   object-fit: contain;
-  transform: scale(1.6);
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.25));
+  transform: scale(2.0);
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.3));
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .teman-btn:hover .teman-btn-mascot-img {
-  transform: scale(1.75) rotate(6deg);
+  transform: scale(2.2) rotate(6deg);
+}
 }
 
 /* Chat Popup */

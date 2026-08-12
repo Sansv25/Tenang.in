@@ -78,7 +78,7 @@ function renderMoodForm() {
     formEl.innerHTML = `
       <div class="card text-center" style="padding: 1.5rem 1.75rem;">
         <div style="margin-bottom:var(--space-sm); display:flex; justify-content:center;">
-          <img src="assets/img/maskots/mascot-mood-${today.level}.png" alt="${labels[today.level]}" style="width:200px; height:200px; object-fit:contain; transform:scale(1.4); filter:drop-shadow(0 12px 30px rgba(0,0,0,0.18)); margin:-20px auto -10px;">
+          <img src="assets/img/maskots/mascot-mood-${today.level}.png" alt="${labels[today.level]}" style="width:300px; height:300px; object-fit:contain; transform:scale(1.75); filter:drop-shadow(0 16px 40px rgba(0,0,0,0.22)); margin:-35px auto -20px;">
         </div>
         <h3 style="font-weight:700; margin-bottom:var(--space-xs); color:var(--text-on-white);">${labels[today.level]}</h3>
         <p style="font-size:var(--caption-size); color:var(--text-secondary);">Mood hari ini sudah tercatat</p>
