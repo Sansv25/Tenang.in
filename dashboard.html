@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Tenang.in Dashboard — Lihat ringkasan perkembangan mood, streak, badge pencapaian, dan insight personal.">
+  <meta name="description"
+    content="Tenang.in Dashboard — Lihat ringkasan perkembangan mood, streak, badge pencapaian, dan insight personal.">
   <meta name="theme-color" content="#3B72C4">
   <title>Dashboard — Tenang.in</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- font-display=swap prevents CLS from web font loading -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet">
   <!-- Material Symbols: font-display=block reserves space, prevents icon-pop CLS -->
   <link rel="stylesheet"
@@ -42,6 +43,7 @@
   <!-- CLS Fix: reserves layout space, stabilizes font & dynamic content -->
   <link rel="stylesheet" href="assets/css/cls-fix.css">
 </head>
+
 <body>
   <div class="page-wrapper">
     <div class="container container-md">
@@ -53,7 +55,8 @@
               <span class="material-symbols-rounded text-primary" style="font-size:32px;">bar_chart</span>
               <span data-i18n="dashboard.title">Dashboard</span>
             </h1>
-            <p style="color:rgba(255,255,255,0.75); margin-top:var(--space-xs);" data-i18n="dashboard.subtitle">Ringkasan perjalanan refleksimu</p>
+            <p style="color:rgba(255,255,255,0.75); margin-top:var(--space-xs);" data-i18n="dashboard.subtitle">
+              Ringkasan perjalanan refleksimu</p>
           </div>
           <div class="header-action-row">
             <button class="header-action-btn" onclick="Settings.open()" aria-label="Settings">
@@ -64,11 +67,15 @@
       </section>
 
       <!-- Section 4: Empty State -->
-      <div id="empty-state" style="display:none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 20px; background: rgba(255, 255, 255, 0.96); border-radius: 24px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2); margin: 30px 0 50px;">
-        <img src="assets/img/maskots/mascot-confused.png" alt="Milo Mascot" style="width:80px; height:80px; object-fit:contain; margin-bottom:16px; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.1));">
+      <div id="empty-state"
+        style="display:none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 20px; background: rgba(255, 255, 255, 0.96); border-radius: 24px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2); margin: 30px 0 50px;">
+        <img src="assets/img/maskots/mascot-confused.png" alt="Milo Mascot"
+          style="width:80px; height:80px; object-fit:contain; margin-bottom:16px; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.1));">
         <h3 style="font-size: 1.5rem; font-weight: 800; color: #1A2F4E; margin-bottom: 8px;">Datamu masih sedikit</h3>
-        <p style="color: #64748B; max-width: 420px; line-height: 1.6; margin-bottom: 24px; font-size: 1rem;">Check-in mood beberapa hari lagi, nanti kamu bisa lihat polamu di sini.</p>
-        <a href="mood-tracker.html" class="btn-primary" style="background: #2D5BA8; color: white; font-weight: 750; padding: 14px 28px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 16px rgba(45, 91, 168, 0.35); text-decoration: none; transition: transform 0.2s;">
+        <p style="color: #64748B; max-width: 420px; line-height: 1.6; margin-bottom: 24px; font-size: 1rem;">Check-in
+          mood beberapa hari lagi, nanti kamu bisa lihat polamu di sini.</p>
+        <a href="mood-tracker.html" class="btn-primary"
+          style="background: #2D5BA8; color: white; font-weight: 750; padding: 14px 28px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 16px rgba(45, 91, 168, 0.35); text-decoration: none; transition: transform 0.2s;">
           <span class="material-icons" style="font-size: 20px; color: white;">sentiment_satisfied</span>
           <span>Check-in Sekarang</span>
         </a>
@@ -79,10 +86,14 @@
         <!-- Section 1: Daily Quote -->
         <section id="dashboard-quote" style="margin-top: var(--space-md);">
           <div class="quote-card" style="display:flex; gap:16px; align-items:flex-start;">
-            <img src="assets/img/maskots/mascot-greeting.png" alt="Teman AI Mascot" style="width:48px; height:48px; object-fit:contain; flex-shrink:0; filter:drop-shadow(0 2px 6px rgba(0,0,0,0.1));">
+            <img src="assets/img/maskots/mascot-greeting.png" alt="Teman AI Mascot"
+              style="width:48px; height:48px; object-fit:contain; flex-shrink:0; filter:drop-shadow(0 2px 6px rgba(0,0,0,0.1));">
             <div style="flex:1;">
-              <p id="daily-quote" class="quote-text" style="font-size: 1.15rem; font-weight: 700; margin: 0 0 16px; line-height: 1.6; color: #1A2F4E;"><!-- diisi JS --></p>
-              <button id="mark-done-btn" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 999px; background: #EEF3F9; color: #2D5BA8; font-weight: 750; font-size: 0.85rem; transition: all 0.2s; cursor: pointer; border: none;">
+              <p id="daily-quote" class="quote-text"
+                style="font-size: 1.15rem; font-weight: 700; margin: 0 0 16px; line-height: 1.6; color: #1A2F4E;">
+                <!-- diisi JS --></p>
+              <button id="mark-done-btn"
+                style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 999px; background: #EEF3F9; color: #2D5BA8; font-weight: 750; font-size: 0.85rem; transition: all 0.2s; cursor: pointer; border: none;">
                 <span class="material-icons" style="font-size: 18px;">check</span> Tandai selesai
               </button>
             </div>
@@ -91,18 +102,21 @@
 
         <!-- Mini Chart -->
         <section style="margin-top:var(--space-xl);">
-          <h2 style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
+          <h2
+            style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
             <span class="material-symbols-rounded" style="font-size:22px;">show_chart</span>
             <span>Mood 7 Hari Terakhir</span>
           </h2>
-          <div class="card" style="padding:var(--space-lg); background: white; border-radius: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);">
+          <div class="card"
+            style="padding:var(--space-lg); background: white; border-radius: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);">
             <div id="dashboard-chart"></div>
           </div>
         </section>
 
         <!-- Section 2: Statistik Cards (4 card grid) -->
         <section style="margin-top:var(--space-xl);">
-          <h2 style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
+          <h2
+            style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
             <span class="material-symbols-rounded" style="font-size:22px;">insights</span>
             <span>Statistik & Ringkasan</span>
           </h2>
@@ -117,7 +131,9 @@
             <!-- Card 2: Mood rata-rata -->
             <div class="stat-card">
               <span class="material-icons">analytics</span>
-              <div class="stat-number" id="stat-avg-mood" style="background: none; -webkit-background-clip: unset; -webkit-text-fill-color: initial; background-clip: unset; color: var(--text-primary); margin: 6px 0 4px; font-size: 1.5rem;">-</div>
+              <div class="stat-number" id="stat-avg-mood"
+                style="background: none; -webkit-background-clip: unset; -webkit-text-fill-color: initial; background-clip: unset; color: var(--text-primary); margin: 6px 0 4px; font-size: 1.5rem;">
+                -</div>
               <div class="stat-label">Mood Rata-rata</div>
             </div>
 
@@ -138,11 +154,13 @@
         </section>
         <!-- Section 3: Badge Pencapaian -->
         <section style="margin-top:var(--space-xl);" id="dashboard-badges">
-          <h2 style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
+          <h2
+            style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
             <span class="material-symbols-rounded" style="font-size:22px;">military_tech</span>
             <span>Badge Pencapaian</span>
           </h2>
-          <div class="card" style="padding: 24px; background: white; border-radius: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);">
+          <div class="card"
+            style="padding: 24px; background: white; border-radius: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);">
             <div class="badge-grid" id="badge-grid">
               <!-- diisi JS -->
             </div>
@@ -151,24 +169,31 @@
 
         <!-- Mini Contribution Grid (Kalender Mood) -->
         <section style="margin-top:var(--space-xl);">
-          <h2 style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
+          <h2
+            style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
             <span class="material-symbols-rounded" style="font-size:22px;">calendar_month</span>
             <span>Kalender Mood Bulan Ini</span>
           </h2>
-          <div class="card" style="padding:var(--space-lg); background: white; border-radius: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);">
+          <div class="card"
+            style="padding:var(--space-lg); background: white; border-radius: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);">
             <div id="dashboard-grid"></div>
           </div>
         </section>
 
         <!-- Quick Actions -->
         <section style="margin-top: var(--space-xl); padding-bottom:var(--space-2xl);">
-          <div class="quick-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
-            <a href="mood-tracker.html" class="quick-card" style="display: flex; align-items: center; gap: 14px; padding: 20px; background: white; border-radius: 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.1); color: #1A2F4E; text-decoration: none; font-weight: 750; transition: transform 0.2s;">
-              <span class="material-symbols-rounded text-primary" style="font-size:36px; color: #5B8FD4;">sentiment_satisfied</span>
+          <div class="quick-grid"
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+            <a href="mood-tracker.html" class="quick-card"
+              style="display: flex; align-items: center; gap: 14px; padding: 20px; background: white; border-radius: 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.1); color: #1A2F4E; text-decoration: none; font-weight: 750; transition: transform 0.2s;">
+              <span class="material-symbols-rounded text-primary"
+                style="font-size:36px; color: #5B8FD4;">sentiment_satisfied</span>
               <span class="quick-card-title">Check-in Mood</span>
             </a>
-            <a href="jurnal.html" class="quick-card" style="display: flex; align-items: center; gap: 14px; padding: 20px; background: white; border-radius: 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.1); color: #1A2F4E; text-decoration: none; font-weight: 750; transition: transform 0.2s;">
-              <span class="material-symbols-rounded text-primary" style="font-size:36px; color: #5B8FD4;">edit_note</span>
+            <a href="jurnal.html" class="quick-card"
+              style="display: flex; align-items: center; gap: 14px; padding: 20px; background: white; border-radius: 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.1); color: #1A2F4E; text-decoration: none; font-weight: 750; transition: transform 0.2s;">
+              <span class="material-symbols-rounded text-primary"
+                style="font-size:36px; color: #5B8FD4;">edit_note</span>
               <span class="quick-card-title">Tulis Jurnal</span>
             </a>
           </div>
@@ -183,15 +208,21 @@
     <div class="modal" style="text-align:center; max-width:380px;">
       <div class="modal-header">
         <h2 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white);">Detail Badge</h2>
-        <button class="modal-close" onclick="document.getElementById('badge-detail-modal').classList.remove('active');" aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
+        <button class="modal-close" onclick="document.getElementById('badge-detail-modal').classList.remove('active');"
+          aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
       </div>
-      <div id="badge-detail-icon" style="font-size:80px; margin:var(--space-lg) 0; display:inline-block; border-radius:var(--radius-xl); padding:var(--space-lg); background:var(--card-subtle);">
+      <div id="badge-detail-icon"
+        style="font-size:80px; margin:var(--space-lg) 0; display:inline-block; border-radius:var(--radius-xl); padding:var(--space-lg); background:var(--card-subtle);">
         <span class="material-symbols-rounded" style="font-size:64px;" id="badge-detail-symbol">star</span>
       </div>
-      <h3 id="badge-detail-title" style="font-size:1.5rem; font-weight:800; color:var(--text-on-white); margin-bottom:var(--space-xs);">Nama Badge</h3>
+      <h3 id="badge-detail-title"
+        style="font-size:1.5rem; font-weight:800; color:var(--text-on-white); margin-bottom:var(--space-xs);">Nama Badge
+      </h3>
       <p id="badge-detail-status" style="font-size:0.875rem; font-weight:600; margin-bottom:var(--space-md);"></p>
-      <p id="badge-detail-desc" style="color:#475569; line-height:1.6; margin-bottom:var(--space-xl);">Deskripsi badge di sini.</p>
-      <button class="btn btn-primary btn-full" onclick="document.getElementById('badge-detail-modal').classList.remove('active');">Tutup</button>
+      <p id="badge-detail-desc" style="color:#475569; line-height:1.6; margin-bottom:var(--space-xl);">Deskripsi badge
+        di sini.</p>
+      <button class="btn btn-primary btn-full"
+        onclick="document.getElementById('badge-detail-modal').classList.remove('active');">Tutup</button>
     </div>
   </div>
 
@@ -204,4 +235,5 @@
   <script src="assets/js/main.js"></script>
   <script src="assets/js/dashboard.js"></script>
 </body>
+
 </html>

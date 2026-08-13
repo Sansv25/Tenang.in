@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Tenang.in Ruang Jurnal — Tulis refleksi harianmu dengan prompt yang dipersonalisasi berdasarkan mood.">
+  <meta name="description"
+    content="Tenang.in Ruang Jurnal — Tulis refleksi harianmu dengan prompt yang dipersonalisasi berdasarkan mood.">
   <meta name="theme-color" content="#3B72C4">
   <title>Ruang Jurnal — Tenang.in</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- font-display=swap prevents CLS from web font loading -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet">
   <!-- Material Symbols: font-display=block reserves space, prevents icon-pop CLS -->
   <link rel="stylesheet"
@@ -42,6 +43,7 @@
   <!-- CLS Fix: reserves layout space, stabilizes font & dynamic content -->
   <link rel="stylesheet" href="assets/css/cls-fix.css">
 </head>
+
 <body>
   <div class="page-wrapper">
     <div class="container container-md">
@@ -53,7 +55,8 @@
               <span class="material-symbols-rounded text-primary" style="font-size:32px;">edit_note</span>
               <span data-i18n="jurnal.title">Ruang Jurnal</span>
             </h1>
-            <p style="color:rgba(255,255,255,0.75); margin-top:var(--space-xs);" data-i18n="jurnal.subtitle">Tulis, refleksi, dan lepaskan</p>
+            <p style="color:rgba(255,255,255,0.75); margin-top:var(--space-xs);" data-i18n="jurnal.subtitle">Tulis,
+              refleksi, dan lepaskan</p>
           </div>
           <div class="header-action-row">
             <button class="header-action-btn" onclick="Settings.open()" aria-label="Settings">
@@ -67,10 +70,11 @@
       <section id="jurnal-prompt">
         <!-- Filled by JS -->
       </section>
-      
+
       <!-- Button Ganti Prompt -->
       <div style="margin-top:var(--space-md); text-align:right;">
-        <button class="btn btn-ghost btn-sm" onclick="document.getElementById('prompt-category-modal').classList.add('active');">
+        <button class="btn btn-ghost btn-sm"
+          onclick="document.getElementById('prompt-category-modal').classList.add('active');">
           <span class="material-symbols-rounded" style="font-size:18px;">change_circle</span>
           <span>Ganti Topik Prompt</span>
         </button>
@@ -79,13 +83,17 @@
       <!-- Writing Area -->
       <section style="margin-top:var(--space-lg);">
         <div class="card" style="padding:var(--space-xl);">
-          <h3 style="font-weight:700; margin-bottom:var(--space-md); color:var(--text-on-white);">Tuliskan perasaanmu...</h3>
-          <textarea id="jurnal-content" class="input textarea" placeholder="Mulai menulis di sini. Jujur sama dirimu sendiri — ini ruang amanmu..." style="min-height:160px;"></textarea>
+          <h3 style="font-weight:700; margin-bottom:var(--space-md); color:var(--text-on-white);">Tuliskan perasaanmu...
+          </h3>
+          <textarea id="jurnal-content" class="input textarea"
+            placeholder="Mulai menulis di sini. Jujur sama dirimu sendiri — ini ruang amanmu..."
+            style="min-height:160px;"></textarea>
           <div class="char-counter" id="char-counter">0 karakter</div>
 
           <!-- Tags -->
           <div style="margin-top:var(--space-lg);">
-            <p style="font-size:0.875rem; font-weight:600; color:var(--text-secondary); margin-bottom:var(--space-sm);">Mood saat menulis</p>
+            <p style="font-size:0.875rem; font-weight:600; color:var(--text-secondary); margin-bottom:var(--space-sm);">
+              Mood saat menulis</p>
             <div class="tag-container" id="jurnal-tags">
               <button class="tag-chip" onclick="toggleJurnalTag('senang', this)">Senang</button>
               <button class="tag-chip" onclick="toggleJurnalTag('sedih', this)">Sedih</button>
@@ -105,60 +113,88 @@
 
       <!-- Bakar Beban (Symbolic Catharsis) -->
       <section style="margin-top:var(--space-2xl);">
-        <div id="bakar-beban-card" style="padding:var(--space-xl); background: linear-gradient(145deg, #1E1B24 0%, #110F17 100%); border: 1px solid rgba(249, 115, 22, 0.4); border-radius: var(--radius-lg); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08); position:relative; overflow:hidden; min-height:450px; transition: all 0.5s ease;">
-          <div style="position:absolute; top:-50px; right:-50px; width:200px; height:200px; background:radial-gradient(circle, rgba(249,115,22,0.15) 0%, transparent 70%); pointer-events:none;"></div>
-          
-          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--space-lg); position:relative; z-index:2;">
+        <div id="bakar-beban-card"
+          style="padding:var(--space-xl); background: linear-gradient(145deg, #1E1B24 0%, #110F17 100%); border: 1px solid rgba(249, 115, 22, 0.4); border-radius: var(--radius-lg); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08); position:relative; overflow:hidden; min-height:450px; transition: all 0.5s ease;">
+          <div
+            style="position:absolute; top:-50px; right:-50px; width:200px; height:200px; background:radial-gradient(circle, rgba(249,115,22,0.15) 0%, transparent 70%); pointer-events:none;">
+          </div>
+
+          <div
+            style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--space-lg); position:relative; z-index:2;">
             <div>
-              <h3 style="font-weight:800; color:#F97316; display:flex; align-items:center; gap:8px; font-size:1.2rem; margin-bottom:8px;">
-                <span class="material-symbols-rounded" style="font-size:26px; color:#F97316;">local_fire_department</span>
+              <h3
+                style="font-weight:800; color:#F97316; display:flex; align-items:center; gap:8px; font-size:1.2rem; margin-bottom:8px;">
+                <span class="material-symbols-rounded"
+                  style="font-size:26px; color:#F97316;">local_fire_department</span>
                 Bakar Beban Pikiran (Katarsis)
               </h3>
               <p style="font-size:0.9rem; color:rgba(255, 255, 255, 0.85); line-height:1.6; max-width:640px;">
-                Tuliskan amarah, kecemasan, atau emosi negatifmu yang terpendam. Klik tombol bakar untuk melenyapkannya dari layar dan memusnahkannya selamanya tanpa disimpan ke dalam memori aplikasi.
+                Tuliskan amarah, kecemasan, atau emosi negatifmu yang terpendam. Klik tombol bakar untuk melenyapkannya
+                dari layar dan memusnahkannya selamanya tanpa disimpan ke dalam memori aplikasi.
               </p>
             </div>
           </div>
-          
-          <div id="burn-paper" style="position:relative; z-index:2; opacity:1; transform:translateY(0); transition: opacity 0.4s ease, transform 0.4s ease;">
-            <textarea id="burn-input" class="input textarea" placeholder="Tulis hal yang mengganggu pikiranmu hari ini. Lepaskan segalanya di sini..." style="min-height:120px; background:rgba(255, 255, 255, 0.07); color:#FFFFFF; border: 1px solid rgba(249, 115, 22, 0.3); border-radius:12px; font-weight:400; font-size:0.95rem; padding:16px; box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.4); width:100%;"></textarea>
-            <button id="btn-burn" class="btn btn-full" style="margin-top:var(--space-md); background:linear-gradient(135deg, #F97316, #EF4444); color:#FFFFFF; border:none; border-radius:28px; padding:14px; font-size:1rem; font-weight:700; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 6px 20px rgba(249,115,22,0.4); cursor:pointer; width:100%; transition: transform 0.2s, box-shadow 0.2s;" onclick="simulateBurn()">
+
+          <div id="burn-paper"
+            style="position:relative; z-index:2; opacity:1; transform:translateY(0); transition: opacity 0.4s ease, transform 0.4s ease;">
+            <textarea id="burn-input" class="input textarea"
+              placeholder="Tulis hal yang mengganggu pikiranmu hari ini. Lepaskan segalanya di sini..."
+              style="min-height:120px; background:rgba(255, 255, 255, 0.07); color:#FFFFFF; border: 1px solid rgba(249, 115, 22, 0.3); border-radius:12px; font-weight:400; font-size:0.95rem; padding:16px; box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.4); width:100%;"></textarea>
+            <button id="btn-burn" class="btn btn-full"
+              style="margin-top:var(--space-md); background:linear-gradient(135deg, #F97316, #EF4444); color:#FFFFFF; border:none; border-radius:28px; padding:14px; font-size:1rem; font-weight:700; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 6px 20px rgba(249,115,22,0.4); cursor:pointer; width:100%; transition: transform 0.2s, box-shadow 0.2s;"
+              onclick="simulateBurn()">
               <span class="material-symbols-rounded" style="font-size:22px;">local_fire_department</span>
               <span>Siapkan Pembakaran Beban Ini</span>
             </button>
           </div>
 
           <!-- 3D Realistic Burning Stage -->
-          <div id="burn-3d-stage" style="display:none; position:relative; z-index:2; width:100%; padding: 15px 0 30px; opacity:0; transform:translateY(15px); transition: opacity 0.5s ease, transform 0.5s ease;">
-            <canvas id="fire-canvas" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:10; pointer-events:none;"></canvas>
+          <div id="burn-3d-stage"
+            style="display:none; position:relative; z-index:2; width:100%; padding: 15px 0 30px; opacity:0; transform:translateY(15px); transition: opacity 0.5s ease, transform 0.5s ease;">
+            <canvas id="fire-canvas"
+              style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:10; pointer-events:none;"></canvas>
             <div class="burn-3d-wrapper">
               <div id="realistic-paper-card" class="realistic-paper-card" onclick="igniteCardFire()">
                 <div class="paper-char-overlay"></div>
-                <div class="realistic-paper-card-header" style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px dashed rgba(180, 150, 80, 0.4); padding-bottom:10px; margin-bottom:12px;">
-                  <span style="font-size:0.75rem; font-weight:800; color:#92400E; letter-spacing:2px; text-transform:uppercase;">BEBAN YANG DILEPASKAN</span>
+                <div class="realistic-paper-card-header"
+                  style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px dashed rgba(180, 150, 80, 0.4); padding-bottom:10px; margin-bottom:12px;">
+                  <span
+                    style="font-size:0.75rem; font-weight:800; color:#92400E; letter-spacing:2px; text-transform:uppercase;">BEBAN
+                    YANG DILEPASKAN</span>
                   <span style="font-size:0.8rem; font-weight:900; color:#B45309; letter-spacing:1.5px;">TENANG.IN</span>
                 </div>
-                <div id="paper-card-content" style="font-family:'Courier New', Courier, monospace; font-size:clamp(0.78rem, 2.6vw, 1.05rem); line-height:1.5; color:#272015; font-weight:700; white-space:pre-wrap; word-break:break-word; text-shadow:0 1px 0 rgba(255,255,255,0.8); flex:1; display:flex; align-items:center; justify-content:center; text-align:center;"></div>
+                <div id="paper-card-content"
+                  style="font-family:'Courier New', Courier, monospace; font-size:clamp(0.78rem, 2.6vw, 1.05rem); line-height:1.5; color:#272015; font-weight:700; white-space:pre-wrap; word-break:break-word; text-shadow:0 1px 0 rgba(255,255,255,0.8); flex:1; display:flex; align-items:center; justify-content:center; text-align:center;">
+                </div>
               </div>
             </div>
             <div style="text-align:center; margin-top:10px;">
-              <span id="burn-stage-status" style="font-size:0.88rem; color:rgba(255,255,255,0.85); font-weight:600; display:inline-flex; align-items:center; gap:6px; background:rgba(0,0,0,0.35); padding:8px 18px; border-radius:20px; border:1px solid rgba(255,255,255,0.1);">
+              <span id="burn-stage-status"
+                style="font-size:0.88rem; color:rgba(255,255,255,0.85); font-weight:600; display:inline-flex; align-items:center; gap:6px; background:rgba(0,0,0,0.35); padding:8px 18px; border-radius:20px; border:1px solid rgba(255,255,255,0.1);">
                 <span class="material-symbols-rounded" style="color:#F59E0B; font-size:18px;">touch_app</span>
                 Klik pada kartu di atas untuk menyalakan api katarsis dan membakarnya
               </span>
             </div>
           </div>
-          
-          <div id="burn-success-msg" style="display:none; text-align:center; padding:var(--space-xl) 0; position:relative; z-index:2; opacity:0; transform:translateY(15px); transition: opacity 0.5s ease, transform 0.5s ease;">
-            <div style="width:72px; height:72px; border-radius:50%; background:rgba(16, 185, 129, 0.15); border:1px solid rgba(16, 185, 129, 0.4); display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
+
+          <div id="burn-success-msg"
+            style="display:none; text-align:center; padding:var(--space-xl) 0; position:relative; z-index:2; opacity:0; transform:translateY(15px); transition: opacity 0.5s ease, transform 0.5s ease;">
+            <div
+              style="width:72px; height:72px; border-radius:50%; background:rgba(16, 185, 129, 0.15); border:1px solid rgba(16, 185, 129, 0.4); display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
               <span class="material-symbols-rounded" style="font-size:40px; color:#10B981;">auto_awesome</span>
             </div>
-            <h4 style="color:#FFFFFF; font-weight:800; margin-top:8px; font-size:1.3rem;">Bebanmu Telah Lenyap Jadi Abu!</h4>
-            <p style="font-size:0.9rem; color:rgba(255, 255, 255, 0.75); margin-top:8px; max-width:440px; margin-left:auto; margin-right:auto; line-height:1.6;">
-              Pikiran negatif itu telah dihancurkan dan tidak tersimpan di mana pun. Ambil napas yang dalam dan rasakan kelegaan di dadamu.
+            <h4 style="color:#FFFFFF; font-weight:800; margin-top:8px; font-size:1.3rem;">Bebanmu Telah Lenyap Jadi Abu!
+            </h4>
+            <p
+              style="font-size:0.9rem; color:rgba(255, 255, 255, 0.75); margin-top:8px; max-width:440px; margin-left:auto; margin-right:auto; line-height:1.6;">
+              Pikiran negatif itu telah dihancurkan dan tidak tersimpan di mana pun. Ambil napas yang dalam dan rasakan
+              kelegaan di dadamu.
             </p>
-            <button class="btn btn-sm" style="margin-top:var(--space-lg); background:transparent; border:1px solid rgba(249,115,22,0.5); color:#F97316; font-weight:700; border-radius:20px; padding:8px 20px; cursor:pointer;" onclick="resetBurn()">
-              <span class="material-symbols-rounded" style="font-size:18px; margin-right:4px; vertical-align:middle;">refresh</span> Tulis Beban Lainnya
+            <button class="btn btn-sm"
+              style="margin-top:var(--space-lg); background:transparent; border:1px solid rgba(249,115,22,0.5); color:#F97316; font-weight:700; border-radius:20px; padding:8px 20px; cursor:pointer;"
+              onclick="resetBurn()">
+              <span class="material-symbols-rounded"
+                style="font-size:18px; margin-right:4px; vertical-align:middle;">refresh</span> Tulis Beban Lainnya
             </button>
           </div>
         </div>
@@ -166,7 +202,8 @@
 
       <!-- Journal History -->
       <section style="margin-top:var(--space-2xl); padding-bottom:var(--space-xl);">
-        <h2 style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
+        <h2
+          style="font-size:var(--h3-size); font-weight:600; margin-bottom:var(--space-md); color:var(--text-on-blue); display:flex; align-items:center; gap:8px;">
           <span class="material-symbols-rounded" style="font-size:22px;">auto_stories</span>
           <span>Riwayat Jurnal</span>
         </h2>
@@ -185,10 +222,13 @@
         <div>
           <span class="journal-date" id="jurnal-read-date"></span>
         </div>
-        <button class="modal-close" onclick="closeJurnalModal()" aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
+        <button class="modal-close" onclick="closeJurnalModal()" aria-label="Tutup Modal"><span
+            class="material-symbols-rounded">close</span></button>
       </div>
-      <p id="jurnal-read-prompt" style="font-size:0.8125rem; color:var(--primary-accent); font-style:italic; margin-bottom:var(--space-md);"></p>
-      <p id="jurnal-read-content" style="font-size:var(--body-size); line-height:1.8; color:var(--text-on-white); white-space:pre-wrap;"></p>
+      <p id="jurnal-read-prompt"
+        style="font-size:0.8125rem; color:var(--primary-accent); font-style:italic; margin-bottom:var(--space-md);"></p>
+      <p id="jurnal-read-content"
+        style="font-size:var(--body-size); line-height:1.8; color:var(--text-on-white); white-space:pre-wrap;"></p>
       <div class="journal-tags" id="jurnal-read-tags" style="margin-top:var(--space-lg);"></div>
     </div>
   </div>
@@ -215,19 +255,27 @@
     <div class="modal" style="max-width:440px;">
       <div class="modal-header">
         <h2 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white);">Pilih Topik Refleksi</h2>
-        <button class="modal-close" onclick="document.getElementById('prompt-category-modal').classList.remove('active');" aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
+        <button class="modal-close"
+          onclick="document.getElementById('prompt-category-modal').classList.remove('active');"
+          aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
       </div>
       <div style="display:flex; flex-direction:column; gap:var(--space-md);">
-        <button class="btn btn-secondary btn-full" style="justify-content:flex-start; padding: 14px 18px; font-weight: 700; font-size: 1rem; gap: 12px;" onclick="changePromptCategory('gratitude')">
-          <span class="material-symbols-rounded text-warning" style="font-size: 24px;">volunteer_activism</span> 
+        <button class="btn btn-secondary btn-full"
+          style="justify-content:flex-start; padding: 14px 18px; font-weight: 700; font-size: 1rem; gap: 12px;"
+          onclick="changePromptCategory('gratitude')">
+          <span class="material-symbols-rounded text-warning" style="font-size: 24px;">volunteer_activism</span>
           <span>Rasa Syukur (Gratitude)</span>
         </button>
-        <button class="btn btn-secondary btn-full" style="justify-content:flex-start; padding: 14px 18px; font-weight: 700; font-size: 1rem; gap: 12px;" onclick="changePromptCategory('stress')">
-          <span class="material-symbols-rounded text-primary" style="font-size: 24px;">psychology</span> 
+        <button class="btn btn-secondary btn-full"
+          style="justify-content:flex-start; padding: 14px 18px; font-weight: 700; font-size: 1rem; gap: 12px;"
+          onclick="changePromptCategory('stress')">
+          <span class="material-symbols-rounded text-primary" style="font-size: 24px;">psychology</span>
           <span>Pelepasan Stres & Emosi</span>
         </button>
-        <button class="btn btn-secondary btn-full" style="justify-content:flex-start; padding: 14px 18px; font-weight: 700; font-size: 1rem; gap: 12px;" onclick="changePromptCategory('discovery')">
-          <span class="material-symbols-rounded text-secondary" style="font-size: 24px;">explore</span> 
+        <button class="btn btn-secondary btn-full"
+          style="justify-content:flex-start; padding: 14px 18px; font-weight: 700; font-size: 1rem; gap: 12px;"
+          onclick="changePromptCategory('discovery')">
+          <span class="material-symbols-rounded text-secondary" style="font-size: 24px;">explore</span>
           <span>Eksplorasi Diri</span>
         </button>
       </div>
@@ -237,12 +285,16 @@
   <!-- Jurnal Success Modal -->
   <div class="modal-overlay" id="jurnal-success-modal">
     <div class="modal" style="text-align:center; max-width:400px; padding:var(--space-2xl);">
-      <span class="material-symbols-rounded text-primary modal-breathing-icon" style="font-size:72px; margin-bottom:var(--space-md);">done_all</span>
-      <h2 style="font-size:1.75rem; font-weight:850; margin-bottom:var(--space-xs); color:var(--text-on-white);">Jurnal Tersimpan!</h2>
+      <span class="material-symbols-rounded text-primary modal-breathing-icon"
+        style="font-size:72px; margin-bottom:var(--space-md);">done_all</span>
+      <h2 style="font-size:1.75rem; font-weight:850; margin-bottom:var(--space-xs); color:var(--text-on-white);">Jurnal
+        Tersimpan!</h2>
       <p style="color:#475569; font-size:1.0625rem; line-height:1.6; margin-bottom:var(--space-xl);">
         Bebanmu sedikit berkurang. Terima kasih sudah jujur dengan dirimu sendiri hari ini.
       </p>
-      <button class="btn btn-primary btn-full" onclick="document.getElementById('jurnal-success-modal').classList.remove('active');" style="font-weight:700;">Tutup</button>
+      <button class="btn btn-primary btn-full"
+        onclick="document.getElementById('jurnal-success-modal').classList.remove('active');"
+        style="font-weight:700;">Tutup</button>
     </div>
   </div>
 
@@ -254,4 +306,5 @@
   <script src="assets/js/main.js"></script>
   <script src="assets/js/jurnal.js"></script>
 </body>
+
 </html>

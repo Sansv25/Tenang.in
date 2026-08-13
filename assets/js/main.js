@@ -60,6 +60,10 @@ const Main = (() => {
       { href: 'dashboard.html', label: 'Dashboard', id: 'dashboard' }
     ];
 
+    const avatar = (typeof Storage !== 'undefined' && Storage.getUserAvatar) ? Storage.getUserAvatar() : null;
+    const userName = (typeof Storage !== 'undefined' && Storage.getUserName) ? Storage.getUserName() : '';
+    const displayName = userName || 'Profil';
+
     nav.innerHTML = `
       <div class="navbar-inner">
         <a href="index.html" class="navbar-logo">
@@ -68,6 +72,13 @@ const Main = (() => {
         </a>
         <div class="navbar-links">
           ${links.map(l => `<a href="${l.href}" class="${activePage === l.id ? 'active' : ''}">${l.label}</a>`).join('')}
+          <a href="profil.html" class="navbar-profile-pill ${activePage === 'profil' ? 'active' : ''}" title="Profil Saya (${escapeHTML(displayName)})">
+            <div class="navbar-avatar-circle">
+              <img src="${avatar || ''}" class="navbar-profile-avatar-img" alt="Avatar" style="${avatar ? 'display:block;' : 'display:none;'} width:100%; height:100%; object-fit:cover; border-radius:50%;">
+              <span class="material-symbols-rounded navbar-profile-avatar-icon" style="${avatar ? 'display:none;' : 'display:inline-block;'} font-size:18px; color:#ffffff;">person</span>
+            </div>
+            <span class="navbar-profile-name">${escapeHTML(displayName)}</span>
+          </a>
         </div>
       </div>
     `;
@@ -77,6 +88,32 @@ const Main = (() => {
     // Scroll effect
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
+  };
+
+  const updateHeaderAvatar = () => {
+    const avatar = (typeof Storage !== 'undefined' && Storage.getUserAvatar) ? Storage.getUserAvatar() : null;
+    const name = (typeof Storage !== 'undefined' && Storage.getUserName) ? Storage.getUserName() : '';
+    const displayName = name || 'Profil';
+
+    const profilePills = document.querySelectorAll('.navbar-profile-pill');
+    profilePills.forEach(pill => {
+      const imgEl = pill.querySelector('.navbar-profile-avatar-img');
+      const iconEl = pill.querySelector('.navbar-profile-avatar-icon');
+      const nameEl = pill.querySelector('.navbar-profile-name');
+
+      if (nameEl) nameEl.textContent = displayName;
+
+      if (avatar) {
+        if (imgEl) {
+          imgEl.src = avatar;
+          imgEl.style.display = 'block';
+        }
+        if (iconEl) iconEl.style.display = 'none';
+      } else {
+        if (imgEl) imgEl.style.display = 'none';
+        if (iconEl) iconEl.style.display = 'inline-block';
+      }
     });
   };
 
@@ -97,21 +134,21 @@ const Main = (() => {
     bottomNav.innerHTML = `
       <div class="bottom-nav-inner">
         ${items.map(item => {
-          if (item.isAction) {
-            return `
+      if (item.isAction) {
+        return `
               <button class="bottom-nav-action" onclick="if(typeof showCheckInModal === 'function'){ showCheckInModal(); } else { window.location.href='beranda.html'; }" aria-label="Catat Mood">
                 <span class="material-symbols-rounded">edit</span>
                 <span style="font-size: 0.75rem; font-weight: 600;">Catat</span>
               </button>
             `;
-          }
-          return `
+      }
+      return `
             <a href="${item.href}" class="bottom-nav-item ${activePage === item.id ? 'active' : ''}">
               <span class="material-symbols-rounded">${item.icon}</span>
               <span class="bottom-nav-label">${item.label}</span>
             </a>
           `;
-        }).join('')}
+    }).join('')}
       </div>
     `;
 
@@ -177,7 +214,7 @@ const Main = (() => {
 
 
   // ---- Time Capsule Intervention Engine ----
-  window.checkTimeCapsuleIntervention = function(level) {
+  window.checkTimeCapsuleIntervention = function (level) {
     if (level >= 4) {
       const lastPrompt = localStorage.getItem('tenang_last_capsule_prompt');
       const today = Storage.todayKey();
@@ -234,7 +271,7 @@ const Main = (() => {
     modal.classList.add('active');
   }
 
-  window.generateAICapsule = function() {
+  window.generateAICapsule = function () {
     const textarea = document.getElementById('capsule-input-msg');
     const btn = document.getElementById('btn-generate-ai');
     if (!textarea) return;
@@ -273,7 +310,7 @@ const Main = (() => {
     }, 16);
   };
 
-  window.submitTimeCapsule = function() {
+  window.submitTimeCapsule = function () {
     const textarea = document.getElementById('capsule-input-msg');
     if (textarea && textarea.value.trim()) {
       Storage.saveTimeCapsule(textarea.value.trim());
@@ -363,7 +400,7 @@ const Main = (() => {
     if (showTeman) await TemanChat.init();
 
     Animations.init();
-    
+
     if (typeof Settings !== 'undefined' && Settings.applyTheme) {
       Settings.applyTheme();
     }
@@ -389,7 +426,7 @@ const Main = (() => {
   };
 
   // ---- Universal Clipboard Copy Helper for Emergency Numbers ----
-  window.copyEmergencyNumber = function(number, label) {
+  window.copyEmergencyNumber = function (number, label) {
     try {
       if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(number).then(() => {
@@ -400,7 +437,7 @@ const Main = (() => {
       } else {
         fallbackCopy(number, label);
       }
-    } catch(e) {
+    } catch (e) {
       fallbackCopy(number, label);
     }
   };
@@ -418,9 +455,9 @@ const Main = (() => {
       if (typeof Animations !== 'undefined' && Animations.showToast) {
         Animations.showToast(`Nomor ${label} (${text}) disalin ke papan klip!`, 'success', 3500);
       }
-    } catch (err) {}
+    } catch (err) { }
     document.body.removeChild(ta);
   }
 
-  return { initPage, getGreetingText, logoSVG };
+  return { initPage, getGreetingText, updateHeaderAvatar, logoSVG };
 })();

@@ -217,7 +217,7 @@ const TemanChat = (() => {
 
     voiceBtn.addEventListener('click', () => {
       if (isListening) {
-        try { recognition.stop(); } catch(e) {}
+        try { recognition.stop(); } catch (e) { }
         return;
       }
       try {

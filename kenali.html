@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Tenang.in Kenali Dirimu — Temukan tipe kepribadianmu melalui kuis 12 pertanyaan dan dapatkan tips personal.">
+  <meta name="description"
+    content="Tenang.in Kenali Dirimu — Temukan tipe kepribadianmu melalui kuis 12 pertanyaan dan dapatkan tips personal.">
   <meta name="theme-color" content="#3B72C4">
   <title>Kenali Dirimu — Tenang.in</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- font-display=swap prevents CLS from web font loading -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet">
   <!-- Material Symbols: font-display=block reserves space, prevents icon-pop CLS -->
   <link rel="stylesheet"
@@ -42,6 +43,7 @@
   <!-- CLS Fix: reserves layout space, stabilizes font & dynamic content -->
   <link rel="stylesheet" href="assets/css/cls-fix.css">
 </head>
+
 <body>
 
   <!-- Ambient Background Orbs -->
@@ -61,7 +63,8 @@
           <div class="icon-ring"></div>
           <div class="icon-ring-2"></div>
           <div class="icon-glow">
-            <img src="assets/img/maskots/mascot-confused.png" alt="Milo Thinking Mascot" style="width:64px; height:64px; object-fit:contain; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.15));">
+            <img src="assets/img/maskots/mascot-confused.png" alt="Milo Thinking Mascot"
+              style="width:64px; height:64px; object-fit:contain; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.15));">
           </div>
         </div>
 
@@ -103,7 +106,8 @@
           </div>
         </div>
 
-        <button class="kenali-start-btn kenali-fade-in kenali-fade-in-delay-4" onclick="startKenaliQuiz()" id="kenali-start-btn">
+        <button class="kenali-start-btn kenali-fade-in kenali-fade-in-delay-4" onclick="startKenaliQuiz()"
+          id="kenali-start-btn">
           <span class="material-symbols-rounded">play_arrow</span>
           Mulai Kuis
         </button>
@@ -150,75 +154,108 @@
     <div class="modal" style="max-width:460px;">
       <div class="modal-header">
         <h2 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white);">Bagikan Hasil Kuis</h2>
-        <button class="modal-close" onclick="document.getElementById('share-result-modal').classList.remove('active');" aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
+        <button class="modal-close" onclick="document.getElementById('share-result-modal').classList.remove('active');"
+          aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
       </div>
 
       <!-- Color Customization -->
       <div style="margin-bottom:var(--space-md); text-align:center;">
-        <p style="font-size:0.875rem; color:var(--text-secondary); margin-bottom:var(--space-sm); font-weight:600;">Sesuaikan Warna Tema</p>
+        <p style="font-size:0.875rem; color:var(--text-secondary); margin-bottom:var(--space-sm); font-weight:600;">
+          Sesuaikan Warna Tema</p>
         <div style="display:flex; justify-content:center; gap:12px;" id="kenali-theme-selector">
-          <button onclick="changeKenaliShareTheme('blue', event)" style="width:32px; height:32px; border-radius:50%; border:2px solid #fff; cursor:pointer; background: linear-gradient(135deg, #2D5BA8, #7EC8E3); box-shadow:0 2px 8px rgba(0,0,0,0.3); transform:scale(1.1);" aria-label="Tema Biru"></button>
-          <button onclick="changeKenaliShareTheme('ocean', event)" style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #1E4780, #38BDF8); box-shadow:0 2px 8px rgba(0,0,0,0.3);" aria-label="Tema Samudra"></button>
-          <button onclick="changeKenaliShareTheme('sunset', event)" style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #FF512F, #DD2476); box-shadow:0 2px 8px rgba(0,0,0,0.3);" aria-label="Tema Senja"></button>
-          <button onclick="changeKenaliShareTheme('midnight', event)" style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); box-shadow:0 2px 8px rgba(0,0,0,0.3);" aria-label="Tema Malam"></button>
-          <button onclick="changeKenaliShareTheme('forest', event)" style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #11998e, #38ef7d); box-shadow:0 2px 8px rgba(0,0,0,0.3);" aria-label="Tema Hutan"></button>
+          <button onclick="changeKenaliShareTheme('blue', event)"
+            style="width:32px; height:32px; border-radius:50%; border:2px solid #fff; cursor:pointer; background: linear-gradient(135deg, #2D5BA8, #7EC8E3); box-shadow:0 2px 8px rgba(0,0,0,0.3); transform:scale(1.1);"
+            aria-label="Tema Biru"></button>
+          <button onclick="changeKenaliShareTheme('ocean', event)"
+            style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #1E4780, #38BDF8); box-shadow:0 2px 8px rgba(0,0,0,0.3);"
+            aria-label="Tema Samudra"></button>
+          <button onclick="changeKenaliShareTheme('sunset', event)"
+            style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #FF512F, #DD2476); box-shadow:0 2px 8px rgba(0,0,0,0.3);"
+            aria-label="Tema Senja"></button>
+          <button onclick="changeKenaliShareTheme('midnight', event)"
+            style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); box-shadow:0 2px 8px rgba(0,0,0,0.3);"
+            aria-label="Tema Malam"></button>
+          <button onclick="changeKenaliShareTheme('forest', event)"
+            style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #11998e, #38ef7d); box-shadow:0 2px 8px rgba(0,0,0,0.3);"
+            aria-label="Tema Hutan"></button>
         </div>
       </div>
 
       <!-- Card Preview -->
-      <div id="kenali-share-card-preview" class="kenali-share-preview" style="background: linear-gradient(135deg, #2D5BA8, #7EC8E3); transition: background 0.5s ease; text-align:left;">
+      <div id="kenali-share-card-preview" class="kenali-share-preview"
+        style="background: linear-gradient(135deg, #2D5BA8, #7EC8E3); transition: background 0.5s ease; text-align:left;">
         <!-- Header -->
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">
           <div>
-            <h3 style="font-size:clamp(1.05rem, 4vw, 1.18rem); font-weight:850; color:#fff; text-shadow:0 2px 4px rgba(0,0,0,0.2); line-height:1.2; margin:0;">Tipe<br>Kepribadianku</h3>
+            <h3
+              style="font-size:clamp(1.05rem, 4vw, 1.18rem); font-weight:850; color:#fff; text-shadow:0 2px 4px rgba(0,0,0,0.2); line-height:1.2; margin:0;">
+              Tipe<br>Kepribadianku</h3>
           </div>
-          <div style="background:rgba(255,255,255,0.2); padding:3px 10px; border-radius:999px; color:#fff; font-size:0.7rem; font-weight:750; display:inline-flex; align-items:center; gap:4px; backdrop-filter:blur(5px); flex-shrink:0; white-space:nowrap;">
+          <div
+            style="background:rgba(255,255,255,0.2); padding:3px 10px; border-radius:999px; color:#fff; font-size:0.7rem; font-weight:750; display:inline-flex; align-items:center; gap:4px; backdrop-filter:blur(5px); flex-shrink:0; white-space:nowrap;">
             <span class="material-symbols-rounded" style="font-size:14px;">psychology</span>
             <span>Kenali Dirimu</span>
           </div>
         </div>
-        
+
         <!-- Big Stat / Hero Result -->
-        <div style="background:rgba(255,255,255,0.12); padding:12px 14px; border-radius:14px; border:1px solid rgba(255,255,255,0.22); display:flex; align-items:center; gap:12px; margin: 4px 0;">
-          <div style="width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-            <span class="material-symbols-rounded" id="share-result-emoji" style="font-size:26px; color:#FFFFFF; font-variation-settings: 'FILL' 1;">psychology</span>
+        <div
+          style="background:rgba(255,255,255,0.12); padding:12px 14px; border-radius:14px; border:1px solid rgba(255,255,255,0.22); display:flex; align-items:center; gap:12px; margin: 4px 0;">
+          <div
+            style="width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <span class="material-symbols-rounded" id="share-result-emoji"
+              style="font-size:26px; color:#FFFFFF; font-variation-settings: 'FILL' 1;">psychology</span>
           </div>
           <div style="overflow:hidden;">
-            <div style="font-size:clamp(1.1rem, 4vw, 1.25rem); font-weight:850; color:#fff; line-height:1.15; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" id="share-result-title">Tipe Kepribadian</div>
-            <div style="font-size:0.8rem; color:rgba(255,255,255,0.9); font-weight:650; margin-top:2px;" id="share-result-tagline">Tagline</div>
+            <div
+              style="font-size:clamp(1.1rem, 4vw, 1.25rem); font-weight:850; color:#fff; line-height:1.15; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"
+              id="share-result-title">Tipe Kepribadian</div>
+            <div style="font-size:0.8rem; color:rgba(255,255,255,0.9); font-weight:650; margin-top:2px;"
+              id="share-result-tagline">Tagline</div>
           </div>
         </div>
 
         <!-- Strengths / Dominant Traits -->
         <div>
-          <div style="font-size:0.7rem; font-weight:750; color:rgba(255,255,255,0.85); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.8px;">Kekuatan Utama</div>
-          <div id="share-result-strengths" style="display:flex; flex-wrap:wrap; gap:5px; max-height:54px; overflow:hidden;">
-            <span style="background:rgba(255,255,255,0.22); padding:3px 9px; border-radius:10px; color:#fff; font-size:0.75rem; font-weight:700; display:inline-flex; align-items:center; gap:4px; white-space:nowrap;">
+          <div
+            style="font-size:0.7rem; font-weight:750; color:rgba(255,255,255,0.85); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.8px;">
+            Kekuatan Utama</div>
+          <div id="share-result-strengths"
+            style="display:flex; flex-wrap:wrap; gap:5px; max-height:54px; overflow:hidden;">
+            <span
+              style="background:rgba(255,255,255,0.22); padding:3px 9px; border-radius:10px; color:#fff; font-size:0.75rem; font-weight:700; display:inline-flex; align-items:center; gap:4px; white-space:nowrap;">
               <span class="material-symbols-rounded" style="font-size:14px;">star</span> Menemukan Potensi
             </span>
           </div>
         </div>
 
         <!-- Quote / Short Desc -->
-        <div style="font-size:0.78rem; color:rgba(255,255,255,0.92); line-height:1.45; font-style:italic; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; margin:2px 0;" id="share-result-desc-short">
+        <div
+          style="font-size:0.78rem; color:rgba(255,255,255,0.92); line-height:1.45; font-style:italic; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; margin:2px 0;"
+          id="share-result-desc-short">
           "Mengetahui potensi dari dalam diri untuk langkah tumbuh yang lebih baik."
         </div>
 
         <!-- Promo Footer -->
-        <div style="border-top:1px dashed rgba(255,255,255,0.35); padding-top:8px; margin-top:2px; display:flex; justify-content:space-between; align-items:center;">
+        <div
+          style="border-top:1px dashed rgba(255,255,255,0.35); padding-top:8px; margin-top:2px; display:flex; justify-content:space-between; align-items:center;">
           <div>
             <div style="font-size:0.85rem; font-weight:850; color:#fff;">Tenang.in</div>
-            <div style="font-size:0.65rem; font-weight:650; color:rgba(255,255,255,0.8);">Ruang aman untuk mentalmu.</div>
+            <div style="font-size:0.65rem; font-weight:650; color:rgba(255,255,255,0.8);">Ruang aman untuk mentalmu.
+            </div>
           </div>
-          <div style="width:32px; height:32px; background:rgba(255,255,255,0.2); border-radius:10px; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px); flex-shrink:0;">
+          <div
+            style="width:32px; height:32px; background:rgba(255,255,255,0.2); border-radius:10px; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px); flex-shrink:0;">
             <span class="material-symbols-rounded" style="color:#fff; font-size:18px;">spa</span>
           </div>
         </div>
       </div>
 
       <div style="display:flex; gap:var(--space-md);">
-        <button class="btn btn-secondary btn-full" onclick="simulateResultShare()"><span class="material-symbols-rounded">download</span> Unduh</button>
-        <button class="btn btn-primary btn-full" onclick="simulateResultShare()"><span class="material-symbols-rounded">share</span> Bagikan</button>
+        <button class="btn btn-secondary btn-full" onclick="simulateResultShare()"><span
+            class="material-symbols-rounded">download</span> Unduh</button>
+        <button class="btn btn-primary btn-full" onclick="simulateResultShare()"><span
+            class="material-symbols-rounded">share</span> Bagikan</button>
       </div>
     </div>
   </div>
@@ -232,4 +269,5 @@
   <script src="assets/js/main.js"></script>
   <script src="assets/js/kenali.js"></script>
 </body>
+
 </html>

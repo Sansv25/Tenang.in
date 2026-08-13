@@ -217,9 +217,9 @@ function updateMoodSummary() {
         : '';
 
       checkedInState.innerHTML = `
-        <div style="padding: 20px 24px; max-width: 600px; margin: 0 auto; text-align:center;">
-          <div style="margin: 0 auto 8px; display: flex; align-items: center; justify-content: center;">
-            <img src="assets/img/maskots/mascot-mood-${mood.level}.png" alt="Mood ${mood.level}" style="width: 320px; height: 320px; object-fit: contain; transform: scale(1.8); filter: drop-shadow(0 18px 45px ${bgGlows[mood.level]}); margin: -40px auto -30px; transition: transform 0.3s ease;">
+        <div style="padding: 8px 16px 20px; max-width: 600px; margin: 0 auto; text-align:center;">
+          <div style="margin: 0 auto 12px; display: flex; align-items: center; justify-content: center;">
+            <img src="assets/img/maskots/mascot-mood-${mood.level}.png" alt="Mood ${mood.level}" class="checked-in-mascot-img">
           </div>
           <span style="display:inline-block; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:${colors[mood.level]}; background:${bgGlows[mood.level]}; padding:4px 14px; border-radius:12px; margin-bottom:12px;">Check-In Hari Ini Tersimpan</span>
           <h3 style="font-size:1.5rem; font-weight:800; color:#1E293B; margin: 4px 0;">${labels[mood.level]}</h3>

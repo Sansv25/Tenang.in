@@ -11,8 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- font-display=swap prevents CLS from web font loading -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet">
   <!-- Material Symbols: font-display=block reserves space, prevents icon-pop CLS -->
   <link rel="stylesheet"
@@ -46,21 +45,21 @@
   <link rel="stylesheet" href="assets/css/cls-fix.css">
   <!-- Synchronous State Detector for Zero CLS on First Paint -->
   <script>
-    (function() {
-      try {
-        const d = new Date();
-        const todayStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-        const moods = JSON.parse(localStorage.getItem('tenang_moods') || '[]');
-        if (Array.isArray(moods) && moods.some(m => m.date === todayStr)) {
-          document.documentElement.classList.add('already-checked-in');
-        }
-        const isNewUser = localStorage.getItem('isNewUser');
-        const isReturning = localStorage.getItem('tenang_isReturning') || localStorage.getItem('tenang_returning');
-        if (isReturning || isNewUser === 'false') {
-          document.documentElement.classList.add('not-new-user');
-        }
-      } catch (e) {}
-    })();
+      (function () {
+        try {
+          const d = new Date();
+          const todayStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+          const moods = JSON.parse(localStorage.getItem('tenang_moods') || '[]');
+          if (Array.isArray(moods) && moods.some(m => m.date === todayStr)) {
+            document.documentElement.classList.add('already-checked-in');
+          }
+          const isNewUser = localStorage.getItem('isNewUser');
+          const isReturning = localStorage.getItem('tenang_isReturning') || localStorage.getItem('tenang_returning');
+          if (isReturning || isNewUser === 'false') {
+            document.documentElement.classList.add('not-new-user');
+          }
+        } catch (e) { }
+      })();
   </script>
 </head>
 
@@ -165,7 +164,7 @@
         </div>
 
         <!-- Empty State: Already Checked In (Rendered Dynamically) -->
-        <div id="mood-checked-in-state" style="display:none; text-align:center; padding:var(--space-lg) 0;">
+        <div id="mood-checked-in-state" style="display:none; text-align:center; padding:0; margin:0;">
         </div>
       </section>
 
@@ -300,76 +299,109 @@
       </section>
 
       <!-- ======= AKSES BANTUAN & KONTAK DARURAT (CRISIS HELPLINE SECTION) ======= -->
-      <section class="emergency-help-section" style="margin-top: var(--space-2xl); margin-bottom: var(--space-xl); background: #FFFFFF; border: 2px solid #E2E8F0; border-radius: 28px; padding: 32px; box-shadow: 0 16px 40px -12px rgba(15, 23, 42, 0.15); color: #1A2F4E;">
-        <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; gap: 16px;">
+      <section class="emergency-help-section"
+        style="margin-top: var(--space-2xl); margin-bottom: var(--space-xl); background: #FFFFFF; border: 2px solid #E2E8F0; border-radius: 28px; padding: 32px; box-shadow: 0 16px 40px -12px rgba(15, 23, 42, 0.15); color: #1A2F4E;">
+        <div
+          style="display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; gap: 16px;">
           <div>
-            <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #2D5BA8; background: #EEF3F9; border: 1px solid #7EC8E3; padding: 6px 14px; border-radius: 999px; margin-bottom: 12px;">
+            <span
+              style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #2D5BA8; background: #EEF3F9; border: 1px solid #7EC8E3; padding: 6px 14px; border-radius: 999px; margin-bottom: 12px;">
               <span class="material-symbols-rounded" style="font-size: 16px; color: #2D5BA8;">emergency</span>
               Bantuan Profesional & Darurat
             </span>
-            <h2 style="font-size: 1.65rem; font-weight: 850; color: #1A2F4E; margin: 0; letter-spacing: -0.02em;">Akses Bantuan & Kontak Darurat</h2>
+            <h2 style="font-size: 1.65rem; font-weight: 850; color: #1A2F4E; margin: 0; letter-spacing: -0.02em;">Akses
+              Bantuan & Kontak Darurat</h2>
             <p style="color: #64748B; font-size: 0.95rem; line-height: 1.6; max-width: 620px; margin: 6px 0 0;">
-              Kamu tidak pernah berjalan sendirian. Jika sewaktu-waktu merasa terbebani, memiliki kecemasan hebat, atau berada dalam situasi krisis emosional, segera hubungi layanan profesional yang selalu siap merangkulmu.
+              Kamu tidak pernah berjalan sendirian. Jika sewaktu-waktu merasa terbebani, memiliki kecemasan hebat, atau
+              berada dalam situasi krisis emosional, segera hubungi layanan profesional yang selalu siap merangkulmu.
             </p>
           </div>
         </div>
 
-        <div class="emergency-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px;">
+        <div class="emergency-grid"
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px;">
           <!-- Card 1: Kemenkes RI -->
-          <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px -5px rgba(91, 143, 212, 0.25)';" onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+          <div
+            style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between;"
+            onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px -5px rgba(91, 143, 212, 0.25)';"
+            onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
             <div>
-              <div style="width: 44px; height: 44px; border-radius: 12px; background: #E0F2FE; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">
+              <div
+                style="width: 44px; height: 44px; border-radius: 12px; background: #E0F2FE; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">
                 <span class="material-symbols-rounded" style="color: #0284C7; font-size: 26px;">call_end</span>
               </div>
               <h3 style="font-size: 1.1rem; font-weight: 800; color: #1A2F4E; margin: 0;">Hotline Kemenkes RI</h3>
-              <p style="font-size: 0.825rem; font-weight: 600; color: #0284C7; margin: 4px 0 10px;">Layanan Kesehatan Jiwa Darurat 24/7</p>
-              <div style="font-size: 1.35rem; font-weight: 850; color: #1E293B; margin-bottom: 16px;">119 <span style="font-size: 0.85rem; font-weight: 700; color: #64748B;">ext. 8</span></div>
+              <p style="font-size: 0.825rem; font-weight: 600; color: #0284C7; margin: 4px 0 10px;">Layanan Kesehatan
+                Jiwa Darurat 24/7</p>
+              <div style="font-size: 1.35rem; font-weight: 850; color: #1E293B; margin-bottom: 16px;">119 <span
+                  style="font-size: 0.85rem; font-weight: 700; color: #64748B;">ext. 8</span></div>
             </div>
             <div style="display: flex; gap: 8px;">
-              <a href="tel:119" style="flex: 1; text-decoration: none; text-align: center; background: #2D5BA8; color: #FFFFFF; font-weight: 750; font-size: 0.85rem; padding: 10px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(45, 91, 168, 0.3); transition: opacity 0.2s;">
+              <a href="tel:119"
+                style="flex: 1; text-decoration: none; text-align: center; background: #2D5BA8; color: #FFFFFF; font-weight: 750; font-size: 0.85rem; padding: 10px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(45, 91, 168, 0.3); transition: opacity 0.2s;">
                 <span class="material-symbols-rounded" style="font-size: 18px;">call</span> Telepon
               </a>
-              <button type="button" onclick="copyEmergencyNumber('119', 'Hotline Kemenkes 119')" style="background: #EEF3F9; border: 1px solid #7EC8E3; color: #2D5BA8; font-weight: 700; padding: 10px 14px; border-radius: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s;" title="Salin Nomor">
+              <button type="button" onclick="copyEmergencyNumber('119', 'Hotline Kemenkes 119')"
+                style="background: #EEF3F9; border: 1px solid #7EC8E3; color: #2D5BA8; font-weight: 700; padding: 10px 14px; border-radius: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s;"
+                title="Salin Nomor">
                 <span class="material-symbols-rounded" style="font-size: 18px;">content_copy</span>
               </button>
             </div>
           </div>
 
           <!-- Card 2: Layanan SEJIWA -->
-          <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px -5px rgba(91, 143, 212, 0.25)';" onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+          <div
+            style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between;"
+            onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px -5px rgba(91, 143, 212, 0.25)';"
+            onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
             <div>
-              <div style="width: 44px; height: 44px; border-radius: 12px; background: #DCFCE7; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">
+              <div
+                style="width: 44px; height: 44px; border-radius: 12px; background: #DCFCE7; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">
                 <span class="material-symbols-rounded" style="color: #16A34A; font-size: 26px;">health_and_safety</span>
               </div>
               <h3 style="font-size: 1.1rem; font-weight: 800; color: #1A2F4E; margin: 0;">Layanan SEJIWA</h3>
-              <p style="font-size: 0.825rem; font-weight: 600; color: #16A34A; margin: 4px 0 10px;">Kolaborasi HIMPSI & Kantor Staf Presiden</p>
-              <div style="font-size: 1.25rem; font-weight: 850; color: #1E293B; margin-bottom: 16px;">0811-9700-119</div>
+              <p style="font-size: 0.825rem; font-weight: 600; color: #16A34A; margin: 4px 0 10px;">Kolaborasi HIMPSI &
+                Kantor Staf Presiden</p>
+              <div style="font-size: 1.25rem; font-weight: 850; color: #1E293B; margin-bottom: 16px;">0811-9700-119
+              </div>
             </div>
             <div style="display: flex; gap: 8px;">
-              <a href="tel:08119700119" style="flex: 1; text-decoration: none; text-align: center; background: #2D5BA8; color: #FFFFFF; font-weight: 750; font-size: 0.85rem; padding: 10px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(45, 91, 168, 0.3); transition: opacity 0.2s;">
+              <a href="tel:08119700119"
+                style="flex: 1; text-decoration: none; text-align: center; background: #2D5BA8; color: #FFFFFF; font-weight: 750; font-size: 0.85rem; padding: 10px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(45, 91, 168, 0.3); transition: opacity 0.2s;">
                 <span class="material-symbols-rounded" style="font-size: 18px;">call</span> Telepon
               </a>
-              <button type="button" onclick="copyEmergencyNumber('08119700119', 'Layanan SEJIWA')" style="background: #EEF3F9; border: 1px solid #7EC8E3; color: #2D5BA8; font-weight: 700; padding: 10px 14px; border-radius: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s;" title="Salin Nomor">
+              <button type="button" onclick="copyEmergencyNumber('08119700119', 'Layanan SEJIWA')"
+                style="background: #EEF3F9; border: 1px solid #7EC8E3; color: #2D5BA8; font-weight: 700; padding: 10px 14px; border-radius: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s;"
+                title="Salin Nomor">
                 <span class="material-symbols-rounded" style="font-size: 18px;">content_copy</span>
               </button>
             </div>
           </div>
 
           <!-- Card 3: Yayasan Pulih -->
-          <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px -5px rgba(91, 143, 212, 0.25)';" onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+          <div
+            style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between;"
+            onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px -5px rgba(91, 143, 212, 0.25)';"
+            onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
             <div>
-              <div style="width: 44px; height: 44px; border-radius: 12px; background: #FEF3C7; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">
+              <div
+                style="width: 44px; height: 44px; border-radius: 12px; background: #FEF3C7; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">
                 <span class="material-symbols-rounded" style="color: #D97706; font-size: 26px;">forum</span>
               </div>
               <h3 style="font-size: 1.1rem; font-weight: 800; color: #1A2F4E; margin: 0;">LSM Yayasan Pulih</h3>
-              <p style="font-size: 0.825rem; font-weight: 600; color: #D97706; margin: 4px 0 10px;">Konseling Psikologi & Pemulihan Trauma</p>
-              <div style="font-size: 1.25rem; font-weight: 850; color: #1E293B; margin-bottom: 16px;">0811-8456-724</div>
+              <p style="font-size: 0.825rem; font-weight: 600; color: #D97706; margin: 4px 0 10px;">Konseling Psikologi
+                & Pemulihan Trauma</p>
+              <div style="font-size: 1.25rem; font-weight: 850; color: #1E293B; margin-bottom: 16px;">0811-8456-724
+              </div>
             </div>
             <div style="display: flex; gap: 8px;">
-              <a href="https://wa.me/628118456724" target="_blank" rel="noopener" style="flex: 1; text-decoration: none; text-align: center; background: #16A34A; color: #FFFFFF; font-weight: 750; font-size: 0.85rem; padding: 10px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3); transition: opacity 0.2s;">
+              <a href="https://wa.me/628118456724" target="_blank" rel="noopener"
+                style="flex: 1; text-decoration: none; text-align: center; background: #16A34A; color: #FFFFFF; font-weight: 750; font-size: 0.85rem; padding: 10px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3); transition: opacity 0.2s;">
                 <span class="material-symbols-rounded" style="font-size: 18px;">chat</span> WhatsApp
               </a>
-              <button type="button" onclick="copyEmergencyNumber('08118456724', 'Yayasan Pulih')" style="background: #EEF3F9; border: 1px solid #7EC8E3; color: #2D5BA8; font-weight: 700; padding: 10px 14px; border-radius: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s;" title="Salin Nomor">
+              <button type="button" onclick="copyEmergencyNumber('08118456724', 'Yayasan Pulih')"
+                style="background: #EEF3F9; border: 1px solid #7EC8E3; color: #2D5BA8; font-weight: 700; padding: 10px 14px; border-radius: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s;"
+                title="Salin Nomor">
                 <span class="material-symbols-rounded" style="font-size: 18px;">content_copy</span>
               </button>
             </div>
@@ -377,10 +409,13 @@
         </div>
 
         <!-- Disclaimer Ramah -->
-        <div style="margin-top: 28px; padding: 16px 20px; background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: 16px; display: flex; align-items: center; gap: 14px;">
-          <span class="material-symbols-rounded" style="font-size: 28px; color: #5B8FD4; flex-shrink: 0;">verified</span>
+        <div
+          style="margin-top: 28px; padding: 16px 20px; background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: 16px; display: flex; align-items: center; gap: 14px;">
+          <span class="material-symbols-rounded"
+            style="font-size: 28px; color: #5B8FD4; flex-shrink: 0;">verified</span>
           <p style="margin: 0; font-size: 0.875rem; color: #475569; font-weight: 600; line-height: 1.5;">
-            <strong style="color: #1A2F4E;">Tenang.in membantu refleksi mandiri. Untuk kondisi darurat, tim profesional selalu siap membantumu.</strong>
+            <strong style="color: #1A2F4E;">Tenang.in membantu refleksi mandiri. Untuk kondisi darurat, tim profesional
+              selalu siap membantumu.</strong>
           </p>
         </div>
       </section>
@@ -388,7 +423,8 @@
       <!-- ======= BOTTOM LOGOUT FOOTER SECTION ======= -->
       <section class="beranda-footer-section">
         <p class="beranda-footer-desc" data-i18n="beranda.footer.privacy">
-          Ruang amanmu selalu terjaga privasinya. Seluruh catatan refleksi dan mood terlindungi secara terenkripsi dan aman.
+          Ruang amanmu selalu terjaga privasinya. Seluruh catatan refleksi dan mood terlindungi secara terenkripsi dan
+          aman.
         </p>
       </section>
 
@@ -484,39 +520,50 @@
   </div>
 
   <!-- ======= FIRST-TIME ONBOARDING MODAL (FULL-SCREEN ON MOBILE) ======= -->
-  <div id="onboarding-modal" class="fixed inset-0 flex items-center justify-center bg-slate-900/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out md:p-4" style="z-index: 9999; display: none;">
+  <div id="onboarding-modal"
+    class="fixed inset-0 flex items-center justify-center bg-slate-900/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-500 ease-in-out md:p-4"
+    style="z-index: 9999; display: none;">
     <!-- Modal Card (Full Screen Mobile, Rounded Card Desktop) -->
-    <div id="onboarding-card" class="bg-white w-full h-full min-h-screen rounded-none p-6 flex flex-col justify-between text-center shadow-2xl border-0 transform scale-95 transition-all duration-500 ease-in-out relative overflow-y-auto md:h-auto md:min-h-0 md:max-w-xl md:rounded-3xl md:p-8 md:border md:border-slate-100 md:max-h-[92vh]">
-      
+    <div id="onboarding-card"
+      class="bg-white w-full h-full min-h-screen rounded-none p-6 flex flex-col justify-between text-center shadow-2xl border-0 transform scale-95 transition-all duration-500 ease-in-out relative overflow-y-auto md:h-auto md:min-h-0 md:max-w-xl md:rounded-3xl md:p-8 md:border md:border-slate-100 md:max-h-[92vh]">
+
       <!-- Top Section: Decorative Line & Dots -->
       <div>
-        <div class="absolute top-0 left-0 right-0 h-2 md:h-3" style="background: linear-gradient(90deg, #2D5BA8, #5B8FD4, #7EC8E3);"></div>
+        <div class="absolute top-0 left-0 right-0 h-2 md:h-3"
+          style="background: linear-gradient(90deg, #2D5BA8, #5B8FD4, #7EC8E3);"></div>
         <div class="flex justify-center items-center gap-2 mt-2 mb-4 md:mb-6">
-          <span class="onboarding-dot h-2.5 rounded-full transition-all duration-300" style="background:#5B8FD4; width:24px;"></span>
+          <span class="onboarding-dot h-2.5 rounded-full transition-all duration-300"
+            style="background:#5B8FD4; width:24px;"></span>
           <span class="onboarding-dot w-2.5 h-2.5 rounded-full bg-slate-200 transition-all duration-300"></span>
           <span class="onboarding-dot w-2.5 h-2.5 rounded-full bg-slate-200 transition-all duration-300"></span>
         </div>
       </div>
 
       <!-- Middle Section: Interactive Slide Content Area -->
-      <div id="onboarding-slide-content" class="flex-1 flex flex-col justify-center items-center my-4 transition-opacity duration-300 ease-in-out w-full max-w-md mx-auto">
+      <div id="onboarding-slide-content"
+        class="flex-1 flex flex-col justify-center items-center my-4 transition-opacity duration-300 ease-in-out w-full max-w-md mx-auto">
         <!-- Injected dynamically by Vanilla JS (With Gender & Goal selections!) -->
       </div>
 
       <!-- Bottom Section: Actions -->
       <div>
         <div class="mt-6 flex items-center justify-between gap-4 pt-4 border-t border-slate-100">
-          <button id="onboarding-prev-btn" onclick="Onboarding.prevSlide()" class="px-4 py-2 text-slate-400 text-sm font-semibold hover:text-slate-600 transition opacity-0 pointer-events-none" aria-label="Sebelumnya">
+          <button id="onboarding-prev-btn" onclick="Onboarding.prevSlide()"
+            class="px-4 py-2 text-slate-400 text-sm font-semibold hover:text-slate-600 transition opacity-0 pointer-events-none"
+            aria-label="Sebelumnya">
             Kembali
           </button>
-          <button id="onboarding-next-btn" onclick="Onboarding.nextSlide()" class="px-8 py-3 rounded-full text-white font-bold text-sm shadow-lg hover:opacity-95 transform active:scale-95 transition flex items-center justify-center gap-2 min-w-[150px]" style="background:#5B8FD4;">
+          <button id="onboarding-next-btn" onclick="Onboarding.nextSlide()"
+            class="px-8 py-3 rounded-full text-white font-bold text-sm shadow-lg hover:opacity-95 transform active:scale-95 transition flex items-center justify-center gap-2 min-w-[150px]"
+            style="background:#5B8FD4;">
             <span>Lanjut</span>
             <span class="material-symbols-rounded" style="font-size:18px;">arrow_forward</span>
           </button>
         </div>
 
         <div class="mt-3.5 text-center">
-          <button onclick="Onboarding.complete()" class="text-xs text-slate-400 hover:text-slate-600 underline transition font-medium">
+          <button onclick="Onboarding.complete()"
+            class="text-xs text-slate-400 hover:text-slate-600 underline transition font-medium">
             Lewati pengenalan ini
           </button>
         </div>

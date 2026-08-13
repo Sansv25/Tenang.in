@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Tenang.in Profil — Temukan gaya refleksi yang cocok dan personalisasi pengalamanmu.">
+  <meta name="description"
+    content="Tenang.in Profil — Temukan gaya refleksi yang cocok dan personalisasi pengalamanmu.">
   <meta name="theme-color" content="#3B72C4">
   <title>Profil — Tenang.in</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- font-display=swap prevents CLS from web font loading -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
     rel="stylesheet">
   <!-- Material Symbols: font-display=block reserves space, prevents icon-pop CLS -->
   <link rel="stylesheet"
@@ -41,49 +42,63 @@
   <!-- CLS Fix: reserves layout space, stabilizes font & dynamic content -->
   <link rel="stylesheet" href="assets/css/cls-fix.css">
 </head>
+
 <body>
   <div class="page-wrapper">
     <div class="container container-md">
 
+      <!-- Profile Card (ALWAYS VISIBLE AT TOP) -->
+      <section id="profil-card-section" style="display:block; padding-top:var(--space-xl); padding-bottom:var(--space-xl);">
+        <!-- Filled by JS -->
+      </section>
+
       <!-- Intro -->
-      <section id="profil-intro" style="padding:var(--space-3xl) 0; text-align:center;">
+      <section id="profil-intro" style="padding:var(--space-2xl) 0; text-align:center;">
         <div style="margin-bottom:var(--space-lg);">
           <span class="material-symbols-rounded" style="font-size:64px; color:var(--secondary-accent);">tune</span>
         </div>
         <h1 style="font-size:var(--h2-size); font-weight:800; margin-bottom:var(--space-md);">Profil Refleksimu</h1>
-        <p style="font-size:1.0625rem; color:rgba(255,255,255,0.75); max-width:480px; margin:0 auto var(--space-xl); line-height:1.7;">
-          Jawab 7 pertanyaan untuk menemukan gaya refleksi yang paling cocok untukmu. Tenang.in akan menyesuaikan pengalaman berdasarkan hasilnya!
+        <p
+          style="font-size:1.0625rem; color:rgba(255,255,255,0.75); max-width:480px; margin:0 auto var(--space-xl); line-height:1.7;">
+          Jawab 7 pertanyaan untuk menemukan gaya refleksi yang paling cocok untukmu. Tenang.in akan menyesuaikan
+          pengalaman berdasarkan hasilnya!
         </p>
 
-        <div class="card" style="max-width:440px; margin:0 auto var(--space-2xl); padding:var(--space-xl); text-align:left;">
-          <h3 style="font-weight:700; margin-bottom:var(--space-md); color:var(--text-on-white); text-align:center;">4 Gaya Refleksi</h3>
+        <div class="card"
+          style="max-width:440px; margin:0 auto var(--space-2xl); padding:var(--space-xl); text-align:left;">
+          <h3 style="font-weight:700; margin-bottom:var(--space-md); color:var(--text-on-white); text-align:center;">4
+            Gaya Refleksi</h3>
           <div style="display:flex; flex-direction:column; gap:var(--space-md);">
             <div style="display:flex; align-items:center; gap:var(--space-md);">
               <span class="material-symbols-rounded text-primary" style="font-size:28px;">dark_mode</span>
               <div>
                 <div style="font-weight:600; color:var(--text-on-white);">Reflektif Malam</div>
-                <div style="font-size:var(--caption-size); color:var(--text-secondary);">Quote filosofis, prompt mendalam</div>
+                <div style="font-size:var(--caption-size); color:var(--text-secondary);">Quote filosofis, prompt
+                  mendalam</div>
               </div>
             </div>
             <div style="display:flex; align-items:center; gap:var(--space-md);">
               <span class="material-symbols-rounded text-primary" style="font-size:28px;">wb_sunny</span>
               <div>
                 <div style="font-weight:600; color:var(--text-on-white);">Aktif Pagi</div>
-                <div style="font-size:var(--caption-size); color:var(--text-secondary);">Quote semangat, tips rutinitas</div>
+                <div style="font-size:var(--caption-size); color:var(--text-secondary);">Quote semangat, tips rutinitas
+                </div>
               </div>
             </div>
             <div style="display:flex; align-items:center; gap:var(--space-md);">
               <span class="material-symbols-rounded text-primary" style="font-size:28px;">chat_bubble</span>
               <div>
                 <div style="font-weight:600; color:var(--text-on-white);">Ekspresif</div>
-                <div style="font-size:var(--caption-size); color:var(--text-secondary);">Teman lebih aktif, sharing-friendly</div>
+                <div style="font-size:var(--caption-size); color:var(--text-secondary);">Teman lebih aktif,
+                  sharing-friendly</div>
               </div>
             </div>
             <div style="display:flex; align-items:center; gap:var(--space-md);">
               <span class="material-symbols-rounded text-primary" style="font-size:28px;">task_alt</span>
               <div>
                 <div style="font-weight:600; color:var(--text-on-white);">Terstruktur</div>
-                <div style="font-size:var(--caption-size); color:var(--text-secondary);">Dashboard, tracking, goal setting</div>
+                <div style="font-size:var(--caption-size); color:var(--text-secondary);">Dashboard, tracking, goal
+                  setting</div>
               </div>
             </div>
           </div>
@@ -93,7 +108,8 @@
           <span class="material-symbols-rounded">play_arrow</span>
           Mulai Kuis Profil
         </button>
-        <p style="font-size:var(--caption-size); color:rgba(255,255,255,0.6); margin-top:var(--space-md);">Sekitar 2-3 menit</p>
+        <p style="font-size:var(--caption-size); color:rgba(255,255,255,0.6); margin-top:var(--space-md);">Sekitar 2-3
+          menit</p>
       </section>
 
       <!-- Quiz Area -->
@@ -108,7 +124,7 @@
             <div class="progress-bar" id="profil-progress-bar" style="width:0%;"></div>
           </div>
         </div>
-        
+
         <div id="profil-questions" class="quiz-container" style="min-height:380px;">
           <!-- Slide questions will be injected here -->
         </div>
@@ -116,11 +132,6 @@
 
       <!-- Result Area -->
       <section id="profil-result" style="display:none; padding:var(--space-xl) 0;">
-        <!-- Filled by JS -->
-      </section>
-
-      <!-- Profile Card -->
-      <section id="profil-card-section" style="display:none; padding-bottom:var(--space-xl);">
         <!-- Filled by JS -->
       </section>
 
@@ -132,12 +143,16 @@
     <div class="modal" style="max-width:440px;">
       <div class="modal-header">
         <h2 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white);">Bagikan Profil Diri</h2>
-        <button class="modal-close" onclick="document.getElementById('share-result-modal').classList.remove('active');" aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
+        <button class="modal-close" onclick="document.getElementById('share-result-modal').classList.remove('active');"
+          aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
       </div>
       <div class="share-card-preview" style="background: linear-gradient(135deg, #2D5BA8, #7EC8E3); text-align:left;">
         <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">
-          <h3 style="font-size:clamp(1.05rem, 4vw, 1.18rem); font-weight:850; color:#fff; text-shadow:0 2px 4px rgba(0,0,0,0.2); line-height:1.2; margin:0;">Profil<br>Refleksiku</h3>
-          <div style="background:rgba(255,255,255,0.2); padding:3px 10px; border-radius:999px; color:#fff; font-size:0.7rem; font-weight:750; display:inline-flex; align-items:center; gap:4px; backdrop-filter:blur(5px); flex-shrink:0; white-space:nowrap;">
+          <h3
+            style="font-size:clamp(1.05rem, 4vw, 1.18rem); font-weight:850; color:#fff; text-shadow:0 2px 4px rgba(0,0,0,0.2); line-height:1.2; margin:0;">
+            Profil<br>Refleksiku</h3>
+          <div
+            style="background:rgba(255,255,255,0.2); padding:3px 10px; border-radius:999px; color:#fff; font-size:0.7rem; font-weight:750; display:inline-flex; align-items:center; gap:4px; backdrop-filter:blur(5px); flex-shrink:0; white-space:nowrap;">
             <span class="material-symbols-rounded" style="font-size:14px;">tune</span>
             <span>Profil Diri</span>
           </div>
@@ -145,27 +160,35 @@
 
         <div style="text-align:center; margin: 8px 0;">
           <div style="font-size:3.2rem; line-height:1; margin-bottom:8px;" id="share-result-emoji">🧠</div>
-          <h2 style="font-size:clamp(1.2rem, 5vw, 1.5rem); font-weight:850; color:#fff; margin:0;" id="share-result-title">Tipe Fokus</h2>
+          <h2 style="font-size:clamp(1.2rem, 5vw, 1.5rem); font-weight:850; color:#fff; margin:0;"
+            id="share-result-title">Tipe Fokus</h2>
         </div>
 
-        <p style="color:rgba(255,255,255,0.92); font-size:0.78rem; line-height:1.45; font-style:italic; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; margin:0;">
-          "Saya mengidentifikasi gaya refleksi diri melalui Tenang.in. Sebuah langkah kecil untuk lebih peka dan peduli pada diri sendiri."
+        <p
+          style="color:rgba(255,255,255,0.92); font-size:0.78rem; line-height:1.45; font-style:italic; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; margin:0;">
+          "Saya mengidentifikasi gaya refleksi diri melalui Tenang.in. Sebuah langkah kecil untuk lebih peka dan peduli
+          pada diri sendiri."
         </p>
 
         <!-- Promo Footer -->
-        <div style="border-top:1px dashed rgba(255,255,255,0.35); padding-top:8px; margin-top:4px; display:flex; justify-content:space-between; align-items:center;">
+        <div
+          style="border-top:1px dashed rgba(255,255,255,0.35); padding-top:8px; margin-top:4px; display:flex; justify-content:space-between; align-items:center;">
           <div>
             <div style="font-size:0.85rem; font-weight:850; color:#fff;">Tenang.in</div>
-            <div style="font-size:0.65rem; font-weight:650; color:rgba(255,255,255,0.8);">Ruang aman untuk mentalmu.</div>
+            <div style="font-size:0.65rem; font-weight:650; color:rgba(255,255,255,0.8);">Ruang aman untuk mentalmu.
+            </div>
           </div>
-          <div style="width:32px; height:32px; background:rgba(255,255,255,0.2); border-radius:10px; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px); flex-shrink:0;">
+          <div
+            style="width:32px; height:32px; background:rgba(255,255,255,0.2); border-radius:10px; display:flex; align-items:center; justify-content:center; backdrop-filter:blur(4px); flex-shrink:0;">
             <span class="material-symbols-rounded" style="color:#fff; font-size:18px;">spa</span>
           </div>
         </div>
       </div>
       <div style="display:flex; gap:var(--space-md);">
-        <button class="btn btn-secondary btn-full" onclick="simulateResultShare()"><span class="material-symbols-rounded">download</span> Simpan</button>
-        <button class="btn btn-primary btn-full" onclick="simulateResultShare()"><span class="material-symbols-rounded">share</span> Bagikan</button>
+        <button class="btn btn-secondary btn-full" onclick="simulateResultShare()"><span
+            class="material-symbols-rounded">download</span> Simpan</button>
+        <button class="btn btn-primary btn-full" onclick="simulateResultShare()"><span
+            class="material-symbols-rounded">share</span> Bagikan</button>
       </div>
     </div>
   </div>

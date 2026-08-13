@@ -48,9 +48,19 @@
 }
 
 @keyframes kenaliOrbFloat {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(30px, -20px) scale(1.05); }
-  66% { transform: translate(-20px, 15px) scale(0.95); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -20px) scale(1.05);
+  }
+
+  66% {
+    transform: translate(-20px, 15px) scale(0.95);
+  }
 }
 
 /* ---- Intro Section ---- */
@@ -103,8 +113,17 @@
 }
 
 @keyframes kenaliPulseRing {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.15); opacity: 0.5; }
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 0.5;
+  }
 }
 
 .kenali-intro h1 {
@@ -168,12 +187,15 @@
 .personality-preview-card:nth-child(1)::before {
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), transparent 70%);
 }
+
 .personality-preview-card:nth-child(2)::before {
   background: linear-gradient(135deg, rgba(56, 189, 248, 0.12), transparent 70%);
 }
+
 .personality-preview-card:nth-child(3)::before {
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), transparent 70%);
 }
+
 .personality-preview-card:nth-child(4)::before {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), transparent 70%);
 }
@@ -202,12 +224,15 @@
 .personality-preview-card:nth-child(1) .personality-preview-icon {
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.08));
 }
+
 .personality-preview-card:nth-child(2) .personality-preview-icon {
   background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.08));
 }
+
 .personality-preview-card:nth-child(3) .personality-preview-icon {
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.08));
 }
+
 .personality-preview-card:nth-child(4) .personality-preview-icon {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.08));
 }
@@ -217,10 +242,21 @@
   font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }
 
-.personality-preview-card:nth-child(1) .personality-preview-icon .material-symbols-rounded { color: #60A5FA; }
-.personality-preview-card:nth-child(2) .personality-preview-icon .material-symbols-rounded { color: #38BDF8; }
-.personality-preview-card:nth-child(3) .personality-preview-icon .material-symbols-rounded { color: #FBBF24; }
-.personality-preview-card:nth-child(4) .personality-preview-icon .material-symbols-rounded { color: #34D399; }
+.personality-preview-card:nth-child(1) .personality-preview-icon .material-symbols-rounded {
+  color: #60A5FA;
+}
+
+.personality-preview-card:nth-child(2) .personality-preview-icon .material-symbols-rounded {
+  color: #38BDF8;
+}
+
+.personality-preview-card:nth-child(3) .personality-preview-icon .material-symbols-rounded {
+  color: #FBBF24;
+}
+
+.personality-preview-card:nth-child(4) .personality-preview-icon .material-symbols-rounded {
+  color: #34D399;
+}
 
 .personality-preview-name {
   font-size: 0.9375rem;
@@ -377,9 +413,17 @@
 }
 
 @keyframes kenaliProgressShimmer {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* ---- Quiz Step Dots ---- */
@@ -599,11 +643,18 @@
 }
 
 @keyframes kenaliResultGlow {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(30px, -20px); }
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(30px, -20px);
+  }
 }
 
-.kenali-result-hero > * {
+.kenali-result-hero>* {
   position: relative;
   z-index: 1;
 }
@@ -630,14 +681,17 @@
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.05));
   box-shadow: 0 0 50px rgba(37, 99, 235, 0.2);
 }
+
 .kenali-result-icon-circle.type-if {
   background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.05));
   box-shadow: 0 0 50px rgba(56, 189, 248, 0.2);
 }
+
 .kenali-result-icon-circle.type-et {
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.05));
   box-shadow: 0 0 50px rgba(245, 158, 11, 0.2);
 }
+
 .kenali-result-icon-circle.type-ef {
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));
   box-shadow: 0 0 50px rgba(16, 185, 129, 0.2);
@@ -648,10 +702,21 @@
   font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
 }
 
-.kenali-result-icon-circle.type-it .material-symbols-rounded { color: #60A5FA; }
-.kenali-result-icon-circle.type-if .material-symbols-rounded { color: #38BDF8; }
-.kenali-result-icon-circle.type-et .material-symbols-rounded { color: #FBBF24; }
-.kenali-result-icon-circle.type-ef .material-symbols-rounded { color: #34D399; }
+.kenali-result-icon-circle.type-it .material-symbols-rounded {
+  color: #60A5FA;
+}
+
+.kenali-result-icon-circle.type-if .material-symbols-rounded {
+  color: #38BDF8;
+}
+
+.kenali-result-icon-circle.type-et .material-symbols-rounded {
+  color: #FBBF24;
+}
+
+.kenali-result-icon-circle.type-ef .material-symbols-rounded {
+  color: #34D399;
+}
 
 .kenali-result-name {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
@@ -678,16 +743,19 @@
   color: #60A5FA;
   border: 1px solid rgba(37, 99, 235, 0.25);
 }
+
 .kenali-result-tagline.type-if {
   background: rgba(56, 189, 248, 0.15);
   color: #38BDF8;
   border: 1px solid rgba(56, 189, 248, 0.25);
 }
+
 .kenali-result-tagline.type-et {
   background: rgba(245, 158, 11, 0.15);
   color: #FBBF24;
   border: 1px solid rgba(245, 158, 11, 0.25);
 }
+
 .kenali-result-tagline.type-ef {
   background: rgba(16, 185, 129, 0.15);
   color: #34D399;
@@ -954,14 +1022,32 @@
 
 /* CLS Fix: removed redundant `opacity: 0` since animation-fill-mode:both
    already handles the initial invisible state during delay */
-.kenali-fade-in-delay-1 { animation-delay: 0.1s; }
-.kenali-fade-in-delay-2 { animation-delay: 0.2s; }
-.kenali-fade-in-delay-3 { animation-delay: 0.3s; }
-.kenali-fade-in-delay-4 { animation-delay: 0.4s; }
+.kenali-fade-in-delay-1 {
+  animation-delay: 0.1s;
+}
+
+.kenali-fade-in-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.kenali-fade-in-delay-3 {
+  animation-delay: 0.3s;
+}
+
+.kenali-fade-in-delay-4 {
+  animation-delay: 0.4s;
+}
 
 @keyframes kenaliFadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ---- Share Modal Enhanced (On-theme blue gradient) ---- */
@@ -995,7 +1081,7 @@
   z-index: 0;
 }
 
-.kenali-share-preview > * {
+.kenali-share-preview>* {
   position: relative;
   z-index: 1;
 }

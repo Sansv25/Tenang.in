@@ -213,6 +213,9 @@ const Settings = (() => {
     const t = typeof I18n !== 'undefined' ? I18n.t : (k) => k;
     const langMeta = typeof I18n !== 'undefined' ? I18n.langMeta : {};
 
+    const avatar = (typeof Storage !== 'undefined' && Storage.getUserAvatar) ? Storage.getUserAvatar() : null;
+    const uName = (typeof Storage !== 'undefined' && Storage.getUserName) ? Storage.getUserName() : '';
+
     const overlay = document.createElement('div');
     overlay.id = 'settings-popup-overlay';
     overlay.className = 'settings-overlay';
@@ -229,6 +232,29 @@ const Settings = (() => {
         </div>
 
         <div class="settings-body">
+          <!-- Profile Navigation Section (Above WARNA TEMA) -->
+          <div class="settings-section" style="margin-bottom:24px;">
+            <div class="settings-section-label" style="margin-bottom:12px;">
+              <span class="material-symbols-rounded" style="font-size:20px;">account_circle</span>
+              <span>Profil Pengguna</span>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 16px; background:var(--card-subtle, #F8FAFC); border-radius:16px; border:1px solid rgba(0,0,0,0.06); box-shadow:0 2px 8px rgba(0,0,0,0.03);">
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div style="width:48px; height:48px; border-radius:50%; background:linear-gradient(135deg, var(--primary-accent), var(--secondary-accent)); display:flex; align-items:center; justify-content:center; overflow:hidden; border:2px solid #fff; box-shadow:0 3px 10px rgba(0,0,0,0.12); flex-shrink:0;">
+                  ${avatar ? `<img src="${avatar}" alt="Foto Profil" style="width:100%; height:100%; object-fit:cover;">` : `<span class="material-symbols-rounded" style="font-size:28px; color:#fff;">person</span>`}
+                </div>
+                <div>
+                  <div style="font-weight:750; font-size:0.95rem; color:var(--text-on-white);">${uName || 'Pengguna'}</div>
+                  <div style="font-size:0.78rem; color:var(--text-secondary); margin-top:2px;">Atur foto avatar & nama</div>
+                </div>
+              </div>
+              <a href="profil.html" class="btn btn-primary btn-sm" onclick="Settings.close()" style="font-size:0.8rem; font-weight:700; padding:8px 16px; text-decoration:none; display:inline-flex; align-items:center; gap:6px; border-radius:12px; flex-shrink:0;">
+                <span class="material-symbols-rounded" style="font-size:16px;">tune</span>
+                <span>Buka Profil</span>
+              </a>
+            </div>
+          </div>
+
           <!-- Theme Color Section -->
           <div class="settings-section">
             <div class="settings-section-label">
@@ -308,19 +334,19 @@ const Settings = (() => {
   const changeLang = (lang) => {
     if (typeof I18n !== 'undefined') {
       I18n.setLang(lang);
-      
+
       // If popup is open, re-render it
       const overlay = document.getElementById('settings-popup-overlay');
       if (overlay) {
         renderSettingsPopup();
       }
-      
+
       // Update landing dropdown if it exists
       const landingDropdownBtn = document.querySelector('.landing-lang-current');
       if (landingDropdownBtn && I18n.langMeta[lang]) {
-         landingDropdownBtn.innerHTML = I18n.langMeta[lang].flag;
+        landingDropdownBtn.innerHTML = I18n.langMeta[lang].flag;
       }
-      
+
       // Update active state in landing dropdown
       document.querySelectorAll('.landing-lang-option').forEach(opt => {
         opt.classList.toggle('active', opt.getAttribute('onclick').includes(`'${lang}'`));
@@ -331,17 +357,17 @@ const Settings = (() => {
   // ---- Logout ----
   const logout = () => {
     localStorage.removeItem('tenang_logged_in_user');
-    
+
     // Attempt to update greeting if on beranda
     const greetingEl = document.getElementById('greeting-text');
     if (greetingEl) greetingEl.textContent = 'Selamat Datang!';
-    
+
     if (typeof Animations !== 'undefined') {
       Animations.showToast('Kamu telah berhasil keluar. Mengalihkan ke halaman utama...', 'info');
     }
-    
+
     close();
-    
+
     setTimeout(() => {
       window.location.href = 'index.html';
     }, 1500);
@@ -446,7 +472,7 @@ const Settings = (() => {
   const renderLandingLangDropdown = () => {
     const navRight = document.querySelector('.landing-nav-right');
     if (!navRight) return;
-    
+
     // Mencegah duplikasi tombol bahasa
     if (document.querySelector('.landing-lang-wrapper')) return;
 

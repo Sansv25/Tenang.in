@@ -23,7 +23,7 @@ async function loadQuizData() {
   try {
     const res = await fetch('assets/data/quiz-kenali.json');
     quizData = await res.json();
-  } catch(e) {
+  } catch (e) {
     console.error('Failed to load quiz data:', e);
   }
 }
@@ -135,12 +135,12 @@ function selectKenaliAnswer(optIndex) {
 
   const slides = document.querySelectorAll('#kenali-questions .kenali-slide');
   const currentSlide = slides[currentQuestion];
-  
+
   // Mark selected with animation
   const buttons = currentSlide.querySelectorAll('.quiz-option');
   buttons[optIndex].classList.add('selected');
   buttons.forEach(b => b.style.pointerEvents = 'none');
-  
+
   setTimeout(() => {
     if (currentQuestion < quizData.questions.length - 1) {
       currentSlide.classList.replace('active', 'prev');
@@ -339,7 +339,7 @@ function shareResult(typeOrName) {
 }
 
 // ---- Theme Switcher for Share Modal ----
-window.changeKenaliShareTheme = function(theme, e) {
+window.changeKenaliShareTheme = function (theme, e) {
   const gradients = {
     blue: 'linear-gradient(135deg, #2D5BA8, #7EC8E3)',
     ocean: 'linear-gradient(135deg, #1E4780, #38BDF8)',
@@ -347,18 +347,18 @@ window.changeKenaliShareTheme = function(theme, e) {
     midnight: 'linear-gradient(135deg, #0f2027, #203a43, #2c5364)',
     forest: 'linear-gradient(135deg, #11998e, #38ef7d)'
   };
-  
+
   const previewCard = document.getElementById('kenali-share-card-preview');
   if (previewCard && gradients[theme]) {
     previewCard.style.background = gradients[theme];
   }
-  
+
   const buttons = document.querySelectorAll('#kenali-theme-selector button');
   buttons.forEach(btn => {
     btn.style.transform = 'scale(1)';
     btn.style.border = '2px solid transparent';
   });
-  
+
   const activeBtn = e ? e.currentTarget : (window.event ? window.event.currentTarget : null);
   if (activeBtn) {
     activeBtn.style.transform = 'scale(1.1)';
@@ -374,7 +374,7 @@ function retakeQuiz() {
 }
 
 // ---- Simulate Share (for modal buttons) ----
-window.simulateResultShare = window.simulateResultShare || function() {
+window.simulateResultShare = window.simulateResultShare || function () {
   Animations.showToast('Memproses gambar...', 'info');
   setTimeout(() => {
     const modal = document.getElementById('share-result-modal');

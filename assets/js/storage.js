@@ -4,7 +4,7 @@
    ============================================= */
 
 // ---- Global XSS Sanitizer Helper ----
-window.escapeHTML = function(str) {
+window.escapeHTML = function (str) {
   if (str == null) return '';
   return String(str)
     .replace(/&/g, '&amp;')
@@ -190,6 +190,18 @@ const Storage = (() => {
     return localStorage.getItem('tenang_username') || '';
   };
 
+  const setUserAvatar = (dataUrl) => {
+    if (dataUrl) {
+      localStorage.setItem('tenang_user_avatar', dataUrl);
+    } else {
+      localStorage.removeItem('tenang_user_avatar');
+    }
+  };
+
+  const getUserAvatar = () => {
+    return localStorage.getItem('tenang_user_avatar') || null;
+  };
+
   // ---- First Time Journey ----
   const isNewUser = () => {
     return !localStorage.getItem('tenang_returning') && !localStorage.getItem('tenang_isReturning');
@@ -289,7 +301,7 @@ const Storage = (() => {
   // ---- Data Reset (for testing) ----
   const resetAll = () => {
     const keys = ['tenang_moods', 'tenang_journals', 'tenang_quiz_kenali', 'tenang_quiz_profil',
-      'tenang_username', 'tenang_isReturning', 'tenang_teman_sessions', 'tenang_time_capsules'];
+      'tenang_username', 'tenang_user_avatar', 'tenang_isReturning', 'tenang_teman_sessions', 'tenang_time_capsules'];
     keys.forEach(k => localStorage.removeItem(k));
     sessionStorage.clear();
   };
@@ -299,7 +311,7 @@ const Storage = (() => {
     getDominantTag, isFirstVisitToday, getStreak,
     getJournals, saveJournal, deleteJournal, getJournalCount,
     saveQuizResult, getQuizResult, getUserType, getKenaliType,
-    setUserName, getUserName,
+    setUserName, getUserName, setUserAvatar, getUserAvatar,
     isNewUser, setReturning,
     incrementTemanSessions, getTemanSessions,
     getTimeCapsules, saveTimeCapsule, getRandomCapsule,

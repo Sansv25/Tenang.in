@@ -2854,73 +2854,73 @@ body.preloader-active {
     filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.35));
   }
 
-  /* 1. Top Left */
+  /* 1. Top Left (Above title left, zero text overlap) */
   .mobile-float-top-left {
-    width: 46px;
-    height: 46px;
-    border-radius: 16px;
-    top: -10px;
-    left: 4%;
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    top: -55px !important;
+    left: -10px !important;
     transform: rotate(-6deg);
     animation: mobileFloatTL 5.8s ease-in-out infinite alternate;
   }
 
   .mobile-float-top-left .material-symbols-rounded {
-    font-size: 23px;
+    font-size: 21px;
   }
 
-  /* 2. Top Right */
+  /* 2. Top Right (Above title right, zero text overlap) */
   .mobile-float-top-right {
-    width: 40px;
-    height: 40px;
-    border-radius: 14px;
-    top: 16px;
-    right: 5%;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    top: -45px !important;
+    right: -10px !important;
     transform: rotate(8deg);
     animation: mobileFloatTR 4.4s ease-in-out infinite alternate;
   }
 
   .mobile-float-top-right .material-symbols-rounded {
-    font-size: 20px;
+    font-size: 19px;
   }
 
-  /* 3. Bottom Left (Below left button, zero overlap) */
+  /* 3. Bottom Left (Below buttons left, zero text overlap) */
   .mobile-float-bottom-left {
-    width: 42px;
-    height: 42px;
-    border-radius: 15px;
-    bottom: -64px;
-    left: 4%;
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    bottom: -75px !important;
+    left: -10px !important;
     transform: rotate(-8deg);
     animation: mobileFloatBL 6.2s ease-in-out infinite alternate;
   }
 
   .mobile-float-bottom-left .material-symbols-rounded {
-    font-size: 21px;
+    font-size: 20px;
   }
 
-  /* 4. Bottom Off-Center (Below button row center, zero overlap) */
+  /* 4. Bottom Off-Center (Below button row center, zero text overlap) */
   .mobile-float-bottom-center {
-    width: 44px;
-    height: 44px;
-    border-radius: 16px;
-    bottom: -88px;
-    left: 45%;
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    bottom: -110px !important;
+    left: 45% !important;
     transform: rotate(4deg);
     animation: mobileFloatBC 5.1s ease-in-out infinite alternate;
   }
 
   .mobile-float-bottom-center .material-symbols-rounded {
-    font-size: 22px;
+    font-size: 21px;
   }
 
-  /* 5. Bottom Right (Below right button, zero overlap) */
+  /* 5. Bottom Right (Below right button, zero text overlap) */
   .mobile-float-bottom-right {
-    width: 40px;
-    height: 40px;
-    border-radius: 14px;
-    bottom: -60px;
-    right: 5%;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    bottom: -75px !important;
+    right: -10px !important;
     transform: rotate(-5deg);
     animation: mobileFloatBR 5.5s ease-in-out infinite alternate;
   }
@@ -3029,79 +3029,132 @@ body.preloader-active {
     filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.35));
   }
 
-  /* 1. Top Left (Asymmetrical higher, rotated -6deg, 46px) */
+  /* 1. Top Left (Floating cleanly above title top left, zero text overlap) */
   .mobile-float-top-left {
-    width: 46px;
-    height: 46px;
-    border-radius: 16px;
-    top: -10px;
-    left: 4%;
+    width: 38px;
+    height: 38px;
+    border-radius: 14px;
+    top: -52px;
+    left: 2%;
     transform: rotate(-6deg);
     animation: mobileFloatTL 5.8s ease-in-out infinite alternate;
   }
 
   .mobile-float-top-left .material-symbols-rounded {
-    font-size: 23px;
+    font-size: 20px;
   }
 
-  /* 2. Top Right (Asymmetrical lower near title shoulder, rotated 8deg, 40px) */
+  /* 2. Top Right (Floating cleanly above title top right, zero text overlap) */
   .mobile-float-top-right {
-    width: 40px;
-    height: 40px;
-    border-radius: 14px;
-    top: 16px;
-    right: 5%;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    top: -44px;
+    right: 2%;
     transform: rotate(8deg);
     animation: mobileFloatTR 4.4s ease-in-out infinite alternate;
   }
 
   .mobile-float-top-right .material-symbols-rounded {
-    font-size: 20px;
+    font-size: 18px;
   }
 
-  /* 3. Bottom Left (Below left button, zero overlap, tilted -8deg, 42px) */
+  /* 3. Bottom Left (Below left button, zero text overlap) */
   .mobile-float-bottom-left {
-    width: 42px;
-    height: 42px;
-    border-radius: 15px;
-    bottom: -64px;
-    left: 4%;
+    width: 38px;
+    height: 38px;
+    border-radius: 14px;
+    bottom: -68px;
+    left: 2%;
     transform: rotate(-8deg);
     animation: mobileFloatBL 6.2s ease-in-out infinite alternate;
   }
 
   .mobile-float-bottom-left .material-symbols-rounded {
-    font-size: 21px;
+    font-size: 20px;
   }
 
-  /* 4. Bottom Off-Center (Below button row center, zero overlap, tilted 4deg, 44px) */
+  /* 4. Bottom Off-Center (Below button row center, zero text overlap) */
   .mobile-float-bottom-center {
-    width: 44px;
-    height: 44px;
-    border-radius: 16px;
-    bottom: -88px;
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    bottom: -95px;
     left: 45%;
     transform: rotate(4deg);
     animation: mobileFloatBC 5.1s ease-in-out infinite alternate;
   }
 
   .mobile-float-bottom-center .material-symbols-rounded {
-    font-size: 22px;
+    font-size: 20px;
   }
 
-  /* 5. Bottom Right (Below right button, zero overlap, tilted -5deg, 40px) */
+  /* 5. Bottom Right (Below right button, zero text overlap) */
   .mobile-float-bottom-right {
-    width: 40px;
-    height: 40px;
-    border-radius: 14px;
-    bottom: -60px;
-    right: 5%;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    bottom: -62px;
+    right: 2%;
     transform: rotate(-5deg);
     animation: mobileFloatBR 5.5s ease-in-out infinite alternate;
   }
 
   .mobile-float-bottom-right .material-symbols-rounded {
-    font-size: 20px;
+    font-size: 18px;
+  }
+
+  @media (max-width: 540px) {
+    .mobile-float-top-left {
+      top: -58px;
+      left: -8px;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+    }
+    .mobile-float-top-left .material-symbols-rounded {
+      font-size: 16px;
+    }
+    .mobile-float-top-right {
+      top: -50px;
+      right: -8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+    }
+    .mobile-float-top-right .material-symbols-rounded {
+      font-size: 15px;
+    }
+    .mobile-float-bottom-left {
+      bottom: -72px;
+      left: -8px;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+    }
+    .mobile-float-bottom-left .material-symbols-rounded {
+      font-size: 16px;
+    }
+    .mobile-float-bottom-center {
+      bottom: -105px;
+      left: 45%;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+    }
+    .mobile-float-bottom-center .material-symbols-rounded {
+      font-size: 17px;
+    }
+    .mobile-float-bottom-right {
+      bottom: -68px;
+      right: -8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+    }
+    .mobile-float-bottom-right .material-symbols-rounded {
+      font-size: 15px;
+    }
   }
 
   /* Global section spacing tightened */
@@ -3323,28 +3376,28 @@ body.preloader-active {
   }
 
   .mobile-float-top-left {
-    top: -12px;
-    left: 4%;
+    top: -55px !important;
+    left: -12px !important;
   }
 
   .mobile-float-top-right {
-    top: 14px;
-    right: 4%;
+    top: -45px !important;
+    right: -12px !important;
   }
 
   .mobile-float-bottom-left {
-    bottom: -64px;
-    left: 4%;
+    bottom: -72px !important;
+    left: -12px !important;
   }
 
   .mobile-float-bottom-center {
-    bottom: -88px;
-    left: 40%;
+    bottom: -105px !important;
+    left: 42% !important;
   }
 
   .mobile-float-bottom-right {
-    bottom: -60px;
-    right: 4%;
+    bottom: -68px !important;
+    right: -12px !important;
   }
 
   /* Organic Multi-Axis Floating Animations (Safe Inset Boundaries & Downward Drift) */

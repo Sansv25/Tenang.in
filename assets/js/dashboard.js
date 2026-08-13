@@ -19,7 +19,7 @@ function safeGetJSON(key, defaultVal = []) {
   try {
     const data = localStorage.getItem(key);
     return data ? JSON.parse(data) : defaultVal;
-  } catch(e) {
+  } catch (e) {
     console.warn(`[Defensive Parsing] Error parsing localStorage key "${key}":`, e);
     return defaultVal;
   }
@@ -99,7 +99,7 @@ function getDailyQuote() {
   const hour = new Date().getHours();
 
   const lastMoods = moodHistory.slice(-3).map(m => m.score !== undefined ? m.score : (m.level || 3));
-  const avgMood = lastMoods.length ? lastMoods.reduce((a,b) => a+b, 0) / lastMoods.length : 3;
+  const avgMood = lastMoods.length ? lastMoods.reduce((a, b) => a + b, 0) / lastMoods.length : 3;
 
   if (dominantTag === 'Lelah' && moodHistory.slice(-2).every(m => (m.tags || []).includes('Lelah')))
     return "Hari ini kamu bisa coba tidur lebih awal. Tubuh yang istirahat cukup akan membawa pikiran yang lebih jernih. 🌙";
@@ -154,31 +154,31 @@ function renderMiniChart() {
 // ---- Statistik Cards ----
 function renderStats() {
   const moodHistory = safeGetJSON('tenang_moods', []);
-  
+
   const streakEl = document.getElementById('stat-streak');
   if (streakEl) streakEl.textContent = getStreak(moodHistory);
-  
+
   const journalEl = document.getElementById('stat-journal');
   if (journalEl) journalEl.textContent = getJournalCountThisMonth();
-  
+
   const temanEl = document.getElementById('stat-teman');
   if (temanEl) temanEl.textContent = parseInt(localStorage.getItem('tenang_teman_sessions') || '0');
 
   // Mood rata-rata minggu ini (rich badge)
   const weekMoods = moodHistory.slice(-7).map(m => m.score !== undefined ? m.score : (m.level || 0)).filter(s => s > 0);
-  const avg = weekMoods.length ? 
-    Math.round(weekMoods.reduce((a,b) => a+b, 0) / weekMoods.length) : 0;
-  
+  const avg = weekMoods.length ?
+    Math.round(weekMoods.reduce((a, b) => a + b, 0) / weekMoods.length) : 0;
+
   const avgLabels = ['Belum Ada', 'Buruk', 'Kurang', 'Biasa', 'Baik', 'Sangat Baik'];
   const avgIcons = ['help_outline', 'sentiment_very_dissatisfied', 'sentiment_dissatisfied', 'sentiment_neutral', 'sentiment_satisfied', 'sentiment_very_satisfied'];
   const avgColors = ['#64748B', '#EF4444', '#F97316', '#FBBF24', '#10B981', '#3B82F6'];
-  
+
   const avgMoodEl = document.getElementById('stat-avg-mood');
   if (avgMoodEl) {
     if (avg === 0 || !weekMoods.length) {
       avgMoodEl.innerHTML = `<span style="font-size:2rem; font-weight:850; color:#64748B;">-</span>`;
     } else {
-      const floatAvg = (weekMoods.reduce((a,b) => a+b, 0) / weekMoods.length).toFixed(1);
+      const floatAvg = (weekMoods.reduce((a, b) => a + b, 0) / weekMoods.length).toFixed(1);
       avgMoodEl.innerHTML = `
         <div style="display:flex; align-items:center; justify-content:center; gap:6px; margin: 4px 0;">
           <span style="font-size: 2.2rem; font-weight: 850; color: ${avgColors[avg]}; line-height: 1;">${floatAvg}</span>
@@ -277,13 +277,13 @@ function openBadgeDetail(id) {
   const unlocked = badge.condition();
   const symbolEl = document.getElementById('badge-detail-symbol');
   if (symbolEl) symbolEl.textContent = unlocked ? badge.icon : 'lock';
-  
+
   const iconWrap = document.getElementById('badge-detail-icon');
   if (iconWrap) iconWrap.style.color = unlocked ? '#5B8FD4' : '#94A3B8';
-  
+
   const titleEl = document.getElementById('badge-detail-title');
   if (titleEl) titleEl.textContent = badge.name;
-  
+
   const statusEl = document.getElementById('badge-detail-status');
   if (statusEl) {
     if (unlocked) {
@@ -294,10 +294,10 @@ function openBadgeDetail(id) {
       statusEl.style.color = '#94A3B8';
     }
   }
-  
+
   const descEl = document.getElementById('badge-detail-desc');
   if (descEl) descEl.textContent = badge.desc;
-  
+
   modal.classList.add('active');
 }
 
