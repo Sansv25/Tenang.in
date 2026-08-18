@@ -39,6 +39,7 @@
   </script>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/kenali.css">
   <!-- CLS Fix: reserves layout space, stabilizes font & dynamic content -->
   <link rel="stylesheet" href="assets/css/cls-fix.css">
 </head>
@@ -52,80 +53,109 @@
         <!-- Filled by JS -->
       </section>
 
-      <!-- Intro -->
-      <section id="profil-intro" style="padding:var(--space-2xl) 0; text-align:center;">
-        <div style="margin-bottom:var(--space-lg);">
-          <span class="material-symbols-rounded" style="font-size:64px; color:var(--secondary-accent);">tune</span>
-        </div>
-        <h1 style="font-size:var(--h2-size); font-weight:800; margin-bottom:var(--space-md);">Profil Refleksimu</h1>
-        <p
-          style="font-size:1.0625rem; color:rgba(255,255,255,0.75); max-width:480px; margin:0 auto var(--space-xl); line-height:1.7;">
-          Jawab 7 pertanyaan untuk menemukan gaya refleksi yang paling cocok untukmu. Tenang.in akan menyesuaikan
-          pengalaman berdasarkan hasilnya!
-        </p>
+      <!-- Intro Section (Ultra-Premium Wellness Design) -->
+      <section id="profil-intro" style="padding: 24px 0 48px; text-align: center;">
+        <div style="background: #FFFFFF; border: 2px solid #E2E8F0; border-radius: 32px; padding: 36px 28px; box-shadow: 0 20px 45px -15px rgba(15, 23, 42, 0.12); color: #1A2F4E; max-width: 680px; margin: 0 auto; text-align: left;">
+          <!-- Top Badge & Header -->
+          <div style="text-align: center; margin-bottom: 28px;">
+            <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #0284C7; background: #E0F2FE; border: 1px solid #BAE6FD; padding: 6px 16px; border-radius: 999px; margin-bottom: 14px;">
+              <span class="material-symbols-rounded" style="font-size: 18px;">psychology</span>
+              Kuis Gaya Refleksi Diri
+            </span>
+            <h1 style="font-size: clamp(1.6rem, 4vw, 2.1rem); font-weight: 850; color: #1A2F4E; margin: 0 0 10px; letter-spacing: -0.02em;">
+              Temukan Gaya Refleksi Jiwamu
+            </h1>
+            <p style="font-size: 0.975rem; color: #64748B; line-height: 1.65; max-width: 520px; margin: 0 auto;">
+              Jawab 7 pertanyaan singkat (2-3 menit) untuk menemukan karakter refleksi yang cocok. Tenang.in akan menyesuaikan panduan jurnal, afirmasi, dan Teman AI khusus untukmu.
+            </p>
+          </div>
 
-        <div class="card"
-          style="max-width:440px; margin:0 auto var(--space-2xl); padding:var(--space-xl); text-align:left;">
-          <h3 style="font-weight:700; margin-bottom:var(--space-md); color:var(--text-on-white); text-align:center;">4
-            Gaya Refleksi</h3>
-          <div style="display:flex; flex-direction:column; gap:var(--space-md);">
-            <div style="display:flex; align-items:center; gap:var(--space-md);">
-              <span class="material-symbols-rounded text-primary" style="font-size:28px;">dark_mode</span>
-              <div>
-                <div style="font-weight:600; color:var(--text-on-white);">Reflektif Malam</div>
-                <div style="font-size:var(--caption-size); color:var(--text-secondary);">Quote filosofis, prompt
-                  mendalam</div>
-              </div>
+          <!-- 4 Reflection Styles Grid -->
+          <div style="margin-bottom: 32px;">
+            <div style="font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: #475569; margin-bottom: 14px; text-align: center;">
+              4 Karakter Refleksi Diri
             </div>
-            <div style="display:flex; align-items:center; gap:var(--space-md);">
-              <span class="material-symbols-rounded text-primary" style="font-size:28px;">wb_sunny</span>
-              <div>
-                <div style="font-weight:600; color:var(--text-on-white);">Aktif Pagi</div>
-                <div style="font-size:var(--caption-size); color:var(--text-secondary);">Quote semangat, tips rutinitas
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
+              <!-- Style 1 -->
+              <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; transition: transform 0.2s, box-shadow 0.2s;">
+                <div style="width: 44px; height: 44px; border-radius: 14px; background: #EEF2FF; border: 1px solid #C7D2FE; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <span class="material-symbols-rounded" style="color: #4F46E5; font-size: 24px;">dark_mode</span>
+                </div>
+                <div>
+                  <div style="font-weight: 800; font-size: 0.95rem; color: #1E293B;">Reflektif Malam</div>
+                  <div style="font-size: 0.8rem; color: #64748B; margin-top: 3px; line-height: 1.4;">Quote filosofis mendalam & perenungan malam yang tenang.</div>
+                </div>
+              </div>
+
+              <!-- Style 2 -->
+              <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; transition: transform 0.2s, box-shadow 0.2s;">
+                <div style="width: 44px; height: 44px; border-radius: 14px; background: #FEF3C7; border: 1px solid #FDE68A; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <span class="material-symbols-rounded" style="color: #D97706; font-size: 24px;">wb_sunny</span>
+                </div>
+                <div>
+                  <div style="font-weight: 800; font-size: 0.95rem; color: #1E293B;">Aktif Pagi</div>
+                  <div style="font-size: 0.8rem; color: #64748B; margin-top: 3px; line-height: 1.4;">Quote afirmasi positif & dorongan energi optimis harian.</div>
+                </div>
+              </div>
+
+              <!-- Style 3 -->
+              <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; transition: transform 0.2s, box-shadow 0.2s;">
+                <div style="width: 44px; height: 44px; border-radius: 14px; background: #ECFDF5; border: 1px solid #A7F3D0; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <span class="material-symbols-rounded" style="color: #059669; font-size: 24px;">chat_bubble</span>
+                </div>
+                <div>
+                  <div style="font-weight: 800; font-size: 0.95rem; color: #1E293B;">Ekspresif & Free-Flow</div>
+                  <div style="font-size: 0.8rem; color: #64748B; margin-top: 3px; line-height: 1.4;">Eksplorasi perasaan bebas & curhat privat dengan Teman AI.</div>
+                </div>
+              </div>
+
+              <!-- Style 4 -->
+              <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; transition: transform 0.2s, box-shadow 0.2s;">
+                <div style="width: 44px; height: 44px; border-radius: 14px; background: #F3E8FF; border: 1px solid #E9D5FF; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                  <span class="material-symbols-rounded" style="color: #7C3AED; font-size: 24px;">task_alt</span>
+                </div>
+                <div>
+                  <div style="font-weight: 800; font-size: 0.95rem; color: #1E293B;">Terstruktur & Focus</div>
+                  <div style="font-size: 0.8rem; color: #64748B; margin-top: 3px; line-height: 1.4;">Statistik mood, grafik jurnal, & pencapaian target medali.</div>
                 </div>
               </div>
             </div>
-            <div style="display:flex; align-items:center; gap:var(--space-md);">
-              <span class="material-symbols-rounded text-primary" style="font-size:28px;">chat_bubble</span>
-              <div>
-                <div style="font-weight:600; color:var(--text-on-white);">Ekspresif</div>
-                <div style="font-size:var(--caption-size); color:var(--text-secondary);">Teman lebih aktif,
-                  sharing-friendly</div>
-              </div>
-            </div>
-            <div style="display:flex; align-items:center; gap:var(--space-md);">
-              <span class="material-symbols-rounded text-primary" style="font-size:28px;">task_alt</span>
-              <div>
-                <div style="font-weight:600; color:var(--text-on-white);">Terstruktur</div>
-                <div style="font-size:var(--caption-size); color:var(--text-secondary);">Dashboard, tracking, goal
-                  setting</div>
-              </div>
+          </div>
+
+          <!-- Action CTA Button -->
+          <div style="text-align: center;">
+            <button onclick="startProfilQuiz()" style="background: #0F172A; color: #FFFFFF; border: none; font-weight: 850; font-size: 1.05rem; padding: 16px 36px; border-radius: 18px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3); transition: transform 0.2s, opacity 0.2s;" onmouseover="this.style.transform='scale(1.02)';" onmouseout="this.style.transform='none';">
+              <span class="material-symbols-rounded" style="font-size: 22px; color: #7EC8E3;">auto_awesome</span>
+              <span>Mulai Kuis Profil (7 Pertanyaan)</span>
+            </button>
+            <div style="font-size: 0.8rem; font-weight: 600; color: #64748B; margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+              <span class="material-symbols-rounded" style="font-size: 16px; color: #0284C7;">schedule</span>
+              <span>Proses cepat ~2 menit • Dapat diulang kapan saja</span>
             </div>
           </div>
         </div>
-
-        <button class="btn btn-white btn-lg" onclick="startProfilQuiz()" style="font-weight:700;">
-          <span class="material-symbols-rounded">play_arrow</span>
-          Mulai Kuis Profil
-        </button>
-        <p style="font-size:var(--caption-size); color:rgba(255,255,255,0.6); margin-top:var(--space-md);">Sekitar 2-3
-          menit</p>
       </section>
 
-      <!-- Quiz Area -->
-      <section id="profil-quiz" style="display:none; min-height:60vh; padding:var(--space-xl) 0;">
-        <!-- Progress Bar -->
-        <div style="margin-bottom:var(--space-xl);" id="quiz-progress-section" style="display:none;">
-          <div class="quiz-progress-text">
-            <span>Progres Kuis</span>
-            <span id="profil-progress-text">0/10</span>
+      <!-- Quiz Area (Matching Kenali Dirimu Theme) -->
+      <section id="profil-quiz" class="kenali-quiz-section" style="display:none;">
+        <!-- Enhanced Progress Bar -->
+        <div class="kenali-progress-wrapper" id="quiz-progress-section" style="display:none;">
+          <div class="kenali-progress-header">
+            <span class="kenali-progress-label">
+              <span class="material-symbols-rounded">quiz</span>
+              Progres Kuis
+            </span>
+            <span class="kenali-progress-count" id="profil-progress-text">1 / 7</span>
           </div>
-          <div class="progress-bar-container">
-            <div class="progress-bar" id="profil-progress-bar" style="width:0%;"></div>
+          <div class="kenali-progress-track">
+            <div class="kenali-progress-fill" id="profil-progress-bar" style="width:14.28%;"></div>
           </div>
+          <!-- Step Dots -->
+          <div class="kenali-step-dots" id="profil-step-dots"></div>
         </div>
 
-        <div id="profil-questions" class="quiz-container" style="min-height:380px;">
+        <!-- Quiz Card Container -->
+        <div id="profil-questions" class="kenali-quiz-card">
           <!-- Slide questions will be injected here -->
         </div>
       </section>

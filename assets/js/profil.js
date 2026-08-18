@@ -39,6 +39,25 @@ async function loadProfilData() {
   }
 }
 
+// ---- Render Step Dots ----
+function renderProfilStepDots() {
+  const dotsContainer = document.getElementById('profil-step-dots');
+  if (!dotsContainer || !profilData) return;
+
+  dotsContainer.innerHTML = profilData.questions.map((_, i) =>
+    `<div class="kenali-step-dot ${i === 0 ? 'active' : ''}" data-step="${i}"></div>`
+  ).join('');
+}
+
+function updateProfilStepDots() {
+  const dots = document.querySelectorAll('#profil-step-dots .kenali-step-dot');
+  dots.forEach((dot, i) => {
+    dot.classList.remove('active', 'completed');
+    if (i < profilQuestion) dot.classList.add('completed');
+    if (i === profilQuestion) dot.classList.add('active');
+  });
+}
+
 // ---- Start Quiz ----
 function startProfilQuiz() {
   if (!profilData) {
@@ -58,6 +77,7 @@ function startProfilQuiz() {
 
   profilQuestion = 0;
   profilScores = { malam: 0, pagi: 0, ekspresif: 0, terstruktur: 0 };
+  renderProfilStepDots();
   renderProfilQuestion();
 }
 
@@ -71,19 +91,24 @@ function renderProfilQuestion() {
   if (progressSection) progressSection.style.display = 'block';
   updateProfilProgressBar();
 
+  const optionLetters = ['A', 'B', 'C', 'D', 'E'];
+
   profilData.questions.forEach((q, index) => {
     const slide = document.createElement('div');
-    slide.className = `quiz-slide ${index === 0 ? 'active' : 'next'}`;
+    slide.className = `kenali-slide ${index === 0 ? 'active' : 'next'}`;
     slide.dataset.index = index;
 
     slide.innerHTML = `
-      <h3 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white); text-align:center; margin-bottom:var(--space-xl);">
-        ${q.text}
-      </h3>
-      <div style="display:flex; flex-direction:column; gap:var(--space-md); width:100%; max-width:400px; margin:0 auto;">
+      <div class="kenali-question-number">
+        <span class="material-symbols-rounded" style="font-size:14px;">quiz</span>
+        Pertanyaan ${index + 1} dari ${profilData.questions.length}
+      </div>
+      <h3 class="kenali-question-text">${q.text}</h3>
+      <div class="kenali-options-wrap">
         ${q.options.map((opt, i) => `
-          <button class="btn btn-secondary btn-full quiz-option" style="justify-content:flex-start; padding:1rem;" onclick="selectProfilAnswer(${i})">
-            ${opt.text}
+          <button class="kenali-option quiz-option" onclick="selectProfilAnswer(${i})">
+            <span class="kenali-option-letter">${optionLetters[i] || (i + 1)}</span>
+            <span>${opt.text}</span>
           </button>
         `).join('')}
       </div>
@@ -100,6 +125,7 @@ function updateProfilProgressBar() {
     const percent = ((profilQuestion + 1) / profilData.questions.length) * 100;
     barEl.style.width = `${percent}%`;
   }
+  updateProfilStepDots();
 }
 
 // ---- Select Answer ----
@@ -112,7 +138,7 @@ function selectProfilAnswer(optIndex) {
     profilScores[key] = (profilScores[key] || 0) + val;
   }
 
-  const slides = document.querySelectorAll('#profil-questions .quiz-slide');
+  const slides = document.querySelectorAll('#profil-questions .kenali-slide');
   const currentSlide = slides[profilQuestion];
 
   // Mark selected

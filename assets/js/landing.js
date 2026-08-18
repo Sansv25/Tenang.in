@@ -757,25 +757,30 @@ document.addEventListener('DOMContentLoaded', () => {
       midAosOffset += (midTarget - midAosOffset) * 0.05;
       frontAosOffset += (frontTarget - frontAosOffset) * 0.05;
 
-      // Full Moon (Celestial Parallax - furthest depth movement in the night sky)
-      if (fullMoon) {
-        const moonY = (scrollProgress * -65) + (mouseY * 18);
-        const moonX = mouseX * -30;
-        fullMoon.style.transform = `translate3d(${moonX}px, ${moonY}px, 0)`;
-      }
+  const bantuanSection = document.querySelector('#bantuan');
 
-      // Layer Back (Bergerak vertikal dengan aman dalam rentang +-25px tanpa terperosok ke luar batas layar)
-      const backY = (scrollProgress * -50) + (mouseY * 15) + backAosOffset;
-      const backX = mouseX * -25;
+  // Full Moon (Celestial Parallax - furthest depth movement in the night sky)
+  if (fullMoon) {
+    const targetSec = bantuanSection || ctaSection;
+    const bRect = targetSec.getBoundingClientRect();
+    const bProgress = ((viewportHeight - bRect.top) / (viewportHeight + bRect.height)) - 0.5;
+    const moonY = (bProgress * -8) + (mouseY * 4);
+    const moonX = mouseX * -6;
+    fullMoon.style.transform = `translate3d(${moonX}px, ${moonY}px, 0)`;
+  }
+
+      // Layer Back (Bergerak vertikal dengan aman dalam rentang depth)
+      const backY = (scrollProgress * -45) + (mouseY * 14) + backAosOffset;
+      const backX = mouseX * -22;
       layerBack.style.transform = `translate3d(${backX}px, ${backY}px, 0) scale(1.04)`;
 
-      // Layer Mid (Medium depth shift)
+      // Layer Mid (Puncak gunung tengah proporsional & estetis di balik kartu)
       const midY = (scrollProgress * -25) + (mouseY * 8) + midAosOffset;
-      const midX = mouseX * -15;
+      const midX = mouseX * -14;
       layerMid.style.transform = `translate3d(${midX}px, ${midY}px, 0) scale(1.02)`;
 
       // Layer Front (Foreground layer, bergemang halus di dasar)
-      const frontY = (scrollProgress * -10) + (mouseY * 4) + frontAosOffset;
+      const frontY = (scrollProgress * -12) + (mouseY * 4) + frontAosOffset;
       const frontX = mouseX * -6;
       layerFront.style.transform = `translate3d(${frontX}px, ${frontY}px, 0) scale(1.01)`;
     }
