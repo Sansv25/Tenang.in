@@ -447,9 +447,9 @@ function renderInsights() {
           </div>
           <div style="display:flex; flex-direction:column; gap:10px;">
             ${aiAdvice.map((a, i) => `
-              <div style="display:flex; align-items:flex-start; gap:12px; padding:12px 14px; background:var(--card-subtle); border-radius:10px; border:1px solid var(--card-border); transition:transform 0.15s;" onmouseenter="this.style.transform='translateX(4px)'" onmouseleave="this.style.transform='translateX(0)'">
-                <div style="min-width:36px; height:36px; border-radius:10px; background:${['#EEF2FF','#ECFDF5','#FFF7ED'][i]}; display:flex; align-items:center; justify-content:center;">
-                  <span class="material-symbols-rounded" style="font-size:20px; color:${['#2563EB','#10B981','#F59E0B'][i]};">${a.icon}</span>
+              <div style="display:flex; align-items:flex-start; gap:12px; padding:12px 14px; background:var(--card-subtle); border-radius:12px; border:1px solid var(--card-border); transition:transform 0.15s;" onmouseenter="this.style.transform='translateX(4px)'" onmouseleave="this.style.transform='translateX(0)'">
+                <div style="min-width:36px; height:36px; border-radius:10px; background:var(--card-subtle); border:1px solid var(--card-border); display:flex; align-items:center; justify-content:center;">
+                  <span class="material-symbols-rounded" style="font-size:20px; color:${['#38BDF8','#10B981','#F59E0B'][i]};">${a.icon}</span>
                 </div>
                 <p style="font-size:0.85rem; line-height:1.6; color:var(--text-secondary); margin:0; padding-top:2px;">${a.text}</p>
               </div>
@@ -458,7 +458,7 @@ function renderInsights() {
         </div>
 
         <!-- Mood Distribution -->
-        <div style="background:var(--bg-soft, #F8FAFC); border-radius:12px; padding:16px;">
+        <div style="background:var(--card-subtle); border:1px solid var(--card-border); border-radius:16px; padding:18px;">
           <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px;">
             <span class="material-symbols-rounded" style="font-size:18px; color:#6366F1;">bar_chart</span>
             <span style="font-size:0.8rem; font-weight:700; color:var(--text-on-white);">Distribusi Mood</span>
@@ -481,15 +481,15 @@ function renderInsights() {
 
         <!-- Stats Row -->
         <div style="display:flex; gap:12px; margin-top:16px; flex-wrap:wrap;">
-          <div style="flex:1; min-width:80px; text-align:center; padding:12px 8px; background:rgba(37,99,235,0.06); border-radius:10px;">
+          <div style="flex:1; min-width:80px; text-align:center; padding:12px 8px; background:var(--card-subtle); border:1px solid var(--card-border); border-radius:12px;">
             <div style="font-size:1.5rem; font-weight:800; color:var(--primary-accent);">${avg}</div>
             <div style="font-size:0.7rem; color:var(--text-secondary); font-weight:600;">Rata-rata</div>
           </div>
-          <div style="flex:1; min-width:80px; text-align:center; padding:12px 8px; background:rgba(245,158,11,0.06); border-radius:10px;">
+          <div style="flex:1; min-width:80px; text-align:center; padding:12px 8px; background:var(--card-subtle); border:1px solid var(--card-border); border-radius:12px;">
             <div style="font-size:1.5rem; font-weight:800; color:var(--warning);">${streak}</div>
             <div style="font-size:0.7rem; color:var(--text-secondary); font-weight:600;">Hari Streak</div>
           </div>
-          <div style="flex:1; min-width:80px; text-align:center; padding:12px 8px; background:rgba(16,185,129,0.06); border-radius:10px;">
+          <div style="flex:1; min-width:80px; text-align:center; padding:12px 8px; background:var(--card-subtle); border:1px solid var(--card-border); border-radius:12px;">
             <div style="font-size:1.5rem; font-weight:800; color:var(--success);">${moods.length}</div>
             <div style="font-size:0.7rem; color:var(--text-secondary); font-weight:600;">Total Check-in</div>
           </div>
