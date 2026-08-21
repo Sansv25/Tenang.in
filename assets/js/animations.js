@@ -79,6 +79,8 @@ const Animations = (() => {
 
   // ---- Confetti ----
   const showConfetti = (count = 30) => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const container = document.createElement('div');
     container.className = 'confetti-container';
     document.body.appendChild(container);

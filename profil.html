@@ -124,7 +124,7 @@
 
           <!-- Action CTA Button -->
           <div style="text-align: center;">
-            <button onclick="startProfilQuiz()" style="background: #0F172A; color: #FFFFFF; border: none; font-weight: 850; font-size: 1.05rem; padding: 16px 36px; border-radius: 18px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3); transition: transform 0.2s, opacity 0.2s;" onmouseover="this.style.transform='scale(1.02)';" onmouseout="this.style.transform='none';">
+            <button data-action="start-profil-quiz" style="background: #0F172A; color: #FFFFFF; border: none; font-weight: 850; font-size: 1.05rem; padding: 16px 36px; border-radius: 18px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3); transition: transform 0.2s, opacity 0.2s;">
               <span class="material-symbols-rounded" style="font-size: 22px; color: #7EC8E3;">auto_awesome</span>
               <span>Mulai Kuis Profil (7 Pertanyaan)</span>
             </button>
@@ -173,7 +173,7 @@
     <div class="modal" style="max-width:440px;">
       <div class="modal-header">
         <h2 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white);">Bagikan Profil Diri</h2>
-        <button class="modal-close" onclick="document.getElementById('share-result-modal').classList.remove('active');"
+        <button class="modal-close" data-action="close-share-result-modal"
           aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
       </div>
       <div class="share-card-preview" style="background: linear-gradient(135deg, #2D5BA8, #7EC8E3); text-align:left;">
@@ -215,9 +215,9 @@
         </div>
       </div>
       <div style="display:flex; gap:var(--space-md);">
-        <button class="btn btn-secondary btn-full" onclick="simulateResultShare()"><span
+        <button class="btn btn-secondary btn-full" data-action="simulate-result-share"><span
             class="material-symbols-rounded">download</span> Simpan</button>
-        <button class="btn btn-primary btn-full" onclick="simulateResultShare()"><span
+        <button class="btn btn-primary btn-full" data-action="simulate-result-share"><span
             class="material-symbols-rounded">share</span> Bagikan</button>
       </div>
     </div>

@@ -461,3 +461,165 @@ const Main = (() => {
 
   return { initPage, getGreetingText, updateHeaderAvatar, logoSVG };
 })();
+
+// ---- Centralized Event Delegation Engine (Clean Code Architecture) ----
+document.addEventListener('click', (event) => {
+  const trigger = event.target.closest('[data-action]');
+  if (!trigger) return;
+
+  const action = trigger.dataset.action;
+
+  if (trigger.tagName === 'A' && (trigger.getAttribute('href') === '#' || trigger.getAttribute('href')?.startsWith('javascript:'))) {
+    event.preventDefault();
+  }
+
+  switch (action) {
+    case 'mulai-sekarang':
+      if (typeof handleMulaiSekarang === 'function') handleMulaiSekarang(event);
+      break;
+    case 'copy-emergency':
+      if (typeof copyEmergencyNumber === 'function') {
+        copyEmergencyNumber(trigger.dataset.number, trigger.dataset.label);
+      }
+      break;
+    case 'close-auth-modal':
+      if (typeof closeAuthModal === 'function') closeAuthModal();
+      break;
+    case 'social-auth':
+      if (typeof handleSocialAuth === 'function') handleSocialAuth(trigger.dataset.provider);
+      break;
+    case 'toggle-password':
+      if (typeof togglePasswordVisibility === 'function') togglePasswordVisibility(trigger.dataset.targetInput, trigger);
+      break;
+    case 'forgot-password':
+      if (typeof handleForgotPassword === 'function') handleForgotPassword();
+      break;
+    case 'switch-auth-tab':
+      if (typeof switchAuthTab === 'function') switchAuthTab(trigger.dataset.tab);
+      break;
+    case 'show-checkin':
+      if (typeof showCheckInModal === 'function') {
+        const moodVal = trigger.dataset.mood ? parseInt(trigger.dataset.mood, 10) : undefined;
+        showCheckInModal(moodVal);
+      }
+      break;
+    case 'close-checkin':
+      if (typeof closeCheckInModal === 'function') closeCheckInModal();
+      break;
+    case 'select-mood':
+      if (typeof selectMood === 'function') selectMood(parseInt(trigger.dataset.mood, 10));
+      break;
+    case 'toggle-tag':
+      if (typeof toggleTag === 'function') toggleTag(trigger.dataset.tag, trigger);
+      break;
+    case 'submit-checkin':
+      if (typeof submitCheckIn === 'function') submitCheckIn();
+      break;
+    case 'rotate-inspiration':
+      if (typeof rotateInspiration === 'function') rotateInspiration();
+      break;
+    case 'open-teman-chat':
+      if (typeof TemanChat !== 'undefined' && typeof TemanChat.open === 'function') TemanChat.open();
+      break;
+    case 'open-settings':
+      if (typeof Settings !== 'undefined' && typeof Settings.open === 'function') Settings.open();
+      break;
+    case 'onboarding-prev':
+      if (typeof Onboarding !== 'undefined' && typeof Onboarding.prevSlide === 'function') Onboarding.prevSlide();
+      break;
+    case 'onboarding-next':
+      if (typeof Onboarding !== 'undefined' && typeof Onboarding.nextSlide === 'function') Onboarding.nextSlide();
+      break;
+    case 'onboarding-complete':
+      if (typeof Onboarding !== 'undefined' && typeof Onboarding.complete === 'function') Onboarding.complete();
+      break;
+    case 'close-streak-modal':
+      document.getElementById('streak-modal')?.classList.remove('active');
+      break;
+    case 'close-badge-modal':
+      document.getElementById('badge-detail-modal')?.classList.remove('active');
+      break;
+    case 'open-prompt-category':
+      document.getElementById('prompt-category-modal')?.classList.add('active');
+      break;
+    case 'close-prompt-category':
+      document.getElementById('prompt-category-modal')?.classList.remove('active');
+      break;
+    case 'change-prompt-category':
+      if (typeof changePromptCategory === 'function') changePromptCategory(trigger.dataset.category);
+      break;
+    case 'toggle-jurnal-tag':
+      if (typeof toggleJurnalTag === 'function') toggleJurnalTag(trigger.dataset.tag, trigger);
+      break;
+    case 'save-jurnal':
+      if (typeof saveJurnal === 'function') saveJurnal();
+      break;
+    case 'simulate-burn':
+      if (typeof simulateBurn === 'function') simulateBurn();
+      break;
+    case 'ignite-paper-card':
+      if (typeof igniteCardFire === 'function') igniteCardFire();
+      break;
+    case 'reset-burn':
+      if (typeof resetBurn === 'function') resetBurn();
+      break;
+    case 'close-jurnal-modal':
+      if (typeof closeJurnalModal === 'function') closeJurnalModal();
+      break;
+    case 'cancel-delete-jurnal':
+      if (typeof cancelDelete === 'function') cancelDelete();
+      break;
+    case 'execute-delete-jurnal':
+      if (typeof executeDelete === 'function') executeDelete();
+      break;
+    case 'close-jurnal-success':
+      document.getElementById('jurnal-success-modal')?.classList.remove('active');
+      break;
+    case 'start-kenali-quiz':
+      if (typeof startKenaliQuiz === 'function') startKenaliQuiz();
+      break;
+    case 'change-kenali-theme':
+      if (typeof changeKenaliShareTheme === 'function') changeKenaliShareTheme(trigger.dataset.theme, event);
+      break;
+    case 'close-share-result-modal':
+      document.getElementById('share-result-modal')?.classList.remove('active');
+      break;
+    case 'simulate-result-share':
+      if (typeof simulateResultShare === 'function') simulateResultShare();
+      break;
+    case 'select-mood-tracker':
+      if (typeof selectMoodTracker === 'function') selectMoodTracker(parseInt(trigger.dataset.mood, 10));
+      break;
+    case 'toggle-mood-tag':
+      if (typeof toggleMoodTag === 'function') toggleMoodTag(trigger.dataset.tag, trigger);
+      break;
+    case 'submit-mood-tracker':
+      if (typeof submitMoodTracker === 'function') submitMoodTracker();
+      break;
+    case 'show-share-chart-modal':
+      if (typeof showShareChartModal === 'function') showShareChartModal();
+      break;
+    case 'close-share-chart-modal':
+      document.getElementById('share-chart-modal')?.classList.remove('active');
+      break;
+    case 'close-low-mood-modal':
+      if (typeof closeLowMoodModal === 'function') closeLowMoodModal();
+      break;
+    case 'close-low-mood-and-chat':
+      if (typeof closeLowMoodModal === 'function') closeLowMoodModal();
+      if (typeof TemanChat !== 'undefined' && typeof TemanChat.open === 'function') TemanChat.open();
+      break;
+    case 'change-share-theme':
+      if (typeof changeShareTheme === 'function') changeShareTheme(trigger.dataset.theme);
+      break;
+    case 'simulate-share':
+      if (typeof simulateShare === 'function') simulateShare();
+      break;
+    case 'start-profil-quiz':
+      if (typeof startProfilQuiz === 'function') startProfilQuiz();
+      break;
+    default:
+      break;
+  }
+});
+

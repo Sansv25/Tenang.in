@@ -109,7 +109,7 @@
             </div>
           </div>
           <div>
-            <button class="btn-mood-cta" id="checkin-cta-btn" onclick="showCheckInModal()">
+            <button class="btn-mood-cta" id="checkin-cta-btn" data-action="show-checkin">
               <span class="material-symbols-rounded" style="font-size:18px;">add_circle</span>
               <span>Buka Form Lengkap</span>
             </button>
@@ -117,7 +117,7 @@
         </div>
 
         <div class="mood-grid" id="mood-grid-container">
-          <div class="mood-card-item mood-1" onclick="showCheckInModal(1)">
+          <div class="mood-card-item mood-1" data-action="show-checkin" data-mood="1">
             <img src="assets/img/maskots/mascot-mood-1.png" alt="Buruk" class="mood-card-mascot-img">
             <div>
               <div class="mood-card-label">Buruk</div>
@@ -125,7 +125,7 @@
             </div>
           </div>
 
-          <div class="mood-card-item mood-2" onclick="showCheckInModal(2)">
+          <div class="mood-card-item mood-2" data-action="show-checkin" data-mood="2">
             <img src="assets/img/maskots/mascot-mood-2.png" alt="Kurang" class="mood-card-mascot-img">
             <div>
               <div class="mood-card-label">Kurang</div>
@@ -133,7 +133,7 @@
             </div>
           </div>
 
-          <div class="mood-card-item mood-3" onclick="showCheckInModal(3)">
+          <div class="mood-card-item mood-3" data-action="show-checkin" data-mood="3">
             <img src="assets/img/maskots/mascot-mood-3.png" alt="Biasa" class="mood-card-mascot-img">
             <div>
               <div class="mood-card-label">Biasa</div>
@@ -141,7 +141,7 @@
             </div>
           </div>
 
-          <div class="mood-card-item mood-4" onclick="showCheckInModal(4)">
+          <div class="mood-card-item mood-4" data-action="show-checkin" data-mood="4">
             <img src="assets/img/maskots/mascot-mood-4.png" alt="Baik" class="mood-card-mascot-img">
             <div>
               <div class="mood-card-label">Baik</div>
@@ -149,7 +149,7 @@
             </div>
           </div>
 
-          <div class="mood-card-item mood-5" onclick="showCheckInModal(5)">
+          <div class="mood-card-item mood-5" data-action="show-checkin" data-mood="5">
             <img src="assets/img/maskots/mascot-mood-5.png" alt="Luar Biasa" class="mood-card-mascot-img">
             <div>
               <div class="mood-card-label">Luar Biasa</div>
@@ -175,7 +175,7 @@
             <span class="material-symbols-rounded" style="font-size:24px;">spa</span>
             <span>Ruang Wisdom & Inspirasi Harian</span>
           </div>
-          <button class="btn-rotate-quote" onclick="rotateInspiration()" aria-label="Ganti kutipan inspiratif">
+          <button class="btn-rotate-quote" data-action="rotate-inspiration" aria-label="Ganti kutipan inspiratif">
             <span class="material-symbols-rounded rotate-icon">refresh</span>
             <span>Inspirasi Baru</span>
           </button>
@@ -268,7 +268,7 @@
           </a>
 
           <!-- Item 5: Wide Card for Teman AI (Clean White with Soft Lavender Tone) -->
-          <a href="javascript:void(0)" onclick="TemanChat.open()" class="bento-item bento-wide" id="quick-teman-ai">
+          <a href="#" data-action="open-teman-chat" class="bento-item bento-wide" id="quick-teman-ai">
             <div class="bento-top">
               <div class="bento-icon-box" style="background: #F3E8FF;">
                 <span class="material-symbols-rounded" style="font-size:34px; color:#9333EA;">smart_toy</span>
@@ -317,9 +317,7 @@
           style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px;">
           <!-- Card 1: Kemenkes RI -->
           <div
-            style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between;"
-            onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px -5px rgba(91, 143, 212, 0.25)';"
-            onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+            style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between;">
             <div>
               <div
                 style="width: 44px; height: 44px; border-radius: 12px; background: #E0F2FE; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">
@@ -336,7 +334,7 @@
                 style="flex: 1; text-decoration: none; text-align: center; background: #2D5BA8; color: #FFFFFF; font-weight: 750; font-size: 0.85rem; padding: 10px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(45, 91, 168, 0.3); transition: opacity 0.2s;">
                 <span class="material-symbols-rounded" style="font-size: 18px;">call</span> Telepon
               </a>
-              <button type="button" onclick="copyEmergencyNumber('119', 'Hotline Kemenkes 119')"
+              <button type="button" data-action="copy-emergency" data-number="119" data-label="Hotline Kemenkes 119"
                 style="background: #EEF3F9; border: 1px solid #7EC8E3; color: #2D5BA8; font-weight: 700; padding: 10px 14px; border-radius: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s;"
                 title="Salin Nomor">
                 <span class="material-symbols-rounded" style="font-size: 18px;">content_copy</span>
@@ -346,9 +344,7 @@
 
           <!-- Card 2: Layanan SEJIWA -->
           <div
-            style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between;"
-            onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px -5px rgba(91, 143, 212, 0.25)';"
-            onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+            style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between;">
             <div>
               <div
                 style="width: 44px; height: 44px; border-radius: 12px; background: #DCFCE7; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">
@@ -365,7 +361,7 @@
                 style="flex: 1; text-decoration: none; text-align: center; background: #2D5BA8; color: #FFFFFF; font-weight: 750; font-size: 0.85rem; padding: 10px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(45, 91, 168, 0.3); transition: opacity 0.2s;">
                 <span class="material-symbols-rounded" style="font-size: 18px;">call</span> Telepon
               </a>
-              <button type="button" onclick="copyEmergencyNumber('08119700119', 'Layanan SEJIWA')"
+              <button type="button" data-action="copy-emergency" data-number="08119700119" data-label="Layanan SEJIWA"
                 style="background: #EEF3F9; border: 1px solid #7EC8E3; color: #2D5BA8; font-weight: 700; padding: 10px 14px; border-radius: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s;"
                 title="Salin Nomor">
                 <span class="material-symbols-rounded" style="font-size: 18px;">content_copy</span>
@@ -375,9 +371,7 @@
 
           <!-- Card 3: Yayasan Pulih -->
           <div
-            style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between;"
-            onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px -5px rgba(91, 143, 212, 0.25)';"
-            onmouseout="this.style.transform='none'; this.style.boxShadow='none';">
+            style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between;">
             <div>
               <div
                 style="width: 44px; height: 44px; border-radius: 12px; background: #FEF3C7; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">
@@ -394,7 +388,7 @@
                 style="flex: 1; text-decoration: none; text-align: center; background: #16A34A; color: #FFFFFF; font-weight: 750; font-size: 0.85rem; padding: 10px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3); transition: opacity 0.2s;">
                 <span class="material-symbols-rounded" style="font-size: 18px;">chat</span> WhatsApp
               </a>
-              <button type="button" onclick="copyEmergencyNumber('08118456724', 'Yayasan Pulih')"
+              <button type="button" data-action="copy-emergency" data-number="08118456724" data-label="Yayasan Pulih"
                 style="background: #EEF3F9; border: 1px solid #7EC8E3; color: #2D5BA8; font-weight: 700; padding: 10px 14px; border-radius: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s;"
                 title="Salin Nomor">
                 <span class="material-symbols-rounded" style="font-size: 18px;">content_copy</span>
@@ -435,30 +429,30 @@
         style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
         <h2 style="font-size: 1.25rem; font-weight: 850; color: #0F172A; margin: 0; letter-spacing: -0.02em;">Bagaimana
           perasaanmu hari ini?</h2>
-        <button class="modal-close" onclick="closeCheckInModal()" aria-label="Tutup Modal"
+        <button class="modal-close" data-action="close-checkin" aria-label="Tutup Modal"
           style="width: 36px; height: 36px; border-radius: 50%; background: #F1F5F9; border: none; color: #64748B; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s;"><span
             class="material-symbols-rounded">close</span></button>
       </div>
 
       <!-- Responsive Wrapping Mood Selector -->
       <div class="emoji-selector" id="checkin-emojis" style="margin-bottom: 8px;">
-        <button class="emoji-btn" onclick="selectMood(1)">
+        <button class="emoji-btn" data-action="select-mood" data-mood="1">
           <img src="assets/img/maskots/mascot-mood-1.png" alt="Buruk" class="emoji-mascot-img">
           <span class="emoji-label">Buruk</span>
         </button>
-        <button class="emoji-btn" onclick="selectMood(2)">
+        <button class="emoji-btn" data-action="select-mood" data-mood="2">
           <img src="assets/img/maskots/mascot-mood-2.png" alt="Kurang" class="emoji-mascot-img">
           <span class="emoji-label">Kurang</span>
         </button>
-        <button class="emoji-btn" onclick="selectMood(3)">
+        <button class="emoji-btn" data-action="select-mood" data-mood="3">
           <img src="assets/img/maskots/mascot-mood-3.png" alt="Biasa" class="emoji-mascot-img">
           <span class="emoji-label">Biasa</span>
         </button>
-        <button class="emoji-btn" onclick="selectMood(4)">
+        <button class="emoji-btn" data-action="select-mood" data-mood="4">
           <img src="assets/img/maskots/mascot-mood-4.png" alt="Baik" class="emoji-mascot-img">
           <span class="emoji-label">Baik</span>
         </button>
-        <button class="emoji-btn" onclick="selectMood(5)">
+        <button class="emoji-btn" data-action="select-mood" data-mood="5">
           <img src="assets/img/maskots/mascot-mood-5.png" alt="Luar Biasa" class="emoji-mascot-img">
           <span class="emoji-label">Luar Biasa</span>
         </button>
@@ -470,14 +464,14 @@
         <p style="font-size: 0.85rem; font-weight: 750; color: #475569; margin-bottom: 12px; text-align: center;">Apa
           yang sedang kamu rasakan? (opsional)</p>
         <div class="tag-container" style="justify-content: center; gap: 8px;">
-          <button type="button" class="tag-chip" onclick="toggleTag('cemas', this)">Cemas</button>
-          <button type="button" class="tag-chip" onclick="toggleTag('stres', this)">Stres</button>
-          <button type="button" class="tag-chip" onclick="toggleTag('kesepian', this)">Kesepian</button>
-          <button type="button" class="tag-chip" onclick="toggleTag('lelah', this)">Lelah</button>
-          <button type="button" class="tag-chip" onclick="toggleTag('bersyukur', this)">Bersyukur</button>
-          <button type="button" class="tag-chip" onclick="toggleTag('semangat', this)">Semangat</button>
-          <button type="button" class="tag-chip" onclick="toggleTag('tenang', this)">Tenang</button>
-          <button type="button" class="tag-chip" onclick="toggleTag('bingung', this)">Bingung</button>
+          <button type="button" class="tag-chip" data-action="toggle-tag" data-tag="cemas">Cemas</button>
+          <button type="button" class="tag-chip" data-action="toggle-tag" data-tag="stres">Stres</button>
+          <button type="button" class="tag-chip" data-action="toggle-tag" data-tag="kesepian">Kesepian</button>
+          <button type="button" class="tag-chip" data-action="toggle-tag" data-tag="lelah">Lelah</button>
+          <button type="button" class="tag-chip" data-action="toggle-tag" data-tag="bersyukur">Bersyukur</button>
+          <button type="button" class="tag-chip" data-action="toggle-tag" data-tag="semangat">Semangat</button>
+          <button type="button" class="tag-chip" data-action="toggle-tag" data-tag="tenang">Tenang</button>
+          <button type="button" class="tag-chip" data-action="toggle-tag" data-tag="bingung">Bingung</button>
         </div>
 
         <!-- Quick Note -->
@@ -489,7 +483,7 @@
 
       <!-- Submit Button -->
       <div style="margin-top: 22px;">
-        <button class="btn btn-primary btn-full" onclick="submitCheckIn()"
+        <button class="btn btn-primary btn-full" data-action="submit-checkin"
           style="font-weight: 850; padding: 14px; background: #0F172A; color: #FFFFFF; border-color: #0F172A; border-radius: 16px; font-size: 1rem; box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25); cursor: pointer;">Simpan
           Check-in</button>
       </div>
@@ -509,7 +503,7 @@
         baik ini ya!
       </p>
       <button class="btn btn-primary btn-full"
-        onclick="document.getElementById('streak-modal').classList.remove('active');"
+        data-action="close-streak-modal"
         style="font-weight:700;">Lanjutkan</button>
     </div>
   </div>
@@ -543,12 +537,12 @@
       <!-- Bottom Section: Actions -->
       <div>
         <div class="mt-6 flex items-center justify-between gap-4 pt-4 border-t border-slate-100">
-          <button id="onboarding-prev-btn" onclick="Onboarding.prevSlide()"
+          <button id="onboarding-prev-btn" data-action="onboarding-prev"
             class="px-4 py-2 text-slate-400 text-sm font-semibold hover:text-slate-600 transition opacity-0 pointer-events-none"
             aria-label="Sebelumnya">
             Kembali
           </button>
-          <button id="onboarding-next-btn" onclick="Onboarding.nextSlide()"
+          <button id="onboarding-next-btn" data-action="onboarding-next"
             class="px-8 py-3 rounded-full text-white font-bold text-sm shadow-lg hover:opacity-95 transform active:scale-95 transition flex items-center justify-center gap-2 min-w-[150px]"
             style="background:#5B8FD4;">
             <span>Lanjut</span>
@@ -557,7 +551,7 @@
         </div>
 
         <div class="mt-3.5 text-center">
-          <button onclick="Onboarding.complete()"
+          <button data-action="onboarding-complete"
             class="text-xs text-slate-400 hover:text-slate-600 underline transition font-medium">
             Lewati pengenalan ini
           </button>

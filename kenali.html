@@ -106,7 +106,7 @@
           </div>
         </div>
 
-        <button class="kenali-start-btn kenali-fade-in kenali-fade-in-delay-4" onclick="startKenaliQuiz()"
+        <button class="kenali-start-btn kenali-fade-in kenali-fade-in-delay-4" data-action="start-kenali-quiz"
           id="kenali-start-btn">
           <span class="material-symbols-rounded">play_arrow</span>
           Mulai Kuis
@@ -154,7 +154,7 @@
     <div class="modal" style="max-width:460px;">
       <div class="modal-header">
         <h2 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white);">Bagikan Hasil Kuis</h2>
-        <button class="modal-close" onclick="document.getElementById('share-result-modal').classList.remove('active');"
+        <button class="modal-close" data-action="close-share-result-modal"
           aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
       </div>
 
@@ -163,19 +163,19 @@
         <p style="font-size:0.875rem; color:var(--text-secondary); margin-bottom:var(--space-sm); font-weight:600;">
           Sesuaikan Warna Tema</p>
         <div style="display:flex; justify-content:center; gap:12px;" id="kenali-theme-selector">
-          <button onclick="changeKenaliShareTheme('blue', event)"
+          <button data-action="change-kenali-theme" data-theme="blue"
             style="width:32px; height:32px; border-radius:50%; border:2px solid #fff; cursor:pointer; background: linear-gradient(135deg, #2D5BA8, #7EC8E3); box-shadow:0 2px 8px rgba(0,0,0,0.3); transform:scale(1.1);"
             aria-label="Tema Biru"></button>
-          <button onclick="changeKenaliShareTheme('ocean', event)"
+          <button data-action="change-kenali-theme" data-theme="ocean"
             style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #1E4780, #38BDF8); box-shadow:0 2px 8px rgba(0,0,0,0.3);"
             aria-label="Tema Samudra"></button>
-          <button onclick="changeKenaliShareTheme('sunset', event)"
+          <button data-action="change-kenali-theme" data-theme="sunset"
             style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #FF512F, #DD2476); box-shadow:0 2px 8px rgba(0,0,0,0.3);"
             aria-label="Tema Senja"></button>
-          <button onclick="changeKenaliShareTheme('midnight', event)"
+          <button data-action="change-kenali-theme" data-theme="midnight"
             style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); box-shadow:0 2px 8px rgba(0,0,0,0.3);"
             aria-label="Tema Malam"></button>
-          <button onclick="changeKenaliShareTheme('forest', event)"
+          <button data-action="change-kenali-theme" data-theme="forest"
             style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #11998e, #38ef7d); box-shadow:0 2px 8px rgba(0,0,0,0.3);"
             aria-label="Tema Hutan"></button>
         </div>
@@ -252,9 +252,9 @@
       </div>
 
       <div style="display:flex; gap:var(--space-md);">
-        <button class="btn btn-secondary btn-full" onclick="simulateResultShare()"><span
+        <button class="btn btn-secondary btn-full" data-action="simulate-result-share"><span
             class="material-symbols-rounded">download</span> Unduh</button>
-        <button class="btn btn-primary btn-full" onclick="simulateResultShare()"><span
+        <button class="btn btn-primary btn-full" data-action="simulate-result-share"><span
             class="material-symbols-rounded">share</span> Bagikan</button>
       </div>
     </div>

@@ -59,7 +59,7 @@
               refleksi, dan lepaskan</p>
           </div>
           <div class="header-action-row">
-            <button class="header-action-btn" onclick="Settings.open()" aria-label="Settings">
+            <button class="header-action-btn" data-action="open-settings" aria-label="Settings">
               <span class="material-symbols-rounded">settings</span>
             </button>
           </div>
@@ -74,7 +74,7 @@
       <!-- Button Ganti Prompt -->
       <div style="margin-top:var(--space-md); text-align:right;">
         <button class="btn btn-ghost btn-sm"
-          onclick="document.getElementById('prompt-category-modal').classList.add('active');">
+          data-action="open-prompt-category">
           <span class="material-symbols-rounded" style="font-size:18px;">change_circle</span>
           <span>Ganti Topik Prompt</span>
         </button>
@@ -95,16 +95,16 @@
             <p style="font-size:0.875rem; font-weight:600; color:var(--text-secondary); margin-bottom:var(--space-sm);">
               Mood saat menulis</p>
             <div class="tag-container" id="jurnal-tags">
-              <button class="tag-chip" onclick="toggleJurnalTag('senang', this)">Senang</button>
-              <button class="tag-chip" onclick="toggleJurnalTag('sedih', this)">Sedih</button>
-              <button class="tag-chip" onclick="toggleJurnalTag('cemas', this)">Cemas</button>
-              <button class="tag-chip" onclick="toggleJurnalTag('lega', this)">Lega</button>
-              <button class="tag-chip" onclick="toggleJurnalTag('bersyukur', this)">Bersyukur</button>
-              <button class="tag-chip" onclick="toggleJurnalTag('bingung', this)">Bingung</button>
+              <button class="tag-chip" data-action="toggle-jurnal-tag" data-tag="senang">Senang</button>
+              <button class="tag-chip" data-action="toggle-jurnal-tag" data-tag="sedih">Sedih</button>
+              <button class="tag-chip" data-action="toggle-jurnal-tag" data-tag="cemas">Cemas</button>
+              <button class="tag-chip" data-action="toggle-jurnal-tag" data-tag="lega">Lega</button>
+              <button class="tag-chip" data-action="toggle-jurnal-tag" data-tag="bersyukur">Bersyukur</button>
+              <button class="tag-chip" data-action="toggle-jurnal-tag" data-tag="bingung">Bingung</button>
             </div>
           </div>
 
-          <button class="btn btn-primary btn-full" style="margin-top:var(--space-xl);" onclick="saveJurnal()">
+          <button class="btn btn-primary btn-full" style="margin-top:var(--space-xl);" data-action="save-jurnal">
             <span class="material-symbols-rounded">save</span>
             Simpan Jurnal
           </button>
@@ -142,7 +142,7 @@
               style="min-height:120px; background:rgba(255, 255, 255, 0.07); color:#FFFFFF; border: 1px solid rgba(249, 115, 22, 0.3); border-radius:12px; font-weight:400; font-size:0.95rem; padding:16px; box-shadow:inset 0 2px 8px rgba(0, 0, 0, 0.4); width:100%;"></textarea>
             <button id="btn-burn" class="btn btn-full"
               style="margin-top:var(--space-md); background:linear-gradient(135deg, #F97316, #EF4444); color:#FFFFFF; border:none; border-radius:28px; padding:14px; font-size:1rem; font-weight:700; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 6px 20px rgba(249,115,22,0.4); cursor:pointer; width:100%; transition: transform 0.2s, box-shadow 0.2s;"
-              onclick="simulateBurn()">
+              data-action="simulate-burn">
               <span class="material-symbols-rounded" style="font-size:22px;">local_fire_department</span>
               <span>Siapkan Pembakaran Beban Ini</span>
             </button>
@@ -154,7 +154,7 @@
             <canvas id="fire-canvas"
               style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:10; pointer-events:none;"></canvas>
             <div class="burn-3d-wrapper">
-              <div id="realistic-paper-card" class="realistic-paper-card" onclick="igniteCardFire()">
+              <div id="realistic-paper-card" class="realistic-paper-card" data-action="ignite-paper-card">
                 <div class="paper-char-overlay"></div>
                 <div class="realistic-paper-card-header"
                   style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px dashed rgba(180, 150, 80, 0.4); padding-bottom:10px; margin-bottom:12px;">
@@ -192,7 +192,7 @@
             </p>
             <button class="btn btn-sm"
               style="margin-top:var(--space-lg); background:transparent; border:1px solid rgba(249,115,22,0.5); color:#F97316; font-weight:700; border-radius:20px; padding:8px 20px; cursor:pointer;"
-              onclick="resetBurn()">
+              data-action="reset-burn">
               <span class="material-symbols-rounded"
                 style="font-size:18px; margin-right:4px; vertical-align:middle;">refresh</span> Tulis Beban Lainnya
             </button>
@@ -222,7 +222,7 @@
         <div>
           <span class="journal-date" id="jurnal-read-date"></span>
         </div>
-        <button class="modal-close" onclick="closeJurnalModal()" aria-label="Tutup Modal"><span
+        <button class="modal-close" data-action="close-jurnal-modal" aria-label="Tutup Modal"><span
             class="material-symbols-rounded">close</span></button>
       </div>
       <p id="jurnal-read-prompt"
@@ -243,8 +243,8 @@
         <h3 class="confirm-dialog-title" style="color:var(--text-on-white);">Hapus Jurnal?</h3>
         <p class="confirm-dialog-text">Jurnal yang dihapus tidak bisa dikembalikan.</p>
         <div class="confirm-dialog-actions">
-          <button class="btn btn-ghost" style="color:var(--text-secondary);" onclick="cancelDelete()">Batal</button>
-          <button class="btn btn-danger" onclick="executeDelete()">Hapus</button>
+          <button class="btn btn-ghost" style="color:var(--text-secondary);" data-action="cancel-delete-jurnal">Batal</button>
+          <button class="btn btn-danger" data-action="execute-delete-jurnal">Hapus</button>
         </div>
       </div>
     </div>
@@ -256,25 +256,25 @@
       <div class="modal-header">
         <h2 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white);">Pilih Topik Refleksi</h2>
         <button class="modal-close"
-          onclick="document.getElementById('prompt-category-modal').classList.remove('active');"
+          data-action="close-prompt-category"
           aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
       </div>
       <div style="display:flex; flex-direction:column; gap:var(--space-md);">
         <button class="btn btn-secondary btn-full"
           style="justify-content:flex-start; padding: 14px 18px; font-weight: 700; font-size: 1rem; gap: 12px;"
-          onclick="changePromptCategory('gratitude')">
+          data-action="change-prompt-category" data-category="gratitude">
           <span class="material-symbols-rounded text-warning" style="font-size: 24px;">volunteer_activism</span>
           <span>Rasa Syukur (Gratitude)</span>
         </button>
         <button class="btn btn-secondary btn-full"
           style="justify-content:flex-start; padding: 14px 18px; font-weight: 700; font-size: 1rem; gap: 12px;"
-          onclick="changePromptCategory('stress')">
+          data-action="change-prompt-category" data-category="stress">
           <span class="material-symbols-rounded text-primary" style="font-size: 24px;">psychology</span>
           <span>Pelepasan Stres & Emosi</span>
         </button>
         <button class="btn btn-secondary btn-full"
           style="justify-content:flex-start; padding: 14px 18px; font-weight: 700; font-size: 1rem; gap: 12px;"
-          onclick="changePromptCategory('discovery')">
+          data-action="change-prompt-category" data-category="discovery">
           <span class="material-symbols-rounded text-secondary" style="font-size: 24px;">explore</span>
           <span>Eksplorasi Diri</span>
         </button>
@@ -293,7 +293,7 @@
         Bebanmu sedikit berkurang. Terima kasih sudah jujur dengan dirimu sendiri hari ini.
       </p>
       <button class="btn btn-primary btn-full"
-        onclick="document.getElementById('jurnal-success-modal').classList.remove('active');"
+        data-action="close-jurnal-success"
         style="font-weight:700;">Tutup</button>
     </div>
   </div>

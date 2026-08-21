@@ -59,7 +59,7 @@
               Ringkasan perjalanan refleksimu</p>
           </div>
           <div class="header-action-row">
-            <button class="header-action-btn" onclick="Settings.open()" aria-label="Settings">
+            <button class="header-action-btn" data-action="open-settings" aria-label="Settings">
               <span class="material-symbols-rounded">settings</span>
             </button>
           </div>
@@ -208,7 +208,7 @@
     <div class="modal" style="text-align:center; max-width:380px;">
       <div class="modal-header">
         <h2 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white);">Detail Badge</h2>
-        <button class="modal-close" onclick="document.getElementById('badge-detail-modal').classList.remove('active');"
+        <button class="modal-close" data-action="close-badge-modal"
           aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
       </div>
       <div id="badge-detail-icon"
@@ -222,7 +222,7 @@
       <p id="badge-detail-desc" style="color:#475569; line-height:1.6; margin-bottom:var(--space-xl);">Deskripsi badge
         di sini.</p>
       <button class="btn btn-primary btn-full"
-        onclick="document.getElementById('badge-detail-modal').classList.remove('active');">Tutup</button>
+        data-action="close-badge-modal">Tutup</button>
     </div>
   </div>
 

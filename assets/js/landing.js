@@ -156,6 +156,11 @@ document.addEventListener('DOMContentLoaded', () => {
       showAuthModal();
     }, 2500);
   }
+
+  const authForm = document.getElementById('auth-form');
+  if (authForm) {
+    authForm.addEventListener('submit', handleAuthSubmit);
+  }
 });
 
 // ---- Auth Actions (Login / Register Popup) ----
@@ -285,7 +290,7 @@ function switchAuthTab(tab) {
     if (forgotWrap) forgotWrap.style.display = 'block';
 
     if (footerSwitch) {
-      footerSwitch.innerHTML = `Belum punya akun? <a href="javascript:void(0)" onclick="switchAuthTab('register')" class="auth-switch-link">Daftar</a>`;
+      footerSwitch.innerHTML = `Belum punya akun? <a href="#" data-action="switch-auth-tab" data-tab="register" class="auth-switch-link">Daftar</a>`;
     }
   } else {
     if (authTitle) authTitle.textContent = 'Daftar ke Tenang.in';
@@ -298,7 +303,7 @@ function switchAuthTab(tab) {
     if (forgotWrap) forgotWrap.style.display = 'none';
 
     if (footerSwitch) {
-      footerSwitch.innerHTML = `Sudah punya akun? <a href="javascript:void(0)" onclick="switchAuthTab('login')" class="auth-switch-link">Masuk</a>`;
+      footerSwitch.innerHTML = `Sudah punya akun? <a href="#" data-action="switch-auth-tab" data-tab="login" class="auth-switch-link">Masuk</a>`;
     }
   }
 }
@@ -416,6 +421,9 @@ function handleForgotPassword() {
 }
 
 // ---- Interactive Calm Particle Animation (Stardust / Ocean Light Motes) ----
+let calmAnimId = null;
+let auroraAnimId = null;
+
 function initCalmParticles() {
   const canvas = document.getElementById('calmParticles');
   if (!canvas || !canvas.parentElement) return;
@@ -455,7 +463,7 @@ function initCalmParticles() {
     });
   }
 
-  function animate() {
+  function renderFrame() {
     ctx.clearRect(0, 0, width, height);
 
     particles.forEach(p => {
@@ -488,11 +496,40 @@ function initCalmParticles() {
       ctx.fill();
       ctx.shadowBlur = 0; // Reset shadow for peak CPU performance
     });
-
-    requestAnimationFrame(animate);
   }
 
-  animate();
+  function animate() {
+    renderFrame();
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReducedMotion) {
+      calmAnimId = requestAnimationFrame(animate);
+    }
+  }
+
+  function startAnimation() {
+    if (!calmAnimId) {
+      animate();
+    }
+  }
+
+  function stopAnimation() {
+    if (calmAnimId) {
+      cancelAnimationFrame(calmAnimId);
+      calmAnimId = null;
+    }
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        startAnimation();
+      } else {
+        stopAnimation();
+      }
+    });
+  }, { threshold: 0.05 });
+
+  observer.observe(canvas.parentElement || canvas);
 }
 
 // ---- Natural Serpentine Aurora Ribbon Arc & Twinkling Stars Canvas Engine ----
@@ -584,7 +621,7 @@ function initAuroraCanvas() {
 
   let time = 0;
 
-  function draw() {
+  function renderFrame() {
     time += 1;
     ctx.clearRect(0, 0, width, height);
 
@@ -611,7 +648,6 @@ function initAuroraCanvas() {
     arcs.forEach(arc => {
       const step = 2.5; // Narrow step for sharp combed vertical ray filaments
 
-      // Asynchronous Spine position calculator for organic non-parallel snake curves
       function getSpineY(x) {
         return height * arc.yBaseRatio +
           Math.sin(x * arc.freqX + time * arc.speed * 10 + arc.phaseShift) * arc.ampY +
@@ -621,14 +657,11 @@ function initAuroraCanvas() {
       for (let x = -20; x < width + 20; x += step) {
         const yBase = getSpineY(x);
 
-        // Dynamic vertical ray height pulled UP & bleeding DOWN
         const rayUp = arc.rayHeightUp + Math.sin(x * arc.rayFreq1 + time * 0.02) * 55 + Math.cos(x * arc.rayFreq2 - time * 0.015) * 35;
         const rayDown = arc.rayHeightDown + Math.sin(x * 0.07 - time * 0.01) * 18;
 
-        // Combed vertical ray filament intensity variation
         const rayAlpha = (0.35 + 0.65 * Math.pow(Math.sin(x * 0.065 + time * 0.025), 2)) * arc.alphaScale;
 
-        // Linear gradient drawn STRICTLY VERTICAL along Y-axis (from bottom to top)
         const gradient = ctx.createLinearGradient(x, yBase + rayDown, x, yBase - rayUp);
         arc.colorStops.forEach(cs => {
           gradient.addColorStop(cs.stop, cs.color);
@@ -643,10 +676,40 @@ function initAuroraCanvas() {
     });
 
     ctx.restore();
-    requestAnimationFrame(draw);
   }
 
-  draw();
+  function draw() {
+    renderFrame();
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReducedMotion) {
+      auroraAnimId = requestAnimationFrame(draw);
+    }
+  }
+
+  function startAuroraAnimation() {
+    if (!auroraAnimId) {
+      draw();
+    }
+  }
+
+  function stopAuroraAnimation() {
+    if (auroraAnimId) {
+      cancelAnimationFrame(auroraAnimId);
+      auroraAnimId = null;
+    }
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        startAuroraAnimation();
+      } else {
+        stopAuroraAnimation();
+      }
+    });
+  }, { threshold: 0.05 });
+
+  observer.observe(canvas.parentElement || canvas);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

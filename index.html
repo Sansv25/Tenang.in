@@ -86,7 +86,7 @@
           <a href="#teman-ai" class="landing-link">Teman AI</a>
           <a href="#bantuan" class="landing-link" style="color:#FDE68A; font-weight:700;">Bantuan</a>
         </nav>
-        <a href="javascript:void(0)" class="btn-rounded-start btn-mulai-sekarang" onclick="handleMulaiSekarang(event)"
+        <a href="#" class="btn-rounded-start btn-mulai-sekarang" data-action="mulai-sekarang"
           aria-label="Mulai Refleksi Sekarang">
           <span>Mulai</span>
           <span class="material-symbols-rounded btn-arrow-icon">arrow_forward</span>
@@ -277,7 +277,7 @@
         </p>
 
         <div class="hero-actions">
-          <a href="javascript:void(0)" onclick="handleMulaiSekarang(event)"
+          <a href="#" data-action="mulai-sekarang"
             class="btn btn-white btn-lg btn-mulai-sekarang" style="font-weight:700;">
             <span>Mulai Sekarang</span>
             <span class="material-symbols-rounded">arrow_forward</span>
@@ -753,7 +753,7 @@
 
           <!-- CTA Button -->
           <div class="teman-cta-wrapper">
-            <a href="javascript:void(0)" onclick="handleMulaiSekarang(event)"
+            <a href="#" data-action="mulai-sekarang"
               class="btn btn-white btn-lg btn-mulai-sekarang teman-cta-btn">
               <span data-i18n="landing.teman.cta">Ayo Mulai Ngobrol</span>
               <span class="material-symbols-rounded">arrow_forward</span>
@@ -933,7 +933,7 @@
             </div>
           </div>
 
-          <a href="javascript:void(0)" onclick="handleMulaiSekarang(event)" class="btn-link-ocean btn-mulai-sekarang"
+          <a href="#" data-action="mulai-sekarang" class="btn-link-ocean btn-mulai-sekarang"
             style="margin-top: 20px;">
             <span>Mulai check-in harimu sekarang</span>
             <span class="material-symbols-rounded" style="font-size: 18px;">arrow_forward</span>
@@ -1002,7 +1002,7 @@
               <a href="tel:119" class="btn-emergency-action btn-blue">
                 <span class="material-symbols-rounded">call</span> Telepon
               </a>
-              <button type="button" class="btn-copy-num" onclick="copyEmergencyNumber('119', 'Hotline Kemenkes 119')"
+              <button type="button" class="btn-copy-num" data-action="copy-emergency" data-number="119" data-label="Hotline Kemenkes 119"
                 title="Salin Nomor">
                 <span class="material-symbols-rounded">content_copy</span>
               </button>
@@ -1023,7 +1023,7 @@
               <a href="tel:08119700119" class="btn-emergency-action btn-blue">
                 <span class="material-symbols-rounded">call</span> Telepon
               </a>
-              <button type="button" class="btn-copy-num" onclick="copyEmergencyNumber('08119700119', 'Layanan SEJIWA')"
+              <button type="button" class="btn-copy-num" data-action="copy-emergency" data-number="08119700119" data-label="Layanan SEJIWA"
                 title="Salin Nomor">
                 <span class="material-symbols-rounded">content_copy</span>
               </button>
@@ -1045,7 +1045,7 @@
                 class="btn-emergency-action btn-green">
                 <span class="material-symbols-rounded">chat</span> WhatsApp
               </a>
-              <button type="button" class="btn-copy-num" onclick="copyEmergencyNumber('08118456724', 'Yayasan Pulih')"
+              <button type="button" class="btn-copy-num" data-action="copy-emergency" data-number="08118456724" data-label="Yayasan Pulih"
                 title="Salin Nomor">
                 <span class="material-symbols-rounded">content_copy</span>
               </button>
@@ -1080,7 +1080,7 @@
       <h2 class="cta-banner-title">Siap mulai perjalanan refleksi dirimu?</h2>
       <p class="cta-banner-subtitle">Kamu tidak harus sempurna. Kamu tidak harus baik-baik saja setiap hari. Yang
         penting, kamu hadir — dan itu sudah cukup.</p>
-      <a href="javascript:void(0)" onclick="handleMulaiSekarang(event)" class="btn btn-white btn-lg btn-mulai-sekarang"
+      <a href="#" data-action="mulai-sekarang" class="btn btn-white btn-lg btn-mulai-sekarang"
         style="font-weight:700;">
         <span>Mulai Sekarang — Gratis</span>
         <span class="material-symbols-rounded">arrow_forward</span>
@@ -1194,7 +1194,7 @@
   <div class="modal-overlay" id="auth-modal" style="backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
     <div class="auth-modal-card">
       <!-- Close Button (X) -->
-      <button type="button" class="btn-auth-close" onclick="closeAuthModal()" aria-label="Tutup">
+      <button type="button" class="btn-auth-close" data-action="close-auth-modal" aria-label="Tutup">
         <span class="material-symbols-rounded">close</span>
       </button>
 
@@ -1206,7 +1206,7 @@
 
       <!-- Social Authentication Buttons -->
       <div class="auth-social-wrap">
-        <button type="button" class="btn-auth-social" onclick="handleSocialAuth('Google')">
+        <button type="button" class="btn-auth-social" data-action="social-auth" data-provider="Google">
           <!-- Authentic 4-Color Google Icon SVG -->
           <svg width="20" height="20" viewBox="0 0 24 24">
             <path fill="#4285F4"
@@ -1221,7 +1221,7 @@
           <span>Lanjutkan dengan Google</span>
         </button>
 
-        <button type="button" class="btn-auth-social" onclick="handleSocialAuth('Apple')">
+        <button type="button" class="btn-auth-social" data-action="social-auth" data-provider="Apple">
           <!-- Apple Icon SVG -->
           <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
             <path
@@ -1237,7 +1237,7 @@
       </div>
 
       <!-- Authentication Form -->
-      <form id="auth-form" onsubmit="handleAuthSubmit(event)">
+      <form id="auth-form">
         <div class="auth-fields-stack">
           <!-- Username / Email Input -->
           <div class="auth-input-group">
@@ -1256,7 +1256,7 @@
               <span class="material-symbols-rounded auth-field-icon">lock</span>
               <input type="password" id="auth-password" class="auth-input-raw" placeholder="••••••••" required
                 autocomplete="current-password">
-              <button type="button" class="btn-toggle-eye" onclick="togglePasswordVisibility('auth-password', this)"
+              <button type="button" class="btn-toggle-eye" data-action="toggle-password" data-target-input="auth-password"
                 aria-label="Lihat sandi">
                 <span class="material-symbols-rounded">visibility_off</span>
               </button>
@@ -1271,7 +1271,7 @@
               <input type="password" id="auth-confirm-password" class="auth-input-raw"
                 placeholder="Ulangi kata sandi di atas..." autocomplete="new-password">
               <button type="button" class="btn-toggle-eye"
-                onclick="togglePasswordVisibility('auth-confirm-password', this)" aria-label="Lihat konfirmasi sandi">
+                data-action="toggle-password" data-target-input="auth-confirm-password" aria-label="Lihat konfirmasi sandi">
                 <span class="material-symbols-rounded">visibility_off</span>
               </button>
             </div>
@@ -1279,7 +1279,7 @@
 
           <!-- Forgot Password (Only for Login) -->
           <div class="auth-forgot-wrap" id="auth-forgot-wrap">
-            <a href="javascript:void(0)" onclick="handleForgotPassword()" class="auth-forgot-link">Lupa kata sandi?</a>
+            <a href="#" data-action="forgot-password" class="auth-forgot-link">Lupa kata sandi?</a>
           </div>
 
           <!-- Error Message Display -->
@@ -1292,7 +1292,7 @@
 
       <!-- Bottom Switch Link -->
       <div class="auth-footer-switch" id="auth-footer-switch">
-        Belum punya akun? <a href="javascript:void(0)" onclick="switchAuthTab('register')"
+        Belum punya akun? <a href="#" data-action="switch-auth-tab" data-tab="register"
           class="auth-switch-link">Daftar</a>
       </div>
     </div>
