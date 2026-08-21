@@ -30,6 +30,13 @@ body.landing-page,
   box-sizing: border-box !important;
 }
 
+/* ---- Restore Original Landing Page Container Sizing (1240px) ---- */
+body.landing-page .container,
+.landing-page .container,
+.landing-navbar-inner {
+  max-width: 1240px !important;
+}
+
 /* ---- Preloader Styles ---- */
 body.preloader-active {
   overflow: hidden;
