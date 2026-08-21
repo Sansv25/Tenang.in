@@ -974,6 +974,112 @@ function initInteractiveRobotBubble() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  initInteractiveRobotBubble();
+  initTemanVideoChromaKey();
 });
+
+// ---- Teman Mascot Video Chroma Key Engine (Green Screen Removal) ----
+function initTemanVideoChromaKey() {
+  const video = document.getElementById('teman-video-source');
+  const canvas = document.getElementById('teman-avatar-canvas');
+  if (!video || !canvas) return;
+
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
+  let animId = null;
+
+  function renderFrame() {
+    if (video.paused || video.ended) {
+      animId = requestAnimationFrame(renderFrame);
+      return;
+    }
+
+    const vw = video.videoWidth;
+    const vh = video.videoHeight;
+
+    if (vw > 0 && vh > 0) {
+      if (canvas.width !== vw || canvas.height !== vh) {
+        canvas.width = vw;
+        canvas.height = vh;
+      }
+
+      ctx.drawImage(video, 0, 0, vw, vh);
+      const frame = ctx.getImageData(0, 0, vw, vh);
+      const data = frame.data;
+      const len = data.length;
+
+      for (let i = 0; i < len; i += 4) {
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
+        const a = data[i + 3];
+
+        if (a === 0) continue;
+
+        const maxRB = Math.max(r, b);
+        const greenDiff = g - maxRB;
+
+        // Key out green screen background with balanced sweet spot
+        if (g > 55 && greenDiff > 16) {
+          if (greenDiff > 28) {
+            // Background -> 100% fully transparent
+            data[i + 3] = 0;
+          } else {
+            // Smooth feathering edges (range 16 to 28)
+            const alphaFactor = 1 - ((greenDiff - 16) / 12);
+            data[i + 3] = Math.floor(a * Math.max(0, Math.min(1, alphaFactor)));
+            // Spill suppression to remove green border halos
+            data[i + 1] = maxRB;
+          }
+        } else if (g > maxRB) {
+          // Desaturate green spill on mascot edge pixels
+          data[i + 1] = Math.floor(maxRB + (g - maxRB) * 0.25);
+        }
+      }
+
+      ctx.putImageData(frame, 0, 0);
+    }
+
+    animId = requestAnimationFrame(renderFrame);
+  }
+
+  video.muted = true;
+  video.loop = true;
+  video.playsInline = true;
+
+  const startPlay = () => {
+    video.play().then(() => {
+      if (!animId) animId = requestAnimationFrame(renderFrame);
+    }).catch(() => {
+      const handleUserGesture = () => {
+        video.play().catch(() => {});
+        if (!animId) animId = requestAnimationFrame(renderFrame);
+        window.removeEventListener('click', handleUserGesture);
+        window.removeEventListener('touchstart', handleUserGesture);
+        window.removeEventListener('scroll', handleUserGesture);
+      };
+      window.addEventListener('click', handleUserGesture, { once: true });
+      window.addEventListener('touchstart', handleUserGesture, { once: true });
+      window.addEventListener('scroll', handleUserGesture, { once: true });
+    });
+  };
+
+  if (video.readyState >= 2) {
+    startPlay();
+  } else {
+    video.addEventListener('loadeddata', startPlay, { once: true });
+    video.addEventListener('canplay', startPlay, { once: true });
+  }
+
+  // IntersectionObserver to pause rendering when section is off-screen
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        if (video.paused) startPlay();
+      } else {
+        if (!video.paused) video.pause();
+      }
+    });
+  }, { threshold: 0.05 });
+
+  observer.observe(canvas.parentElement || canvas);
+}
 

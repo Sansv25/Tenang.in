@@ -37,19 +37,29 @@ async function loadPrompt() {
     currentPrompt = prompt.text;
 
     promptEl.innerHTML = `
-      <div class="card" style="padding:var(--space-lg); border-left:4px solid var(--primary-accent);">
-        <div style="font-size:0.8125rem; font-weight:600; color:var(--primary-accent); margin-bottom:var(--space-xs); display:flex; align-items:center; gap:8px;">
-          <img src="assets/img/maskots/mascot-confused.png" alt="Milo Reflecting" style="width:24px; height:24px; object-fit:contain;">
-          <span>Prompt Hari Ini</span>
+      <div class="card" style="padding:var(--space-lg); border-left:4px solid var(--primary-accent); display:flex; align-items:center; gap:16px;">
+        <div style="flex-shrink:0;">
+          <img src="assets/img/maskots/mascot-confused.png" alt="Milo Reflecting" style="width:64px; height:64px; object-fit:contain; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.12));">
         </div>
-        <p style="font-size:1.0625rem; font-weight:500; line-height:1.6; color:var(--text-on-white);">${prompt.text}</p>
+        <div style="flex:1;">
+          <div style="font-size:0.8125rem; font-weight:700; color:var(--primary-accent); margin-bottom:4px; display:flex; align-items:center; gap:6px;">
+            <span class="material-symbols-rounded" style="font-size:18px;">lightbulb</span>
+            <span>Prompt Hari Ini</span>
+          </div>
+          <p style="font-size:1.0625rem; font-weight:600; line-height:1.5; color:var(--text-on-white); margin:0;">${prompt.text}</p>
+        </div>
       </div>
     `;
   } catch(e) {
     currentPrompt = 'Apa yang ada di pikiranmu hari ini?';
     promptEl.innerHTML = `
-      <div class="card" style="padding:var(--space-lg); border-left:4px solid var(--primary-accent);">
-        <p style="font-size:1.0625rem; color:var(--text-on-white);">Apa yang ada di pikiranmu hari ini?</p>
+      <div class="card" style="padding:var(--space-lg); border-left:4px solid var(--primary-accent); display:flex; align-items:center; gap:16px;">
+        <div style="flex-shrink:0;">
+          <img src="assets/img/maskots/mascot-confused.png" alt="Milo Reflecting" style="width:64px; height:64px; object-fit:contain; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.12));">
+        </div>
+        <div style="flex:1;">
+          <p style="font-size:1.0625rem; font-weight:600; color:var(--text-on-white); margin:0;">Apa yang ada di pikiranmu hari ini?</p>
+        </div>
       </div>
     `;
   }
@@ -80,12 +90,17 @@ async function changePromptCategory(category) {
     currentPrompt = prompt.text;
     
     promptEl.innerHTML = `
-      <div class="card" style="padding:var(--space-lg); border-left:4px solid var(--primary-accent); animation: bubbleIn 0.3s ease-out forwards;">
-        <div style="font-size:0.8125rem; font-weight:600; color:var(--primary-accent); margin-bottom:var(--space-xs); display:flex; align-items:center; gap:6px;">
-          <span class="material-symbols-rounded" style="font-size:18px;">lightbulb</span>
-          <span>Prompt Baru (${category})</span>
+      <div class="card" style="padding:var(--space-lg); border-left:4px solid var(--primary-accent); display:flex; align-items:center; gap:16px; animation: bubbleIn 0.3s ease-out forwards;">
+        <div style="flex-shrink:0;">
+          <img src="assets/img/maskots/mascot-tenang.png" alt="Milo Reflecting" style="width:64px; height:64px; object-fit:contain; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.12));">
         </div>
-        <p style="font-size:1.0625rem; font-weight:500; line-height:1.6; color:var(--text-on-white);">${prompt.text}</p>
+        <div style="flex:1;">
+          <div style="font-size:0.8125rem; font-weight:700; color:var(--primary-accent); margin-bottom:4px; display:flex; align-items:center; gap:6px;">
+            <span class="material-symbols-rounded" style="font-size:18px;">lightbulb</span>
+            <span>Prompt Baru (${category})</span>
+          </div>
+          <p style="font-size:1.0625rem; font-weight:600; line-height:1.5; color:var(--text-on-white); margin:0;">${prompt.text}</p>
+        </div>
       </div>
     `;
   } catch (e) {
@@ -159,15 +174,15 @@ function renderJournalList() {
 
   if (journals.length === 0) {
     listEl.innerHTML = `
-      <div class="card p-8 text-center border-2 border-dashed rounded-2xl my-4" style="border-color:#7EC8E3; background:linear-gradient(180deg, #FFFFFF 0%, #F0F5FF 100%);">
-        <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center shadow-md" style="background:#5B8FD4;">
+      <div class="card p-8 text-center border-2 border-dashed rounded-2xl my-4" style="border-color:var(--primary-accent); background:var(--card-surface);">
+        <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center shadow-md" style="background:var(--primary-accent);">
           <span class="material-symbols-rounded" style="font-size:36px; color:#FFFFFF;">auto_stories</span>
         </div>
-        <h3 class="font-bold text-lg mb-2" style="color:#1A2F4E;">Ruang Jurnalmu Masih Kosong</h3>
-        <p class="text-sm max-w-sm mx-auto mb-6 leading-relaxed" style="color:#6B8DB5;">
+        <h3 class="font-bold text-lg mb-2" style="color:var(--text-on-white);">Ruang Jurnalmu Masih Kosong</h3>
+        <p class="text-sm max-w-sm mx-auto mb-6 leading-relaxed" style="color:var(--text-secondary);">
           Hari ini bisa menjadi lembaran barumu. Tuangkan pikiran, kecemasan, atau rasa syukurmu dengan nyaman dan privat.
         </p>
-        <button onclick="const el = document.getElementById('jurnal-content'); if(el) { el.focus(); el.scrollIntoView({behavior:'smooth'}); }" class="btn btn-primary inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold shadow-md hover:opacity-95 transition" style="background:#2D5BA8; color:#FFFFFF;">
+        <button onclick="const el = document.getElementById('jurnal-content'); if(el) { el.focus(); el.scrollIntoView({behavior:'smooth'}); }" class="btn btn-primary inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold shadow-md hover:opacity-95 transition">
           <span class="material-symbols-rounded" style="font-size:18px;">edit_note</span>
           <span>Tulis Refleksi Pertama</span>
         </button>

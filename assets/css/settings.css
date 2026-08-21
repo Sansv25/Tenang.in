@@ -459,18 +459,173 @@
     width: 180px;
   }
 }
+
+/* ---- Appearance Mode Selector (Light / Dark Mode) ---- */
+.settings-mode-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
 
-.header-action-btn .material-symbols-rounded {
-  font-size: 20px;
+.settings-mode-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 14px;
+  background: #FAFBFC;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: inherit;
+  color: #0F172A;
 }
 
-.landing-lang-btn {
-  padding: 6px 10px;
+.settings-mode-btn:hover {
+  background: #F1F5F9;
+  border-color: #CBD5E1;
+  transform: translateY(-2px);
 }
 
-.landing-lang-dropdown {
-  right: -20px;
-  width: 180px;
+.settings-mode-btn.active {
+  border-color: var(--primary-accent, #2563EB);
+  background: rgba(37, 99, 235, 0.08);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
 }
+
+.mode-name {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+/* ---- Dark Mode Settings Popup Overrides ---- */
+html.dark-mode .settings-popup,
+body.dark-mode .settings-popup {
+  background: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+}
+
+html.dark-mode .settings-header,
+body.dark-mode .settings-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html.dark-mode .settings-header-title,
+body.dark-mode .settings-header-title,
+html.dark-mode .settings-header-title h3,
+body.dark-mode .settings-header-title h3 {
+  color: #F8FAFC !important;
+}
+
+html.dark-mode .settings-close-btn,
+body.dark-mode .settings-close-btn {
+  background: #334155 !important;
+  color: #CBD5E1 !important;
+}
+
+html.dark-mode .settings-close-btn:hover,
+body.dark-mode .settings-close-btn:hover {
+  background: #475569 !important;
+  color: #FFFFFF !important;
+}
+
+html.dark-mode .settings-section-label,
+body.dark-mode .settings-section-label {
+  color: #94A3B8 !important;
+}
+
+html.dark-mode .settings-color-swatch,
+body.dark-mode .settings-color-swatch {
+  background: #0F172A !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html.dark-mode .settings-color-swatch:hover,
+body.dark-mode .settings-color-swatch:hover {
+  background: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+html.dark-mode .swatch-name,
+body.dark-mode .swatch-name {
+  color: #94A3B8 !important;
+}
+
+html.dark-mode .settings-lang-btn,
+body.dark-mode .settings-lang-btn {
+  background: #0F172A !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+html.dark-mode .settings-lang-btn:hover,
+body.dark-mode .settings-lang-btn:hover {
+  background: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+html.dark-mode .lang-name,
+body.dark-mode .lang-name {
+  color: #F8FAFC !important;
+}
+
+html.dark-mode .settings-mode-btn,
+body.dark-mode .settings-mode-btn {
+  background: #0F172A !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+}
+
+html.dark-mode .settings-mode-btn:hover,
+body.dark-mode .settings-mode-btn:hover {
+  background: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+html.dark-mode .settings-mode-btn.active,
+body.dark-mode .settings-mode-btn.active {
+  border-color: var(--primary-accent, #2563EB) !important;
+  background: rgba(37, 99, 235, 0.18) !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25) !important;
+}
+
+/* ---- Tablet & Desktop Settings Popup Sizing (>= 641px) ---- */
+@media (min-width: 641px) {
+  .settings-popup {
+    max-width: 620px;
+    border-radius: 28px;
+  }
+
+  .settings-header {
+    padding: 24px 32px 20px;
+  }
+
+  .settings-body {
+    padding: 28px 32px 32px;
+  }
+
+  .settings-color-grid {
+    gap: 14px;
+  }
+
+  .settings-color-swatch {
+    padding: 14px 8px 10px;
+    border-radius: 18px;
+  }
+
+  .swatch-color {
+    width: 44px;
+    height: 44px;
+  }
+
+  .settings-mode-btn {
+    padding: 16px;
+    font-size: 0.95rem;
+  }
+
+  .settings-lang-btn {
+    padding: 14px 18px;
+    font-size: 0.92rem;
+  }
 }

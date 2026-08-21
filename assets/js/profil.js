@@ -258,7 +258,16 @@ function renderProfileCard(type, result) {
           <span class="material-symbols-rounded text-primary" style="font-size:24px;">person</span>
           <span>Profil Kamu</span>
         </div>
-        <button class="btn btn-ghost btn-sm" onclick="showShareResultModal('${escapeHTML(result.name)}', '${iconName}')" aria-label="Bagikan Hasil Profil"><span class="material-symbols-rounded">share</span></button>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button class="btn btn-ghost btn-sm" data-action="open-settings" onclick="if(typeof Settings !== 'undefined' && Settings.open) Settings.open();" aria-label="Buka Pengaturan" style="color: var(--text-secondary); display: inline-flex; align-items: center; gap: 6px; background: var(--card-subtle); border: 1px solid var(--card-border); padding: 6px 14px; border-radius: 999px; cursor: pointer; transition: background 0.2s;">
+            <span class="material-symbols-rounded" style="font-size:18px;">settings</span>
+            <span style="font-size:0.8rem; font-weight:700;">Pengaturan</span>
+          </button>
+          <button class="btn btn-ghost btn-sm" onclick="showShareResultModal('${escapeHTML(result.name)}', '${iconName}')" aria-label="Bagikan Hasil Profil" style="color: var(--primary-accent); display: inline-flex; align-items: center; gap: 6px; background: var(--card-subtle); border: 1px solid var(--card-border); padding: 6px 14px; border-radius: 999px; cursor: pointer; transition: background 0.2s;">
+            <span class="material-symbols-rounded" style="font-size:18px;">share</span>
+            <span style="font-size:0.8rem; font-weight:700;">Bagikan</span>
+          </button>
+        </div>
       </h3>
 
       <!-- Avatar Upload Circle -->
@@ -329,7 +338,7 @@ function renderProfileCard(type, result) {
 
         <div style="display:flex; flex-direction:column; gap:10px;">
           <!-- Item 1: Streak -->
-          <div style="display:flex; align-items:flex-start; gap:12px; padding:12px 14px; background:var(--card-subtle, #F8FAFC); border-radius:14px; border:1px solid rgba(0,0,0,0.04);">
+          <div style="display:flex; align-items:flex-start; gap:12px; padding:12px 14px; background:var(--card-subtle); border-radius:14px; border:1px solid var(--card-border);">
             <div style="width:36px; height:36px; border-radius:10px; background:rgba(245,158,11,0.15); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
               <span class="material-symbols-rounded" style="color:#D97706; font-size:20px;">local_fire_department</span>
             </div>
@@ -340,7 +349,7 @@ function renderProfileCard(type, result) {
           </div>
 
           <!-- Item 2: Mood Check-in -->
-          <div style="display:flex; align-items:flex-start; gap:12px; padding:12px 14px; background:var(--card-subtle, #F8FAFC); border-radius:14px; border:1px solid rgba(0,0,0,0.04);">
+          <div style="display:flex; align-items:flex-start; gap:12px; padding:12px 14px; background:var(--card-subtle); border-radius:14px; border:1px solid var(--card-border);">
             <div style="width:36px; height:36px; border-radius:10px; background:rgba(16,185,129,0.15); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
               <span class="material-symbols-rounded" style="color:#059669; font-size:20px;">task_alt</span>
             </div>
@@ -351,7 +360,7 @@ function renderProfileCard(type, result) {
           </div>
 
           <!-- Item 3: Journal -->
-          <div style="display:flex; align-items:flex-start; gap:12px; padding:12px 14px; background:var(--card-subtle, #F8FAFC); border-radius:14px; border:1px solid rgba(0,0,0,0.04);">
+          <div style="display:flex; align-items:flex-start; gap:12px; padding:12px 14px; background:var(--card-subtle); border-radius:14px; border:1px solid var(--card-border);">
             <div style="width:36px; height:36px; border-radius:10px; background:rgba(139,92,246,0.15); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
               <span class="material-symbols-rounded" style="color:#7C3AED; font-size:20px;">edit_note</span>
             </div>

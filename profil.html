@@ -39,6 +39,7 @@
   </script>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/settings.css">
   <link rel="stylesheet" href="assets/css/kenali.css">
   <!-- CLS Fix: reserves layout space, stabilizes font & dynamic content -->
   <link rel="stylesheet" href="assets/css/cls-fix.css">
@@ -50,73 +51,73 @@
 
       <!-- Profile Card (ALWAYS VISIBLE AT TOP) -->
       <section id="profil-card-section" style="display:block; padding-top:var(--space-xl); padding-bottom:var(--space-xl);">
-        <!-- Filled by JS -->
+        <div id="profil-card-container"></div>
       </section>
 
       <!-- Intro Section (Ultra-Premium Wellness Design) -->
       <section id="profil-intro" style="padding: 24px 0 48px; text-align: center;">
-        <div style="background: #FFFFFF; border: 2px solid #E2E8F0; border-radius: 32px; padding: 36px 28px; box-shadow: 0 20px 45px -15px rgba(15, 23, 42, 0.12); color: #1A2F4E; max-width: 680px; margin: 0 auto; text-align: left;">
+        <div class="card" style="border: 2px solid var(--card-border); border-radius: 32px; padding: 36px 28px; box-shadow: 0 20px 45px -15px rgba(15, 23, 42, 0.12); max-width: 680px; margin: 0 auto; text-align: left;">
           <!-- Top Badge & Header -->
           <div style="text-align: center; margin-bottom: 28px;">
-            <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #0284C7; background: #E0F2FE; border: 1px solid #BAE6FD; padding: 6px 16px; border-radius: 999px; margin-bottom: 14px;">
-              <span class="material-symbols-rounded" style="font-size: 18px;">psychology</span>
+            <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-accent); background: var(--card-subtle); border: 1px solid var(--card-border); padding: 6px 16px; border-radius: 999px; margin-bottom: 14px;">
+              <span class="material-symbols-rounded" style="font-size: 18px; color: var(--primary-accent);">psychology</span>
               Kuis Gaya Refleksi Diri
             </span>
-            <h1 style="font-size: clamp(1.6rem, 4vw, 2.1rem); font-weight: 850; color: #1A2F4E; margin: 0 0 10px; letter-spacing: -0.02em;">
+            <h1 style="font-size: clamp(1.6rem, 4vw, 2.1rem); font-weight: 850; color: var(--text-on-white); margin: 0 0 10px; letter-spacing: -0.02em;">
               Temukan Gaya Refleksi Jiwamu
             </h1>
-            <p style="font-size: 0.975rem; color: #64748B; line-height: 1.65; max-width: 520px; margin: 0 auto;">
+            <p style="font-size: 0.975rem; color: var(--text-secondary); line-height: 1.65; max-width: 520px; margin: 0 auto;">
               Jawab 7 pertanyaan singkat (2-3 menit) untuk menemukan karakter refleksi yang cocok. Tenang.in akan menyesuaikan panduan jurnal, afirmasi, dan Teman AI khusus untukmu.
             </p>
           </div>
 
           <!-- 4 Reflection Styles Grid -->
           <div style="margin-bottom: 32px;">
-            <div style="font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: #475569; margin-bottom: 14px; text-align: center;">
+            <div style="font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-secondary); margin-bottom: 14px; text-align: center;">
               4 Karakter Refleksi Diri
             </div>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
               <!-- Style 1 -->
-              <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; transition: transform 0.2s, box-shadow 0.2s;">
-                <div style="width: 44px; height: 44px; border-radius: 14px; background: #EEF2FF; border: 1px solid #C7D2FE; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <div style="background: var(--card-subtle); border: 1.5px solid var(--card-border); border-radius: 20px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; transition: transform 0.2s, box-shadow 0.2s;">
+                <div style="width: 44px; height: 44px; border-radius: 14px; background: rgba(79, 70, 229, 0.15); border: 1px solid rgba(79, 70, 229, 0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                   <span class="material-symbols-rounded" style="color: #4F46E5; font-size: 24px;">dark_mode</span>
                 </div>
                 <div>
-                  <div style="font-weight: 800; font-size: 0.95rem; color: #1E293B;">Reflektif Malam</div>
-                  <div style="font-size: 0.8rem; color: #64748B; margin-top: 3px; line-height: 1.4;">Quote filosofis mendalam & perenungan malam yang tenang.</div>
+                  <div style="font-weight: 800; font-size: 0.95rem; color: var(--text-on-white);">Reflektif Malam</div>
+                  <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 3px; line-height: 1.4;">Quote filosofis mendalam & perenungan malam yang tenang.</div>
                 </div>
               </div>
 
               <!-- Style 2 -->
-              <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; transition: transform 0.2s, box-shadow 0.2s;">
-                <div style="width: 44px; height: 44px; border-radius: 14px; background: #FEF3C7; border: 1px solid #FDE68A; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <div style="background: var(--card-subtle); border: 1.5px solid var(--card-border); border-radius: 20px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; transition: transform 0.2s, box-shadow 0.2s;">
+                <div style="width: 44px; height: 44px; border-radius: 14px; background: rgba(217, 119, 6, 0.15); border: 1px solid rgba(217, 119, 6, 0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                   <span class="material-symbols-rounded" style="color: #D97706; font-size: 24px;">wb_sunny</span>
                 </div>
                 <div>
-                  <div style="font-weight: 800; font-size: 0.95rem; color: #1E293B;">Aktif Pagi</div>
-                  <div style="font-size: 0.8rem; color: #64748B; margin-top: 3px; line-height: 1.4;">Quote afirmasi positif & dorongan energi optimis harian.</div>
+                  <div style="font-weight: 800; font-size: 0.95rem; color: var(--text-on-white);">Aktif Pagi</div>
+                  <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 3px; line-height: 1.4;">Quote afirmasi positif & dorongan energi optimis harian.</div>
                 </div>
               </div>
 
               <!-- Style 3 -->
-              <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; transition: transform 0.2s, box-shadow 0.2s;">
-                <div style="width: 44px; height: 44px; border-radius: 14px; background: #ECFDF5; border: 1px solid #A7F3D0; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <div style="background: var(--card-subtle); border: 1.5px solid var(--card-border); border-radius: 20px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; transition: transform 0.2s, box-shadow 0.2s;">
+                <div style="width: 44px; height: 44px; border-radius: 14px; background: rgba(5, 150, 105, 0.15); border: 1px solid rgba(5, 150, 105, 0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                   <span class="material-symbols-rounded" style="color: #059669; font-size: 24px;">chat_bubble</span>
                 </div>
                 <div>
-                  <div style="font-weight: 800; font-size: 0.95rem; color: #1E293B;">Ekspresif & Free-Flow</div>
-                  <div style="font-size: 0.8rem; color: #64748B; margin-top: 3px; line-height: 1.4;">Eksplorasi perasaan bebas & curhat privat dengan Teman AI.</div>
+                  <div style="font-weight: 800; font-size: 0.95rem; color: var(--text-on-white);">Ekspresif & Free-Flow</div>
+                  <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 3px; line-height: 1.4;">Eksplorasi perasaan bebas & curhat privat dengan Teman AI.</div>
                 </div>
               </div>
 
               <!-- Style 4 -->
-              <div style="background: #F8FAFC; border: 1.5px solid #E2E8F0; border-radius: 20px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; transition: transform 0.2s, box-shadow 0.2s;">
-                <div style="width: 44px; height: 44px; border-radius: 14px; background: #F3E8FF; border: 1px solid #E9D5FF; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <div style="background: var(--card-subtle); border: 1.5px solid var(--card-border); border-radius: 20px; padding: 16px; display: flex; align-items: flex-start; gap: 14px; transition: transform 0.2s, box-shadow 0.2s;">
+                <div style="width: 44px; height: 44px; border-radius: 14px; background: rgba(124, 58, 237, 0.15); border: 1px solid rgba(124, 58, 237, 0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                   <span class="material-symbols-rounded" style="color: #7C3AED; font-size: 24px;">task_alt</span>
                 </div>
                 <div>
-                  <div style="font-weight: 800; font-size: 0.95rem; color: #1E293B;">Terstruktur & Focus</div>
-                  <div style="font-size: 0.8rem; color: #64748B; margin-top: 3px; line-height: 1.4;">Statistik mood, grafik jurnal, & pencapaian target medali.</div>
+                  <div style="font-weight: 800; font-size: 0.95rem; color: var(--text-on-white);">Terstruktur & Focus</div>
+                  <div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 3px; line-height: 1.4;">Statistik mood, grafik jurnal, & pencapaian target medali.</div>
                 </div>
               </div>
             </div>
@@ -124,12 +125,12 @@
 
           <!-- Action CTA Button -->
           <div style="text-align: center;">
-            <button data-action="start-profil-quiz" style="background: #0F172A; color: #FFFFFF; border: none; font-weight: 850; font-size: 1.05rem; padding: 16px 36px; border-radius: 18px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3); transition: transform 0.2s, opacity 0.2s;">
-              <span class="material-symbols-rounded" style="font-size: 22px; color: #7EC8E3;">auto_awesome</span>
+            <button data-action="start-profil-quiz" style="background: var(--primary-accent); color: #FFFFFF; border: none; font-weight: 850; font-size: 1.05rem; padding: 16px 36px; border-radius: 18px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.35); transition: transform 0.2s, opacity 0.2s;">
+              <span class="material-symbols-rounded" style="font-size: 22px; color: #FFFFFF;">auto_awesome</span>
               <span>Mulai Kuis Profil (7 Pertanyaan)</span>
             </button>
-            <div style="font-size: 0.8rem; font-weight: 600; color: #64748B; margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 6px;">
-              <span class="material-symbols-rounded" style="font-size: 16px; color: #0284C7;">schedule</span>
+            <div style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-top: 12px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+              <span class="material-symbols-rounded" style="font-size: 16px; color: var(--primary-accent);">schedule</span>
               <span>Proses cepat ~2 menit • Dapat diulang kapan saja</span>
             </div>
           </div>

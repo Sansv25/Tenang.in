@@ -208,12 +208,12 @@ function updateMoodSummary() {
 
       const tagsHTML = mood.tags && mood.tags.length > 0
         ? `<div style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:16px 0;">
-             ${mood.tags.map(t => `<span style="background:rgba(15,23,42,0.06); border:1px solid rgba(15,23,42,0.15); color:#334155; font-size:0.75rem; font-weight:600; padding:4px 12px; border-radius:16px;">#${escapeHTML(t)}</span>`).join('')}
+             ${mood.tags.map(t => `<span style="background:var(--card-subtle); border:1px solid var(--card-border); color:var(--text-secondary); font-size:0.75rem; font-weight:600; padding:4px 12px; border-radius:16px;">#${escapeHTML(t)}</span>`).join('')}
            </div>`
         : '';
 
       const noteHTML = mood.note
-        ? `<div style="margin:16px auto; max-width:420px; padding:12px 16px; background:#F8FAFC; border-left:4px solid ${colors[mood.level]}; border-radius:6px; color:#475569; font-size:0.9rem; font-style:italic; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,0.05);">"${escapeHTML(mood.note)}"</div>`
+        ? `<div style="margin:16px auto; max-width:420px; padding:12px 16px; background:var(--card-subtle); border-left:4px solid ${colors[mood.level]}; border-radius:6px; color:var(--text-secondary); font-size:0.9rem; font-style:italic; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,0.05);">"${escapeHTML(mood.note)}"</div>`
         : '';
 
       checkedInState.innerHTML = `
@@ -222,8 +222,8 @@ function updateMoodSummary() {
             <img src="assets/img/maskots/mascot-mood-${mood.level}.png" alt="Mood ${mood.level}" class="checked-in-mascot-img">
           </div>
           <span style="display:inline-block; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:${colors[mood.level]}; background:${bgGlows[mood.level]}; padding:4px 14px; border-radius:12px; margin-bottom:12px;">Check-In Hari Ini Tersimpan</span>
-          <h3 style="font-size:1.5rem; font-weight:800; color:#1E293B; margin: 4px 0;">${labels[mood.level]}</h3>
-          <p style="color:#64748B; font-size:0.95rem; line-height:1.6; max-width:480px; margin: 8px auto 0;">
+          <h3 style="font-size:1.5rem; font-weight:800; color:var(--text-on-white); margin: 4px 0;">${labels[mood.level]}</h3>
+          <p style="color:var(--text-secondary); font-size:0.95rem; line-height:1.6; max-width:480px; margin: 8px auto 0;">
             Terimakasih telah hadir dan jujur melacak emosimu hari ini. Konsistensi dalam mengenali diri sendiri adalah langkah utama menuju jiwa yang tenang dan berdaya.
           </p>
           
@@ -235,7 +235,7 @@ function updateMoodSummary() {
               <span class="material-symbols-rounded" style="font-size:20px;">analytics</span>
               Lihat Analisa & Grafisku
             </a>
-            <button onclick="window.resetMoodInHome()" style="background:#F1F5F9; border:1px solid #CBD5E1; color:#334155; padding:12px 24px; border-radius:26px; font-weight:600; font-size:0.9rem; display:flex; align-items:center; gap:6px; cursor:pointer; transition:background 0.2s;">
+            <button onclick="window.resetMoodInHome()" style="background:var(--card-subtle); border:1px solid var(--card-border); color:var(--text-on-white); padding:12px 24px; border-radius:26px; font-weight:600; font-size:0.9rem; display:flex; align-items:center; gap:6px; cursor:pointer; transition:background 0.2s;">
               <span class="material-symbols-rounded" style="font-size:20px;">edit_note</span>
               Ubah Check-In
             </button>
@@ -345,26 +345,28 @@ async function renderWeeklyMoodSummary() {
     }[m]));
   };
 
-  // Deteksi tema tempat komponen dijalankan (Landing vs Dashboard)
+  // Deteksi tema tempat komponen dijalankan (Landing vs Dashboard vs Dark Mode)
   const isLanding = document.querySelector('.hero') !== null || window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/');
+  const isDark = document.documentElement.classList.contains('dark-mode') || document.body.classList.contains('dark-mode');
+
   const theme = {
-    cardBg: isLanding ? 'rgba(255, 255, 255, 0.04)' : '#FFFFFF',
-    cardBorder: isLanding ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid #E2E8F0',
+    cardBg: isLanding ? 'rgba(255, 255, 255, 0.04)' : (isDark ? '#1E293B' : '#FFFFFF'),
+    cardBorder: isLanding ? '1px solid rgba(255, 255, 255, 0.12)' : (isDark ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid #E2E8F0'),
     cardBlur: isLanding ? 'backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);' : '',
-    textColor: isLanding ? '#FFFFFF' : '#1A2F4E',
-    subTextColor: isLanding ? 'rgba(255, 255, 255, 0.75)' : '#64748B',
-    boxBg: isLanding ? 'rgba(255, 255, 255, 0.05)' : '#F8FAFC',
-    boxBorder: isLanding ? '1px solid rgba(255, 255, 255, 0.1)' : '1px solid #E2E8F0',
-    chipBg: isLanding ? 'rgba(126, 200, 227, 0.15)' : '#EEF3F9',
-    chipBorder: isLanding ? '1px solid rgba(126, 200, 227, 0.3)' : '1px solid #7EC8E3',
-    chipColor: isLanding ? '#7EC8E3' : '#2D5BA8',
-    tipBg: isLanding ? 'rgba(45, 91, 168, 0.35)' : 'linear-gradient(135deg, #EEF3F9 0%, #E0F2FE 100%)',
-    tipBorder: isLanding ? '1px solid rgba(126, 200, 227, 0.3)' : '1.5px solid #7EC8E3',
-    tipText: isLanding ? '#FFFFFF' : '#1A2F4E',
-    btnDetailBg: isLanding ? 'rgba(255, 255, 255, 0.1)' : '#F8FAFC',
-    btnDetailBorder: isLanding ? '1px solid rgba(255, 255, 255, 0.2)' : '1.5px solid #CBD5E1',
-    btnDetailColor: isLanding ? '#FFFFFF' : '#1E293B',
-    emptyBorder: isLanding ? '1px dashed rgba(255, 255, 255, 0.2)' : '2px dashed #CBD5E1'
+    textColor: isLanding ? '#FFFFFF' : (isDark ? '#F8FAFC' : '#1A2F4E'),
+    subTextColor: isLanding ? 'rgba(255, 255, 255, 0.75)' : (isDark ? '#CBD5E1' : '#64748B'),
+    boxBg: isLanding ? 'rgba(255, 255, 255, 0.05)' : (isDark ? '#0F172A' : '#F8FAFC'),
+    boxBorder: isLanding ? '1px solid rgba(255, 255, 255, 0.1)' : (isDark ? '1px solid rgba(255, 255, 255, 0.12)' : '1px solid #E2E8F0'),
+    chipBg: isLanding ? 'rgba(126, 200, 227, 0.15)' : (isDark ? 'rgba(59, 130, 246, 0.2)' : '#EEF3F9'),
+    chipBorder: isLanding ? '1px solid rgba(126, 200, 227, 0.3)' : (isDark ? '1px solid rgba(59, 130, 246, 0.4)' : '1px solid #7EC8E3'),
+    chipColor: isLanding ? '#7EC8E3' : (isDark ? '#60A5FA' : '#2D5BA8'),
+    tipBg: isLanding ? 'rgba(45, 91, 168, 0.35)' : (isDark ? '#0F172A' : 'linear-gradient(135deg, #EEF3F9 0%, #E0F2FE 100%)'),
+    tipBorder: isLanding ? '1px solid rgba(126, 200, 227, 0.3)' : (isDark ? '1px solid rgba(255, 255, 255, 0.12)' : '1.5px solid #7EC8E3'),
+    tipText: isLanding ? '#FFFFFF' : (isDark ? '#F8FAFC' : '#1A2F4E'),
+    btnDetailBg: isLanding ? 'rgba(255, 255, 255, 0.1)' : (isDark ? '#0F172A' : '#F8FAFC'),
+    btnDetailBorder: isLanding ? '1px solid rgba(255, 255, 255, 0.2)' : (isDark ? '1px solid rgba(255, 255, 255, 0.15)' : '1.5px solid #CBD5E1'),
+    btnDetailColor: isLanding ? '#FFFFFF' : (isDark ? '#F8FAFC' : '#1E293B'),
+    emptyBorder: isLanding ? '1px dashed rgba(255, 255, 255, 0.2)' : (isDark ? '2px dashed rgba(255, 255, 255, 0.2)' : '2px dashed #CBD5E1')
   };
 
   // Jika data mood belum cukup (user baru / kosong) -> Tampilkan Motivative Empty State
@@ -495,12 +497,12 @@ async function renderWeeklyMoodSummary() {
               <span class="material-symbols-rounded" style="font-size: 22px;">psychology</span>
               <span>Insight Refleksi Untukmu</span>
             </div>
-            <p style="font-size: clamp(0.88rem, 2.5vw, 0.94rem); color: ${isLanding ? 'rgba(255,255,255,0.9)' : '#334155'}; line-height: 1.65; font-style: italic; margin: 0; text-align: justify;">
+            <p style="font-size: clamp(0.88rem, 2.5vw, 0.94rem); color: ${isLanding ? 'rgba(255,255,255,0.9)' : (isDark ? '#F8FAFC' : '#334155')}; line-height: 1.65; font-style: italic; margin: 0; text-align: justify;">
               "${safeText(insightMsg)}"
             </p>
           </div>
           <div class="weekly-insight-sub" style="margin-top: 18px; font-size: 0.78rem; font-weight: 750; color: ${theme.subTextColor}; display: flex; align-items: center; gap: 6px;">
-            <span class="material-symbols-rounded" style="font-size: 16px; color: ${isLanding ? '#7EC8E3' : '#2D5BA8'};">analytics</span>
+            <span class="material-symbols-rounded" style="font-size: 16px; color: ${isLanding ? '#7EC8E3' : (isDark ? '#60A5FA' : '#2D5BA8')};">analytics</span>
             <span>Berdasarkan ${itemsToAnalyze.length} catatan check-in mood terakhir</span>
           </div>
         </div>
@@ -508,7 +510,7 @@ async function renderWeeklyMoodSummary() {
 
       <div class="weekly-tips-box" style="background: ${theme.tipBg}; border: ${theme.tipBorder}; border-radius: 20px; padding: 18px clamp(18px, 4vw, 24px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
         <div style="display: flex; align-items: center; gap: 14px; flex: 1; min-width: 240px;">
-          <div style="width: 44px; height: 44px; border-radius: 12px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+          <div style="width: 44px; height: 44px; border-radius: 12px; background: ${isDark ? '#1E293B' : '#FFFFFF'}; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
             <span class="material-symbols-rounded" style="color: #F59E0B; font-size: 26px;">lightbulb</span>
           </div>
           <div style="flex: 1;">

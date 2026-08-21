@@ -1020,3 +1020,97 @@
     display: none !important;
   }
 }
+
+/* ---- Dark Mode Overrides for Beranda ---- */
+html.dark-mode .dashboard-hero-box,
+body.dark-mode .dashboard-hero-box,
+html.dark-mode .dashboard-mood-card,
+body.dark-mode .dashboard-mood-card,
+html.dark-mode .inspiration-card-premium,
+body.dark-mode .inspiration-card-premium,
+html.dark-mode .bento-item,
+body.dark-mode .bento-item,
+html.dark-mode .emergency-help-section,
+body.dark-mode .emergency-help-section,
+html.dark-mode .nudge-banner,
+body.dark-mode .nudge-banner,
+html.dark-mode .weekly-summary-card,
+body.dark-mode .weekly-summary-card {
+  background: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+}
+
+html.dark-mode .weekly-box-trend,
+body.dark-mode .weekly-box-trend,
+html.dark-mode .weekly-box-insight,
+body.dark-mode .weekly-box-insight,
+html.dark-mode .weekly-tips-box,
+body.dark-mode .weekly-tips-box {
+  background: #0F172A !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #F8FAFC !important;
+}
+
+html.dark-mode .bento-wide,
+body.dark-mode .bento-wide {
+  background: linear-gradient(135deg, #1E293B 0%, #1E1B4B 100%) !important;
+  border-color: rgba(192, 132, 252, 0.3) !important;
+}
+
+html.dark-mode .bento-title,
+body.dark-mode .bento-title,
+html.dark-mode .greeting-text,
+body.dark-mode .greeting-text,
+html.dark-mode .quote-text,
+body.dark-mode .quote-text,
+html.dark-mode .mood-title-wrap h2,
+body.dark-mode .mood-title-wrap h2,
+html.dark-mode .nudge-banner-title,
+body.dark-mode .nudge-banner-title,
+html.dark-mode .mood-card-label,
+body.dark-mode .mood-card-label {
+  color: #F8FAFC !important;
+}
+
+html.dark-mode .bento-desc,
+body.dark-mode .bento-desc,
+html.dark-mode .greeting-sub,
+body.dark-mode .greeting-sub,
+html.dark-mode .mood-title-wrap p,
+body.dark-mode .mood-title-wrap p,
+html.dark-mode .nudge-banner-desc,
+body.dark-mode .nudge-banner-desc,
+html.dark-mode .mood-card-sub,
+body.dark-mode .mood-card-sub {
+  color: #CBD5E1 !important;
+}
+
+html.dark-mode .mood-card-item,
+body.dark-mode .mood-card-item {
+  background: #0F172A !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+html.dark-mode .btn-rotate-quote,
+body.dark-mode .btn-rotate-quote {
+  background: #0F172A !important;
+  border-color: rgba(56, 189, 248, 0.3) !important;
+  color: #38BDF8 !important;
+}
+
+html.dark-mode .btn-mood-cta,
+body.dark-mode .btn-mood-cta {
+  background: var(--primary-accent, #2563EB) !important;
+  border-color: var(--primary-accent, #2563EB) !important;
+  color: #FFFFFF !important;
+}
+
+/* ---- Desktop Container for Beranda (960px Max-Width) ---- */
+@media (min-width: 1025px) {
+  .beranda-page .container,
+  .container-beranda {
+    max-width: 960px !important;
+  }
+}

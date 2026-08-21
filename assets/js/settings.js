@@ -16,7 +16,7 @@ const Settings = (() => {
       bgLight: '#4F84D4',
       bgSection: '#2B5EA0',
       bgDeep: '#1E4780',
-      gradBody: 'radial-gradient(circle at 15% 20%, rgba(59,130,246,0.45) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(56,189,248,0.45) 0%, transparent 65%), radial-gradient(circle at 50% 50%, rgba(37,99,235,0.8) 0%, rgba(15,23,42,0.95) 100%), linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #312e81 100%)',
+      gradBody: 'radial-gradient(circle at 15% 20%, rgba(37,99,235,0.22) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(56,189,248,0.2) 0%, transparent 65%), linear-gradient(135deg, #090D16 0%, #172554 50%, #090D16 100%)',
       gradHero: 'linear-gradient(135deg, #5198DE 0%, #3270BF 50%, #2B5EA0 100%)',
       navBg: 'rgba(42, 80, 140, 0.8)',
       navBgScrolled: 'rgba(42, 80, 140, 0.95)',
@@ -33,7 +33,7 @@ const Settings = (() => {
       bgLight: '#7C3AED',
       bgSection: '#5B21B6',
       bgDeep: '#4C1D95',
-      gradBody: 'radial-gradient(circle at 15% 20%, rgba(124,58,237,0.45) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(192,132,252,0.45) 0%, transparent 65%), radial-gradient(circle at 50% 50%, rgba(109,40,217,0.8) 0%, rgba(15,23,42,0.95) 100%), linear-gradient(135deg, #0f172a 0%, #3b0764 50%, #1e1b4b 100%)',
+      gradBody: 'radial-gradient(circle at 15% 20%, rgba(124,58,237,0.22) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(192,132,252,0.2) 0%, transparent 65%), linear-gradient(135deg, #090D16 0%, #2E1065 50%, #090D16 100%)',
       gradHero: 'linear-gradient(135deg, #8B5CF6 0%, #6D28D9 50%, #5B21B6 100%)',
       navBg: 'rgba(76, 29, 149, 0.8)',
       navBgScrolled: 'rgba(76, 29, 149, 0.95)',
@@ -50,7 +50,7 @@ const Settings = (() => {
       bgLight: '#059669',
       bgSection: '#065F46',
       bgDeep: '#064E3B',
-      gradBody: 'radial-gradient(circle at 15% 20%, rgba(5,150,105,0.45) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(52,211,153,0.45) 0%, transparent 65%), radial-gradient(circle at 50% 50%, rgba(4,120,87,0.8) 0%, rgba(15,23,42,0.95) 100%), linear-gradient(135deg, #0f172a 0%, #064E3B 50%, #1e1b4b 100%)',
+      gradBody: 'radial-gradient(circle at 15% 20%, rgba(5,150,105,0.22) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(52,211,153,0.2) 0%, transparent 65%), linear-gradient(135deg, #090D16 0%, #022C22 50%, #090D16 100%)',
       gradHero: 'linear-gradient(135deg, #10B981 0%, #059669 50%, #047857 100%)',
       navBg: 'rgba(6, 78, 59, 0.8)',
       navBgScrolled: 'rgba(6, 78, 59, 0.95)',
@@ -67,7 +67,7 @@ const Settings = (() => {
       bgLight: '#EA580C',
       bgSection: '#9A3412',
       bgDeep: '#7C2D12',
-      gradBody: 'radial-gradient(circle at 15% 20%, rgba(234,88,12,0.45) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(251,146,60,0.45) 0%, transparent 65%), radial-gradient(circle at 50% 50%, rgba(194,65,12,0.8) 0%, rgba(15,23,42,0.95) 100%), linear-gradient(135deg, #0f172a 0%, #7C2D12 50%, #1e1b4b 100%)',
+      gradBody: 'radial-gradient(circle at 15% 20%, rgba(234,88,12,0.22) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(251,146,60,0.2) 0%, transparent 65%), linear-gradient(135deg, #090D16 0%, #451A03 50%, #090D16 100%)',
       gradHero: 'linear-gradient(135deg, #FB923C 0%, #EA580C 50%, #C2410C 100%)',
       navBg: 'rgba(124, 45, 18, 0.8)',
       navBgScrolled: 'rgba(124, 45, 18, 0.95)',
@@ -84,7 +84,7 @@ const Settings = (() => {
       bgLight: '#DB2777',
       bgSection: '#9D174D',
       bgDeep: '#831843',
-      gradBody: 'radial-gradient(circle at 15% 20%, rgba(219,39,119,0.45) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(244,114,182,0.45) 0%, transparent 65%), radial-gradient(circle at 50% 50%, rgba(190,24,93,0.8) 0%, rgba(15,23,42,0.95) 100%), linear-gradient(135deg, #0f172a 0%, #831843 50%, #1e1b4b 100%)',
+      gradBody: 'radial-gradient(circle at 15% 20%, rgba(219,39,119,0.22) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(244,114,182,0.2) 0%, transparent 65%), linear-gradient(135deg, #090D16 0%, #4C0519 50%, #090D16 100%)',
       gradHero: 'linear-gradient(135deg, #F472B6 0%, #DB2777 50%, #BE185D 100%)',
       navBg: 'rgba(131, 24, 67, 0.8)',
       navBgScrolled: 'rgba(131, 24, 67, 0.95)',
@@ -101,7 +101,7 @@ const Settings = (() => {
       bgLight: '#0D9488',
       bgSection: '#115E59',
       bgDeep: '#134E4A',
-      gradBody: 'radial-gradient(circle at 15% 20%, rgba(13,148,136,0.45) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(45,212,191,0.45) 0%, transparent 65%), radial-gradient(circle at 50% 50%, rgba(15,118,110,0.8) 0%, rgba(15,23,42,0.95) 100%), linear-gradient(135deg, #0f172a 0%, #134E4A 50%, #1e1b4b 100%)',
+      gradBody: 'radial-gradient(circle at 15% 20%, rgba(13,148,136,0.22) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(45,212,191,0.2) 0%, transparent 65%), linear-gradient(135deg, #090D16 0%, #042F2E 50%, #090D16 100%)',
       gradHero: 'linear-gradient(135deg, #2DD4BF 0%, #0D9488 50%, #0F766E 100%)',
       navBg: 'rgba(19, 78, 74, 0.8)',
       navBgScrolled: 'rgba(19, 78, 74, 0.95)',
@@ -118,7 +118,7 @@ const Settings = (() => {
       bgLight: '#4F46E5',
       bgSection: '#3730A3',
       bgDeep: '#312E81',
-      gradBody: 'radial-gradient(circle at 15% 20%, rgba(79,70,229,0.45) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(129,140,248,0.45) 0%, transparent 65%), radial-gradient(circle at 50% 50%, rgba(67,56,202,0.8) 0%, rgba(15,23,42,0.95) 100%), linear-gradient(135deg, #0f172a 0%, #312E81 50%, #1e1b4b 100%)',
+      gradBody: 'radial-gradient(circle at 15% 20%, rgba(79,70,229,0.22) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(129,140,248,0.2) 0%, transparent 65%), linear-gradient(135deg, #090D16 0%, #1E1B4B 50%, #090D16 100%)',
       gradHero: 'linear-gradient(135deg, #818CF8 0%, #4F46E5 50%, #4338CA 100%)',
       navBg: 'rgba(49, 46, 129, 0.8)',
       navBgScrolled: 'rgba(49, 46, 129, 0.95)',
@@ -135,7 +135,7 @@ const Settings = (() => {
       bgLight: '#D97706',
       bgSection: '#92400E',
       bgDeep: '#78350F',
-      gradBody: 'radial-gradient(circle at 15% 20%, rgba(217,119,6,0.45) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(251,191,36,0.45) 0%, transparent 65%), radial-gradient(circle at 50% 50%, rgba(180,83,9,0.8) 0%, rgba(15,23,42,0.95) 100%), linear-gradient(135deg, #0f172a 0%, #78350F 50%, #1e1b4b 100%)',
+      gradBody: 'radial-gradient(circle at 15% 20%, rgba(217,119,6,0.22) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(251,191,36,0.2) 0%, transparent 65%), linear-gradient(135deg, #090D16 0%, #451A03 50%, #090D16 100%)',
       gradHero: 'linear-gradient(135deg, #FBBF24 0%, #D97706 50%, #B45309 100%)',
       navBg: 'rgba(120, 53, 15, 0.8)',
       navBgScrolled: 'rgba(120, 53, 15, 0.95)',
@@ -156,6 +156,8 @@ const Settings = (() => {
   // ---- Apply Theme to CSS ----
   const applyTheme = () => {
     const theme = getTheme();
+    const mode = getMode();
+    const isDark = mode === 'dark';
     const root = document.documentElement.style;
 
     // Default to ocean for index page so Fitur Unggulan and other index elements stay blue
@@ -170,16 +172,20 @@ const Settings = (() => {
     root.setProperty('--primary-hover', effectiveTheme.accentHover);
     root.setProperty('--secondary-accent', effectiveTheme.secondary);
 
-    // Body background — only on non-index pages
+    // Body background — dynamically styled per theme & mode
     if (!isIndex) {
-      document.body.style.background = effectiveTheme.gradBody;
+      if (isDark) {
+        document.body.style.background = effectiveTheme.gradBody;
+      } else {
+        document.body.style.background = effectiveTheme.gradHero;
+      }
       document.body.style.backgroundAttachment = 'fixed';
     }
 
     // Navbar
     const navbar = document.querySelector('.navbar');
     if (navbar) {
-      navbar.style.background = effectiveTheme.navBg;
+      navbar.style.background = isDark ? 'rgba(15, 23, 42, 0.9)' : effectiveTheme.navBg;
     }
 
     // Update pseudo-element glow colors via CSS variables
@@ -192,6 +198,78 @@ const Settings = (() => {
     document.querySelectorAll('.settings-color-swatch').forEach(s => {
       s.classList.toggle('active', s.dataset.theme === theme.id);
     });
+  };
+
+  // ---- Get / Set Mode (Light / Dark Mode) ----
+  const getMode = () => localStorage.getItem('tenang_mode') || 'light';
+
+  const setMode = (mode) => {
+    localStorage.setItem('tenang_mode', mode);
+    applyMode();
+  };
+
+  const applyMode = () => {
+    const isIndex = window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/') || window.location.pathname === '';
+    
+    // On index.html, completely disable dark mode so the landing page retains its original vibrant design & light/gradient buttons
+    if (isIndex) {
+      document.documentElement.classList.remove('dark-mode');
+      document.body.classList.remove('dark-mode');
+      const root = document.documentElement.style;
+      root.setProperty('--card-surface', '#FFFFFF');
+      root.setProperty('--card-bg', '#FFFFFF');
+      root.setProperty('--card-subtle', '#F8FAFC');
+      root.setProperty('--card-border', 'rgba(226, 232, 240, 0.8)');
+      root.setProperty('--text-on-white', '#1A2F4E');
+      root.setProperty('--text-secondary', '#475569');
+      root.setProperty('--input-bg', '#F8FAFC');
+      root.setProperty('--input-border', '#E2E8F0');
+      return;
+    }
+
+    const mode = getMode();
+    const isDark = mode === 'dark';
+    const root = document.documentElement.style;
+
+    if (isDark) {
+      document.documentElement.classList.add('dark-mode');
+      document.body.classList.add('dark-mode');
+      root.setProperty('--card-surface', '#1E293B');
+      root.setProperty('--card-bg', '#1E293B');
+      root.setProperty('--card-subtle', '#0F172A');
+      root.setProperty('--card-border', 'rgba(255, 255, 255, 0.12)');
+      root.setProperty('--text-on-white', '#F8FAFC');
+      root.setProperty('--text-secondary', '#CBD5E1');
+      root.setProperty('--input-bg', '#0F172A');
+      root.setProperty('--input-border', 'rgba(255, 255, 255, 0.15)');
+    } else {
+      document.documentElement.classList.remove('dark-mode');
+      document.body.classList.remove('dark-mode');
+      root.setProperty('--card-surface', '#FFFFFF');
+      root.setProperty('--card-bg', '#FFFFFF');
+      root.setProperty('--card-subtle', '#F8FAFC');
+      root.setProperty('--card-border', 'rgba(226, 232, 240, 0.8)');
+      root.setProperty('--text-on-white', '#1A2F4E');
+      root.setProperty('--text-secondary', '#475569');
+      root.setProperty('--input-bg', '#F8FAFC');
+      root.setProperty('--input-border', '#E2E8F0');
+    }
+
+    document.querySelectorAll('.settings-mode-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.mode === mode);
+    });
+
+    // Re-apply theme to sync background gradient with current mode & selected color
+    const theme = getTheme();
+    const effectiveTheme = isIndex ? themes.find(t => t.id === 'ocean') : theme;
+    if (!isIndex && effectiveTheme) {
+      if (isDark) {
+        document.body.style.background = effectiveTheme.gradBody;
+      } else {
+        document.body.style.background = effectiveTheme.gradHero;
+      }
+      document.body.style.backgroundAttachment = 'fixed';
+    }
   };
 
   // ---- Apply Language ----
@@ -209,6 +287,7 @@ const Settings = (() => {
     if (existing) existing.remove();
 
     const currentTheme = getThemeId();
+    const currentMode = getMode();
     const currentLang = typeof I18n !== 'undefined' ? I18n.getLang() : 'id';
     const t = typeof I18n !== 'undefined' ? I18n.t : (k) => k;
     const langMeta = typeof I18n !== 'undefined' ? I18n.langMeta : {};
@@ -252,6 +331,30 @@ const Settings = (() => {
                 <span class="material-symbols-rounded" style="font-size:16px;">tune</span>
                 <span>Buka Profil</span>
               </a>
+            </div>
+          </div>
+
+          <!-- Appearance Mode Section (Light / Dark Mode) -->
+          <div class="settings-section" style="margin-bottom:24px;">
+            <div class="settings-section-label">
+              <span class="material-symbols-rounded" style="font-size:20px;">dark_mode</span>
+              <span>Mode Tampilan</span>
+            </div>
+            <div class="settings-mode-grid">
+              <button class="settings-mode-btn ${currentMode === 'light' ? 'active' : ''}"
+                      data-mode="light"
+                      onclick="Settings.setMode('light')"
+                      aria-label="Mode Terang">
+                <span class="material-symbols-rounded" style="font-size:22px; color:#F59E0B;">light_mode</span>
+                <span class="mode-name">Mode Terang</span>
+              </button>
+              <button class="settings-mode-btn ${currentMode === 'dark' ? 'active' : ''}"
+                      data-mode="dark"
+                      onclick="Settings.setMode('dark')"
+                      aria-label="Mode Gelap">
+                <span class="material-symbols-rounded" style="font-size:22px; color:#818CF8;">dark_mode</span>
+                <span class="mode-name">Mode Gelap</span>
+              </button>
             </div>
           </div>
 
@@ -522,11 +625,13 @@ const Settings = (() => {
   // ---- Init (called on every page load) ----
   const init = () => {
     applyTheme();
+    applyMode();
     applyLanguage();
   };
 
   return {
     themes, getTheme, getThemeId, setTheme,
+    getMode, setMode, applyMode,
     applyTheme, applyLanguage,
     open, close,
     renderNotifications, closeNotif,
@@ -535,5 +640,6 @@ const Settings = (() => {
   };
 })();
 
-// Auto-apply theme on page load (before DOMContentLoaded for faster paint)
+// Auto-apply theme & mode on page load (before DOMContentLoaded for faster paint)
 Settings.applyTheme();
+Settings.applyMode();

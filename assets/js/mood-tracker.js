@@ -75,16 +75,31 @@ function renderMoodForm() {
       5: 'var(--mood-5)'
     };
     const labels = { 1: 'Buruk', 2: 'Kurang Baik', 3: 'Biasa', 4: 'Baik', 5: 'Luar Biasa' };
+    const taglines = { 1: 'Perlu Istirahat & Merawat Diri', 2: 'Sedikit Kurang Nyaman', 3: 'Normal & Stabil', 4: 'Positif & Berenergi', 5: 'Penuh Semangat & Harapan' };
+
     formEl.innerHTML = `
-      <div class="card text-center" style="padding: 1.5rem 1.75rem;">
-        <div style="margin-bottom:var(--space-sm); display:flex; justify-content:center;">
-          <img src="assets/img/maskots/mascot-mood-${today.level}.png" alt="${labels[today.level]}" style="width:110px; height:110px; object-fit:contain; filter:drop-shadow(0 6px 16px rgba(0,0,0,0.15)); margin:0 auto;">
+      <div class="card text-center" style="padding: clamp(24px, 4vw, 36px); border-radius: 28px;">
+        <div style="display:inline-flex; align-items:center; gap:6px; font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.8px; color:var(--primary-accent); background:var(--card-subtle); border:1px solid var(--card-border); padding:6px 18px; border-radius:999px; margin-bottom:18px;">
+          <span class="material-symbols-rounded" style="font-size:16px;">check_circle</span>
+          <span>CHECK-IN HARI INI TERSIMPAN</span>
         </div>
-        <h3 style="font-weight:700; margin-bottom:var(--space-xs); color:var(--text-on-white);">${labels[today.level]}</h3>
-        <p style="font-size:var(--caption-size); color:var(--text-secondary);">Mood hari ini sudah tercatat</p>
-        ${today.tags.length ? `<div class="journal-tags" style="justify-content:center; margin-top:var(--space-md);">${today.tags.map(t => `<span class="journal-tag">${escapeHTML(t)}</span>`).join('')}</div>` : ''}
-        ${today.note ? `<p style="font-size:0.875rem; color:var(--text-secondary); margin-top:var(--space-sm); font-style:italic;">"${escapeHTML(today.note)}"</p>` : ''}
-        <button class="btn btn-sm btn-ghost" style="margin-top:var(--space-lg); color:var(--primary-accent);" onclick="resetTodayMood()">Ubah Mood Hari Ini</button>
+        <div style="margin-bottom:16px; display:flex; justify-content:center;">
+          <img src="assets/img/maskots/mascot-mood-${today.level}.png" alt="${labels[today.level]}" class="checked-in-mascot-img" style="width:130px; height:130px; object-fit:contain; filter:drop-shadow(0 10px 24px rgba(0,0,0,0.12));">
+        </div>
+        <h2 style="font-size:clamp(1.25rem, 3vw, 1.6rem); font-weight:850; color:var(--text-on-white); margin-bottom:6px;">
+          ${labels[today.level]} <span style="font-weight:600; font-size:0.9em; opacity:0.85;">· ${taglines[today.level]}</span>
+        </h2>
+        <p style="font-size:clamp(0.88rem, 2.5vw, 0.95rem); color:var(--text-secondary); max-width:520px; margin:0 auto 18px; line-height:1.6;">
+          Terimakasih telah hadir dan jujur melacak emosimu hari ini. Konsistensi dalam mengenali diri sendiri adalah langkah utama menuju jiwa yang tenang dan berdaya.
+        </p>
+        ${today.tags && today.tags.length ? `<div class="journal-tags" style="justify-content:center; margin-bottom:16px;">${today.tags.map(t => `<span class="journal-tag">${escapeHTML(t)}</span>`).join('')}</div>` : ''}
+        ${today.note ? `<p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:20px; font-style:italic;">"${escapeHTML(today.note)}"</p>` : ''}
+        <div style="display:flex; align-items:center; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:10px;">
+          <button class="btn btn-ghost btn-sm" onclick="resetTodayMood()" style="color:var(--primary-accent); display:inline-flex; align-items:center; gap:6px; background:var(--card-subtle); border:1px solid var(--card-border); padding:8px 20px; border-radius:999px; font-weight:700; cursor:pointer; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+            <span class="material-symbols-rounded" style="font-size:18px;">edit_note</span>
+            <span>Ubah Mood Hari Ini</span>
+          </button>
+        </div>
       </div>
     `;
   }
@@ -405,22 +420,22 @@ function renderInsights() {
         </div>
 
         <!-- AI Analysis -->
-        <div style="background:linear-gradient(135deg, #EEF2FF, #F0F9FF); border-radius:12px; padding:16px; margin-bottom:20px; border-left:4px solid #2563EB;">
+        <div style="background:var(--card-subtle); border-radius:12px; padding:16px; margin-bottom:20px; border-left:4px solid #2563EB;">
           <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
             <span class="material-symbols-rounded" style="font-size:18px; color:#2563EB;">psychology</span>
             <span style="font-size:0.8rem; font-weight:700; color:#2563EB; text-transform:uppercase; letter-spacing:0.5px;">Analisa AI</span>
           </div>
-          <p style="font-size:0.9rem; line-height:1.7; color:#334155; margin:0;">${aiAnalysis}</p>
+          <p style="font-size:0.9rem; line-height:1.7; color:var(--text-on-white); margin:0;">${aiAnalysis}</p>
         </div>
 
         ${tagInsight ? `
         <!-- Tag Insight -->
-        <div style="background:#FFF7ED; border-radius:12px; padding:14px 16px; margin-bottom:20px; border-left:4px solid #F59E0B;">
+        <div style="background:var(--card-subtle); border-radius:12px; padding:14px 16px; margin-bottom:20px; border-left:4px solid #F59E0B;">
           <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
             <span class="material-symbols-rounded" style="font-size:18px; color:#F59E0B;">label</span>
             <span style="font-size:0.8rem; font-weight:700; color:#B45309;">Pola Emosi Terdeteksi: "${dominantTag}"</span>
           </div>
-          <p style="font-size:0.875rem; line-height:1.6; color:#78350F; margin:0;">${tagInsight}</p>
+          <p style="font-size:0.875rem; line-height:1.6; color:var(--text-secondary); margin:0;">${tagInsight}</p>
         </div>
         ` : ''}
 
@@ -432,11 +447,11 @@ function renderInsights() {
           </div>
           <div style="display:flex; flex-direction:column; gap:10px;">
             ${aiAdvice.map((a, i) => `
-              <div style="display:flex; align-items:flex-start; gap:12px; padding:12px 14px; background:var(--bg-soft, #F8FAFC); border-radius:10px; border:1px solid rgba(0,0,0,0.05); transition:transform 0.15s;" onmouseenter="this.style.transform='translateX(4px)'" onmouseleave="this.style.transform='translateX(0)'">
+              <div style="display:flex; align-items:flex-start; gap:12px; padding:12px 14px; background:var(--card-subtle); border-radius:10px; border:1px solid var(--card-border); transition:transform 0.15s;" onmouseenter="this.style.transform='translateX(4px)'" onmouseleave="this.style.transform='translateX(0)'">
                 <div style="min-width:36px; height:36px; border-radius:10px; background:${['#EEF2FF','#ECFDF5','#FFF7ED'][i]}; display:flex; align-items:center; justify-content:center;">
                   <span class="material-symbols-rounded" style="font-size:20px; color:${['#2563EB','#10B981','#F59E0B'][i]};">${a.icon}</span>
                 </div>
-                <p style="font-size:0.85rem; line-height:1.6; color:#475569; margin:0; padding-top:2px;">${a.text}</p>
+                <p style="font-size:0.85rem; line-height:1.6; color:var(--text-secondary); margin:0; padding-top:2px;">${a.text}</p>
               </div>
             `).join('')}
           </div>

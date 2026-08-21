@@ -309,7 +309,7 @@ p {
 /* ---- Layout Helpers ---- */
 .container {
   width: 100% !important;
-  max-width: 1080px !important;
+  max-width: 960px !important;
   margin-left: auto !important;
   margin-right: auto !important;
   padding-left: var(--space-lg) !important;
@@ -324,7 +324,7 @@ p {
 }
 
 .container-md {
-  max-width: 680px !important;
+  max-width: 960px !important;
   width: 100% !important;
   margin: 0 auto !important;
 }
@@ -1576,7 +1576,7 @@ p {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   color: var(--text-on-white, #1A2F4E);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  border: 1px solid var(--card-border, rgba(226, 232, 240, 0.8));
 }
 
 .stat-card:hover {
@@ -1587,7 +1587,7 @@ p {
 .stat-card .material-icons,
 .stat-card .material-symbols-rounded {
   font-size: 32px;
-  color: #5B8FD4;
+  color: var(--primary-accent, #5B8FD4);
   margin-bottom: 8px;
 }
 
@@ -1599,7 +1599,7 @@ p {
 .stat-number {
   font-size: 2rem;
   font-weight: 850;
-  color: #1A2F4E;
+  color: var(--text-on-white, #1A2F4E);
   line-height: 1.2;
   margin: 6px 0 4px;
 }
@@ -1607,7 +1607,7 @@ p {
 .stat-label {
   font-size: 0.825rem;
   font-weight: 700;
-  color: #64748B;
+  color: var(--text-secondary, #64748B);
 }
 
 /* Badge Grid */
@@ -1629,9 +1629,9 @@ p {
   align-items: center;
   text-align: center;
   padding: 18px 12px;
-  background: #F8FAFC;
+  background: var(--card-subtle, #F8FAFC);
   border-radius: 18px;
-  border: 1px solid #E2E8F0;
+  border: 1px solid var(--card-border, #E2E8F0);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
 }
@@ -1645,8 +1645,8 @@ p {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: #E2E8F0;
-  color: #64748B;
+  background: var(--card-border, #E2E8F0);
+  color: var(--text-secondary, #64748B);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1661,7 +1661,7 @@ p {
 .badge-name {
   font-size: 0.85rem;
   font-weight: 750;
-  color: #1A2F4E;
+  color: var(--text-on-white, #1A2F4E);
 }
 
 .badge-item.locked {
@@ -1858,4 +1858,221 @@ p {
 #onboarding-back:hover {
   background: #E2E8F0;
   color: #1E293B;
+}
+
+/* ---- Eye-Friendly Dark Mode Global Overrides ---- */
+html.dark-mode,
+body.dark-mode {
+  --card-surface: #1E293B;
+  --card-subtle: #0F172A;
+  --text-on-white: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+  --card-border: rgba(255, 255, 255, 0.12);
+  --input-bg: #0F172A;
+  --input-border: rgba(255, 255, 255, 0.15);
+  color: #F8FAFC !important;
+}
+
+/* Dark Navigation Bar for Desktop & Mobile Header */
+html.dark-mode .navbar,
+body.dark-mode .navbar,
+html.dark-mode .header,
+body.dark-mode .header,
+html.dark-mode .top-nav,
+body.dark-mode .top-nav {
+  background: rgba(11, 19, 43, 0.9) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+html.dark-mode .nav-link,
+body.dark-mode .nav-link,
+html.dark-mode .nav-item,
+body.dark-mode .nav-item,
+html.dark-mode .header-title,
+body.dark-mode .header-title {
+  color: #F8FAFC !important;
+}
+
+/* Dark Mobile Bottom Navigation Bar */
+html.dark-mode .bottom-nav,
+body.dark-mode .bottom-nav {
+  background: rgba(11, 19, 43, 0.95) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+}
+
+html.dark-mode .bottom-nav-item,
+body.dark-mode .bottom-nav-item {
+  color: #94A3B8 !important;
+}
+
+html.dark-mode .bottom-nav-item.active,
+body.dark-mode .bottom-nav-item.active {
+  color: #60A5FA !important;
+}
+
+body.dark-mode .card,
+html.dark-mode .card {
+  background-color: #1E293B !important;
+  color: #F8FAFC !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.dark-mode .card h1,
+body.dark-mode .card h2,
+body.dark-mode .card h3,
+body.dark-mode .card h4,
+body.dark-mode .card p,
+body.dark-mode .card label,
+html.dark-mode .card h1,
+html.dark-mode .card h2,
+html.dark-mode .card h3,
+html.dark-mode .card h4,
+html.dark-mode .card p,
+html.dark-mode .card label {
+  color: #F8FAFC !important;
+}
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select,
+body.dark-mode .input,
+html.dark-mode input,
+html.dark-mode textarea,
+html.dark-mode select,
+html.dark-mode .input {
+  background-color: #0F172A !important;
+  color: #F8FAFC !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder,
+html.dark-mode input::placeholder,
+html.dark-mode textarea::placeholder {
+  color: #94A3B8 !important;
+}
+
+body.dark-mode .modal,
+html.dark-mode .modal {
+  background-color: #1E293B !important;
+  color: #F8FAFC !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.dark-mode .modal h1,
+body.dark-mode .modal h2,
+body.dark-mode .modal h3,
+body.dark-mode .modal h4,
+body.dark-mode .modal p,
+body.dark-mode .modal label,
+html.dark-mode .modal h1,
+html.dark-mode .modal h2,
+html.dark-mode .modal h3,
+html.dark-mode .modal h4,
+html.dark-mode .modal p,
+html.dark-mode .modal label {
+  color: #F8FAFC !important;
+}
+
+body.dark-mode .modal-close,
+html.dark-mode .modal-close {
+  background: #334155 !important;
+  color: #F8FAFC !important;
+}
+
+body.dark-mode .personality-preview-card,
+html.dark-mode .personality-preview-card {
+  background: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+}
+
+body.dark-mode .personality-preview-name,
+html.dark-mode .personality-preview-name {
+  color: #F8FAFC !important;
+}
+
+body.dark-mode .personality-preview-tag,
+html.dark-mode .personality-preview-tag {
+  color: #94A3B8 !important;
+}
+
+body.dark-mode #bakar-beban-card,
+html.dark-mode #bakar-beban-card {
+  background: #1E293B !important;
+  border-color: rgba(249, 115, 22, 0.3) !important;
+}
+
+body.dark-mode #bakar-beban-card p,
+html.dark-mode #bakar-beban-card p {
+  color: #CBD5E1 !important;
+}
+
+body.dark-mode .tag-chip,
+html.dark-mode .tag-chip {
+  background: #0F172A !important;
+  color: #CBD5E1 !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+body.dark-mode .tag-chip.selected,
+html.dark-mode .tag-chip.selected {
+  background: var(--primary-accent, #2563EB) !important;
+  color: #FFFFFF !important;
+}
+
+body.dark-mode .journal-entry,
+html.dark-mode .journal-entry {
+  background: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+}
+
+body.dark-mode .journal-preview,
+html.dark-mode .journal-preview {
+  color: #CBD5E1 !important;
+}
+
+/* ---- Dark Mode Solid Black Footer Overrides (Non-Index Pages) ---- */
+html.dark-mode .footer,
+body.dark-mode .footer,
+html.dark-mode .beranda-footer-section,
+body.dark-mode .beranda-footer-section {
+  background-color: #000000 !important;
+  background: #000000 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+  color: #F8FAFC !important;
+}
+
+html.dark-mode .footer-desc,
+body.dark-mode .footer-desc,
+html.dark-mode .beranda-footer-desc,
+body.dark-mode .beranda-footer-desc {
+  color: #94A3B8 !important;
+}
+
+html.dark-mode .footer-title,
+body.dark-mode .footer-title {
+  color: #CBD5E1 !important;
+}
+
+html.dark-mode .footer-link,
+body.dark-mode .footer-link {
+  color: #CBD5E1 !important;
+}
+
+html.dark-mode .footer-link:hover,
+body.dark-mode .footer-link:hover {
+  color: #FFFFFF !important;
+}
+
+html.dark-mode .footer-disclaimer,
+body.dark-mode .footer-disclaimer {
+  color: #64748B !important;
 }

@@ -67,15 +67,15 @@
       </section>
 
       <!-- Section 4: Empty State -->
-      <div id="empty-state"
-        style="display:none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 20px; background: rgba(255, 255, 255, 0.96); border-radius: 24px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2); margin: 30px 0 50px;">
+      <div id="empty-state" class="card"
+        style="display:none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 20px; border-radius: 24px; margin: 30px 0 50px;">
         <img src="assets/img/maskots/mascot-confused.png" alt="Milo Mascot"
           style="width:80px; height:80px; object-fit:contain; margin-bottom:16px; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.1));">
-        <h3 style="font-size: 1.5rem; font-weight: 800; color: #1A2F4E; margin-bottom: 8px;">Datamu masih sedikit</h3>
-        <p style="color: #64748B; max-width: 420px; line-height: 1.6; margin-bottom: 24px; font-size: 1rem;">Check-in
+        <h3 style="font-size: 1.5rem; font-weight: 800; color: var(--text-on-white); margin-bottom: 8px;">Datamu masih sedikit</h3>
+        <p style="color: var(--text-secondary); max-width: 420px; line-height: 1.6; margin-bottom: 24px; font-size: 1rem;">Check-in
           mood beberapa hari lagi, nanti kamu bisa lihat polamu di sini.</p>
         <a href="mood-tracker.html" class="btn-primary"
-          style="background: #2D5BA8; color: white; font-weight: 750; padding: 14px 28px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 16px rgba(45, 91, 168, 0.35); text-decoration: none; transition: transform 0.2s;">
+          style="background: var(--primary-accent); color: white; font-weight: 750; padding: 14px 28px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 16px rgba(45, 91, 168, 0.35); text-decoration: none; transition: transform 0.2s;">
           <span class="material-icons" style="font-size: 20px; color: white;">sentiment_satisfied</span>
           <span>Check-in Sekarang</span>
         </a>
@@ -85,15 +85,15 @@
       <div id="dashboard-content">
         <!-- Section 1: Daily Quote -->
         <section id="dashboard-quote" style="margin-top: var(--space-md);">
-          <div class="quote-card" style="display:flex; gap:16px; align-items:flex-start;">
+          <div class="quote-card card" style="display:flex; gap:16px; align-items:flex-start;">
             <img src="assets/img/maskots/mascot-greeting.png" alt="Teman AI Mascot"
               style="width:48px; height:48px; object-fit:contain; flex-shrink:0; filter:drop-shadow(0 2px 6px rgba(0,0,0,0.1));">
             <div style="flex:1;">
               <p id="daily-quote" class="quote-text"
-                style="font-size: 1.15rem; font-weight: 700; margin: 0 0 16px; line-height: 1.6; color: #1A2F4E;">
+                style="font-size: 1.15rem; font-weight: 700; margin: 0 0 16px; line-height: 1.6; color: var(--text-on-white);">
                 <!-- diisi JS --></p>
               <button id="mark-done-btn"
-                style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 999px; background: #EEF3F9; color: #2D5BA8; font-weight: 750; font-size: 0.85rem; transition: all 0.2s; cursor: pointer; border: none;">
+                style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 999px; background: var(--card-subtle); color: var(--primary-accent); font-weight: 750; font-size: 0.85rem; transition: all 0.2s; cursor: pointer; border: 1px solid var(--card-border);">
                 <span class="material-icons" style="font-size: 18px;">check</span> Tandai selesai
               </button>
             </div>
@@ -108,7 +108,7 @@
             <span>Mood 7 Hari Terakhir</span>
           </h2>
           <div class="card"
-            style="padding:var(--space-lg); background: white; border-radius: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);">
+            style="padding:var(--space-lg); border-radius: 20px;">
             <div id="dashboard-chart"></div>
           </div>
         </section>
@@ -132,7 +132,7 @@
             <div class="stat-card">
               <span class="material-icons">analytics</span>
               <div class="stat-number" id="stat-avg-mood"
-                style="background: none; -webkit-background-clip: unset; -webkit-text-fill-color: initial; background-clip: unset; color: var(--text-primary); margin: 6px 0 4px; font-size: 1.5rem;">
+                style="background: none; -webkit-background-clip: unset; -webkit-text-fill-color: initial; background-clip: unset; color: var(--text-on-white); margin: 6px 0 4px; font-size: 1.5rem;">
                 -</div>
               <div class="stat-label">Mood Rata-rata</div>
             </div>
@@ -160,7 +160,7 @@
             <span>Badge Pencapaian</span>
           </h2>
           <div class="card"
-            style="padding: 24px; background: white; border-radius: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);">
+            style="padding: 24px; border-radius: 20px;">
             <div class="badge-grid" id="badge-grid">
               <!-- diisi JS -->
             </div>
@@ -175,7 +175,7 @@
             <span>Kalender Mood Bulan Ini</span>
           </h2>
           <div class="card"
-            style="padding:var(--space-lg); background: white; border-radius: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.1);">
+            style="padding:var(--space-lg); border-radius: 20px;">
             <div id="dashboard-grid"></div>
           </div>
         </section>
@@ -184,17 +184,17 @@
         <section style="margin-top: var(--space-xl); padding-bottom:var(--space-2xl);">
           <div class="quick-grid"
             style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
-            <a href="mood-tracker.html" class="quick-card"
-              style="display: flex; align-items: center; gap: 14px; padding: 20px; background: white; border-radius: 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.1); color: #1A2F4E; text-decoration: none; font-weight: 750; transition: transform 0.2s;">
+            <a href="mood-tracker.html" class="quick-card card"
+              style="display: flex; align-items: center; gap: 14px; padding: 20px; border-radius: 16px; text-decoration: none; font-weight: 750; transition: transform 0.2s;">
               <span class="material-symbols-rounded text-primary"
-                style="font-size:36px; color: #5B8FD4;">sentiment_satisfied</span>
-              <span class="quick-card-title">Check-in Mood</span>
+                style="font-size:36px; color: var(--primary-accent);">sentiment_satisfied</span>
+              <span class="quick-card-title" style="color:var(--text-on-white);">Check-in Mood</span>
             </a>
-            <a href="jurnal.html" class="quick-card"
-              style="display: flex; align-items: center; gap: 14px; padding: 20px; background: white; border-radius: 16px; box-shadow: 0 6px 18px rgba(0,0,0,0.1); color: #1A2F4E; text-decoration: none; font-weight: 750; transition: transform 0.2s;">
+            <a href="jurnal.html" class="quick-card card"
+              style="display: flex; align-items: center; gap: 14px; padding: 20px; border-radius: 16px; text-decoration: none; font-weight: 750; transition: transform 0.2s;">
               <span class="material-symbols-rounded text-primary"
-                style="font-size:36px; color: #5B8FD4;">edit_note</span>
-              <span class="quick-card-title">Tulis Jurnal</span>
+                style="font-size:36px; color: var(--primary-accent);">edit_note</span>
+              <span class="quick-card-title" style="color:var(--text-on-white);">Tulis Jurnal</span>
             </a>
           </div>
         </section>

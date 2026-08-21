@@ -158,23 +158,30 @@
 }
 
 .btn-white {
-  background: var(--card-surface);
-  color: var(--primary-accent);
+  background: #FFFFFF !important;
+  color: var(--primary-accent, #2563EB) !important;
   box-shadow: var(--shadow-md);
 }
 
 .btn-white:hover {
+  background: #FFFFFF !important;
+  color: var(--primary-hover, #1D4ED8) !important;
   transform: translateY(-1px);
   box-shadow: var(--shadow-lg);
 }
 
 .btn-ghost {
-  color: var(--text-on-blue);
+  color: var(--primary-accent, #2563EB);
   padding: 0.5rem 1rem;
 }
 
 .btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--card-subtle, rgba(0, 0, 0, 0.05));
+}
+
+html.dark-mode .btn-ghost,
+body.dark-mode .btn-ghost {
+  color: #60A5FA;
 }
 
 .btn-sm {
@@ -1237,10 +1244,17 @@
 }
 
 /* ---- Contribution Grid (Calendar Mood Map) ---- */
+#mood-grid,
+#dashboard-grid,
+.contribution-grid-wrapper {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
 .contribution-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
+  gap: 8px;
 }
 
 .contribution-day-header {
@@ -1255,7 +1269,10 @@
 
 .contribution-cell {
   aspect-ratio: 1;
-  border-radius: 8px;
+  max-width: 52px;
+  max-height: 52px;
+  margin: 0 auto;
+  border-radius: 12px;
   background: rgba(45, 91, 168, 0.06);
   transition: all var(--transition-fast);
   cursor: pointer;
@@ -1263,7 +1280,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 36px;
+  min-height: 32px;
+  width: 100%;
 }
 
 .contribution-cell-empty {
