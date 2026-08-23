@@ -1115,8 +1115,8 @@ body.preloader-active {
 /* ---- App Showcase Section (Phone Mockup + Side Floating Pills) ---- */
 .showcase-section {
   position: relative;
-  padding: clamp(75px, 8.5vw, 130px) 0 clamp(90px, 9.5vw, 140px);
-  background: linear-gradient(180deg, rgba(91, 143, 212, 0.12) 0%, rgba(61, 107, 175, 0.28) 55%, rgba(30, 58, 110, 0.42) 100%);
+  padding: clamp(60px, 7vw, 110px) 0 clamp(70px, 8vw, 120px);
+  background: linear-gradient(180deg, #2D5BA8 0%, #264E8E 100%);
   overflow: hidden;
 }
 
@@ -1135,92 +1135,69 @@ body.preloader-active {
   position: absolute;
   filter: blur(12px);
   will-change: transform;
-  opacity: 0.85;
+  opacity: 0.7;
 }
 
 .showcase-cloud-1 {
   top: 4%;
   left: -5%;
-  width: 380px;
+  width: 300px;
   animation: cloudFloatX1 35s ease-in-out infinite alternate;
 }
 
 .showcase-cloud-2 {
   top: 22%;
   right: -4%;
-  width: 440px;
+  width: 340px;
   animation: cloudFloatX2 40s ease-in-out infinite alternate;
 }
 
 .showcase-cloud-3 {
   bottom: 14%;
   left: 6%;
-  width: 330px;
+  width: 260px;
   animation: cloudFloatX3 36s ease-in-out infinite alternate;
 }
 
 .showcase-cloud-4 {
   bottom: 4%;
   right: 8%;
-  width: 360px;
+  width: 280px;
   animation: cloudFloatX1 42s ease-in-out infinite alternate-reverse;
 }
 
-/* Ambient Glow Orbs for Ultra-Smooth Section Color Blending */
+/* Ambient Glow Orbs - Hidden to prevent overflow clipping lines */
 .showcase-ambient-glow {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.showcase-ambient-glow.glow-top {
-  top: -50px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 800px;
-  height: 450px;
-  background: radial-gradient(circle, rgba(126, 200, 227, 0.22) 0%, rgba(91, 143, 212, 0) 70%);
-  filter: blur(80px);
-}
-
-.showcase-ambient-glow.glow-bottom {
-  bottom: -80px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1000px;
-  height: 450px;
-  background: radial-gradient(circle, rgba(61, 107, 175, 0.45) 0%, rgba(11, 21, 40, 0) 75%);
-  filter: blur(95px);
+  display: none !important;
 }
 
 @media (max-width: 768px) {
   .showcase-cloud-1 {
-    width: 220px;
+    width: 180px;
     top: 2%;
   }
 
   .showcase-cloud-2 {
-    width: 260px;
+    width: 210px;
     top: 15%;
   }
 
   .showcase-cloud-3 {
-    width: 200px;
+    width: 160px;
     bottom: 12%;
   }
 
   .showcase-cloud-4 {
-    width: 220px;
+    width: 180px;
     bottom: 3%;
   }
 }
 
 .showcase-container {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 440px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) 240px minmax(0, 1fr);
   align-items: center;
-  gap: clamp(10px, 2vw, 30px);
+  gap: clamp(35px, 6vw, 75px);
   margin-top: clamp(2rem, 4vw, 3.5rem);
 }
 
@@ -1370,8 +1347,8 @@ body.preloader-active {
 }
 
 .showcase-pill-text {
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.875rem;
+  font-weight: 750;
   color: #0F172A;
   letter-spacing: -0.01em;
   white-space: nowrap;
@@ -1413,7 +1390,7 @@ body.preloader-active {
 .showcase-phone-stage {
   position: relative;
   width: 100%;
-  max-width: 440px;
+  max-width: 240px;
   perspective: 1000px;
 }
 
@@ -1469,7 +1446,7 @@ body.preloader-active {
 /* Responsive Showcase Layout */
 @media (max-width: 1200px) and (min-width: 769px) {
   .showcase-container {
-    grid-template-columns: minmax(0, 1fr) clamp(270px, 32vw, 360px) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) clamp(260px, 28vw, 320px) minmax(0, 1fr);
     gap: clamp(6px, 1.5vw, 18px);
   }
 
@@ -1597,7 +1574,7 @@ body.preloader-active {
 .features-section {
   position: relative;
   padding: clamp(75px, 9vw, 125px) 0;
-  background: transparent !important;
+  background: linear-gradient(180deg, #264E8E 0%, #1B3868 50%, #112344 100%);
   border-top: none !important;
   border-bottom: none !important;
   border: none !important;
@@ -1612,9 +1589,9 @@ body.preloader-active {
   height: 100%;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.95;
-  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  opacity: 0.9;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
 }
 
 .section-header {

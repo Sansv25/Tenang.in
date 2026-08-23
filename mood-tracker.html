@@ -51,8 +51,8 @@
       <section style="padding:var(--space-xl) 0;">
         <div style="display:flex; align-items:flex-start; justify-content:space-between;">
           <div>
-            <h1 style="font-size:var(--h2-size); font-weight:700; display:flex; align-items:center; gap:10px;">
-              <span class="material-symbols-rounded text-primary" style="font-size:32px;">sentiment_satisfied</span>
+            <h1 style="font-size:var(--h2-size); font-weight:700; display:flex; align-items:center; gap:10px; color:#FFFFFF;">
+              <span class="material-symbols-rounded" style="font-size:32px; color:#FFFFFF; filter:drop-shadow(0 2px 8px rgba(255,255,255,0.3));">sentiment_satisfied</span>
               <span data-i18n="mood.title">Mood Tracker</span>
             </h1>
             <p style="color:rgba(255,255,255,0.75); margin-top:var(--space-xs);" data-i18n="mood.subtitle">Lacak emosimu
@@ -122,12 +122,13 @@
             <span class="material-symbols-rounded" style="font-size:22px;">show_chart</span>
             <span>Mood 7 Hari Terakhir</span>
           </h2>
-          <button class="btn btn-ghost btn-sm" data-action="show-share-chart-modal">
-            <span class="material-symbols-rounded" style="font-size:18px;">share</span>
-            <span>Bagikan</span>
+          <button class="btn-share-trigger" data-action="show-share-chart-modal"
+            style="display: inline-flex; align-items: center; gap: 6px; padding: 7px 18px; border-radius: 999px; background: rgba(255, 255, 255, 0.18); color: #FFFFFF; font-weight: 750; font-size: 0.825rem; border: 1px solid rgba(255, 255, 255, 0.35); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); cursor: pointer; transition: all 0.25s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+            <span class="material-symbols-rounded" style="font-size:18px; color:#FFFFFF;">share</span>
+            <span style="color:#FFFFFF;">Bagikan</span>
           </button>
         </div>
-        <div class="card" style="padding:var(--space-lg);">
+        <div class="card" style="padding: clamp(14px, 3vw, 24px);">
           <div id="mood-chart"></div>
         </div>
       </section>

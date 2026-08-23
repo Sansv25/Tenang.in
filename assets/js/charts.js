@@ -29,8 +29,8 @@ const Charts = (() => {
   const createLineChart = (container, data, options = {}) => {
     const {
       width = 600,
-      height = 190,
-      padding = { top: 32, right: 45, bottom: 30, left: 42 },
+      height = 205,
+      padding = { top: 32, right: 42, bottom: 28, left: 38 },
       showDots = true,
       showArea = true,
       showLabels = true
@@ -50,24 +50,73 @@ const Charts = (() => {
       return;
     }
 
-    // Map data to points
-    const points = data.map((d, i) => ({
-      x: padding.left + (data.length === 1 ? chartW / 2 : (i / (data.length - 1)) * chartW),
-      y: padding.top + chartH - ((d.level - 1) / 4) * chartH,
-      ...d
-    }));
+    // 1. Build map of existing moods by YYYY-MM-DD
+    const moodMap = {};
+    if (Array.isArray(data)) {
+      data.forEach(item => {
+        if (item && item.date) {
+          moodMap[item.date] = item;
+        }
+      });
+    }
+
+    // 2. Generate last 7 consecutive calendar days (from 6 days ago up to today)
+    const today = new Date();
+    const daysShort = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+    const calendar7Days = [];
+
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date(today);
+      d.setDate(d.getDate() - i);
+      const dateKey = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      const dayName = daysShort[d.getDay()];
+      calendar7Days.push({
+        colIndex: 6 - i, // 0..6
+        date: dateKey,
+        dayName: dayName,
+        mood: moodMap[dateKey] || null
+      });
+    }
+
+    // 3. Active points mapped to 7-day grid coordinates
+    const activePoints = calendar7Days
+      .filter(d => d.mood && (d.mood.level !== undefined || d.mood.score !== undefined))
+      .map(d => {
+        const lvl = d.mood.level !== undefined ? d.mood.level : d.mood.score;
+        return {
+          x: padding.left + (d.colIndex / 6) * chartW,
+          y: padding.top + chartH - ((lvl - 1) / 4) * chartH,
+          level: lvl,
+          date: d.date,
+          dayName: d.dayName,
+          ...d.mood
+        };
+      });
+
+    // Fallback if raw data exists outside last 7 calendar days
+    let points = activePoints;
+    if (points.length === 0 && data.length > 0) {
+      const sortedData = data.slice().sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+      points = sortedData.map((d, i) => {
+        const lvl = d.level !== undefined ? d.level : (d.score || 3);
+        return {
+          x: padding.left + (sortedData.length === 1 ? chartW / 2 : (i / (sortedData.length - 1)) * chartW),
+          y: padding.top + chartH - ((lvl - 1) / 4) * chartH,
+          level: lvl,
+          ...d
+        };
+      });
+    }
 
     // Build SVG path
     let pathD = '';
     let areaD = '';
 
     if (points.length === 1) {
-      // Single point — draw horizontal dashed guide line & area halo
       const p = points[0];
       pathD = `M ${padding.left} ${p.y} L ${width - padding.right} ${p.y}`;
       areaD = `M ${padding.left} ${padding.top + chartH} L ${padding.left} ${p.y} L ${width - padding.right} ${p.y} L ${width - padding.right} ${padding.top + chartH} Z`;
-    } else {
-      // Smooth curve using cubic bezier
+    } else if (points.length > 1) {
       pathD = `M ${points[0].x} ${points[0].y}`;
       areaD = `M ${points[0].x} ${padding.top + chartH} L ${points[0].x} ${points[0].y}`;
 
@@ -82,42 +131,40 @@ const Charts = (() => {
       areaD += ` L ${points[points.length - 1].x} ${padding.top + chartH} Z`;
     }
 
-    // Day labels (CRISP DARK SLATE FOR WCAG CONTRAST)
-    const days = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
-
-    const labelsHTML = showLabels ? points.map(p => {
-      const date = new Date(p.date);
-      const dayName = days[date.getDay()];
+    // Day labels (Sleek 12px labels, clean & balanced)
+    const labelsHTML = showLabels ? calendar7Days.map(d => {
+      const x = padding.left + (d.colIndex / 6) * chartW;
+      const isToday = d.colIndex === 6;
       return `
-        <text x="${p.x}" y="${height - 8}" text-anchor="middle" fill="#475569" font-size="11" font-weight="600" font-family="Plus Jakarta Sans">${dayName}</text>
+        <text x="${x}" y="${height - 6}" text-anchor="middle" fill="${isToday ? '#2563EB' : '#475569'}" font-size="12" font-weight="${isToday ? '850' : '700'}" font-family="Plus Jakarta Sans">${d.dayName}</text>
       `;
     }).join('') : '';
 
-    // Y-axis labels & gridlines (CRISP SLATE & CLEAR GRIDLINES)
+    // Y-axis labels & gridlines (10.5px clean labels)
     const yLabelsHTML = [1,2,3,4,5].map(level => {
       const y = padding.top + chartH - ((level - 1) / 4) * chartH;
       return `
-        <text x="${padding.left - 10}" y="${y + 3.5}" text-anchor="end" fill="#64748B" font-size="10" font-weight="600" font-family="Plus Jakarta Sans">${level}</text>
-        <line x1="${padding.left}" y1="${y}" x2="${width - padding.right}" y2="${y}" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4 4"/>
+        <text x="${padding.left - 8}" y="${y + 3.5}" text-anchor="end" fill="#64748B" font-size="10.5" font-weight="650" font-family="Plus Jakarta Sans">${level}</text>
+        <line x1="${padding.left}" y1="${y}" x2="${width - padding.right}" y2="${y}" stroke="rgba(226, 232, 240, 0.5)" stroke-width="1" stroke-dasharray="4 4"/>
       `;
     }).join('');
 
-    // Dots & Callout Tooltips
+    // Dots & Callout Tooltips (Compact 10.5px badges)
     const dotsHTML = showDots ? points.map(p => {
       const col = moodColor(p.level);
       const labelText = moodLabel(p.level);
-      const badgeW = labelText.length > 6 ? 80 : 54;
-      const badgeX = Math.max(6, Math.min(width - badgeW - 6, p.x - badgeW / 2));
+      const badgeW = labelText.length > 6 ? 74 : 52;
+      const badgeX = Math.max(4, Math.min(width - badgeW - 4, p.x - badgeW / 2));
       const badgeCenter = badgeX + badgeW / 2;
       return `
         <g class="chart-point-group">
           <!-- Glow halo -->
-          <circle cx="${p.x}" cy="${p.y}" r="8" fill="${col}" opacity="0.15"/>
+          <circle cx="${p.x}" cy="${p.y}" r="7.5" fill="${col}" opacity="0.18"/>
           <!-- Solid dot -->
-          <circle cx="${p.x}" cy="${p.y}" r="4.5" fill="${col}" stroke="#FFFFFF" stroke-width="2" class="chart-dot"/>
-          <!-- Tooltip badge above point with generous padding & boundary clamp -->
-          <rect x="${badgeX}" y="${p.y - 26}" width="${badgeW}" height="20" rx="10" fill="#0F172A" opacity="0.94" style="filter: drop-shadow(0 2px 5px rgba(0,0,0,0.18));"/>
-          <text x="${badgeCenter}" y="${p.y - 12.5}" text-anchor="middle" fill="#FFFFFF" font-size="10" font-weight="700" font-family="Plus Jakarta Sans">${labelText}</text>
+          <circle cx="${p.x}" cy="${p.y}" r="4" fill="${col}" stroke="#FFFFFF" stroke-width="2" class="chart-dot"/>
+          <!-- Tooltip badge above point -->
+          <rect x="${badgeX}" y="${p.y - 24}" width="${badgeW}" height="18" rx="9" fill="#0F172A" opacity="0.94" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.18));"/>
+          <text x="${badgeCenter}" y="${p.y - 11.5}" text-anchor="middle" fill="#FFFFFF" font-size="10.5" font-weight="750" font-family="Plus Jakarta Sans">${labelText}</text>
         </g>
       `;
     }).join('') : '';
@@ -128,13 +175,13 @@ const Charts = (() => {
       <svg viewBox="0 0 ${width} ${height}" width="100%" preserveAspectRatio="xMidYMid meet" style="max-height: 220px; width: 100%; height: auto; overflow:visible; display: block; margin: 0 auto;">
         <defs>
           <linearGradient id="${gradientId}" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#2563EB" stop-opacity="0.22"/>
+            <stop offset="0%" stop-color="#2563EB" stop-opacity="0.25"/>
             <stop offset="100%" stop-color="#2563EB" stop-opacity="0.0"/>
           </linearGradient>
         </defs>
         ${yLabelsHTML}
         ${showArea && areaD ? `<path d="${areaD}" fill="url(#${gradientId})"/>` : ''}
-        ${pathD ? `<path d="${pathD}" fill="none" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" ${points.length === 1 ? 'stroke-dasharray="6 6"' : ''}/>` : ''}
+        ${pathD ? `<path d="${pathD}" fill="none" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round" ${points.length === 1 ? 'stroke-dasharray="6 6"' : ''}/>` : ''}
         ${dotsHTML}
         ${labelsHTML}
       </svg>

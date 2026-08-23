@@ -125,16 +125,18 @@ function renderQuote() {
   if (markDoneBtn) {
     const today = typeof Storage !== 'undefined' ? Storage.todayKey() : new Date().toISOString().split('T')[0];
     if (localStorage.getItem('tenang_quote_done_' + today)) {
-      markDoneBtn.innerHTML = '<span class="material-icons" style="font-size:18px;">done_all</span> Selesai dibaca';
+      markDoneBtn.innerHTML = '<span class="material-symbols-rounded" style="font-size:18px;">done_all</span> <span>Selesai dibaca</span>';
       markDoneBtn.style.background = '#DCFCE7';
       markDoneBtn.style.color = '#15803D';
+      markDoneBtn.style.borderColor = '#86EFAC';
       markDoneBtn.disabled = true;
     }
     markDoneBtn.addEventListener('click', () => {
       localStorage.setItem('tenang_quote_done_' + today, 'true');
-      markDoneBtn.innerHTML = '<span class="material-icons" style="font-size:18px;">done_all</span> Selesai dibaca';
+      markDoneBtn.innerHTML = '<span class="material-symbols-rounded" style="font-size:18px;">done_all</span> <span>Selesai dibaca</span>';
       markDoneBtn.style.background = '#DCFCE7';
       markDoneBtn.style.color = '#15803D';
+      markDoneBtn.style.borderColor = '#86EFAC';
       markDoneBtn.disabled = true;
       if (typeof Animations !== 'undefined' && Animations.showToast) {
         Animations.showToast('Kutipan harian selesai dibaca ✨', 'success');

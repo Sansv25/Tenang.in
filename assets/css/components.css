@@ -184,6 +184,21 @@ body.dark-mode .btn-ghost {
   color: #60A5FA;
 }
 
+.btn-share-trigger:hover {
+  background: rgba(255, 255, 255, 0.32) !important;
+  border-color: rgba(255, 255, 255, 0.65) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ---- SVG Chart Crisp Text Styling ---- */
+#mood-chart svg text,
+#dashboard-chart svg text {
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .btn-sm {
   padding: 0.5rem 1rem;
   font-size: var(--caption-size);

@@ -172,11 +172,11 @@ html.already-checked-in #checkin-cta-btn {
 }
 
 /* ---- 4. Chart Container Height Stabilization ---- */
-/* All chart containers get a minimum height to prevent
-   the zero-to-full-height CLS when charts render */
-#mood-chart,
-#dashboard-chart {
-  min-height: 200px;
+/* Chart containers get a minimum height when empty to prevent
+   the zero-to-full-height CLS before chart JS renders */
+#mood-chart:empty,
+#dashboard-chart:empty {
+  min-height: 180px;
 }
 
 /* ---- 5. Hero Section Stability (Beranda) ---- */

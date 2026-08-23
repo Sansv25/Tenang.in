@@ -44,8 +44,34 @@ const Storage = (() => {
     return Math.round(Math.abs((new Date(d1) - new Date(d2)) / oneDay));
   };
 
+  const defaultAugustMoods = [
+    {"date":"2026-08-01","timestamp":1785614400000,"level":2,"score":2,"tags":["lelah"],"note":"Hari yang cukup melelahkan setelah minggu padat"},
+    {"date":"2026-08-02","timestamp":1785700800000,"level":3,"score":3,"tags":["tenang"],"note":"Istirahat santai di rumah"},
+    {"date":"2026-08-03","timestamp":1785787200000,"level":2,"score":2,"tags":["cemas"],"note":"Kecemasan mulai datang jelang awal pekan"},
+    {"date":"2026-08-04","timestamp":1785873600000,"level":1,"score":1,"tags":["stres","lelah"],"note":"Pikiran terbebani dan emosi terasa berat"},
+    {"date":"2026-08-05","timestamp":1785960000000,"level":2,"score":2,"tags":["bingung"],"note":"Coba pelan-pelan menata pikiran"},
+    {"date":"2026-08-06","timestamp":1786046400000,"level":3,"score":3,"tags":["tenang"],"note":"Sudah sedikit lebih stabil"},
+    {"date":"2026-08-07","timestamp":1786132800000,"level":4,"score":4,"tags":["lega"],"note":"Berhasil menyelesaikan tugas tepat waktu"},
+    {"date":"2026-08-08","timestamp":1786219200000,"level":3,"score":3,"tags":["bersyukur"],"note":"Menikmati akhir pekan dengan tenang"},
+    {"date":"2026-08-09","timestamp":1786305600000,"level":4,"score":4,"tags":["semangat"],"note":"Siap menyambut minggu baru"},
+    {"date":"2026-08-10","timestamp":1786392000000,"level":3,"score":3,"tags":["tenang"],"note":"Rutinitas berjalan lancar"},
+    {"date":"2026-08-11","timestamp":1786478400000,"level":4,"score":4,"tags":["bersyukur"],"note":"Mulai rutin grounding dan pernapasan"},
+    {"date":"2026-08-12","timestamp":1786564800000,"level":3,"score":3,"tags":["bingung"],"note":"Ada sedikit dilema tapi bisa diatasi"},
+    {"date":"2026-08-13","timestamp":1786651200000,"level":4,"score":4,"tags":["semangat"],"note":"Merasa energi positif meningkat"},
+    {"date":"2026-08-14","timestamp":1786737600000,"level":5,"score":5,"tags":["bersyukur","tenang"],"note":"Hari yang sangat berkesan dan membahagiakan"},
+    {"date":"2026-08-15","timestamp":1786824000000,"level":4,"score":4,"tags":["lega"],"note":"Perasaan damai dan puas"},
+    {"date":"2026-08-16","timestamp":1786910400000,"level":3,"score":3,"tags":["tenang"],"note":"Meremajakan pikiran"},
+    {"date":"2026-08-17","timestamp":1786996800000,"level":4,"score":4,"tags":["semangat"],"note":"Semangat kemerdekaan dan rasa syukur"},
+    {"date":"2026-08-18","timestamp":1787083200000,"level":3,"score":3,"tags":["lelah"],"note":"Agak lelah tapi tetap bersyukur"},
+    {"date":"2026-08-19","timestamp":1787169600000,"level":4,"score":4,"tags":["tenang"],"note":"Fokus pada hal yang bisa dikontrol"},
+    {"date":"2026-08-20","timestamp":1787256000000,"level":5,"score":5,"tags":["bersyukur","semangat"],"note":"Perkembangan diri terasa nyata!"},
+    {"date":"2026-08-21","timestamp":1787342400000,"level":4,"score":4,"tags":["lega"],"note":"Beban pikiran semakin berkurang"},
+    {"date":"2026-08-22","timestamp":1787428800000,"level":4,"score":4,"tags":["tenang"],"note":"Pikiran jernih dan penuh harapan"},
+    {"date":"2026-08-23","timestamp":1787515200000,"level":5,"score":5,"tags":["bersyukur","semangat"],"note":"Merasa sangat tenang, kuat, dan bahagia hari ini"}
+  ];
+
   // ---- Mood Functions ----
-  const getMoods = () => getJSON('tenang_moods', []);
+  const getMoods = () => getJSON('tenang_moods', defaultAugustMoods);
 
   const saveMood = (data) => {
     const moods = getMoods();
@@ -72,7 +98,8 @@ const Storage = (() => {
 
   const getMoodHistory = (n = 7) => {
     const moods = getMoods();
-    return moods.slice(-n);
+    const sorted = moods.slice().sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+    return sorted.slice(-n);
   };
 
   const getMoodAverage = (n = 7) => {
