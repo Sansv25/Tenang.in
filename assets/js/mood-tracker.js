@@ -107,7 +107,7 @@ function renderMoodForm() {
 
 function selectMoodTracker(level) {
   moodLevel = level;
-  document.querySelectorAll('#mood-emojis .emoji-btn').forEach((btn, i) => {
+  document.querySelectorAll('#mood-emojis .mood-card-item').forEach((btn, i) => {
     btn.classList.toggle('selected', (i + 1) === level);
   });
   document.getElementById('mood-tags-area').style.display = 'block';
@@ -170,27 +170,42 @@ function getMoodFormHTML() {
   return `
     <div class="card" style="padding: 1.5rem 1.75rem;">
       <h3 style="font-weight:700; margin-bottom:var(--space-lg); text-align:center; color:var(--text-on-white);">Bagaimana perasaanmu hari ini?</h3>
-      <div class="emoji-selector" id="mood-emojis">
-        <button class="emoji-btn" onclick="selectMoodTracker(1)">
-          <img src="assets/img/maskots/mascot-mood-1.png" alt="Buruk" class="emoji-mascot-img">
-          <span class="emoji-label">Buruk</span>
-        </button>
-        <button class="emoji-btn" onclick="selectMoodTracker(2)">
-          <img src="assets/img/maskots/mascot-mood-2.png" alt="Kurang" class="emoji-mascot-img">
-          <span class="emoji-label">Kurang</span>
-        </button>
-        <button class="emoji-btn" onclick="selectMoodTracker(3)">
-          <img src="assets/img/maskots/mascot-mood-3.png" alt="Biasa" class="emoji-mascot-img">
-          <span class="emoji-label">Biasa</span>
-        </button>
-        <button class="emoji-btn" onclick="selectMoodTracker(4)">
-          <img src="assets/img/maskots/mascot-mood-4.png" alt="Baik" class="emoji-mascot-img">
-          <span class="emoji-label">Baik</span>
-        </button>
-        <button class="emoji-btn" onclick="selectMoodTracker(5)">
-          <img src="assets/img/maskots/mascot-mood-5.png" alt="Luar Biasa" class="emoji-mascot-img">
-          <span class="emoji-label">Luar Biasa</span>
-        </button>
+      <div class="mood-grid" id="mood-emojis">
+        <div class="mood-card-item mood-1" onclick="selectMoodTracker(1)">
+          <img src="assets/img/maskots/mascot-mood-1.png" alt="Buruk" class="mood-card-mascot-img">
+          <div>
+            <div class="mood-card-label">Buruk</div>
+            <div class="mood-card-sub">Sangat Berat</div>
+          </div>
+        </div>
+        <div class="mood-card-item mood-2" onclick="selectMoodTracker(2)">
+          <img src="assets/img/maskots/mascot-mood-2.png" alt="Kurang" class="mood-card-mascot-img">
+          <div>
+            <div class="mood-card-label">Kurang</div>
+            <div class="mood-card-sub">Kurang Oke</div>
+          </div>
+        </div>
+        <div class="mood-card-item mood-3" onclick="selectMoodTracker(3)">
+          <img src="assets/img/maskots/mascot-mood-3.png" alt="Biasa" class="mood-card-mascot-img">
+          <div>
+            <div class="mood-card-label">Biasa</div>
+            <div class="mood-card-sub">Normal & Stabil</div>
+          </div>
+        </div>
+        <div class="mood-card-item mood-4" onclick="selectMoodTracker(4)">
+          <img src="assets/img/maskots/mascot-mood-4.png" alt="Baik" class="mood-card-mascot-img">
+          <div>
+            <div class="mood-card-label">Baik</div>
+            <div class="mood-card-sub">Damai & Positif</div>
+          </div>
+        </div>
+        <div class="mood-card-item mood-5" onclick="selectMoodTracker(5)">
+          <img src="assets/img/maskots/mascot-mood-5.png" alt="Luar Biasa" class="mood-card-mascot-img">
+          <div>
+            <div class="mood-card-label">Luar Biasa</div>
+            <div class="mood-card-sub">Sangat Bahagia</div>
+          </div>
+        </div>
       </div>
       <div id="mood-tags-area" style="display:none; margin-top:var(--space-lg);">
         <p style="font-size:0.875rem; font-weight:600; color:var(--text-secondary); margin-bottom:var(--space-sm);">Tag (opsional)</p>
@@ -457,25 +472,44 @@ function renderInsights() {
           </div>
         </div>
 
-        <!-- Mood Distribution -->
-        <div style="background:var(--card-subtle); border:1px solid var(--card-border); border-radius:16px; padding:18px;">
-          <div style="display:flex; align-items:center; gap:8px; margin-bottom:14px;">
-            <span class="material-symbols-rounded" style="font-size:18px; color:#6366F1;">bar_chart</span>
-            <span style="font-size:0.8rem; font-weight:700; color:var(--text-on-white);">Distribusi Mood</span>
+        <!-- Mood Distribution (Diagram Batang / Vertical Bar Chart) -->
+        <div style="background:var(--card-subtle); border:1px solid var(--card-border); border-radius:20px; padding:20px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="material-symbols-rounded" style="font-size:20px; color:#6366F1;">bar_chart</span>
+              <span style="font-size:0.875rem; font-weight:800; color:var(--text-on-white);">Distribusi Mood</span>
+            </div>
+            <span style="font-size:0.72rem; font-weight:700; color:var(--text-secondary); background:rgba(99, 102, 241, 0.12); padding:3px 10px; border-radius:20px;">
+              Total: ${moods.length} Check-in
+            </span>
           </div>
-          <div style="display:flex; align-items:flex-end; gap:8px; height:60px; margin-bottom:8px;">
+
+          <!-- Bar Chart Area (Fixed 110px Height Container) -->
+          <div style="display:flex; align-items:flex-end; gap:12px; height:110px; margin-bottom:12px; padding:0 4px;">
             ${[1,2,3,4,5].map(level => {
               const count = moodCounts[level];
-              const height = Math.max((count / maxCount) * 100, 8);
+              const heightPercent = maxCount > 0 ? (count > 0 ? Math.max(Math.round((count / maxCount) * 100), 12) : 4) : 4;
               const colors = { 1: '#EF4444', 2: '#F97316', 3: '#3B82F6', 4: '#10B981', 5: '#8B5CF6' };
-              return `<div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:4px;">
-                <span style="font-size:0.65rem; font-weight:600; color:${colors[level]};">${count}</span>
-                <div style="width:100%; height:${height}%; background:${colors[level]}; border-radius:6px 6px 2px 2px; min-height:4px; transition:height 0.3s;"></div>
-              </div>`;
+              const labels = { 1: 'Buruk', 2: 'Kurang', 3: 'Biasa', 4: 'Baik', 5: 'Luar Biasa' };
+
+              return `
+                <div style="flex:1; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:6px;" title="${labels[level]}: ${count} kali">
+                  <!-- Count Badge above Bar -->
+                  <span style="font-size:0.75rem; font-weight:850; color:${colors[level]};">${count}</span>
+                  
+                  <!-- Vertical Bar Track Container -->
+                  <div style="width:100%; max-width:38px; height:80px; display:flex; align-items:flex-end; background:${colors[level]}15; border-radius:8px; padding:2px; box-sizing:border-box;">
+                    <!-- Actual Dynamic Height Vertical Bar -->
+                    <div style="width:100%; height:${heightPercent}%; background:linear-gradient(to top, ${colors[level]}, ${colors[level]}E6); border-radius:6px; min-height:4px; transition:height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow:0 2px 8px ${colors[level]}40;"></div>
+                  </div>
+                </div>
+              `;
             }).join('')}
           </div>
-          <div style="display:flex; gap:8px;">
-            ${['😢','😟','😐','😊','🤩'].map(e => `<div style="flex:1; text-align:center; font-size:1rem;">${e}</div>`).join('')}
+
+          <!-- Emoji Row below Bars -->
+          <div style="display:flex; gap:12px; border-top:1px dashed var(--card-border); padding-top:10px;">
+            ${['😢','😟','😐','😊','🤩'].map(e => `<div style="flex:1; text-align:center; font-size:1.2rem; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.1));">${e}</div>`).join('')}
           </div>
         </div>
 

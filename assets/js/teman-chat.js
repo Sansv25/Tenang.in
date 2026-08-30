@@ -57,7 +57,7 @@ const TemanChat = (() => {
             <div style="font-size:0.75rem;opacity:0.8;">AI Companion</div>
           </div>
         </div>
-        <button class="modal-close" id="teman-close-btn" style="background:rgba(255,255,255,0.15);color:white;" aria-label="Tutup Chat">
+        <button class="modal-close" id="teman-close-btn" aria-label="Tutup Chat">
           <span class="material-symbols-rounded" style="font-size:18px;">close</span>
         </button>
       </div>
@@ -65,9 +65,9 @@ const TemanChat = (() => {
       <div class="chat-options" id="teman-chat-options"></div>
       <div class="teman-chat-input-bar">
         <button type="button" class="teman-input-btn" id="teman-voice-btn" aria-label="Input Suara Tidak Aktif" title="Fitur suara tidak aktif" disabled style="opacity:0.4; cursor:not-allowed; pointer-events:none;">
-          <span class="material-symbols-rounded" style="font-size:22px; color:var(--text-muted);">mic</span>
+          <span class="material-symbols-rounded" style="font-size:22px;">mic</span>
         </button>
-        <input type="text" class="teman-input-field" id="teman-text-input" placeholder="Pilih opsi obrolan di atas..." readonly style="background:var(--card-subtle); color:var(--text-secondary); cursor:default;">
+        <input type="text" class="teman-input-field" id="teman-text-input" placeholder="Ketik pesan untuk Teman AI..." disabled readonly style="cursor: not-allowed; pointer-events: none;">
         <button type="button" class="teman-input-btn teman-send-btn" id="teman-send-btn" aria-label="Kirim pesan" disabled>
           <span class="material-symbols-rounded" style="font-size:22px;">send</span>
         </button>

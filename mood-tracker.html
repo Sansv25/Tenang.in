@@ -71,27 +71,42 @@
         <div class="card" style="padding: 1.5rem 1.75rem;">
           <h3 style="font-weight:700; margin-bottom:var(--space-lg); text-align:center; color:var(--text-on-white);">
             Bagaimana perasaanmu hari ini?</h3>
-          <div class="emoji-selector" id="mood-emojis">
-            <button class="emoji-btn" data-action="select-mood-tracker" data-mood="1">
-              <img src="assets/img/maskots/mascot-mood-1.png" alt="Buruk" class="emoji-mascot-img">
-              <span class="emoji-label">Buruk</span>
-            </button>
-            <button class="emoji-btn" data-action="select-mood-tracker" data-mood="2">
-              <img src="assets/img/maskots/mascot-mood-2.png" alt="Kurang" class="emoji-mascot-img">
-              <span class="emoji-label">Kurang</span>
-            </button>
-            <button class="emoji-btn" data-action="select-mood-tracker" data-mood="3">
-              <img src="assets/img/maskots/mascot-mood-3.png" alt="Biasa" class="emoji-mascot-img">
-              <span class="emoji-label">Biasa</span>
-            </button>
-            <button class="emoji-btn" data-action="select-mood-tracker" data-mood="4">
-              <img src="assets/img/maskots/mascot-mood-4.png" alt="Baik" class="emoji-mascot-img">
-              <span class="emoji-label">Baik</span>
-            </button>
-            <button class="emoji-btn" data-action="select-mood-tracker" data-mood="5">
-              <img src="assets/img/maskots/mascot-mood-5.png" alt="Luar Biasa" class="emoji-mascot-img">
-              <span class="emoji-label">Luar Biasa</span>
-            </button>
+          <div class="mood-grid" id="mood-emojis">
+            <div class="mood-card-item mood-1" data-action="select-mood-tracker" data-mood="1">
+              <img src="assets/img/maskots/mascot-mood-1.png" alt="Buruk" class="mood-card-mascot-img">
+              <div>
+                <div class="mood-card-label">Buruk</div>
+                <div class="mood-card-sub">Sangat Berat</div>
+              </div>
+            </div>
+            <div class="mood-card-item mood-2" data-action="select-mood-tracker" data-mood="2">
+              <img src="assets/img/maskots/mascot-mood-2.png" alt="Kurang" class="mood-card-mascot-img">
+              <div>
+                <div class="mood-card-label">Kurang</div>
+                <div class="mood-card-sub">Kurang Oke</div>
+              </div>
+            </div>
+            <div class="mood-card-item mood-3" data-action="select-mood-tracker" data-mood="3">
+              <img src="assets/img/maskots/mascot-mood-3.png" alt="Biasa" class="mood-card-mascot-img">
+              <div>
+                <div class="mood-card-label">Biasa</div>
+                <div class="mood-card-sub">Normal & Stabil</div>
+              </div>
+            </div>
+            <div class="mood-card-item mood-4" data-action="select-mood-tracker" data-mood="4">
+              <img src="assets/img/maskots/mascot-mood-4.png" alt="Baik" class="mood-card-mascot-img">
+              <div>
+                <div class="mood-card-label">Baik</div>
+                <div class="mood-card-sub">Damai & Positif</div>
+              </div>
+            </div>
+            <div class="mood-card-item mood-5" data-action="select-mood-tracker" data-mood="5">
+              <img src="assets/img/maskots/mascot-mood-5.png" alt="Luar Biasa" class="mood-card-mascot-img">
+              <div>
+                <div class="mood-card-label">Luar Biasa</div>
+                <div class="mood-card-sub">Sangat Bahagia</div>
+              </div>
+            </div>
           </div>
           <div id="mood-tags-area" style="display:none; margin-top:var(--space-lg);">
             <p style="font-size:0.875rem; font-weight:600; color:var(--text-secondary); margin-bottom:var(--space-sm);">

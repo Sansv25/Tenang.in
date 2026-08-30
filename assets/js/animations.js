@@ -109,27 +109,153 @@ const Animations = (() => {
     setTimeout(() => container.remove(), 4000);
   };
 
-  // ---- Full Screen Celebration ----
-  const showCelebration = (iconName, text, duration = 2500) => {
+  // ---- Helper for Green Screen Video Canvas Chroma Key ----
+  const playGreenScreenVideo = (container, videoSrc) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'celebration-video-wrap';
+    wrapper.style.cssText = 'position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center;';
+
+    const video = document.createElement('video');
+    video.src = videoSrc;
+    video.autoplay = true;
+    video.loop = true;
+    video.muted = true;
+    video.playsInline = true;
+    video.setAttribute('aria-hidden', 'true');
+    video.style.cssText = 'position:absolute; width:1px; height:1px; opacity:0.01; pointer-events:none;';
+
+    const canvas = document.createElement('canvas');
+    canvas.width = 300;
+    canvas.height = 300;
+    canvas.className = 'celebration-canvas';
+
+    wrapper.appendChild(video);
+    wrapper.appendChild(canvas);
+    container.appendChild(wrapper);
+
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    let animId = null;
+
+    video.addEventListener('loadedmetadata', () => {
+      canvas.width = video.videoWidth || 300;
+      canvas.height = video.videoHeight || 300;
+    });
+
+    const renderFrame = () => {
+      if (video.paused || video.ended) {
+        animId = requestAnimationFrame(renderFrame);
+        return;
+      }
+
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = frame.data;
+      const len = data.length;
+
+      for (let i = 0; i < len; i += 4) {
+        const r = data[i];
+        const g = data[i + 1];
+        const b = data[i + 2];
+
+        // Green screen pixel removal
+        if (g > 80 && g > r * 1.15 && g > b * 1.15) {
+          data[i + 3] = 0;
+        } else if (g > 65 && g > r * 1.05 && g > b * 1.05) {
+          // Soft edge blending
+          const diff = g - Math.max(r, b);
+          data[i + 3] = Math.max(0, 255 - diff * 4);
+        }
+      }
+
+      ctx.putImageData(frame, 0, 0);
+      animId = requestAnimationFrame(renderFrame);
+    };
+
+    video.play().then(() => {
+      renderFrame();
+    }).catch(() => {
+      // Fallback if autoplay is blocked
+      canvas.style.display = 'none';
+      video.style.cssText = 'width:100%; height:100%; object-fit:contain; display:block; filter:drop-shadow(0 18px 40px rgba(0,0,0,0.35));';
+    });
+
+    return () => {
+      if (animId) cancelAnimationFrame(animId);
+      video.pause();
+      wrapper.remove();
+    };
+  };
+
+  // ---- Full Screen Celebration with Mascot Video (Theme-matched & Bottom-Up Flying Mascot) ----
+  const showCelebration = (iconName, text, duration = 4500, useVideo = true) => {
+    // Remove existing overlay
+    const existing = document.querySelector('.celebration-overlay');
+    if (existing) existing.remove();
+
+    // Resolve active theme gradient dynamically
+    let themeBg = 'linear-gradient(135deg, #10B981 0%, #059669 50%, #047857 100%)';
+    if (typeof Settings !== 'undefined' && Settings.getTheme) {
+      const theme = Settings.getTheme();
+      const mode = Settings.getMode ? Settings.getMode() : 'light';
+      if (theme) {
+        themeBg = (mode === 'dark' && theme.gradBody) ? theme.gradBody : (theme.gradHero || theme.gradBody);
+      }
+    } else if (document.body.style.background) {
+      themeBg = document.body.style.background;
+    }
+
     const overlay = document.createElement('div');
     overlay.className = 'celebration-overlay';
+    overlay.style.background = themeBg;
+    overlay.style.backgroundAttachment = 'fixed';
+
     overlay.innerHTML = `
-      <div class="celebration-emoji">
-        <span class="material-symbols-rounded" style="font-size:72px; color:var(--warning);">${iconName || 'stars'}</span>
+      <div class="celebration-ambient-orb orb-top"></div>
+      <div class="celebration-ambient-orb orb-bottom"></div>
+      <div class="celebration-content-container">
+        <div class="celebration-video-container" id="celebration-video-slot"></div>
+        <div class="celebration-text-box">
+          <div class="celebration-text">${text || 'Selamat! Kuis Selesai'}</div>
+        </div>
       </div>
-      <div class="celebration-text">${text}</div>
     `;
     document.body.appendChild(overlay);
 
+    let stopVideo = null;
+    const slot = overlay.querySelector('#celebration-video-slot');
+
+    if (useVideo) {
+      stopVideo = playGreenScreenVideo(slot, 'assets/img/mp4/idle.mp4');
+    } else {
+      slot.innerHTML = `
+        <div class="celebration-emoji">
+          <img src="assets/img/maskots/mascot-cheerful.png" alt="Celebration Mascot" style="width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 18px 40px rgba(0,0,0,0.35));">
+        </div>
+      `;
+    }
+
+    // Trigger active state smoothly after element injection
     requestAnimationFrame(() => {
-      overlay.classList.add('active');
+      requestAnimationFrame(() => {
+        overlay.classList.add('active');
+      });
     });
 
-    showConfetti(50);
+    const dismiss = () => {
+      if (overlay.classList.contains('closing')) return;
+      overlay.classList.add('closing');
+      overlay.classList.remove('active');
+      setTimeout(() => {
+        if (stopVideo) stopVideo();
+        overlay.remove();
+      }, 450);
+    };
+
+    // Tap anywhere on full screen overlay to dismiss early
+    overlay.addEventListener('click', dismiss);
 
     setTimeout(() => {
-      overlay.classList.remove('active');
-      setTimeout(() => overlay.remove(), 400);
+      dismiss();
     }, duration);
   };
 

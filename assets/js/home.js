@@ -491,7 +491,7 @@ async function renderWeeklyMoodSummary() {
           </div>
         </div>
 
-        <div class="weekly-box-insight" style="background: ${theme.boxBg}; border: ${theme.boxBorder}; border-left: 5px solid #2D5BA8; border-radius: 22px; padding: clamp(20px, 4vw, 26px); display: flex; flex-direction: column; justify-content: space-between;">
+        <div class="weekly-box-insight" style="background: ${theme.boxBg}; border: ${theme.boxBorder}; border-radius: 22px; padding: clamp(20px, 4vw, 26px); display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <div style="display: flex; align-items: center; gap: 8px; font-weight: 800; color: ${isLanding ? '#7EC8E3' : '#2D5BA8'}; font-size: 0.92rem; margin-bottom: 12px;">
               <span class="material-symbols-rounded" style="font-size: 22px;">psychology</span>
@@ -813,3 +813,130 @@ const Onboarding = (() => {
 })();
 
 window.Onboarding = Onboarding;
+
+// ---- Streak Share Modal Engine ----
+const STREAK_AI_QUOTES = [
+  'Satu hari lagi jujur dan ramah pada diri sendiri.',
+  'Melangkah pelan, merawat ketenangan jiwa.',
+  'Setiap detik refleksi adalah ruang bertumbuh.',
+  'Hadir utuh menyapa apa pun rasa hari ini.',
+  'Konsisten menjaga damai di dalam dada.',
+  'Hargai setiap proses kecil perjalanan ini.'
+];
+
+let streakInputInitialized = false;
+
+window.openShareStreakModal = function () {
+  const modal = document.getElementById('share-streak-modal');
+  if (!modal) return;
+
+  const streak = (typeof Storage !== 'undefined' && Storage.getStreak) ? Storage.getStreak() : 1;
+  const username = (typeof Storage !== 'undefined' && Storage.getUserName) ? Storage.getUserName() : 'User Tenang.in';
+
+  const countEl = document.getElementById('streak-share-count-text');
+  const userEl = document.getElementById('streak-share-username');
+  const dateEl = document.getElementById('streak-share-date');
+  const captionInput = document.getElementById('streak-caption-input');
+  const captionPreview = document.getElementById('streak-share-caption-preview');
+
+  if (countEl) countEl.textContent = `${streak} HARI`;
+  if (userEl) userEl.textContent = username || 'User Tenang.in';
+  if (dateEl) {
+    const now = new Date();
+    dateEl.textContent = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  // Set default caption if empty
+  const defaultCaption = 'Melangkah pelan, merawat ketenangan jiwa.';
+  if (captionInput && !captionInput.value.trim()) {
+    captionInput.value = defaultCaption;
+  }
+  if (captionPreview) {
+    captionPreview.textContent = `"${(captionInput ? captionInput.value.trim() : defaultCaption) || defaultCaption}"`;
+  }
+
+  // Attach live input listener once
+  if (captionInput && !streakInputInitialized) {
+    captionInput.addEventListener('input', () => {
+      const val = captionInput.value.trim();
+      if (captionPreview) {
+        captionPreview.textContent = `"${val || defaultCaption}"`;
+      }
+    });
+    streakInputInitialized = true;
+  }
+
+  modal.classList.add('active');
+};
+
+window.generateStreakCaption = function () {
+  const captionInput = document.getElementById('streak-caption-input');
+  const captionPreview = document.getElementById('streak-share-caption-preview');
+  if (!captionInput) return;
+
+  // Pick a random quote distinct from current
+  const currentVal = captionInput.value.trim();
+  const availableQuotes = STREAK_AI_QUOTES.filter(q => q !== currentVal);
+  const randomQuote = availableQuotes[Math.floor(Math.random() * availableQuotes.length)] || STREAK_AI_QUOTES[0];
+
+  captionInput.value = randomQuote;
+  if (captionPreview) {
+    captionPreview.textContent = `"${randomQuote}"`;
+  }
+
+  if (typeof Animations !== 'undefined' && Animations.showToast) {
+    Animations.showToast('Kata-kata disajikan khusus oleh Teman AI ✨', 'info', 2000);
+  }
+};
+
+window.changeStreakShareTheme = function (theme, btn) {
+  const preview = document.getElementById('streak-share-card-preview');
+  if (!preview) return;
+
+  const themes = {
+    sunset: 'linear-gradient(135deg, #F97316, #EF4444)',
+    blue: 'linear-gradient(135deg, #2D5BA8, #7EC8E3)',
+    midnight: 'linear-gradient(135deg, #0F172A, #1E293B, #334155)',
+    forest: 'linear-gradient(135deg, #059669, #10B981, #34D399)',
+    purple: 'linear-gradient(135deg, #7E22CE, #A855F7, #EC4899)'
+  };
+
+  preview.style.background = themes[theme] || themes.sunset;
+
+  const buttons = document.querySelectorAll('#streak-share-theme-selector button');
+  buttons.forEach(b => {
+    b.style.border = '2px solid transparent';
+    b.style.transform = 'scale(1)';
+  });
+  if (btn) {
+    btn.style.border = '2px solid #FFFFFF';
+    btn.style.transform = 'scale(1.1)';
+  }
+};
+
+window.copyStreakShare = function () {
+  const streak = (typeof Storage !== 'undefined' && Storage.getStreak) ? Storage.getStreak() : 1;
+  const captionInput = document.getElementById('streak-caption-input');
+  const customQuote = captionInput ? captionInput.value.trim() : '';
+
+  const shareText = `🔥 Streak Refleksi ${streak} Hari Beruntun!\n"${customQuote || 'Melangkah pelan, merawat ketenangan jiwa.'}"\n\nYuk mulai perjalanan refleksi dirimu di https://tenang.in #TenangIn`;
+
+  if (navigator && navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(shareText).then(() => {
+      if (typeof Animations !== 'undefined' && Animations.showToast) {
+        Animations.showToast('Teks streak berhasil disalin ke papan klip!', 'success');
+      }
+    });
+  } else {
+    if (typeof Animations !== 'undefined' && Animations.showToast) {
+      Animations.showToast('Teks streak berhasil disalin!', 'success');
+    }
+  }
+};
+
+window.simulateStreakShare = function () {
+  document.getElementById('share-streak-modal')?.classList.remove('active');
+  if (typeof Animations !== 'undefined' && Animations.showToast) {
+    Animations.showToast('Pesan streak berhasil dibagikan! Terus pertahankan semangatmu! 🔥', 'success');
+  }
+};

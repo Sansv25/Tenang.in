@@ -574,16 +574,15 @@ body.dark-mode .kenali-page-bg .orb {
   z-index: 1;
 }
 
-/* ---- Result Hero Card (Glassmorphism) ---- */
+/* ---- Result Hero Card (Clean Solid White Theme in Light Mode) ---- */
 .kenali-result-hero {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.9);
   border-radius: var(--radius-2xl);
   padding: var(--space-3xl) var(--space-2xl);
   text-align: center;
   margin-bottom: var(--space-xl);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   position: relative;
   overflow: hidden;
 }
@@ -595,90 +594,35 @@ body.dark-mode .kenali-page-bg .orb {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.06) 0%, transparent 50%);
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.04) 0%, transparent 50%);
   animation: kenaliResultGlow 8s ease-in-out infinite;
 }
 
 @keyframes kenaliResultGlow {
-
-  0%,
-  100% {
+  0%, 100% {
     transform: translate(0, 0);
   }
-
   50% {
     transform: translate(30px, -20px);
   }
 }
 
-.kenali-result-hero>* {
+.kenali-result-hero > * {
   position: relative;
   z-index: 1;
 }
 
-.kenali-result-icon-wrap {
+.kenali-result-mascot-wrap {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: var(--space-lg);
-}
-
-.kenali-result-icon-circle {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-/* Dynamic color per personality type — on-theme */
-.kenali-result-icon-circle.type-it {
-  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(37, 99, 235, 0.05));
-  box-shadow: 0 0 50px rgba(37, 99, 235, 0.2);
-}
-
-.kenali-result-icon-circle.type-if {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.05));
-  box-shadow: 0 0 50px rgba(56, 189, 248, 0.2);
-}
-
-.kenali-result-icon-circle.type-et {
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.05));
-  box-shadow: 0 0 50px rgba(245, 158, 11, 0.2);
-}
-
-.kenali-result-icon-circle.type-ef {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.05));
-  box-shadow: 0 0 50px rgba(16, 185, 129, 0.2);
-}
-
-.kenali-result-icon-circle .material-symbols-rounded {
-  font-size: 48px;
-  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 48;
-}
-
-.kenali-result-icon-circle.type-it .material-symbols-rounded {
-  color: #60A5FA;
-}
-
-.kenali-result-icon-circle.type-if .material-symbols-rounded {
-  color: #38BDF8;
-}
-
-.kenali-result-icon-circle.type-et .material-symbols-rounded {
-  color: #FBBF24;
-}
-
-.kenali-result-icon-circle.type-ef .material-symbols-rounded {
-  color: #34D399;
+  margin-bottom: var(--space-md);
 }
 
 .kenali-result-name {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 900;
-  color: #FFFFFF;
+  color: #1A2F4E;
   margin-bottom: var(--space-xs);
   letter-spacing: -0.03em;
   line-height: 1.15;
@@ -696,38 +640,38 @@ body.dark-mode .kenali-page-bg .orb {
 }
 
 .kenali-result-tagline.type-it {
-  background: rgba(37, 99, 235, 0.15);
-  color: #60A5FA;
-  border: 1px solid rgba(37, 99, 235, 0.25);
+  background: #EFF6FF;
+  color: #1D4ED8;
+  border: 1px solid #BFDBFE;
 }
 
 .kenali-result-tagline.type-if {
-  background: rgba(56, 189, 248, 0.15);
-  color: #38BDF8;
-  border: 1px solid rgba(56, 189, 248, 0.25);
+  background: #F0F9FF;
+  color: #0284C7;
+  border: 1px solid #BAE6FD;
 }
 
 .kenali-result-tagline.type-et {
-  background: rgba(245, 158, 11, 0.15);
-  color: #FBBF24;
-  border: 1px solid rgba(245, 158, 11, 0.25);
+  background: #FEF3C7;
+  color: #D97706;
+  border: 1px solid #FDE68A;
 }
 
 .kenali-result-tagline.type-ef {
-  background: rgba(16, 185, 129, 0.15);
-  color: #34D399;
-  border: 1px solid rgba(16, 185, 129, 0.25);
+  background: #ECFDF5;
+  color: #059669;
+  border: 1px solid #A7F3D0;
 }
 
 .kenali-result-desc {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: #475569;
   line-height: 1.75;
-  max-width: 520px;
+  max-width: 540px;
   margin: 0 auto;
 }
 
-/* ---- Result Detail Cards (Glassmorphism) ---- */
+/* ---- Result Detail Cards (Solid White in Light Mode) ---- */
 .kenali-result-cards {
   display: flex;
   flex-direction: column;
@@ -736,18 +680,17 @@ body.dark-mode .kenali-page-bg .orb {
 }
 
 .kenali-detail-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #FFFFFF;
+  border: 1px solid rgba(226, 232, 240, 0.9);
   border-radius: var(--radius-xl);
   padding: var(--space-xl);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
   transition: all 0.3s ease;
 }
 
 .kenali-detail-card:hover {
-  border-color: rgba(255, 255, 255, 0.18);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-color: rgba(37, 99, 235, 0.2);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
   transform: translateY(-2px);
 }
 
@@ -769,39 +712,39 @@ body.dark-mode .kenali-page-bg .orb {
 }
 
 .kenali-detail-icon.icon-dimension {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(37, 99, 235, 0.1));
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(37, 99, 235, 0.08));
 }
 
 .kenali-detail-icon.icon-dimension .material-symbols-rounded {
   font-size: 22px;
-  color: var(--secondary-accent);
+  color: #0284C7;
 }
 
 .kenali-detail-icon.icon-strength {
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.08));
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.08));
 }
 
 .kenali-detail-icon.icon-strength .material-symbols-rounded {
   font-size: 22px;
-  color: #FBBF24;
+  color: #D97706;
 }
 
 .kenali-detail-icon.icon-tips {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.08));
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08));
 }
 
 .kenali-detail-icon.icon-tips .material-symbols-rounded {
   font-size: 22px;
-  color: #34D399;
+  color: #059669;
 }
 
 .kenali-detail-title {
   font-size: 1.0625rem;
-  font-weight: 700;
-  color: #FFFFFF;
+  font-weight: 750;
+  color: #1A2F4E;
 }
 
-/* ---- Enhanced Dimension Bars (On-theme) ---- */
+/* ---- Enhanced Dimension Bars ---- */
 .kenali-dimension-item {
   margin-bottom: var(--space-xl);
 }
@@ -818,14 +761,14 @@ body.dark-mode .kenali-page-bg .orb {
 
 .kenali-dimension-label {
   font-size: 0.8125rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.7);
+  font-weight: 650;
+  color: #475569;
 }
 
 .kenali-dimension-track {
   width: 100%;
   height: 10px;
-  background: rgba(255, 255, 255, 0.08);
+  background: #F1F5F9;
   border-radius: var(--radius-full);
   overflow: hidden;
   position: relative;
@@ -851,10 +794,10 @@ body.dark-mode .kenali-page-bg .orb {
   margin-top: var(--space-sm);
   font-size: 0.8125rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
+  color: #64748B;
 }
 
-/* ---- Strength Chips (On-theme warm amber) ---- */
+/* ---- Strength Chips ---- */
 .kenali-strength-chips {
   display: flex;
   flex-wrap: wrap;
@@ -866,17 +809,18 @@ body.dark-mode .kenali-page-bg .orb {
   align-items: center;
   gap: 6px;
   padding: 0.5rem 1rem;
-  background: rgba(245, 158, 11, 0.1);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  background: #FEF3C7;
+  border: 1px solid #FDE68A;
   border-radius: var(--radius-full);
   font-size: 0.8125rem;
-  font-weight: 600;
-  color: #FBBF24;
+  font-weight: 650;
+  color: #B45309;
   transition: all 0.25s ease;
 }
 
 .kenali-strength-chip .material-symbols-rounded {
   font-size: 16px;
+  color: #D97706;
 }
 
 .kenali-strength-chip:hover {
@@ -901,24 +845,24 @@ body.dark-mode .kenali-page-bg .orb {
   width: 32px;
   height: 32px;
   border-radius: var(--radius-md);
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.8125rem;
-  font-weight: 700;
-  color: #34D399;
+  font-weight: 750;
+  color: #059669;
   flex-shrink: 0;
 }
 
 .kenali-tip-text {
   font-size: 0.9375rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: #334155;
   line-height: 1.65;
 }
 
-/* ---- Result Action Buttons (On-theme) ---- */
+/* ---- Result Action Buttons ---- */
 .kenali-result-actions {
   display: flex;
   gap: var(--space-md);
@@ -953,19 +897,19 @@ body.dark-mode .kenali-page-bg .orb {
   align-items: center;
   gap: var(--space-sm);
   padding: 0.875rem 1.75rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: rgba(255, 255, 255, 0.8);
+  background: #F1F5F9;
+  border: 1px solid #CBD5E1;
+  color: #334155;
   border-radius: var(--radius-full);
   font-size: 0.9375rem;
-  font-weight: 600;
+  font-weight: 650;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .kenali-btn-retake:hover {
-  background: rgba(255, 255, 255, 0.14);
-  color: #FFFFFF;
+  background: #E2E8F0;
+  color: #0F172A;
   transform: translateY(-2px);
 }
 
@@ -1161,15 +1105,35 @@ body.dark-mode .kenali-question-text,
 html.dark-mode .kenali-result-name,
 body.dark-mode .kenali-result-name,
 html.dark-mode .kenali-card-title,
-body.dark-mode .kenali-card-title {
+body.dark-mode .kenali-card-title,
+html.dark-mode .kenali-detail-title,
+body.dark-mode .kenali-detail-title {
   color: #F8FAFC !important;
 }
 
 html.dark-mode .personality-preview-tag,
 body.dark-mode .personality-preview-tag,
 html.dark-mode .kenali-card-text,
-body.dark-mode .kenali-card-text {
+body.dark-mode .kenali-card-text,
+html.dark-mode .kenali-result-desc,
+body.dark-mode .kenali-result-desc,
+html.dark-mode .kenali-dimension-label,
+body.dark-mode .kenali-dimension-label,
+html.dark-mode .kenali-tip-text,
+body.dark-mode .kenali-tip-text {
   color: #CBD5E1 !important;
+}
+
+html.dark-mode .kenali-dimension-track,
+body.dark-mode .kenali-dimension-track {
+  background: #0F172A !important;
+}
+
+html.dark-mode .kenali-btn-retake,
+body.dark-mode .kenali-btn-retake {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+  color: #F8FAFC !important;
 }
 
 html.dark-mode .kenali-option,

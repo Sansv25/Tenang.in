@@ -1,0 +1,21 @@
+# Documentation / PRDs & Briefs
+PRD*
+PRD_*.md
+AI_EXECUTION_BRIEF*
+AI_EXECUTION_BRIEF_fix_landing_dan_clean_code.md
+
+# Editor / Tooling
+.antigravity/
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs & Temp
+*.log
+node_modules/

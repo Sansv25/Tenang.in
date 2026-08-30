@@ -3,34 +3,9 @@
    ============================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // ---- Preloader (Loading Screen) Logic ----
-  const preloader = document.getElementById('preloader');
-
-  if (preloader) {
-    const finishPreloader = () => {
-      preloader.classList.add('fade-out');
-
-      // Scroll to top so page starts at the very top
-      window.scrollTo(0, 0);
-
-      // Let body scroll again
-      document.body.classList.remove('preloader-active');
-
-      // Remove element from DOM after transition
-      setTimeout(() => {
-        preloader.style.display = 'none';
-
-        // Trigger reveal for hero elements immediately
-        const heroReveals = document.querySelectorAll('#hero .reveal');
-        heroReveals.forEach(el => el.classList.add('active'));
-      }, 800);
-    };
-
-    // Simple 1.5 second delay then fade out
-    setTimeout(finishPreloader, 1500);
-  } else {
-    document.body.classList.remove('preloader-active');
-  }
+  document.body.classList.remove('preloader-active');
+  const heroReveals = document.querySelectorAll('#hero .reveal');
+  heroReveals.forEach(el => el.classList.add('active'));
 
   // ---- Landing Navbar Scroll Effect ----
   const landingNav = document.getElementById('landing-navbar');

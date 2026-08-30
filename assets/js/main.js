@@ -13,37 +13,57 @@ const Main = (() => {
     <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#7EC8E3"/><stop offset="1" stop-color="#2D5BA8"/></linearGradient></defs>
   </svg>`;
 
-  // ---- Welcome Screen ----
+  // ---- Welcome Screen (Video Splash Loader) ----
   const showWelcomeScreen = () => {
-    if (sessionStorage.getItem('tenang_welcomed')) return;
-
     const overlay = document.createElement('div');
     overlay.className = 'welcome-screen';
     overlay.id = 'welcome-screen';
     overlay.innerHTML = `
-      <div class="welcome-logo">
-        <svg width="80" height="80" viewBox="0 0 32 32" fill="none">
-          <circle cx="16" cy="16" r="15" fill="url(#wlGrad)" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
-          <path d="M10 18 C10 14, 13 11, 16 11 C19 11, 22 14, 22 18" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
-          <circle cx="12.5" cy="15" r="1.2" fill="white"/>
-          <circle cx="19.5" cy="15" r="1.2" fill="white"/>
-          <path d="M13 20 Q16 23, 19 20" stroke="white" stroke-width="1.2" stroke-linecap="round" fill="none"/>
-          <defs><linearGradient id="wlGrad" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#7EC8E3"/><stop offset="1" stop-color="#2D5BA8"/></linearGradient></defs>
-        </svg>
-        <h1 style="font-size:2.5rem; margin-top:1rem; font-weight:800; letter-spacing:-0.02em;">Tenang.in</h1>
+      <div class="welcome-video-wrapper">
+        <video id="welcome-video" 
+               src="assets/VIDEO/load.mov" 
+               autoplay 
+               playsinline 
+               muted 
+               aria-label="Loading Tenang.in" 
+               class="welcome-video-player"></video>
       </div>
-      <p class="welcome-tagline" data-i18n="welcome.tagline">Ruang amanmu untuk refleksi diri</p>
     `;
     document.body.appendChild(overlay);
 
-    setTimeout(() => {
+    const video = overlay.querySelector('#welcome-video');
+    let dismissed = false;
+
+    const dismissOverlay = () => {
+      if (dismissed) return;
+      dismissed = true;
       overlay.classList.add('fade-out');
       setTimeout(() => {
         overlay.remove();
       }, 600);
-    }, 2500);
+    };
 
-    sessionStorage.setItem('tenang_welcomed', 'true');
+    if (video) {
+      // Transition out when video finishes playing (no loop)
+      video.addEventListener('ended', dismissOverlay);
+
+      // Set timeout dynamically based on video duration
+      video.addEventListener('loadedmetadata', () => {
+        if (video.duration && !isNaN(video.duration) && video.duration > 0) {
+          setTimeout(dismissOverlay, Math.round(video.duration * 1000) + 200);
+        }
+      });
+
+      // Attempt playback
+      video.play().catch(() => {
+        setTimeout(dismissOverlay, 2500);
+      });
+
+      // Global safety timeout
+      setTimeout(dismissOverlay, 5000);
+    } else {
+      setTimeout(dismissOverlay, 2500);
+    }
   };
 
   // ---- Navbar ----
@@ -389,9 +409,10 @@ const Main = (() => {
 
   // ---- Init Page ----
   const initPage = async (pageName, options = {}) => {
-    const { showWelcome = true, showNav = true, showFooter = true, showTeman = true } = options;
+    const isLandingPage = (pageName === 'landing' || pageName === 'index' || window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname.endsWith('/'));
+    const { showWelcome = isLandingPage, showNav = true, showFooter = true, showTeman = true } = options;
 
-    if (showWelcome) showWelcomeScreen();
+    if (showWelcome && isLandingPage) showWelcomeScreen();
     if (showNav) {
       createNavbar(pageName);
       createBottomNav(pageName);
@@ -617,6 +638,24 @@ document.addEventListener('click', (event) => {
       break;
     case 'start-profil-quiz':
       if (typeof startProfilQuiz === 'function') startProfilQuiz();
+      break;
+    case 'open-share-streak':
+      if (typeof openShareStreakModal === 'function') openShareStreakModal();
+      break;
+    case 'close-share-streak-modal':
+      document.getElementById('share-streak-modal')?.classList.remove('active');
+      break;
+    case 'change-streak-share-theme':
+      if (typeof changeStreakShareTheme === 'function') changeStreakShareTheme(trigger.dataset.theme, trigger);
+      break;
+    case 'copy-streak-share':
+      if (typeof copyStreakShare === 'function') copyStreakShare();
+      break;
+    case 'simulate-streak-share':
+      if (typeof simulateStreakShare === 'function') simulateStreakShare();
+      break;
+    case 'generate-streak-caption':
+      if (typeof generateStreakCaption === 'function') generateStreakCaption();
       break;
     default:
       break;

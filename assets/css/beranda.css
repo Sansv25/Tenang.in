@@ -130,7 +130,7 @@
 .streak-badge .fire-icon {
   color: #EA580C;
   font-size: 18px !important;
-  animation: pulseFire 2s infinite ease-in-out;
+  animation: none !important;
 }
 
 @keyframes pulseFire {
@@ -254,123 +254,7 @@
   transform: translateY(-2px);
 }
 
-.mood-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: var(--space-md);
-}
 
-.mood-card-item {
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
-  border-radius: var(--radius-lg);
-  padding: var(--space-md) var(--space-sm);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 8px;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.mood-card-item:hover {
-  transform: translateY(-4px) scale(1.03);
-  z-index: 2;
-}
-
-/* Clean Pastel Glows by Mood Level */
-.mood-1:hover {
-  background: #FFF1F2;
-  border-color: #FDA4AF;
-  box-shadow: 0 8px 20px rgba(244, 63, 94, 0.15);
-}
-
-.mood-2:hover {
-  background: #FFF7ED;
-  border-color: #FDBA74;
-  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.15);
-}
-
-.mood-3:hover {
-  background: #F0F9FF;
-  border-color: #7DD3FC;
-  box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
-}
-
-.mood-4:hover {
-  background: #ECFDF5;
-  border-color: #6EE7B7;
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
-}
-
-.mood-5:hover {
-  background: #FAF5FF;
-  border-color: #C084FC;
-  box-shadow: 0 8px 20px rgba(168, 85, 247, 0.2);
-}
-
-.mood-card-icon {
-  font-size: 36px;
-  transition: transform 0.3s ease;
-}
-
-.mood-card-mascot-img {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  filter: drop-shadow(0 3px 8px rgba(0,0,0,0.12));
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.mood-card-item:hover .mood-card-mascot-img {
-  transform: scale(1.15) rotate(5deg);
-}
-
-@media (max-width: 640px) {
-  .mood-card-mascot-img {
-    width: 48px;
-    height: 48px;
-  }
-}
-
-/* ---- Checked-In State Mascot (Responsive & Prominent) ---- */
-.checked-in-mascot-img {
-  width: 170px;
-  height: 170px;
-  object-fit: contain;
-  filter: drop-shadow(0 10px 28px rgba(0, 0, 0, 0.15));
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.checked-in-mascot-img:hover {
-  transform: scale(1.08) rotate(3deg);
-}
-
-@media (max-width: 768px) {
-  .checked-in-mascot-img {
-    width: 140px;
-    height: 140px;
-  }
-}
-
-.mood-card-item:hover .mood-card-icon {
-  transform: scale(1.15) rotate(6deg);
-}
-
-.mood-card-label {
-  font-weight: 800;
-  font-size: 0.85rem;
-  color: #0F172A;
-}
-
-.mood-card-sub {
-  font-size: 0.72rem;
-  color: #64748B;
-  margin-top: -3px;
-}
 
 /* ---- Bento Grid Section ---- */
 .bento-container {
@@ -400,17 +284,7 @@
   box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 4px 10px -3px rgba(15, 23, 42, 0.03);
 }
 
-.bento-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #3B82F6, #60A5FA);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
+
 
 .bento-item:hover {
   transform: translateY(-4px);
@@ -419,9 +293,7 @@
   background: #FFFFFF;
 }
 
-.bento-item:hover::before {
-  opacity: 1;
-}
+
 
 .bento-wide {
   grid-column: span 2;
@@ -429,9 +301,7 @@
   border: 1.5px solid #E9D5FF;
 }
 
-.bento-wide::before {
-  background: linear-gradient(90deg, #9333EA, #C084FC);
-}
+
 
 .bento-wide:hover {
   border-color: #C084FC;
@@ -538,7 +408,6 @@
   transition: all 0.25s ease;
   margin-top: 12px;
   padding-left: 12px;
-  border-left: 3px solid #3B82F6;
 }
 
 .quote-text {
@@ -891,7 +760,32 @@
 .streak-badge-floating .fire-icon {
   color: #F59E0B;
   font-size: 22px !important;
-  animation: pulseFire 2s infinite ease-in-out;
+  animation: none !important;
+}
+
+.btn-streak-share {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: rgba(245, 158, 11, 0.22);
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  color: #FDE68A;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: 2px;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.2);
+  flex-shrink: 0;
+}
+
+.btn-streak-share:hover {
+  background: #F59E0B;
+  color: #0F172A;
+  border-color: #F59E0B;
+  transform: scale(1.1);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4);
 }
 
 /* ---- Bottom Logout Section in Footer ---- */

@@ -225,6 +225,7 @@
 .lang-flag {
   font-size: 1.25rem;
   line-height: 1;
+  color: #0F172A;
 }
 
 .lang-name {
@@ -566,7 +567,9 @@ body.dark-mode .settings-lang-btn:hover {
 }
 
 html.dark-mode .lang-name,
-body.dark-mode .lang-name {
+body.dark-mode .lang-name,
+html.dark-mode .lang-flag,
+body.dark-mode .lang-flag {
   color: #F8FAFC !important;
 }
 

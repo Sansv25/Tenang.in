@@ -75,9 +75,12 @@
         </p>
         <!-- Status Streak & Mood Today (Streak Anchored Left for Zero CLS) -->
         <div class="hero-badges-row">
-          <div class="streak-badge-floating" id="streak-display" style="display:inline-flex;">
+          <div class="streak-badge-floating" id="streak-display" style="display:inline-flex; align-items:center; gap:8px;">
             <span class="material-symbols-rounded fire-icon">local_fire_department</span>
             <span><span id="streak-count" style="color:#FBBF24;">0</span> hari beruntun</span>
+            <button class="btn-streak-share" data-action="open-share-streak" title="Bagikan Streak Refleksi" aria-label="Bagikan Streak">
+              <span class="material-symbols-rounded" style="font-size:15px;">share</span>
+            </button>
           </div>
           <div id="mood-today-summary" style="display:inline-flex; align-items:center; gap:8px;"></div>
         </div>
@@ -498,6 +501,101 @@
       <button class="btn btn-primary btn-full"
         data-action="close-streak-modal"
         style="font-weight:700;">Lanjutkan</button>
+    </div>
+  </div>
+
+  <!-- ======= STREAK SHARE MODAL ======= -->
+  <div class="modal-overlay" id="share-streak-modal">
+    <div class="modal" style="max-width:440px;">
+      <div class="modal-header">
+        <h2 style="font-size:var(--h3-size); font-weight:700; color:var(--text-on-white); display:flex; align-items:center; gap:8px;">
+          <span class="material-symbols-rounded" style="color:#F59E0B;">local_fire_department</span>
+          <span>Bagikan Streak Refleksi</span>
+        </h2>
+        <button class="modal-close" data-action="close-share-streak-modal" aria-label="Tutup Modal">
+          <span class="material-symbols-rounded">close</span>
+        </button>
+      </div>
+
+      <!-- Color Customization Selector -->
+      <div style="margin-bottom:var(--space-md); text-align:center;">
+        <p style="font-size:0.875rem; color:var(--text-secondary); margin-bottom:var(--space-sm); font-weight:600;">
+          Sesuaikan Tema Warna
+        </p>
+        <div style="display:flex; justify-content:center; gap:12px;" id="streak-share-theme-selector">
+          <button data-action="change-streak-share-theme" data-theme="sunset"
+            style="width:32px; height:32px; border-radius:50%; border:2px solid #fff; cursor:pointer; background: linear-gradient(135deg, #F97316, #EF4444); box-shadow:0 2px 8px rgba(0,0,0,0.3); transform:scale(1.1);"
+            aria-label="Tema Api Senja"></button>
+          <button data-action="change-streak-share-theme" data-theme="blue"
+            style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #2D5BA8, #7EC8E3); box-shadow:0 2px 8px rgba(0,0,0,0.3);"
+            aria-label="Tema Biru"></button>
+          <button data-action="change-streak-share-theme" data-theme="midnight"
+            style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #0F172A, #1E293B, #334155); box-shadow:0 2px 8px rgba(0,0,0,0.3);"
+            aria-label="Tema Malam"></button>
+          <button data-action="change-streak-share-theme" data-theme="forest"
+            style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #059669, #10B981, #34D399); box-shadow:0 2px 8px rgba(0,0,0,0.3);"
+            aria-label="Tema Hutan"></button>
+          <button data-action="change-streak-share-theme" data-theme="purple"
+            style="width:32px; height:32px; border-radius:50%; border:2px solid transparent; cursor:pointer; background: linear-gradient(135deg, #7E22CE, #A855F7, #EC4899); box-shadow:0 2px 8px rgba(0,0,0,0.3);"
+            aria-label="Tema Ungu"></button>
+        </div>
+      </div>
+
+      <!-- Caption Customizer & AI Generator -->
+      <div style="margin-bottom:var(--space-md); text-align:left;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; flex-wrap:wrap; gap:6px;">
+          <span style="font-size:0.8rem; font-weight:750; color:var(--text-secondary);">Kesan Refleksi Harian:</span>
+          <button type="button" id="btn-generate-streak-ai" data-action="generate-streak-caption" style="background:linear-gradient(135deg, rgba(139,92,246,0.15), rgba(79,70,229,0.15)); border:1px solid rgba(139, 92, 246, 0.5); color:var(--primary-accent); border-radius:20px; padding:4px 12px; font-size:0.75rem; font-weight:750; display:inline-flex; align-items:center; gap:5px; cursor:pointer; transition:all 0.2s;">
+            <span class="material-symbols-rounded" style="font-size:15px; color:#8B5CF6;">auto_awesome</span>
+            <span>Generate Teman AI</span>
+          </button>
+        </div>
+        <textarea id="streak-caption-input" maxlength="80" rows="2" class="input textarea" placeholder="Ungkapkan kesan singkatmu (maks 80 karakter)..." style="min-height:54px; max-height:75px; background:var(--card-subtle); color:var(--text-on-white); border:1px solid var(--card-border); border-radius:12px; font-size:0.85rem; padding:8px 12px; width:100%; box-sizing:border-box; font-family:inherit; resize:none;"></textarea>
+      </div>
+
+      <!-- Streak Share Card Preview -->
+      <div id="streak-share-card-preview" class="share-card-preview"
+        style="background: linear-gradient(135deg, #F97316, #EF4444); transition: background 0.5s ease; text-align:center; padding: 28px 22px; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.25);">
+        
+        <div style="font-size: 0.75rem; font-weight: 850; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 12px;">
+          TENANG.IN • STREAK REFLEKSI
+        </div>
+
+        <div style="width: 72px; height: 72px; min-width: 72px; min-height: 72px; aspect-ratio: 1 / 1; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: 2px solid rgba(255, 255, 255, 0.4); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); flex-shrink: 0;">
+          <span class="material-symbols-rounded" style="font-size: 42px; color: #FFE4E6; filter: drop-shadow(0 4px 12px rgba(255,255,255,0.4));">local_fire_department</span>
+        </div>
+
+        <h3 id="streak-share-count-text" style="font-size: 2.3rem; font-weight: 900; color: #FFFFFF; margin: 0; line-height: 1.1; letter-spacing: -0.02em; text-shadow: 0 3px 10px rgba(0,0,0,0.3);">
+          1 HARI
+        </h3>
+
+        <div style="font-size: 0.9rem; font-weight: 800; color: #FFE4E6; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; margin-bottom: 14px;">
+          BERUNTUN KONSISTEN!
+        </div>
+
+        <p id="streak-share-caption-preview" style="font-size: 0.88rem; color: rgba(255,255,255,0.95); line-height: 1.5; font-weight: 500; max-width: 320px; margin: 0 auto 18px; font-style: italic; background: rgba(0,0,0,0.18); padding: 10px 14px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.22); word-break: break-word; white-space: pre-wrap;">
+          "Konsistensi menyapa dan merawat kesehatan mental harian di ruang aman Tenang.in."
+        </p>
+
+        <div style="border-top: 1px dashed rgba(255,255,255,0.35); padding-top: 12px; display: flex; justify-content: space-between; align-items: center;">
+          <div style="text-align: left;">
+            <div id="streak-share-username" style="font-size: 0.88rem; font-weight: 850; color: #FFFFFF;">User Tenang.in</div>
+            <div style="font-size: 0.72rem; color: rgba(255,255,255,0.78);" id="streak-share-date">30 Agustus 2026</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 800; color: #FFFFFF;">
+            Tenang.in
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:var(--space-md); margin-top:var(--space-lg);">
+        <button class="btn btn-secondary btn-full" data-action="copy-streak-share">
+          <span class="material-symbols-rounded">content_copy</span> Salin Teks
+        </button>
+        <button class="btn btn-primary btn-full" data-action="simulate-streak-share" style="background: linear-gradient(135deg, #F97316, #EF4444); border:none;">
+          <span class="material-symbols-rounded">share</span> Bagikan
+        </button>
+      </div>
     </div>
   </div>
 

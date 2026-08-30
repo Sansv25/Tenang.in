@@ -430,7 +430,7 @@ window.igniteCardFire = function() {
 
   if (statusEl) {
     statusEl.innerHTML = `
-      <span class="material-symbols-rounded animate-bounce" style="color:#EF4444; font-size:18px;">local_fire_department</span>
+      <span class="material-symbols-rounded" style="color:#EF4444; font-size:18px;">local_fire_department</span>
       Api berkobar! Memusnahkan beban dan amarahmu menjadi abu...
     `;
   }
