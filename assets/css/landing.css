@@ -3839,7 +3839,7 @@ body {
 }
 
 .mountain-layer.layer-back {
-  background-image: url('../img/mountain-back.png');
+  background-image: url('../img/mountain-back.jpg');
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
   mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
   bottom: 0;
@@ -3848,7 +3848,7 @@ body {
 }
 
 .mountain-layer.layer-mid {
-  background-image: url('../img/mountain-mid.png');
+  background-image: url('../img/mountain-mid.jpg');
   bottom: 0;
   z-index: 2;
   height: 100%;

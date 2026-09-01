@@ -47,6 +47,33 @@
 <body
   class="landing-page bg-gradient-to-b from-[#5B8FD4] via-[#3D6BAF] to-[#0B1528] min-h-screen text-white overflow-x-hidden">
 
+  <!-- ======= WELCOME SPLASH SCREEN (STATIC HTML FOR SUB-SECOND LCP) ======= -->
+  <script>
+    if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('tenang_seen_welcome_session')) {
+      document.write('<style>#welcome-screen{display:none !important;}</style>');
+    }
+  </script>
+  <div class="welcome-screen" id="welcome-screen">
+    <div class="welcome-content-container">
+      <div class="welcome-logo-glow"></div>
+      <div class="welcome-logo-wrapper">
+        <img id="welcome-logo-img" src="assets/img/logo/logo-icon.png" alt="Tenang.in Leaf Mark" class="welcome-logo-img" fetchpriority="high" decoding="async">
+      </div>
+      <h1 class="welcome-title" aria-label="Tenang.in">
+        <span class="welcome-char" style="animation-delay: 0.15s">T</span>
+        <span class="welcome-char" style="animation-delay: 0.20s">e</span>
+        <span class="welcome-char" style="animation-delay: 0.25s">n</span>
+        <span class="welcome-char" style="animation-delay: 0.30s">a</span>
+        <span class="welcome-char" style="animation-delay: 0.35s">n</span>
+        <span class="welcome-char" style="animation-delay: 0.40s">g</span>
+        <span class="welcome-char" style="animation-delay: 0.45s">.</span>
+        <span class="welcome-char" style="animation-delay: 0.50s">i</span>
+        <span class="welcome-char" style="animation-delay: 0.55s">n</span>
+      </h1>
+      <div class="welcome-subtitle">Ruang Aman Refleksi Diri</div>
+    </div>
+  </div>
+
   <!-- ======= PERSISTENT LANDING NAVBAR (DESKTOP & MOBILE) ======= -->
   <header class="landing-navbar" id="landing-navbar">
     <div class="landing-navbar-inner container">

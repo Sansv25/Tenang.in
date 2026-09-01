@@ -732,16 +732,6 @@ p {
   pointer-events: none;
 }
 
-.welcome-screen.welcome-loading .welcome-content-container {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.welcome-screen.welcome-ready .welcome-content-container {
-  opacity: 1;
-  visibility: visible;
-}
-
 .welcome-content-container {
   display: flex;
   flex-direction: column;
