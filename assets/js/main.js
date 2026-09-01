@@ -13,10 +13,10 @@ const Main = (() => {
     <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#7EC8E3"/><stop offset="1" stop-color="#2D5BA8"/></linearGradient></defs>
   </svg>`;
 
-  // ---- Welcome Screen (Custom Animated Kinetic Typography Splash Loader) ----
+  // ---- Welcome Screen (Custom Animated Kinetic Typography Splash Loader with Preloader Sync) ----
   const showWelcomeScreen = () => {
     const overlay = document.createElement('div');
-    overlay.className = 'welcome-screen';
+    overlay.className = 'welcome-screen welcome-loading';
     overlay.id = 'welcome-screen';
 
     const brandName = 'Tenang.in';
@@ -29,7 +29,7 @@ const Main = (() => {
       <div class="welcome-content-container">
         <div class="welcome-logo-glow"></div>
         <div class="welcome-logo-wrapper">
-          <img src="assets/img/logo/logo-icon.png" alt="Tenang.in Leaf Mark" class="welcome-logo-img">
+          <img id="welcome-logo-img" src="assets/img/logo/logo-icon.png" alt="Tenang.in Leaf Mark" class="welcome-logo-img">
         </div>
         <h1 class="welcome-title" aria-label="Tenang.in">${animatedTitleHTML}</h1>
         <div class="welcome-subtitle">Ruang Aman Refleksi Diri</div>
@@ -38,6 +38,15 @@ const Main = (() => {
     document.body.appendChild(overlay);
 
     let dismissed = false;
+    let animStarted = false;
+
+    const startAnimations = () => {
+      if (animStarted) return;
+      animStarted = true;
+      overlay.classList.remove('welcome-loading');
+      overlay.classList.add('welcome-ready');
+      setTimeout(dismissOverlay, 2500);
+    };
 
     const dismissOverlay = () => {
       if (dismissed) return;
@@ -48,8 +57,16 @@ const Main = (() => {
       }, 700);
     };
 
-    // Auto dismiss after animation duration (~2.4s)
-    setTimeout(dismissOverlay, 2400);
+    // Preload & decode image in memory before triggering animations
+    const logoImg = overlay.querySelector('#welcome-logo-img');
+    if (logoImg.complete && logoImg.naturalWidth !== 0) {
+      startAnimations();
+    } else {
+      logoImg.onload = startAnimations;
+      logoImg.onerror = startAnimations;
+      // Fallback safety trigger (max 300ms)
+      setTimeout(startAnimations, 300);
+    }
 
     // Click/tap to skip immediately
     overlay.addEventListener('click', dismissOverlay);
