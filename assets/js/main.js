@@ -13,25 +13,30 @@ const Main = (() => {
     <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#7EC8E3"/><stop offset="1" stop-color="#2D5BA8"/></linearGradient></defs>
   </svg>`;
 
-  // ---- Welcome Screen (Video Splash Loader) ----
+  // ---- Welcome Screen (Custom Animated Kinetic Typography Splash Loader) ----
   const showWelcomeScreen = () => {
     const overlay = document.createElement('div');
     overlay.className = 'welcome-screen';
     overlay.id = 'welcome-screen';
+
+    const brandName = 'Tenang.in';
+    const animatedTitleHTML = brandName.split('').map((char, i) => {
+      const delay = (0.25 + i * 0.07).toFixed(2);
+      return `<span class="welcome-char" style="animation-delay: ${delay}s">${char}</span>`;
+    }).join('');
+
     overlay.innerHTML = `
-      <div class="welcome-video-wrapper">
-        <video id="welcome-video" 
-               src="assets/VIDEO/load.mov" 
-               autoplay 
-               playsinline 
-               muted 
-               aria-label="Loading Tenang.in" 
-               class="welcome-video-player"></video>
+      <div class="welcome-content-container">
+        <div class="welcome-logo-glow"></div>
+        <div class="welcome-logo-wrapper">
+          <img src="assets/img/logo/logo-icon.png" alt="Tenang.in Leaf Mark" class="welcome-logo-img">
+        </div>
+        <h1 class="welcome-title" aria-label="Tenang.in">${animatedTitleHTML}</h1>
+        <div class="welcome-subtitle">Ruang Aman Refleksi Diri</div>
       </div>
     `;
     document.body.appendChild(overlay);
 
-    const video = overlay.querySelector('#welcome-video');
     let dismissed = false;
 
     const dismissOverlay = () => {
@@ -40,30 +45,14 @@ const Main = (() => {
       overlay.classList.add('fade-out');
       setTimeout(() => {
         overlay.remove();
-      }, 600);
+      }, 700);
     };
 
-    if (video) {
-      // Transition out when video finishes playing (no loop)
-      video.addEventListener('ended', dismissOverlay);
+    // Auto dismiss after animation duration (~2.4s)
+    setTimeout(dismissOverlay, 2400);
 
-      // Set timeout dynamically based on video duration
-      video.addEventListener('loadedmetadata', () => {
-        if (video.duration && !isNaN(video.duration) && video.duration > 0) {
-          setTimeout(dismissOverlay, Math.round(video.duration * 1000) + 200);
-        }
-      });
-
-      // Attempt playback
-      video.play().catch(() => {
-        setTimeout(dismissOverlay, 2500);
-      });
-
-      // Global safety timeout
-      setTimeout(dismissOverlay, 5000);
-    } else {
-      setTimeout(dismissOverlay, 2500);
-    }
+    // Click/tap to skip immediately
+    overlay.addEventListener('click', dismissOverlay);
   };
 
   // ---- Navbar ----
@@ -87,8 +76,7 @@ const Main = (() => {
     nav.innerHTML = `
       <div class="navbar-inner">
         <a href="index.html" class="navbar-logo">
-          ${logoSVG}
-          <span>Tenang.in</span>
+          <img src="assets/img/logo/logo-horizontal.png" alt="Tenang.in Logo" class="nav-logo-img">
         </a>
         <div class="navbar-links">
           ${links.map(l => `<a href="${l.href}" class="${activePage === l.id ? 'active' : ''}">${l.label}</a>`).join('')}
@@ -184,8 +172,7 @@ const Main = (() => {
         <div class="footer-grid">
           <div>
             <div class="footer-brand">
-              <span class="material-symbols-rounded" style="color:var(--secondary-accent); font-size:22px;">favorite</span>
-              <span>Tenang.in</span>
+              <img src="assets/img/logo/logo-horizontal.png" alt="Tenang.in Logo" class="nav-logo-img" style="height: 48px;">
             </div>
             <p class="footer-desc">Ruang digital untuk membantu remaja mengenali pola emosi, merefleksikan diri, dan merasa tidak sendirian.</p>
           </div>

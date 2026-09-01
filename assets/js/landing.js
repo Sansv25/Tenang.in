@@ -546,14 +546,14 @@ function initAuroraCanvas() {
   const arcs = [
     {
       // Primary Upper Snake Ribbon (Bright Glowing Base -> Thin Upward Shaft)
-      yBaseRatio: 0.32,
+      yBaseRatio: 0.38,
       freqX: 0.0014,
       freqX2: 0.0031,
       phaseShift: 0,
-      ampY: 75,
-      ampY2: 38,
+      ampY: 65,
+      ampY2: 30,
       speed: 0.0006,
-      rayHeightUp: 170,
+      rayHeightUp: 140,
       rayHeightDown: 30,
       alphaScale: 0.95,
       rayFreq1: 0.05,
@@ -563,8 +563,8 @@ function initAuroraCanvas() {
         { stop: 0.1, color: 'rgba(16, 185, 129, 0.25)' },  // Soft Downward Bleed
         { stop: 0.22, color: 'rgba(0, 245, 212, 0.98)' }, // Sharp Peak Bright Base Edge
         { stop: 0.45, color: 'rgba(56, 189, 248, 0.55)' }, // Mid Shaft - Thinner Cyan
-        { stop: 0.68, color: 'rgba(168, 85, 247, 0.28)' }, // Upper Shaft - Very Thin Violet
-        { stop: 0.88, color: 'rgba(236, 72, 153, 0.08)' },  // Top Tips - Faint Whisper Pink
+        { stop: 0.65, color: 'rgba(168, 85, 247, 0.18)' }, // Upper Shaft - Very Thin Violet
+        { stop: 0.82, color: 'rgba(236, 72, 153, 0.04)' },  // Top Tips - Faint Whisper Pink
         { stop: 1.0, color: 'rgba(0, 0, 0, 0)' }           // Space Dissipation
       ]
     },
@@ -690,6 +690,20 @@ function initAuroraCanvas() {
 document.addEventListener('DOMContentLoaded', () => {
   initCalmParticles();
   initAuroraCanvas();
+
+  // Replay hover GIF animation when hovering feature cards
+  document.querySelectorAll('.feature-card').forEach(card => {
+    const hoverGif = card.querySelector('.hover-gif');
+    if (hoverGif) {
+      card.addEventListener('mouseenter', () => {
+        const src = hoverGif.getAttribute('src');
+        if (src) {
+          hoverGif.src = '';
+          hoverGif.src = src;
+        }
+      });
+    }
+  });
 });
 
 // ---- Mountain Parallax 3-Layer (Chroma Key Green-Removal & Interaction Engine) ----

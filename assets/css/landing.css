@@ -750,6 +750,34 @@ body.preloader-active {
   flex-wrap: wrap;
 }
 
+/* Desktop Hero CTA Button Sizing & Micro-interactions */
+.hero-actions .btn-mulai-sekarang {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 1.05rem 2.4rem;
+  font-size: 1.15rem;
+  font-weight: 800;
+  border-radius: 9999px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22), 0 0 20px rgba(255, 255, 255, 0.25);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  white-space: nowrap;
+}
+
+.hero-actions .btn-mulai-sekarang:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 30px rgba(255, 255, 255, 0.4);
+}
+
+.hero-actions .btn-mulai-sekarang .btn-arrow-icon {
+  font-size: 1.35rem;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hero-actions .btn-mulai-sekarang:hover .btn-arrow-icon {
+  transform: translateX(6px);
+}
+
 @media (max-width: 991px) {
   .hero-actions {
     justify-content: center;
@@ -1129,6 +1157,8 @@ body.preloader-active {
   height: 100%;
   pointer-events: none;
   z-index: 1;
+  mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 95%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 95%);
 }
 
 .showcase-cloud {
@@ -1396,9 +1426,9 @@ body.preloader-active {
 
 .showcase-phone-glow {
   position: absolute;
-  inset: -12%;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, rgba(45, 91, 168, 0) 70%);
-  filter: blur(45px);
+  inset: -5%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(45, 91, 168, 0) 70%);
+  filter: blur(20px);
   z-index: 1;
   pointer-events: none;
   animation: showcaseGlowPulse 4s ease-in-out infinite alternate;
@@ -1406,13 +1436,13 @@ body.preloader-active {
 
 @keyframes showcaseGlowPulse {
   0% {
-    transform: scale(0.92);
-    opacity: 0.5;
+    transform: scale(0.95);
+    opacity: 0.4;
   }
 
   100% {
-    transform: scale(1.08);
-    opacity: 0.85;
+    transform: scale(1.02);
+    opacity: 0.65;
   }
 }
 
@@ -1422,7 +1452,7 @@ body.preloader-active {
   display: block;
   position: relative;
   z-index: 2;
-  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6));
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   animation: floatPhoneShowcase 6s ease-in-out infinite;
 }
@@ -1589,9 +1619,9 @@ body.preloader-active {
   height: 100%;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.9;
-  mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 75%, transparent 100%);
+  opacity: 0.95;
+  mask-image: linear-gradient(to bottom, transparent 0%, transparent 15%, black 35%, black 75%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 15%, black 35%, black 75%, transparent 100%);
 }
 
 .section-header {
@@ -1697,6 +1727,46 @@ body.preloader-active {
 .feature-icon span.material-symbols-rounded {
   color: #FFFFFF !important;
   font-size: 26px !important;
+}
+
+/* Animated GIF Feature Icons */
+.feature-icon-gif {
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-icon-gif .gif-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.feature-icon-gif .default-gif {
+  position: relative;
+  opacity: 1;
+  z-index: 1;
+}
+
+.feature-icon-gif .hover-gif {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.feature-card:hover .feature-icon-gif .default-gif {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.feature-card:hover .feature-icon-gif .hover-gif {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
 .feature-title {

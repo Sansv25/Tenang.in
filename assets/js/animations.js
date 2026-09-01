@@ -225,7 +225,7 @@ const Animations = (() => {
     const slot = overlay.querySelector('#celebration-video-slot');
 
     if (useVideo) {
-      stopVideo = playGreenScreenVideo(slot, 'assets/img/mp4/idle.mp4');
+      stopVideo = playGreenScreenVideo(slot, 'assets/img/anim-mascot/idle.mp4');
     } else {
       slot.innerHTML = `
         <div class="celebration-emoji">
