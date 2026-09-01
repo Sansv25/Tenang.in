@@ -13,18 +13,9 @@ const Main = (() => {
     <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#7EC8E3"/><stop offset="1" stop-color="#2D5BA8"/></linearGradient></defs>
   </svg>`;
 
-  // ---- Welcome Screen (Custom Animated Kinetic Typography Splash Loader with High-Priority LCP) ----
+  // ---- Welcome Screen (Custom Animated Kinetic Typography Splash Loader) ----
   const showWelcomeScreen = () => {
     let overlay = document.getElementById('welcome-screen');
-
-    // If repeat visit in same session, remove element immediately for 0ms LCP delay
-    if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('tenang_seen_welcome_session')) {
-      if (overlay) overlay.remove();
-      return;
-    }
-    if (typeof sessionStorage !== 'undefined') {
-      sessionStorage.setItem('tenang_seen_welcome_session', 'true');
-    }
 
     if (!overlay) {
       overlay = document.createElement('div');
