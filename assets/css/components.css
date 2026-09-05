@@ -191,6 +191,41 @@ body.dark-mode .btn-ghost {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
 }
 
+.btn-prompt-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #FFFFFF;
+  color: var(--primary-accent, #2563EB);
+  font-weight: 700;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-prompt-trigger:hover {
+  background: #FFFFFF;
+  color: var(--primary-hover, #1D4ED8);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+html.dark-mode .btn-prompt-trigger,
+body.dark-mode .btn-prompt-trigger {
+  background: rgba(30, 41, 59, 0.9);
+  color: #60A5FA;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+html.dark-mode .btn-prompt-trigger span.material-symbols-rounded,
+body.dark-mode .btn-prompt-trigger span.material-symbols-rounded {
+  color: #60A5FA !important;
+}
+
 /* ---- SVG Chart Crisp Text Styling ---- */
 #mood-chart svg text,
 #dashboard-chart svg text {
