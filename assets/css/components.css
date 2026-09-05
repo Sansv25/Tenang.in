@@ -2181,8 +2181,8 @@ padding: 0 !important;
 }
 
 .mood-card-item {
-  background: #F8FAFC;
-  border: 1px solid #E2E8F0;
+  background: #0F172A !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
   border-radius: var(--radius-lg);
   padding: var(--space-md) var(--space-sm);
   display: flex;
@@ -2201,35 +2201,35 @@ padding: 0 !important;
   z-index: 2;
 }
 
-/* Clean Pastel Glows by Mood Level */
+/* Clean Pastel Glows for Dark Cards */
 .mood-1:hover, .mood-1.selected {
-  background: #FFF1F2;
-  border-color: #FDA4AF;
-  box-shadow: 0 8px 20px rgba(244, 63, 94, 0.15);
+  background: rgba(239, 68, 68, 0.18) !important;
+  border-color: #EF4444 !important;
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.25) !important;
 }
 
 .mood-2:hover, .mood-2.selected {
-  background: #FFF7ED;
-  border-color: #FDBA74;
-  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.15);
+  background: rgba(249, 115, 22, 0.18) !important;
+  border-color: #F97316 !important;
+  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.25) !important;
 }
 
 .mood-3:hover, .mood-3.selected {
-  background: #F0F9FF;
-  border-color: #7DD3FC;
-  box-shadow: 0 8px 20px rgba(56, 189, 248, 0.15);
+  background: rgba(59, 130, 246, 0.18) !important;
+  border-color: #3B82F6 !important;
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25) !important;
 }
 
 .mood-4:hover, .mood-4.selected {
-  background: #ECFDF5;
-  border-color: #6EE7B7;
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.15);
+  background: rgba(16, 185, 129, 0.18) !important;
+  border-color: #10B981 !important;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25) !important;
 }
 
 .mood-5:hover, .mood-5.selected {
-  background: #FAF5FF;
-  border-color: #C084FC;
-  box-shadow: 0 8px 20px rgba(168, 85, 247, 0.2);
+  background: rgba(139, 92, 246, 0.18) !important;
+  border-color: #8B5CF6 !important;
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25) !important;
 }
 
 .mood-card-icon {
@@ -2250,9 +2250,42 @@ padding: 0 !important;
 }
 
 @media (max-width: 640px) {
+  .mood-grid {
+    display: grid !important;
+    grid-template-columns: repeat(6, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .mood-card-item {
+    grid-column: span 2 !important;
+    padding: 10px 4px !important;
+    border-radius: 16px !important;
+    gap: 4px !important;
+  }
+
+  .mood-card-item:nth-child(4) {
+    grid-column: 1 / span 3 !important;
+  }
+
+  .mood-card-item:nth-child(5) {
+    grid-column: 4 / span 3 !important;
+  }
+
+  .mood-card-sub {
+    display: block !important;
+    font-size: 0.68rem !important;
+    color: #CBD5E1 !important;
+    margin-top: 2px !important;
+  }
+
+  .mood-card-label {
+    font-size: 0.8rem !important;
+    font-weight: 800 !important;
+  }
+
   .mood-card-mascot-img {
-    width: 48px;
-    height: 48px;
+    width: 44px !important;
+    height: 44px !important;
   }
 }
 
@@ -2263,12 +2296,12 @@ padding: 0 !important;
 .mood-card-label {
   font-weight: 800;
   font-size: 0.85rem;
-  color: #0F172A;
+  color: #FFFFFF !important;
 }
 
 .mood-card-sub {
   font-size: 0.72rem;
-  color: #64748B;
+  color: #CBD5E1 !important;
   margin-top: -3px;
 }
 

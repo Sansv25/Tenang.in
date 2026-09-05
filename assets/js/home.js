@@ -244,22 +244,17 @@ function updateMoodSummary() {
       `;
     }
 
-    if (checkinCtaBtn) {
-      checkinCtaBtn.style.display = 'none';
-    }
+    const checkinCtaWrapper = document.getElementById('checkin-cta-wrapper');
+    if (checkinCtaBtn) checkinCtaBtn.style.display = 'none';
+    if (checkinCtaWrapper) checkinCtaWrapper.style.display = 'none';
   } else {
     if (gridContainer && checkedInState) {
-      gridContainer.style.display = 'grid';
+      gridContainer.style.display = '';
       checkedInState.style.display = 'none';
     }
-    if (checkinCtaBtn) {
-      checkinCtaBtn.style.display = 'inline-flex';
-      checkinCtaBtn.innerHTML = `
-        <span class="material-symbols-rounded" style="font-size:18px;">add_circle</span>
-        <span>Buka Form Lengkap</span>
-      `;
-      checkinCtaBtn.onclick = () => showCheckInModal();
-    }
+    const checkinCtaWrapper = document.getElementById('checkin-cta-wrapper');
+    if (checkinCtaWrapper) checkinCtaWrapper.style.display = 'flex';
+    if (checkinCtaBtn) checkinCtaBtn.style.display = 'inline-flex';
   }
 }
 
@@ -267,11 +262,11 @@ window.resetMoodInHome = function () {
   const gridContainer = document.getElementById('mood-grid-container');
   const checkedInState = document.getElementById('mood-checked-in-state');
   const checkinCtaBtn = document.getElementById('checkin-cta-btn');
-  if (gridContainer) gridContainer.style.display = 'grid';
+  const checkinCtaWrapper = document.getElementById('checkin-cta-wrapper');
+  if (gridContainer) gridContainer.style.display = '';
   if (checkedInState) checkedInState.style.display = 'none';
-  if (checkinCtaBtn) {
-    checkinCtaBtn.style.display = 'inline-flex';
-  }
+  if (checkinCtaWrapper) checkinCtaWrapper.style.display = 'flex';
+  if (checkinCtaBtn) checkinCtaBtn.style.display = 'inline-flex';
   showCheckInModal();
 };
 

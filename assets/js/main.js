@@ -163,16 +163,17 @@ const Main = (() => {
     document.body.appendChild(bottomNav);
   };
 
-  // ---- Footer ----
-  const createFooter = () => {
+  // ---- Landing Footer ----
+  const createLandingFooter = () => {
+    if (document.querySelector('.footer, .app-footer')) return;
     const footer = document.createElement('footer');
-    footer.className = 'footer';
+    footer.className = 'footer landing-footer';
     footer.innerHTML = `
       <div class="container">
         <div class="footer-grid">
           <div>
             <div class="footer-brand">
-              <img src="assets/img/logo/logo-horizontal.png" alt="Tenang.in Logo" class="nav-logo-img" style="height: 48px;">
+              <img src="assets/img/logo/logo-horizontal.png" alt="Tenang.in Logo" class="nav-logo-img" style="height: 42px;">
             </div>
             <p class="footer-desc">Ruang digital untuk membantu remaja mengenali pola emosi, merefleksikan diri, dan merasa tidak sendirian.</p>
           </div>
@@ -195,9 +196,47 @@ const Main = (() => {
         <div class="footer-bottom">
           <p class="footer-disclaimer">
             <span class="material-symbols-rounded">warning</span>
-            <span>Tenang.in adalah ruang refleksi diri dan bukan pengganti konsultasi profesional. Jika kamu merasa butuh bantuan lebih, jangan ragu menghubungi psikolog atau konselor profesional. Seluruh data terenkripsi dan terjaga privasinya.</span>
+            <span>Tenang.in adalah ruang refleksi diri dan bukan pengganti konsultasi profesional. Jika kamu merasa butuh bantuan lebih, jangan ragu menghubungi psikolog atau konselor profesional.</span>
           </p>
           <p style="font-size:0.75rem; color:rgba(255,255,255,0.4);">© 2026 Tenang.in</p>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(footer);
+  };
+
+  // ---- App Page Footer (Beranda, Mood, Jurnal, Kenali, Dashboard, Profil, Pengaturan) ----
+  const createAppFooter = (pageName = 'app') => {
+    if (document.querySelector('.footer, .app-footer')) return;
+    const footer = document.createElement('footer');
+    footer.className = 'footer app-footer';
+    footer.innerHTML = `
+      <div class="container">
+        <div class="footer-grid app-footer-grid" style="grid-template-columns: 1fr 1fr; gap: var(--space-2xl);">
+          <div>
+            <div class="footer-brand" style="margin-bottom:12px;">
+              <img src="assets/img/logo/logo-horizontal.png" alt="Tenang.in Logo" class="nav-logo-img" style="height: 38px;">
+            </div>
+            <p class="footer-desc" style="max-width:360px; margin-bottom:0;">Ruang aman untuk merefleksikan perasaan, memantau mood, dan menemani hari-harimu.</p>
+          </div>
+          <div>
+            <div class="footer-title">Butuh Teman Cerita?</div>
+            <p style="font-size:0.8rem; color:#94A3B8; margin-bottom:12px; line-height:1.5;">Layanan darurat bebas pulsa 24 jam jika kamu membutuhkan bantuan profesional saat ini:</p>
+            <a href="tel:119" class="footer-link" style="color:#F59E0B; font-weight:700;"><span class="material-symbols-rounded" style="color:#F59E0B;">call</span> Layanan Sejiwa: 119 ext. 8</a>
+            <a href="tel:02178845555" class="footer-link"><span class="material-symbols-rounded">phone_iphone</span> Into The Light Indonesia</a>
+            <a href="https://www.halodoc.com" target="_blank" rel="noopener" class="footer-link"><span class="material-symbols-rounded">language</span> Konsultasi Halodoc</a>
+          </div>
+        </div>
+        <div class="footer-bottom" style="margin-top:24px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <p class="footer-disclaimer" style="margin:0; flex:1; min-width:240px;">
+            <span class="material-symbols-rounded" style="color:#F59E0B;">info</span>
+            <span>Tenang.in bukan pengganti konsultasi profesional.</span>
+          </p>
+          <div style="font-size:0.75rem; color:rgba(255,255,255,0.4); display:flex; gap:16px;">
+            <a href="kebijakan.html" style="color:rgba(255,255,255,0.5); text-decoration:none;">Privasi</a>
+            <a href="syarat.html" style="color:rgba(255,255,255,0.5); text-decoration:none;">Syarat & Ketentuan</a>
+            <span>© 2026 Tenang.in</span>
+          </div>
         </div>
       </div>
     `;
@@ -404,7 +443,13 @@ const Main = (() => {
       createNavbar(pageName);
       createBottomNav(pageName);
     }
-    if (showFooter) createFooter();
+    if (showFooter) {
+      if (isLandingPage) {
+        createLandingFooter();
+      } else {
+        createAppFooter(pageName);
+      }
+    }
     if (showTeman) await TemanChat.init();
 
     Animations.init();

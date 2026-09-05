@@ -2426,12 +2426,15 @@ body.preloader-active {
 }
 
 /* ---- Landing-specific footer adjustments ---- */
+.landing-footer,
 .landing-page .footer {
   background: #0B1528 !important;
   border-top: none !important;
   box-shadow: 0 -30px 50px rgba(11, 21, 40, 0.98);
   position: relative;
   z-index: 5;
+  padding: 3rem 0 2rem !important;
+  margin-top: 0 !important;
 }
 
 /* Landing page has no bottom nav, so move chatbot button down */
