@@ -1,5 +1,5 @@
 /* =============================================
-   Tenang.in — Landing Page Script
+   Tenang.in, Landing Page Script
    ============================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
           nextBtn.textContent = 'Mulai →';
         }
       } else {
-        // Last step — save to localStorage and redirect
+        // Last step, save to localStorage and redirect
         localStorage.setItem('tenang_returning', 'true');
         localStorage.setItem('tenang_isReturning', 'true');
         const modal = document.getElementById('onboarding-modal');
@@ -227,12 +227,18 @@ function showAuthModal() {
   if (modal) modal.classList.add('active');
 
   // Reset fields
+  const emailInput = document.getElementById('auth-email');
   const usernameInput = document.getElementById('auth-username');
   const passwordInput = document.getElementById('auth-password');
+  const confirmInput = document.getElementById('auth-confirm-password');
   const errorMsg = document.getElementById('auth-error-msg');
+  if (emailInput) emailInput.value = '';
   if (usernameInput) usernameInput.value = '';
   if (passwordInput) passwordInput.value = '';
+  if (confirmInput) confirmInput.value = '';
   if (errorMsg) errorMsg.style.display = 'none';
+
+  switchAuthTab(currentAuthTab || 'login');
 }
 
 function closeAuthModal() {
@@ -246,6 +252,11 @@ function switchAuthTab(tab) {
   const authSubtitle = document.getElementById('auth-subtitle');
   const authBtn = document.getElementById('auth-btn');
   const dividerText = document.getElementById('auth-divider-text');
+  const emailGroup = document.getElementById('auth-email-group');
+  const emailInput = document.getElementById('auth-email');
+  const usernameLabel = document.getElementById('auth-username-label');
+  const usernameIcon = document.getElementById('auth-username-icon');
+  const usernameInput = document.getElementById('auth-username');
   const confirmGroup = document.getElementById('auth-confirm-group');
   const confirmInput = document.getElementById('auth-confirm-password');
   const forgotWrap = document.getElementById('auth-forgot-wrap');
@@ -257,8 +268,18 @@ function switchAuthTab(tab) {
   if (tab === 'login') {
     if (authTitle) authTitle.textContent = 'Masuk ke Tenang.in';
     if (authSubtitle) authSubtitle.textContent = 'Mari lanjutkan perjalanan refleksi dirimu.';
-    if (dividerText) dividerText.textContent = 'ATAU MASUK DENGAN USERNAME';
+    if (dividerText) dividerText.textContent = 'ATAU MASUK DENGAN USERNAME / EMAIL';
     if (authBtn) authBtn.textContent = 'Masuk';
+
+    if (emailGroup) emailGroup.style.display = 'none';
+    if (emailInput) emailInput.required = false;
+
+    if (usernameLabel) usernameLabel.textContent = 'Username atau Email';
+    if (usernameIcon) usernameIcon.textContent = 'mail';
+    if (usernameInput) {
+      usernameInput.placeholder = 'Masukkan username atau email...';
+      usernameInput.removeAttribute('maxlength');
+    }
 
     if (confirmGroup) confirmGroup.style.display = 'none';
     if (confirmInput) confirmInput.required = false;
@@ -270,8 +291,18 @@ function switchAuthTab(tab) {
   } else {
     if (authTitle) authTitle.textContent = 'Daftar ke Tenang.in';
     if (authSubtitle) authSubtitle.textContent = 'Mulai langkah awal ruang amanmu hari ini.';
-    if (dividerText) dividerText.textContent = 'ATAU DAFTAR DENGAN USERNAME';
+    if (dividerText) dividerText.textContent = 'ATAU DAFTAR DENGAN EMAIL & USERNAME';
     if (authBtn) authBtn.textContent = 'Daftar Sekarang';
+
+    if (emailGroup) emailGroup.style.display = 'block';
+    if (emailInput) emailInput.required = true;
+
+    if (usernameLabel) usernameLabel.textContent = 'Username (Maksimal 10 Karakter)';
+    if (usernameIcon) usernameIcon.textContent = 'person';
+    if (usernameInput) {
+      usernameInput.placeholder = 'Username (maksimal 10 huruf)...';
+      usernameInput.setAttribute('maxlength', '10');
+    }
 
     if (confirmGroup) confirmGroup.style.display = 'block';
     if (confirmInput) confirmInput.required = true;
@@ -285,19 +316,14 @@ function switchAuthTab(tab) {
 
 function handleAuthSubmit(e) {
   e.preventDefault();
+  const emailInput = document.getElementById('auth-email');
   const usernameInput = document.getElementById('auth-username');
   const passwordInput = document.getElementById('auth-password');
   const confirmInput = document.getElementById('auth-confirm-password');
 
   if (!usernameInput || !passwordInput) return;
 
-  const username = usernameInput.value.trim();
   const password = passwordInput.value;
-
-  if (!username || !password) {
-    showAuthError('Username dan password harus diisi.');
-    return;
-  }
 
   // Load existing users
   let users = [];
@@ -309,25 +335,51 @@ function handleAuthSubmit(e) {
   }
 
   if (currentAuthTab === 'register') {
+    const email = emailInput ? emailInput.value.trim() : '';
+    const username = usernameInput.value.trim();
+
+    if (!email || !username || !password) {
+      showAuthError('Email, username, dan kata sandi wajib diisi.');
+      return;
+    }
+
+    if (!email.includes('@') || !email.includes('.')) {
+      showAuthError('Format email tidak valid.');
+      return;
+    }
+
+    if (username.length > 10) {
+      showAuthError('Username maksimal 10 karakter.');
+      return;
+    }
+
     if (confirmInput && confirmInput.value !== password) {
       showAuthError('Konfirmasi kata sandi tidak cocok!');
       return;
     }
 
-    // Check if user already exists
-    const exists = users.some(u => u.username.toLowerCase() === username.toLowerCase());
-    if (exists) {
-      showAuthError('Username/Email sudah terdaftar. Silakan pilih yang lain.');
+    // Check if email already exists
+    const emailExists = users.some(u => u.email && u.email.toLowerCase() === email.toLowerCase());
+    if (emailExists) {
+      showAuthError('Email ini sudah terdaftar. Silakan gunakan email lain atau masuk.');
+      return;
+    }
+
+    // Check if username already exists
+    const usernameExists = users.some(u => u.username && u.username.toLowerCase() === username.toLowerCase());
+    if (usernameExists) {
+      showAuthError('Username ini sudah terdaftar. Silakan pilih username lain.');
       return;
     }
 
     // Register user
-    users.push({ username, password });
+    users.push({ username, email, password });
     localStorage.setItem('tenang_users', JSON.stringify(users));
 
     // Save session
     localStorage.setItem('tenang_logged_in_user', username);
     localStorage.setItem('tenang_username', username);
+    localStorage.setItem('tenang_user_email', email);
 
     Animations.showToast('Pendaftaran berhasil! Mengalihkan ke ruang tenangmu...', 'success');
     closeAuthModal();
@@ -335,18 +387,31 @@ function handleAuthSubmit(e) {
       window.location.href = 'beranda.html';
     }, 800);
   } else {
-    // Login check
-    const user = users.find(u => u.username.toLowerCase() === username.toLowerCase() && u.password === password);
+    // Login check (Username OR Email)
+    const loginValue = usernameInput.value.trim();
+
+    if (!loginValue || !password) {
+      showAuthError('Username/Email dan kata sandi harus diisi.');
+      return;
+    }
+
+    const user = users.find(u => {
+      const matchUsername = u.username && u.username.toLowerCase() === loginValue.toLowerCase();
+      const matchEmail = u.email && u.email.toLowerCase() === loginValue.toLowerCase();
+      return (matchUsername || matchEmail) && u.password === password;
+    });
+
     if (!user) {
-      showAuthError('Username atau kata sandi yang Anda masukkan salah.');
+      showAuthError('Username/Email atau kata sandi yang Anda masukkan salah.');
       return;
     }
 
     // Save session
-    localStorage.setItem('tenang_logged_in_user', user.username);
-    localStorage.setItem('tenang_username', user.username);
+    localStorage.setItem('tenang_logged_in_user', user.username || loginValue);
+    localStorage.setItem('tenang_username', user.username || loginValue);
+    if (user.email) localStorage.setItem('tenang_user_email', user.email);
 
-    Animations.showToast(`Berhasil masuk! Selamat datang kembali, ${user.username}.`, 'success');
+    Animations.showToast(`Berhasil masuk! Selamat datang kembali, ${user.username || loginValue}.`, 'success');
     closeAuthModal();
     setTimeout(() => {
       window.location.href = 'beranda.html';

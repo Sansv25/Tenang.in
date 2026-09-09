@@ -1,7 +1,7 @@
 /* =============================================
-   Tenang.in — CLS (Cumulative Layout Shift) Fixes
+   Tenang.in, CLS (Cumulative Layout Shift) Fixes
    Applies to all non-index pages
-   v2.0 — Safe, well-audited, no side-effects
+   v2.0, Safe, well-audited, no side-effects
    ============================================= */
 
 /* ---- 1. Icon Font Stability ---- */
@@ -78,7 +78,7 @@ html.already-checked-in #checkin-cta-btn {
 /* These :empty rules activate BEFORE JS runs and reserve space,
    preventing the classic "content appears and pushes layout" CLS. */
 
-/* Beranda: daily-tip section — filled by home.js */
+/* Beranda: daily-tip section, filled by home.js */
 #daily-tip:empty {
   min-height: 145px;
   background: rgba(255, 255, 255, 0.05);
@@ -86,7 +86,7 @@ html.already-checked-in #checkin-cta-btn {
   margin-bottom: var(--space-2xl, 3rem);
 }
 
-/* Beranda: weekly mood summary — filled by home.js (Reserves 365px to prevent inspiration card CLS) */
+/* Beranda: weekly mood summary, filled by home.js (Reserves 365px to prevent inspiration card CLS) */
 #weekly-mood-summary-section {
   min-height: 365px;
 }
@@ -104,12 +104,12 @@ html.already-checked-in #checkin-cta-btn {
   display: inline-flex;
 }
 
-/* Dashboard: daily quote text — filled by dashboard.js */
+/* Dashboard: daily quote text, filled by dashboard.js */
 #daily-quote:empty {
   min-height: 60px;
 }
 
-/* Dashboard: badge grid — filled by dashboard.js */
+/* Dashboard: badge grid, filled by dashboard.js */
 #badge-grid:empty {
   min-height: 160px;
 }
@@ -138,12 +138,12 @@ html.already-checked-in #checkin-cta-btn {
   min-height: 200px;
 }
 
-/* Mood Tracker: insights section — filled by mood-tracker.js */
+/* Mood Tracker: insights section, filled by mood-tracker.js */
 #mood-insights:empty {
   min-height: 110px;
 }
 
-/* Jurnal: daily prompt section — filled by jurnal.js */
+/* Jurnal: daily prompt section, filled by jurnal.js */
 #jurnal-prompt:empty {
   min-height: 120px;
   background: rgba(255, 255, 255, 0.05);
@@ -151,12 +151,12 @@ html.already-checked-in #checkin-cta-btn {
   margin-bottom: var(--space-md, 1rem);
 }
 
-/* Jurnal: journal history list — filled by jurnal.js */
+/* Jurnal: journal history list, filled by jurnal.js */
 #jurnal-list:empty {
   min-height: 60px;
 }
 
-/* Kenali: quiz question card area — filled by kenali.js */
+/* Kenali: quiz question card area, filled by kenali.js */
 #kenali-questions:empty {
   min-height: 300px;
 }
@@ -201,7 +201,7 @@ html.already-checked-in #checkin-cta-btn {
   min-height: 30px;
 }
 
-/* ---- 6. Bottom Nav — Stable Padding Reservation ---- */
+/* ---- 6. Bottom Nav, Stable Padding Reservation ---- */
 /* Ensure page content never underlaps the bottom nav on mobile.
    This prevents CLS when the bottom nav appears after JS loads.
    We use !important to override any JS-set inline styles. */
@@ -231,16 +231,16 @@ html.already-checked-in #checkin-cta-btn {
 .reveal-right,
 .reveal-scale {
   /* visibility:visible ensures the element still occupies space.
-     DO NOT set display:none — that causes CLS.
+     DO NOT set display:none, that causes CLS.
      The existing opacity:0 in style.css handles initial hide state. */
   visibility: visible;
 }
 
-/* NOTE: Do NOT override .reveal.visible here — let style.css
+/* NOTE: Do NOT override .reveal.visible here, let style.css
    handle the full opacity+transform transition animation. */
 
 
-/* ---- 9. Transform Containment — Prevent Hover Reflow ---- */
+/* ---- 9. Transform Containment, Prevent Hover Reflow ---- */
 /* Card hover transforms (translateY) can cause CLS if they
    shift sibling elements. Use transform-style to isolate. */
 .card,
@@ -248,14 +248,14 @@ html.already-checked-in #checkin-cta-btn {
 .stat-card,
 .personality-preview-card,
 .bento-item {
-  /* Promote to composited layer — transform won't affect layout flow */
+  /* Promote to composited layer, transform won't affect layout flow */
   will-change: transform;
   /* Stabilize rendering context */
   transform: translateZ(0);
   backface-visibility: hidden;
 }
 
-/* ---- 10. Floating Elements — Stable Positioning ---- */
+/* ---- 10. Floating Elements, Stable Positioning ---- */
 
 /* Teman chat button: promote to GPU layer to prevent paint shifts */
 .teman-floating {
@@ -306,7 +306,7 @@ body.no-scroll {
   position: relative;
 }
 
-/* ---- 15. Dashboard Empty State — Prevent Layout Pop ---- */
+/* ---- 15. Dashboard Empty State, Prevent Layout Pop ---- */
 #empty-state {
   /* Smooth appearance, don't cause layout shift */
   transition: opacity 0.25s ease;
@@ -320,7 +320,7 @@ body.no-scroll {
   min-height: 400px;
 }
 
-/* Kenali quiz section — never collapses */
+/* Kenali quiz section, never collapses */
 #kenali-quiz {
   /* Start hidden but reserve space */
   min-height: 0;

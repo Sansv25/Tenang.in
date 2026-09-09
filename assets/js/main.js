@@ -1,5 +1,5 @@
 /* =============================================
-   Tenang.in — Main Global Script
+   Tenang.in, Main Global Script
    ============================================= */
 
 const Main = (() => {

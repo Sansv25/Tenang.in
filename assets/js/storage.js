@@ -1,5 +1,5 @@
 /* =============================================
-   Tenang.in — Mood Context Engine (storage.js)
+   Tenang.in, Mood Context Engine (storage.js)
    Central data layer for all pages
    ============================================= */
 
@@ -210,11 +210,17 @@ const Storage = (() => {
   };
 
   const setUserName = (name) => {
-    localStorage.setItem('tenang_username', name);
+    const cleaned = (name || '').trim().slice(0, 10);
+    localStorage.setItem('tenang_username', cleaned);
+  };
+
+  const getRawUserName = () => {
+    return (localStorage.getItem('tenang_username') || '').trim();
   };
 
   const getUserName = () => {
-    return localStorage.getItem('tenang_username') || '';
+    const name = getRawUserName();
+    return name || '';
   };
 
   const setUserAvatar = (dataUrl) => {
@@ -338,7 +344,7 @@ const Storage = (() => {
     getDominantTag, isFirstVisitToday, getStreak,
     getJournals, saveJournal, deleteJournal, getJournalCount,
     saveQuizResult, getQuizResult, getUserType, getKenaliType,
-    setUserName, getUserName, setUserAvatar, getUserAvatar,
+    setUserName, getUserName, getRawUserName, setUserAvatar, getUserAvatar,
     isNewUser, setReturning,
     incrementTemanSessions, getTemanSessions,
     getTimeCapsules, saveTimeCapsule, getRandomCapsule,

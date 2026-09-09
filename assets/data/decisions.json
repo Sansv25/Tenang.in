@@ -37,7 +37,7 @@
       ]
     },
     "feeling_sad": {
-      "message": "Sedih itu manusiawi, dan kamu berani mengakuinya — itu sudah langkah yang besar 💙\n\nKadang kita nggak perlu tahu kenapa sedih. Yang penting, kamu nggak harus melewati ini sendirian.",
+      "message": "Sedih itu manusiawi, dan kamu berani mengakuinya, itu sudah langkah yang besar 💙\n\nKadang kita nggak perlu tahu kenapa sedih. Yang penting, kamu nggak harus melewati ini sendirian.",
       "options": [
         { "text": "💭 Aku mau cerita lebih lanjut", "next": "sad_deeper" },
         { "text": "📝 Mungkin aku mau tulis di jurnal", "next": "suggest_journal" },
@@ -56,7 +56,7 @@
       ]
     },
     "angry": {
-      "message": "Marah itu emosi yang valid — artinya ada sesuatu yang penting buat kamu yang terasa dilanggar.\n\nSebelum bereaksi, coba tarik napas dalam 4 detik, tahan 4 detik, hembuskan 4 detik. Ulangi 3 kali.\n\nSudah lebih tenang?",
+      "message": "Marah itu emosi yang valid, artinya ada sesuatu yang penting buat kamu yang terasa dilanggar.\n\nSebelum bereaksi, coba tarik napas dalam 4 detik, tahan 4 detik, hembuskan 4 detik. Ulangi 3 kali.\n\nSudah lebih tenang?",
       "options": [
         { "text": "😌 Iya, lumayan", "next": "calm_after_anger" },
         { "text": "😤 Masih kesal", "next": "still_angry" },
@@ -65,7 +65,7 @@
       ]
     },
     "calm_after_anger": {
-      "message": "Bagus! 💙 Sekarang coba pikirin: apa yang sebenarnya bikin kamu kesal? Kadang di balik marah ada perasaan lain — kecewa, takut, atau lelah.\n\nMenulis bisa bantu kamu memproses ini.",
+      "message": "Bagus! 💙 Sekarang coba pikirin: apa yang sebenarnya bikin kamu kesal? Kadang di balik marah ada perasaan lain: kecewa, takut, atau lelah.\n\nMenulis bisa bantu kamu memproses ini.",
       "options": [
         { "text": "📝 Oke, aku mau coba tulis", "next": "suggest_journal" },
         { "text": "💡 Kasih tips mengelola emosi", "next": "anger_tips" },
@@ -73,7 +73,7 @@
       ]
     },
     "still_angry": {
-      "message": "Nggak apa-apa, emosi butuh waktu untuk diproses. Jangan paksa dirimu untuk langsung 'baik-baik aja'.\n\nYang penting sekarang: jangan ambil keputusan besar saat masih emosi. Istirahat dulu, ya 💙",
+      "message": "Nggak apa-apa, emosi butuh waktu untuk diproses. Jangan paksa dirimu untuk langsung baik-baik saja.\n\nYang penting sekarang: jangan ambil keputusan besar saat masih emosi. Istirahat dulu, ya 💙",
       "options": [
         { "text": "💡 Kasih tips mengelola emosi", "next": "anger_tips" },
         { "text": "🙏 Oke, terima kasih Teman", "next": "closing_care" },
@@ -81,7 +81,7 @@
       ]
     },
     "anger_tips": {
-      "message": "Beberapa tips mengelola emosi marah:\n\n🏃 Gerakkan tubuh — jalan kaki, push-up, atau stretching\n✍️ Tulis apa yang kamu rasakan tanpa sensor\n🎵 Dengerin musik yang match sama mood\n🧊 Pegang es batu — sensasi fisik bisa 'reset' emosi\n⏰ Beri diri waktu 20 menit sebelum merespon",
+      "message": "Beberapa tips mengelola emosi marah:\n\n🏃 Gerakkan tubuh (jalan kaki, push-up, atau stretching)\n✍️ Tulis apa yang kamu rasakan tanpa sensor\n🎵 Dengerin musik yang match sama mood\n🧊 Pegang es batu, sensasi fisik bisa reset emosi\n⏰ Beri diri waktu 20 menit sebelum merespon",
       "options": [
         { "text": "🙏 Terima kasih, helpful banget!", "next": "closing_positive" },
         { "text": "📝 Mau coba tulis di jurnal", "next": "suggest_journal" },
@@ -98,7 +98,7 @@
       ]
     },
     "lonely_deeper": {
-      "message": "Terkadang rasa sepi datang karena kita merasa nggak benar-benar 'dimengerti'. Kamu layak punya koneksi yang genuine 💙\n\nSatu langkah kecil: coba hubungi satu orang yang dulu bikin kamu nyaman. Kadang mereka juga menunggu kabar darimu.",
+      "message": "Terkadang rasa sepi datang karena kita merasa nggak benar-benar dimengerti. Kamu layak punya koneksi yang genuine 💙\n\nSatu langkah kecil: coba hubungi satu orang yang dulu bikin kamu nyaman. Kadang mereka juga menunggu kabar darimu.",
       "options": [
         { "text": "🙏 Terima kasih, aku mau coba", "next": "closing_positive" },
         { "text": "📝 Mau tulis perasaanku dulu", "next": "suggest_journal" },
@@ -106,14 +106,14 @@
       ]
     },
     "lonely_tips": {
-      "message": "Tips mengatasi rasa kesepian:\n\n📱 Kirim pesan ke satu teman — mulai dari yang kecil\n🎯 Ikut komunitas/klub yang sesuai minatmu\n📝 Tulis surat untuk dirimu sendiri\n🤝 Volunteer — membantu orang lain menciptakan koneksi\n💙 Ingat: kualitas > kuantitas dalam pertemanan",
+      "message": "Tips mengatasi rasa kesepian:\n\n📱 Kirim pesan ke satu teman (mulai dari yang kecil\n🎯 Ikut komunitas/klub yang sesuai minatmu\n📝 Tulis surat untuk dirimu sendiri\n🤝 Volunteer, membantu orang lain menciptakan koneksi\n💙 Ingat: kualitas > kuantitas dalam pertemanan",
       "options": [
         { "text": "🙏 Terima kasih, Teman", "next": "closing_positive" },
         { "text": "🔙 Kembali ke awal", "next": "root" }
       ]
     },
     "happy": {
-      "message": "Yeay! Senang dengar kamu lagi happy! 🎉 Momen bahagia itu berharga — yuk kita rayakan!",
+      "message": "Yeay! Senang dengar kamu lagi happy! 🎉 Momen bahagia itu berharga, yuk kita rayakan!",
       "options": [
         { "text": "📝 Aku mau tulis momen ini biar nggak lupa", "next": "suggest_journal_happy" },
         { "text": "🌟 Apa yang bikin aku senang hari ini", "next": "happy_explore" },
@@ -138,7 +138,7 @@
       ]
     },
     "confused": {
-      "message": "Bingung sama perasaan sendiri itu lebih umum dari yang kamu kira 💙 Emosi itu kompleks — kadang kita merasa beberapa hal sekaligus.",
+      "message": "Bingung sama perasaan sendiri itu lebih umum dari yang kamu kira 💙 Emosi itu kompleks, kadang kita merasa beberapa hal sekaligus.",
       "options": [
         { "text": "🎭 Aku merasa banyak emosi sekaligus", "next": "mixed_emotions" },
         { "text": "😶 Aku merasa mati rasa / kosong", "next": "numb" },
@@ -156,9 +156,9 @@
       ]
     },
     "numb": {
-      "message": "Merasa 'kosong' kadang adalah cara tubuhmu melindungi diri dari emosi yang terlalu berat 💙\n\nIni bukan berarti kamu rusak. Tubuhmu sedang istirahat dari perasaan.\n\nCoba mulai dari hal kecil: pegang sesuatu yang punya tekstur, atau minum air hangat. Rasakan sensasinya.",
+      "message": "Merasa hampa kadang adalah cara tubuhmu melindungi diri dari emosi yang terlalu berat 💙\n\nIni bukan berarti kamu rusak. Tubuhmu sedang istirahat dari perasaan.\n\nCoba mulai dari hal kecil: pegang sesuatu yang punya tekstur, atau minum air hangat. Rasakan sensasinya.",
       "options": [
-        { "text": "💡 Tips untuk 'merasa' lagi", "next": "numb_tips" },
+        { "text": "💡 Tips Terapi Perasaan", "next": "numb_tips" },
         { "text": "📞 Ini sudah lama, aku butuh bantuan", "next": "professional_help" },
         { "text": "🔙 Kembali ke awal", "next": "root" }
       ]
@@ -173,7 +173,7 @@
       ]
     },
     "mood_swings": {
-      "message": "Mood yang naik-turun itu sangat umum di usia remaja — hormonal, tekanan sosial, dan banyak hal lain bisa mempengaruhi 💙\n\nYang penting: kamu menyadari polanya. Itu sudah langkah besar!",
+      "message": "Mood yang naik-turun itu sangat umum di usia remaja, seperti faktor hormonal, tekanan sosial, dan banyak hal lain bisa mempengaruhi 💙\n\nYang penting: kamu menyadari polanya. Itu sudah langkah besar!",
       "options": [
         { "text": "📊 Aku mau track mood-ku", "next": "suggest_mood_tracker" },
         { "text": "💡 Tips stabilkan mood", "next": "mood_stability_tips" },
@@ -181,7 +181,7 @@
       ]
     },
     "mood_stability_tips": {
-      "message": "Tips menstabilkan mood:\n\n😴 Tidur 7-9 jam — ini fondasi segalanya\n🍎 Makan teratur, hindari skip meals\n📱 Kurangi doom scrolling\n🏃 Gerak badan teratur\n📝 Track mood harian — lihat polanya\n🧘 Latihan mindfulness 5 menit per hari\n\nKonsistensi kecil > perubahan besar yang nggak sustainable",
+      "message": "Tips menstabilkan mood:\n\n😴 Tidur 7-9 jam (ini fondasi segalanya\n🍎 Makan teratur, hindari skip meals\n📱 Kurangi doom scrolling\n🏃 Gerak badan teratur\n📝 Track mood harian, lihat polanya\n🧘 Latihan mindfulness 5 menit per hari\n\nKonsistensi kecil > perubahan besar yang nggak sustainable",
       "options": [
         { "text": "📊 Mau mulai track mood", "next": "suggest_mood_tracker" },
         { "text": "🙏 Terima kasih!", "next": "closing_positive" },
@@ -207,7 +207,7 @@
       ]
     },
     "tips_anxiety": {
-      "message": "Tips Mengatasi Kecemasan 😰\n\n🫁 Teknik napas 4-7-8: hirup 4 detik, tahan 7, hembuskan 8\n🖐️ Grounding 5-4-3-2-1: gunakan 5 indra\n✍️ Tulis kekhawatiranmu — pisahkan yang bisa vs nggak bisa dikontrol\n⏰ 'Worry window': 10 menit khusus untuk cemas, lalu stop\n🚶 Jalan kaki — gerakan membantu 'reset' pikiran\n💬 Bicara dengan seseorang yang kamu percaya",
+      "message": "Tips Mengatasi Kecemasan 😰\n\n🫁 Teknik napas 4-7-8: hirup 4 detik, tahan 7, hembuskan 8\n🖐️ Grounding 5-4-3-2-1: gunakan 5 indra\n✍️ Tulis kekhawatiranmu (pisahkan yang bisa vs tidak bisa dikontrol)\n⏰ Teknik Worry Window: 10 menit khusus untuk cemas, lalu stop\n🚶 Jalan kaki, gerakan membantu reset pikiran\n💬 Bicara dengan seseorang yang kamu percaya",
       "options": [
         { "text": "🧘 Latihan pernapasan sekarang", "next": "breathing" },
         { "text": "🙏 Terima kasih!", "next": "closing_positive" },
@@ -223,7 +223,7 @@
       ]
     },
     "tips_selfcare": {
-      "message": "Tips Self-Care Harian 💪\n\n💧 Minum air putih yang cukup\n🏃 15 menit gerak badan\n☀️ Paparan sinar matahari pagi\n📝 Journaling 5 menit\n🎵 Dengerin musik yang kamu suka\n🤝 Hubungi satu orang yang kamu sayangi\n😴 Tidur cukup — ini bukan kemewahan, ini kebutuhan",
+      "message": "Tips Self-Care Harian 💪\n\n💧 Minum air putih yang cukup\n🏃 15 menit gerak badan\n☀️ Paparan sinar matahari pagi\n📝 Journaling 5 menit\n🎵 Dengerin musik yang kamu suka\n🤝 Hubungi satu orang yang kamu sayangi\n😴 Tidur cukup, ini bukan kemewahan, ini kebutuhan",
       "options": [
         { "text": "🙏 Terima kasih!", "next": "closing_positive" },
         { "text": "📝 Mau mulai journaling", "next": "suggest_journal" },
@@ -249,7 +249,7 @@
       ]
     },
     "breathing_more": {
-      "message": "Nggak apa-apa, butuh latihan 💙 Coba lagi pelan-pelan — nggak ada yang salah kalau belum langsung terasa.\n\nAlternatif: coba teknik 'body scan' — dari ujung kaki ke kepala, sadari tiap bagian tubuhmu. Rilekskan yang tegang.",
+      "message": "Nggak apa-apa, butuh latihan 💙 Coba lagi pelan-pelan, nggak ada yang salah kalau belum langsung terasa.\n\nAlternatif: coba teknik Body Scan (dari ujung kaki ke kepala, sadari tiap bagian tubuhmu) Rilekskan yang tegang.",
       "options": [
         { "text": "📝 Mau coba tulis perasaanku", "next": "suggest_journal" },
         { "text": "📞 Aku butuh bicara dengan seseorang", "next": "professional_help" },
@@ -258,7 +258,7 @@
       ]
     },
     "suggest_journal": {
-      "message": "Menulis bisa membantu kamu memproses perasaan 📝\n\nKamu bisa mulai dari prompt yang sudah aku siapkan, atau tulis bebas — yang penting, jujur sama dirimu sendiri.\n\n💙 Semua tulisanmu privat dan terjaga keamanannya.",
+      "message": "Menulis bisa membantu kamu memproses perasaan 📝\n\nKamu bisa mulai dari prompt yang sudah aku siapkan, atau tulis bebas, yang penting, jujur sama dirimu sendiri.\n\n💙 Semua tulisanmu tersimpan dengan keamanan terjamin.",
       "options": [
         { "text": "✏️ Buka Ruang Jurnal", "next": "_navigate_jurnal" },
         { "text": "🙏 Nanti aja, terima kasih", "next": "closing_care" },
@@ -266,7 +266,7 @@
       ]
     },
     "suggest_journal_happy": {
-      "message": "Ide bagus! 📝 Menulis momen bahagia itu kayak bikin 'tabungan kebahagiaan' — nanti di hari yang berat, kamu bisa baca lagi dan ingat bahwa hari baik itu ada.\n\n💛 Yuk, abadikan momen ini!",
+      "message": "Ide bagus! 📝 Menulis momen bahagia itu kayak bikin tabungan kebahagiaan. Nanti di hari yang berat, kamu bisa baca lagi dan ingat bahwa hari baik itu ada.\n\n💛 Yuk, abadikan momen ini!",
       "options": [
         { "text": "✏️ Buka Ruang Jurnal", "next": "_navigate_jurnal" },
         { "text": "🙏 Nanti aja, thanks!", "next": "closing_positive" },
@@ -298,7 +298,7 @@
       ]
     },
     "professional_help": {
-      "message": "Kamu sangat berani mau mencari bantuan 💙 Itu bukan kelemahan, itu kekuatan.\n\n📞 Hotline Kesehatan Jiwa: 119 ext. 8\n📱 Into The Light: 021-7884-5555\n💬 Sejiwa: 119 ext. 8\n🌐 Halodoc — konsultasi psikolog online\n\nJangan ragu untuk menghubungi mereka ya. Kamu layak mendapat bantuan.",
+      "message": "Kamu sangat berani mau mencari bantuan 💙 Itu bukan kelemahan, itu kekuatan.\n\n📞 Hotline Kesehatan Jiwa: 119 ext. 8\n📱 Into The Light: 021-7884-5555\n💬 Sejiwa: 119 ext. 8\n🌐 Halodoc, konsultasi psikolog online\n\nJangan ragu untuk menghubungi mereka ya. Kamu layak mendapat bantuan.",
       "options": [
         { "text": "🙏 Terima kasih, Teman", "next": "closing_care" },
         { "text": "🔙 Kembali ke awal", "next": "root" }

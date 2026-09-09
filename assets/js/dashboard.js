@@ -1,5 +1,5 @@
 /* =============================================
-   Tenang.in — Dashboard Script
+   Tenang.in, Dashboard Script
    ============================================= */
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -106,7 +106,7 @@ function getDailyQuote() {
   if (avgMood <= 2 && lastMoods.length >= 3)
     return "Kamu sudah melewati hari-hari berat. Itu butuh kekuatan yang luar biasa. Bangga sama dirimu. 💙";
   if (streak >= 5)
-    return `${streak} hari berturut-turut check-in — kamu luar biasa konsisten! 🔥`;
+    return `${streak} hari berturut-turut check-in, kamu luar biasa konsisten! 🔥`;
   if (userType === 'malam' && hour >= 20)
     return "Malam yang tenang untuk pikiran yang jernih. Selamat merenung. 🌙";
   if (userType === 'pagi' && hour < 12)

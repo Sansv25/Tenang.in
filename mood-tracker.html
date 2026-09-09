@@ -5,43 +5,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
-    content="Tenang.in Mood Tracker — Lacak mood harianmu, lihat pola emosi dalam chart, dan dapatkan insight personal.">
+    content="Tenang.in Mood Tracker | Lacak mood harianmu, lihat pola emosi dalam chart, dan dapatkan insight personal.">
   <meta name="theme-color" content="#3B72C4">
-  <title>Mood Tracker — Tenang.in</title>
+  <title>Mood Tracker | Tenang.in</title>
   <link rel="icon" type="image/png" href="assets/img/logo/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- font-display=swap prevents CLS from web font loading -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-    rel="stylesheet">
-  <!-- Material Symbols: font-display=block reserves space, prevents icon-pop CLS -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" />
-  <!-- Tailwind CSS via CDN & Custom Theme Config -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#5B8FD4',
-            secondary: '#7EC8E3',
-            accent: '#2D5BA8',
-            cardText: '#1A2F4E',
-            moodWarning: '#F5A66D',
-            moodPositive: '#5BC4A0',
-          },
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"></noscript>
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/settings.css">
-  <!-- CLS Fix: reserves layout space, stabilizes font & dynamic content -->
   <link rel="stylesheet" href="assets/css/cls-fix.css">
 </head>
 
@@ -74,35 +50,35 @@
             Bagaimana perasaanmu hari ini?</h3>
           <div class="mood-grid" id="mood-emojis">
             <div class="mood-card-item mood-1" data-action="select-mood-tracker" data-mood="1">
-              <img src="assets/img/maskots/mascot-mood-1.png" alt="Buruk" class="mood-card-mascot-img">
+              <img src="assets/img/maskots/mascot-mood-1.png" alt="Buruk" class="mood-card-mascot-img" loading="lazy" decoding="async" width="56" height="56">
               <div>
                 <div class="mood-card-label">Buruk</div>
                 <div class="mood-card-sub">Sangat Berat</div>
               </div>
             </div>
             <div class="mood-card-item mood-2" data-action="select-mood-tracker" data-mood="2">
-              <img src="assets/img/maskots/mascot-mood-2.png" alt="Kurang" class="mood-card-mascot-img">
+              <img src="assets/img/maskots/mascot-mood-2.png" alt="Kurang" class="mood-card-mascot-img" loading="lazy" decoding="async" width="56" height="56">
               <div>
                 <div class="mood-card-label">Kurang</div>
                 <div class="mood-card-sub">Kurang Oke</div>
               </div>
             </div>
             <div class="mood-card-item mood-3" data-action="select-mood-tracker" data-mood="3">
-              <img src="assets/img/maskots/mascot-mood-3.png" alt="Biasa" class="mood-card-mascot-img">
+              <img src="assets/img/maskots/mascot-mood-3.png" alt="Biasa" class="mood-card-mascot-img" loading="lazy" decoding="async" width="56" height="56">
               <div>
                 <div class="mood-card-label">Biasa</div>
                 <div class="mood-card-sub">Normal & Stabil</div>
               </div>
             </div>
             <div class="mood-card-item mood-4" data-action="select-mood-tracker" data-mood="4">
-              <img src="assets/img/maskots/mascot-mood-4.png" alt="Baik" class="mood-card-mascot-img">
+              <img src="assets/img/maskots/mascot-mood-4.png" alt="Baik" class="mood-card-mascot-img" loading="lazy" decoding="async" width="56" height="56">
               <div>
                 <div class="mood-card-label">Baik</div>
                 <div class="mood-card-sub">Damai & Positif</div>
               </div>
             </div>
             <div class="mood-card-item mood-5" data-action="select-mood-tracker" data-mood="5">
-              <img src="assets/img/maskots/mascot-mood-5.png" alt="Luar Biasa" class="mood-card-mascot-img">
+              <img src="assets/img/maskots/mascot-mood-5.png" alt="Luar Biasa" class="mood-card-mascot-img" loading="lazy" decoding="async" width="56" height="56">
               <div>
                 <div class="mood-card-label">Luar Biasa</div>
                 <div class="mood-card-sub">Sangat Bahagia</div>
@@ -123,7 +99,7 @@
               <button class="tag-chip" data-action="toggle-mood-tag" data-tag="bingung">Bingung</button>
             </div>
             <textarea id="mood-note" class="input textarea" placeholder="Catatan (opsional)..."
-              style="margin-top:var(--space-md); min-height:80px;"></textarea>
+              aria-label="Catatan mood harian" style="margin-top:var(--space-md); min-height:80px;"></textarea>
             <button class="btn btn-primary btn-full" style="margin-top:var(--space-md);"
               data-action="submit-mood-tracker">Simpan Mood</button>
           </div>

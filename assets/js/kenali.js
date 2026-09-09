@@ -1,5 +1,5 @@
 /* =============================================
-   Tenang.in — Kenali Dirimu Quiz Script
+   Tenang.in, Kenali Dirimu Quiz Script
    Premium visual experience with rich animations
    ============================================= */
 
@@ -89,7 +89,7 @@ function renderQuestions() {
   if (progressSection) progressSection.style.display = 'block';
   updateProgressBar();
 
-  const optionLetters = ['A', 'B'];
+  const optionLetters = ['A', 'B', 'C', 'D'];
 
   quizData.questions.forEach((q, index) => {
     const slide = document.createElement('div');
@@ -97,15 +97,11 @@ function renderQuestions() {
     slide.dataset.index = index;
 
     slide.innerHTML = `
-      <div class="kenali-question-number">
-        <span class="material-symbols-rounded" style="font-size:14px;">quiz</span>
-        Pertanyaan ${index + 1} dari ${quizData.questions.length}
-      </div>
       <h3 class="kenali-question-text">${q.text}</h3>
       <div class="kenali-options-wrap">
         ${q.options.map((opt, i) => `
           <button class="kenali-option quiz-option" onclick="selectKenaliAnswer(${i})">
-            <span class="kenali-option-letter">${optionLetters[i]}</span>
+            <span class="kenali-option-letter">${optionLetters[i] || (i + 1)}</span>
             <span>${opt.text}</span>
           </button>
         `).join('')}
@@ -118,11 +114,17 @@ function renderQuestions() {
 function updateProgressBar() {
   const textEl = document.getElementById('kenali-progress-text');
   const barEl = document.getElementById('kenali-progress-bar');
+  const qNumEl = document.getElementById('kenali-q-num');
+  const qTotalEl = document.getElementById('kenali-q-total');
+
   if (textEl && barEl) {
     textEl.textContent = `${currentQuestion + 1} / ${quizData.questions.length}`;
     const percent = ((currentQuestion + 1) / quizData.questions.length) * 100;
     barEl.style.width = `${percent}%`;
   }
+  if (qNumEl) qNumEl.textContent = currentQuestion + 1;
+  if (qTotalEl && quizData && quizData.questions) qTotalEl.textContent = quizData.questions.length;
+
   updateStepDots();
 }
 
@@ -150,7 +152,7 @@ function selectKenaliAnswer(optIndex) {
     } else {
       calculateResult();
     }
-  }, 450);
+  }, 350);
 }
 
 // ---- Calculate Result ----
@@ -196,9 +198,9 @@ function showResult(type, resultScores, isNew = true) {
     Animations.showCelebration(iconName, `Kamu adalah ${result.name}!`);
   }
 
-  // Calculate dimension percentages
-  const iePercent = Math.round(((resultScores.IE + 6) / 12) * 100);
-  const tfPercent = Math.round(((resultScores.TF + 6) / 12) * 100);
+  // Calculate dimension percentages (for scores ranging -12 to +12)
+  const iePercent = Math.min(100, Math.max(0, Math.round(((resultScores.IE + 12) / 24) * 100)));
+  const tfPercent = Math.min(100, Math.max(0, Math.round(((resultScores.TF + 12) / 24) * 100)));
   const ieText = iePercent < 50 ? 'Cenderung Introvert' : iePercent > 50 ? 'Cenderung Ekstrovert' : 'Seimbang';
   const tfText = tfPercent < 50 ? 'Cenderung Thinker' : tfPercent > 50 ? 'Cenderung Feeler' : 'Seimbang';
 
@@ -251,15 +253,23 @@ function showResult(type, resultScores, isNew = true) {
           <div class="kenali-detail-icon icon-strength">
             <span class="material-symbols-rounded">star</span>
           </div>
-          <span class="kenali-detail-title">Kekuatanmu</span>
+          <div>
+            <span class="kenali-detail-title">Kekuatanmu</span>
+            <div style="font-size:0.75rem; color:#64748B; margin-top:2px;">Klik / hover untuk melihat penjelasan detail</div>
+          </div>
         </div>
         <div class="kenali-strength-chips">
-          ${result.strengths.map(s => `
-            <span class="kenali-strength-chip">
-              <span class="material-symbols-rounded">check_circle</span>
-              ${s}
-            </span>
-          `).join('')}
+          ${result.strengths.map(s => {
+            const exp = STRENGTH_EXPLANATIONS[s] || 'Kekuatan kepribadian unik yang membantumu berkembang dan menghadapi tantangan.';
+            const safeExp = exp.replace(/"/g, '&quot;');
+            return `
+              <button type="button" class="kenali-strength-chip" onclick="openStrengthModal('${s}')" title="Klik untuk penjelasan detail ${s}">
+                <span class="material-symbols-rounded">check_circle</span>
+                <span>${s}</span>
+                <span class="strength-tooltip-badge">${exp}</span>
+              </button>
+            `;
+          }).join('')}
         </div>
       </div>
 
@@ -380,3 +390,61 @@ window.simulateResultShare = window.simulateResultShare || function () {
     Animations.showToast('Hasil kuis berhasil dibagikan!', 'success');
   }, 1500);
 };
+
+// ---- Strength Detail Explanations Mapping ----
+const STRENGTH_EXPLANATIONS = {
+  "Analitis dan detail": "Kamu mampu mengurai masalah kompleks menjadi bagian-bagian logis dan melihat detail penting yang sering luput dari perhatian orang lain.",
+  "Mandiri dan fokus": "Kamu tidak tergantung pada dorongan eksternal untuk menyelesaikan tugas; fokusmu sangat kuat saat bekerja secara mandiri.",
+  "Pemikir strategis": "Kamu selalu berpikir beberapa langkah ke depan dan memperhitungkan dampak jangka panjang sebelum mengambil tindakan.",
+  "Tenang di bawah tekanan": "Dalam situasi panik atau darurat, pikiran logismu membantumu tetap tenang dan menemukan solusi yang jernih.",
+
+  "Empatik dan peka": "Kamu memiliki kepekaan luar biasa dalam merasakan suasana hati dan kebutuhan emosional orang-orang di sekitarmu.",
+  "Kreatif dan imajinatif": "Kedalaman emosimu menjadi bahan bakar karya kreatif, ide out-of-the-box, dan cara pandang baru yang unik.",
+  "Pendengar yang baik": "Orang lain merasa sangat didengar dan dihargai saat bercerita padamu tanpa takut dihakimi.",
+  "Intuitif dan mendalam": "Kamu mempercayai kata hati dan mampu melihat makna tersirat yang mendalam di balik setiap peristiwa.",
+
+  "Tegas dan decisive": "Kamu tidak ragu mengambil tindakan dan keputusan sulit secara cepat, lugas, dan efisien.",
+  "Natural leader": "Karisma dan kepastian yang kamu pancarkan membuat orang lain secara alami terdorong untuk mengikuti arahanmu.",
+  "Problem-solver efektif": "Kamu fokus pada solusi nyata dan langkah tindakan konkret daripada tenggelam dalam keluhan.",
+  "Energik dan motivatif": "Semangatmu yang menular mampu mengobarkan energi positif dan menggerakkan tim untuk bertindak maju.",
+
+  "Hangat dan ekspresif": "Kehangatan sikapmu membuat siapa pun merasa diterima, nyaman, dan dihargai saat berada di dekatmu.",
+  "Mudah berteman": "Kamu memiliki kemampuan alami mencairkan suasana dan membangun koneksi erat di lingkungan baru mana pun.",
+  "Penyemangat alami": "Kehadiranmu selalu membawa keceriaan dan dorongan positif saat orang-orang di sekitarmu sedang redup.",
+  "Komunikator yang baik": "Kamu mahir menyuarakan isi hati dan pikiran secara artikulatif, persuasif, dan menyentuh perasaan pendengar."
+};
+
+// ---- Strength Detail Modal Popup Engine ----
+window.openStrengthModal = function (strengthName) {
+  const modal = document.getElementById('strength-detail-modal');
+  const titleEl = document.getElementById('strength-modal-title');
+  const descEl = document.getElementById('strength-modal-desc');
+  if (!modal) return;
+
+  const explanation = STRENGTH_EXPLANATIONS[strengthName] || 'Kekuatan kepribadian unik yang membantumu berkembang dan menghadapi berbagai tantangan.';
+
+  if (titleEl) titleEl.textContent = strengthName;
+  if (descEl) descEl.textContent = explanation;
+
+  modal.classList.add('active');
+};
+
+window.closeStrengthModal = function () {
+  const modal = document.getElementById('strength-detail-modal');
+  if (modal) modal.classList.remove('active');
+};
+
+// Close on overlay click
+document.addEventListener('click', (e) => {
+  const modal = document.getElementById('strength-detail-modal');
+  if (modal && modal.classList.contains('active') && e.target === modal) {
+    closeStrengthModal();
+  }
+});
+
+// Close on ESC key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeStrengthModal();
+  }
+});

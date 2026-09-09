@@ -1,5 +1,5 @@
 /* =============================================
-   Tenang.in — Custom SVG Chart Generator
+   Tenang.in, Custom SVG Chart Generator
    ============================================= */
 
 const Charts = (() => {

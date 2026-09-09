@@ -1,5 +1,5 @@
 /* =============================================
-   Tenang.in — Teman Chat (Decision Tree)
+   Tenang.in, Teman Chat (Decision Tree)
    ============================================= */
 
 const TemanChat = (() => {

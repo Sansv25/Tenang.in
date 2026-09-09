@@ -11,89 +11,109 @@
       "text": "Di akhir pekan, kamu lebih suka...",
       "dimension": "IE",
       "options": [
-        { "text": "Menghabiskan waktu sendiri di kamar, baca buku atau nonton", "score": -1 },
-        { "text": "Keluar bareng teman-teman, ngobrol seru", "score": 1 }
+        { "text": "Menyendiri di kamar seharian, baca buku atau marathon film", "score": -2 },
+        { "text": "Hangout santai dengan 1-2 teman dekat di cafe tenang", "score": -1 },
+        { "text": "Jalan-jalan ke mall atau event seru bareng teman-teman", "score": 1 },
+        { "text": "Kumpul ramai-ramai, pesta, dan kenalan dengan banyak orang baru", "score": 2 }
       ]
     },
     {
       "id": 2,
-      "text": "Saat menghadapi masalah, kamu cenderung...",
+      "text": "Saat menghadapi masalah berat, kamu cenderung...",
       "dimension": "TF",
       "options": [
-        { "text": "Analisis dulu, cari solusi logis step by step", "score": -1 },
-        { "text": "Ikuti perasaan dan intuisi, dengarkan hati", "score": 1 }
+        { "text": "Analisis fakta & data secara dingin, cari solusi logis murni", "score": -2 },
+        { "text": "Cari solusi praktis step-by-step sambil mempertimbangkan risiko", "score": -1 },
+        { "text": "Dengarkan firasat dan minta pandangan dari orang terdekat", "score": 1 },
+        { "text": "Ikuti kata hati & emosi sepenuhnya, utamakan kedamaian perasaan", "score": 2 }
       ]
     },
     {
       "id": 3,
-      "text": "Di kelas, kamu lebih nyaman...",
+      "text": "Di kelas atau tempat kerja, kamu paling nyaman...",
       "dimension": "IE",
       "options": [
-        { "text": "Kerja individu, fokus sendiri", "score": -1 },
-        { "text": "Diskusi kelompok, brainstorming bareng", "score": 1 }
+        { "text": "Fokus kerja mandiri 100% tanpa gangguan siapapun", "score": -2 },
+        { "text": "Kerja sendiri tapi senang jika ada teman mengobrol sesekali", "score": -1 },
+        { "text": "Diskusi kelompok kecil untuk bertukar inspirasi dan ide", "score": 1 },
+        { "text": "Brainstorming ramai-ramai & memimpin diskusi kelompok besar", "score": 2 }
       ]
     },
     {
       "id": 4,
-      "text": "Saat temanmu curhat soal masalahnya, kamu biasanya...",
+      "text": "Saat temanmu curhat tentang masalahnya, kamu biasanya...",
       "dimension": "TF",
       "options": [
-        { "text": "Kasih saran praktis dan solusi konkret", "score": -1 },
-        { "text": "Dengerin dulu, validasi perasaannya", "score": 1 }
+        { "text": "Langsung berikan analisis objektif & saran langkah konkret", "score": -2 },
+        { "text": "Memberikan pertimbangan logis pelan-pelan sambil menyimak", "score": -1 },
+        { "text": "Dengarkan dulu dengan empati & validasi perasaannya", "score": 1 },
+        { "text": "Ikut merasakan kesedihannya dan menenangkan dengan kehangatan", "score": 2 }
       ]
     },
     {
       "id": 5,
-      "text": "Kalau harus presentasi di depan kelas...",
+      "text": "Kalau harus tampil atau presentasi di depan banyak orang...",
       "dimension": "IE",
       "options": [
-        { "text": "Agak nervous, lebih suka nulis daripada ngomong", "score": -1 },
-        { "text": "Excited! Suka jadi pusat perhatian", "score": 1 }
+        { "text": "Sangat cemas & berusaha menghindar jika memungkinkan", "score": -2 },
+        { "text": "Persiapan matang dulu agar tampil tenang meski agak grogi", "score": -1 },
+        { "text": "Cukup percaya diri dan menikmati momen berbagi materi", "score": 1 },
+        { "text": "Sangat antusias! Suka jadi pusat perhatian & menghidupkan suasana", "score": 2 }
       ]
     },
     {
       "id": 6,
-      "text": "Dalam memilih film atau series, kamu lebih tertarik...",
+      "text": "Saat memilih film, buku, atau cerita favorit...",
       "dimension": "TF",
       "options": [
-        { "text": "Plot twist cerdas, misteri, sci-fi", "score": -1 },
-        { "text": "Drama emosional, romance, slice of life", "score": 1 }
+        { "text": "Suka plot twist cerdas, misteri, teori konspirasi, & sci-fi", "score": -2 },
+        { "text": "Suka cerita petualangan, aksi, atau dokumenter fakta", "score": -1 },
+        { "text": "Suka drama slice-of-life yang hangat dan menyentuh perasaan", "score": 1 },
+        { "text": "Suka kisah romansa emosional & perjuangan hubungan antarmanusia", "score": 2 }
       ]
     },
     {
       "id": 7,
-      "text": "Setelah acara ramai seharian, kamu merasa...",
+      "text": "Setelah seharian berada di acara sosial yang ramai...",
       "dimension": "IE",
       "options": [
-        { "text": "Butuh waktu sendiri untuk recharge", "score": -1 },
-        { "text": "Masih penuh energi, mau lanjut!", "score": 1 }
+        { "text": "Energi habis total, butuh me-time tanpa gangguan sama sekali", "score": -2 },
+        { "text": "Agak lelah, ingin istirahat santai sambil mendengar musik", "score": -1 },
+        { "text": "Masih cukup segar dan senang telah bersosialisasi", "score": 1 },
+        { "text": "Semakin berenergi & siap lanjut nongkrong sampai malam!", "score": 2 }
       ]
     },
     {
       "id": 8,
-      "text": "Saat harus ambil keputusan penting...",
+      "text": "Saat harus mengambil keputusan penting dalam hidup...",
       "dimension": "TF",
       "options": [
-        { "text": "Buat daftar pro-kontra, pertimbangkan fakta", "score": -1 },
-        { "text": "Ikuti feeling, pilih yang terasa paling benar", "score": 1 }
+        { "text": "Buat daftar pro-kontra ketat dan berpatokan logika murni", "score": -2 },
+        { "text": "Mempertimbangkan fakta obyektif sebelum mengambil tindakan", "score": -1 },
+        { "text": "Memikirkan bagaimana perasaan orang-orang yang terdampak", "score": 1 },
+        { "text": "Ikuti kepekaan intuisi dan nilai-nilai kebaikan hati", "score": 2 }
       ]
     },
     {
       "id": 9,
-      "text": "Di lingkungan baru, kamu biasanya...",
+      "text": "Saat berada di lingkungan atau komunitas baru...",
       "dimension": "IE",
       "options": [
-        { "text": "Observasi dulu, baru pelan-pelan buka diri", "score": -1 },
-        { "text": "Langsung kenalan dan ngobrol sama orang baru", "score": 1 }
+        { "text": "Diam dan mengamati situasi dulu dari jauh", "score": -2 },
+        { "text": "Menunggu orang lain menyapa duluan baru membuka diri", "score": -1 },
+        { "text": "Ramah dan menyapa orang-orang di sekitar dengan senyuman", "score": 1 },
+        { "text": "Inisiatif kenalan duluan dan cepat mencairkan suasana", "score": 2 }
       ]
     },
     {
       "id": 10,
-      "text": "Yang paling bikin kamu kesal adalah...",
+      "text": "Hal yang paling membuatmu tidak nyaman atau kesal adalah...",
       "dimension": "TF",
       "options": [
-        { "text": "Orang yang nggak logis atau nggak efisien", "score": -1 },
-        { "text": "Orang yang nggak peka atau cuek sama perasaan orang", "score": 1 }
+        { "text": "Orang yang berpikir tidak masuk akal atau tidak efisien", "score": -2 },
+        { "text": "Keputusan yang diambil tanpa bukti dan fakta jelas", "score": -1 },
+        { "text": "Sikap dingin dan kurangnya kepedulian terhadap sesama", "score": 1 },
+        { "text": "Orang yang perkataannya melukai atau mengabaikan perasaan orang lain", "score": 2 }
       ]
     },
     {
@@ -101,17 +121,21 @@
       "text": "Cara kamu me-recharge energi yang paling efektif...",
       "dimension": "IE",
       "options": [
-        { "text": "Me-time: journaling, musik, atau hobi sendiri", "score": -1 },
-        { "text": "Hangout: ngobrol, ketemu orang, aktivitas bareng", "score": 1 }
+        { "text": "Me-time total: journaling, melamun, atau hobi pribadi", "score": -2 },
+        { "text": "Santai di rumah sambil menikmati minum hangat", "score": -1 },
+        { "text": "Ngobrol santai atau jalan-jalan bareng teman terdekat", "score": 1 },
+        { "text": "Piknik, pesta, atau acara seru di luar bersama banyak orang", "score": 2 }
       ]
     },
     {
       "id": 12,
-      "text": "Menurutmu, kekuatan terbesarmu adalah...",
+      "text": "Menurutmu, kualitas terbaik yang kamu miliki adalah...",
       "dimension": "TF",
       "options": [
-        { "text": "Kemampuan berpikir jernih dan problem-solving", "score": -1 },
-        { "text": "Kemampuan memahami dan merasakan emosi orang lain", "score": 1 }
+        { "text": "Pikiran kritis, jujur, dan problem-solving yang tajam", "score": -2 },
+        { "text": "Kemampuan berpikir jernih & obyektif dalam segala situasi", "score": -1 },
+        { "text": "Kepekaan rasa dan ketulusan dalam menghargai orang lain", "score": 1 },
+        { "text": "Empati yang mendalam & kemampuan merangkul emosi sesama", "score": 2 }
       ]
     }
   ],
@@ -121,14 +145,14 @@
       "icon": "dark_mode",
       "name": "Pemikir Tenang",
       "tagline": "Introvert + Thinker",
-      "description": "Kamu adalah pemikir yang mendalam dan analitis. Kamu suka merenungkan segala sesuatu secara logis dan mendalam. Waktu sendiri adalah sumber energimu — bukan karena anti-sosial, tapi karena di sanalah kamu berpikir paling jernih. Kamu punya kemampuan luar biasa untuk melihat detail yang orang lain lewatkan.",
+      "description": "Kamu adalah pemikir yang mendalam dan analitis. Kamu suka merenungkan segala sesuatu secara logis dan mendalam. Waktu sendiri adalah sumber energimu, bukan karena anti-sosial, tapi karena di sanalah kamu berpikir paling jernih. Kamu punya kemampuan luar biasa untuk melihat detail yang orang lain lewatkan.",
       "strengths": ["Analitis dan detail", "Mandiri dan fokus", "Pemikir strategis", "Tenang di bawah tekanan"],
       "tips": [
-        "Arahkan overthinking dengan journaling terstruktur",
-        "Buat daftar kekhawatiran — tandai yang bisa dikontrol",
-        "Waktu sendiri adalah cara mengisi ulang energi, bukan anti-sosial",
-        "Teknik 'worry window': 10 menit khusus untuk khawatir, lalu tutup",
-        "Kamu tidak harus punya jawaban untuk semua hal"
+        "Tuangkan pikiran lewat journaling agar terasa lebih teratur.",
+        "Bedakan hal yang bisa kamu kendalikan dari hal yang tidak.",
+        "Luangkan waktu sendiri untuk mengisi kembali energimu.",
+        "Beri dirimu 10 menit untuk memikirkan kekhawatiran, lalu lepaskan.",
+        "Ingat, kamu tidak harus selalu punya jawaban untuk semuanya."
       ]
     },
     "IF": {
@@ -136,14 +160,14 @@
       "icon": "favorite",
       "name": "Perasa Mendalam",
       "tagline": "Introvert + Feeler",
-      "description": "Kamu punya kedalaman emosi yang luar biasa. Kamu merasakan segala sesuatu lebih intens dari kebanyakan orang — dan itu adalah kekuatanmu. Kamu empatik, peka, dan punya intuisi yang tajam. Kreativitasmu sering muncul dari perasaan yang kamu alami.",
+      "description": "Kamu punya kedalaman emosi yang luar biasa. Kamu merasakan segala sesuatu lebih intens dari kebanyakan orang, dan itu adalah kekuatanmu. Kamu empatik, peka, dan punya intuisi yang tajam. Kreativitasmu sering muncul dari perasaan yang kamu alami.",
       "strengths": ["Empatik dan peka", "Kreatif dan imajinatif", "Pendengar yang baik", "Intuitif dan mendalam"],
       "tips": [
         "Perasaanmu yang dalam adalah kekuatan, bukan kelemahan",
         "Teknik grounding 5-4-3-2-1 saat emosi overwhelming",
-        "Batasi waktu scrolling — konten orang lain mempengaruhi mood tanpa disadari",
+        "Batasi waktu scrolling, karena konten orang lain mempengaruhi mood tanpa disadari",
         "Self-compassion: perlakukan dirimu seperti sahabat terbaikmu",
-        "Tidak semua perasaan perlu dibagikan — jurnal untuk memproses dulu"
+        "Tidak semua perasaan perlu dibagikan, bisa gunakan jurnal untuk memproses dulu"
       ]
     },
     "ET": {
@@ -157,8 +181,8 @@
         "Ubah kecemasan jadi langkah konkret sekecil apapun",
         "Istirahat aktif lebih cocok: jalan kaki, olahraga ringan",
         "Bilang tidak adalah skill produktivitas, bukan kelemahan",
-        "Jadwalkan waktu diam — otak aktif juga butuh jeda",
-        "Energimu besar — isi ulang dengan tidur cukup dan makan bergizi"
+        "Jadwalkan waktu diam, otak aktif juga butuh jeda",
+        "Energimu besar, isi ulang dengan tidur cukup dan makan bergizi"
       ]
     },
     "EF": {
@@ -166,13 +190,13 @@
       "icon": "auto_awesome",
       "name": "Jiwa Sosial",
       "tagline": "Ekstrovert + Feeler",
-      "description": "Kamu adalah orang yang hangat, ekspresif, dan penuh semangat. Kamu mudah terhubung dengan orang lain dan sering jadi 'penyemangat' di kelompokmu. Kemampuanmu memahami perasaan orang lain membuat kamu dicari sebagai tempat bercerita.",
+      "description": "Kamu adalah orang yang hangat, ekspresif, dan penuh semangat. Kamu mudah terhubung dengan orang lain dan sering jadi penyemangat di kelompokmu. Kemampuanmu memahami perasaan orang lain membuat kamu dicari sebagai tempat bercerita.",
       "strengths": ["Hangat dan ekspresif", "Mudah berteman", "Penyemangat alami", "Komunikator yang baik"],
       "tips": [
-        "Kamu mudah merasakan emosi orang lain — jangan sampai menyerap beban mereka",
+        "Kamu mudah merasakan emosi orang lain, jangan sampai menyerap beban mereka",
         "Bedakan empati vs mengambil alih beban orang lain",
         "Tarik napas sebelum bereaksi terhadap situasi emosional",
-        "Kamu tidak harus selalu jadi 'penyemangat' — kamu juga berhak lelah",
+        "Kamu tidak harus selalu jadi penyemangat, kamu juga berhak lelah",
         "Pilih circle yang memberi energi, bukan hanya menguras energimu"
       ]
     }

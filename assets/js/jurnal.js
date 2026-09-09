@@ -1,5 +1,5 @@
 /* =============================================
-   Tenang.in — Jurnal Script
+   Tenang.in, Jurnal Script
    ============================================= */
 
 let jurnalTags = [];

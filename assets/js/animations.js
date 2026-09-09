@@ -1,5 +1,5 @@
 /* =============================================
-   Tenang.in — Animations & Micro-Celebrations
+   Tenang.in, Animations & Micro-Celebrations
    ============================================= */
 
 const Animations = (() => {

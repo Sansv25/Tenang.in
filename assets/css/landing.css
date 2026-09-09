@@ -1,5 +1,5 @@
 /* =============================================
-   Tenang.in — Landing Page Styles & Master Overflow Lock
+   Tenang.in, Landing Page Styles & Master Overflow Lock
    ============================================= */
 
 /* Master Mobile Horizontal Overflow Lock (Prevents Pinch Zoom-Out & Horizontal Swipe Glitches) */
@@ -1409,7 +1409,7 @@ body.preloader-active {
   font-weight: 800;
 }
 
-/* Center Phone Mockup Stage — Larger Prominent iPhone with higher z-index */
+/* Center Phone Mockup Stage, Larger Prominent iPhone with higher z-index */
 .showcase-center {
   display: flex;
   justify-content: center;
@@ -4078,8 +4078,28 @@ body {
 
 .emergency-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
+}
+
+@media (max-width: 1024px) {
+  .emergency-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .emergency-grid > .emergency-card:nth-child(3),
+  .emergency-grid > div:nth-child(3) {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .emergency-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .emergency-grid > .emergency-card:nth-child(3),
+  .emergency-grid > div:nth-child(3) {
+    grid-column: auto !important;
+  }
 }
 
 .emergency-card {

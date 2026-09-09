@@ -1,5 +1,5 @@
 /* =============================================
-   Tenang.in — Component Styles
+   Tenang.in, Component Styles
    ============================================= */
 
 /* ---- Cards ---- */
@@ -2181,8 +2181,8 @@ padding: 0 !important;
 }
 
 .mood-card-item {
-  background: #0F172A !important;
-  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
   border-radius: var(--radius-lg);
   padding: var(--space-md) var(--space-sm);
   display: flex;
@@ -2194,6 +2194,14 @@ padding: 0 !important;
   transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+}
+
+html.dark-mode .mood-card-item,
+body.dark-mode .mood-card-item {
+  background: #0F172A !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  box-shadow: none !important;
 }
 
 .mood-card-item:hover, .mood-card-item.selected {
@@ -2201,35 +2209,95 @@ padding: 0 !important;
   z-index: 2;
 }
 
-/* Clean Pastel Glows for Dark Cards */
+/* Clean Pastel Glows for Light & Dark Modes */
 .mood-1:hover, .mood-1.selected {
-  background: rgba(239, 68, 68, 0.18) !important;
+  background: #FEF2F2 !important;
   border-color: #EF4444 !important;
-  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.25) !important;
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.18) !important;
 }
+
+.mood-1:hover .mood-card-label, .mood-1.selected .mood-card-label { color: #991B1B !important; }
+.mood-1:hover .mood-card-sub, .mood-1.selected .mood-card-sub { color: #B91C1C !important; }
 
 .mood-2:hover, .mood-2.selected {
-  background: rgba(249, 115, 22, 0.18) !important;
+  background: #FFF7ED !important;
   border-color: #F97316 !important;
-  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.25) !important;
+  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.18) !important;
 }
+
+.mood-2:hover .mood-card-label, .mood-2.selected .mood-card-label { color: #9A3412 !important; }
+.mood-2:hover .mood-card-sub, .mood-2.selected .mood-card-sub { color: #C2410C !important; }
 
 .mood-3:hover, .mood-3.selected {
-  background: rgba(59, 130, 246, 0.18) !important;
+  background: #EFF6FF !important;
   border-color: #3B82F6 !important;
-  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25) !important;
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.18) !important;
 }
+
+.mood-3:hover .mood-card-label, .mood-3.selected .mood-card-label { color: #1E40AF !important; }
+.mood-3:hover .mood-card-sub, .mood-3.selected .mood-card-sub { color: #1D4ED8 !important; }
 
 .mood-4:hover, .mood-4.selected {
-  background: rgba(16, 185, 129, 0.18) !important;
+  background: #ECFDF5 !important;
   border-color: #10B981 !important;
-  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.25) !important;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.18) !important;
 }
 
+.mood-4:hover .mood-card-label, .mood-4.selected .mood-card-label { color: #065F46 !important; }
+.mood-4:hover .mood-card-sub, .mood-4.selected .mood-card-sub { color: #047857 !important; }
+
 .mood-5:hover, .mood-5.selected {
-  background: rgba(139, 92, 246, 0.18) !important;
+  background: #F3E8FF !important;
   border-color: #8B5CF6 !important;
-  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25) !important;
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.18) !important;
+}
+
+.mood-5:hover .mood-card-label, .mood-5.selected .mood-card-label { color: #5B21B6 !important; }
+.mood-5:hover .mood-card-sub, .mood-5.selected .mood-card-sub { color: #6D28D9 !important; }
+
+/* Dark mode hover states */
+html.dark-mode .mood-1:hover, html.dark-mode .mood-1.selected,
+body.dark-mode .mood-1:hover, body.dark-mode .mood-1.selected {
+  background: rgba(239, 68, 68, 0.22) !important;
+  border-color: #EF4444 !important;
+}
+
+html.dark-mode .mood-2:hover, html.dark-mode .mood-2.selected,
+body.dark-mode .mood-2:hover, body.dark-mode .mood-2.selected {
+  background: rgba(249, 115, 22, 0.22) !important;
+  border-color: #F97316 !important;
+}
+
+html.dark-mode .mood-3:hover, html.dark-mode .mood-3.selected,
+body.dark-mode .mood-3:hover, body.dark-mode .mood-3.selected {
+  background: rgba(59, 130, 246, 0.22) !important;
+  border-color: #3B82F6 !important;
+}
+
+html.dark-mode .mood-4:hover, html.dark-mode .mood-4.selected,
+body.dark-mode .mood-4:hover, body.dark-mode .mood-4.selected {
+  background: rgba(16, 185, 129, 0.22) !important;
+  border-color: #10B981 !important;
+}
+
+html.dark-mode .mood-5:hover, html.dark-mode .mood-5.selected,
+body.dark-mode .mood-5:hover, body.dark-mode .mood-5.selected {
+  background: rgba(139, 92, 246, 0.22) !important;
+  border-color: #8B5CF6 !important;
+}
+
+html.dark-mode .mood-card-item:hover .mood-card-label,
+html.dark-mode .mood-card-item.selected .mood-card-label,
+body.dark-mode .mood-card-item:hover .mood-card-label,
+body.dark-mode .mood-card-item.selected .mood-card-label {
+  color: #FFFFFF !important;
+}
+
+html.dark-mode .mood-card-item:hover .mood-card-sub,
+html.dark-mode .mood-card-item.selected .mood-card-sub,
+body.dark-mode .mood-card-item:hover .mood-card-sub,
+body.dark-mode .mood-card-item.selected .mood-card-sub {
+  color: #E2E8F0 !important;
 }
 
 .mood-card-icon {
@@ -2274,8 +2342,13 @@ padding: 0 !important;
   .mood-card-sub {
     display: block !important;
     font-size: 0.68rem !important;
-    color: #CBD5E1 !important;
+    color: #475569;
     margin-top: 2px !important;
+  }
+
+  html.dark-mode .mood-card-sub,
+  body.dark-mode .mood-card-sub {
+    color: #CBD5E1 !important;
   }
 
   .mood-card-label {
@@ -2296,13 +2369,23 @@ padding: 0 !important;
 .mood-card-label {
   font-weight: 800;
   font-size: 0.85rem;
+  color: #0F172A;
+}
+
+html.dark-mode .mood-card-label,
+body.dark-mode .mood-card-label {
   color: #FFFFFF !important;
 }
 
 .mood-card-sub {
   font-size: 0.72rem;
-  color: #CBD5E1 !important;
+  color: #475569;
   margin-top: -3px;
+}
+
+html.dark-mode .mood-card-sub,
+body.dark-mode .mood-card-sub {
+  color: #CBD5E1 !important;
 }
 
 /* ---- Checked-In State Mascot (Responsive & Prominent) ---- */
@@ -2323,4 +2406,163 @@ padding: 0 !important;
     width: 120px;
     height: 120px;
   }
+}
+
+/* ---- Emergency Grid Responsive Tablet & Mobile Layout ---- */
+.emergency-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 1024px) {
+  .emergency-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .emergency-grid > .emergency-card:nth-child(3),
+  .emergency-grid > div:nth-child(3) {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .emergency-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .emergency-grid > .emergency-card:nth-child(3),
+  .emergency-grid > div:nth-child(3) {
+    grid-column: auto !important;
+  }
+}
+
+/* =============================================
+   Tenang.in, Compiled Tailwind Utilities
+   Replaces CDN runtime for 100/100 Lighthouse Performance
+   ============================================= */
+
+/* Layout & Positioning */
+.fixed { position: fixed; }
+.absolute { position: absolute; }
+.relative { position: relative; }
+.inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+.top-0 { top: 0; }
+.left-0 { left: 0; }
+.right-0 { right: 0; }
+.bottom-0 { bottom: 0; }
+.top-1\/3 { top: 33.333333%; }
+.left-1\/4 { left: 25%; }
+.bottom-1\/4 { bottom: 25%; }
+.right-1\/4 { right: 25%; }
+.top-1\/2 { top: 50%; }
+.left-1\/2 { left: 50%; }
+.-translate-x-1\/2 { transform: translateX(-50%); }
+.-translate-y-1\/2 { transform: translateY(-50%); }
+.z-0 { z-index: 0; }
+.z-10 { z-index: 10; }
+
+/* Flexbox & Grid */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-1 { flex: 1 1 0%; }
+.grid { display: grid; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-2 { gap: 0.5rem; }
+.gap-4 { gap: 1rem; }
+
+/* Sizing */
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.min-h-screen { min-height: 100vh; }
+.max-w-md { max-width: 28rem; }
+.h-2 { height: 0.5rem; }
+.h-2\.5 { height: 0.625rem; }
+.w-2\.5 { width: 0.625rem; }
+.w-\[30rem\] { width: 30rem; }
+.h-\[30rem\] { height: 30rem; }
+.w-\[32rem\] { width: 32rem; }
+.h-\[32rem\] { height: 32rem; }
+.w-\[34rem\] { width: 34rem; }
+.h-\[34rem\] { height: 34rem; }
+
+/* Spacing (Padding & Margin) */
+.p-6 { padding: 1.5rem; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.px-8 { padding-left: 2rem; padding-right: 2rem; }
+.py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+.pt-4 { padding-top: 1rem; }
+.mt-2 { margin-top: 0.5rem; }
+.mt-3\.5 { margin-top: 0.875rem; }
+.mt-6 { margin-top: 1.5rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.my-4 { margin-top: 1rem; margin-bottom: 1rem; }
+.mb-4 { margin-bottom: 1rem; }
+
+/* Colors & Backgrounds */
+.bg-white { background-color: #ffffff; }
+.bg-slate-200 { background-color: #e2e8f0; }
+.bg-slate-900\/80 { background-color: rgba(15, 23, 42, 0.8); }
+.bg-cyan-500\/10 { background-color: rgba(6, 182, 212, 0.1); }
+.bg-sky-400\/10 { background-color: rgba(56, 189, 248, 0.1); }
+.bg-blue-500\/10 { background-color: rgba(59, 130, 246, 0.1); }
+
+/* Typography */
+.text-center { text-align: center; }
+.text-xs { font-size: 0.75rem; line-height: 1rem; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.text-white { color: #ffffff; }
+.text-slate-400 { color: #94a3b8; }
+.text-slate-600 { color: #475569; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+/* Borders & Radius */
+.border-0 { border-width: 0px; }
+.border-t { border-top-width: 1px; }
+.border-slate-100 { border-color: #f1f5f9; }
+.rounded-none { border-radius: 0px; }
+.rounded-full { border-radius: 9999px; }
+.shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+.shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+
+/* Transitions & Transforms */
+.transform { transform: translate(var(--tw-translate-x, 0), var(--tw-translate-y, 0)) rotate(var(--tw-rotate, 0)) scaleX(var(--tw-scale-x, 1)) scaleY(var(--tw-scale-y, 1)); }
+.scale-95 { transform: scale(0.95); }
+.opacity-0 { opacity: 0; }
+.pointer-events-none { pointer-events: none; }
+.transition { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.transition-opacity { transition-property: opacity; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.duration-300 { transition-duration: 300ms; }
+.duration-500 { transition-duration: 500ms; }
+.ease-in-out { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+
+/* Filters & Blend Modes */
+.backdrop-blur-md { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.filter { filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-drop-shadow) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia); }
+.blur-\[180px\] { filter: blur(180px); }
+.mix-blend-screen { mix-blend-mode: screen; }
+.overflow-y-auto { overflow-y: auto; }
+
+/* Interactive Hover States */
+.hover\:opacity-95:hover { opacity: 0.95; }
+.hover\:text-slate-600:hover { color: #475569; }
+.active\:scale-95:active { transform: scale(0.95); }
+
+/* Responsive Media Queries (md: 768px+) */
+@media (min-width: 768px) {
+  .md\:p-4 { padding: 1rem; }
+  .md\:p-8 { padding: 2rem; }
+  .md\:h-3 { height: 0.75rem; }
+  .md\:h-auto { height: auto; }
+  .md\:min-h-0 { min-height: 0px; }
+  .md\:max-w-xl { max-width: 36rem; }
+  .md\:mb-6 { margin-bottom: 1.5rem; }
+  .md\:rounded-3xl { border-radius: 1.5rem; }
+  .md\:max-h-\[92vh\] { max-height: 92vh; }
+  .md\:border { border-width: 1px; }
+  .md\:border-slate-100 { border-color: #f1f5f9; }
 }

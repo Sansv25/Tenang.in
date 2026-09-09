@@ -1,5 +1,5 @@
 /* =============================================
-   Tenang.in — Profil Script
+   Tenang.in, Profil Script
    ============================================= */
 
 let profilData = null;
@@ -99,10 +99,6 @@ function renderProfilQuestion() {
     slide.dataset.index = index;
 
     slide.innerHTML = `
-      <div class="kenali-question-number">
-        <span class="material-symbols-rounded" style="font-size:14px;">quiz</span>
-        Pertanyaan ${index + 1} dari ${profilData.questions.length}
-      </div>
       <h3 class="kenali-question-text">${q.text}</h3>
       <div class="kenali-options-wrap">
         ${q.options.map((opt, i) => `
@@ -120,11 +116,17 @@ function renderProfilQuestion() {
 function updateProfilProgressBar() {
   const textEl = document.getElementById('profil-progress-text');
   const barEl = document.getElementById('profil-progress-bar');
+  const qNumEl = document.getElementById('profil-q-num');
+  const qTotalEl = document.getElementById('profil-q-total');
+
   if (textEl && barEl) {
     textEl.textContent = `${profilQuestion + 1} / ${profilData.questions.length}`;
     const percent = ((profilQuestion + 1) / profilData.questions.length) * 100;
     barEl.style.width = `${percent}%`;
   }
+  if (qNumEl) qNumEl.textContent = profilQuestion + 1;
+  if (qTotalEl && profilData && profilData.questions) qTotalEl.textContent = profilData.questions.length;
+
   updateProfilStepDots();
 }
 
@@ -245,7 +247,7 @@ function renderProfileCard(type, result) {
   cardSection.style.display = 'block';
 
   const avatar = (typeof Storage !== 'undefined' && Storage.getUserAvatar) ? Storage.getUserAvatar() : null;
-  const name = (typeof Storage !== 'undefined' && Storage.getUserName) ? Storage.getUserName() : '';
+  const rawName = (typeof Storage !== 'undefined' && Storage.getRawUserName) ? Storage.getRawUserName() : '';
   const kenaliResult = Storage.getQuizResult('kenali');
   const joinDate = Storage.getQuizResult('profil')?.completedAt;
   const dateStr = joinDate ? new Date(joinDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : '13 Agustus 2026';
@@ -259,13 +261,13 @@ function renderProfileCard(type, result) {
           <span>Profil Kamu</span>
         </div>
         <div style="display:flex; align-items:center; gap:8px;">
-          <button class="btn btn-ghost btn-sm" data-action="open-settings" onclick="if(typeof Settings !== 'undefined' && Settings.open) Settings.open();" aria-label="Buka Pengaturan" style="color: var(--text-secondary); display: inline-flex; align-items: center; gap: 6px; background: var(--card-subtle); border: 1px solid var(--card-border); padding: 6px 14px; border-radius: 999px; cursor: pointer; transition: background 0.2s;">
+          <button class="btn btn-ghost btn-sm btn-profile-header-action" data-action="open-settings" onclick="if(typeof Settings !== 'undefined' && Settings.open) Settings.open();" aria-label="Buka Pengaturan" style="color: var(--text-secondary); display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: var(--card-subtle); border: 1px solid var(--card-border); padding: 6px 14px; border-radius: 999px; cursor: pointer; transition: background 0.2s, transform 0.2s;" title="Pengaturan">
             <span class="material-symbols-rounded" style="font-size:18px;">settings</span>
-            <span style="font-size:0.8rem; font-weight:700;">Pengaturan</span>
+            <span class="btn-profile-label" style="font-size:0.8rem; font-weight:700;">Pengaturan</span>
           </button>
-          <button class="btn btn-ghost btn-sm" onclick="showShareResultModal('${escapeHTML(result.name)}', '${iconName}')" aria-label="Bagikan Hasil Profil" style="color: var(--primary-accent); display: inline-flex; align-items: center; gap: 6px; background: var(--card-subtle); border: 1px solid var(--card-border); padding: 6px 14px; border-radius: 999px; cursor: pointer; transition: background 0.2s;">
+          <button class="btn btn-ghost btn-sm btn-profile-header-action" onclick="showShareResultModal('${escapeHTML(result.name)}', '${iconName}')" aria-label="Bagikan Hasil Profil" style="color: var(--primary-accent); display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: var(--card-subtle); border: 1px solid var(--card-border); padding: 6px 14px; border-radius: 999px; cursor: pointer; transition: background 0.2s, transform 0.2s;" title="Bagikan">
             <span class="material-symbols-rounded" style="font-size:18px;">share</span>
-            <span style="font-size:0.8rem; font-weight:700;">Bagikan</span>
+            <span class="btn-profile-label" style="font-size:0.8rem; font-weight:700;">Bagikan</span>
           </button>
         </div>
       </h3>
@@ -294,7 +296,7 @@ function renderProfileCard(type, result) {
       <div style="margin-bottom:var(--space-xl);">
         <label style="font-size:0.875rem; font-weight:600; color:var(--text-secondary); display:block; margin-bottom:var(--space-sm);">Nama (opsional)</label>
         <div style="display:flex; gap:var(--space-sm);">
-          <input type="text" class="input" id="profil-name" value="${escapeHTML(name)}" placeholder="Masukkan namamu..." style="flex:1;">
+          <input type="text" class="input" id="profil-name" value="${escapeHTML(rawName)}" placeholder="Masukkan namamu..." maxlength="10" style="flex:1;">
           <button class="btn btn-primary btn-sm" onclick="saveName()">Simpan</button>
         </div>
       </div>

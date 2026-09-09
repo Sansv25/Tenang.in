@@ -1,5 +1,5 @@
 /* =============================================
-   Tenang.in — Home Page Script
+   Tenang.in, Home Page Script
    ============================================= */
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -277,11 +277,11 @@ function updateCTAButton() {
 
 // ---- Load Daily Tip ----
 const FALLBACK_TIPS = {
-  "IT": { "emoji": "dark_mode", "name": "Pemikir Tenang", "daily": [ "Overthinking bukan kelemahanmu — itu tanda kamu peduli. Arahkan energi itu ke jurnal hari ini.", "Waktu sendiri bukan anti-sosial. Itu caramu mengisi ulang.", "Kamu nggak harus punya jawaban untuk semua hal. Kadang cukup hadirkan pertanyaan yang tepat.", "Pikiran yang berat bisa diringankan dengan menuliskannya. Coba buka jurnal hari ini.", "Buat daftar kekhawatiranmu — tandai mana yang bisa kamu kontrol. Lepaskan yang sisanya." ] },
+  "IT": { "emoji": "dark_mode", "name": "Pemikir Tenang", "daily": [ "Tuangkan pikiran lewat journaling agar terasa lebih teratur.", "Bedakan hal yang bisa kamu kendalikan dari hal yang tidak.", "Luangkan waktu sendiri untuk mengisi kembali energimu.", "Beri dirimu 10 menit untuk memikirkan kekhawatiran, lalu lepaskan.", "Ingat, kamu tidak harus selalu punya jawaban untuk semuanya." ] },
   "IF": { "emoji": "favorite", "name": "Perasa Mendalam", "daily": [ "Perasaanmu yang dalam adalah kekuatan, bukan kelemahan. Jangan pernah ragu merasakannya.", "Self-compassion: hari ini, perlakukan dirimu seperti kamu memperlakukan sahabat terbaikmu.", "Batasi scrolling hari ini. Perasaan orang lain di timeline bisa mempengaruhimu tanpa sadar.", "Saat emosi terasa overwhelming, coba grounding 5-4-3-2-1: lihat 5 benda, sentuh 4, dengar 3, cium 2, rasa 1.", "Tidak semua perasaan harus dibagikan. Jurnal adalah ruang amanmu untuk memproses." ] },
-  "ET": { "emoji": "bolt", "name": "Pemimpin Aktif", "daily": [ "Ubah kecemasan jadi aksi. Langkah kecil hari ini > rencana besar yang nggak dimulai.", "Bilang 'tidak' adalah skill. Kamu nggak harus iya-kan semua hal.", "Energimu besar — tapi jangan lupa isi ulang. Tidur cukup malam ini, ya.", "Jadwalkan 10 menit waktu diam hari ini. Otak aktif juga butuh jeda.", "Istirahat aktif cocok buat kamu — jalan kaki 15 menit bisa reset pikiran." ] },
+  "ET": { "emoji": "bolt", "name": "Pemimpin Aktif", "daily": [ "Ubah kecemasan jadi aksi. Langkah kecil hari ini > rencana besar yang nggak dimulai.", "Bilang 'tidak' adalah skill. Kamu nggak harus iya-kan semua hal.", "Energimu besar, tapi jangan lupa isi ulang. Tidur cukup malam ini, ya.", "Jadwalkan 10 menit waktu diam hari ini. Otak aktif juga butuh jeda.", "Istirahat aktif cocok buat kamu. Jalan kaki 15 menit bisa reset pikiran." ] },
   "EF": { "emoji": "auto_awesome", "name": "Jiwa Sosial", "daily": [ "Kamu mudah merasakan emosi orang lain. Hari ini, cek dulu: ini perasaanku atau perasaan orang?", "Kamu nggak harus selalu jadi 'penyemangat'. Kamu juga berhak lelah dan istirahat.", "Tarik napas sebelum bereaksi. Jeda 3 detik bisa mengubah reaksi jadi respons.", "Pilih circle yang memberi energi, bukan hanya menguras. Kamu layak itu.", "Empati itu kekuatanmu. Tapi bedakan antara memahami beban orang lain vs menanggungnya." ] },
-  "default": { "emoji": "lightbulb", "name": "Untukmu", "daily": [ "Hari ini adalah kesempatan baru. Mulai dari hal kecil yang membuatmu tersenyum.", "Kamu nggak harus baik-baik aja setiap hari. Yang penting, kamu hadir.", "Progress, bukan perfection. Langkah kecil tetap langkah.", "Jaga dirimu hari ini — minum air, gerak badan, dan beri waktu untuk dirimu.", "Kamu lebih kuat dari yang kamu kira. Buktinya, kamu masih di sini." ] }
+  "default": { "emoji": "lightbulb", "name": "Untukmu", "daily": [ "Hari ini adalah kesempatan baru. Mulai dari hal kecil yang membuatmu tersenyum.", "Kamu nggak harus baik-baik aja setiap hari. Yang penting, kamu hadir.", "Progress, bukan perfection. Langkah kecil tetap langkah.", "Jaga dirimu hari ini: minum air, gerak badan, dan beri waktu untuk dirimu.", "Kamu lebih kuat dari yang kamu kira. Buktinya, kamu masih di sini." ] }
 };
 
 function renderTipContent(tips) {
@@ -540,7 +540,7 @@ function initInspirationRotator() {
   const authorEl = document.getElementById('interactive-quote-author');
   if (quoteEl && authorEl && inspirationList.length > 0) {
     quoteEl.textContent = `"${inspirationList[0].text}"`;
-    authorEl.textContent = `— ${inspirationList[0].author}`;
+    authorEl.textContent = inspirationList[0].author;
   }
 }
 
@@ -554,7 +554,7 @@ function rotateInspiration() {
   setTimeout(() => {
     currentInspIdx = (currentInspIdx + 1) % inspirationList.length;
     quoteEl.textContent = `"${inspirationList[currentInspIdx].text}"`;
-    authorEl.textContent = `— ${inspirationList[currentInspIdx].author}`;
+    authorEl.textContent = inspirationList[currentInspIdx].author;
     container.classList.remove('fading');
   }, 250);
 }
@@ -757,7 +757,7 @@ const Onboarding = (() => {
         <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 max-w-xs mx-auto text-center flex items-center gap-2.5">
           <span class="material-symbols-rounded text-emerald-500 flex-shrink-0" style="font-size:24px;">enhanced_encryption</span>
           <p class="text-[11px] text-slate-500 text-left leading-tight">
-            <strong>100% Privat & Aman:</strong> Seluruh catatan emosi dan obrolan Teman AI disandikan & terjaga privasinya.
+            <strong>Keamanan Terjamin:</strong> Seluruh catatan emosi dan obrolan Teman AI tersimpan dengan keamanan terjamin.
           </p>
         </div>
       `;

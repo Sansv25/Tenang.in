@@ -1,5 +1,5 @@
 /* =============================================
-   Tenang.in — Mood Tracker Script
+   Tenang.in, Mood Tracker Script
    ============================================= */
 
 // ---- Global functions for Modals ----
@@ -352,7 +352,7 @@ function renderInsights() {
     statusColor = '#10B981';
     aiAnalysis = 'Berdasarkan data check-in kamu, kondisi emosionalmu secara keseluruhan sangat positif. Kamu menunjukkan pola mood yang sehat dan stabil. Ini menandakan kamu memiliki mekanisme coping yang baik.';
     aiAdvice = [
-      { icon: 'self_improvement', text: 'Pertahankan rutinitas positifmu saat ini — konsistensi adalah kunci kesehatan mental jangka panjang.' },
+      { icon: 'self_improvement', text: 'Pertahankan rutinitas positifmu saat ini, konsistensi adalah kunci kesehatan mental jangka panjang.' },
       { icon: 'group', text: 'Bagikan energi positifmu kepada orang di sekitarmu. Kebaikan kecil bisa berdampak besar.' },
       { icon: 'edit_note', text: 'Coba tuliskan 3 hal yang kamu syukuri hari ini di jurnal untuk memperkuat pola pikir positif.' }
     ];
@@ -370,11 +370,11 @@ function renderInsights() {
     moodEmoji = 'sentiment_dissatisfied';
     moodStatus = 'Perlu Perhatian';
     statusColor = '#EF4444';
-    aiAnalysis = 'Data menunjukkan mood-mu sedang dalam fase rendah. Ini wajar dan bukan tanda kelemahan. Yang penting adalah kamu tetap hadir dan mencatat perasaanmu — itu sudah langkah yang sangat berani.';
+    aiAnalysis = 'Data menunjukkan mood-mu sedang dalam fase rendah. Ini wajar dan bukan tanda kelemahan. Yang penting adalah kamu tetap hadir dan mencatat perasaanmu, itu sudah langkah yang sangat berani.';
     aiAdvice = [
       { icon: 'spa', text: 'Kurangi tekanan pada dirimu sendiri. Istirahat bukan berarti menyerah, tapi mengisi ulang energi.' },
       { icon: 'chat_bubble', text: 'Ceritakan perasaanmu kepada seseorang yang kamu percaya, atau gunakan fitur Teman AI di Tenang.in.' },
-      { icon: 'local_florist', text: 'Lakukan satu hal kecil yang membuatmu senang hari ini — minum teh hangat, dengarkan lagu favorit, atau jalan-jalan sebentar.' }
+      { icon: 'local_florist', text: 'Lakukan satu hal kecil yang membuatmu senang hari ini: minum teh hangat, dengarkan lagu favorit, atau jalan-jalan sebentar.' }
     ];
   }
 
@@ -384,12 +384,12 @@ function renderInsights() {
     const tagAdvice = {
       'cemas': 'Rasa cemas sering muncul dalam datamu. Coba teknik pernapasan 4-7-8: tarik napas 4 detik, tahan 7 detik, buang 8 detik.',
       'stres': 'Stres mendominasi emosimu akhir-akhir ini. Prioritaskan tugas-tugasmu dan jangan ragu untuk bilang "tidak" pada hal yang berlebihan.',
-      'kesepian': 'Kamu sering merasa kesepian. Coba hubungi satu teman lama hari ini — koneksi kecil bisa membuat perbedaan besar.',
+      'kesepian': 'Kamu sering merasa kesepian. Coba hubungi satu teman lama hari ini, koneksi kecil bisa membuat perbedaan besar.',
       'lelah': 'Kelelahan terdeteksi sebagai pola berulang. Evaluasi beban kerjamu dan pastikan ada waktu istirahat yang cukup.',
-      'bersyukur': 'Rasa syukur sering muncul — ini tanda positif! Terus latih gratitude journaling untuk memperkuat mindset ini.',
+      'bersyukur': 'Rasa syukur sering muncul, ini tanda positif! Terus latih gratitude journaling untuk memperkuat mindset ini.',
       'semangat': 'Semangatmu terlihat dari data! Channel energi ini untuk membangun kebiasaan baru yang positif.',
       'tenang': 'Ketenangan menjadi emosi dominanmu. Ini fondasi yang bagus untuk kesehatan mental jangka panjang.',
-      'bingung': 'Perasaan bingung sering muncul. Coba luangkan waktu 10 menit untuk journaling — menulis bisa membantu menjernihkan pikiran.'
+      'bingung': 'Perasaan bingung sering muncul. Coba luangkan waktu 10 menit untuk journaling, menulis bisa membantu menjernihkan pikiran.'
     };
     tagInsight = tagAdvice[dominantTag] || `Tag "${dominantTag}" sering muncul dalam catatan emosimu.`;
   }

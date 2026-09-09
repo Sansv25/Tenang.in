@@ -44,7 +44,7 @@
     },
     {
       "id": 5,
-      "text": "Apa yang bikin kamu merasa 'accomplished' di akhir hari?",
+      "text": "Apa yang bikin kamu merasa puas di akhir hari?",
       "options": [
         { "text": "Punya waktu tenang untuk refleksi", "scores": { "malam": 2 } },
         { "text": "Bangun on-time dan produktif sejak pagi", "scores": { "pagi": 2 } },
@@ -56,10 +56,10 @@
       "id": 6,
       "text": "Kalau Tenang.in bisa kirim satu notifikasi per hari, kapan waktu terbaiknya?",
       "options": [
-        { "text": "Malam, sebelum tidur — waktu wind-down", "scores": { "malam": 2 } },
-        { "text": "Pagi, saat baru bangun — mulai hari dengan positif", "scores": { "pagi": 2 } },
-        { "text": "Random — surprise yang bikin hari lebih hidup", "scores": { "ekspresif": 2 } },
-        { "text": "Sore — waktu review dan planning besok", "scores": { "terstruktur": 2 } }
+        { "text": "Malam, sebelum tidur (waktu wind-down)", "scores": { "malam": 2 } },
+        { "text": "Pagi, saat baru bangun (mulai hari dengan positif)", "scores": { "pagi": 2 } },
+        { "text": "Random (surprise yang bikin hari lebih hidup)", "scores": { "ekspresif": 2 } },
+        { "text": "Sore (waktu review dan planning besok)", "scores": { "terstruktur": 2 } }
       ]
     },
     {
@@ -87,7 +87,7 @@
       "emoji": "wb_sunny",
       "icon": "wb_sunny",
       "name": "Aktif Pagi",
-      "description": "Kamu paling bersemangat di pagi hari! Energimu tinggi saat memulai hari baru, dan kamu suka rutinitas yang memberi struktur pada harimu. Self-care bagimu adalah action — bergerak, berkeringat, produktif.",
+      "description": "Kamu paling bersemangat di pagi hari! Energimu tinggi saat memulai hari baru, dan kamu suka rutinitas yang memberi struktur pada harimu. Self-care bagimu adalah action, bergerak, berkeringat, produktif.",
       "impact": "Quote semangat pagi, tips rutinitas positif",
       "accent_color": "#F59E0B",
       "recommendations": ["Morning check-in", "Rutinitas pagi", "Tips olahraga & energi"]
@@ -96,7 +96,7 @@
       "emoji": "chat_bubble",
       "icon": "chat_bubble",
       "name": "Ekspresif",
-      "description": "Kamu butuh mengekspresikan apa yang kamu rasakan — dan itu sehat! Bercerita adalah caramu memproses emosi. Kamu merasa lebih baik setelah bicara, menulis, atau sharing dengan orang yang kamu percaya.",
+      "description": "Kamu butuh mengekspresikan apa yang kamu rasakan, dan itu sehat! Bercerita adalah caramu memproses emosi. Kamu merasa lebih baik setelah bicara, menulis, atau sharing dengan orang yang kamu percaya.",
       "impact": "Teman lebih sering buka percakapan, prompt ekspresif",
       "accent_color": "#EC4899",
       "recommendations": ["Chat dengan Teman", "Jurnal ekspresif", "Sharing perasaan"]

@@ -1,5 +1,5 @@
 /* =============================================
-   Tenang.in — Internationalization (i18n) System
+   Tenang.in, Internationalization (i18n) System
    5 Languages: ID, EN, JA, KO, ZH
    ============================================= */
 
@@ -26,7 +26,7 @@ const I18n = (() => {
       'landing.hero.line1': 'Kenali Emosimu',
       'landing.hero.line2': 'Refleksi Bersama',
       'landing.hero.line3': 'Temukan Ketenangan',
-      'landing.hero.subtitle': 'Tenang.in membantu kamu mengenali pola emosi, merefleksikan diri melalui jurnal, dan mendapatkan insight personal — dengan enkripsi dan privasi terjamin.',
+      'landing.hero.subtitle': 'Tenang.in membantu kamu mengenali pola emosi, merefleksikan diri melalui jurnal, dan mendapatkan insight personal, dengan keamanan terjamin.',
       'landing.cta.start': 'Mulai Sekarang',
       'landing.cta.features': 'Kenali Fitur',
       'landing.scroll': 'Scroll ke bawah',
@@ -69,8 +69,8 @@ const I18n = (() => {
       'landing.teman.c4.desc': 'Akses cepat ke kontak konselor & hotline resmi saat kamu membutuhkan bantuan.',
       'landing.teman.cta': 'Ayo Mulai Ngobrol',
       'landing.cta.ready': 'Siap mulai perjalanan refleksi dirimu?',
-      'landing.cta.message': 'Kamu tidak harus sempurna. Kamu tidak harus baik-baik saja setiap hari. Yang penting, kamu hadir — dan itu sudah cukup.',
-      'landing.cta.free': 'Mulai Sekarang — Gratis',
+      'landing.cta.message': 'Kamu tidak harus sempurna. Kamu tidak harus baik-baik saja setiap hari. Yang penting, kamu hadir, dan itu sudah cukup.',
+      'landing.cta.free': 'Mulai Sekarang (Gratis)',
       'landing.nav.features': 'Fitur',
       'landing.nav.how': 'Cara Kerja',
       'landing.nav.teman': 'Teman AI',
@@ -135,9 +135,9 @@ const I18n = (() => {
       'beranda.bento.dashboard.desc': 'Pantau kemajuan pencapaian medali refleksi, hitung rekor konsistensi streak, dan amati sejauh mana kamu berkembang.',
       'beranda.bento.teman.badge': 'AI COMPANION 24/7',
       'beranda.bento.teman.title': 'Teman AI Companion',
-      'beranda.bento.teman.desc': 'Merasa butuh teman bercerita saat ini juga? Ngobrol santai tanpa rasa takut dihakimi bersama Teman AI. Dipersonalisasi khusus sesuai kondisi emosimu hari ini dengan perlindungan privasi dan keamanan tinggi.',
+      'beranda.bento.teman.desc': 'Merasa butuh teman bercerita saat ini juga? Ngobrol santai tanpa rasa takut dihakimi bersama Teman AI. Dipersonalisasi khusus sesuai kondisi emosimu hari ini dengan jaminan keamanan terjamin.',
       'beranda.bento.teman.cta': 'Mulai Sesi Curhat Sekarang',
-      'beranda.footer.privacy': 'Ruang amanmu selalu terjaga privasinya. Seluruh catatan refleksi dan mood terlindungi secara terenkripsi dan aman.',
+      'beranda.footer.privacy': 'Ruang amanmu terlindungi. Seluruh catatan refleksi dan mood tersimpan dengan keamanan terjamin.',
       'beranda.logout': 'Keluar dari Akun',
       'beranda.mood.today': 'Mood hari ini',
 
@@ -173,7 +173,7 @@ const I18n = (() => {
       'jurnal.title': 'Ruang Jurnal',
       'jurnal.subtitle': 'Tulis, refleksi, dan lepaskan',
       'jurnal.write.title': 'Tuliskan perasaanmu...',
-      'jurnal.write.placeholder': 'Mulai menulis di sini. Jujur sama dirimu sendiri — ini ruang amanmu...',
+      'jurnal.write.placeholder': 'Mulai menulis di sini. Jujur sama dirimu sendiri, ini ruang amanmu...',
       'jurnal.chars': 'karakter',
       'jurnal.mood.label': 'Mood saat menulis',
       'jurnal.save': 'Simpan Jurnal',
@@ -209,7 +209,7 @@ const I18n = (() => {
 
       // -- Kenali --
       'kenali.title': 'Kenali Dirimu',
-      'kenali.subtitle': 'Jawab 12 pertanyaan untuk menemukan tipe kepribadianmu. Tidak ada jawaban yang salah — cukup pilih yang paling menggambarkan dirimu!',
+      'kenali.subtitle': 'Jawab 12 pertanyaan untuk menemukan tipe kepribadianmu. Tidak ada jawaban yang salah, cukup pilih yang paling menggambarkan dirimu!',
       'kenali.types.title': '4 Tipe Kepribadian',
       'kenali.type1.name': 'Pemikir Tenang',
       'kenali.type1.sub': 'Introvert + Thinker',
@@ -260,7 +260,7 @@ const I18n = (() => {
       'footer.desc': 'Ruang digital untuk membantu remaja mengenali pola emosi, merefleksikan diri, dan merasa tidak sendirian.',
       'footer.nav': 'Navigasi',
       'footer.help': 'Bantuan Profesional',
-      'footer.disclaimer': 'Tenang.in adalah ruang refleksi diri dan bukan pengganti konsultasi profesional. Jika kamu merasa butuh bantuan lebih, jangan ragu menghubungi psikolog atau konselor profesional. Seluruh data terenkripsi dan terjaga privasinya.',
+      'footer.disclaimer': 'Tenang.in adalah ruang refleksi diri dan bukan pengganti konsultasi profesional. Jika kamu merasa butuh bantuan lebih, jangan ragu menghubungi psikolog atau konselor profesional. Seluruh data tersimpan dengan keamanan terjamin.',
 
       // -- Toast Messages --
       'toast.mood.saved': 'Mood hari ini tersimpan!',
@@ -328,7 +328,7 @@ const I18n = (() => {
       'landing.hero.line1': 'Understand Your Emotions',
       'landing.hero.line2': 'Reflect Together',
       'landing.hero.line3': 'Find Your Calm',
-      'landing.hero.subtitle': 'Tenang.in helps you recognize emotional patterns, reflect through journaling, and gain personal insights — with guaranteed privacy and encryption.',
+      'landing.hero.subtitle': 'Tenang.in helps you recognize emotional patterns, reflect through journaling, and gain personal insights, with guaranteed privacy and encryption.',
       'landing.cta.start': 'Get Started',
       'landing.cta.features': 'Explore Features',
       'landing.scroll': 'Scroll down',
@@ -371,8 +371,8 @@ const I18n = (() => {
       'landing.teman.c4.desc': 'Quick access to official counselors & emergency helplines in crisis.',
       'landing.teman.cta': 'Start Chatting Now',
       'landing.cta.ready': 'Ready to start your reflection journey?',
-      'landing.cta.message': "You don't have to be perfect. You don't have to be okay every day. What matters is that you show up — and that's enough.",
-      'landing.cta.free': 'Start Now — Free',
+      'landing.cta.message': "You don't have to be perfect. You don't have to be okay every day. What matters is that you show up, and that's enough.",
+      'landing.cta.free': 'Start Now (Free)',
       'landing.nav.features': 'Features',
       'landing.nav.how': 'How It Works',
       'landing.nav.teman': 'Teman AI',
@@ -470,7 +470,7 @@ const I18n = (() => {
       'jurnal.title': 'Journal Space',
       'jurnal.subtitle': 'Write, reflect, and release',
       'jurnal.write.title': 'Write your feelings...',
-      'jurnal.write.placeholder': 'Start writing here. Be honest with yourself — this is your safe space...',
+      'jurnal.write.placeholder': 'Start writing here. Be honest with yourself, this is your safe space...',
       'jurnal.chars': 'characters',
       'jurnal.mood.label': 'Mood while writing',
       'jurnal.save': 'Save Journal',
@@ -504,7 +504,7 @@ const I18n = (() => {
       'mood.lowmood.chat': 'Chat with Teman',
 
       'kenali.title': 'Know Yourself',
-      'kenali.subtitle': 'Answer 12 questions to discover your personality type. There are no wrong answers — just pick what best describes you!',
+      'kenali.subtitle': 'Answer 12 questions to discover your personality type. There are no wrong answers, just pick what best describes you!',
       'kenali.types.title': '4 Personality Types',
       'kenali.type1.name': 'Quiet Thinker',
       'kenali.type1.sub': 'Introvert + Thinker',
@@ -656,8 +656,8 @@ const I18n = (() => {
       'landing.teman.c4.desc': '危機的状況において公式カウンセラーへ迅速にアクセス。',
       'landing.teman.cta': '今すぐチャットを始める',
       'landing.cta.ready': '自己省察の旅を始める準備はできましたか？',
-      'landing.cta.message': '完璧である必要はありません。毎日大丈夫である必要もありません。大切なのは、あなたがここにいること — それだけで十分です。',
-      'landing.cta.free': '今すぐ始める — 無料',
+      'landing.cta.message': '完璧である必要はありません。毎日大丈夫である必要もありません。大切なのは、あなたがここにいること, それだけで十分です。',
+      'landing.cta.free': '今すぐ始める, 無料',
       'landing.nav.features': '機能',
       'landing.nav.how': '使い方',
       'landing.nav.teman': 'Teman AI',
@@ -741,7 +741,7 @@ const I18n = (() => {
       'jurnal.title': '日記スペース',
       'jurnal.subtitle': '書いて、振り返って、手放す',
       'jurnal.write.title': '気持ちを書いてください...',
-      'jurnal.write.placeholder': 'ここに書き始めてください。自分に正直に — ここはあなたの安全な空間です...',
+      'jurnal.write.placeholder': 'ここに書き始めてください。自分に正直に, ここはあなたの安全な空間です...',
       'jurnal.chars': '文字',
       'jurnal.mood.label': '書いている時のムード',
       'jurnal.save': '日記を保存',
@@ -769,7 +769,7 @@ const I18n = (() => {
       'mood.lowmood.chat': 'Temanとチャット',
 
       'kenali.title': '自分を知る',
-      'kenali.subtitle': '12の質問に答えて性格タイプを発見しましょう。正解も不正解もありません — 自分を最もよく表すものを選んでください！',
+      'kenali.subtitle': '12の質問に答えて性格タイプを発見しましょう。正解も不正解もありません, 自分を最もよく表すものを選んでください！',
       'kenali.types.title': '4つの性格タイプ',
       'kenali.type1.name': '静かな思考家', 'kenali.type1.sub': '内向型＋思考型',
       'kenali.type2.name': '深い感受性', 'kenali.type2.sub': '内向型＋感情型',
@@ -878,8 +878,8 @@ const I18n = (() => {
       'landing.teman.f1': '무드에 맞춘 대화', 'landing.teman.f2': '24/7 판단 없이 경청',
       'landing.teman.f3': '실천 가능한 셀프케어 팁', 'landing.teman.f4': '필요시 전문 도움 연결',
       'landing.cta.ready': '성찰 여정을 시작할 준비가 되셨나요?',
-      'landing.cta.message': '완벽할 필요 없습니다. 매일 괜찮을 필요도 없습니다. 중요한 건 당신이 여기 있다는 것 — 그것만으로 충분합니다.',
-      'landing.cta.free': '지금 시작하기 — 무료',
+      'landing.cta.message': '완벽할 필요 없습니다. 매일 괜찮을 필요도 없습니다. 중요한 건 당신이 여기 있다는 것, 그것만으로 충분합니다.',
+      'landing.cta.free': '지금 시작하기, 무료',
       'landing.nav.features': '기능', 'landing.nav.how': '사용 방법', 'landing.nav.teman': 'Teman AI',
 
       'auth.login.title': 'Tenang.in 로그인', 'auth.login.subtitle': '성찰 여정을 계속합시다.',
@@ -938,7 +938,7 @@ const I18n = (() => {
       'dashboard.quick.mood': '무드 체크인', 'dashboard.quick.journal': '일기 쓰기',
 
       'jurnal.title': '일기 공간', 'jurnal.subtitle': '쓰고, 성찰하고, 놓아주세요',
-      'jurnal.write.title': '감정을 써보세요...', 'jurnal.write.placeholder': '여기에 쓰기 시작하세요. 자신에게 솔직하게 — 여기는 당신의 안전한 공간입니다...',
+      'jurnal.write.title': '감정을 써보세요...', 'jurnal.write.placeholder': '여기에 쓰기 시작하세요. 자신에게 솔직하게, 여기는 당신의 안전한 공간입니다...',
       'jurnal.chars': '글자', 'jurnal.mood.label': '쓸 때의 무드', 'jurnal.save': '일기 저장',
       'jurnal.history.title': '일기 기록', 'jurnal.delete.title': '일기를 삭제할까요?',
       'jurnal.delete.text': '삭제된 일기는 복구할 수 없습니다.', 'jurnal.delete.cancel': '취소', 'jurnal.delete.confirm': '삭제',
@@ -956,7 +956,7 @@ const I18n = (() => {
       'mood.lowmood.chat': 'Teman과 채팅',
 
       'kenali.title': '나를 알기',
-      'kenali.subtitle': '12개의 질문에 답해 성격 유형을 발견하세요. 정답도 오답도 없습니다 — 자신을 가장 잘 나타내는 것을 선택하세요!',
+      'kenali.subtitle': '12개의 질문에 답해 성격 유형을 발견하세요. 정답도 오답도 없습니다, 자신을 가장 잘 나타내는 것을 선택하세요!',
       'kenali.types.title': '4가지 성격 유형',
       'kenali.type1.name': '조용한 사색가', 'kenali.type1.sub': '내향형 + 사고형',
       'kenali.type2.name': '깊은 감성가', 'kenali.type2.sub': '내향형 + 감정형',
@@ -1027,7 +1027,7 @@ const I18n = (() => {
       'landing.hero.line1': '了解你的情绪',
       'landing.hero.line2': '一起反思',
       'landing.hero.line3': '找到你的平静',
-      'landing.hero.subtitle': 'Tenang.in帮助你认识情绪模式，通过日记进行自我反思，获得个人洞察 — 所有内容都私密存储在你的设备上。',
+      'landing.hero.subtitle': 'Tenang.in帮助你认识情绪模式，通过日记进行自我反思，获得个人洞察, 所有内容都私密存储在你的设备上。',
       'landing.cta.start': '立即开始', 'landing.cta.features': '探索功能',
       'landing.scroll': '向下滚动',
       'landing.features.label': '核心功能',
@@ -1059,8 +1059,8 @@ const I18n = (() => {
       'landing.teman.c4.title': '专业求助渠道', 'landing.teman.c4.desc': '紧急情况下快速连接官方心理咨询师与热线。',
       'landing.teman.cta': '立即开始聊天',
       'landing.cta.ready': '准备好开始你的反思之旅了吗？',
-      'landing.cta.message': '你不必完美。你不必每天都好好的。重要的是你在这里 — 这就够了。',
-      'landing.cta.free': '立即开始 — 免费',
+      'landing.cta.message': '你不必完美。你不必每天都好好的。重要的是你在这里, 这就够了。',
+      'landing.cta.free': '立即开始, 免费',
       'landing.nav.features': '功能', 'landing.nav.how': '使用方法', 'landing.nav.teman': 'Teman AI',
 
       'auth.login.title': '登录Tenang.in', 'auth.login.subtitle': '让我们继续你的反思之旅。',
@@ -1119,7 +1119,7 @@ const I18n = (() => {
       'dashboard.quick.mood': '心情签到', 'dashboard.quick.journal': '写日记',
 
       'jurnal.title': '日记空间', 'jurnal.subtitle': '写下、反思、释放',
-      'jurnal.write.title': '写下你的感受...', 'jurnal.write.placeholder': '从这里开始写。对自己诚实 — 这是你的安全空间...',
+      'jurnal.write.title': '写下你的感受...', 'jurnal.write.placeholder': '从这里开始写。对自己诚实, 这是你的安全空间...',
       'jurnal.chars': '字符', 'jurnal.mood.label': '写作时的心情', 'jurnal.save': '保存日记',
       'jurnal.history.title': '日记历史', 'jurnal.delete.title': '删除日记？',
       'jurnal.delete.text': '删除的日记无法恢复。', 'jurnal.delete.cancel': '取消', 'jurnal.delete.confirm': '删除',
@@ -1137,7 +1137,7 @@ const I18n = (() => {
       'mood.lowmood.chat': '和Teman聊天',
 
       'kenali.title': '认识自己',
-      'kenali.subtitle': '回答12个问题发现你的性格类型。没有正确或错误的答案 — 选择最能描述你的选项！',
+      'kenali.subtitle': '回答12个问题发现你的性格类型。没有正确或错误的答案, 选择最能描述你的选项！',
       'kenali.types.title': '4种性格类型',
       'kenali.type1.name': '安静的思考者', 'kenali.type1.sub': '内向型 + 思考型',
       'kenali.type2.name': '深度感受者', 'kenali.type2.sub': '内向型 + 感受型',
