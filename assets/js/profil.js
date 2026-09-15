@@ -73,12 +73,15 @@ function startProfilQuiz() {
   if (intro) intro.style.display = 'none';
   if (quiz) quiz.style.display = 'block';
   if (result) result.style.display = 'none';
-  if (profileCard) profileCard.style.display = 'block';
+  if (profileCard) profileCard.style.display = 'none'; // Sembunyikan profil card & elemen atas saat tes berlangsung agar user fokus!
 
   profilQuestion = 0;
   profilScores = { malam: 0, pagi: 0, ekspresif: 0, terstruktur: 0 };
   renderProfilStepDots();
   renderProfilQuestion();
+
+  // Scroll halus ke paling atas halaman
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ---- Render Questions (Slides) ----
@@ -193,6 +196,8 @@ function showProfilResult(type, isNew = true) {
   if (quiz) quiz.style.display = 'none';
   if (resultSection) resultSection.style.display = 'block';
   if (profileCard) profileCard.style.display = 'block';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 
   // Apply accent color
   document.documentElement.style.setProperty('--accent-color', result.accent_color);

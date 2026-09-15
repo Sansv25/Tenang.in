@@ -113,10 +113,17 @@ const Animations = (() => {
   const playGreenScreenVideo = (container, videoSrc) => {
     const wrapper = document.createElement('div');
     wrapper.className = 'celebration-video-wrap';
-    wrapper.style.cssText = 'position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center;';
+    wrapper.style.cssText = 'position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%;';
+
+    // Instant fallback image while video loads/buffers
+    const fallbackImg = document.createElement('img');
+    fallbackImg.src = 'assets/img/maskots/mascot-cheerful.png';
+    fallbackImg.alt = 'Mascot';
+    fallbackImg.style.cssText = 'position:absolute; width:85%; height:85%; object-fit:contain; filter:drop-shadow(0 18px 40px rgba(0,0,0,0.35)); transition:opacity 0.35s ease; z-index:1;';
 
     const video = document.createElement('video');
     video.src = videoSrc;
+    video.preload = 'auto';
     video.autoplay = true;
     video.loop = true;
     video.muted = true;
@@ -125,16 +132,19 @@ const Animations = (() => {
     video.style.cssText = 'position:absolute; width:1px; height:1px; opacity:0.01; pointer-events:none;';
 
     const canvas = document.createElement('canvas');
-    canvas.width = 300;
-    canvas.height = 300;
+    canvas.width = 480;
+    canvas.height = 480;
     canvas.className = 'celebration-canvas';
+    canvas.style.cssText = 'position:relative; z-index:2; width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 20px 45px rgba(0,0,0,0.35));';
 
+    wrapper.appendChild(fallbackImg);
     wrapper.appendChild(video);
     wrapper.appendChild(canvas);
     container.appendChild(wrapper);
 
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
     let animId = null;
+    let hasRenderedFirstFrame = false;
 
     video.addEventListener('loadedmetadata', () => {
       canvas.width = video.videoWidth || 300;
@@ -168,6 +178,14 @@ const Animations = (() => {
       }
 
       ctx.putImageData(frame, 0, 0);
+
+      // Smoothly hide fallback image after first video frame renders
+      if (!hasRenderedFirstFrame) {
+        hasRenderedFirstFrame = true;
+        fallbackImg.style.opacity = '0';
+        setTimeout(() => { fallbackImg.style.display = 'none'; }, 350);
+      }
+
       animId = requestAnimationFrame(renderFrame);
     };
 
@@ -176,7 +194,8 @@ const Animations = (() => {
     }).catch(() => {
       // Fallback if autoplay is blocked
       canvas.style.display = 'none';
-      video.style.cssText = 'width:100%; height:100%; object-fit:contain; display:block; filter:drop-shadow(0 18px 40px rgba(0,0,0,0.35));';
+      fallbackImg.style.opacity = '1';
+      fallbackImg.style.display = 'block';
     });
 
     return () => {
@@ -251,9 +270,7 @@ const Animations = (() => {
       }, 450);
     };
 
-    // Tap anywhere on full screen overlay to dismiss early
-    overlay.addEventListener('click', dismiss);
-
+    // Automatically dismiss only when duration timer finishes
     setTimeout(() => {
       dismiss();
     }, duration);

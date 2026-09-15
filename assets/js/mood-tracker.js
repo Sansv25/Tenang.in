@@ -307,7 +307,7 @@ function renderInsights() {
           Lakukan ${needed} check-in lagi untuk membuka analisa kecenderungan emosi dan saran personal dari Teman AI.
         </p>
         <div class="progress-bar-container" style="height:10px; margin-bottom:var(--space-sm);">
-          <div class="progress-bar" style="width:${progress}%; background: linear-gradient(90deg, #2563EB, #38BDF8);"></div>
+          <div class="progress-bar" style="width:${progress}%; background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent));"></div>
         </div>
         <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-secondary);">
           <span>Kemajuan: ${progress}%</span>
@@ -403,7 +403,7 @@ function renderInsights() {
     <div class="insight-card" style="border:none; padding:0; overflow:hidden; border-radius:16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
       
       <!-- Header -->
-      <div style="background:linear-gradient(135deg, #1E3A5F, #2563EB); padding:20px 24px; display:flex; align-items:center; justify-content:space-between;">
+      <div style="background:linear-gradient(135deg, var(--bg-deep, #1E4780), var(--primary-accent, #2563EB)); padding:20px 24px; display:flex; align-items:center; justify-content:space-between;">
         <div style="display:flex; align-items:center; gap:12px;">
           <img src="assets/img/maskots/mascot-listening.png" alt="Teman AI" style="width:34px; height:34px; object-fit:contain; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.15));">
           <span style="color:#fff; font-weight:700; font-size:1rem;">Analisa Teman AI</span>
@@ -435,10 +435,10 @@ function renderInsights() {
         </div>
 
         <!-- AI Analysis -->
-        <div style="background:var(--card-subtle); border-radius:12px; padding:16px; margin-bottom:20px; border-left:4px solid #2563EB;">
+        <div style="background:var(--card-subtle); border-radius:12px; padding:16px; margin-bottom:20px; border-left:4px solid var(--primary-accent);">
           <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
-            <span class="material-symbols-rounded" style="font-size:18px; color:#2563EB;">psychology</span>
-            <span style="font-size:0.8rem; font-weight:700; color:#2563EB; text-transform:uppercase; letter-spacing:0.5px;">Analisa AI</span>
+            <span class="material-symbols-rounded" style="font-size:18px; color:var(--primary-accent);">psychology</span>
+            <span style="font-size:0.8rem; font-weight:700; color:var(--primary-accent); text-transform:uppercase; letter-spacing:0.5px;">Analisa AI</span>
           </div>
           <p style="font-size:0.9rem; line-height:1.7; color:var(--text-on-white); margin:0;">${aiAnalysis}</p>
         </div>
@@ -473,7 +473,7 @@ function renderInsights() {
         </div>
 
         <!-- Mood Distribution (Diagram Batang / Vertical Bar Chart) -->
-        <div style="background:var(--card-subtle); border:1px solid var(--card-border); border-radius:20px; padding:20px;">
+        <div style="background:var(--card-subtle); border:1px solid var(--card-border); border-radius:20px; padding:20px; position:relative;" id="mood-distribution-card">
           <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
             <div style="display:flex; align-items:center; gap:8px;">
               <span class="material-symbols-rounded" style="font-size:20px; color:#6366F1;">bar_chart</span>
@@ -485,15 +485,16 @@ function renderInsights() {
           </div>
 
           <!-- Bar Chart Area (Fixed 110px Height Container) -->
-          <div style="display:flex; align-items:flex-end; gap:12px; height:110px; margin-bottom:12px; padding:0 4px;">
+          <div style="display:flex; align-items:flex-end; gap:12px; height:110px; margin-bottom:12px; padding:0 4px;" id="mood-bar-chart-area">
             ${[1,2,3,4,5].map(level => {
               const count = moodCounts[level];
               const heightPercent = maxCount > 0 ? (count > 0 ? Math.max(Math.round((count / maxCount) * 100), 12) : 4) : 4;
               const colors = { 1: '#EF4444', 2: '#F97316', 3: '#3B82F6', 4: '#10B981', 5: '#8B5CF6' };
               const labels = { 1: 'Buruk', 2: 'Kurang', 3: 'Biasa', 4: 'Baik', 5: 'Luar Biasa' };
+              const emojis = { 1: '😢', 2: '😟', 3: '😐', 4: '😊', 5: '🤩' };
 
               return `
-                <div style="flex:1; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:6px;" title="${labels[level]}: ${count} kali">
+                <div class="mood-bar-item" data-level="${level}" data-count="${count}" data-label="${labels[level]}" data-emoji="${emojis[level]}" data-color="${colors[level]}" style="flex:1; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:6px;" onmouseenter="showMoodBarPopup(this, event)" onmouseleave="hideMoodBarPopup()" onclick="toggleMoodBarPopup(this, event)">
                   <!-- Count Badge above Bar -->
                   <span style="font-size:0.75rem; font-weight:850; color:${colors[level]};">${count}</span>
                   
@@ -509,8 +510,18 @@ function renderInsights() {
 
           <!-- Emoji Row below Bars -->
           <div style="display:flex; gap:12px; border-top:1px dashed var(--card-border); padding-top:10px;">
-            ${['😢','😟','😐','😊','🤩'].map(e => `<div style="flex:1; text-align:center; font-size:1.2rem; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.1));">${e}</div>`).join('')}
+            ${[1,2,3,4,5].map(level => {
+              const emojis = { 1: '😢', 2: '😟', 3: '😐', 4: '😊', 5: '🤩' };
+              return `
+                <div class="mood-bar-emoji-btn" data-level="${level}" style="flex:1; text-align:center; font-size:1.2rem;" onmouseenter="showMoodBarPopupByLevel(${level}, event)" onmouseleave="hideMoodBarPopup()" onclick="toggleMoodBarPopupByLevel(${level}, event)">
+                  ${emojis[level]}
+                </div>
+              `;
+            }).join('')}
           </div>
+
+          <!-- Floating Popup Tooltip Container -->
+          <div id="mood-bar-popup" class="mood-bar-popup-container" style="display:none;"></div>
         </div>
 
         <!-- Stats Row -->
@@ -533,6 +544,141 @@ function renderInsights() {
     </div>
   `;
 }
+
+// ---- Global Popup Helper Functions for Distribusi Mood ----
+window.showMoodBarPopup = function(el, event) {
+  if (!el) return;
+  const level = parseInt(el.dataset.level);
+  const count = parseInt(el.dataset.count);
+  const label = el.dataset.label;
+  const emoji = el.dataset.emoji;
+  const color = el.dataset.color;
+
+  let popup = document.getElementById('mood-bar-popup');
+  if (!popup) {
+    popup = document.createElement('div');
+    popup.id = 'mood-bar-popup';
+    popup.className = 'mood-bar-popup-container';
+    document.body.appendChild(popup);
+  } else if (popup.parentElement !== document.body) {
+    document.body.appendChild(popup);
+  }
+
+  const moods = typeof Storage !== 'undefined' ? Storage.getMoods() : [];
+  const now = new Date();
+  const monthNames = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  const monthName = monthNames[now.getMonth()];
+  const year = now.getFullYear();
+
+  // Find entries for this month
+  const monthMoods = moods.filter(m => {
+    if (!m.date) return false;
+    const parts = m.date.split('-');
+    return parseInt(parts[0], 10) === year && (parseInt(parts[1], 10) - 1) === now.getMonth();
+  });
+
+  let dateRangeText = `Bulan ${monthName} ${year}`;
+  if (monthMoods.length > 0) {
+    const dates = monthMoods.map(m => parseInt(m.date.split('-')[2], 10)).sort((a,b) => a - b);
+    const minDay = dates[0];
+    const maxDay = dates[dates.length - 1];
+    dateRangeText = `${minDay} - ${maxDay} ${monthName} ${year}`;
+  }
+
+  // Calculate monthly summary
+  let summaryText = 'Belum ada data check-in cukup.';
+  if (monthMoods.length > 0) {
+    const avgLvl = monthMoods.reduce((a, b) => a + (b.level || b.score || 3), 0) / monthMoods.length;
+    if (avgLvl >= 4.2) summaryText = `Cenderung sangat bahagia & berenergi bulan ini 🤩`;
+    else if (avgLvl >= 3.5) summaryText = `Cenderung bahagia & positif bulan ini 😊`;
+    else if (avgLvl >= 2.8) summaryText = `Cenderung stabil & tenang bulan ini 😐`;
+    else if (avgLvl >= 2.0) summaryText = `Cenderung kurang baik & butuh istirahat 😟`;
+    else summaryText = `Cenderung merasa berat bulan ini 😢`;
+  }
+
+  const percent = monthMoods.length > 0 ? Math.round((count / monthMoods.length) * 100) : 0;
+
+  popup.innerHTML = `
+    <div class="mood-bar-popup-header">
+      <span class="mood-bar-popup-emoji">${emoji}</span>
+      <div>
+        <div class="mood-bar-popup-title" style="color:${color};">Mood ${label} (Level ${level})</div>
+        <div class="mood-bar-popup-date">
+          <span class="material-symbols-rounded" style="font-size:14px; color:rgba(255,255,255,0.7);">calendar_month</span>
+          <span>${dateRangeText}</span>
+        </div>
+      </div>
+    </div>
+    <div class="mood-bar-popup-count-badge">
+      <span style="color:${color}; font-weight:850;">${count} Check-in</span>
+      <span style="opacity:0.6;">·</span>
+      <span>${percent}% dari total bulan ini</span>
+    </div>
+    <div class="mood-bar-popup-summary">
+      <div class="mood-bar-popup-summary-title">
+        <span class="material-symbols-rounded" style="font-size:14px;">auto_awesome</span>
+        <span>Ringkasan Emosi</span>
+      </div>
+      <div>${summaryText}</div>
+    </div>
+  `;
+
+  popup.style.display = 'block';
+  // Force reflow for smooth transition
+  popup.offsetHeight;
+  popup.classList.add('active');
+
+  // Position relative to viewport (fixed positioning)
+  const elRect = el.getBoundingClientRect();
+  const popupW = popup.offsetWidth || 280;
+  const popupH = popup.offsetHeight || 160;
+
+  let left = elRect.left + (elRect.width / 2) - (popupW / 2);
+  left = Math.max(12, Math.min(left, window.innerWidth - popupW - 12));
+
+  let top = elRect.top - popupH - 12;
+  if (top < 12) {
+    top = elRect.bottom + 12;
+  }
+  top = Math.max(12, Math.min(top, window.innerHeight - popupH - 12));
+
+  popup.style.left = left + 'px';
+  popup.style.top = top + 'px';
+};
+
+window.hideMoodBarPopup = function() {
+  const popup = document.getElementById('mood-bar-popup');
+  if (popup) {
+    popup.classList.remove('active');
+  }
+};
+
+window.toggleMoodBarPopup = function(el, event) {
+  if (event) event.stopPropagation();
+  const popup = document.getElementById('mood-bar-popup');
+  if (popup && popup.classList.contains('active')) {
+    window.hideMoodBarPopup();
+  } else {
+    window.showMoodBarPopup(el, event);
+  }
+};
+
+window.showMoodBarPopupByLevel = function(level, event) {
+  const barEl = document.querySelector(`.mood-bar-item[data-level="${level}"]`);
+  if (barEl) window.showMoodBarPopup(barEl, event);
+};
+
+window.toggleMoodBarPopupByLevel = function(level, event) {
+  const barEl = document.querySelector(`.mood-bar-item[data-level="${level}"]`);
+  if (barEl) window.toggleMoodBarPopup(barEl, event);
+};
+
+document.addEventListener('click', (e) => {
+  const popup = document.getElementById('mood-bar-popup');
+  if (popup && !popup.contains(e.target) && !e.target.closest('.mood-bar-item') && !e.target.closest('.mood-bar-emoji-btn')) {
+    window.hideMoodBarPopup();
+  }
+});
 
 // ---- Low Mood Popup ----
 function showLowMoodPopup() {

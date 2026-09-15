@@ -105,14 +105,14 @@
           </h2>
           <div class="stat-grid" id="dashboard-stats-grid">
             <!-- Card 1: Streak -->
-            <div class="stat-card">
+            <div class="stat-card" onclick="openStatModal('streak')" title="Klik untuk melihat detail Streak">
               <span class="material-icons">local_fire_department</span>
               <div class="stat-number" id="stat-streak">0</div>
               <div class="stat-label">Hari Streak</div>
             </div>
 
             <!-- Card 2: Mood rata-rata -->
-            <div class="stat-card">
+            <div class="stat-card" onclick="openStatModal('avg-mood')" title="Klik untuk melihat detail Mood Rata-rata">
               <span class="material-icons">analytics</span>
               <div class="stat-number" id="stat-avg-mood"
                 style="background: none; -webkit-background-clip: unset; -webkit-text-fill-color: initial; background-clip: unset; color: var(--text-on-white); margin: 6px 0 4px; font-size: 1.5rem;">
@@ -121,14 +121,14 @@
             </div>
 
             <!-- Card 3: Total jurnal -->
-            <div class="stat-card">
+            <div class="stat-card" onclick="openStatModal('journal')" title="Klik untuk melihat detail Entri Jurnal">
               <span class="material-icons">edit_note</span>
               <div class="stat-number" id="stat-journal">0</div>
               <div class="stat-label">Entri Jurnal</div>
             </div>
 
             <!-- Card 4: Sesi Teman -->
-            <div class="stat-card">
+            <div class="stat-card" onclick="openStatModal('teman')" title="Klik untuk melihat detail Sesi Teman AI">
               <span class="material-icons">smart_toy</span>
               <div class="stat-number" id="stat-teman">0</div>
               <div class="stat-label">Sesi Teman</div>
@@ -186,6 +186,13 @@
     </div>
   </div>
 
+  <!-- Stat Details Modal -->
+  <div class="modal-overlay" id="stat-detail-modal">
+    <div class="modal" style="text-align:center; max-width:440px; border-radius:28px;" id="stat-modal-container">
+      <!-- Filled dynamically by JS -->
+    </div>
+  </div>
+
   <!-- Badge Details Modal -->
   <div class="modal-overlay" id="badge-detail-modal">
     <div class="modal" style="text-align:center; max-width:380px;">
@@ -195,14 +202,14 @@
           aria-label="Tutup Modal"><span class="material-symbols-rounded">close</span></button>
       </div>
       <div id="badge-detail-icon"
-        style="font-size:80px; margin:var(--space-lg) 0; display:inline-block; border-radius:var(--radius-xl); padding:var(--space-lg); background:var(--card-subtle);">
-        <span class="material-symbols-rounded" style="font-size:64px;" id="badge-detail-symbol">star</span>
+        style="width: 100px; height: 100px; aspect-ratio: 1 / 1; margin: 20px auto; border-radius: 24px; background: var(--card-subtle); border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);">
+        <span class="material-symbols-rounded" style="font-size:52px;" id="badge-detail-symbol">star</span>
       </div>
       <h3 id="badge-detail-title"
         style="font-size:1.5rem; font-weight:800; color:var(--text-on-white); margin-bottom:var(--space-xs);">Nama Badge
       </h3>
       <p id="badge-detail-status" style="font-size:0.875rem; font-weight:600; margin-bottom:var(--space-md);"></p>
-      <p id="badge-detail-desc" style="color:#475569; line-height:1.6; margin-bottom:var(--space-xl);">Deskripsi badge
+      <p id="badge-detail-desc" style="color:var(--text-secondary); line-height:1.6; margin-bottom:var(--space-xl);">Deskripsi badge
         di sini.</p>
       <button class="btn btn-primary btn-full"
         data-action="close-badge-modal">Tutup</button>

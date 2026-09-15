@@ -57,6 +57,7 @@ function startKenaliQuiz() {
   scores = { IE: 0, TF: 0 };
   renderStepDots();
   renderQuestions();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ---- Render Step Dots ----

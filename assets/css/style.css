@@ -197,9 +197,10 @@ body::before {
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, rgba(56, 189, 248, 0) 70%);
+  background: radial-gradient(circle, var(--theme-glow, rgba(56, 189, 248, 0.2)) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
+  transition: background 0.5s ease;
 }
 
 body::after {
@@ -210,9 +211,10 @@ body::after {
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, rgba(37, 99, 235, 0) 70%);
+  background: radial-gradient(circle, var(--theme-glow, rgba(37, 99, 235, 0.25)) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
+  transition: background 0.5s ease;
 }
 
 a {
@@ -918,10 +920,11 @@ p {
 }
 
 .app-footer {
-  background-color: #0F172A !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background-color: var(--bg-deep, #1E4780) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
   margin-top: 2rem;
   padding: 3rem 0 2rem;
+  transition: background-color var(--transition-base, 0.3s ease);
 }
 
 .footer-grid {
@@ -2239,4 +2242,11 @@ body.dark-mode .footer-disclaimer {
     justify-content: center !important;
     flex-shrink: 0 !important;
   }
+}
+
+/* ---- Inner Pages Logo Styling (Always White) ---- */
+.navbar-logo .nav-logo-img,
+.app-footer .footer-brand .nav-logo-img {
+  filter: brightness(0) invert(1) !important;
+  transition: filter var(--transition-base, 0.3s ease);
 }

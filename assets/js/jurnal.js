@@ -37,7 +37,7 @@ async function loadPrompt() {
     currentPrompt = prompt.text;
 
     promptEl.innerHTML = `
-      <div class="card" style="padding:var(--space-lg); border-left:4px solid var(--primary-accent); display:flex; align-items:center; gap:16px;">
+      <div class="card card-prompt-clickable" data-action="open-prompt-category" title="Klik untuk mengganti topik prompt" style="padding:var(--space-lg); border-left:4px solid var(--primary-accent); display:flex; align-items:center; gap:16px;">
         <div style="flex-shrink:0;">
           <img src="assets/img/maskots/mascot-confused.png" alt="Milo Reflecting" style="width:64px; height:64px; object-fit:contain; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.12));">
         </div>
@@ -45,6 +45,9 @@ async function loadPrompt() {
           <div style="font-size:0.8125rem; font-weight:700; color:var(--primary-accent); margin-bottom:4px; display:flex; align-items:center; gap:6px;">
             <span class="material-symbols-rounded" style="font-size:18px;">lightbulb</span>
             <span>Prompt Hari Ini</span>
+            <span style="margin-left:auto; font-size:0.75rem; font-weight:600; opacity:0.7; display:inline-flex; align-items:center; gap:3px;">
+              <span class="material-symbols-rounded" style="font-size:14px;">change_circle</span> Ganti Topik
+            </span>
           </div>
           <p style="font-size:1.0625rem; font-weight:600; line-height:1.5; color:var(--text-on-white); margin:0;">${prompt.text}</p>
         </div>
@@ -53,7 +56,7 @@ async function loadPrompt() {
   } catch(e) {
     currentPrompt = 'Apa yang ada di pikiranmu hari ini?';
     promptEl.innerHTML = `
-      <div class="card" style="padding:var(--space-lg); border-left:4px solid var(--primary-accent); display:flex; align-items:center; gap:16px;">
+      <div class="card card-prompt-clickable" data-action="open-prompt-category" title="Klik untuk mengganti topik prompt" style="padding:var(--space-lg); border-left:4px solid var(--primary-accent); display:flex; align-items:center; gap:16px;">
         <div style="flex-shrink:0;">
           <img src="assets/img/maskots/mascot-confused.png" alt="Milo Reflecting" style="width:64px; height:64px; object-fit:contain; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.12));">
         </div>
@@ -90,7 +93,7 @@ async function changePromptCategory(category) {
     currentPrompt = prompt.text;
     
     promptEl.innerHTML = `
-      <div class="card" style="padding:var(--space-lg); border-left:4px solid var(--primary-accent); display:flex; align-items:center; gap:16px; animation: bubbleIn 0.3s ease-out forwards;">
+      <div class="card card-prompt-clickable" data-action="open-prompt-category" title="Klik untuk mengganti topik prompt" style="padding:var(--space-lg); border-left:4px solid var(--primary-accent); display:flex; align-items:center; gap:16px; animation: bubbleIn 0.3s ease-out forwards;">
         <div style="flex-shrink:0;">
           <img src="assets/img/maskots/mascot-tenang.png" alt="Milo Reflecting" style="width:64px; height:64px; object-fit:contain; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.12));">
         </div>
@@ -98,6 +101,9 @@ async function changePromptCategory(category) {
           <div style="font-size:0.8125rem; font-weight:700; color:var(--primary-accent); margin-bottom:4px; display:flex; align-items:center; gap:6px;">
             <span class="material-symbols-rounded" style="font-size:18px;">lightbulb</span>
             <span>Prompt Baru (${category})</span>
+            <span style="margin-left:auto; font-size:0.75rem; font-weight:600; opacity:0.7; display:inline-flex; align-items:center; gap:3px;">
+              <span class="material-symbols-rounded" style="font-size:14px;">change_circle</span> Ganti Topik
+            </span>
           </div>
           <p style="font-size:1.0625rem; font-weight:600; line-height:1.5; color:var(--text-on-white); margin:0;">${prompt.text}</p>
         </div>
@@ -174,16 +180,16 @@ function renderJournalList() {
 
   if (journals.length === 0) {
     listEl.innerHTML = `
-      <div class="card p-8 text-center border-2 border-dashed rounded-2xl my-4" style="border-color:var(--primary-accent); background:var(--card-surface);">
-        <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center shadow-md" style="background:var(--primary-accent);">
-          <span class="material-symbols-rounded" style="font-size:36px; color:#FFFFFF;">auto_stories</span>
+      <div class="card" style="padding: clamp(32px, 5vw, 44px) clamp(20px, 4vw, 32px); text-align: center; border: 2px dashed rgba(45, 91, 168, 0.3); border-radius: var(--radius-2xl, 24px); margin: var(--space-lg) 0; background: var(--card-surface, #FFFFFF); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: var(--shadow-sm);">
+        <div style="width: 68px; height: 68px; border-radius: 50%; background: linear-gradient(135deg, var(--bg-primary-light, #7EC8E3), var(--primary-accent, #2D5BA8)); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; box-shadow: 0 8px 24px rgba(45, 91, 168, 0.25); flex-shrink: 0;">
+          <span class="material-symbols-rounded" style="font-size: 34px; color: #FFFFFF;">auto_stories</span>
         </div>
-        <h3 class="font-bold text-lg mb-2" style="color:var(--text-on-white);">Ruang Jurnalmu Masih Kosong</h3>
-        <p class="text-sm max-w-sm mx-auto mb-6 leading-relaxed" style="color:var(--text-secondary);">
+        <h3 style="font-weight: 800; font-size: 1.2rem; margin: 0 0 10px 0; color: var(--text-on-white, #1A2F4E); letter-spacing: -0.015em;">Ruang Jurnalmu Masih Kosong</h3>
+        <p style="font-size: 0.9375rem; max-width: 440px; margin: 0 auto 26px auto; line-height: 1.65; color: var(--text-secondary, #475569); font-weight: 500;">
           Hari ini bisa menjadi lembaran barumu. Tuangkan pikiran, kecemasan, atau rasa syukurmu dengan nyaman dan privat.
         </p>
-        <button onclick="const el = document.getElementById('jurnal-content'); if(el) { el.focus(); el.scrollIntoView({behavior:'smooth'}); }" class="btn btn-primary inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full text-sm font-semibold shadow-md hover:opacity-95 transition">
-          <span class="material-symbols-rounded" style="font-size:18px;">edit_note</span>
+        <button onclick="const el = document.getElementById('jurnal-content'); if(el) { el.focus(); el.scrollIntoView({behavior:'smooth'}); }" class="btn btn-primary" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 28px; border-radius: 9999px; font-weight: 700; font-size: 0.9rem; box-shadow: 0 6px 20px rgba(45, 91, 168, 0.3); transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;">
+          <span class="material-symbols-rounded" style="font-size: 20px;">edit_note</span>
           <span>Tulis Refleksi Pertama</span>
         </button>
       </div>
@@ -265,32 +271,52 @@ let fireAnimId = null;
 function runFireCanvasEngine(canvas) {
   if (fireAnimId) cancelAnimationFrame(fireAnimId);
   const ctx = canvas.getContext('2d');
-  const width = canvas.width = canvas.parentElement.offsetWidth || 600;
-  const height = canvas.height = canvas.parentElement.offsetHeight || 380;
   
+  // Detect performance capabilities & device type
+  const isMobile = window.innerWidth <= 768 || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  const isLowEnd = isMobile || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Dynamic parameters based on performance level
+  const particleRate = prefersReduced ? 1 : (isLowEnd ? 2 : 7);
+  const sparkRate = prefersReduced ? 0 : (isLowEnd ? 1 : 4);
+  const enableShadowBlur = !isLowEnd && !prefersReduced;
+  const dpr = isLowEnd ? 0.75 : Math.min(window.devicePixelRatio || 1, 2);
+
+  const parentWidth = canvas.parentElement.offsetWidth || 600;
+  const parentHeight = canvas.parentElement.offsetHeight || 380;
+  
+  canvas.width = Math.floor(parentWidth * dpr);
+  canvas.height = Math.floor(parentHeight * dpr);
+  
+  // Scale canvas context coordinate system according to DPR
+  ctx.scale(dpr, dpr);
+  const effectiveWidth = parentWidth;
+  const effectiveHeight = parentHeight;
+
   const particles = [];
   const sparks = [];
   let isActive = true;
 
   function addParticle() {
-    const spread = Math.min(width, 480) * 0.8;
-    const x = width / 2 + (Math.random() - 0.5) * spread;
-    const y = height * 0.88 + Math.random() * 15;
-    const radius = 30 + Math.random() * 40;
+    const spread = Math.min(effectiveWidth, 480) * 0.8;
+    const x = effectiveWidth / 2 + (Math.random() - 0.5) * spread;
+    const y = effectiveHeight * 0.88 + Math.random() * 15;
+    const radius = (30 + Math.random() * 40) * (isLowEnd ? 0.85 : 1);
     const life = 1;
-    const decay = 0.018 + Math.random() * 0.015;
+    const decay = (isLowEnd ? 0.025 : 0.018) + Math.random() * 0.015;
     const vx = (Math.random() - 0.5) * 2;
     const vy = -(3.5 + Math.random() * 4.5);
     particles.push({ x, y, radius, life, decay, vx, vy });
   }
 
   function addSpark() {
-    const spread = Math.min(width, 480) * 0.9;
-    const x = width / 2 + (Math.random() - 0.5) * spread;
-    const y = height * 0.88;
+    const spread = Math.min(effectiveWidth, 480) * 0.9;
+    const x = effectiveWidth / 2 + (Math.random() - 0.5) * spread;
+    const y = effectiveHeight * 0.88;
     const size = 2 + Math.random() * 3.5;
     const life = 1;
-    const decay = 0.012 + Math.random() * 0.015;
+    const decay = (isLowEnd ? 0.025 : 0.012) + Math.random() * 0.015;
     const vx = (Math.random() - 0.5) * 4;
     const vy = -(5 + Math.random() * 6);
     sparks.push({ x, y, size, life, decay, vx, vy });
@@ -300,13 +326,13 @@ function runFireCanvasEngine(canvas) {
 
   function loop() {
     if (!isActive) return;
-    ctx.clearRect(0, 0, width, height);
+    ctx.clearRect(0, 0, effectiveWidth, effectiveHeight);
 
     const elapsed = (Date.now() - startTime) / 1000;
 
     if (elapsed < 3.4) {
-      for (let i = 0; i < 7; i++) addParticle();
-      for (let i = 0; i < 4; i++) addSpark();
+      for (let i = 0; i < particleRate; i++) addParticle();
+      for (let i = 0; i < sparkRate; i++) addSpark();
     }
 
     ctx.globalCompositeOperation = 'lighter';
@@ -340,6 +366,11 @@ function runFireCanvasEngine(canvas) {
       ctx.fill();
     }
 
+    if (enableShadowBlur) {
+      ctx.shadowColor = '#F97316';
+      ctx.shadowBlur = 10;
+    }
+
     for (let i = sparks.length - 1; i >= 0; i--) {
       const s = sparks[i];
       s.x += s.vx + Math.sin(s.y * 0.05) * 0.8;
@@ -352,20 +383,22 @@ function runFireCanvasEngine(canvas) {
       }
 
       ctx.fillStyle = `rgba(255, 210, 90, ${s.life})`;
-      ctx.shadowColor = '#F97316';
-      ctx.shadowBlur = 10;
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
       ctx.fill();
+    }
+
+    if (enableShadowBlur) {
       ctx.shadowBlur = 0;
     }
+
     ctx.globalCompositeOperation = 'source-over';
 
     if (elapsed < 4.2 || particles.length > 0 || sparks.length > 0) {
       fireAnimId = requestAnimationFrame(loop);
     } else {
       isActive = false;
-      ctx.clearRect(0, 0, width, height);
+      ctx.clearRect(0, 0, effectiveWidth, effectiveHeight);
     }
   }
 

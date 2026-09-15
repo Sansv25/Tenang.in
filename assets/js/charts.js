@@ -203,6 +203,24 @@ const Charts = (() => {
     const todayKey = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
     const isCurrentMonth = (now.getFullYear() === year && now.getMonth() === month);
 
+    // Compute monthly summary for current view month
+    const monthMoods = (moods || []).filter(m => {
+      if (!m.date) return false;
+      const parts = m.date.split('-');
+      if (parts.length < 3) return false;
+      return parseInt(parts[0], 10) === year && (parseInt(parts[1], 10) - 1) === month;
+    });
+
+    let monthSummaryText = `Belum ada check-in bulan ini`;
+    if (monthMoods.length > 0) {
+      const avgLvl = monthMoods.reduce((a, b) => a + (b.level || b.score || 3), 0) / monthMoods.length;
+      if (avgLvl >= 4.2) monthSummaryText = `cenderung sangat bahagia & berenergi bulan ini 🤩`;
+      else if (avgLvl >= 3.5) monthSummaryText = `cenderung bahagia & positif bulan ini 😊`;
+      else if (avgLvl >= 2.8) monthSummaryText = `cenderung stabil & tenang bulan ini 😐`;
+      else if (avgLvl >= 2.0) monthSummaryText = `cenderung kurang baik & butuh istirahat 😟`;
+      else monthSummaryText = `cenderung merasa berat bulan ini 😢`;
+    }
+
     // Day headers
     const headerHTML = dayNames.map(d => `<div class="contribution-day-header">${d}</div>`).join('');
 
@@ -289,6 +307,12 @@ const Charts = (() => {
           content += `<div class="contribution-tooltip-empty">Belum check-in</div>`;
         }
 
+        // Include Month Summary
+        content += `<div class="contribution-tooltip-summary">
+          <span class="material-symbols-rounded" style="font-size:14px; color:#F59E0B; vertical-align:middle;">auto_awesome</span>
+          <span><strong>Ringkasan ${monthNames[month]}:</strong> ${monthSummaryText}</span>
+        </div>`;
+
         tooltip.innerHTML = content;
         tooltip.classList.add('active');
 
@@ -300,7 +324,11 @@ const Charts = (() => {
         let left = cellRect.left - containerRect.left + (cellRect.width / 2) - (tooltipW / 2);
         left = Math.max(0, Math.min(left, containerRect.width - tooltipW));
         tooltipEl.style.left = left + 'px';
-        tooltipEl.style.top = (cellRect.top - containerRect.top - tooltipEl.offsetHeight - 8) + 'px';
+        let top = cellRect.top - containerRect.top - tooltipEl.offsetHeight - 8;
+        if (top < 0) {
+          top = cellRect.bottom - containerRect.top + 8;
+        }
+        tooltipEl.style.top = top + 'px';
       };
 
       const hideTooltip = () => {

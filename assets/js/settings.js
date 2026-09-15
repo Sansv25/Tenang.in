@@ -92,21 +92,21 @@ const Settings = (() => {
       selectionBg: 'rgba(244, 114, 182, 0.3)'
     },
     {
-      id: 'teal',
-      name: 'Midnight Teal',
-      accent: '#0D9488',
-      accentHover: '#0F766E',
-      secondary: '#2DD4BF',
-      bgPrimary: '#0F766E',
-      bgLight: '#0D9488',
-      bgSection: '#115E59',
-      bgDeep: '#134E4A',
-      gradBody: 'radial-gradient(circle at 15% 20%, rgba(13,148,136,0.22) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(45,212,191,0.2) 0%, transparent 65%), linear-gradient(135deg, #090D16 0%, #042F2E 50%, #090D16 100%)',
-      gradHero: 'linear-gradient(135deg, #2DD4BF 0%, #0D9488 50%, #0F766E 100%)',
-      navBg: 'rgba(19, 78, 74, 0.8)',
-      navBgScrolled: 'rgba(19, 78, 74, 0.95)',
-      glowColor: 'rgba(45, 212, 191, 0.2)',
-      selectionBg: 'rgba(45, 212, 191, 0.3)'
+      id: 'crimson',
+      name: 'Ruby Crimson',
+      accent: '#DC2626',
+      accentHover: '#B91C1C',
+      secondary: '#F87171',
+      bgPrimary: '#B91C1C',
+      bgLight: '#DC2626',
+      bgSection: '#991B1B',
+      bgDeep: '#7F1D1D',
+      gradBody: 'radial-gradient(circle at 15% 20%, rgba(220,38,38,0.22) 0%, transparent 65%), radial-gradient(circle at 85% 80%, rgba(248,113,113,0.2) 0%, transparent 65%), linear-gradient(135deg, #090D16 0%, #450A0A 50%, #090D16 100%)',
+      gradHero: 'linear-gradient(135deg, #F87171 0%, #DC2626 50%, #B91C1C 100%)',
+      navBg: 'rgba(127, 29, 29, 0.8)',
+      navBgScrolled: 'rgba(127, 29, 29, 0.95)',
+      glowColor: 'rgba(248, 113, 113, 0.2)',
+      selectionBg: 'rgba(248, 113, 113, 0.3)'
     },
     {
       id: 'indigo',
@@ -145,7 +145,11 @@ const Settings = (() => {
   ];
 
   // ---- Get / Set Theme ----
-  const getThemeId = () => localStorage.getItem('tenang_theme') || 'ocean';
+  const getThemeId = () => {
+    const saved = localStorage.getItem('tenang_theme');
+    if (saved === 'teal') return 'emerald';
+    return saved || 'ocean';
+  };
   const getTheme = () => themes.find(t => t.id === getThemeId()) || themes[0];
 
   const setTheme = (themeId) => {
