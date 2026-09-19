@@ -126,8 +126,37 @@ const Main = (() => {
   };
 
   // ---- Bottom Nav (Mobile - Matte Black Capsule) ----
+  const getBottomNavActionHTML = (activePage = '') => {
+    const isCheckedIn = (typeof Storage !== 'undefined' && typeof Storage.getMoodToday === 'function') ? !!Storage.getMoodToday() : false;
+
+    if (isCheckedIn) {
+      return `
+        <a href="jurnal.html" class="bottom-nav-action ${activePage === 'jurnal' ? 'active' : ''}" aria-label="Ruang Jurnal" style="text-decoration: none;">
+          <span class="material-symbols-rounded">edit_note</span>
+          <span style="font-size: 0.75rem; font-weight: 600;">Jurnal</span>
+        </a>
+      `;
+    } else {
+      return `
+        <button class="bottom-nav-action" onclick="if(typeof showCheckInModal === 'function'){ showCheckInModal(); } else { window.location.href='beranda.html'; }" aria-label="Catat Mood">
+          <span class="material-symbols-rounded">edit</span>
+          <span style="font-size: 0.75rem; font-weight: 600;">Catat</span>
+        </button>
+      `;
+    }
+  };
+
+  const updateBottomNav = (activePage = '') => {
+    const actionBtn = document.querySelector('.bottom-nav-action');
+    if (!actionBtn) return;
+    actionBtn.outerHTML = getBottomNavActionHTML(activePage);
+  };
+
   const createBottomNav = (activePage = '') => {
-    if (document.querySelector('.bottom-nav')) return;
+    if (document.querySelector('.bottom-nav')) {
+      updateBottomNav(activePage);
+      return;
+    }
 
     const items = [
       { href: 'beranda.html', label: 'Home', id: 'home', icon: 'grid_view' },
@@ -143,12 +172,7 @@ const Main = (() => {
       <div class="bottom-nav-inner">
         ${items.map(item => {
       if (item.isAction) {
-        return `
-              <button class="bottom-nav-action" onclick="if(typeof showCheckInModal === 'function'){ showCheckInModal(); } else { window.location.href='beranda.html'; }" aria-label="Catat Mood">
-                <span class="material-symbols-rounded">edit</span>
-                <span style="font-size: 0.75rem; font-weight: 600;">Catat</span>
-              </button>
-            `;
+        return getBottomNavActionHTML(activePage);
       }
       return `
             <a href="${item.href}" class="bottom-nav-item ${activePage === item.id ? 'active' : ''}">
@@ -389,7 +413,7 @@ const Main = (() => {
           <p style="color:rgba(255,255,255,0.75); font-size:0.85rem; margin-top:4px;">
             Saat kamu merasa harimu berat hari ini, dirimu dari tanggal <b id="read-capsule-date" style="color:#fff;"></b> pernah mengirimkan pesan ini khusus untukmu:
           </p>
-          <div style="margin:20px 0; padding:16px; background:rgba(255,255,255,0.05); border-left:4px solid #F43F5E; border-radius:8px; font-style:italic; color:#fff; font-size:1rem; line-height:1.6;" id="read-capsule-content"></div>
+          <div style="margin:20px 0; padding:16px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.15); border-radius:12px; font-style:italic; color:#fff; font-size:1rem; line-height:1.6;" id="read-capsule-content"></div>
           <div style="display:flex; flex-direction:column; gap:10px;">
             <button class="btn btn-full" style="background:linear-gradient(135deg, #F97316, #D97706); color:#fff; border:none; font-weight:700;" onclick="document.getElementById('time-capsule-read-modal').classList.remove('active'); window.location.href='jurnal.html';">
               <span class="material-symbols-rounded">local_fire_department</span> Lepas Emosimu via "Bakar Beban" di Jurnal
@@ -512,7 +536,7 @@ const Main = (() => {
     document.body.removeChild(ta);
   }
 
-  return { initPage, getGreetingText, updateHeaderAvatar, logoSVG };
+  return { initPage, getGreetingText, updateHeaderAvatar, updateBottomNav, logoSVG };
 })();
 
 // ---- Centralized Event Delegation Engine (Clean Code Architecture) ----
@@ -572,7 +596,15 @@ document.addEventListener('click', (event) => {
       if (typeof rotateInspiration === 'function') rotateInspiration();
       break;
     case 'open-teman-chat':
-      if (typeof TemanChat !== 'undefined' && typeof TemanChat.open === 'function') TemanChat.open();
+      if (typeof TemanChat !== 'undefined') {
+        if (!document.getElementById('teman-chat') && typeof TemanChat.init === 'function') {
+          TemanChat.init().then(() => {
+            if (typeof TemanChat.open === 'function') TemanChat.open();
+          });
+        } else if (typeof TemanChat.open === 'function') {
+          TemanChat.open();
+        }
+      }
       break;
     case 'open-settings':
       if (typeof Settings !== 'undefined' && typeof Settings.open === 'function') Settings.open();
@@ -616,6 +648,8 @@ document.addEventListener('click', (event) => {
     case 'reset-burn':
       if (typeof resetBurn === 'function') resetBurn();
       break;
+
+
     case 'close-jurnal-modal':
       if (typeof closeJurnalModal === 'function') closeJurnalModal();
       break;

@@ -153,6 +153,7 @@ function submitMoodTracker() {
   renderChart();
   renderContributionGrid();
   renderInsights();
+  if (typeof Main !== 'undefined' && Main.updateBottomNav) Main.updateBottomNav('mood');
 
   // Reset
   moodLevel = null;
@@ -295,7 +296,7 @@ function renderInsights() {
     const needed = 3 - moods.length;
     const progress = Math.round((moods.length / 3) * 100);
     insightEl.innerHTML = `
-      <div class="insight-card" style="border-left:4px solid var(--secondary-accent);">
+      <div class="insight-card" style="border: 1px solid var(--card-border, #E2E8F0); border-radius: 16px;">
         <div class="flex items-center justify-between" style="margin-bottom:var(--space-md);">
           <div class="insight-card-header" style="margin:0;">
             <span class="material-symbols-rounded text-primary" style="font-size:24px;">psychology</span>
@@ -435,7 +436,7 @@ function renderInsights() {
         </div>
 
         <!-- AI Analysis -->
-        <div style="background:var(--card-subtle); border-radius:12px; padding:16px; margin-bottom:20px; border-left:4px solid var(--primary-accent);">
+        <div style="background:var(--card-subtle); border-radius:12px; padding:16px; margin-bottom:20px; border:1px solid var(--card-border);">
           <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
             <span class="material-symbols-rounded" style="font-size:18px; color:var(--primary-accent);">psychology</span>
             <span style="font-size:0.8rem; font-weight:700; color:var(--primary-accent); text-transform:uppercase; letter-spacing:0.5px;">Analisa AI</span>
@@ -445,7 +446,7 @@ function renderInsights() {
 
         ${tagInsight ? `
         <!-- Tag Insight -->
-        <div style="background:var(--card-subtle); border-radius:12px; padding:14px 16px; margin-bottom:20px; border-left:4px solid #F59E0B;">
+        <div style="background:var(--card-subtle); border-radius:12px; padding:14px 16px; margin-bottom:20px; border:1px solid var(--card-border);">
           <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
             <span class="material-symbols-rounded" style="font-size:18px; color:#F59E0B;">label</span>
             <span style="font-size:0.8rem; font-weight:700; color:#B45309;">Pola Emosi Terdeteksi: "${dominantTag}"</span>
@@ -484,37 +485,40 @@ function renderInsights() {
             </span>
           </div>
 
-          <!-- Bar Chart Area (Fixed 110px Height Container) -->
-          <div style="display:flex; align-items:flex-end; gap:12px; height:110px; margin-bottom:12px; padding:0 4px;" id="mood-bar-chart-area">
+          <!-- Bar Chart Area (Tall Vertical Bar Chart with Perfectly Aligned Baseline) -->
+          <div style="display:flex; align-items:flex-end; gap:12px; height:185px; margin-bottom:12px; padding:0 4px;" id="mood-bar-chart-area">
             ${[1,2,3,4,5].map(level => {
               const count = moodCounts[level];
-              const heightPercent = maxCount > 0 ? (count > 0 ? Math.max(Math.round((count / maxCount) * 100), 12) : 4) : 4;
+              const heightPercent = maxCount > 0 ? (count > 0 ? Math.max(Math.round((count / maxCount) * 100), 10) : 4) : 4;
               const colors = { 1: '#EF4444', 2: '#F97316', 3: '#3B82F6', 4: '#10B981', 5: '#8B5CF6' };
               const labels = { 1: 'Buruk', 2: 'Kurang', 3: 'Biasa', 4: 'Baik', 5: 'Luar Biasa' };
-              const emojis = { 1: '😢', 2: '😟', 3: '😐', 4: '😊', 5: '🤩' };
 
               return `
-                <div class="mood-bar-item" data-level="${level}" data-count="${count}" data-label="${labels[level]}" data-emoji="${emojis[level]}" data-color="${colors[level]}" style="flex:1; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:6px;" onmouseenter="showMoodBarPopup(this, event)" onmouseleave="hideMoodBarPopup()" onclick="toggleMoodBarPopup(this, event)">
+                <div class="mood-bar-item" data-level="${level}" data-count="${count}" data-label="${labels[level]}" data-color="${colors[level]}" style="flex:1; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:6px; cursor:pointer;" onmouseenter="showMoodBarPopup(this, event)" onmouseleave="hideMoodBarPopup()" onclick="toggleMoodBarPopup(this, event)">
                   <!-- Count Badge above Bar -->
-                  <span style="font-size:0.75rem; font-weight:850; color:${colors[level]};">${count}</span>
+                  <span style="font-size:0.85rem; font-weight:850; color:${colors[level]}; margin-bottom:2px;">${count}</span>
                   
-                  <!-- Vertical Bar Track Container -->
-                  <div style="width:100%; max-width:38px; height:80px; display:flex; align-items:flex-end; background:${colors[level]}15; border-radius:8px; padding:2px; box-sizing:border-box;">
+                  <!-- Vertical Bar Track Container (150px Height) -->
+                  <div style="width:100%; max-width:44px; height:150px; display:flex; align-items:flex-end; background:${colors[level]}15; border-radius:12px; padding:3px; box-sizing:border-box;">
                     <!-- Actual Dynamic Height Vertical Bar -->
-                    <div style="width:100%; height:${heightPercent}%; background:linear-gradient(to top, ${colors[level]}, ${colors[level]}E6); border-radius:6px; min-height:4px; transition:height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow:0 2px 8px ${colors[level]}40;"></div>
+                    <div style="width:100%; height:${heightPercent}%; background:linear-gradient(to top, ${colors[level]}, ${colors[level]}E6); border-radius:9px; min-height:6px; transition:height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow:0 3px 10px ${colors[level]}40;"></div>
                   </div>
                 </div>
               `;
             }).join('')}
           </div>
 
-          <!-- Emoji Row below Bars -->
-          <div style="display:flex; gap:12px; border-top:1px dashed var(--card-border); padding-top:10px;">
+          <!-- Mascot & Label Row (Strictly Aligned Horizontal Baseline) -->
+          <div style="display:flex; gap:12px; border-top:1px dashed var(--card-border); padding-top:12px; align-items:flex-start;" id="mood-bar-labels-area">
             ${[1,2,3,4,5].map(level => {
-              const emojis = { 1: '😢', 2: '😟', 3: '😐', 4: '😊', 5: '🤩' };
+              const count = moodCounts[level];
+              const colors = { 1: '#EF4444', 2: '#F97316', 3: '#3B82F6', 4: '#10B981', 5: '#8B5CF6' };
+              const labels = { 1: 'Buruk', 2: 'Kurang', 3: 'Biasa', 4: 'Baik', 5: 'Luar Biasa' };
+
               return `
-                <div class="mood-bar-emoji-btn" data-level="${level}" style="flex:1; text-align:center; font-size:1.2rem;" onmouseenter="showMoodBarPopupByLevel(${level}, event)" onmouseleave="hideMoodBarPopup()" onclick="toggleMoodBarPopupByLevel(${level}, event)">
-                  ${emojis[level]}
+                <div class="mood-bar-label-item" data-level="${level}" data-count="${count}" data-label="${labels[level]}" data-color="${colors[level]}" style="flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:6px; cursor:pointer;" onmouseenter="showMoodBarPopupByLevel(${level}, event)" onmouseleave="hideMoodBarPopup()" onclick="toggleMoodBarPopupByLevel(${level}, event)">
+                  <img src="assets/img/maskots/mascot-mood-${level}.png" alt="${labels[level]}" class="mood-bar-mascot-img" style="width:clamp(30px, 7vw, 38px); height:clamp(30px, 7vw, 38px); object-fit:contain; filter:drop-shadow(0 4px 8px rgba(0,0,0,0.14)); transition:transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);">
+                  <span style="font-size:0.75rem; font-weight:800; color:var(--text-secondary); text-align:center; line-height:1.25;">${labels[level]}</span>
                 </div>
               `;
             }).join('')}
@@ -551,7 +555,6 @@ window.showMoodBarPopup = function(el, event) {
   const level = parseInt(el.dataset.level);
   const count = parseInt(el.dataset.count);
   const label = el.dataset.label;
-  const emoji = el.dataset.emoji;
   const color = el.dataset.color;
 
   let popup = document.getElementById('mood-bar-popup');
@@ -589,33 +592,35 @@ window.showMoodBarPopup = function(el, event) {
   let summaryText = 'Belum ada data check-in cukup.';
   if (monthMoods.length > 0) {
     const avgLvl = monthMoods.reduce((a, b) => a + (b.level || b.score || 3), 0) / monthMoods.length;
-    if (avgLvl >= 4.2) summaryText = `Cenderung sangat bahagia & berenergi bulan ini 🤩`;
-    else if (avgLvl >= 3.5) summaryText = `Cenderung bahagia & positif bulan ini 😊`;
-    else if (avgLvl >= 2.8) summaryText = `Cenderung stabil & tenang bulan ini 😐`;
-    else if (avgLvl >= 2.0) summaryText = `Cenderung kurang baik & butuh istirahat 😟`;
-    else summaryText = `Cenderung merasa berat bulan ini 😢`;
+    if (avgLvl >= 4.2) summaryText = `Cenderung sangat bahagia & penuh semangat bulan ini`;
+    else if (avgLvl >= 3.5) summaryText = `Cenderung bahagia & positif bulan ini`;
+    else if (avgLvl >= 2.8) summaryText = `Cenderung stabil & tenang bulan ini`;
+    else if (avgLvl >= 2.0) summaryText = `Cenderung kurang baik & butuh istirahat`;
+    else summaryText = `Cenderung merasa cukup berat bulan ini`;
   }
 
   const percent = monthMoods.length > 0 ? Math.round((count / monthMoods.length) * 100) : 0;
 
   popup.innerHTML = `
-    <div class="mood-bar-popup-header">
-      <span class="mood-bar-popup-emoji">${emoji}</span>
-      <div>
-        <div class="mood-bar-popup-title" style="color:${color};">Mood ${label} (Level ${level})</div>
-        <div class="mood-bar-popup-date">
+    <div class="mood-bar-popup-header" style="display:flex; align-items:center; gap:12px; padding-bottom:10px; border-bottom:1px dashed rgba(255,255,255,0.15); margin-bottom:10px;">
+      <img src="assets/img/maskots/mascot-mood-${level}.png" alt="${label}" style="width:42px; height:42px; object-fit:contain; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.25)); flex-shrink:0;">
+      <div style="flex:1; min-width:0;">
+        <div class="mood-bar-popup-title" style="color:${color}; font-size:0.98rem; font-weight:850; line-height:1.2;">Mood ${label} (Level ${level})</div>
+        <div class="mood-bar-popup-date" style="font-size:0.75rem; color:rgba(255,255,255,0.75); display:flex; align-items:center; gap:4px; margin-top:3px;">
           <span class="material-symbols-rounded" style="font-size:14px; color:rgba(255,255,255,0.7);">calendar_month</span>
           <span>${dateRangeText}</span>
         </div>
       </div>
     </div>
-    <div class="mood-bar-popup-count-badge">
+    
+    <div class="mood-bar-popup-count-badge" style="display:flex; align-items:center; justify-content:center; gap:6px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.18); padding:6px 14px; border-radius:999px; font-size:0.8rem; font-weight:750; margin-bottom:12px; white-space:nowrap; width:100%; box-sizing:border-box;">
       <span style="color:${color}; font-weight:850;">${count} Check-in</span>
       <span style="opacity:0.6;">·</span>
       <span>${percent}% dari total bulan ini</span>
     </div>
-    <div class="mood-bar-popup-summary">
-      <div class="mood-bar-popup-summary-title">
+    
+    <div class="mood-bar-popup-summary" style="background:rgba(245, 158, 11, 0.14); border:1px solid rgba(245, 158, 11, 0.3); border-radius:10px; padding:10px 12px; font-size:0.82rem; line-height:1.55; color:rgba(255,255,255,0.95);">
+      <div class="mood-bar-popup-summary-title" style="font-size:0.72rem; font-weight:850; color:#F59E0B; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:3px; display:flex; align-items:center; gap:4px;">
         <span class="material-symbols-rounded" style="font-size:14px;">auto_awesome</span>
         <span>Ringkasan Emosi</span>
       </div>
@@ -624,14 +629,11 @@ window.showMoodBarPopup = function(el, event) {
   `;
 
   popup.style.display = 'block';
-  // Force reflow for smooth transition
-  popup.offsetHeight;
-  popup.classList.add('active');
 
   // Position relative to viewport (fixed positioning)
   const elRect = el.getBoundingClientRect();
-  const popupW = popup.offsetWidth || 280;
-  const popupH = popup.offsetHeight || 160;
+  const popupW = popup.offsetWidth || 330;
+  const popupH = popup.offsetHeight || 170;
 
   let left = elRect.left + (elRect.width / 2) - (popupW / 2);
   left = Math.max(12, Math.min(left, window.innerWidth - popupW - 12));
@@ -644,6 +646,10 @@ window.showMoodBarPopup = function(el, event) {
 
   popup.style.left = left + 'px';
   popup.style.top = top + 'px';
+
+  // Force reflow for smooth transition
+  popup.offsetHeight;
+  popup.classList.add('active');
 };
 
 window.hideMoodBarPopup = function() {

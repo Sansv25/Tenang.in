@@ -4,18 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:; style-src 'self' 'unsafe-inline' https: fonts.googleapis.com; font-src 'self' https: fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' data: blob: https:; connect-src 'self' https: wss: data: blob:;">
   <meta name="description"
     content="Tenang.in Beranda | Check-in mood harian instan, bento grid refleksi diri, dan interaksi privat dengan Teman AI dalam antarmuka wellness bersih dan tenang.">
   <meta name="theme-color" content="#3B72C4">
   <title>Beranda | Tenang.in</title>
   <link rel="icon" type="image/png" href="assets/img/logo/favicon.png">
+  <link rel="shortcut icon" type="image/png" href="assets/img/logo/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"></noscript>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"></noscript>
-  <link rel="preload" as="video" href="assets/img/anim-mascot/idle.mp4" type="video/mp4">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block">
   <link rel="preload" as="image" href="assets/img/maskots/mascot-greeting.png">
   <link rel="preload" as="image" href="assets/img/maskots/mascot-cheerful.png">
   <link rel="stylesheet" href="assets/css/style.css">
@@ -80,7 +79,7 @@
         <a href="profil.html" class="btn btn-sm" style="font-weight:700;">Isi Profil</a>
       </div>
 
-      <!-- ======= INTERACTIVE INSTANT MOOD PICKER (WHITE WELLNESS CARD) ======= -->
+      <!-- ======= INTERACTIVE INSTANT MOOD PICKER (PRIMARY FOCAL POINT) ======= -->
       <section class="dashboard-mood-card">
         <div class="dashboard-mood-header">
           <div class="mood-title-wrap">
@@ -88,8 +87,11 @@
               <span class="material-symbols-rounded" style="font-size:28px;">sentiment_very_satisfied</span>
             </div>
             <div>
-              <h2>Check-In Mood Hari Ini</h2>
-              <p>Pilih emosi yang menggambarkan rasamu saat ini untuk mencatatnya dengan instan.</p>
+              <span class="section-badge-pill badge-primary">
+                <span class="material-symbols-rounded" style="font-size:14px;">auto_awesome</span> Aksi Utama Harian
+              </span>
+              <h2 class="section-title-primary">Check-In Mood Hari Ini</h2>
+              <p class="section-sub-text">Pilih emosi yang menggambarkan rasamu saat ini untuk mencatatnya dengan instan.</p>
             </div>
           </div>
         </div>
@@ -141,6 +143,11 @@
         </div>
       </section>
 
+      <!-- ======= PROFIL KEPRIBADIAN & SELF-CARE PERSONAL (NEW SECTION 1) ======= -->
+      <section id="beranda-personality-section" style="margin-top: var(--space-xl); margin-bottom: var(--space-xl);">
+        <!-- Akan diisi secara dinamik oleh home.js (Profil Aktif vs Launcher Kuis) -->
+      </section>
+
       <!-- ======= RANGKUMAN EMOSIMU MINGGUAN INI (HIGH IMPACT INNOVATION SECTION) ======= -->
       <section id="weekly-mood-summary-section" style="margin-top: var(--space-xl); margin-bottom: var(--space-xl);">
         <!-- Akan diisi secara dinamakan oleh home.js dengan try-catch & sanitasi teks -->
@@ -168,12 +175,18 @@
       <!-- Daily tip dynamically populated by home.js -->
       <section id="daily-tip" style="margin-bottom:var(--space-2xl);"></section>
 
+      <!-- ======= MEDALI PENCAPAIAN & REKOR REFLEKSI (NEW SECTION 3) ======= -->
+      <section id="beranda-achievements-section" style="margin-top: var(--space-xl); margin-bottom: var(--space-2xl);">
+        <!-- Akan diisi secara dinamik oleh home.js (Medali pencapaian + Stat summary) -->
+      </section>
+
       <!-- ======= BENTO GRID QUICK ACCESS (ALL WHITE CARDS) ======= -->
       <section class="bento-container">
-        <div style="margin-bottom:var(--space-lg); display:flex; align-items:center; gap:8px;">
-          <span class="material-symbols-rounded text-primary"
-            style="font-size:28px; color:#FFFFFF !important;">explore</span>
-          <h2 style="font-size:1.5rem; font-weight:800; color:#FFFFFF; margin:0;">Eksplorasi Fitur Refleksi</h2>
+        <div class="bento-section-header">
+          <span class="section-badge-pill badge-white">
+            <span class="material-symbols-rounded" style="font-size:14px;">explore</span> Navigasi Fitur
+          </span>
+          <h2 class="bento-section-title">Eksplorasi Fitur Refleksi</h2>
         </div>
 
         <div class="bento-grid">
@@ -271,20 +284,16 @@
         </div>
       </section>
 
-      <!-- ======= AKSES BANTUAN & KONTAK DARURAT (CRISIS HELPLINE SECTION) ======= -->
-      <section class="card emergency-help-section"
-        style="margin-top: var(--space-2xl); margin-bottom: var(--space-xl); border: 2px solid var(--card-border); border-radius: 28px; padding: 32px; box-shadow: 0 16px 40px -12px rgba(15, 23, 42, 0.15);">
-        <div
-          style="display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; gap: 16px;">
+      <!-- ======= AKSES BANTUAN & KONTAK DARURAT (CRISIS HELPLINE UTILITY FOOTER) ======= -->
+      <section class="card emergency-help-section">
+        <div class="emergency-help-header">
           <div>
-            <span
-              style="display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--primary-accent); background: var(--card-subtle); border: 1px solid var(--card-border); padding: 6px 14px; border-radius: 999px; margin-bottom: 12px;">
-              <span class="material-symbols-rounded" style="font-size: 16px; color: var(--primary-accent);">emergency</span>
+            <span class="section-badge-pill badge-utility">
+              <span class="material-symbols-rounded" style="font-size: 15px;">emergency</span>
               Layanan Bantuan & Konseling 24/7
             </span>
-            <h2 style="font-size: 1.65rem; font-weight: 850; color: var(--text-on-white); margin: 0; letter-spacing: -0.02em;">Akses
-              Bantuan & Kontak Darurat</h2>
-            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; max-width: 620px; margin: 6px 0 0;">
+            <h2 class="emergency-section-title">Akses Bantuan & Kontak Darurat</h2>
+            <p class="emergency-section-desc">
               Kamu tidak pernah sendirian. Jika sewaktu-waktu merasa terbebani, cemas berlebihan, atau membutuhkan teman bicara profesional, layanan konselor resmi Indonesia siap mendampingimu.
             </p>
           </div>
@@ -460,11 +469,11 @@
   <!-- ======= STREAK MILESTONE MODAL ======= -->
   <div class="modal-overlay" id="streak-modal">
     <div class="modal" style="text-align:center; max-width:400px; padding:var(--space-2xl);">
-      <span class="material-symbols-rounded text-warning modal-breathing-icon"
+      <span class="material-symbols-rounded text-warning"
         style="font-size:72px; margin-bottom:var(--space-md);">local_fire_department</span>
       <h2 style="font-size:1.75rem; font-weight:850; margin-bottom:var(--space-xs); color:var(--text-on-white);">Luar
         Biasa!</h2>
-      <p style="color:#475569; font-size:1.0625rem; line-height:1.6; margin-bottom:var(--space-xl);">
+      <p style="color:var(--text-secondary); font-size:1.0625rem; line-height:1.6; margin-bottom:var(--space-xl);">
         Kamu berhasil mencapai <strong id="streak-modal-count"
           style="color:var(--warning); font-size:1.25rem;">3</strong> hari streak refleksi. Terus pertahankan kebiasaan
         baik ini ya!
@@ -585,6 +594,8 @@
         <div class="flex justify-center items-center gap-2 mt-2 mb-4 md:mb-6">
           <span class="onboarding-dot h-2.5 rounded-full transition-all duration-300"
             style="background:#5B8FD4; width:24px;"></span>
+          <span class="onboarding-dot w-2.5 h-2.5 rounded-full bg-slate-200 transition-all duration-300"></span>
+          <span class="onboarding-dot w-2.5 h-2.5 rounded-full bg-slate-200 transition-all duration-300"></span>
           <span class="onboarding-dot w-2.5 h-2.5 rounded-full bg-slate-200 transition-all duration-300"></span>
           <span class="onboarding-dot w-2.5 h-2.5 rounded-full bg-slate-200 transition-all duration-300"></span>
         </div>

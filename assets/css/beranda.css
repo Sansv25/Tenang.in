@@ -178,14 +178,123 @@
   background: #334155 !important;
 }
 
-/* ---- Interactive Mood Picker Card ---- */
-.dashboard-mood-card {
-  background: #FFFFFF;
+/* =============================================
+   Visual Hierarchy & Standard Typography System
+   ============================================= */
+
+/* Section Badge Pills */
+.section-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 4px;
+  width: fit-content;
+}
+
+.section-badge-pill.badge-primary {
+  background: #E0F2FE;
+  color: #0284C7;
+  border: 1px solid #BAE6FD;
+}
+
+.section-badge-pill.badge-white {
+  background: rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.section-badge-pill.badge-utility {
+  background: #F1F5F9;
+  color: #0284C7;
   border: 1px solid #E2E8F0;
+}
+
+/* Primary Action Heading (Check-In Mood) - Level 1 Focal Point */
+.section-title-primary {
+  font-size: 1.48rem;
+  font-weight: 850;
+  color: #0F172A;
+  margin: 2px 0 0;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.section-sub-text {
+  font-size: 0.88rem;
+  color: #64748B;
+  margin: 4px 0 0;
+  line-height: 1.45;
+}
+
+/* Bento Navigation Header - Level 3 Navigation */
+.bento-section-header {
+  margin-bottom: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.bento-section-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Emergency Helpline Section - Level 4 Utility Footer */
+.emergency-help-section {
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 24px;
+  padding: 26px 28px;
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-xl);
+  box-shadow: 0 10px 30px -8px rgba(15, 23, 42, 0.08);
+}
+
+.emergency-help-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.emergency-section-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 4px 0 0;
+  letter-spacing: -0.01em;
+}
+
+.emergency-section-desc {
+  color: #64748B;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  max-width: 620px;
+  margin: 4px 0 0;
+}
+
+/* ---- Interactive Mood Picker Card (Primary Focal Point) ---- */
+.dashboard-mood-card {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAFCFF 100%);
+  border: 1.5px solid #CBD5E1;
   border-radius: var(--radius-xl);
   padding: var(--space-2xl);
   margin-bottom: var(--space-xl);
-  box-shadow: 0 12px 32px -6px rgba(15, 23, 42, 0.12), 0 4px 10px -3px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 16px 40px -8px rgba(2, 132, 199, 0.12), 0 4px 12px rgba(15, 23, 42, 0.04);
   position: relative;
 }
 
@@ -214,20 +323,6 @@
   background: #FFEDD5;
   color: #EA580C;
   flex-shrink: 0;
-}
-
-.mood-title-wrap h2 {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: #0F172A;
-  margin: 0;
-  letter-spacing: -0.01em;
-}
-
-.mood-title-wrap p {
-  font-size: 0.85rem;
-  color: #64748B;
-  margin: 3px 0 0;
 }
 
 .btn-mood-cta {
@@ -598,7 +693,7 @@
 
   /* Mobile 2-row clean 6-span grid layout for 5 mood cards (Row 1: 3 items, Row 2: 2 items) */
   .mood-grid {
-    display: grid !important;
+    display: grid;
     grid-template-columns: repeat(6, 1fr) !important;
     gap: 8px !important;
   }
@@ -940,12 +1035,19 @@ body.dark-mode .emergency-help-section,
 html.dark-mode .nudge-banner,
 body.dark-mode .nudge-banner,
 html.dark-mode .weekly-summary-card,
-body.dark-mode .weekly-summary-card {
+body.dark-mode .weekly-summary-card,
+html.dark-mode .home-katarsis-card,
+body.dark-mode .home-katarsis-card,
+html.dark-mode #beranda-personality-section .card,
+body.dark-mode #beranda-personality-section .card,
+html.dark-mode #beranda-achievements-section .card,
+body.dark-mode #beranda-achievements-section .card {
   background: #1E293B !important;
   border-color: rgba(255, 255, 255, 0.12) !important;
   color: #F8FAFC !important;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
 }
+
 
 html.dark-mode .weekly-box-trend,
 body.dark-mode .weekly-box-trend,

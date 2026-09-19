@@ -27,7 +27,7 @@
     "id": 5,
     "text": "Apa yang akan kamu katakan ke dirimu yang kemarin?",
     "mood_context": ["all"],
-    "category": "self-compassion"
+    "category": "self-love"
   },
   {
     "id": 6,
@@ -63,7 +63,7 @@
     "id": 11,
     "text": "Apa satu hal baik yang sudah kamu lakukan untuk dirimu sendiri hari ini?",
     "mood_context": ["all"],
-    "category": "self-compassion"
+    "category": "self-love"
   },
   {
     "id": 12,
@@ -87,6 +87,96 @@
     "id": 15,
     "text": "Apa kekuatan dirimu yang sering kamu lupakan?",
     "mood_context": ["sad", "neutral"],
-    "category": "self-compassion"
+    "category": "self-love"
+  },
+  {
+    "id": 16,
+    "text": "Pikirkan seseorang yang membantu perjalanan hidupmu. Ucapan terima kasih apa yang ingin kamu sampaikan padanya?",
+    "mood_context": ["happy", "all"],
+    "category": "gratitude"
+  },
+  {
+    "id": 17,
+    "text": "Jika kamu bisa membuang satu ekspektasi berat dari pundakmu hari ini, ekspektasi apakah itu?",
+    "mood_context": ["stressed", "anxious"],
+    "category": "release"
+  },
+  {
+    "id": 18,
+    "text": "Pelajaran paling berharga apa yang kamu dapatkan minggu ini dari sebuah tantangan?",
+    "mood_context": ["all"],
+    "category": "reflection"
+  },
+  {
+    "id": 19,
+    "text": "Bagaimana cara terbaik untuk merawat dan memanjakan dirimu ketika merasa kelelahan?",
+    "mood_context": ["sad", "all"],
+    "category": "self-love"
+  },
+  {
+    "id": 20,
+    "text": "Impian atau pencapaian kecil apa yang paling ingin kamu wujudkan bulan ini?",
+    "mood_context": ["happy", "neutral"],
+    "category": "hope"
+  },
+  {
+    "id": 21,
+    "text": "Kapan terakhir kali kamu merasa benar-benar didengar dan dipahami oleh orang lain?",
+    "mood_context": ["all"],
+    "category": "connection"
+  },
+  {
+    "id": 22,
+    "text": "Nikmat sederhana apa hari ini (seperti makanan, cuaca, atau senyuman) yang terasa menenangkan?",
+    "mood_context": ["happy", "all"],
+    "category": "gratitude"
+  },
+  {
+    "id": 23,
+    "text": "Tuliskan semua rasa takutmu tanpa dihakimi, lalu bayangkan rasa takut itu menguap satu per satu.",
+    "mood_context": ["anxious", "stressed"],
+    "category": "release"
+  },
+  {
+    "id": 24,
+    "text": "Apa nilai atau prinsip hidup yang paling menjaga arah langkahmu saat merasa bingung?",
+    "mood_context": ["neutral", "all"],
+    "category": "reflection"
+  },
+  {
+    "id": 25,
+    "text": "Jika sahabat terbaikmu berada di posisimu saat ini, kata-kata penyemangat apa yang akan kamu berikan padanya?",
+    "mood_context": ["sad", "anxious"],
+    "category": "self-love"
+  },
+  {
+    "id": 26,
+    "text": "Apa satu hal yang sangat kamu nantikan dengan penuh antusiasme dalam beberapa hari ke depan?",
+    "mood_context": ["happy", "neutral"],
+    "category": "hope"
+  },
+  {
+    "id": 27,
+    "text": "Bagaimana cara kamu membagikan kebaikan atau energi positif kepada orang-orang di sekitarmu hari ini?",
+    "mood_context": ["happy", "all"],
+    "category": "connection"
+  },
+  {
+    "id": 28,
+    "text": "Apa hal yang paling menguras energimu hari ini, dan bagaimana cara terbaik untuk memulihkannya?",
+    "mood_context": ["stressed", "sad"],
+    "category": "release"
+  },
+  {
+    "id": 29,
+    "text": "Sifat atau karakter apa dalam dirimu yang paling kamu banggakan saat ini?",
+    "mood_context": ["all"],
+    "category": "self-love"
+  },
+  {
+    "id": 30,
+    "text": "Sebutkan satu momen di masa lalu yang dulu terasa berat, tapi kini kamu syukuri karena membuatmu lebih kuat.",
+    "mood_context": ["all"],
+    "category": "reflection"
   }
 ]

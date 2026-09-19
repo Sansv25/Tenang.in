@@ -631,7 +631,7 @@ p {
   }
 }
 
-/* ---- Bottom Nav (Mobile Only, Matte Black Floating Capsule) ---- */
+/* ---- Bottom Nav (Mobile Only, Glassmorphic White Floating Capsule in Light Mode) ---- */
 .bottom-nav {
   display: none;
   position: fixed;
@@ -642,15 +642,16 @@ p {
   width: calc(100% - 24px) !important;
   max-width: 440px !important;
   height: 64px;
-  background: rgba(20, 20, 24, 0.94);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(148, 163, 184, 0.45);
   border-radius: 9999px;
   z-index: var(--z-sticky);
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
   padding: 0 8px;
   box-sizing: border-box;
+  transition: background-color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base);
 }
 
 .bottom-nav-inner {
@@ -672,7 +673,7 @@ p {
   gap: 3px;
   flex: 1 1 0px;
   min-width: 0;
-  color: rgba(255, 255, 255, 0.45);
+  color: #64748B;
   transition: all var(--transition-fast);
   padding: 4px 2px;
   text-decoration: none;
@@ -697,29 +698,29 @@ p {
 
 .bottom-nav-item:hover,
 .bottom-nav-item.active {
-  color: #FFFFFF;
+  color: #2563EB;
 }
 
 .bottom-nav-item.active .material-symbols-rounded {
-  color: #FFFFFF;
-  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  color: #2563EB;
+  font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
 }
 
-/* Central Action (+) Button */
+/* Central Action Button */
 .bottom-nav-action {
   width: auto;
   height: 40px;
   padding: 0 14px;
   gap: 5px;
   border-radius: 20px;
-  background: #28282D;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, #3B72C4, #2563EB);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all var(--transition-base);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
   margin: 0 3px;
   flex-shrink: 0;
   font-weight: 700;
@@ -733,8 +734,14 @@ p {
 
 .bottom-nav-action:hover,
 .bottom-nav-action:active {
-  background: #38383E;
+  background: linear-gradient(135deg, #2563EB, #1D4ED8);
   transform: scale(1.05);
+}
+
+.bottom-nav-action.active {
+  background: linear-gradient(135deg, #1D4ED8, #1E40AF);
+  border-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 16px rgba(29, 78, 216, 0.45);
 }
 
 @media (max-width: 768px) {
@@ -754,7 +761,7 @@ p {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #0056d6 0%, #0066ff 50%, #0044b3 100%);
+  background: #588DD1;
   overflow: hidden;
   transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1), filter 0.7s ease;
   user-select: none;
@@ -1702,7 +1709,7 @@ p {
   color: var(--text-on-white, #1A2F4E);
   position: relative;
   overflow: hidden;
-  border-left: 5px solid #5B8FD4;
+  border: 1px solid var(--card-border, #E2E8F0);
 }
 
 /* Stat Cards Grid */
@@ -2050,10 +2057,11 @@ body.dark-mode .header-title {
 /* Dark Mobile Bottom Navigation Bar */
 html.dark-mode .bottom-nav,
 body.dark-mode .bottom-nav {
-  background: rgba(11, 19, 43, 0.95) !important;
-  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
+  background: rgba(15, 23, 42, 0.94) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.5) !important;
 }
 
 html.dark-mode .bottom-nav-item,
@@ -2061,8 +2069,15 @@ body.dark-mode .bottom-nav-item {
   color: #94A3B8 !important;
 }
 
+html.dark-mode .bottom-nav-item:hover,
+body.dark-mode .bottom-nav-item:hover,
 html.dark-mode .bottom-nav-item.active,
 body.dark-mode .bottom-nav-item.active {
+  color: #60A5FA !important;
+}
+
+html.dark-mode .bottom-nav-item.active .material-symbols-rounded,
+body.dark-mode .bottom-nav-item.active .material-symbols-rounded {
   color: #60A5FA !important;
 }
 

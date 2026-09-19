@@ -330,19 +330,18 @@ function openStatModal(type) {
       { days: 30, label: '30d', color: '#EC4899' },
       { days: 100, label: '100d', color: '#8B5CF6' }
     ];
-
     const tiersHTML = tiers.map((t, index) => {
       const isUnlocked = streak >= t.days;
       const isLast = index === tiers.length - 1;
       return `
         <div style="display:flex; align-items:center; gap:6px;">
           <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
-            <div style="width:38px; height:38px; border-radius:50%; background:${isUnlocked ? t.color + '22' : 'rgba(255,255,255,0.06)'}; border:2px solid ${isUnlocked ? t.color : 'rgba(255,255,255,0.15)'}; display:flex; align-items:center; justify-content:center; box-shadow:${isUnlocked ? `0 0 12px ${t.color}60` : 'none'}; transition:all 0.3s ease;">
-              <span class="material-symbols-rounded" style="font-size:20px; color:${isUnlocked ? t.color : 'rgba(255,255,255,0.3)'};">local_fire_department</span>
+            <div style="width:38px; height:38px; border-radius:50%; background:${isUnlocked ? t.color + '22' : 'var(--card-subtle)'}; border:2px solid ${isUnlocked ? t.color : 'var(--card-border)'}; display:flex; align-items:center; justify-content:center; box-shadow:${isUnlocked ? `0 0 12px ${t.color}60` : 'none'}; transition:all 0.3s ease;">
+              <span class="material-symbols-rounded" style="font-size:20px; color:${isUnlocked ? t.color : 'var(--text-muted)'};">local_fire_department</span>
             </div>
-            <span style="font-size:0.75rem; font-weight:800; color:${isUnlocked ? '#FFFFFF' : 'rgba(255,255,255,0.4)'};">${t.label}</span>
+            <span style="font-size:0.75rem; font-weight:800; color:${isUnlocked ? 'var(--text-on-white)' : 'var(--text-muted)'};">${t.label}</span>
           </div>
-          ${!isLast ? `<div style="width:16px; height:2px; background:${streak >= tiers[index+1].days ? tiers[index+1].color : 'rgba(255,255,255,0.15)'}; margin-bottom:18px;"></div>` : ''}
+          ${!isLast ? `<div style="width:16px; height:2px; background:${streak >= tiers[index+1].days ? tiers[index+1].color : 'var(--card-border)'}; margin-bottom:18px;"></div>` : ''}
         </div>
       `;
     }).join('');
@@ -351,35 +350,32 @@ function openStatModal(type) {
       <div style="position:relative; text-align:center; padding: 10px 4px 6px;">
         <button class="modal-close" onclick="closeStatModal()" aria-label="Tutup" style="position:absolute; top:-6px; right:-6px;"><span class="material-symbols-rounded">close</span></button>
 
-        <!-- Top Avatar & Mascot Header -->
+        <!-- Top Avatar Header -->
         <div style="position:relative; display:flex; justify-content:center; align-items:center; margin-bottom:16px; margin-top:10px;">
-          <!-- Left Floating Mascot Waving -->
-          <img src="assets/img/maskots/mascot-cheerful.png" alt="Mascot" style="position:absolute; left:-10px; top:-16px; width:64px; height:64px; object-fit:contain; filter:drop-shadow(0 6px 14px rgba(0,0,0,0.3)); animation: streakMascotWave 2.5s ease-in-out infinite;">
-          
           <!-- Overlapping Avatars -->
-          <div style="display:flex; align-items:center; justify-content:center; margin-left:20px;">
-            <div style="width:58px; height:58px; border-radius:50%; background:linear-gradient(135deg, #2563EB, #60A5FA); border:3px solid #1E293B; display:flex; align-items:center; justify-content:center; overflow:hidden; z-index:2; box-shadow:0 6px 16px rgba(0,0,0,0.3);">
+          <div style="display:flex; align-items:center; justify-content:center;">
+            <div style="width:58px; height:58px; border-radius:50%; background:linear-gradient(135deg, #2563EB, #60A5FA); border:3px solid var(--card-surface); display:flex; align-items:center; justify-content:center; overflow:hidden; z-index:2; box-shadow:0 6px 16px rgba(0,0,0,0.3);">
               <img src="assets/img/maskots/mascot-listening.png" alt="Milo" style="width:100%; height:100%; object-fit:cover;">
             </div>
-            <div style="width:58px; height:58px; border-radius:50%; background:linear-gradient(135deg, #F59E0B, #EF4444); border:3px solid #1E293B; display:flex; align-items:center; justify-content:center; overflow:hidden; margin-left:-18px; z-index:1; box-shadow:0 6px 16px rgba(0,0,0,0.3);">
+            <div style="width:58px; height:58px; border-radius:50%; background:linear-gradient(135deg, #F59E0B, #EF4444); border:3px solid var(--card-surface); display:flex; align-items:center; justify-content:center; overflow:hidden; margin-left:-18px; z-index:1; box-shadow:0 6px 16px rgba(0,0,0,0.3);">
               ${avatar ? `<img src="${avatar}" style="width:100%; height:100%; object-fit:cover;">` : `<span class="material-symbols-rounded" style="color:#FFF; font-size:32px;">person</span>`}
             </div>
           </div>
         </div>
 
         <!-- Title -->
-        <h3 style="font-size: clamp(1.2rem, 4vw, 1.45rem); font-weight:850; color:#FFFFFF; margin-bottom:8px; line-height:1.3;">
+        <h3 style="font-size: clamp(1.2rem, 4vw, 1.45rem); font-weight:850; color:var(--text-on-white); margin-bottom:8px; line-height:1.3;">
           Kamu memiliki Streak selama<br>
-          <span style="background: linear-gradient(135deg, #FF512F, #DD2476); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-size:1.35em;">🔥 ${streak} Hari</span>
+          <span style="display:inline-flex; align-items:center; justify-content:center; gap:6px; font-size:1.35em; font-weight:900; color:#EF4444; margin-top:4px;"><span class="material-symbols-rounded" style="font-size:1.15em; color:#EF4444; font-variation-settings: 'FILL' 1;">local_fire_department</span><span>${streak} Hari</span></span>
         </h3>
 
         <!-- Explanation Bullet Points -->
-        <div style="text-align:left; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:14px 16px; margin:18px 0; display:flex; flex-direction:column; gap:10px;">
-          <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:rgba(255,255,255,0.85); line-height:1.5;">
+        <div style="text-align:left; background:var(--card-subtle); border:1px solid var(--card-border); border-radius:18px; padding:14px 16px; margin:18px 0; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:var(--text-on-white); line-height:1.5;">
             <span style="color:#F97316; font-weight:850; font-size:1rem;">•</span>
             <span>Streak terbuka saat kamu mencatat check-in mood secara konsisten setiap hari di <strong>Tenang.in</strong>.</span>
           </div>
-          <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:rgba(255,255,255,0.85); line-height:1.5;">
+          <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:var(--text-on-white); line-height:1.5;">
             <span style="color:#F97316; font-weight:850; font-size:1rem;">•</span>
             <span>Jaga ritme check-in harianmu untuk memperbarui & meningkatkan level badge refleksimu!</span>
           </div>
@@ -387,7 +383,7 @@ function openStatModal(type) {
 
         <!-- Tier Step Milestones -->
         <div style="margin:20px 0 24px;">
-          <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.8px; color:rgba(255,255,255,0.6); margin-bottom:12px;">Level Pencapaian Streak</div>
+          <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:0.8px; color:var(--text-secondary); margin-bottom:12px;">Level Pencapaian Streak</div>
           <div style="display:flex; align-items:center; justify-content:center; gap:4px; flex-wrap:nowrap; overflow-x:auto; padding:4px 0;">
             ${tiersHTML}
           </div>
@@ -408,15 +404,15 @@ function openStatModal(type) {
           <span class="material-symbols-rounded" style="font-size:40px; color:#38BDF8;">analytics</span>
         </div>
 
-        <h3 style="font-size:1.35rem; font-weight:850; color:#FFFFFF; margin-bottom:6px;">Rata-rata Mood</h3>
+        <h3 style="font-size:1.35rem; font-weight:850; color:var(--text-on-white); margin-bottom:6px;">Rata-rata Mood</h3>
         <div style="font-size:2.4rem; font-weight:850; color:#38BDF8; margin-bottom:6px;">${floatAvg} <span style="font-size:0.4em; padding:4px 12px; border-radius:12px; background:rgba(56,189,248,0.15); border:1px solid rgba(56,189,248,0.3); vertical-align:middle;">${avgLabel}</span></div>
 
-        <div style="text-align:left; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:14px 16px; margin:18px 0; display:flex; flex-direction:column; gap:10px;">
-          <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:rgba(255,255,255,0.85); line-height:1.5;">
+        <div style="text-align:left; background:var(--card-subtle); border:1px solid var(--card-border); border-radius:18px; padding:14px 16px; margin:18px 0; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:var(--text-on-white); line-height:1.5;">
             <span style="color:#38BDF8; font-weight:850; font-size:1rem;">•</span>
             <span>Rata-rata dihitung dari 7 hari check-in terakhir yang kamu catat.</span>
           </div>
-          <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:rgba(255,255,255,0.85); line-height:1.5;">
+          <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:var(--text-on-white); line-height:1.5;">
             <span style="color:#38BDF8; font-weight:850; font-size:1rem;">•</span>
             <span>Menunjukkan gambaran tren kestabilan emosi dan kondisi perasaanmu minggu ini.</span>
           </div>
@@ -437,15 +433,18 @@ function openStatModal(type) {
           <span class="material-symbols-rounded" style="font-size:40px; color:#A78BFA;">edit_note</span>
         </div>
 
-        <h3 style="font-size:1.35rem; font-weight:850; color:#FFFFFF; margin-bottom:6px;">Entri Jurnal</h3>
-        <div style="font-size:2.4rem; font-weight:850; color:#A78BFA; margin-bottom:6px;">${journalCount} <span style="font-size:0.4em; font-weight:700; color:rgba(255,255,255,0.7);">Catatan Bulan Ini</span></div>
+        <h3 style="font-size:1.35rem; font-weight:850; color:var(--text-on-white); margin-bottom:6px;">Entri Jurnal</h3>
+        <div style="display:flex; flex-direction:column; align-items:center; margin-bottom:12px;">
+          <span style="font-size:2.8rem; font-weight:850; color:#A78BFA; line-height:1;">${journalCount}</span>
+          <span style="font-size:0.875rem; font-weight:700; color:var(--text-secondary); margin-top:4px;">Catatan Bulan Ini</span>
+        </div>
 
-        <div style="text-align:left; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:14px 16px; margin:18px 0; display:flex; flex-direction:column; gap:10px;">
-          <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:rgba(255,255,255,0.85); line-height:1.5;">
+        <div style="text-align:left; background:var(--card-subtle); border:1px solid var(--card-border); border-radius:18px; padding:14px 16px; margin:18px 0; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:var(--text-on-white); line-height:1.5;">
             <span style="color:#A78BFA; font-weight:850; font-size:1rem;">•</span>
             <span>Jurnal adalah ruang privat aman tempatmu mengekspresikan pikiran dan perasaan tanpa batasan.</span>
           </div>
-          <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:rgba(255,255,255,0.85); line-height:1.5;">
+          <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:var(--text-on-white); line-height:1.5;">
             <span style="color:#A78BFA; font-weight:850; font-size:1rem;">•</span>
             <span>Menulis jurnal secara teratur membantu meredakan stres dan melatih kepekaan diri.</span>
           </div>
@@ -466,15 +465,18 @@ function openStatModal(type) {
           <span class="material-symbols-rounded" style="font-size:40px; color:#34D399;">smart_toy</span>
         </div>
 
-        <h3 style="font-size:1.35rem; font-weight:850; color:#FFFFFF; margin-bottom:6px;">Sesi Teman AI</h3>
-        <div style="font-size:2.4rem; font-weight:850; color:#34D399; margin-bottom:6px;">${temanSessions} <span style="font-size:0.4em; font-weight:700; color:rgba(255,255,255,0.7);">Sesi Refleksi</span></div>
+        <h3 style="font-size:1.35rem; font-weight:850; color:var(--text-on-white); margin-bottom:6px;">Sesi Teman AI</h3>
+        <div style="display:flex; flex-direction:column; align-items:center; margin-bottom:12px;">
+          <span style="font-size:2.8rem; font-weight:850; color:#34D399; line-height:1;">${temanSessions}</span>
+          <span style="font-size:0.875rem; font-weight:700; color:var(--text-secondary); margin-top:4px;">Sesi Refleksi</span>
+        </div>
 
-        <div style="text-align:left; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:14px 16px; margin:18px 0; display:flex; flex-direction:column; gap:10px;">
-          <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:rgba(255,255,255,0.85); line-height:1.5;">
+        <div style="text-align:left; background:var(--card-subtle); border:1px solid var(--card-border); border-radius:18px; padding:14px 16px; margin:18px 0; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:var(--text-on-white); line-height:1.5;">
             <span style="color:#34D399; font-weight:850; font-size:1rem;">•</span>
             <span>Teman AI selalu hadir 24/7 untuk mendengarkan curhatmu kapan saja tanpa pernah menghakimi.</span>
           </div>
-          <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:rgba(255,255,255,0.85); line-height:1.5;">
+          <div style="display:flex; align-items:flex-start; gap:10px; font-size:0.85rem; color:var(--text-on-white); line-height:1.5;">
             <span style="color:#34D399; font-weight:850; font-size:1rem;">•</span>
             <span>Setiap sesi membantumu meresapi perasaan dengan perspektif baru yang lebih damai.</span>
           </div>

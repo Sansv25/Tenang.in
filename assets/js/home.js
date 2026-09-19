@@ -57,9 +57,15 @@ async function initializeHome() {
   updateMoodSummary();
   renderWeeklyMoodSummary();
 
+  // ---- NEW SECTIONS FOR BERANDA ----
+  renderHomePersonalitySection();
+  renderHomeAchievementsShowcase();
+
+
   // ---- Update CTA button if already checked in ----
   updateCTAButton();
 }
+
 
 // ---- Daily Check-in Modal ----
 function showCheckInModal(preselectedLevel = null) {
@@ -120,6 +126,7 @@ function submitCheckIn() {
   updateMoodSummary();
   renderWeeklyMoodSummary();
   updateCTAButton();
+  if (typeof Main !== 'undefined' && Main.updateBottomNav) Main.updateBottomNav('home');
   Animations.showToast('Mood hari ini tersimpan!', 'success');
 
   // Check time capsule or low mood interventions
@@ -171,6 +178,7 @@ function updateMoodSummary() {
   const checkinCtaBtn = document.getElementById('checkin-cta-btn');
 
   if (mood) {
+    document.documentElement.classList.add('already-checked-in');
     const icons = {
       1: 'sentiment_very_dissatisfied',
       2: 'sentiment_dissatisfied',
@@ -213,7 +221,7 @@ function updateMoodSummary() {
         : '';
 
       const noteHTML = mood.note
-        ? `<div style="margin:16px auto; max-width:420px; padding:12px 16px; background:var(--card-subtle); border-left:4px solid ${colors[mood.level]}; border-radius:6px; color:var(--text-secondary); font-size:0.9rem; font-style:italic; text-align:center; box-shadow:0 1px 3px rgba(0,0,0,0.05);">"${escapeHTML(mood.note)}"</div>`
+        ? `<div style="margin:16px auto; max-width:420px; padding:14px 18px; background:var(--card-subtle); border:1px solid var(--card-border); border-radius:14px; color:var(--text-secondary); font-size:0.9rem; font-style:italic; text-align:center;">"${escapeHTML(mood.note)}"</div>`
         : '';
 
       checkedInState.innerHTML = `
@@ -248,6 +256,7 @@ function updateMoodSummary() {
     if (checkinCtaBtn) checkinCtaBtn.style.display = 'none';
     if (checkinCtaWrapper) checkinCtaWrapper.style.display = 'none';
   } else {
+    document.documentElement.classList.remove('already-checked-in');
     if (gridContainer && checkedInState) {
       gridContainer.style.display = '';
       checkedInState.style.display = 'none';
@@ -259,6 +268,7 @@ function updateMoodSummary() {
 }
 
 window.resetMoodInHome = function () {
+  document.documentElement.classList.remove('already-checked-in');
   const gridContainer = document.getElementById('mood-grid-container');
   const checkedInState = document.getElementById('mood-checked-in-state');
   const checkinCtaBtn = document.getElementById('checkin-cta-btn');
@@ -562,11 +572,13 @@ function rotateInspiration() {
 // ---- First-Time Onboarding Modal Engine (Vanilla JS State Management & Interactive Selections) ----
 const Onboarding = (() => {
   let currentStep = 0;
-  
+
   // Interactive Onboarding State
   let state = {
     gender: localStorage.getItem('tenang_user_gender') || 'Netral',
-    goals: []
+    goals: [],
+    time: localStorage.getItem('tenang_user_time') || 'Fleksibel',
+    aiStyle: localStorage.getItem('tenang_user_aistyle') || 'Empatis'
   };
   try {
     const savedGoals = localStorage.getItem('tenang_user_goals');
@@ -590,7 +602,7 @@ const Onboarding = (() => {
     const modal = document.getElementById('onboarding-modal');
     const card = document.getElementById('onboarding-card');
     if (!modal || !card) return;
-    
+
     modal.style.display = 'flex';
     setTimeout(() => {
       modal.classList.remove('opacity-0', 'pointer-events-none');
@@ -625,6 +637,8 @@ const Onboarding = (() => {
     localStorage.setItem('isNewUser', 'false');
     localStorage.setItem('tenang_user_gender', state.gender);
     localStorage.setItem('tenang_user_goals', JSON.stringify(state.goals));
+    localStorage.setItem('tenang_user_time', state.time);
+    localStorage.setItem('tenang_user_aistyle', state.aiStyle);
     close();
     if (typeof Animations !== 'undefined' && typeof Animations.showToast === 'function') {
       Animations.showToast('Selamat datang! Ruang amanmu siap digunakan.', 'success', 4000);
@@ -650,8 +664,20 @@ const Onboarding = (() => {
     renderSlide();
   };
 
+  const selectTime = (val) => {
+    state.time = val;
+    localStorage.setItem('tenang_user_time', val);
+    renderSlide();
+  };
+
+  const selectAiStyle = (val) => {
+    state.aiStyle = val;
+    localStorage.setItem('tenang_user_aistyle', val);
+    renderSlide();
+  };
+
   const nextSlide = () => {
-    if (currentStep < 2) {
+    if (currentStep < 4) {
       currentStep++;
       renderSlide();
     } else {
@@ -678,29 +704,30 @@ const Onboarding = (() => {
     if (currentStep === 0) {
       // Step 1: Welcome & Gender Selection
       html = `
-        <div class="w-14 h-14 md:w-16 md:h-16 rounded-full mx-auto mb-4 flex items-center justify-center shadow-sm" style="background: rgba(91, 143, 212, 0.15);">
-          <span class="material-symbols-rounded text-2xl md:text-3xl" style="color: #5B8FD4;">waving_hand</span>
+        <div style="width: 56px; height: 56px; border-radius: 9999px; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; background: rgba(91, 143, 212, 0.15);">
+          <span class="material-symbols-rounded" style="font-size: 32px; color: #3B72C4;">waving_hand</span>
         </div>
-        <h3 class="text-xl md:text-2xl font-extrabold mb-2 px-2 leading-tight" style="color: #1A2F4E;">
+        <h3 style="font-size: 1.35rem; font-weight: 800; margin: 0 0 6px 0; color: #1E293B; line-height: 1.3; text-align: center;">
           Selamat Datang di Tenang.in
         </h3>
-        <p class="text-xs md:text-sm max-w-xs mx-auto mb-5 leading-relaxed" style="color: #6B8DB5;">
+        <p style="font-size: 0.85rem; max-width: 340px; margin: 0 auto 18px; color: #64748B; line-height: 1.5; text-align: center;">
           Agar Teman AI dapat menyapa dan berinteraksi lebih personal, apa panggilan atau gender yang kamu nyaman?
         </p>
-        <div class="grid grid-cols-3 gap-2 md:gap-3 w-full max-w-sm">
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; width: 100%; max-width: 400px; margin: 0 auto;">
           ${[
             { val: 'Laki-laki', label: 'Laki-laki', icon: 'man' },
             { val: 'Perempuan', label: 'Perempuan', icon: 'woman' },
             { val: 'Netral', label: 'Netral / Privasi', icon: 'person' }
           ].map(opt => {
             const isSelected = state.gender === opt.val;
-            const cardStyle = isSelected
-              ? 'border-2 border-[#5B8FD4] bg-[#F0F6FF] text-[#2D5BA8] font-bold shadow-md'
-              : 'border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100';
+            const btnStyle = isSelected
+              ? 'background: #F0F6FF; border: 2px solid #3B72C4; color: #1E3A8A; font-weight: 700; box-shadow: 0 4px 12px rgba(59, 114, 196, 0.15);'
+              : 'background: #F8FAFC; border: 1.5px solid #E2E8F0; color: #475569; font-weight: 600;';
+            const iconColor = isSelected ? '#3B72C4' : '#94A3B8';
             return `
-              <button type="button" onclick="Onboarding.selectGender('${opt.val}')" class="p-3 rounded-2xl transition flex flex-col items-center justify-center gap-1 cursor-pointer ${cardStyle}">
-                <span class="material-symbols-rounded text-2xl" style="color: ${isSelected ? '#5B8FD4' : '#94A3B8'};">${opt.icon}</span>
-                <span class="text-[11px] md:text-xs leading-tight">${opt.label}</span>
+              <button type="button" onclick="Onboarding.selectGender('${opt.val}')" style="padding: 16px 8px; border-radius: 16px; transition: all 0.2s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; cursor: pointer; min-height: 90px; text-align: center; ${btnStyle}">
+                <span class="material-symbols-rounded" style="font-size: 28px; color: ${iconColor};">${opt.icon}</span>
+                <span style="font-size: 0.78rem; line-height: 1.2;">${opt.label}</span>
               </button>
             `;
           }).join('')}
@@ -715,50 +742,209 @@ const Onboarding = (() => {
         { text: 'Refleksi & Belajar Memahami Diri', icon: 'menu_book' }
       ];
       html = `
-        <div class="w-14 h-14 md:w-16 md:h-16 rounded-full mx-auto mb-4 flex items-center justify-center shadow-sm" style="background: rgba(126, 200, 227, 0.18);">
-          <span class="material-symbols-rounded text-2xl md:text-3xl" style="color: #4AA4C6;">track_changes</span>
+        <div style="width: 56px; height: 56px; border-radius: 9999px; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; background: rgba(14, 165, 233, 0.15);">
+          <span class="material-symbols-rounded" style="font-size: 32px; color: #0284C7;">track_changes</span>
         </div>
-        <h3 class="text-xl md:text-2xl font-extrabold mb-2 px-2 leading-tight" style="color: #1A2F4E;">
+        <h3 style="font-size: 1.35rem; font-weight: 800; margin: 0 0 6px 0; color: #1E293B; line-height: 1.3; text-align: center;">
           Apa fokus utamamu saat ini?
         </h3>
-        <p class="text-xs md:text-sm max-w-xs mx-auto mb-4 leading-relaxed" style="color: #6B8DB5;">
+        <p style="font-size: 0.85rem; max-width: 340px; margin: 0 auto 16px; color: #64748B; line-height: 1.5; text-align: center;">
           Pilih satu atau lebih fokus refleksi agar pengalamanmu lebih terarah.
         </p>
-        <div class="flex flex-col gap-2.5 w-full max-w-sm text-left">
+        <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 380px; margin: 0 auto;">
           ${availableGoals.map(g => {
             const isSelected = state.goals.includes(g.text);
             const btnStyle = isSelected
-              ? 'border-2 border-[#5B8FD4] bg-[#F0F6FF] text-[#1A2F4E] font-bold shadow-sm'
-              : 'border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100';
+              ? 'background: #F0F6FF; border: 2px solid #3B72C4; color: #1E293B; font-weight: 700;'
+              : 'background: #F8FAFC; border: 1.5px solid #E2E8F0; color: #475569; font-weight: 600;';
+            const iconColor = isSelected ? '#3B72C4' : '#94A3B8';
             return `
-              <button type="button" onclick="Onboarding.toggleGoal('${g.text}')" class="px-4 py-3 rounded-2xl transition flex items-center justify-between cursor-pointer ${btnStyle}">
-                <div class="flex items-center gap-3">
-                  <span class="material-symbols-rounded text-xl" style="color: ${isSelected ? '#5B8FD4' : '#94A3B8'};">${g.icon}</span>
-                  <span class="text-xs md:text-sm">${g.text}</span>
+              <button type="button" onclick="Onboarding.toggleGoal('${g.text}')" style="padding: 12px 16px; border-radius: 16px; transition: all 0.2s ease; display: flex; align-items: center; justify-content: space-between; cursor: pointer; text-align: left; ${btnStyle}">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <span class="material-symbols-rounded" style="font-size: 22px; color: ${iconColor}; flex-shrink: 0;">${g.icon}</span>
+                  <span style="font-size: 0.82rem; line-height: 1.3;">${g.text}</span>
                 </div>
-                <span class="material-symbols-rounded text-lg" style="color: ${isSelected ? '#5B8FD4' : '#CBD5E1'};">${isSelected ? 'check_circle' : 'radio_button_unchecked'}</span>
+                <span class="material-symbols-rounded" style="font-size: 20px; color: ${iconColor}; flex-shrink: 0;">${isSelected ? 'check_circle' : 'radio_button_unchecked'}</span>
+              </button>
+            `;
+          }).join('')}
+        </div>
+      `;
+    } else if (currentStep === 2) {
+      // Step 3: Daily Reflection Time Preference
+      const timeOptions = [
+        { val: 'Pagi', label: 'Pagi Hari (08:00)', desc: 'Memulai hari dengan pikiran tenang & niat positif', icon: 'wb_sunny' },
+        { val: 'Sore', label: 'Sore Hari (17:00)', desc: 'Melepas penat seusai beraktivitas', icon: 'wb_twilight' },
+        { val: 'Malam', label: 'Malam Hari (21:00)', desc: 'Evaluasi & menenangkan pikiran sebelum tidur', icon: 'bedtime' },
+        { val: 'Fleksibel', label: 'Fleksibel / Kapan Saja', desc: 'Tanpa jadwal khusus, saat butuh cerita', icon: 'auto_awesome' }
+      ];
+      html = `
+        <div style="width: 56px; height: 56px; border-radius: 9999px; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; background: rgba(245, 158, 11, 0.15);">
+          <span class="material-symbols-rounded" style="font-size: 32px; color: #D97706;">schedule</span>
+        </div>
+        <h3 style="font-size: 1.35rem; font-weight: 800; margin: 0 0 6px 0; color: #1E293B; line-height: 1.3; text-align: center;">
+          Kapan waktu refleksi terbaikmu?
+        </h3>
+        <p style="font-size: 0.85rem; max-width: 340px; margin: 0 auto 16px; color: #64748B; line-height: 1.5; text-align: center;">
+          Tenang.in siap mendampingimu kapan pun kamu meluangkan waktu sejenak.
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 380px; margin: 0 auto;">
+          ${timeOptions.map(t => {
+            const isSelected = state.time === t.val;
+            const btnStyle = isSelected
+              ? 'background: #F0F6FF; border: 2px solid #3B72C4; color: #1E293B; font-weight: 700;'
+              : 'background: #F8FAFC; border: 1.5px solid #E2E8F0; color: #475569; font-weight: 600;';
+            const iconColor = isSelected ? '#3B72C4' : '#94A3B8';
+            return `
+              <button type="button" onclick="Onboarding.selectTime('${t.val}')" style="padding: 12px 16px; border-radius: 16px; transition: all 0.2s ease; display: flex; align-items: center; justify-content: space-between; cursor: pointer; text-align: left; ${btnStyle}">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <span class="material-symbols-rounded" style="font-size: 22px; color: ${iconColor}; flex-shrink: 0;">${t.icon}</span>
+                  <div>
+                    <div style="font-size: 0.82rem; font-weight: 700; color: #1E293B; line-height: 1.2;">${t.label}</div>
+                    <div style="font-size: 0.72rem; font-weight: 400; color: #64748B; line-height: 1.3; margin-top: 2px;">${t.desc}</div>
+                  </div>
+                </div>
+                <span class="material-symbols-rounded" style="font-size: 20px; color: ${iconColor}; flex-shrink: 0;">${isSelected ? 'radio_button_checked' : 'radio_button_unchecked'}</span>
+              </button>
+            `;
+          }).join('')}
+        </div>
+      `;
+    } else if (currentStep === 3) {
+      // Step 4: Teman AI Communication Style
+      const aiStyles = [
+        { val: 'Empatis', label: 'Empatis & Hangat', desc: 'Menenangkan, merangkul, dan ramah', icon: 'favorite' },
+        { val: 'Solutif', label: 'Solutif & Praktis', desc: 'Memberikan sudut pandang baru & langkah konkrit', icon: 'lightbulb' },
+        { val: 'Santai', label: 'Santai & Pendengar', desc: 'Seperti sahabat tempat cerita tanpa sekat', icon: 'chat_bubble' }
+      ];
+      html = `
+        <div style="width: 56px; height: 56px; border-radius: 9999px; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; background: rgba(168, 85, 247, 0.15);">
+          <span class="material-symbols-rounded" style="font-size: 32px; color: #9333EA;">psychology</span>
+        </div>
+        <h3 style="font-size: 1.35rem; font-weight: 800; margin: 0 0 6px 0; color: #1E293B; line-height: 1.3; text-align: center;">
+          Gaya komunikasi Teman AI yang kamu suka?
+        </h3>
+        <p style="font-size: 0.85rem; max-width: 340px; margin: 0 auto 16px; color: #64748B; line-height: 1.5; text-align: center;">
+          Atur gaya bimbingan Teman AI agar obrolan terasa paling nyaman untukmu.
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 380px; margin: 0 auto;">
+          ${aiStyles.map(s => {
+            const isSelected = state.aiStyle === s.val;
+            const btnStyle = isSelected
+              ? 'background: #F0F6FF; border: 2px solid #3B72C4; color: #1E293B; font-weight: 700;'
+              : 'background: #F8FAFC; border: 1.5px solid #E2E8F0; color: #475569; font-weight: 600;';
+            const iconColor = isSelected ? '#9333EA' : '#94A3B8';
+            return `
+              <button type="button" onclick="Onboarding.selectAiStyle('${s.val}')" style="padding: 12px 16px; border-radius: 16px; transition: all 0.2s ease; display: flex; align-items: center; justify-content: space-between; cursor: pointer; text-align: left; ${btnStyle}">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <span class="material-symbols-rounded" style="font-size: 22px; color: ${iconColor}; flex-shrink: 0;">${s.icon}</span>
+                  <div>
+                    <div style="font-size: 0.82rem; font-weight: 700; color: #1E293B; line-height: 1.2;">${s.label}</div>
+                    <div style="font-size: 0.72rem; font-weight: 400; color: #64748B; line-height: 1.3; margin-top: 2px;">${s.desc}</div>
+                  </div>
+                </div>
+                <span class="material-symbols-rounded" style="font-size: 20px; color: ${isSelected ? '#3B72C4' : '#94A3B8'}; flex-shrink: 0;">${isSelected ? 'radio_button_checked' : 'radio_button_unchecked'}</span>
               </button>
             `;
           }).join('')}
         </div>
       `;
     } else {
-      // Step 3: Ready
+      // Step 5: Ready & Personalized Summary
+      const timeLabelMap = {
+        'Pagi': 'Pagi (08:00)',
+        'Sore': 'Sore (17:00)',
+        'Malam': 'Malam (21:00)',
+        'Fleksibel': 'Fleksibel'
+      };
+
+      const aiStyleLabelMap = {
+        'Empatis': 'Empatis & Hangat',
+        'Solutif': 'Solutif & Praktis',
+        'Santai': 'Santai & Pendengar'
+      };
+
+      const primaryGoalText = state.goals.length > 0 ? state.goals[0] : 'Refleksi Diri';
+
       html = `
-        <div class="w-20 h-20 md:w-24 md:h-24 rounded-full mx-auto mb-5 flex items-center justify-center shadow-md transform transition duration-500 hover:rotate-12" style="background: linear-gradient(135deg, #F0F6FF 0%, #E2EFFE 100%); border: 2px solid #D2E4FF;">
-          <span class="material-symbols-rounded" style="font-size: 48px; color: #2D5BA8;">rocket_launch</span>
+        <div style="width: 56px; height: 56px; border-radius: 16px; margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #3B72C4 0%, #2563EB 100%); color: #FFFFFF; box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);">
+          <span class="material-symbols-rounded" style="font-size: 30px;">rocket_launch</span>
         </div>
-        <h3 class="text-xl md:text-2xl font-extrabold mb-3 px-2 leading-tight" style="color: #1A2F4E;">
+
+        <h3 style="font-size: 1.35rem; font-weight: 850; margin: 0 0 6px 0; color: #1E293B; line-height: 1.3; text-align: center;">
           Kamu Sudah Siap Melangkah!
         </h3>
-        <p class="text-xs md:text-sm max-w-sm mx-auto mb-4 leading-relaxed" style="color: #6B8DB5;">
-          Preferensimu telah diselaraskan. Ruang refleksi ini adalah milikmu seutuhnya.
+        <p style="font-size: 0.82rem; max-width: 360px; margin: 0 auto 14px; color: #64748B; line-height: 1.4; text-align: center;">
+          Preferensimu diselaraskan. Ringkasan ruang amanmu:
         </p>
-        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 max-w-xs mx-auto text-center flex items-center gap-2.5">
-          <span class="material-symbols-rounded text-emerald-500 flex-shrink-0" style="font-size:24px;">enhanced_encryption</span>
-          <p class="text-[11px] text-slate-500 text-left leading-tight">
-            <strong>Keamanan Terjamin:</strong> Seluruh catatan emosi dan obrolan Teman AI tersimpan dengan keamanan terjamin.
-          </p>
+
+        <!-- User Preference Summary Pill Grid -->
+        <div style="width: 100%; max-width: 390px; margin: 0 auto 12px; padding: 12px 14px; border-radius: 16px; background: #F0F6FF; border: 1.5px solid #D2E4FF; text-align: left;">
+          <div style="font-size: 0.7rem; font-weight: 800; color: #1E3A8A; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+            <span class="material-symbols-rounded" style="font-size: 15px; color: #2563EB;">tune</span>
+            <span>Profil Refleksimu</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+            <div style="background: #FFFFFF; padding: 7px 10px; border-radius: 10px; border: 1px solid #E2E8F0; display: flex; align-items: center; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+              <span class="material-symbols-rounded" style="font-size: 16px; color: #3B72C4; flex-shrink: 0;">person</span>
+              <span style="font-size: 0.75rem; font-weight: 700; color: #1E293B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${state.gender}</span>
+            </div>
+            <div style="background: #FFFFFF; padding: 7px 10px; border-radius: 10px; border: 1px solid #E2E8F0; display: flex; align-items: center; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+              <span class="material-symbols-rounded" style="font-size: 16px; color: #D97706; flex-shrink: 0;">schedule</span>
+              <span style="font-size: 0.75rem; font-weight: 700; color: #1E293B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${timeLabelMap[state.time] || state.time}</span>
+            </div>
+            <div style="background: #FFFFFF; padding: 7px 10px; border-radius: 10px; border: 1px solid #E2E8F0; display: flex; align-items: center; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+              <span class="material-symbols-rounded" style="font-size: 16px; color: #9333EA; flex-shrink: 0;">psychology</span>
+              <span style="font-size: 0.75rem; font-weight: 700; color: #1E293B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${aiStyleLabelMap[state.aiStyle] || state.aiStyle}</span>
+            </div>
+            <div style="background: #FFFFFF; padding: 7px 10px; border-radius: 10px; border: 1px solid #E2E8F0; display: flex; align-items: center; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+              <span class="material-symbols-rounded" style="font-size: 16px; color: #059669; flex-shrink: 0;">track_changes</span>
+              <span style="font-size: 0.75rem; font-weight: 700; color: #1E293B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${primaryGoalText}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Core Pillars of Tenang.in -->
+        <div style="display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 390px; margin: 0 auto; text-align: left;">
+          <div style="padding: 10px 12px; border-radius: 14px; background: #F8FAFC; border: 1px solid #E2E8F0; display: flex; align-items: flex-start; gap: 10px;">
+            <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(16, 185, 129, 0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">
+              <span class="material-symbols-rounded" style="font-size: 18px; color: #059669;">enhanced_encryption</span>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div style="font-size: 0.78rem; font-weight: 800; color: #1E293B; line-height: 1.2;">100% Privasi & Keamanan Lokal</div>
+              <div style="font-size: 0.71rem; font-weight: 400; color: #64748B; line-height: 1.3; margin-top: 2px;">Catatan mood & percakapan tersimpan secara privat.</div>
+            </div>
+          </div>
+
+          <div style="padding: 10px 12px; border-radius: 14px; background: #F8FAFC; border: 1px solid #E2E8F0; display: flex; align-items: flex-start; gap: 10px;">
+            <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(14, 165, 233, 0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">
+              <span class="material-symbols-rounded" style="font-size: 18px; color: #0284C7;">grid_view</span>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div style="font-size: 0.78rem; font-weight: 800; color: #1E293B; line-height: 1.2;">Visual Bento Grid & Analisis Mood</div>
+              <div style="font-size: 0.71rem; font-weight: 400; color: #64748B; line-height: 1.3; margin-top: 2px;">Lacak grafik tren emosimu dengan visual jernih.</div>
+            </div>
+          </div>
+
+          <div style="padding: 10px 12px; border-radius: 14px; background: #F8FAFC; border: 1px solid #E2E8F0; display: flex; align-items: flex-start; gap: 10px;">
+            <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(168, 85, 247, 0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">
+              <span class="material-symbols-rounded" style="font-size: 18px; color: #9333EA;">forum</span>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div style="font-size: 0.78rem; font-weight: 800; color: #1E293B; line-height: 1.2;">Teman AI Pendamping 24/7</div>
+              <div style="font-size: 0.71rem; font-weight: 400; color: #64748B; line-height: 1.3; margin-top: 2px;">Ruang curhat hangat & responsif tanpa diskriminasi.</div>
+            </div>
+          </div>
+
+          <div style="padding: 10px 12px; border-radius: 14px; background: #F8FAFC; border: 1px solid #E2E8F0; display: flex; align-items: flex-start; gap: 10px;">
+            <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(245, 158, 11, 0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">
+              <span class="material-symbols-rounded" style="font-size: 18px; color: #D97706;">self_improvement</span>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div style="font-size: 0.78rem; font-weight: 800; color: #1E293B; line-height: 1.2;">Jurnal & Panduan Olah Rasa</div>
+              <div style="font-size: 0.71rem; font-weight: 400; color: #64748B; line-height: 1.3; margin-top: 2px;">Prompts reflektif harian & latihan relaksasi pikiran.</div>
+            </div>
+          </div>
         </div>
       `;
     }
@@ -794,7 +980,7 @@ const Onboarding = (() => {
 
     // Update Next Button
     if (nextBtn) {
-      if (currentStep === 2) {
+      if (currentStep === 4) {
         nextBtn.innerHTML = `<span>Mulai Perjalananku</span><span class="material-symbols-rounded" style="font-size:18px;">check_circle</span>`;
         nextBtn.style.background = '#2D5BA8';
       } else {
@@ -804,7 +990,7 @@ const Onboarding = (() => {
     }
   };
 
-  return { init: checkAndShow, open, close, complete, nextSlide, prevSlide, selectGender, toggleGoal };
+  return { init: checkAndShow, open, close, complete, nextSlide, prevSlide, selectGender, toggleGoal, selectTime, selectAiStyle };
 })();
 
 window.Onboarding = Onboarding;
@@ -935,3 +1121,260 @@ window.simulateStreakShare = function () {
     Animations.showToast('Pesan streak berhasil dibagikan! Terus pertahankan semangatmu! 🔥', 'success');
   }
 };
+
+/* ========================================================
+   SECTIONS FOR BERANDA: PERSONALITY & ACHIEVEMENTS SHOWCASE
+   ======================================================== */
+
+// ---- SECTION 1: PROFIL KEPRIBADIAN & SELF-CARE RECOMMENDATIONS ----
+function renderHomePersonalitySection() {
+  const container = document.getElementById('beranda-personality-section');
+  if (!container) return;
+
+  const typeKey = (typeof Storage !== 'undefined' && typeof Storage.getKenaliType === 'function')
+    ? Storage.getKenaliType()
+    : (localStorage.getItem('tenang_kenali_type') || localStorage.getItem('tenang_personality_type'));
+
+  const typesData = {
+    IT: {
+      name: 'Pemikir Tenang',
+      tagline: 'Introvert + Thinker',
+      icon: 'dark_mode',
+      color: '#4F46E5',
+      bg: '#EEF2FF',
+      border: '#C7D2FE',
+      strengths: ['Analitis Mendalam', 'Reflektif Mandiri', 'Fokus Terstruktur'],
+      tip: 'Tuangkan pikiran lewat jurnal untuk membantu menata ide & merapikan kompleksitas di dalam kepala.'
+    },
+    IF: {
+      name: 'Perasa Mendalam',
+      tagline: 'Introvert + Feeler',
+      icon: 'favorite',
+      color: '#D97706',
+      bg: '#FEF3C7',
+      border: '#FDE68A',
+      strengths: ['Empati Tinggi', 'Self-Compassion', 'Peka Emosional'],
+      tip: 'Perasaanmu adalah kompas. Luangkan waktu untuk menyapa emosimu tanpa rasa salah hari ini.'
+    },
+    ET: {
+      name: 'Pemimpin Aktif',
+      tagline: 'Ekstrovert + Thinker',
+      icon: 'bolt',
+      color: '#059669',
+      bg: '#D1FAE5',
+      border: '#A7F3D0',
+      strengths: ['Solutif & Cepat', 'Berani Bertindak', 'Energi Tinggi'],
+      tip: 'Ubah kecemasan jadi aksi nyata. Langkah kecil yang dieksekusi hari ini jauh lebih berharga.'
+    },
+    EF: {
+      name: 'Jiwa Sosial',
+      tagline: 'Ekstrovert + Feeler',
+      icon: 'auto_awesome',
+      color: '#9333EA',
+      bg: '#F3E8FF',
+      border: '#E9D5FF',
+      strengths: ['Komunikatif Warm', 'Penghangat Suasana', 'Koneksi Jiwa'],
+      tip: 'Berbagi cerita memberi kekuatan baru. Mengobrol privat bersama Teman AI dapat membuatmu lega.'
+    }
+  };
+
+  if (typeKey && typesData[typeKey]) {
+    const t = typesData[typeKey];
+    container.innerHTML = `
+      <div class="card" style="padding: clamp(20px, 4vw, 28px); background: #FFFFFF; border: 1.5px solid ${t.border}; border-radius: 24px; box-shadow: 0 12px 32px -6px rgba(15, 23, 42, 0.08); position: relative; overflow: hidden;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 50px; height: 50px; border-radius: 16px; background: ${t.bg}; border: 1.5px solid ${t.border}; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 12px ${t.color}20;">
+              <span class="material-symbols-rounded" style="color: ${t.color}; font-size: 28px;">${t.icon}</span>
+            </div>
+            <div>
+              <span style="font-size: 0.72rem; font-weight: 850; text-transform: uppercase; letter-spacing: 0.8px; color: ${t.color};">Profil Kepribadian Refleksimu</span>
+              <h2 style="font-size: clamp(1.15rem, 4vw, 1.4rem); font-weight: 850; color: #0F172A; margin: 2px 0 0;">${t.name} <span style="font-size: 0.85rem; font-weight: 600; color: #64748B;">(${t.tagline})</span></h2>
+            </div>
+          </div>
+          <a href="kenali.html" class="btn btn-sm" style="background: #F8FAFC; border: 1px solid #E2E8F0; color: #0F172A; font-weight: 750; font-size: 0.8rem; border-radius: 20px; padding: 6px 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+            <span class="material-symbols-rounded" style="font-size: 16px;">refresh</span>
+            <span>Ulangi Tes</span>
+          </a>
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px;">
+          ${t.strengths.map(s => `<span style="background: ${t.bg}; border: 1px solid ${t.border}; color: ${t.color}; font-size: 0.76rem; font-weight: 750; padding: 4px 12px; border-radius: 16px; display: inline-flex; align-items: center; gap: 4px;"><span class="material-symbols-rounded" style="font-size: 14px; color: ${t.color};">auto_awesome</span> ${s}</span>`).join('')}
+        </div>
+
+        <div style="background: var(--card-subtle, #F8FAFC); border: 1px solid var(--card-border, #E2E8F0); border-radius: 16px; padding: 14px 18px; font-size: 0.88rem; color: var(--text-secondary, #334155); line-height: 1.55; font-weight: 500;">
+          <strong style="color: ${t.color};">Aksi Self-Care Hari Ini:</strong> ${t.tip}
+        </div>
+      </div>
+    `;
+  } else {
+    // Show inviting preview card if user hasn't completed quiz
+    container.innerHTML = `
+      <div class="card" style="padding: clamp(20px, 4vw, 28px); background: linear-gradient(135deg, #FFFFFF 0%, #F0F6FF 100%); border: 1.5px solid #BAE6FD; border-radius: 24px; box-shadow: 0 12px 32px -6px rgba(15, 23, 42, 0.08); position: relative; overflow: hidden;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-bottom: 16px;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 50px; height: 50px; border-radius: 16px; background: #E0F2FE; border: 1.5px solid #BAE6FD; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);">
+              <span class="material-symbols-rounded" style="color: #0284C7; font-size: 28px;">psychology</span>
+            </div>
+            <div>
+              <span style="font-size: 0.72rem; font-weight: 850; text-transform: uppercase; letter-spacing: 0.8px; color: #0284C7;">Kuis Self-Discovery (3 Menit)</span>
+              <h2 style="font-size: clamp(1.15rem, 4vw, 1.4rem); font-weight: 850; color: #0F172A; margin: 2px 0 0;">Temukan Tipe Kepribadian Refleksimu</h2>
+            </div>
+          </div>
+          <a href="kenali.html" class="btn btn-primary" style="background: #0284C7; border-color: #0284C7; color: #FFFFFF; font-weight: 800; font-size: 0.88rem; padding: 10px 22px; border-radius: 999px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);">
+            <span class="material-symbols-rounded" style="font-size: 20px;">play_arrow</span>
+            <span>Mulai Kuis Sekarang</span>
+          </a>
+        </div>
+        
+        <p style="font-size: 0.88rem; color: #475569; line-height: 1.55; margin: 0 0 16px; max-width: 680px;">
+          Jawab 12 pertanyaan singkat untuk mengenali keunikan emosionalmu, menemukan 4 tipe karakter refleksi, dan mendapatkan rekomendasi perawatan diri (*self-care*) yang dipersonalisasi.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
+          <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 10px; text-align: center;">
+            <span class="material-symbols-rounded" style="color: #4F46E5; font-size: 22px;">dark_mode</span>
+            <div style="font-size: 0.8rem; font-weight: 800; color: #0F172A; margin-top: 2px;">Pemikir Tenang</div>
+          </div>
+          <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 10px; text-align: center;">
+            <span class="material-symbols-rounded" style="color: #D97706; font-size: 22px;">favorite</span>
+            <div style="font-size: 0.8rem; font-weight: 800; color: #0F172A; margin-top: 2px;">Perasa Mendalam</div>
+          </div>
+          <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 10px; text-align: center;">
+            <span class="material-symbols-rounded" style="color: #059669; font-size: 22px;">bolt</span>
+            <div style="font-size: 0.8rem; font-weight: 800; color: #0F172A; margin-top: 2px;">Pemimpin Aktif</div>
+          </div>
+          <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 10px; text-align: center;">
+            <span class="material-symbols-rounded" style="color: #9333EA; font-size: 22px;">auto_awesome</span>
+            <div style="font-size: 0.8rem; font-weight: 800; color: #0F172A; margin-top: 2px;">Jiwa Sosial</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+}
+window.renderHomePersonalitySection = renderHomePersonalitySection;
+
+// ---- SECTION 2: MEDALI PENCAPAIAN & REKOR REFLEKSI ----
+function renderHomeAchievementsShowcase() {
+  const container = document.getElementById('beranda-achievements-section');
+  if (!container) return;
+
+  const streak = (typeof Storage !== 'undefined' && Storage.getStreak) ? Storage.getStreak() : 0;
+  const journalsCount = (typeof Storage !== 'undefined' && Storage.getJournals) ? Storage.getJournals().length : 0;
+  const moodHistory = (typeof Storage !== 'undefined' && Storage.getMoodHistory) ? Storage.getMoodHistory() : [];
+  const moodCount = moodHistory.length;
+
+  const badges = [
+    {
+      id: 'first_step',
+      name: 'Langkah Pertama',
+      symbol: 'directions_walk',
+      color: '#0284C7',
+      desc: 'Melakukan check-in mood pertamamu',
+      unlocked: moodCount >= 1
+    },
+    {
+      id: 'streak_7',
+      name: 'Streak Master',
+      symbol: 'local_fire_department',
+      color: '#EA580C',
+      desc: 'Mencapai 7 hari streak berturut-turut',
+      unlocked: streak >= 7
+    },
+    {
+      id: 'journal_master',
+      name: 'Pena Emas',
+      symbol: 'edit_note',
+      color: '#059669',
+      desc: 'Menulis setidaknya 5 entri jurnal refleksi',
+      unlocked: journalsCount >= 5
+    },
+    {
+      id: 'explorer',
+      name: 'Penjelajah Jiwa',
+      symbol: 'psychology',
+      color: '#7C3AED',
+      desc: 'Melengkapi tes kepribadian & gaya refleksi',
+      unlocked: Boolean(localStorage.getItem('tenang_kenali_type') || localStorage.getItem('tenang_personality_type'))
+    }
+  ];
+
+  const unlockedCount = badges.filter(b => b.unlocked).length;
+
+  container.innerHTML = `
+    <div class="card" style="padding: clamp(20px, 4vw, 28px); background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 24px; box-shadow: 0 12px 32px -6px rgba(15, 23, 42, 0.08);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 18px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 48px; height: 48px; border-radius: 16px; background: #F3E8FF; border: 1.5px solid #E9D5FF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 12px rgba(126, 34, 206, 0.15);">
+            <span class="material-symbols-rounded" style="color: #7E22CE; font-size: 28px;">military_tech</span>
+          </div>
+          <div>
+            <h2 style="font-size: clamp(1.15rem, 4vw, 1.4rem); font-weight: 850; color: #0F172A; margin: 0;">Medali Pencapaian & Rekor Refleksi</h2>
+          </div>
+        </div>
+        <a href="dashboard.html#dashboard-badges" class="btn btn-sm" style="background: #F8FAFC; border: 1px solid #E2E8F0; color: #7E22CE; font-weight: 800; font-size: 0.82rem; border-radius: 20px; padding: 6px 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+          <span>Lihat Selengkapnya</span>
+          <span class="material-symbols-rounded" style="font-size: 16px;">arrow_forward</span>
+        </a>
+      </div>
+
+      <!-- Stat Counter Pills with Material Symbols Icons -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-bottom: 20px;">
+        <div style="background: #FFF7ED; border: 1px solid #FFEDD5; border-radius: 16px; padding: 10px 12px; text-align: center;">
+          <div style="font-size: 1.25rem; font-weight: 850; color: #EA580C; display: inline-flex; align-items: center; justify-content: center; gap: 4px;">
+            <span class="material-symbols-rounded" style="font-size: 22px; color: #EA580C;">local_fire_department</span>
+            <span>${streak}</span>
+          </div>
+          <div style="font-size: 0.72rem; font-weight: 750; color: #9A3412; margin-top: 2px;">Hari Streak</div>
+        </div>
+
+        <div style="background: #F0F9FF; border: 1px solid #BAE6FD; border-radius: 16px; padding: 10px 12px; text-align: center;">
+          <div style="font-size: 1.25rem; font-weight: 850; color: #0284C7; display: inline-flex; align-items: center; justify-content: center; gap: 4px;">
+            <span class="material-symbols-rounded" style="font-size: 22px; color: #0284C7;">analytics</span>
+            <span>${moodCount}</span>
+          </div>
+          <div style="font-size: 0.72rem; font-weight: 750; color: #0369A1; margin-top: 2px;">Check-In Mood</div>
+        </div>
+
+        <div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 16px; padding: 10px 12px; text-align: center;">
+          <div style="font-size: 1.25rem; font-weight: 850; color: #059669; display: inline-flex; align-items: center; justify-content: center; gap: 4px;">
+            <span class="material-symbols-rounded" style="font-size: 22px; color: #059669;">edit_note</span>
+            <span>${journalsCount}</span>
+          </div>
+          <div style="font-size: 0.72rem; font-weight: 750; color: #047857; margin-top: 2px;">Jurnal Refleksi</div>
+        </div>
+
+        <div style="background: #F3E8FF; border: 1px solid #E9D5FF; border-radius: 16px; padding: 10px 12px; text-align: center;">
+          <div style="font-size: 1.25rem; font-weight: 850; color: #7E22CE; display: inline-flex; align-items: center; justify-content: center; gap: 4px;">
+            <span class="material-symbols-rounded" style="font-size: 22px; color: #7E22CE;">military_tech</span>
+            <span>${unlockedCount}/4</span>
+          </div>
+          <div style="font-size: 0.72rem; font-weight: 750; color: #6B21A8; margin-top: 2px;">Medali Terbuka</div>
+        </div>
+      </div>
+
+      <!-- Badge Cards -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+        ${badges.map(b => `
+          <div style="background: ${b.unlocked ? '#FFFFFF' : '#F8FAFC'}; border: 1.5px solid ${b.unlocked ? b.color + '45' : '#E2E8F0'}; border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; opacity: ${b.unlocked ? 1 : 0.65}; box-shadow: ${b.unlocked ? '0 4px 12px rgba(0,0,0,0.04)' : 'none'}; transition: transform 0.2s;">
+            <div style="width: 44px; height: 44px; border-radius: 12px; background: ${b.unlocked ? b.color + '1A' : '#E2E8F0'}; border: 1px solid ${b.unlocked ? b.color + '50' : '#CBD5E1'}; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <span class="material-symbols-rounded" style="color: ${b.unlocked ? b.color : '#94A3B8'}; font-size: 24px;">${b.symbol}</span>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div style="font-size: 0.85rem; font-weight: 850; color: ${b.unlocked ? '#0F172A' : '#64748B'}; line-height: 1.25; word-break: break-word;">${b.name}</div>
+              <div style="font-size: 0.72rem; color: ${b.unlocked ? b.color : '#94A3B8'}; font-weight: 750; margin-top: 2px; display: inline-flex; align-items: center; gap: 3px;">
+                <span class="material-symbols-rounded" style="font-size: 13px;">${b.unlocked ? 'check_circle' : 'lock'}</span>
+                <span>${b.unlocked ? 'Terbuka' : 'Terkunci'}</span>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+}
+window.renderHomeAchievementsShowcase = renderHomeAchievementsShowcase;
+
+

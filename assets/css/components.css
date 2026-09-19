@@ -1718,7 +1718,7 @@ body.dark-mode .teman-input-field::placeholder {
 
 .contribution-tooltip-summary {
   background: rgba(245, 158, 11, 0.15);
-  border-left: 3px solid #F59E0B;
+  border: 1px solid rgba(245, 158, 11, 0.3);
   border-radius: 6px;
   padding: 6px 8px;
   margin-top: 6px;
@@ -1736,12 +1736,14 @@ body.dark-mode .teman-input-field::placeholder {
   -webkit-backdrop-filter: blur(16px);
   color: #FFFFFF;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 16px;
-  padding: 14px 18px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.25);
-  width: 280px;
+  border-radius: 18px;
+  padding: 16px 18px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55), 0 6px 16px rgba(0, 0, 0, 0.3);
+  width: 330px;
+  min-width: 290px;
   max-width: calc(100vw - 24px);
-  pointer-events: auto;
+  box-sizing: border-box;
+  pointer-events: none;
   opacity: 0;
   visibility: hidden;
   transform: translateY(6px) scale(0.96);
@@ -1752,6 +1754,7 @@ body.dark-mode .teman-input-field::placeholder {
   opacity: 1;
   visibility: visible;
   transform: translateY(0) scale(1);
+  pointer-events: none;
 }
 
 .mood-bar-popup-header {
@@ -1801,7 +1804,7 @@ body.dark-mode .teman-input-field::placeholder {
 
 .mood-bar-popup-summary {
   background: rgba(245, 158, 11, 0.12);
-  border-left: 3px solid #F59E0B;
+  border: 1px solid rgba(245, 158, 11, 0.3);
   border-radius: 8px;
   padding: 8px 10px;
   font-size: 0.78rem;
@@ -1830,7 +1833,11 @@ body.dark-mode .teman-input-field::placeholder {
 
 .mood-bar-item:hover,
 .mood-bar-item.active-popup {
-  transform: scale(1.06);
+  transform: translateY(-4px) scale(1.04);
+}
+
+.mood-bar-item:hover .mood-bar-mascot-img {
+  transform: scale(1.15) rotate(4deg);
 }
 
 .mood-bar-emoji-btn {
@@ -2080,26 +2087,7 @@ body.dark-mode .teman-input-field::placeholder {
 
 /* ---- Goal Additions ---- */
 .modal-breathing-icon {
-  animation: breathing 3s ease-in-out infinite;
   display: inline-block;
-}
-
-@keyframes breathing {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-
-  50% {
-    transform: scale(1.15);
-    opacity: 1;
-    filter: drop-shadow(0 0 12px rgba(126, 200, 227, 0.6));
-  }
-
-  100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
 }
 
 .share-card-preview {
@@ -2446,7 +2434,7 @@ body.dark-mode .mood-card-item.selected .mood-card-sub {
 
 @media (max-width: 640px) {
   .mood-grid {
-    display: grid !important;
+    display: grid;
     grid-template-columns: repeat(6, 1fr) !important;
     gap: 8px !important;
   }
@@ -2594,11 +2582,16 @@ body.dark-mode .mood-card-sub {
 .flex-1 { flex: 1 1 0%; }
 .flex-shrink-0 { flex-shrink: 0; }
 .grid { display: grid; }
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .items-center { align-items: center; }
 .justify-center { justify-content: center; }
 .justify-between { justify-content: space-between; }
 .gap-2 { gap: 0.5rem; }
 .gap-2\.5 { gap: 0.625rem; }
+.gap-3 { gap: 0.75rem; }
+.gap-3\.5 { gap: 0.875rem; }
 .gap-4 { gap: 1rem; }
 
 /* Sizing */
@@ -2755,7 +2748,7 @@ body.dark-mode .mood-card-sub {
 .card-prompt-clickable:hover {
   transform: translateY(-2px) scale(1.005);
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-  border-left-color: var(--primary-accent-light, #5B8FD4) !important;
+  border-color: var(--primary-accent-light, #5B8FD4) !important;
 }
 
 .card-prompt-clickable:active {

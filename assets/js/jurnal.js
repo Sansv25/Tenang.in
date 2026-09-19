@@ -37,7 +37,7 @@ async function loadPrompt() {
     currentPrompt = prompt.text;
 
     promptEl.innerHTML = `
-      <div class="card card-prompt-clickable" data-action="open-prompt-category" title="Klik untuk mengganti topik prompt" style="padding:var(--space-lg); border-left:4px solid var(--primary-accent); display:flex; align-items:center; gap:16px;">
+      <div class="card card-prompt-clickable" data-action="open-prompt-category" title="Klik untuk mengganti topik prompt" style="padding:var(--space-lg); display:flex; align-items:center; gap:16px;">
         <div style="flex-shrink:0;">
           <img src="assets/img/maskots/mascot-confused.png" alt="Milo Reflecting" style="width:64px; height:64px; object-fit:contain; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.12));">
         </div>
@@ -56,7 +56,7 @@ async function loadPrompt() {
   } catch(e) {
     currentPrompt = 'Apa yang ada di pikiranmu hari ini?';
     promptEl.innerHTML = `
-      <div class="card card-prompt-clickable" data-action="open-prompt-category" title="Klik untuk mengganti topik prompt" style="padding:var(--space-lg); border-left:4px solid var(--primary-accent); display:flex; align-items:center; gap:16px;">
+      <div class="card card-prompt-clickable" data-action="open-prompt-category" title="Klik untuk mengganti topik prompt" style="padding:var(--space-lg); display:flex; align-items:center; gap:16px;">
         <div style="flex-shrink:0;">
           <img src="assets/img/maskots/mascot-confused.png" alt="Milo Reflecting" style="width:64px; height:64px; object-fit:contain; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.12));">
         </div>
@@ -70,7 +70,7 @@ async function loadPrompt() {
 
 // ---- Change Prompt Category ----
 async function changePromptCategory(category) {
-  document.getElementById('prompt-category-modal').classList.remove('active');
+  document.getElementById('prompt-category-modal')?.classList.remove('active');
   const promptEl = document.getElementById('jurnal-prompt');
   
   try {
@@ -79,11 +79,17 @@ async function changePromptCategory(category) {
     
     let filtered = prompts;
     if (category === 'gratitude') {
-      filtered = prompts.filter(p => p.mood_context.includes('happy') || p.text.toLowerCase().includes('syukur') || p.text.toLowerCase().includes('terbaik'));
-    } else if (category === 'stress') {
-      filtered = prompts.filter(p => p.mood_context.includes('sad') || p.text.toLowerCase().includes('beban') || p.text.toLowerCase().includes('stres'));
-    } else if (category === 'discovery') {
-      filtered = prompts.filter(p => p.mood_context.includes('neutral') || p.text.toLowerCase().includes('pelajaran') || p.text.toLowerCase().includes('tujuan'));
+      filtered = prompts.filter(p => p.category === 'gratitude' || (p.mood_context && p.mood_context.includes('happy')));
+    } else if (category === 'stress' || category === 'release') {
+      filtered = prompts.filter(p => p.category === 'release' || p.category === 'stress' || (p.mood_context && (p.mood_context.includes('sad') || p.mood_context.includes('anxious'))));
+    } else if (category === 'discovery' || category === 'reflection') {
+      filtered = prompts.filter(p => p.category === 'reflection' || p.category === 'growth' || p.category === 'discovery');
+    } else if (category === 'self-love') {
+      filtered = prompts.filter(p => p.category === 'self-love' || p.category === 'self-compassion');
+    } else if (category === 'hope') {
+      filtered = prompts.filter(p => p.category === 'hope' || p.category === 'growth');
+    } else if (category === 'connection') {
+      filtered = prompts.filter(p => p.category === 'connection');
     }
     
     if (filtered.length === 0) filtered = prompts; // fallback
@@ -91,16 +97,27 @@ async function changePromptCategory(category) {
     const randomIdx = Math.floor(Math.random() * filtered.length);
     const prompt = filtered[randomIdx];
     currentPrompt = prompt.text;
+
+    const categoryNames = {
+      gratitude: 'Rasa Syukur',
+      stress: 'Pelepasan Stres',
+      discovery: 'Eksplorasi Diri',
+      'self-love': 'Self-Love',
+      hope: 'Harapan Masa Depan',
+      connection: 'Hubungan & Pertemanan',
+      all: 'Topik Acak'
+    };
+    const catName = categoryNames[category] || 'Topik Refleksi';
     
     promptEl.innerHTML = `
-      <div class="card card-prompt-clickable" data-action="open-prompt-category" title="Klik untuk mengganti topik prompt" style="padding:var(--space-lg); border-left:4px solid var(--primary-accent); display:flex; align-items:center; gap:16px; animation: bubbleIn 0.3s ease-out forwards;">
+      <div class="card card-prompt-clickable" data-action="open-prompt-category" title="Klik untuk mengganti topik prompt" style="padding:var(--space-lg); display:flex; align-items:center; gap:16px; animation: bubbleIn 0.3s ease-out forwards;">
         <div style="flex-shrink:0;">
           <img src="assets/img/maskots/mascot-tenang.png" alt="Milo Reflecting" style="width:64px; height:64px; object-fit:contain; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.12));">
         </div>
         <div style="flex:1;">
           <div style="font-size:0.8125rem; font-weight:700; color:var(--primary-accent); margin-bottom:4px; display:flex; align-items:center; gap:6px;">
             <span class="material-symbols-rounded" style="font-size:18px;">lightbulb</span>
-            <span>Prompt Baru (${category})</span>
+            <span>Prompt (${catName})</span>
             <span style="margin-left:auto; font-size:0.75rem; font-weight:600; opacity:0.7; display:inline-flex; align-items:center; gap:3px;">
               <span class="material-symbols-rounded" style="font-size:14px;">change_circle</span> Ganti Topik
             </span>
@@ -218,7 +235,9 @@ function renderJournalList() {
   }).join('');
 }
 
-// ---- Open Journal Full ----
+// ---- Open Journal Full (Redesigned Modal Populator) ----
+let activeJournalContent = '';
+
 function openJournal(id) {
   const journals = Storage.getJournals();
   const journal = journals.find(j => j.id === id);
@@ -226,17 +245,65 @@ function openJournal(id) {
 
   const date = new Date(journal.timestamp);
   const dateStr = date.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  const timeStr = date.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
 
   const modal = document.getElementById('jurnal-read-modal');
-  document.getElementById('jurnal-read-date').textContent = dateStr;
-  document.getElementById('jurnal-read-prompt').textContent = journal.prompt || '';
-  document.getElementById('jurnal-read-prompt').style.display = journal.prompt ? 'block' : 'none';
-  document.getElementById('jurnal-read-content').textContent = journal.content;
+  if (!modal) return;
 
+  const dateEl = document.getElementById('jurnal-read-date');
+  if (dateEl) dateEl.textContent = `${dateStr} · ${timeStr}`;
+
+  const promptBox = document.getElementById('jurnal-read-prompt-box');
+  const promptEl = document.getElementById('jurnal-read-prompt');
+  if (promptBox && promptEl) {
+    if (journal.prompt) {
+      promptEl.textContent = `"${journal.prompt}"`;
+      promptBox.style.display = 'block';
+    } else {
+      promptBox.style.display = 'none';
+    }
+  }
+
+  const contentEl = document.getElementById('jurnal-read-content');
+  if (contentEl) contentEl.textContent = journal.content;
+  activeJournalContent = journal.content || '';
+
+  // Word count & reading duration stats
+  const statsEl = document.getElementById('jurnal-read-stats');
+  if (statsEl) {
+    const text = (journal.content || '').trim();
+    const words = text ? text.split(/\s+/).length : 0;
+    const estTime = Math.max(1, Math.ceil(words / 150));
+    statsEl.textContent = `${words} kata · ~${estTime} mnt baca`;
+  }
+
+  const tagsWrapper = document.getElementById('jurnal-read-tags-wrapper');
   const tagsEl = document.getElementById('jurnal-read-tags');
-  tagsEl.innerHTML = journal.tags.map(t => `<span class="journal-tag">${typeof window.escapeHTML === 'function' ? window.escapeHTML(t) : t}</span>`).join('');
+  if (tagsEl) {
+    if (journal.tags && journal.tags.length > 0) {
+      tagsEl.innerHTML = journal.tags.map(t => `<span class="journal-tag" style="font-size:0.78rem; font-weight:700; background:var(--card-subtle); border:1px solid var(--card-border); color:var(--primary-accent); padding:5px 14px; border-radius:16px;">#${typeof window.escapeHTML === 'function' ? window.escapeHTML(t) : t}</span>`).join('');
+      if (tagsWrapper) tagsWrapper.style.display = 'block';
+    } else {
+      if (tagsWrapper) tagsWrapper.style.display = 'none';
+    }
+  }
+
   modal.classList.add('active');
 }
+
+window.copyJournalContent = function() {
+  if (activeJournalContent) {
+    navigator.clipboard.writeText(activeJournalContent).then(() => {
+      if (typeof Animations !== 'undefined' && typeof Animations.showToast === 'function') {
+        Animations.showToast('Jurnal berhasil disalin!', 'success');
+      }
+    }).catch(() => {
+      if (typeof Animations !== 'undefined' && typeof Animations.showToast === 'function') {
+        Animations.showToast('Gagal menyalin jurnal', 'warning');
+      }
+    });
+  }
+};
 
 function closeJurnalModal() {
   document.getElementById('jurnal-read-modal')?.classList.remove('active');

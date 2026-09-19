@@ -155,11 +155,12 @@ function handleMulaiSekarang(e) {
 
 // ---- Onboarding Modal Navigation Logic ----
 let currentStep = 1;
-const totalSteps = 3;
+const totalSteps = 5;
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Event listeners untuk tombol mulai sekarang
+  // Event listeners untuk tombol mulai sekarang (kecuali open-teman-chat)
   document.querySelectorAll('.btn-mulai-sekarang').forEach(btn => {
+    if (btn.getAttribute('data-action') === 'open-teman-chat') return;
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       handleMulaiSekarang();
