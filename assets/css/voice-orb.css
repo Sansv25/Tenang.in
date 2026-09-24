@@ -1,0 +1,422 @@
+/* =============================================
+   Tenang.in | AI Voice Orb Overlay
+   Muncul saat tombol mic (VN) di chat Teman dipencet
+   ============================================= */
+
+/* ---- Overlay Background ---- */
+.voice-orb-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 60%, #0a0f1e 0%, #000000 100%);
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  overflow: hidden;
+}
+
+/* Subtle ambient glow background */
+.voice-orb-overlay::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(75, 120, 220, 0.12) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.voice-orb-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ---- Top Controls ---- */
+.voice-orb-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px;
+  padding-top: calc(20px + env(safe-area-inset-top, 0px));
+  z-index: 10;
+}
+
+.voice-orb-menu-btn,
+.voice-orb-settings-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.voice-orb-menu-btn:hover,
+.voice-orb-settings-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+/* ---- Orb Stage ---- */
+.voice-orb-stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 300px;
+}
+
+/* ---- BLOB / Ripple Rings (behind the orb) ---- */
+.voice-orb-ripple {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  border: 1px solid rgba(100, 150, 240, 0.25);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.voice-orb-ripple:nth-child(1) { animation: none; }
+.voice-orb-ripple:nth-child(2) { animation: none; }
+.voice-orb-ripple:nth-child(3) { animation: none; }
+
+/* Active ripples (when listening/speaking) */
+.voice-orb-ripple.pulsing:nth-child(1) {
+  animation: orbRipple 2.2s ease-out infinite;
+}
+.voice-orb-ripple.pulsing:nth-child(2) {
+  animation: orbRipple 2.2s ease-out infinite 0.75s;
+}
+.voice-orb-ripple.pulsing:nth-child(3) {
+  animation: orbRipple 2.2s ease-out infinite 1.5s;
+}
+
+/* ---- THE AI ORB (Morphing Blob) ---- */
+.voice-orb-circle {
+  width: 230px;
+  height: 230px;
+  position: relative;
+  cursor: pointer;
+  z-index: 2;
+
+  /* Premium multi-stop gradient — persis seperti referensi */
+  background: radial-gradient(
+    ellipse at 38% 28%,
+    #e8efff 0%,
+    #c2d4ff 12%,
+    #8eb0f7 28%,
+    #6090f0 42%,
+    #4a78e8 55%,
+    #3060d8 68%,
+    #1a48c8 82%,
+    #0f36b0 100%
+  );
+
+  /* Soft outer glow */
+  box-shadow:
+    0 0 55px rgba(80, 130, 230, 0.55),
+    0 0 110px rgba(70, 110, 210, 0.28),
+    0 0 200px rgba(60, 90, 190, 0.12),
+    inset 0 0 50px rgba(255, 255, 255, 0.12);
+
+  /* Blob morphing animation (idle state) */
+  animation: blobIdle 6s ease-in-out infinite;
+}
+
+/* Shiny specular highlight — cloud-like white glow */
+.voice-orb-circle::before {
+  content: '';
+  position: absolute;
+  top: 6%;
+  left: 12%;
+  width: 52%;
+  height: 44%;
+  background: radial-gradient(
+    ellipse at 40% 35%,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(230, 242, 255, 0.6) 35%,
+    rgba(200, 225, 255, 0.2) 65%,
+    transparent 100%
+  );
+  border-radius: 60% 50% 70% 55%;
+  filter: blur(10px);
+  animation: specularDrift 5s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+/* Conic shimmer layer */
+.voice-orb-circle::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 20%,
+    transparent 40%,
+    rgba(150, 190, 255, 0.1) 60%,
+    transparent 80%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  animation: shimmerSpin 10s linear infinite;
+  pointer-events: none;
+}
+
+/* ---- Listening State ---- */
+.voice-orb-circle.listening {
+  animation: blobListening 1s ease-in-out infinite;
+  box-shadow:
+    0 0 75px rgba(80, 130, 230, 0.75),
+    0 0 150px rgba(70, 110, 210, 0.4),
+    0 0 250px rgba(60, 90, 190, 0.18),
+    inset 0 0 70px rgba(255, 255, 255, 0.18);
+}
+
+/* ---- Speaking State ---- */
+.voice-orb-circle.speaking {
+  animation: blobSpeaking 0.55s ease-in-out infinite alternate;
+  box-shadow:
+    0 0 90px rgba(100, 160, 255, 0.8),
+    0 0 180px rgba(80, 130, 230, 0.45),
+    inset 0 0 80px rgba(255, 255, 255, 0.2);
+}
+
+/* ---- Status Label ---- */
+.voice-orb-status {
+  margin-top: 44px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.03em;
+  text-align: center;
+  min-height: 28px;
+  font-family: var(--font-family, 'Plus Jakarta Sans', sans-serif);
+  transition: opacity 0.3s ease, color 0.3s ease;
+  z-index: 10;
+  position: relative;
+}
+
+/* ---- Bottom Controls ---- */
+.voice-orb-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 28px 24px;
+  padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+  z-index: 10;
+}
+
+.voice-orb-text-btn {
+  flex: 1;
+  max-width: 220px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 9999px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: var(--font-family, 'Plus Jakarta Sans', sans-serif);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.voice-orb-text-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.voice-orb-close-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.voice-orb-close-btn:hover {
+  background: rgba(239, 68, 68, 0.22);
+  border-color: rgba(239, 68, 68, 0.45);
+  color: #F87171;
+  transform: rotate(90deg);
+}
+
+/* ==============================================
+   KEYFRAME ANIMATIONS
+   ============================================== */
+
+/* IDLE: blob bergelombang halus (morph) */
+@keyframes blobIdle {
+  0% {
+    border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;
+    transform: scale(1) rotate(0deg);
+  }
+  14% {
+    border-radius: 55% 45% 65% 35% / 45% 60% 40% 55%;
+    transform: scale(1.01) rotate(2deg);
+  }
+  28% {
+    border-radius: 45% 55% 40% 60% / 60% 40% 55% 45%;
+    transform: scale(1.02) rotate(-1deg);
+  }
+  42% {
+    border-radius: 65% 35% 55% 45% / 45% 55% 60% 40%;
+    transform: scale(1.015) rotate(3deg);
+  }
+  57% {
+    border-radius: 40% 60% 45% 55% / 55% 45% 50% 50%;
+    transform: scale(1.025) rotate(-2deg);
+  }
+  71% {
+    border-radius: 55% 45% 60% 40% / 40% 65% 35% 60%;
+    transform: scale(1.01) rotate(1deg);
+  }
+  85% {
+    border-radius: 50% 50% 45% 55% / 55% 45% 65% 35%;
+    transform: scale(1.005) rotate(-1deg);
+  }
+  100% {
+    border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* LISTENING: blob lebih aktif dan cepat */
+@keyframes blobListening {
+  0% {
+    border-radius: 55% 45% 50% 50% / 50% 55% 45% 50%;
+    transform: scale(1);
+  }
+  25% {
+    border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
+    transform: scale(1.06);
+  }
+  50% {
+    border-radius: 65% 35% 45% 55% / 45% 55% 35% 65%;
+    transform: scale(0.97);
+  }
+  75% {
+    border-radius: 45% 55% 65% 35% / 55% 45% 50% 50%;
+    transform: scale(1.05);
+  }
+  100% {
+    border-radius: 55% 45% 50% 50% / 50% 55% 45% 50%;
+    transform: scale(1);
+  }
+}
+
+/* SPEAKING: blob pulsate & morph dengan glow */
+@keyframes blobSpeaking {
+  0% {
+    border-radius: 50% 50% 45% 55% / 55% 45% 60% 40%;
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    border-radius: 42% 58% 58% 42% / 48% 52% 48% 52%;
+    transform: scale(1.055);
+    filter: brightness(1.08);
+  }
+  100% {
+    border-radius: 58% 42% 42% 58% / 52% 48% 52% 48%;
+    transform: scale(1.03);
+    filter: brightness(1.04);
+  }
+}
+
+/* Specular highlight drift */
+@keyframes specularDrift {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(-5deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(8%, 6%) scale(1.1) rotate(5deg);
+    opacity: 0.75;
+  }
+}
+
+/* Conic shimmer spin */
+@keyframes shimmerSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Ripple expand */
+@keyframes orbRipple {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+/* ---- Entrance Animation ---- */
+.voice-orb-overlay.active .voice-orb-circle {
+  animation: blobIdle 6s ease-in-out infinite, orbEnter 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes orbEnter {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+    filter: blur(20px);
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0px);
+  }
+}
+
+/* Override listening/speaking during entry */
+.voice-orb-overlay.active .voice-orb-circle.listening {
+  animation: blobListening 1s ease-in-out infinite;
+}
+
+.voice-orb-overlay.active .voice-orb-circle.speaking {
+  animation: blobSpeaking 0.55s ease-in-out infinite alternate;
+}

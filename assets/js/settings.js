@@ -399,8 +399,22 @@ const Settings = (() => {
                 </button>
               `).join('')}
             </div>
+          <!-- Tour Section -->
+          <div class="settings-section" style="margin-top:24px;">
+            <div class="settings-section-label" style="margin-bottom:10px;">
+              <span class="material-symbols-rounded" style="font-size:20px;">explore</span>
+              <span>Panduan Fitur</span>
+            </div>
+            <button class="tour-trigger-btn" onclick="Settings.close(); setTimeout(() => { if(typeof Tour !== 'undefined') { Tour.reset(); Tour.start(); } }, 200);" style="font-size:0.875rem;">
+              <span class="material-symbols-rounded" style="font-size:18px;">tour</span>
+              <span>Mulai Tour Fitur Halaman Ini</span>
+            </button>
+            <p style="font-size:0.72rem; color:var(--text-secondary); text-align:center; margin-top:8px; font-weight:600;">
+              Ulangi panduan kapan saja untuk mengeksplorasi fitur-fitur Tenang.in 🗺️
+            </p>
+          </div>
           <!-- Account Section -->
-          <div class="settings-section" style="margin-top:32px;">
+          <div class="settings-section" style="margin-top:20px;">
             <button class="settings-lang-btn" style="color:#EF4444; border-color:rgba(239, 68, 68, 0.2); background:rgba(239, 68, 68, 0.05); width:100%; justify-content:center;" onclick="Settings.logout()">
               <span class="material-symbols-rounded">logout</span>
               <span class="lang-name" style="color:#EF4444;">${t('beranda.logout') || 'Keluar dari Akun'}</span>

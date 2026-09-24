@@ -159,11 +159,11 @@ const Main = (() => {
     }
 
     const items = [
-      { href: 'beranda.html', label: 'Home', id: 'home', icon: 'grid_view' },
+      { href: 'beranda.html', label: 'Beranda', id: 'home', icon: 'grid_view' },
       { href: 'mood-tracker.html', label: 'Mood', id: 'mood', icon: 'sentiment_satisfied' },
       { isAction: true, label: '', id: 'action', icon: 'add' },
-      { href: 'kenali.html', label: 'Learn', id: 'kenali', icon: 'psychology' },
-      { href: 'dashboard.html', label: 'Summary', id: 'dashboard', icon: 'bar_chart' }
+      { href: 'kenali.html', label: 'Kenali', id: 'kenali', icon: 'psychology' },
+      { href: 'dashboard.html', label: 'Dashboard', id: 'dashboard', icon: 'bar_chart' }
     ];
 
     const bottomNav = document.createElement('div');
@@ -290,14 +290,25 @@ const Main = (() => {
       const today = Storage.todayKey();
       if (lastPrompt !== today) {
         localStorage.setItem('tenang_last_capsule_prompt', today);
-        setTimeout(() => showWriteCapsuleModal(), 1200);
+        window._isCapsuleInterventionPending = true;
+        setTimeout(() => {
+          window._isCapsuleInterventionPending = false;
+          showWriteCapsuleModal();
+        }, 1200);
       }
     } else if (level <= 2) {
       const capsule = Storage.getRandomCapsule();
+      window._isCapsuleInterventionPending = true;
       if (capsule) {
-        setTimeout(() => showReadCapsuleModal(capsule), 1200);
+        setTimeout(() => {
+          window._isCapsuleInterventionPending = false;
+          showReadCapsuleModal(capsule);
+        }, 1200);
       } else {
-        setTimeout(() => showLowMoodRecommendationModal(), 1200);
+        setTimeout(() => {
+          window._isCapsuleInterventionPending = false;
+          showLowMoodRecommendationModal();
+        }, 1200);
       }
     }
   };
@@ -475,6 +486,7 @@ const Main = (() => {
       }
     }
     if (showTeman) await TemanChat.init();
+    if (showTeman && typeof VoiceOrb !== 'undefined') VoiceOrb.init();
 
     Animations.init();
 
@@ -546,7 +558,7 @@ document.addEventListener('click', (event) => {
 
   const action = trigger.dataset.action;
 
-  if (trigger.tagName === 'A' && (trigger.getAttribute('href') === '#' || trigger.getAttribute('href')?.startsWith('javascript:'))) {
+  if (trigger.tagName === 'A' || trigger.closest('a')) {
     event.preventDefault();
   }
 
@@ -596,6 +608,7 @@ document.addEventListener('click', (event) => {
       if (typeof rotateInspiration === 'function') rotateInspiration();
       break;
     case 'open-teman-chat':
+      event.preventDefault();
       if (typeof TemanChat !== 'undefined') {
         if (!document.getElementById('teman-chat') && typeof TemanChat.init === 'function') {
           TemanChat.init().then(() => {

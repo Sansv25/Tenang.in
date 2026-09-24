@@ -18,7 +18,7 @@ const I18n = (() => {
       'nav.journal': 'Jurnal',
       'nav.learn': 'Kenali',
       'nav.dashboard': 'Dashboard',
-      'nav.summary': 'Summary',
+      'nav.summary': 'Dashboard',
       'nav.start': 'Mulai',
 
       // -- Landing / Index --

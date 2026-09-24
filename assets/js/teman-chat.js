@@ -64,7 +64,7 @@ const TemanChat = (() => {
       <div class="teman-chat-body" id="teman-chat-body"></div>
       <div class="chat-options" id="teman-chat-options"></div>
       <div class="teman-chat-input-bar">
-        <button type="button" class="teman-input-btn" id="teman-voice-btn" aria-label="Input Suara Tidak Aktif" title="Fitur suara tidak aktif" disabled style="opacity:0.4; cursor:not-allowed; pointer-events:none;">
+        <button type="button" class="teman-input-btn" id="teman-voice-btn" aria-label="Input Suara" title="Ketuk untuk berbicara">
           <span class="material-symbols-rounded" style="font-size:22px;">mic</span>
         </button>
         <input type="text" class="teman-input-field" id="teman-text-input" placeholder="Ketik pesan untuk Teman AI..." disabled readonly style="cursor: not-allowed; pointer-events: none;">
@@ -78,8 +78,23 @@ const TemanChat = (() => {
     chatContainer = chatDiv;
 
     // Event listeners
+    console.log('[TemanChat] createChatUI selesai, memasang event listener...');
     document.getElementById('teman-toggle-btn').addEventListener('click', toggle);
     document.getElementById('teman-close-btn').addEventListener('click', close);
+
+    // Tombol mic → buka Voice Orb overlay
+    const voiceBtn = document.getElementById('teman-voice-btn');
+    console.log('[TemanChat] voice btn element:', voiceBtn);
+    if (voiceBtn) {
+      voiceBtn.addEventListener('click', () => {
+        console.log('[TemanChat] Tombol mic diklik! VoiceOrb:', typeof VoiceOrb);
+        if (typeof VoiceOrb !== 'undefined') {
+          VoiceOrb.open();
+        } else {
+          console.warn('[TemanChat] VoiceOrb tidak ditemukan!');
+        }
+      });
+    }
   };
 
   // ---- Open Chat ----
@@ -207,5 +222,16 @@ const TemanChat = (() => {
     createChatUI();
   };
 
-  return { init, open, close, toggle, reset };
+  // ---- Send Voice Message (dipanggil dari VoiceOrb) ----
+  const sendVoiceMessage = (text) => {
+    if (!text || !text.trim()) return;
+    addBubble(text, 'user');
+    // Tambah respons Teman sederhana
+    setTimeout(() => {
+      addBubble('Aku mendengar kamu. Cerita lebih banyak, ya! 🌿', 'teman');
+      showOptions('root');
+    }, 700);
+  };
+
+  return { init, open, close, toggle, reset, sendVoiceMessage };
 })();

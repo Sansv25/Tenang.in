@@ -157,7 +157,9 @@ function updateStreakDisplay() {
     const streakModalCount = document.getElementById('streak-modal-count');
     if (streakModal && streakModalCount) {
       streakModalCount.textContent = streak;
+      window._isStreakMilestonePending = true;
       setTimeout(() => {
+        window._isStreakMilestonePending = false;
         streakModal.classList.add('active');
         // Trigger confetti if possible
         if (typeof confetti === 'function') {
@@ -639,6 +641,9 @@ const Onboarding = (() => {
     localStorage.setItem('tenang_user_goals', JSON.stringify(state.goals));
     localStorage.setItem('tenang_user_time', state.time);
     localStorage.setItem('tenang_user_aistyle', state.aiStyle);
+    if (typeof Tour !== 'undefined' && typeof Tour.reset === 'function') {
+      Tour.reset();
+    }
     close();
     if (typeof Animations !== 'undefined' && typeof Animations.showToast === 'function') {
       Animations.showToast('Selamat datang! Ruang amanmu siap digunakan.', 'success', 4000);

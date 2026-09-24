@@ -22,6 +22,8 @@
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/landing.css">
   <link rel="stylesheet" href="assets/css/settings.css">
+  <link rel="stylesheet" href="assets/css/voice-orb.css">
+  <link rel="stylesheet" href="assets/css/tour.css">
 </head>
 
 <body
@@ -65,7 +67,7 @@
           <a href="#teman-ai" class="landing-link">Teman AI</a>
           <a href="#bantuan" class="landing-link" style="color:#FDE68A; font-weight:700;">Bantuan</a>
         </nav>
-        <a href="#" class="btn-rounded-start btn-mulai-sekarang" data-action="mulai-sekarang"
+        <a href="#" class="btn-rounded-start btn-nav-mulai btn-mulai-sekarang" data-action="mulai-sekarang"
           aria-label="Mulai Refleksi Sekarang">
           <span>Mulai</span>
           <span class="material-symbols-rounded btn-arrow-icon">arrow_forward</span>
@@ -740,7 +742,7 @@
     <div class="container relative z-10">
       <div class="section-header" data-aos="fade-up">
         <span class="section-label">Dampak & Statistik</span>
-        <h2 class="section-title">Ruang Aman untuk Saling Bertumbuh</h2>
+        <h2 class="section-title">Ruang Aan untuk Saling Bertumbuh</h2>
         <p class="section-subtitle">Lihat bagaimana ribuan remaja Indonesia rutin menyapa perasaan dan bertumbuh dalam ruang yang tenang.</p>
       </div>
 
@@ -856,7 +858,7 @@
               Rumah digital tempat setiap perasaanmu diterima sepenuhnya. Bebas dari rasa cemas dan takut dihakimi, kamu bisa berdamai dengan harimu.
             </p>
 
-            <div style="margin-top: 28px; padding-top: 20px; border-top: 1px dashed rgba(255, 255, 255, 0.15); display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+            <div class="bento-benefits-grid" style="margin-top: 28px; padding-top: 20px; border-top: 1px dashed rgba(255, 255, 255, 0.15);">
               <div style="display: flex; align-items: center; gap: 12px;">
                 <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(56, 189, 248, 0.12); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(56, 189, 248, 0.2);">
                   <span class="material-symbols-rounded" style="font-size: 18px; color: #38BDF8;">spa</span>
@@ -1306,16 +1308,30 @@
   <script src="assets/js/settings.js"></script>
   <script src="assets/js/animations.js"></script>
   <script src="assets/js/charts.js"></script>
+  <script src="assets/js/voice-orb.js"></script>
   <script src="assets/js/teman-chat.js"></script>
   <script src="assets/js/main.js"></script>
   <script src="assets/js/landing.js"></script>
   <script src="assets/js/home.js"></script>
+  <script src="assets/js/tour.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       Settings.renderLandingLangDropdown();
-      Main.initPage('landing', { showNav: false, showFooter: false, showTeman: true, showWelcome: true });
+      await Main.initPage('landing', { showNav: false, showFooter: false, showTeman: true, showWelcome: true });
       if (typeof renderWeeklyMoodSummary === 'function') {
         renderWeeklyMoodSummary();
+      }
+    });
+
+    // Global delegation: klik tombol mic Teman → buka VoiceOrb
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('#teman-voice-btn');
+      if (!btn) return;
+      console.log('[Global] Mic btn diklik via delegation!');
+      if (typeof VoiceOrb !== 'undefined') {
+        VoiceOrb.open();
+      } else {
+        console.warn('[Global] VoiceOrb undefined');
       }
     });
   </script>

@@ -783,18 +783,18 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!ctaSection || !layerBack || !layerMid || !layerFront) return;
 
   // ---- Chroma Key Engine (Remove #05f904 neon green screen & edge fringing) ----
-  function applyChromaKeyToLayer(layer, imgPath) {
+  function applyChromaKeyToLayer(layer, imgPath, overlapX = 0, overlapY = 0) {
     const img = new Image();
     img.crossOrigin = 'Anonymous';
     img.src = imgPath;
     img.onload = () => {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.drawImage(img, 0, 0);
+      const tempCanvas = document.createElement('canvas');
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCanvas.width = img.width;
+      tempCanvas.height = img.height;
+      tempCtx.drawImage(img, 0, 0);
 
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
       const data = imageData.data;
 
       for (let i = 0; i < data.length; i += 4) {
@@ -822,14 +822,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      ctx.putImageData(imageData, 0, 0);
+      tempCtx.putImageData(imageData, 0, 0);
+
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = img.width - overlapX;
+      canvas.height = img.height;
+
+      // Draw the main image
+      ctx.drawImage(tempCanvas, 0, 0);
+      
+      // If overlap is specified, draw the right side of the image overlapping onto the left side
+      if (overlapX > 0) {
+        ctx.drawImage(tempCanvas, -(img.width - overlapX), overlapY);
+      }
+
       layer.style.backgroundImage = `url("${canvas.toDataURL('image/png')}")`;
     };
   }
 
   // Terapkan chroma key pada ketiga lapisan gambar gunung
   applyChromaKeyToLayer(layerBack, 'assets/img/mountain-back.png');
-  applyChromaKeyToLayer(layerMid, 'assets/img/mountain-mid.png');
+  // Menjorok kedalam (overlap) sebesar 280px untuk layer mid agar menyatu
+  applyChromaKeyToLayer(layerMid, 'assets/img/mountain-mid.png', 280);
   applyChromaKeyToLayer(layerFront, 'assets/img/mountain-front.png');
 
   let mouseX = 0;

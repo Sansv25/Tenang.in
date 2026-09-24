@@ -3860,13 +3860,13 @@ body {
 }
 
 .mountain-layer.layer-mid {
-  background-image: url('../img/mountain-mid.jpg');
+  background-image: url('../img/mountain-mid.png');
   bottom: 0;
   z-index: 2;
   height: 100%;
   background-repeat: repeat-x;
   background-position: bottom center;
-  background-size: auto 100%;
+  background-size: auto 110%;
   opacity: 1;
 }
 
@@ -4268,6 +4268,19 @@ body {
 
 .btn-copy-num:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+/* ---- Bento Benefits Grid (Responsive) ---- */
+.bento-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .bento-benefits-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---- WCAG Accessibility: Prefers Reduced Motion ---- */
