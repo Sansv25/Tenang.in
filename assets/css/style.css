@@ -7,7 +7,7 @@
 /* display=swap: show system font first, swap when loaded, prevents CLS */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 /* display=block: reserves space during load to prevent icon-pop CLS */
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
 
 /* ---- CSS Variables ---- */
 :root {
@@ -967,7 +967,7 @@ p {
 
 .footer-desc {
   font-size: var(--body-sm);
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.85);
   max-width: 300px;
   line-height: 1.6;
 }
@@ -977,7 +977,7 @@ p {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.8);
   margin-bottom: var(--space-md);
 }
 
@@ -986,7 +986,7 @@ p {
   align-items: center;
   gap: 8px;
   font-size: var(--caption-size);
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.85);
   padding: 5px 0;
   transition: all var(--transition-fast);
 }
@@ -1015,7 +1015,7 @@ p {
 
 .footer-disclaimer {
   font-size: var(--small-size);
-  color: rgba(255, 255, 255, 0.35);
+  color: rgba(255, 255, 255, 0.75);
   max-width: 560px;
   line-height: 1.6;
   display: flex;
@@ -2252,7 +2252,7 @@ body.dark-mode .footer-link:hover {
 
 html.dark-mode .footer-disclaimer,
 body.dark-mode .footer-disclaimer {
-  color: #64748B !important;
+  color: #94A3B8 !important;
 }
 
 /* ---- Profile Header Mobile Icon-Only Buttons ---- */
