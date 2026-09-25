@@ -48,7 +48,7 @@ const Tour = (() => {
     {
       page: 'beranda', target: '#greeting-text, .greeting-text, .dashboard-hero-floating h1', position: 'bottom',
       title: 'Sapaan & Streak Konsistensi',
-      body: 'Area sapaan harianmu. Tombol ikon api 🔥 ("Streak") mencatat konsistensi refleksi harianmu. Kamu juga bisa membagikan streak-mu lewat tombol bagikan (ikon share 🔗).'
+      body: 'Area sapaan harianmu. Tombol ikon api ("Streak") mencatat konsistensi refleksi harianmu. Kamu juga bisa membagikan streak-mu lewat tombol bagikan (ikon share).'
     },
     {
       page: 'beranda', target: '#mood-checked-in-state a, #mood-checked-in-state button, #mood-grid-container, .mood-grid', position: 'bottom',
@@ -58,76 +58,93 @@ const Tour = (() => {
     {
       page: 'beranda', target: '#inspiration-card .btn-rotate-quote, #inspiration-card', position: 'bottom',
       title: 'Wisdom & Kutipan Motivasi',
-      body: 'Kutipan reflektif penenang pikiran. Klik tombol "Inspirasi Baru" (refresh 🔄) di bagian atas kartu untuk mengacak dan mendapatkan pesan motivasi segar kapan saja.'
+      body: 'Kutipan reflektif penenang pikiran. Klik tombol "Inspirasi Baru" di bagian atas kartu untuk mengacak dan mendapatkan pesan motivasi segar kapan saja.'
     },
     {
       page: 'beranda', target: '#quick-teman-ai .btn-ai-start, #quick-teman-ai, [data-action="open-teman-chat"]', position: 'top',
       noTooltip: true,
-      autoOpen: () => { if (typeof TemanChat !== 'undefined' && TemanChat.open) TemanChat.open(); },
+      autoOpen: () => {
+        if (typeof TemanChat !== 'undefined' && TemanChat.open) {
+          if (!document.getElementById('teman-chat')?.classList.contains('active')) {
+            TemanChat.open();
+          }
+        }
+      },
       autoAdvance: true,
-      autoAdvanceDelayMs: 1500,
-      delayMs: 800
+      autoAdvanceDelayMs: 1200,
+      delayMs: 600
     },
     {
       page: 'beranda', target: '#teman-chat', position: 'left',
       noTooltip: true,
       beforeRender: async () => {
-        if (typeof TemanChat !== 'undefined' && TemanChat.open) TemanChat.open();
-        const chatEl = document.getElementById('teman-chat');
-        if (chatEl) {
-          chatEl.style.position = 'fixed';
-          chatEl.style.zIndex = '10501';
+        if (typeof TemanChat !== 'undefined' && TemanChat.open) {
+          if (!document.getElementById('teman-chat')?.classList.contains('active')) {
+            TemanChat.open();
+          }
         }
       },
-      autoOpen: () => {
-        const chatEl = document.getElementById('teman-chat');
-        if (chatEl) chatEl.style.zIndex = '';
-      },
       autoAdvance: true,
-      autoAdvanceDelayMs: 2500,
-      delayMs: 1000
+      autoAdvanceDelayMs: 3000,
+      delayMs: 300
     },
     {
       page: 'beranda',
-      target: '#teman-voice-btn, .voice-orb-wrapper, #voice-orb-fab',
+      target: '#teman-voice-btn',
       position: 'top',
-      noTooltip: true,
+      title: 'Percakapan Suara',
+      body: 'Ketuk ikon mikrofon ini untuk berbicara langsung menggunakan suara dengan Teman AI.',
       beforeRender: async () => {
-        if (typeof TemanChat !== 'undefined' && TemanChat.open) TemanChat.open();
-        await new Promise(r => setTimeout(r, 150));
+        if (typeof TemanChat !== 'undefined' && TemanChat.open) {
+          if (!document.getElementById('teman-chat')?.classList.contains('active')) {
+            TemanChat.open();
+          }
+        }
         const voiceBtn = document.getElementById('teman-voice-btn');
         if (voiceBtn) {
           voiceBtn.style.position = 'relative';
-          voiceBtn.style.zIndex = '10501';
+          voiceBtn.style.zIndex = '10601';
         }
       },
-      autoOpen: () => {
-        const voiceBtn = document.getElementById('teman-voice-btn');
-        if (voiceBtn) {
-          voiceBtn.style.position = '';
-          voiceBtn.style.zIndex = '';
+      autoAdvance: true,
+      autoAdvanceDelayMs: 2800,
+      delayMs: 300
+    },
+    {
+      page: 'beranda',
+      target: '#voice-orb-circle, #voice-orb-overlay',
+      position: 'center',
+      noTooltip: true,
+      beforeRender: async () => {
+        if (typeof TemanChat !== 'undefined' && TemanChat.close) {
+          TemanChat.close();
         }
-        if (typeof TemanChat !== 'undefined' && TemanChat.close) TemanChat.close();
-        if (typeof VoiceOrb !== 'undefined' && VoiceOrb.open) VoiceOrb.open();
+        await new Promise(r => setTimeout(r, 120));
+        if (typeof VoiceOrb !== 'undefined' && VoiceOrb.open) {
+          VoiceOrb.open();
+        }
       },
       modalId: 'voice-orb-overlay',
-      delayMs: 2200
+      autoAdvance: true,
+      autoAdvanceDelayMs: 3200,
+      delayMs: 400
     },
     {
       page: 'beranda', target: '#quick-mood, .bento-grid', position: 'top',
+      beforeRender: async () => {
+        if (typeof VoiceOrb !== 'undefined' && VoiceOrb.close) {
+          VoiceOrb.close();
+        }
+        if (typeof TemanChat !== 'undefined' && TemanChat.close) {
+          TemanChat.close();
+        }
+      },
       title: 'Navigasi Fitur Utama',
       body: 'Empat kartu navigasi cepat: Mood Tracker (lacak emosi), Ruang Jurnal (menulis cerita), Kenali Dirimu (tes kepribadian), dan Dashboard (medali & statistik). Klik kartu mana saja untuk ke fitur tersebut.'
     },
-    {
-      page: 'beranda', target: '[data-action="open-settings"]', position: 'bottom',
-      noTooltip: true,
-      autoOpen: () => { if (typeof Settings !== 'undefined' && Settings.open) Settings.open(); },
-      modalId: 'settings-popup-overlay',
-      delayMs: 2000
-    },
 
     // ══════════════════════════════
-    // MOOD TRACKER  (step 7 – 10)
+    // MOOD TRACKER
     // ══════════════════════════════
     {
       page: 'mood-tracker', target: null, position: 'center', mascot: true,
@@ -142,16 +159,21 @@ const Tour = (() => {
     {
       page: 'mood-tracker', target: '.btn-share-trigger, #mood-chart', position: 'top',
       title: 'Grafik 7 Hari & Tombol Bagikan',
-      body: 'Grafik visual tren emosimu selama seminggu. Tekan tombol "Bagikan" (ikon share 🔗) di pojok kanan atas untuk mengunduh atau membagikan kartu grafik mood dalam tampilan estetik.'
+      body: 'Grafik visual tren emosimu selama seminggu. Tekan tombol "Bagikan" (ikon share) di pojok kanan atas untuk mengunduh atau membagikan kartu grafik mood dalam tampilan estetik.'
     },
     {
       page: 'mood-tracker', target: '#mood-grid', position: 'top',
       title: 'Kalender Riwayat Mood',
       body: 'Visualisasi kalender riwayat refleksi. Tiap kotak berwarna mewakili emosimu pada tanggal tersebut. Sentuh kotak untuk melihat rincian catatan harianmu.'
     },
+    {
+      page: 'mood-tracker', target: '[data-action="open-settings"]', position: 'bottom',
+      title: 'Pengaturan & Preferensi',
+      body: 'Ketuk ikon roda gigi di kanan atas untuk mengelola tema tampilan, suara, dan preferensi akunmu.'
+    },
 
     // ══════════════════════════════
-    // JURNAL  (step 11 – 14)
+    // JURNAL
     // ══════════════════════════════
     {
       page: 'jurnal', target: null, position: 'center', mascot: true,
@@ -161,12 +183,12 @@ const Tour = (() => {
     {
       page: 'jurnal', target: '.btn-prompt-trigger, #jurnal-prompt', position: 'bottom',
       title: 'Prompt Refleksi & Tombol Ganti Topik',
-      body: 'Pertanyaan panduan harian untuk memicu tulisanmu. Tekan tombol "Ganti Topik Prompt" (🔄) untuk memilih kategori lain seperti Rasa Syukur, Pelepasan Stres, Self-Love, atau Harapan.'
+      body: 'Pertanyaan panduan harian untuk memicu tulisanmu. Tekan tombol "Ganti Topik Prompt" untuk memilih kategori lain seperti Rasa Syukur, Pelepasan Stres, Self-Love, atau Harapan.'
     },
     {
       page: 'jurnal', target: '[data-action="save-jurnal"], #jurnal-content', position: 'top',
       title: 'Area Menulis & Tombol Simpan',
-      body: 'Tuangkan pikiranmu di area teks, pilih tag emosi yang sesuai, lalu tekan tombol "Simpan Jurnal" (ikon disket 💾) untuk mengunci catatan refleksimu secara aman.'
+      body: 'Tuangkan pikiranmu di area teks, pilih tag emosi yang sesuai, lalu tekan tombol "Simpan Jurnal" untuk mengunci catatan refleksimu secara aman.'
     },
     {
       page: 'jurnal', target: '#btn-burn, [data-action="simulate-burn"], #bakar-beban-card', position: 'top',
@@ -175,7 +197,7 @@ const Tour = (() => {
     },
 
     // ══════════════════════════════
-    // KENALI DIRIMU  (step 15 – 17)
+    // KENALI DIRIMU
     // ══════════════════════════════
     {
       page: 'kenali', target: null, position: 'center', mascot: true,
@@ -194,7 +216,7 @@ const Tour = (() => {
     },
 
     // ══════════════════════════════
-    // DASHBOARD  (step 18 – 21)
+    // DASHBOARD
     // ══════════════════════════════
     {
       page: 'dashboard', target: null, position: 'center', mascot: true,
@@ -218,7 +240,7 @@ const Tour = (() => {
     },
 
     // ══════════════════════════════
-    // PROFIL  (step 22 – 25)
+    // PROFIL
     // ══════════════════════════════
     {
       page: 'profil', target: null, position: 'center', mascot: true,
@@ -226,9 +248,9 @@ const Tour = (() => {
       body: 'Kelola identitas personalmu, ubah avatar, dan ikuti kuis gaya refleksi jiwa.'
     },
     {
-      page: 'profil', target: '#profil-card-section .btn, #profil-card-section', position: 'bottom',
-      title: 'Pengaturan Nama & Avatar',
-      body: 'Gunakan tombol edit di kartu profil untuk menyesuaikan nama panggilan dan memilih gambar avatar favoritmu.'
+      page: 'profil', target: '#profil-avatar-box, #profil-name-box, label[for="avatar-file-input"], #profil-name', position: 'bottom',
+      title: 'Pengaturan Avatar & Nama',
+      body: 'Gunakan tombol foto avatar untuk mengunggah foto profil favoritmu, dan isi kolom nama panggilan untuk personalisasi aplikasi.'
     },
     {
       page: 'profil', target: '[data-action="start-profil-quiz"], #profil-intro .btn-primary, #profil-intro', position: 'top',
@@ -237,7 +259,7 @@ const Tour = (() => {
     },
     {
       page: 'profil', target: null, position: 'center', mascot: true,
-      title: 'Tour Selesai 🎉',
+      title: 'Tour Selesai',
       body: 'Kamu telah mengenal seluruh fitur dan tombol utama Tenang.in! Selamat melanjutkan perjalanan refleksi dan merawat kesehatan mentalmu.'
     }
   ];
@@ -462,7 +484,7 @@ const Tour = (() => {
       : '';
 
     const nextClass = isLast ? 'tour-btn-next tour-btn-finish' : 'tour-btn-next';
-    const nextLabel = isLast ? 'Selesai! 🎉' : 'Lanjut';
+    const nextLabel = isLast ? 'Selesai!' : 'Lanjut';
     const nextIcon  = isLast ? 'check_circle' : 'arrow_forward';
 
     tooltipEl.innerHTML = `
@@ -492,7 +514,6 @@ const Tour = (() => {
   function updateSpotlight(targetEl) {
     if (!spotlightEl) return;
     if (!targetEl) {
-      // No target → 0×0 centre, huge box-shadow = full dark backdrop
       spotlightEl.style.width   = '0px';
       spotlightEl.style.height  = '0px';
       spotlightEl.style.top     = '50%';
@@ -501,15 +522,39 @@ const Tour = (() => {
       spotlightEl.style.opacity = '1';
       return;
     }
-    const r = targetEl.getBoundingClientRect();
+
+    const node = typeof targetEl === 'string' ? getTargetEl(targetEl) : targetEl;
+    if (!node) return;
+
+    const r = node.getBoundingClientRect();
     const isSmallBtn = r.height <= 64;
     const p = isSmallBtn ? 6 : SPOT_PAD;
-    const radius = isSmallBtn ? '18px' : '14px';
+    let radius = isSmallBtn ? '18px' : '14px';
 
-    spotlightEl.style.top          = `${r.top  - p}px`;
-    spotlightEl.style.left         = `${r.left - p}px`;
-    spotlightEl.style.width        = `${Math.max(0, r.width  + p * 2)}px`;
-    spotlightEl.style.height       = `${Math.max(0, r.height + p * 2)}px`;
+    let top = r.top - p;
+    let left = r.left - p;
+    let width = r.width + p * 2;
+    let height = r.height + p * 2;
+
+    // Special handling for Teman Chat modal on mobile (when targeting the chat window itself)
+    const chatEl = document.getElementById('teman-chat');
+    if (chatEl && (node === chatEl || node.classList?.contains('teman-chat'))) {
+      const vh = window.innerHeight;
+      const vw = window.innerWidth;
+      if (vw <= 768) {
+        const chatRect = chatEl.getBoundingClientRect();
+        top = Math.max(0, chatRect.top - 6);
+        left = 0;
+        width = vw;
+        height = Math.max(0, vh - top);
+        radius = '24px 24px 0 0';
+      }
+    }
+
+    spotlightEl.style.top          = `${top}px`;
+    spotlightEl.style.left         = `${left}px`;
+    spotlightEl.style.width        = `${Math.max(0, width)}px`;
+    spotlightEl.style.height       = `${Math.max(0, height)}px`;
     spotlightEl.style.borderRadius = radius;
     spotlightEl.style.opacity      = '1';
   }
@@ -522,9 +567,10 @@ const Tour = (() => {
 
     const vw  = window.innerWidth;
     const vh  = window.innerHeight;
-    const pad = TIP_GAP;
-    const TW  = tooltipEl.offsetWidth  || 360;
-    const TH  = tooltipEl.offsetHeight || 220;
+    const isMobile = vw <= 768;
+    const pad = isMobile ? 12 : TIP_GAP;
+    const TW  = tooltipEl.offsetWidth  || (isMobile ? Math.min(350, vw - 24) : 360);
+    const TH  = tooltipEl.offsetHeight || 200;
 
     let top, left;
     const arrowEl = tooltipEl.querySelector('#tour-arrow');
@@ -536,63 +582,77 @@ const Tour = (() => {
     } else {
       const r   = targetEl.getBoundingClientRect();
       const p   = SPOT_PAD;
-      const tCX = (r.left + r.right) / 2;
 
-      if (arrowEl) arrowEl.style.display = 'block';
+      if (arrowEl) arrowEl.style.display = isMobile ? 'none' : 'block';
 
-      let pos = position;
+      if (isMobile) {
+        // Mobile: Prioritize BELOW target element
+        left = Math.max(pad, (vw - TW) / 2);
 
-      // Available space above and below the spotlight box
-      const spaceAbove = r.top - p - pad;
-      const spaceBelow = vh - (r.bottom + p + pad);
+        // Place below target
+        top = r.bottom + p + pad;
 
-      // Auto-flip if not enough space on requested side
-      if (pos === 'top' && spaceAbove < TH) {
-        if (spaceBelow >= TH || spaceBelow > spaceAbove) {
-          pos = 'bottom';
+        // If placing below exceeds screen bottom, check if placing above is cleaner
+        if (top + TH > vh - 12 && r.top - p - pad - TH > 12) {
+          top = r.top - p - pad - TH;
+          if (arrowEl) arrowEl.className = 'tour-arrow arrow-bottom';
+        } else {
+          if (arrowEl) arrowEl.className = 'tour-arrow arrow-top';
         }
-      } else if (pos === 'bottom' && spaceBelow < TH) {
-        if (spaceAbove >= TH || spaceAbove > spaceBelow) {
-          pos = 'top';
-        }
-      }
-
-      if (pos === 'bottom') {
-        top  = r.bottom + p + pad;
-        if (arrowEl) arrowEl.className = 'tour-arrow arrow-top';
-      } else if (pos === 'top') {
-        top  = r.top - p - pad - TH;
-        if (arrowEl) arrowEl.className = 'tour-arrow arrow-bottom';
-      } else if (pos === 'right') {
-        top  = (r.top + r.bottom) / 2 - TH / 2;
-        left = r.right + p + pad;
-        if (arrowEl) arrowEl.className = 'tour-arrow arrow-right';
       } else {
-        top  = (r.top + r.bottom) / 2 - TH / 2;
-        left = r.left - p - pad - TW;
-        if (arrowEl) arrowEl.className = 'tour-arrow arrow-left';
-      }
+        // Desktop positioning logic
+        let pos = position;
+        const spaceAbove = r.top - p - pad;
+        const spaceBelow = vh - (r.bottom + p + pad);
 
-      // Horizontal placement & smart alignment for wide section cards
-      if (pos === 'bottom' || pos === 'top') {
-        if (r.width > 520) {
-          // Align near left side of wide container card
-          left = r.left + 24;
-          left = Math.max(pad, Math.min(left, vw - TW - pad));
-          if (arrowEl) {
-            const arrowOffset = Math.max(28, Math.min(TW - 28, (r.left + 48) - left));
-            arrowEl.style.left = `${arrowOffset}px`;
+        // Auto-flip if not enough space on requested side
+        if (pos === 'top' && spaceAbove < TH) {
+          if (spaceBelow >= TH || spaceBelow > spaceAbove) {
+            pos = 'bottom';
+          }
+        } else if (pos === 'bottom' && spaceBelow < TH) {
+          if (spaceAbove >= TH || spaceAbove > spaceBelow) {
+            pos = 'top';
+          }
+        }
+
+        if (pos === 'bottom') {
+          top  = r.bottom + p + pad;
+          if (arrowEl) arrowEl.className = 'tour-arrow arrow-top';
+        } else if (pos === 'top') {
+          top  = r.top - p - pad - TH;
+          if (arrowEl) arrowEl.className = 'tour-arrow arrow-bottom';
+        } else if (pos === 'right') {
+          top  = (r.top + r.bottom) / 2 - TH / 2;
+          left = r.right + p + pad;
+          if (arrowEl) arrowEl.className = 'tour-arrow arrow-right';
+        } else {
+          top  = (r.top + r.bottom) / 2 - TH / 2;
+          left = r.left - p - pad - TW;
+          if (arrowEl) arrowEl.className = 'tour-arrow arrow-left';
+        }
+
+        // Horizontal placement & smart alignment for wide section cards
+        if (pos === 'bottom' || pos === 'top') {
+          if (r.width > 520) {
+            left = r.left + 24;
+            left = Math.max(pad, Math.min(left, vw - TW - pad));
+            if (arrowEl) {
+              const arrowOffset = Math.max(28, Math.min(TW - 28, (r.left + 48) - left));
+              arrowEl.style.left = `${arrowOffset}px`;
+            }
+          } else {
+            const tCX = (r.left + r.right) / 2;
+            left = tCX - TW / 2;
+            left = Math.max(pad, Math.min(left, vw - TW - pad));
+            if (arrowEl) {
+              arrowEl.style.left = '50%';
+            }
           }
         } else {
-          left = tCX - TW / 2;
           left = Math.max(pad, Math.min(left, vw - TW - pad));
-          if (arrowEl) {
-            arrowEl.style.left = '50%';
-          }
+          if (arrowEl) arrowEl.style.left = '50%';
         }
-      } else {
-        left = Math.max(pad, Math.min(left, vw - TW - pad));
-        if (arrowEl) arrowEl.style.left = '50%';
       }
 
       // Vertical safety clamp
@@ -611,25 +671,35 @@ const Tour = (() => {
     if (!targetEl) return;
     const r      = targetEl.getBoundingClientRect();
     const vh     = window.innerHeight;
-    const TH     = tooltipEl ? (tooltipEl.offsetHeight || 240) : 240;
+    const isMobile = window.innerWidth <= 768;
+    const TH     = tooltipEl ? (tooltipEl.offsetHeight || 200) : 200;
     const pad    = TIP_GAP;
     const p      = SPOT_PAD;
-
-    const spaceAbove = r.top - p - pad;
-    const spaceBelow = vh - (r.bottom + p + pad);
 
     let needsScroll = false;
     let targetY = window.scrollY;
 
-    if (position === 'top' && spaceAbove < TH + 20) {
-      needsScroll = true;
-      targetY = window.scrollY + r.top - (TH + pad + p + 50);
-    } else if (position === 'bottom' && spaceBelow < TH + 20) {
-      needsScroll = true;
-      targetY = window.scrollY + r.bottom + TH + pad + p + 50 - vh;
-    } else if (r.top < 80 || r.bottom > vh - 80) {
-      needsScroll = true;
-      targetY = window.scrollY + r.top - (vh - r.height) / 2;
+    if (isMobile) {
+      // On mobile, scroll target near top of viewport (top: 85px) so room below is maximized
+      const desiredY = window.scrollY + r.top - 85;
+      if (Math.abs(window.scrollY - desiredY) > 30) {
+        needsScroll = true;
+        targetY = desiredY;
+      }
+    } else {
+      const spaceAbove = r.top - p - pad;
+      const spaceBelow = vh - (r.bottom + p + pad);
+
+      if (position === 'top' && spaceAbove < TH + 20) {
+        needsScroll = true;
+        targetY = window.scrollY + r.top - (TH + pad + p + 50);
+      } else if (position === 'bottom' && spaceBelow < TH + 20) {
+        needsScroll = true;
+        targetY = window.scrollY + r.bottom + TH + pad + p + 50 - vh;
+      } else if (r.top < 80 || r.bottom > vh - 80) {
+        needsScroll = true;
+        targetY = window.scrollY + r.top - (vh - r.height) / 2;
+      }
     }
 
     if (needsScroll) {
@@ -717,6 +787,47 @@ const Tour = (() => {
     }, 200);
   }
 
+  let activeTargetObserver = null;
+  let activeResizeObserver = null;
+
+  function observeTarget(targetEl) {
+    if (activeTargetObserver) {
+      activeTargetObserver.disconnect();
+      activeTargetObserver = null;
+    }
+    if (activeResizeObserver) {
+      activeResizeObserver.disconnect();
+      activeResizeObserver = null;
+    }
+    if (!targetEl) return;
+
+    activeTargetObserver = new MutationObserver(() => {
+      if (state.active && spotlightEl) {
+        updateSpotlight(targetEl);
+        const sd = STEPS[state.step];
+        if (sd) positionTooltip(targetEl, sd.position);
+      }
+    });
+
+    activeTargetObserver.observe(targetEl, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      characterData: true
+    });
+
+    if (window.ResizeObserver) {
+      activeResizeObserver = new ResizeObserver(() => {
+        if (state.active && spotlightEl) {
+          updateSpotlight(targetEl);
+          const sd = STEPS[state.step];
+          if (sd) positionTooltip(targetEl, sd.position);
+        }
+      });
+      activeResizeObserver.observe(targetEl);
+    }
+  }
+
   function clearAutoTriggers() {
     if (activeAutoTimer) {
       clearTimeout(activeAutoTimer);
@@ -726,6 +837,14 @@ const Tour = (() => {
       clearInterval(activeWatcherInterval);
       clearTimeout(activeWatcherInterval);
       activeWatcherInterval = null;
+    }
+    if (activeTargetObserver) {
+      activeTargetObserver.disconnect();
+      activeTargetObserver = null;
+    }
+    if (activeResizeObserver) {
+      activeResizeObserver.disconnect();
+      activeResizeObserver = null;
     }
     activeWatchedUserModal = null;
     const voiceBtn = document.getElementById('teman-voice-btn');
@@ -761,6 +880,7 @@ const Tour = (() => {
     await new Promise(r => setTimeout(r, 60));
 
     updateSpotlight(targetEl);
+    observeTarget(targetEl);
 
     if (stepData.noTooltip) {
       if (tooltipEl) tooltipEl.classList.add('tour-hidden');
@@ -880,6 +1000,12 @@ const Tour = (() => {
   function stop() {
     clearAutoTriggers();
     stopUserModalWatcher();
+    if (typeof TemanChat !== 'undefined' && TemanChat.close) {
+      TemanChat.close();
+    }
+    if (typeof VoiceOrb !== 'undefined' && VoiceOrb.close) {
+      VoiceOrb.close();
+    }
     if (!state.active) { clearRunning(); unlockScroll(); return; }
     state.active = false;
 
@@ -895,7 +1021,7 @@ const Tour = (() => {
 
     try {
       if (typeof Animations !== 'undefined' && Animations.showToast) {
-        Animations.showToast('Tour selesai! Selamat menjelajahi Tenang.in 🎉', 'success');
+        Animations.showToast('Tour selesai! Selamat menjelajahi Tenang.in', 'success');
       }
     } catch(e) {}
   }

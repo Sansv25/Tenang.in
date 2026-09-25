@@ -780,11 +780,30 @@ body.preloader-active {
   font-size: 1.35rem;
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
   display: inline-block;
+  margin-left: 0.45rem;
+  flex-shrink: 0;
 }
 
 .btn-mulai-sekarang:hover .btn-arrow-icon,
 .btn-mulai-sekarang:hover .material-symbols-rounded {
   transform: translateX(6px) !important;
+}
+
+@media (max-width: 768px) {
+  .btn-mulai-sekarang {
+    font-size: clamp(0.8rem, 3.4vw, 0.92rem) !important;
+    padding: 0.65rem 1.25rem !important;
+    gap: 0.45rem !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .btn-mulai-sekarang .btn-arrow-icon,
+  .btn-mulai-sekarang .material-symbols-rounded {
+    font-size: 1.1rem !important;
+    margin-left: 0.4rem !important;
+    flex-shrink: 0 !important;
+  }
 }
 
 @media (max-width: 991px) {
@@ -1578,6 +1597,15 @@ body.preloader-active {
     gap: 12px;
   }
 
+  .showcase-pill {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .showcase-pill-text {
+    text-align: center;
+  }
+
   /* Sembunyikan kolom pill kanan pada mobile agar tampil tepat 3 pill utama di bawah iPhone */
   .showcase-right {
     display: none !important;
@@ -1595,13 +1623,15 @@ body.preloader-active {
 @media (max-width: 640px) {
   .showcase-pill {
     width: 100%;
-    justify-content: space-between;
-    padding: 8px 12px;
+    justify-content: center;
+    text-align: center;
+    padding: 10px 16px;
   }
 
   .showcase-pill-text {
     font-size: 0.82rem;
     white-space: normal;
+    text-align: center;
   }
 
   .showcase-phone-stage {

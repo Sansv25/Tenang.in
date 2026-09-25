@@ -204,6 +204,15 @@ const TemanChat = (() => {
         }
         setTimeout(() => showOptions(nextId), 300);
       }
+
+      // If tour is active on fastchat step, trigger tour advance after AI response
+      if (typeof Tour !== 'undefined' && Tour.isRunning && Tour.isRunning()) {
+        setTimeout(() => {
+          if (typeof Tour !== 'undefined' && Tour.isRunning && Tour.isRunning()) {
+            Tour._next();
+          }
+        }, 1200);
+      }
     }, 500);
   };
 

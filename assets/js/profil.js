@@ -278,7 +278,7 @@ function renderProfileCard(type, result) {
       </h3>
 
       <!-- Avatar Upload Circle -->
-      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; margin-bottom:var(--space-2xl);">
+      <div id="profil-avatar-box" style="display:flex; flex-direction:column; align-items:center; justify-content:center; margin-bottom:var(--space-2xl);">
         <div style="position:relative; width:140px; height:140px; border-radius:50%; background:linear-gradient(135deg, #2563EB, #60A5FA); display:flex; align-items:center; justify-content:center; box-shadow:0 12px 32px rgba(37,99,235,0.3); border:4px solid #ffffff; overflow:visible;">
           ${avatar ? `
             <img src="${avatar}" id="avatar-img-preview" alt="Avatar" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
@@ -298,7 +298,7 @@ function renderProfileCard(type, result) {
       </div>
 
       <!-- Name Input -->
-      <div style="margin-bottom:var(--space-xl);">
+      <div id="profil-name-box" style="margin-bottom:var(--space-xl);">
         <label style="font-size:0.875rem; font-weight:600; color:var(--text-secondary); display:block; margin-bottom:var(--space-sm);">Nama (opsional)</label>
         <div style="display:flex; gap:var(--space-sm);">
           <input type="text" class="input" id="profil-name" value="${escapeHTML(rawName)}" placeholder="Masukkan namamu..." maxlength="10" style="flex:1;">

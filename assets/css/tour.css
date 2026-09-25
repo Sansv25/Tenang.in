@@ -97,13 +97,8 @@ body.tour-active {
   margin: 0 auto 6px;
   display: block;
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.15));
-  animation: tour-mascot-bounce 3s ease-in-out infinite;
-}
-
-@keyframes tour-mascot-bounce {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  30% { transform: translateY(-5px) rotate(-2deg); }
-  60% { transform: translateY(-2px) rotate(1deg); }
+  animation: none !important;
+  transform: none !important;
 }
 
 /* ─────────────────────────────────────────
@@ -435,36 +430,69 @@ body.tour-active {
 /* ─────────────────────────────────────────
    RESPONSIVE ADJUSTMENTS
    ───────────────────────────────────────── */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .tour-tooltip {
-    width: calc(100vw - 24px);
-    padding: 18px 16px 14px;
-    border-radius: 18px;
-    bottom: 16px;
-    top: auto !important;
-    left: 12px !important;
-    right: 12px;
+    width: min(350px, calc(100vw - 24px));
+    padding: 14px 16px 12px;
+    border-radius: 16px;
+    box-shadow: 0 16px 40px -10px rgba(15, 23, 42, 0.3);
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
   }
 
   .tour-tooltip.tour-center {
-    width: calc(100vw - 24px);
+    width: min(350px, calc(100vw - 24px));
     top: 50% !important;
-    transform: translateY(-50%);
-    bottom: auto;
-    left: 12px !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
   }
 
   .tour-tooltip.tour-hidden {
-    transform: translateY(10px) scale(0.97);
+    opacity: 0;
+    transform: scale(0.96);
+    pointer-events: none;
   }
 
   .tour-tooltip.tour-center.tour-hidden {
-    transform: translateY(-40%) scale(0.97);
+    transform: translate(-50%, -46%) scale(0.96);
   }
 
   .tour-mascot {
-    width: 58px;
-    height: 58px;
+    width: 42px;
+    height: 42px;
+    margin: 0 auto 4px;
+  }
+
+  .tour-step-counter {
+    font-size: 0.65rem;
+    margin-bottom: 2px;
+  }
+
+  .tour-title {
+    font-size: 0.92rem;
+    margin-bottom: 4px;
+  }
+
+  .tour-body {
+    font-size: 0.8rem;
+    line-height: 1.45;
+    margin-bottom: 8px;
+  }
+
+  .tour-progress {
+    margin-bottom: 8px;
+  }
+
+  .tour-btn-next, .tour-btn-prev {
+    padding: 9px 14px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+  }
+
+  .tour-skip {
+    margin-top: 6px;
+    font-size: 0.72rem;
+    padding: 2px;
   }
 
   .tour-arrow {
@@ -474,15 +502,15 @@ body.tour-active {
 
 @media (max-width: 360px) {
   .tour-title {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
   }
 
   .tour-body {
-    font-size: 0.82rem;
+    font-size: 0.78rem;
   }
 
   .tour-btn-next, .tour-btn-prev {
-    font-size: 0.78rem;
-    padding: 9px 12px;
+    font-size: 0.76rem;
+    padding: 8px 10px;
   }
 }
