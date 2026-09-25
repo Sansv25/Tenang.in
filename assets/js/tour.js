@@ -524,9 +524,26 @@ const Tour = (() => {
     }
 
     const node = typeof targetEl === 'string' ? getTargetEl(targetEl) : targetEl;
-    if (!node) return;
+    if (!node) {
+      spotlightEl.style.opacity = '0';
+      return;
+    }
+
+    // Safety check for Teman Chat container
+    const chatEl = document.getElementById('teman-chat');
+    if (chatEl && (node === chatEl || node.classList?.contains('teman-chat') || chatEl.contains(node))) {
+      if (!chatEl.classList.contains('active')) {
+        spotlightEl.style.opacity = '0';
+        return;
+      }
+    }
 
     const r = node.getBoundingClientRect();
+    if (r.width === 0 && r.height === 0) {
+      spotlightEl.style.opacity = '0';
+      return;
+    }
+
     const isSmallBtn = r.height <= 64;
     const p = isSmallBtn ? 6 : SPOT_PAD;
     let radius = isSmallBtn ? '18px' : '14px';
@@ -537,8 +554,7 @@ const Tour = (() => {
     let height = r.height + p * 2;
 
     // Special handling for Teman Chat modal on mobile (when targeting the chat window itself)
-    const chatEl = document.getElementById('teman-chat');
-    if (chatEl && (node === chatEl || node.classList?.contains('teman-chat'))) {
+    if (chatEl && chatEl.classList.contains('active') && (node === chatEl || node.classList?.contains('teman-chat'))) {
       const vh = window.innerHeight;
       const vw = window.innerWidth;
       if (vw <= 768) {
@@ -564,6 +580,12 @@ const Tour = (() => {
   // ─────────────────────────────────────────
   function positionTooltip(targetEl, position) {
     if (!tooltipEl) return;
+
+    const chatEl = document.getElementById('teman-chat');
+    if (chatEl && targetEl && (targetEl === chatEl || chatEl.contains(targetEl)) && !chatEl.classList.contains('active')) {
+      tooltipEl.classList.add('tour-hidden');
+      return;
+    }
 
     const vw  = window.innerWidth;
     const vh  = window.innerHeight;
@@ -1037,6 +1059,43 @@ const Tour = (() => {
   }
 
   // ─────────────────────────────────────────
+  // TEMAN CHAT CLOSED HANDLER
+  // ─────────────────────────────────────────
+  function onTemanChatClosed() {
+    if (!state.active) return;
+    const sd = STEPS[state.step];
+    if (!sd) return;
+
+    const targetStr = sd.target || '';
+    if (targetStr.includes('teman-chat') || targetStr.includes('teman-voice-btn') || targetStr.includes('quick-teman-ai')) {
+      clearAutoTriggers();
+      if (typeof VoiceOrb !== 'undefined' && VoiceOrb.close) {
+        VoiceOrb.close();
+      }
+      if (spotlightEl) spotlightEl.style.opacity = '0';
+      if (tooltipEl) tooltipEl.classList.add('tour-hidden');
+
+      // Find the next step that is not a chat/voice step (i.e. step 8: Navigasi Fitur Utama)
+      let nextStep = state.step + 1;
+      while (nextStep < STEPS.length) {
+        const nextTarget = STEPS[nextStep].target || '';
+        if (!nextTarget.includes('teman-chat') && !nextTarget.includes('teman-voice-btn') && !nextTarget.includes('voice-orb')) {
+          break;
+        }
+        nextStep++;
+      }
+
+      setTimeout(() => {
+        if (state.active) {
+          state.step = nextStep;
+          setRunning(nextStep);
+          renderStep(nextStep);
+        }
+      }, 120);
+    }
+  }
+
+  // ─────────────────────────────────────────
   // NEXT / PREV  (called from inline onclick)
   // ─────────────────────────────────────────
   function _next() {
@@ -1179,6 +1238,7 @@ const Tour = (() => {
     isRunning,
     isDone,
     autoStart,
+    onTemanChatClosed,
     _next,
     _prev
   };

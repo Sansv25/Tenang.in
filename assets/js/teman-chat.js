@@ -117,6 +117,10 @@ const TemanChat = (() => {
     chatContainer.classList.remove('active');
     document.getElementById('teman-floating').style.display = 'block';
     isOpen = false;
+
+    if (typeof Tour !== 'undefined' && Tour.onTemanChatClosed) {
+      Tour.onTemanChatClosed();
+    }
   };
 
   // ---- Toggle Chat ----
