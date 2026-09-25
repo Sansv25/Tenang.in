@@ -474,8 +474,14 @@ function initCalmParticles() {
   let particles = [];
 
   function resize() {
-    width = canvas.width = canvas.parentElement.offsetWidth;
-    height = canvas.height = canvas.parentElement.offsetHeight;
+    width = canvas.width = canvas.parentElement ? canvas.parentElement.offsetWidth : window.innerWidth;
+    height = canvas.height = canvas.parentElement ? canvas.parentElement.offsetHeight : 600;
+    if (window.innerWidth <= 1024) {
+      stopAnimation();
+      renderFrame();
+    } else {
+      startAnimation();
+    }
   }
 
   window.addEventListener('resize', resize);
@@ -542,12 +548,18 @@ function initCalmParticles() {
   function animate() {
     renderFrame();
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!prefersReducedMotion) {
+    const isMobileOrTablet = window.innerWidth <= 1024;
+    if (!prefersReducedMotion && !isMobileOrTablet) {
       calmAnimId = requestAnimationFrame(animate);
     }
   }
 
   function startAnimation() {
+    if (window.innerWidth <= 1024) {
+      stopAnimation();
+      renderFrame();
+      return;
+    }
     if (!calmAnimId) {
       animate();
     }
@@ -602,6 +614,13 @@ function initAuroraCanvas() {
         speed: Math.random() * 0.02 + 0.008,
         phase: Math.random() * Math.PI * 2
       });
+    }
+
+    if (window.innerWidth <= 1024) {
+      stopAuroraAnimation();
+      renderFrame();
+    } else {
+      startAuroraAnimation();
     }
   }
 
@@ -722,12 +741,18 @@ function initAuroraCanvas() {
   function draw() {
     renderFrame();
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!prefersReducedMotion) {
+    const isMobileOrTablet = window.innerWidth <= 1024;
+    if (!prefersReducedMotion && !isMobileOrTablet) {
       auroraAnimId = requestAnimationFrame(draw);
     }
   }
 
   function startAuroraAnimation() {
+    if (window.innerWidth <= 1024) {
+      stopAuroraAnimation();
+      renderFrame();
+      return;
+    }
     if (!auroraAnimId) {
       draw();
     }
@@ -918,10 +943,17 @@ document.addEventListener('DOMContentLoaded', () => {
       layerFront.style.transform = `translate3d(${frontX}px, ${frontY}px, 0) scale(1.01)`;
     }
 
-    requestAnimationFrame(updateParallax);
+    if (window.innerWidth > 1024) {
+      requestAnimationFrame(updateParallax);
+    }
   }
 
   updateParallax();
+  window.addEventListener('scroll', () => {
+    if (window.innerWidth <= 1024) {
+      updateParallax();
+    }
+  }, { passive: true });
 });
 
 // ---- Interactive Teman AI Robot & 3 Synchronized Auto-Rotating Speech Bubbles ----
