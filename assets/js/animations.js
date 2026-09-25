@@ -47,7 +47,8 @@ const Animations = (() => {
   };
 
   // ---- Toast Notifications ----
-  const showToast = (message, type = 'info', duration = 3000) => {
+  // ---- Toast Notifications (Swipeable / Draggable) ----
+  const showToast = (message, type = 'info', duration = 3500) => {
     let container = document.querySelector('.toast-container');
     if (!container) {
       container = document.createElement('div');
@@ -68,13 +69,116 @@ const Animations = (() => {
         <span class="material-symbols-rounded toast-icon">${icons[type] || icons.info}</span>
       </div>
       <span class="toast-message">${message}</span>
+      <button type="button" class="toast-close-btn" aria-label="Tutup Toast">
+        <span class="material-symbols-rounded" style="font-size:16px;">close</span>
+      </button>
     `;
     container.appendChild(toast);
 
-    setTimeout(() => {
-      toast.classList.add('toast-out');
-      setTimeout(() => toast.remove(), 300);
-    }, duration);
+    let dismissTimeout = setTimeout(() => dismissToast(0), duration);
+
+    function dismissToast(flyDirection = 0) {
+      clearTimeout(dismissTimeout);
+      if (toast.classList.contains('dismissing')) return;
+      toast.classList.add('dismissing');
+
+      if (flyDirection !== 0) {
+        toast.style.transition = 'transform 0.25s ease-out, opacity 0.25s ease-out';
+        toast.style.transform = `translate3d(${flyDirection * 350}px, 0, 0) rotate(${flyDirection * 18}deg)`;
+        toast.style.opacity = '0';
+      } else {
+        toast.classList.add('toast-out');
+      }
+
+      setTimeout(() => {
+        if (toast.parentNode) toast.remove();
+      }, 260);
+    }
+
+    // Close button handler
+    const closeBtn = toast.querySelector('.toast-close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dismissToast(1);
+      });
+    }
+
+    // ---- Swipe / Drag Gesture Engine ----
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    const onStart = (e) => {
+      isDragging = true;
+      clearTimeout(dismissTimeout);
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      startX = clientX;
+      startY = clientY;
+      toast.style.transition = 'none';
+      toast.classList.add('toast-dragging');
+    };
+
+    const onMove = (e) => {
+      if (!isDragging) return;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const deltaX = clientX - startX;
+      const deltaY = clientY - startY;
+
+      const rotate = deltaX * 0.04;
+      const opacity = Math.max(0.1, 1 - Math.abs(deltaX) / 220);
+
+      toast.style.transform = `translate3d(${deltaX}px, ${deltaY * 0.25}px, 0) rotate(${rotate}deg)`;
+      toast.style.opacity = opacity;
+
+      // Prevent window scroll when swiping toast horizontally
+      if (Math.abs(deltaX) > Math.abs(deltaY) && e.cancelable) {
+        e.preventDefault();
+      }
+    };
+
+    const onEnd = (e) => {
+      if (!isDragging) return;
+      isDragging = false;
+      toast.classList.remove('toast-dragging');
+
+      const endX = e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+      const deltaX = endX - startX;
+
+      if (Math.abs(deltaX) > 55) {
+        // Swipe threshold reached -> fly out in swipe direction
+        const direction = deltaX > 0 ? 1 : -1;
+        dismissToast(direction);
+      } else {
+        // Snap back to normal center position
+        toast.style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease';
+        toast.style.transform = 'translate3d(0, 0, 0) rotate(0deg)';
+        toast.style.opacity = '1';
+        dismissTimeout = setTimeout(() => dismissToast(0), 2500);
+      }
+    };
+
+    // Attach Touch events
+    toast.addEventListener('touchstart', onStart, { passive: false });
+    toast.addEventListener('touchmove', onMove, { passive: false });
+    toast.addEventListener('touchend', onEnd);
+    toast.addEventListener('touchcancel', onEnd);
+
+    // Attach Mouse events (Desktop drag)
+    toast.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.toast-close-btn')) return;
+      onStart(e);
+      const onMouseMove = (me) => onMove(me);
+      const onMouseUp = (me) => {
+        onEnd(me);
+        window.removeEventListener('mousemove', onMouseMove);
+        window.removeEventListener('mouseup', onMouseUp);
+      };
+      window.addEventListener('mousemove', onMouseMove);
+      window.addEventListener('mouseup', onMouseUp);
+    });
   };
 
   // ---- Confetti ----

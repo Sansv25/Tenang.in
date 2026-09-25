@@ -298,6 +298,7 @@ const Settings = (() => {
 
     const avatar = (typeof Storage !== 'undefined' && Storage.getUserAvatar) ? Storage.getUserAvatar() : null;
     const uName = (typeof Storage !== 'undefined' && Storage.getRawUserName) ? Storage.getRawUserName() : '';
+    const isProfilePage = window.location.pathname.endsWith('profil.html');
 
     const overlay = document.createElement('div');
     overlay.id = 'settings-popup-overlay';
@@ -331,10 +332,12 @@ const Settings = (() => {
                   <div style="font-size:0.78rem; color:var(--text-secondary); margin-top:2px;">Atur foto avatar & nama</div>
                 </div>
               </div>
+              ${isProfilePage ? '' : `
               <a href="profil.html" class="btn btn-primary btn-sm" onclick="Settings.close()" style="font-size:0.8rem; font-weight:700; padding:8px 16px; text-decoration:none; display:inline-flex; align-items:center; gap:6px; border-radius:12px; flex-shrink:0;">
                 <span class="material-symbols-rounded" style="font-size:16px;">tune</span>
                 <span>Buka Profil</span>
               </a>
+              `}
             </div>
           </div>
 
