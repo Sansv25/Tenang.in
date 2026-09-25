@@ -2076,6 +2076,10 @@ body.preloader-active {
   transition: transform 0.4s ease;
 }
 
+#teman-avatar-mobile-img {
+  display: none !important;
+}
+
 .teman-avatar-img {
   width: 100%;
   height: 100%;
@@ -3287,6 +3291,19 @@ body.preloader-active {
   .teman-avatar-glow {
     width: 200px;
     height: 200px;
+  }
+
+  #teman-avatar-canvas {
+    display: none !important;
+  }
+
+  #teman-avatar-mobile-img {
+    display: block !important;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: scale(1.18);
+    filter: drop-shadow(0 10px 25px rgba(56, 189, 248, 0.35));
   }
 
   .teman-speech-bubble {

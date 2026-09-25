@@ -1137,8 +1137,7 @@ function initTemanVideoChromaKey() {
   }
 
   function renderFrame() {
-    if (window.innerWidth <= 1024) {
-      processFrame();
+    if (window.innerWidth <= 768) {
       if (!video.paused) video.pause();
       if (animId) {
         cancelAnimationFrame(animId);
@@ -1161,22 +1160,20 @@ function initTemanVideoChromaKey() {
   video.playsInline = true;
 
   const startPlay = () => {
+    if (window.innerWidth <= 768) {
+      if (!video.paused) video.pause();
+      return;
+    }
     video.play().then(() => {
-      if (window.innerWidth <= 1024) {
-        processFrame();
-        video.pause();
-      } else {
-        if (!animId) animId = requestAnimationFrame(renderFrame);
-      }
+      if (!animId) animId = requestAnimationFrame(renderFrame);
     }).catch(() => {
       const handleUserGesture = () => {
-        video.play().catch(() => {});
-        if (window.innerWidth <= 1024) {
-          processFrame();
-          video.pause();
-        } else {
-          if (!animId) animId = requestAnimationFrame(renderFrame);
+        if (window.innerWidth <= 768) {
+          if (!video.paused) video.pause();
+          return;
         }
+        video.play().catch(() => {});
+        if (!animId) animId = requestAnimationFrame(renderFrame);
         window.removeEventListener('click', handleUserGesture);
         window.removeEventListener('touchstart', handleUserGesture);
         window.removeEventListener('scroll', handleUserGesture);
@@ -1188,8 +1185,7 @@ function initTemanVideoChromaKey() {
   };
 
   window.addEventListener('resize', () => {
-    if (window.innerWidth <= 1024) {
-      processFrame();
+    if (window.innerWidth <= 768) {
       if (!video.paused) video.pause();
       if (animId) {
         cancelAnimationFrame(animId);
