@@ -1088,12 +1088,7 @@ function initTemanVideoChromaKey() {
   const ctx = canvas.getContext('2d', { willReadFrequently: true });
   let animId = null;
 
-  function renderFrame() {
-    if (video.paused || video.ended) {
-      animId = requestAnimationFrame(renderFrame);
-      return;
-    }
-
+  function processFrame() {
     const vw = video.videoWidth;
     const vh = video.videoHeight;
 
@@ -1139,7 +1134,25 @@ function initTemanVideoChromaKey() {
 
       ctx.putImageData(frame, 0, 0);
     }
+  }
 
+  function renderFrame() {
+    if (window.innerWidth <= 1024) {
+      processFrame();
+      if (!video.paused) video.pause();
+      if (animId) {
+        cancelAnimationFrame(animId);
+        animId = null;
+      }
+      return;
+    }
+
+    if (video.paused || video.ended) {
+      animId = requestAnimationFrame(renderFrame);
+      return;
+    }
+
+    processFrame();
     animId = requestAnimationFrame(renderFrame);
   }
 
@@ -1149,11 +1162,21 @@ function initTemanVideoChromaKey() {
 
   const startPlay = () => {
     video.play().then(() => {
-      if (!animId) animId = requestAnimationFrame(renderFrame);
+      if (window.innerWidth <= 1024) {
+        processFrame();
+        video.pause();
+      } else {
+        if (!animId) animId = requestAnimationFrame(renderFrame);
+      }
     }).catch(() => {
       const handleUserGesture = () => {
         video.play().catch(() => {});
-        if (!animId) animId = requestAnimationFrame(renderFrame);
+        if (window.innerWidth <= 1024) {
+          processFrame();
+          video.pause();
+        } else {
+          if (!animId) animId = requestAnimationFrame(renderFrame);
+        }
         window.removeEventListener('click', handleUserGesture);
         window.removeEventListener('touchstart', handleUserGesture);
         window.removeEventListener('scroll', handleUserGesture);
@@ -1163,6 +1186,22 @@ function initTemanVideoChromaKey() {
       window.addEventListener('scroll', handleUserGesture, { once: true });
     });
   };
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth <= 1024) {
+      processFrame();
+      if (!video.paused) video.pause();
+      if (animId) {
+        cancelAnimationFrame(animId);
+        animId = null;
+      }
+    } else {
+      if (video.paused && video.readyState >= 2) {
+        video.play().catch(() => {});
+        if (!animId) animId = requestAnimationFrame(renderFrame);
+      }
+    }
+  });
 
   if (video.readyState >= 2) {
     startPlay();
@@ -1175,7 +1214,8 @@ function initTemanVideoChromaKey() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        if (video.paused) startPlay();
+        if (window.innerWidth > 1024 && video.paused) startPlay();
+        else if (window.innerWidth <= 1024) processFrame();
       } else {
         if (!video.paused) video.pause();
       }
