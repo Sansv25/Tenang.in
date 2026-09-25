@@ -413,7 +413,7 @@ const Settings = (() => {
               <span>Mulai Tour Fitur Halaman Ini</span>
             </button>
             <p style="font-size:0.72rem; color:var(--text-secondary); text-align:center; margin-top:8px; font-weight:600;">
-              Ulangi panduan kapan saja untuk mengeksplorasi fitur-fitur Tenang.in 🗺️
+              Ulangi panduan kapan saja untuk mengeksplorasi fitur-fitur Tenang.in
             </p>
           </div>
           <!-- Account Section -->
