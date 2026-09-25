@@ -1314,27 +1314,6 @@
   <script src="assets/js/landing.js"></script>
   <script src="assets/js/home.js"></script>
   <script src="assets/js/tour.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      Settings.renderLandingLangDropdown();
-      await Main.initPage('landing', { showNav: false, showFooter: false, showTeman: true, showWelcome: true });
-      if (typeof renderWeeklyMoodSummary === 'function') {
-        renderWeeklyMoodSummary();
-      }
-    });
-
-    // Global delegation: klik tombol mic Teman → buka VoiceOrb
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('#teman-voice-btn');
-      if (!btn) return;
-      console.log('[Global] Mic btn diklik via delegation!');
-      if (typeof VoiceOrb !== 'undefined') {
-        VoiceOrb.open();
-      } else {
-        console.warn('[Global] VoiceOrb undefined');
-      }
-    });
-  </script>
 </body>
 
 </html>

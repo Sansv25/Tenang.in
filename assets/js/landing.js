@@ -473,20 +473,6 @@ function initCalmParticles() {
   let width, height;
   let particles = [];
 
-  function resize() {
-    width = canvas.width = canvas.parentElement ? canvas.parentElement.offsetWidth : window.innerWidth;
-    height = canvas.height = canvas.parentElement ? canvas.parentElement.offsetHeight : 600;
-    if (window.innerWidth <= 1024) {
-      stopAnimation();
-      renderFrame();
-    } else {
-      startAnimation();
-    }
-  }
-
-  window.addEventListener('resize', resize);
-  resize();
-
   // Create serene oceanic light motes
   const particleCount = Math.min(Math.floor((width * height) / 14000), 45);
   const colors = [
@@ -572,6 +558,20 @@ function initCalmParticles() {
     }
   }
 
+  function resize() {
+    width = canvas.width = canvas.parentElement ? canvas.parentElement.offsetWidth : window.innerWidth;
+    height = canvas.height = canvas.parentElement ? canvas.parentElement.offsetHeight : 600;
+    if (window.innerWidth <= 1024) {
+      stopAnimation();
+      renderFrame();
+    } else {
+      startAnimation();
+    }
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -596,36 +596,6 @@ function initAuroraCanvas() {
   // Star Particles (Minimal & Elegant)
   const stars = [];
   const numStars = 45;
-
-  function resize() {
-    const parent = canvas.parentElement;
-    width = parent ? parent.offsetWidth : window.innerWidth;
-    height = parent ? parent.offsetHeight : 600;
-    canvas.width = width;
-    canvas.height = height;
-
-    stars.length = 0;
-    for (let i = 0; i < numStars; i++) {
-      stars.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        radius: Math.random() * 1.3 + 0.5,
-        alpha: Math.random(),
-        speed: Math.random() * 0.02 + 0.008,
-        phase: Math.random() * Math.PI * 2
-      });
-    }
-
-    if (window.innerWidth <= 1024) {
-      stopAuroraAnimation();
-      renderFrame();
-    } else {
-      startAuroraAnimation();
-    }
-  }
-
-  window.addEventListener('resize', resize);
-  resize();
 
   // 2 Natural Asynchronous Auroral Arcs (Well-Separated Vertical Distance)
   const arcs = [
@@ -764,6 +734,36 @@ function initAuroraCanvas() {
       auroraAnimId = null;
     }
   }
+
+  function resize() {
+    const parent = canvas.parentElement;
+    width = parent ? parent.offsetWidth : window.innerWidth;
+    height = parent ? parent.offsetHeight : 600;
+    canvas.width = width;
+    canvas.height = height;
+
+    stars.length = 0;
+    for (let i = 0; i < numStars; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.3 + 0.5,
+        alpha: Math.random(),
+        speed: Math.random() * 0.02 + 0.008,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+
+    if (window.innerWidth <= 1024) {
+      stopAuroraAnimation();
+      renderFrame();
+    } else {
+      startAuroraAnimation();
+    }
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1184,4 +1184,25 @@ function initTemanVideoChromaKey() {
 
   observer.observe(canvas.parentElement || canvas);
 }
+
+document.addEventListener('DOMContentLoaded', async () => {
+  if (typeof Settings !== 'undefined' && Settings.renderLandingLangDropdown) {
+    Settings.renderLandingLangDropdown();
+  }
+  if (typeof Main !== 'undefined' && Main.initPage) {
+    await Main.initPage('landing', { showNav: false, showFooter: false, showTeman: true, showWelcome: true });
+  }
+  if (typeof renderWeeklyMoodSummary === 'function') {
+    renderWeeklyMoodSummary();
+  }
+});
+
+// Global delegation: klik tombol mic Teman -> buka VoiceOrb
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('#teman-voice-btn');
+  if (!btn) return;
+  if (typeof VoiceOrb !== 'undefined') {
+    VoiceOrb.open();
+  }
+});
 
