@@ -139,7 +139,7 @@ function renderQuote() {
       markDoneBtn.style.borderColor = '#86EFAC';
       markDoneBtn.disabled = true;
       if (typeof Animations !== 'undefined' && Animations.showToast) {
-        Animations.showToast('Kutipan harian selesai dibaca ✨', 'success');
+        Animations.showToast('Kutipan harian selesai dibaca', 'success');
       }
     });
   }

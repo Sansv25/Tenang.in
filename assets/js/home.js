@@ -884,33 +884,33 @@ const Onboarding = (() => {
         </p>
 
         <!-- User Preference Summary Pill Grid -->
-        <div style="width: 100%; max-width: 390px; margin: 0 auto 12px; padding: 12px 14px; border-radius: 16px; background: #F0F6FF; border: 1.5px solid #D2E4FF; text-align: left;">
+        <div style="width: 100%; max-width: 390px; margin: 0 auto 12px; padding: 12px 14px; border-radius: 16px; background: #F0F6FF; border: 1.5px solid #D2E4FF; text-align: left; box-sizing: border-box; overflow: hidden;">
           <div style="font-size: 0.7rem; font-weight: 800; color: #1E3A8A; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
             <span class="material-symbols-rounded" style="font-size: 15px; color: #2563EB;">tune</span>
             <span>Profil Refleksimu</span>
           </div>
-          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
-            <div style="background: #FFFFFF; padding: 7px 10px; border-radius: 10px; border: 1px solid #E2E8F0; display: flex; align-items: center; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; width: 100%; box-sizing: border-box;">
+            <div style="background: #FFFFFF; padding: 7px 10px; border-radius: 10px; border: 1px solid #E2E8F0; display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); min-width: 0; box-sizing: border-box; overflow: hidden;">
               <span class="material-symbols-rounded" style="font-size: 16px; color: #3B72C4; flex-shrink: 0;">person</span>
-              <span style="font-size: 0.75rem; font-weight: 700; color: #1E293B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${state.gender}</span>
+              <span style="font-size: 0.72rem; font-weight: 700; color: #1E293B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 1;">${state.gender}</span>
             </div>
-            <div style="background: #FFFFFF; padding: 7px 10px; border-radius: 10px; border: 1px solid #E2E8F0; display: flex; align-items: center; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+            <div style="background: #FFFFFF; padding: 7px 10px; border-radius: 10px; border: 1px solid #E2E8F0; display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); min-width: 0; box-sizing: border-box; overflow: hidden;">
               <span class="material-symbols-rounded" style="font-size: 16px; color: #D97706; flex-shrink: 0;">schedule</span>
-              <span style="font-size: 0.75rem; font-weight: 700; color: #1E293B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${timeLabelMap[state.time] || state.time}</span>
+              <span style="font-size: 0.72rem; font-weight: 700; color: #1E293B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 1;">${timeLabelMap[state.time] || state.time}</span>
             </div>
-            <div style="background: #FFFFFF; padding: 7px 10px; border-radius: 10px; border: 1px solid #E2E8F0; display: flex; align-items: center; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+            <div style="background: #FFFFFF; padding: 7px 10px; border-radius: 10px; border: 1px solid #E2E8F0; display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); min-width: 0; box-sizing: border-box; overflow: hidden;">
               <span class="material-symbols-rounded" style="font-size: 16px; color: #9333EA; flex-shrink: 0;">psychology</span>
-              <span style="font-size: 0.75rem; font-weight: 700; color: #1E293B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${aiStyleLabelMap[state.aiStyle] || state.aiStyle}</span>
+              <span style="font-size: 0.72rem; font-weight: 700; color: #1E293B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 1;">${aiStyleLabelMap[state.aiStyle] || state.aiStyle}</span>
             </div>
-            <div style="background: #FFFFFF; padding: 7px 10px; border-radius: 10px; border: 1px solid #E2E8F0; display: flex; align-items: center; gap: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+            <div style="background: #FFFFFF; padding: 7px 10px; border-radius: 10px; border: 1px solid #E2E8F0; display: flex; align-items: center; gap: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.03); min-width: 0; box-sizing: border-box; overflow: hidden;">
               <span class="material-symbols-rounded" style="font-size: 16px; color: #059669; flex-shrink: 0;">track_changes</span>
-              <span style="font-size: 0.75rem; font-weight: 700; color: #1E293B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${primaryGoalText}</span>
+              <span style="font-size: 0.72rem; font-weight: 700; color: #1E293B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 1;">${primaryGoalText}</span>
             </div>
           </div>
         </div>
 
         <!-- 4 Core Pillars of Tenang.in -->
-        <div style="display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 390px; margin: 0 auto; text-align: left;">
+        <div style="display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 390px; margin: 0 auto; text-align: left; box-sizing: border-box; overflow: hidden;">
           <div style="padding: 10px 12px; border-radius: 14px; background: #F8FAFC; border: 1px solid #E2E8F0; display: flex; align-items: flex-start; gap: 10px;">
             <div style="width: 32px; height: 32px; border-radius: 10px; background: rgba(16, 185, 129, 0.12); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">
               <span class="material-symbols-rounded" style="font-size: 18px; color: #059669;">enhanced_encryption</span>
@@ -1018,15 +1018,24 @@ window.openShareStreakModal = function () {
 
   const streak = (typeof Storage !== 'undefined' && Storage.getStreak) ? Storage.getStreak() : 1;
   const username = (typeof Storage !== 'undefined' && Storage.getUserName) ? Storage.getUserName() : 'User Tenang.in';
+  const userAvatar = (typeof Storage !== 'undefined' && Storage.getUserAvatar) ? Storage.getUserAvatar() : null;
 
   const countEl = document.getElementById('streak-share-count-text');
   const userEl = document.getElementById('streak-share-username');
+  const userAvatarEl = document.getElementById('streak-share-user-avatar');
   const dateEl = document.getElementById('streak-share-date');
   const captionInput = document.getElementById('streak-caption-input');
   const captionPreview = document.getElementById('streak-share-caption-preview');
 
   if (countEl) countEl.textContent = `${streak} HARI`;
   if (userEl) userEl.textContent = username || 'User Tenang.in';
+  if (userAvatarEl) {
+    if (userAvatar) {
+      userAvatarEl.innerHTML = `<img src="${userAvatar}" alt="Foto Profil User" style="width:100%; height:100%; object-fit:cover;">`;
+    } else {
+      userAvatarEl.innerHTML = `<span class="material-symbols-rounded" style="font-size:34px; color:#FFFFFF;">person</span>`;
+    }
+  }
   if (dateEl) {
     const now = new Date();
     dateEl.textContent = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -1071,7 +1080,7 @@ window.generateStreakCaption = function () {
   }
 
   if (typeof Animations !== 'undefined' && Animations.showToast) {
-    Animations.showToast('Kata-kata disajikan khusus oleh Teman AI ✨', 'info', 2000);
+    Animations.showToast('Kata-kata disajikan khusus oleh Teman AI', 'info', 2000);
   }
 };
 
@@ -1123,7 +1132,7 @@ window.copyStreakShare = function () {
 window.simulateStreakShare = function () {
   document.getElementById('share-streak-modal')?.classList.remove('active');
   if (typeof Animations !== 'undefined' && Animations.showToast) {
-    Animations.showToast('Pesan streak berhasil dibagikan! Terus pertahankan semangatmu! 🔥', 'success');
+    Animations.showToast('Pesan streak berhasil dibagikan! Terus pertahankan semangatmu!', 'success');
   }
 };
 

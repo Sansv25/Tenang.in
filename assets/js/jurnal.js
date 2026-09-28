@@ -45,9 +45,6 @@ async function loadPrompt() {
           <div style="font-size:0.8125rem; font-weight:700; color:var(--primary-accent); margin-bottom:4px; display:flex; align-items:center; gap:6px;">
             <span class="material-symbols-rounded" style="font-size:18px;">lightbulb</span>
             <span>Prompt Hari Ini</span>
-            <span style="margin-left:auto; font-size:0.75rem; font-weight:600; opacity:0.7; display:inline-flex; align-items:center; gap:3px;">
-              <span class="material-symbols-rounded" style="font-size:14px;">change_circle</span> Ganti Topik
-            </span>
           </div>
           <p style="font-size:1.0625rem; font-weight:600; line-height:1.5; color:var(--text-on-white); margin:0;">${prompt.text}</p>
         </div>
@@ -118,9 +115,6 @@ async function changePromptCategory(category) {
           <div style="font-size:0.8125rem; font-weight:700; color:var(--primary-accent); margin-bottom:4px; display:flex; align-items:center; gap:6px;">
             <span class="material-symbols-rounded" style="font-size:18px;">lightbulb</span>
             <span>Prompt (${catName})</span>
-            <span style="margin-left:auto; font-size:0.75rem; font-weight:600; opacity:0.7; display:inline-flex; align-items:center; gap:3px;">
-              <span class="material-symbols-rounded" style="font-size:14px;">change_circle</span> Ganti Topik
-            </span>
           </div>
           <p style="font-size:1.0625rem; font-weight:600; line-height:1.5; color:var(--text-on-white); margin:0;">${prompt.text}</p>
         </div>

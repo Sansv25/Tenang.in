@@ -535,36 +535,43 @@
 
       <!-- Streak Share Card Preview -->
       <div id="streak-share-card-preview" class="share-card-preview"
-        style="background: linear-gradient(135deg, #F97316, #EF4444); transition: background 0.5s ease; text-align:center; padding: 28px 22px; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.25);">
+        style="background: linear-gradient(135deg, #F97316, #EF4444); transition: background 0.5s ease; text-align:center; padding: 18px 16px; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.25); aspect-ratio: auto; min-height: 360px;">
         
-        <div style="font-size: 0.75rem; font-weight: 850; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 12px;">
+        <div style="font-size: 0.72rem; font-weight: 850; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-bottom: 8px;">
           TENANG.IN • STREAK REFLEKSI
         </div>
 
-        <div style="width: 72px; height: 72px; min-width: 72px; min-height: 72px; aspect-ratio: 1 / 1; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: 2px solid rgba(255, 255, 255, 0.4); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); flex-shrink: 0;">
-          <span class="material-symbols-rounded" style="font-size: 42px; color: #FFE4E6; filter: drop-shadow(0 4px 12px rgba(255,255,255,0.4));">local_fire_department</span>
+        <!-- Overlapping Mascot & User Profile Avatars -->
+        <div style="display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; position: relative; height: 58px;">
+          <div style="width: 56px; height: 56px; border-radius: 50%; background: #3B72C4; border: 2.5px solid #FFFFFF; box-shadow: 0 6px 16px rgba(0,0,0,0.25); display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 2; flex-shrink: 0;">
+            <img src="assets/img/maskots/mascot-listening.png" alt="Mascot Avatar" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div id="streak-share-user-avatar" style="width: 56px; height: 56px; border-radius: 50%; background: rgba(255, 255, 255, 0.25); border: 2.5px solid #FFFFFF; box-shadow: 0 6px 16px rgba(0,0,0,0.25); display: flex; align-items: center; justify-content: center; overflow: hidden; margin-left: -18px; z-index: 1; flex-shrink: 0;">
+            <span class="material-symbols-rounded" style="font-size: 30px; color: #FFFFFF;">person</span>
+          </div>
         </div>
 
-        <h3 id="streak-share-count-text" style="font-size: 2.3rem; font-weight: 900; color: #FFFFFF; margin: 0; line-height: 1.1; letter-spacing: -0.02em; text-shadow: 0 3px 10px rgba(0,0,0,0.3);">
+        <h3 id="streak-share-count-text" style="font-size: 2.1rem; font-weight: 900; color: #FFFFFF; margin: 0; line-height: 1.1; letter-spacing: -0.02em; text-shadow: 0 3px 10px rgba(0,0,0,0.3);">
           1 HARI
         </h3>
 
-        <div style="font-size: 0.9rem; font-weight: 800; color: #FFE4E6; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; margin-bottom: 14px;">
+        <div style="font-size: 0.82rem; font-weight: 800; color: #FFE4E6; letter-spacing: 0.8px; text-transform: uppercase; margin-top: 2px; margin-bottom: 8px;">
           BERUNTUN KONSISTEN!
         </div>
 
-        <p id="streak-share-caption-preview" style="font-size: 0.88rem; color: rgba(255,255,255,0.95); line-height: 1.5; font-weight: 500; max-width: 320px; margin: 0 auto 18px; font-style: italic; background: rgba(0,0,0,0.18); padding: 10px 14px; border-radius: 14px; border: 1px solid rgba(255,255,255,0.22); word-break: break-word; white-space: pre-wrap;">
+        <p id="streak-share-caption-preview" style="font-size: 0.82rem; color: rgba(255,255,255,0.95); line-height: 1.45; font-weight: 500; max-width: 320px; margin: 0 auto 6px; font-style: italic; background: rgba(0,0,0,0.18); padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.22); word-break: break-word; white-space: pre-wrap;">
           "Konsistensi menyapa dan merawat kesehatan mental harian di ruang aman Tenang.in."
         </p>
 
-        <div style="border-top: 1px dashed rgba(255,255,255,0.35); padding-top: 12px; display: flex; justify-content: space-between; align-items: center;">
-          <div style="text-align: left;">
-            <div id="streak-share-username" style="font-size: 0.88rem; font-weight: 850; color: #FFFFFF;">User Tenang.in</div>
-            <div style="font-size: 0.72rem; color: rgba(255,255,255,0.78);" id="streak-share-date">30 Agustus 2026</div>
-          </div>
-          <div style="background: rgba(255,255,255,0.2); padding: 5px 12px; border-radius: 12px; font-size: 0.75rem; font-weight: 800; color: #FFFFFF;">
-            Tenang.in
-          </div>
+        <!-- User Name & Reflection Date Under Quote -->
+        <div style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.9); font-weight: 700; margin-bottom: 8px; text-align: center;">
+          <span id="streak-share-username" style="color: #FFFFFF;">User Tenang.in</span> · <span id="streak-share-date" style="color: rgba(255,255,255,0.85); font-weight: 500;">30 Agustus 2026</span>
+        </div>
+
+        <!-- Promo Footer (Consistent Centered Brand Footer Across All Share Cards) -->
+        <div style="border-top: 1px dashed rgba(255,255,255,0.35); padding-top: 8px; margin-top: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+          <img src="assets/img/logo/logo-horizontal.png" alt="Tenang.in Logo" style="height: 22px; object-fit: contain; display: block; margin: 0 auto 3px auto; filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.25));">
+          <div style="font-size: 0.7rem; color: rgba(255,255,255,0.85); font-weight: 500;">Ruang aman untuk mentalmu.</div>
         </div>
       </div>
 
@@ -585,7 +592,7 @@
     style="z-index: 9999; display: none;">
     <!-- Modal Card (Full Screen Mobile, Rounded Card Desktop) -->
     <div id="onboarding-card"
-      class="bg-white w-full h-full min-h-screen rounded-none p-6 flex flex-col justify-between text-center shadow-2xl border-0 transform scale-95 transition-all duration-500 ease-in-out relative overflow-y-auto md:h-auto md:min-h-0 md:max-w-xl md:rounded-3xl md:p-8 md:border md:border-slate-100 md:max-h-[92vh]">
+      class="bg-white w-full h-full min-h-screen rounded-none px-4 py-6 flex flex-col justify-between text-center shadow-2xl border-0 transform scale-95 transition-all duration-500 ease-in-out relative overflow-y-auto md:h-auto md:min-h-0 md:max-w-xl md:rounded-3xl md:p-8 md:border md:border-slate-100 md:max-h-[92vh]">
 
       <!-- Top Section: Decorative Line & Dots -->
       <div>
