@@ -276,6 +276,22 @@ const Settings = (() => {
     }
   };
 
+  const defaultLangMeta = {
+    id: { flag: '🇮🇩', nativeName: 'Indonesia' },
+    en: { flag: '🇬🇧', nativeName: 'English' },
+    ja: { flag: '🇯🇵', nativeName: '日本語' },
+    ko: { flag: '🇰🇷', nativeName: '한국어' },
+    zh: { flag: '🇨🇳', nativeName: '中文' }
+  };
+
+  const defaultTranslations = {
+    'settings.title': 'Pengaturan',
+    'settings.theme.title': 'Warna Tema',
+    'settings.lang.title': 'Bahasa Utama',
+    'settings.close': 'Tutup',
+    'beranda.logout': 'Keluar dari Akun'
+  };
+
   // ---- Apply Language ----
   const applyLanguage = () => {
     if (typeof I18n !== 'undefined') {
@@ -292,9 +308,9 @@ const Settings = (() => {
 
     const currentTheme = getThemeId();
     const currentMode = getMode();
-    const currentLang = typeof I18n !== 'undefined' ? I18n.getLang() : 'id';
-    const t = typeof I18n !== 'undefined' ? I18n.t : (k) => k;
-    const langMeta = typeof I18n !== 'undefined' ? I18n.langMeta : {};
+    const currentLang = typeof I18n !== 'undefined' ? I18n.getLang() : (localStorage.getItem('tenang_lang') || 'id');
+    const t = (k) => (typeof I18n !== 'undefined' ? I18n.t(k) : (defaultTranslations[k] || k));
+    const langMeta = (typeof I18n !== 'undefined' && I18n.langMeta) ? I18n.langMeta : defaultLangMeta;
 
     const avatar = (typeof Storage !== 'undefined' && Storage.getUserAvatar) ? Storage.getUserAvatar() : null;
     const uName = (typeof Storage !== 'undefined' && Storage.getRawUserName) ? Storage.getRawUserName() : '';
@@ -456,25 +472,35 @@ const Settings = (() => {
 
   // ---- Change Language ----
   const changeLang = (lang) => {
+    localStorage.setItem('tenang_lang', lang);
+
     if (typeof I18n !== 'undefined') {
       I18n.setLang(lang);
+    }
 
-      // If popup is open, re-render it
-      const overlay = document.getElementById('settings-popup-overlay');
-      if (overlay) {
-        renderSettingsPopup();
-      }
+    const langMeta = (typeof I18n !== 'undefined' && I18n.langMeta) ? I18n.langMeta : defaultLangMeta;
 
-      // Update landing dropdown if it exists
-      const landingDropdownBtn = document.querySelector('.landing-lang-current');
-      if (landingDropdownBtn && I18n.langMeta[lang]) {
-        landingDropdownBtn.innerHTML = I18n.langMeta[lang].flag;
-      }
+    // If popup is open, re-render it
+    const overlay = document.getElementById('settings-popup-overlay');
+    if (overlay) {
+      renderSettingsPopup();
+    }
 
-      // Update active state in landing dropdown
-      document.querySelectorAll('.landing-lang-option').forEach(opt => {
+    // Update landing dropdown if it exists
+    const landingDropdownBtn = document.querySelector('.landing-lang-current');
+    if (landingDropdownBtn && langMeta[lang]) {
+      landingDropdownBtn.innerHTML = langMeta[lang].flag;
+    }
+
+    // Update active state in landing dropdown
+    document.querySelectorAll('.landing-lang-option').forEach(opt => {
+      if (opt.getAttribute('onclick')) {
         opt.classList.toggle('active', opt.getAttribute('onclick').includes(`'${lang}'`));
-      });
+      }
+    });
+
+    if (typeof Animations !== 'undefined' && langMeta[lang]) {
+      Animations.showToast(`Bahasa dipilih: ${langMeta[lang].nativeName}`, 'info');
     }
   };
 
@@ -600,9 +626,9 @@ const Settings = (() => {
     // Mencegah duplikasi tombol bahasa
     if (document.querySelector('.landing-lang-wrapper')) return;
 
-    const currentLang = typeof I18n !== 'undefined' ? I18n.getLang() : 'id';
-    const langMeta = typeof I18n !== 'undefined' ? I18n.langMeta : {};
-    const currentMeta = langMeta[currentLang] || { flag: '🌐', nativeName: 'ID' };
+    const currentLang = typeof I18n !== 'undefined' ? I18n.getLang() : (localStorage.getItem('tenang_lang') || 'id');
+    const langMeta = (typeof I18n !== 'undefined' && I18n.langMeta) ? I18n.langMeta : defaultLangMeta;
+    const currentMeta = langMeta[currentLang] || { flag: '🇮🇩', nativeName: 'Indonesia' };
 
     const wrapper = document.createElement('div');
     wrapper.className = 'landing-lang-wrapper';
