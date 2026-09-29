@@ -341,7 +341,7 @@ const Tour = (() => {
   }
 
   function handleScroll() {
-    if (!state.active) return;
+    if (!state.active || isProgrammaticScrolling) return;
     const sd = STEPS[state.step];
     if (!sd) return;
     const el = getTargetEl(sd.target);
@@ -731,6 +731,10 @@ const Tour = (() => {
       document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
 
+      if (spotlightEl) {
+        spotlightEl.style.opacity = '0';
+      }
+
       window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
       await new Promise(res => setTimeout(res, 450));
 
@@ -896,13 +900,25 @@ const Tour = (() => {
 
     state.step = globalStep;
     if (tooltipEl) tooltipEl.classList.add('tour-hidden');
+    if (spotlightEl) spotlightEl.style.opacity = '0';
 
     const targetEl = getTargetEl(stepData.target);
     await scrollToTarget(targetEl, stepData.position);
     await new Promise(r => setTimeout(r, 60));
 
+    // Disable position transition momentarily so spotlight snaps directly to final target position
+    if (spotlightEl) {
+      spotlightEl.style.transition = 'opacity 0.25s ease';
+    }
     updateSpotlight(targetEl);
     observeTarget(targetEl);
+
+    // Force reflow and restore smooth transitions + fade in
+    if (spotlightEl) {
+      void spotlightEl.offsetHeight;
+      spotlightEl.style.transition = '';
+      spotlightEl.style.opacity = '1';
+    }
 
     if (stepData.noTooltip) {
       if (tooltipEl) tooltipEl.classList.add('tour-hidden');
