@@ -1325,19 +1325,22 @@ function renderHomeAchievementsShowcase() {
 
   container.innerHTML = `
     <div class="card" style="padding: clamp(20px, 4vw, 28px); background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 24px; box-shadow: 0 12px 32px -6px rgba(15, 23, 42, 0.08);">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 18px;">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <div style="width: 48px; height: 48px; border-radius: 16px; background: #F3E8FF; border: 1.5px solid #E9D5FF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 12px rgba(126, 34, 206, 0.15);">
-            <span class="material-symbols-rounded" style="color: #7E22CE; font-size: 28px;">military_tech</span>
+      <div class="card-header-responsive" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; border-bottom: 1.5px solid #F1F5F9; padding-bottom: 16px;">
+        <div style="display: flex; align-items: center; gap: clamp(10px, 3vw, 16px); flex: 1; min-width: 0;">
+          <div style="width: clamp(42px, 10vw, 50px); height: clamp(42px, 10vw, 50px); border-radius: 16px; background: #F3E8FF; border: 1.5px solid #E9D5FF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 14px rgba(126, 34, 206, 0.15);">
+            <span class="material-symbols-rounded" style="font-size: clamp(22px, 5vw, 28px); color: #7E22CE;">military_tech</span>
           </div>
-          <div>
-            <h2 style="font-size: clamp(1.15rem, 4vw, 1.4rem); font-weight: 850; color: #0F172A; margin: 0;">Medali Pencapaian & Rekor Refleksi</h2>
+          <div style="flex: 1; min-width: 0;">
+            <div style="font-size: 0.72rem; font-weight: 850; text-transform: uppercase; letter-spacing: 0.8px; color: #7E22CE; margin-bottom: 2px;">Lencana & Medali</div>
+            <h2 style="font-size: clamp(1.05rem, 3.8vw, 1.4rem); font-weight: 850; color: #0F172A; margin: 0; line-height: 1.25;">Medali Pencapaian & Rekor Refleksi</h2>
           </div>
         </div>
-        <a href="dashboard.html#dashboard-badges" class="btn btn-sm" style="background: #F8FAFC; border: 1px solid #E2E8F0; color: #7E22CE; font-weight: 800; font-size: 0.82rem; border-radius: 20px; padding: 6px 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-          <span>Lihat Selengkapnya</span>
-          <span class="material-symbols-rounded" style="font-size: 16px;">arrow_forward</span>
-        </a>
+        <div style="flex-shrink: 0;">
+          <a href="dashboard.html#dashboard-badges" class="header-action-btn header-action-purple" style="text-decoration: none; background: #F3E8FF; border: 1px solid #E9D5FF; color: #7E22CE; font-weight: 750; font-size: 0.85rem; padding: 10px 16px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s; white-space: nowrap;" title="Lihat Selengkapnya">
+            <span class="desktop-btn-label">Lihat Selengkapnya</span>
+            <span class="material-symbols-rounded" style="font-size: 20px;">chevron_right</span>
+          </a>
+        </div>
       </div>
 
       <!-- Stat Counter Pills with Material Symbols Icons -->

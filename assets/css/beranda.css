@@ -976,12 +976,14 @@
     font-size: 0.88rem !important;
   }
 
-  .weekly-detail-link {
+  .weekly-detail-link,
+  .header-action-btn {
     padding: 8px 10px !important;
     border-radius: 12px !important;
   }
 
-  .weekly-detail-link .desktop-btn-label {
+  .weekly-detail-link .desktop-btn-label,
+  .header-action-btn .desktop-btn-label {
     display: none !important;
   }
 

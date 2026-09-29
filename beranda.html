@@ -153,15 +153,22 @@
 
       <!-- ======= INTERACTIVE INSPIRATION & WISDOM (CLEAN WHITE) ======= -->
       <section class="inspiration-card-premium" id="inspiration-card">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-          <div style="display:flex; align-items:center; gap:8px; font-weight:800; color:#0284C7; font-size:0.95rem;">
-            <span class="material-symbols-rounded" style="font-size:24px;">spa</span>
-            <span>Ruang Wisdom & Inspirasi Harian</span>
+        <div class="card-header-responsive" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; border-bottom: 1.5px solid #F0F9FF; padding-bottom: 14px;">
+          <div style="display: flex; align-items: center; gap: clamp(10px, 3vw, 14px); flex: 1; min-width: 0;">
+            <div style="width: clamp(38px, 9vw, 44px); height: clamp(38px, 9vw, 44px); border-radius: 14px; background: #E0F2FE; border: 1.5px solid #BAE6FD; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);">
+              <span class="material-symbols-rounded" style="font-size: clamp(20px, 4.5vw, 24px); color: #0284C7;">spa</span>
+            </div>
+            <div style="flex: 1; min-width: 0;">
+              <div style="font-size: 0.7rem; font-weight: 850; text-transform: uppercase; letter-spacing: 0.8px; color: #0284C7; margin-bottom: 2px;">Inspirasi Harian</div>
+              <h3 style="font-size: clamp(1rem, 3.5vw, 1.25rem); font-weight: 850; color: #0F172A; margin: 0; line-height: 1.25;">Ruang Wisdom & Refleksi</h3>
+            </div>
           </div>
-          <button class="btn-rotate-quote" data-action="rotate-inspiration" aria-label="Ganti kutipan inspiratif">
-            <span class="material-symbols-rounded rotate-icon">refresh</span>
-            <span>Inspirasi Baru</span>
-          </button>
+          <div style="flex-shrink: 0;">
+            <button class="btn-rotate-quote header-action-btn" data-action="rotate-inspiration" aria-label="Ganti kutipan inspiratif" title="Inspirasi Baru" style="background: #F0F9FF; border: 1px solid #BAE6FD; color: #0284C7; font-weight: 750; font-size: 0.82rem; padding: 8px 14px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: all 0.2s; white-space: nowrap;">
+              <span class="material-symbols-rounded rotate-icon" style="font-size: 18px;">refresh</span>
+              <span class="desktop-btn-label">Inspirasi Baru</span>
+            </button>
+          </div>
         </div>
         <div class="quote-content">
           <div class="quote-text" id="interactive-quote-text">"Kamu tidak harus sempurna setiap saat. Hadir dan
