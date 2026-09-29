@@ -1206,7 +1206,7 @@ function renderHomePersonalitySection() {
               <h2 style="font-size: clamp(1.15rem, 4vw, 1.4rem); font-weight: 850; color: #0F172A; margin: 2px 0 0;">${t.name} <span style="font-size: 0.85rem; font-weight: 600; color: #64748B;">(${t.tagline})</span></h2>
             </div>
           </div>
-          <a href="kenali.html" class="btn btn-sm" style="background: #F8FAFC; border: 1px solid #E2E8F0; color: #0F172A; font-weight: 750; font-size: 0.8rem; border-radius: 20px; padding: 6px 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+          <a href="kenali.html" class="btn btn-sm desktop-only-ulangi" style="background: #F8FAFC; border: 1px solid #E2E8F0; color: #0F172A; font-weight: 750; font-size: 0.8rem; border-radius: 20px; padding: 6px 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
             <span class="material-symbols-rounded" style="font-size: 16px;">refresh</span>
             <span>Ulangi Tes</span>
           </a>
@@ -1218,6 +1218,13 @@ function renderHomePersonalitySection() {
 
         <div style="background: var(--card-subtle, #F8FAFC); border: 1px solid var(--card-border, #E2E8F0); border-radius: 16px; padding: 14px 18px; font-size: 0.88rem; color: var(--text-secondary, #334155); line-height: 1.55; font-weight: 500;">
           <strong style="color: ${t.color};">Aksi Self-Care Hari Ini:</strong> ${t.tip}
+        </div>
+
+        <div class="mobile-only-ulangi-wrap">
+          <a href="kenali.html" class="btn-ulangi-tes-mobile">
+            <span class="material-symbols-rounded" style="font-size: 16px;">refresh</span>
+            <span>Ulangi Tes</span>
+          </a>
         </div>
       </div>
     `;

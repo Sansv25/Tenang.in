@@ -2931,3 +2931,42 @@ body.dark-mode .mood-card-sub {
     font-size: 28px !important;
   }
 }
+
+/* Personality Ulangi Tes Mobile/Desktop Responsiveness */
+.mobile-only-ulangi-wrap {
+  display: none;
+  margin-top: 14px;
+}
+
+.btn-ulangi-tes-mobile {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  color: #0F172A;
+  font-weight: 750;
+  font-size: 0.82rem;
+  border-radius: 999px;
+  padding: 8px 18px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+  transition: all 0.2s ease;
+}
+
+.btn-ulangi-tes-mobile:active {
+  transform: scale(0.98);
+  background: #F1F5F9;
+}
+
+@media (max-width: 640px) {
+  .desktop-only-ulangi {
+    display: none !important;
+  }
+
+  .mobile-only-ulangi-wrap {
+    display: block;
+  }
+}
