@@ -209,7 +209,7 @@ function showProfilResult(type, isNew = true) {
   }
 
   resultSection.innerHTML = `
-    <div class="card-elevated" style="text-align:center; margin-bottom:var(--space-xl);">
+    <div class="card-elevated profil-result-hero" style="text-align:center; margin-bottom:var(--space-xl);">
       <div style="margin-bottom:var(--space-md);">
         <span class="material-symbols-rounded text-primary" style="font-size:64px;">${iconName}</span>
       </div>
@@ -234,7 +234,7 @@ function showProfilResult(type, isNew = true) {
     </div>
 
     <div style="text-align:center;">
-      <button class="btn btn-secondary" style="color:var(--text-on-blue);" onclick="startProfilQuiz()">
+      <button class="btn btn-secondary profil-btn-retake" data-action="retake-profil-quiz" style="color:var(--text-on-blue);" onclick="startProfilQuiz()">
         <span class="material-symbols-rounded">refresh</span>
         Ulangi Kuis
       </button>
