@@ -2803,32 +2803,40 @@ body.dark-mode .mood-card-sub {
 /* ---- Analisa Teman AI Responsive Layout ---- */
 .ai-analysis-header {
   background: linear-gradient(135deg, var(--bg-deep, #1E4780), var(--primary-accent, #2563EB));
-  padding: 18px 24px;
+  padding: 22px 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
 }
 
 .ai-analysis-title-wrap {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
-  min-width: 0;
+  width: 100%;
 }
 
 .ai-analysis-mascot-img {
-  width: 36px;
-  height: 36px;
+  width: 60px;
+  height: 60px;
   object-fit: contain;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.3));
   flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.ai-analysis-mascot-img:hover {
+  transform: scale(1.08) rotate(-3deg);
 }
 
 .ai-analysis-title {
   color: #FFFFFF;
-  font-weight: 800;
-  font-size: 1.05rem;
+  font-weight: 850;
+  font-size: 1.25rem;
   white-space: nowrap;
   letter-spacing: -0.01em;
 }
@@ -2838,16 +2846,18 @@ body.dark-mode .mood-card-sub {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: #FFFFFF;
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 5px 14px;
-  border-radius: 20px;
+  font-size: 0.76rem;
+  font-weight: 750;
+  padding: 5px 16px;
+  border-radius: 999px;
   white-space: nowrap;
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .ai-analysis-body {
@@ -2892,24 +2902,33 @@ body.dark-mode .mood-card-sub {
 
 @media (max-width: 640px) {
   .ai-analysis-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-    padding: 16px 18px;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    gap: 10px !important;
+    padding: 20px 16px !important;
   }
 
   .ai-analysis-title-wrap {
-    width: 100%;
+    width: 100% !important;
+    justify-content: center !important;
+    gap: 10px !important;
+  }
+
+  .ai-analysis-mascot-img {
+    width: 52px !important;
+    height: 52px !important;
   }
 
   .ai-analysis-title {
-    font-size: 1rem;
+    font-size: 1.15rem !important;
   }
 
   .ai-analysis-badge {
-    align-self: flex-start;
-    font-size: 0.68rem;
-    padding: 4px 12px;
+    align-self: center !important;
+    font-size: 0.72rem !important;
+    padding: 5px 14px !important;
   }
 
   .ai-analysis-body {
