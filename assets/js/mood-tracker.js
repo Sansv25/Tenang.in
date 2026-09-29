@@ -90,7 +90,7 @@ function renderMoodForm() {
           ${labels[today.level]} <span style="font-weight:600; font-size:0.9em; opacity:0.85;">· ${taglines[today.level]}</span>
         </h2>
         <p style="font-size:clamp(0.88rem, 2.5vw, 0.95rem); color:var(--text-secondary); max-width:520px; margin:0 auto 18px; line-height:1.6;">
-          Terimakasih telah hadir dan jujur melacak emosimu hari ini. Konsistensi dalam mengenali diri sendiri adalah langkah utama menuju jiwa yang tenang dan berdaya.
+          Terima kasih telah hadir dan jujur melacak emosimu hari ini. Konsistensi dalam mengenali diri sendiri adalah langkah utama menuju jiwa yang tenang dan berdaya.
         </p>
         ${today.tags && today.tags.length ? `<div class="journal-tags" style="justify-content:center; margin-bottom:16px;">${today.tags.map(t => `<span class="journal-tag">${escapeHTML(t)}</span>`).join('')}</div>` : ''}
         ${today.note ? `<p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:20px; font-style:italic;">"${escapeHTML(today.note)}"</p>` : ''}
@@ -305,7 +305,7 @@ function renderInsights() {
           <span class="tag-chip selected" style="font-size:0.75rem; cursor:pointer; transition:transform 0.15s, box-shadow 0.15s;" onclick="demoAddCheckin()" onmouseenter="this.style.transform='scale(1.08)';this.style.boxShadow='0 2px 12px rgba(37,99,235,0.25)'" onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='none'" title="Klik untuk menambah progress demo">${moods.length}/3 Check-in</span>
         </div>
         <p style="font-size:0.9375rem; color:var(--text-on-white); line-height:1.6; margin-bottom:var(--space-md);">
-          Lakukan ${needed} check-in lagi untuk membuka analisa kecenderungan emosi dan saran personal dari Teman AI.
+          Lakukan ${needed} check-in lagi untuk membuka analisis kecenderungan emosi dan saran personal dari Teman AI.
         </p>
         <div class="progress-bar-container" style="height:10px; margin-bottom:var(--space-sm);">
           <div class="progress-bar" style="width:${progress}%; background: linear-gradient(90deg, var(--primary-accent), var(--secondary-accent));"></div>
@@ -407,7 +407,7 @@ function renderInsights() {
       <div class="ai-analysis-header">
         <div class="ai-analysis-title-wrap">
           <img src="assets/img/maskots/mascot-listening.png" alt="Teman AI" class="ai-analysis-mascot-img">
-          <span class="ai-analysis-title">Analisa Teman AI</span>
+          <span class="ai-analysis-title">Analisis Teman AI</span>
         </div>
         <span class="ai-analysis-badge">
           <span class="material-symbols-rounded" style="font-size:14px;">auto_awesome</span>
@@ -439,7 +439,7 @@ function renderInsights() {
         <div style="background:var(--card-subtle); border-radius:12px; padding:16px; margin-bottom:20px; border:1px solid var(--card-border);">
           <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
             <span class="material-symbols-rounded" style="font-size:18px; color:var(--primary-accent);">psychology</span>
-            <span style="font-size:0.8rem; font-weight:700; color:var(--primary-accent); text-transform:uppercase; letter-spacing:0.5px;">Analisa AI</span>
+            <span style="font-size:0.8rem; font-weight:700; color:var(--primary-accent); text-transform:uppercase; letter-spacing:0.5px;">Analisis AI</span>
           </div>
           <p style="font-size:0.9rem; line-height:1.7; color:var(--text-on-white); margin:0;">${aiAnalysis}</p>
         </div>

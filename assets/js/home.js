@@ -234,7 +234,7 @@ function updateMoodSummary() {
           <span style="display:inline-block; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:${colors[mood.level]}; background:${bgGlows[mood.level]}; padding:4px 14px; border-radius:12px; margin-bottom:12px;">Check-In Hari Ini Tersimpan</span>
           <h3 style="font-size:1.5rem; font-weight:800; color:var(--text-on-white); margin: 4px 0;">${labels[mood.level]}</h3>
           <p style="color:var(--text-secondary); font-size:0.95rem; line-height:1.6; max-width:480px; margin: 8px auto 0;">
-            Terimakasih telah hadir dan jujur melacak emosimu hari ini. Konsistensi dalam mengenali diri sendiri adalah langkah utama menuju jiwa yang tenang dan berdaya.
+            Terima kasih telah hadir dan jujur melacak emosimu hari ini. Konsistensi dalam mengenali diri sendiri adalah langkah utama menuju jiwa yang tenang dan berdaya.
           </p>
           
           ${tagsHTML}
@@ -243,7 +243,7 @@ function updateMoodSummary() {
           <div style="display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:14px; margin-top:28px;">
             <a href="mood-tracker.html" style="text-decoration:none; background:linear-gradient(135deg, #2563EB, #3B82F6); color:#fff; padding:12px 26px; border-radius:26px; font-weight:700; font-size:0.9rem; display:flex; align-items:center; gap:6px; box-shadow:0 4px 16px rgba(37,99,235,0.35); transition:transform 0.2s;">
               <span class="material-symbols-rounded" style="font-size:20px;">analytics</span>
-              Lihat Analisa & Grafisku
+              Lihat Analisis & Grafisku
             </a>
             <button onclick="window.resetMoodInHome()" style="background:var(--card-subtle); border:1px solid var(--card-border); color:var(--text-on-white); padding:12px 24px; border-radius:26px; font-weight:600; font-size:0.9rem; display:flex; align-items:center; gap:6px; cursor:pointer; transition:background 0.2s;">
               <span class="material-symbols-rounded" style="font-size:20px;">edit_note</span>

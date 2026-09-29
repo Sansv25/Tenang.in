@@ -89,7 +89,7 @@
       "dimension": "TF",
       "options": [
         { "text": "Buat daftar pro-kontra ketat dan berpatokan logika murni", "score": -2 },
-        { "text": "Mempertimbangkan fakta obyektif sebelum mengambil tindakan", "score": -1 },
+        { "text": "Mempertimbangkan fakta objektif sebelum mengambil tindakan", "score": -1 },
         { "text": "Memikirkan bagaimana perasaan orang-orang yang terdampak", "score": 1 },
         { "text": "Ikuti kepekaan intuisi dan nilai-nilai kebaikan hati", "score": 2 }
       ]
@@ -133,7 +133,7 @@
       "dimension": "TF",
       "options": [
         { "text": "Pikiran kritis, jujur, dan problem-solving yang tajam", "score": -2 },
-        { "text": "Kemampuan berpikir jernih & obyektif dalam segala situasi", "score": -1 },
+        { "text": "Kemampuan berpikir jernih & objektif dalam segala situasi", "score": -1 },
         { "text": "Kepekaan rasa dan ketulusan dalam menghargai orang lain", "score": 1 },
         { "text": "Empati yang mendalam & kemampuan merangkul emosi sesama", "score": 2 }
       ]

@@ -53,7 +53,7 @@ const Tour = (() => {
     {
       page: 'beranda', target: '#mood-checked-in-state a, #mood-checked-in-state button, #mood-grid-container, .mood-grid', position: 'bottom',
       title: 'Check-In Mood Harian',
-      body: 'Gunakan 5 opsi emoji untuk mencatat emosimu saat ini. Jika sudah check-in, tombol "Lihat Analisa & Grafisku" membuka grafik emosi, sedangkan "Ubah Check-In" untuk memperbarui mood hari ini.'
+      body: 'Gunakan 5 opsi emoji untuk mencatat emosimu saat ini. Jika sudah check-in, tombol "Lihat Analisis & Grafisku" membuka grafik emosi, sedangkan "Ubah Check-In" untuk memperbarui mood hari ini.'
     },
     {
       page: 'beranda', target: '#inspiration-card .btn-rotate-quote, #inspiration-card', position: 'bottom',

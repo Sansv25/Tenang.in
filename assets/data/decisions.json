@@ -56,7 +56,7 @@
       ]
     },
     "angry": {
-      "message": "Marah itu emosi yang valid, artinya ada sesuatu yang penting buat kamu yang terasa dilanggar.\n\nSebelum bereaksi, coba tarik napas dalam 4 detik, tahan 4 detik, hembuskan 4 detik. Ulangi 3 kali.\n\nSudah lebih tenang?",
+      "message": "Marah itu emosi yang valid, artinya ada sesuatu yang penting buat kamu yang terasa dilanggar.\n\nSebelum bereaksi, coba tarik napas dalam 4 detik, tahan 4 detik, embuskan 4 detik. Ulangi 3 kali.\n\nSudah lebih tenang?",
       "options": [
         { "text": "😌 Iya, lumayan", "next": "calm_after_anger" },
         { "text": "😤 Masih kesal", "next": "still_angry" },
@@ -207,7 +207,7 @@
       ]
     },
     "tips_anxiety": {
-      "message": "Tips Mengatasi Kecemasan 😰\n\n🫁 Teknik napas 4-7-8: hirup 4 detik, tahan 7, hembuskan 8\n🖐️ Grounding 5-4-3-2-1: gunakan 5 indra\n✍️ Tulis kekhawatiranmu (pisahkan yang bisa vs tidak bisa dikontrol)\n⏰ Teknik Worry Window: 10 menit khusus untuk cemas, lalu stop\n🚶 Jalan kaki, gerakan membantu reset pikiran\n💬 Bicara dengan seseorang yang kamu percaya",
+      "message": "Tips Mengatasi Kecemasan 😰\n\n🫁 Teknik napas 4-7-8: hirup 4 detik, tahan 7, embuskan 8\n🖐️ Grounding 5-4-3-2-1: gunakan 5 indra\n✍️ Tulis kekhawatiranmu (pisahkan yang bisa vs tidak bisa dikontrol)\n⏰ Teknik Worry Window: 10 menit khusus untuk cemas, lalu stop\n🚶 Jalan kaki, gerakan membantu reset pikiran\n💬 Bicara dengan seseorang yang kamu percaya",
       "options": [
         { "text": "🧘 Latihan pernapasan sekarang", "next": "breathing" },
         { "text": "🙏 Terima kasih!", "next": "closing_positive" },
@@ -241,7 +241,7 @@
       ]
     },
     "breathing": {
-      "message": "Yuk, latihan pernapasan bersama! 🧘\n\n1️⃣ Duduk nyaman, tutup mata\n2️⃣ Hirup napas dalam... 4 detik\n3️⃣ Tahan... 7 detik\n4️⃣ Hembuskan pelan... 8 detik\n\nUlangi 3-4 kali. Rasakan tubuhmu jadi lebih rileks.\n\nBagaimana rasanya?",
+      "message": "Yuk, latihan pernapasan bersama! 🧘\n\n1️⃣ Duduk nyaman, tutup mata\n2️⃣ Hirup napas dalam... 4 detik\n3️⃣ Tahan... 7 detik\n4️⃣ Embuskan pelan... 8 detik\n\nUlangi 3-4 kali. Rasakan tubuhmu jadi lebih rileks.\n\nBagaimana rasanya?",
       "options": [
         { "text": "😌 Lebih tenang sekarang", "next": "closing_positive" },
         { "text": "😕 Masih belum tenang", "next": "breathing_more" },
