@@ -422,9 +422,11 @@ function saveName() {
 window.showShareResultModal = function (title, emoji) {
   const modal = document.getElementById('share-result-modal');
   if (modal) {
-    document.getElementById('share-result-title').textContent = title;
+    if (document.getElementById('share-result-title')) {
+      document.getElementById('share-result-title').textContent = title;
+    }
     if (emoji && document.getElementById('share-result-emoji')) {
-      document.getElementById('share-result-emoji').innerHTML = `<span class="material-symbols-rounded" style="font-size:3.5rem;">${emoji}</span>`;
+      document.getElementById('share-result-emoji').innerHTML = `<span class="material-symbols-rounded" style="font-size:3.5rem; color:#FFFFFF; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.2));">${emoji}</span>`;
     }
     modal.classList.add('active');
   }
