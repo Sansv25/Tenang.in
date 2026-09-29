@@ -3283,25 +3283,34 @@ body.preloader-active {
   }
 
   .teman-avatar-stage {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
   }
 
   .teman-avatar,
   .teman-avatar-glow {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
   }
 
   #teman-avatar-canvas {
-    display: block !important;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    display: none !important;
   }
 
   #teman-avatar-mobile-img {
-    display: none !important;
+    display: block !important;
+    width: 100%;
+    height: 100%;
+    max-width: 175px;
+    max-height: 175px;
+    margin: 0 auto;
+    object-fit: contain;
+    transform: none !important;
+  }
+
+  .teman-avatar-stage:hover #teman-avatar-mobile-img {
+    transform: scale(1.05) translateY(-2px) !important;
   }
 
   .teman-speech-bubble {
@@ -3533,15 +3542,15 @@ body.preloader-active {
   }
 
   .teman-avatar-stage {
-    width: 220px;
-    height: 220px;
+    width: 180px;
+    height: 180px;
     margin: 0 auto;
   }
 
   .teman-avatar,
   .teman-avatar-glow {
-    width: 185px;
-    height: 185px;
+    width: 160px;
+    height: 160px;
   }
 
   .teman-avatar .material-symbols-rounded {
@@ -4260,7 +4269,38 @@ body {
 .emergency-ext {
   font-size: 0.85rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Ensure fixed bright light text on index page emergency section (no dark mode conflicts) */
+.bantuan-section .emergency-title {
+  color: #FFFFFF !important;
+}
+
+.bantuan-section .emergency-sub {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.bantuan-section .emergency-sub.text-cyan {
+  color: #38BDF8 !important;
+}
+
+.bantuan-section .emergency-sub.text-emerald {
+  color: #10B981 !important;
+}
+
+.bantuan-section .emergency-sub.text-amber {
+  color: #F59E0B !important;
+}
+
+.bantuan-section .emergency-number-val {
+  color: #FFFFFF !important;
+}
+
+.bantuan-section .emergency-ext-tag {
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
 .emergency-btn-group {

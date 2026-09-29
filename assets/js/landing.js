@@ -1154,11 +1154,17 @@ function initTemanVideoChromaKey() {
   video.setAttribute('muted', '');
 
   const startPlay = () => {
+    if (window.innerWidth <= 768) {
+      if (!video.paused) video.pause();
+      if (animId) { cancelAnimationFrame(animId); animId = null; }
+      return;
+    }
     video.muted = true;
     video.play().then(() => {
       if (!animId) animId = requestAnimationFrame(renderFrame);
     }).catch(() => {
       const handleUserGesture = () => {
+        if (window.innerWidth <= 768) return;
         video.muted = true;
         video.play().catch(() => {});
         if (!animId) animId = requestAnimationFrame(renderFrame);
@@ -1173,7 +1179,10 @@ function initTemanVideoChromaKey() {
   };
 
   window.addEventListener('resize', () => {
-    if (video.paused && video.readyState >= 2) {
+    if (window.innerWidth <= 768) {
+      if (!video.paused) video.pause();
+      if (animId) { cancelAnimationFrame(animId); animId = null; }
+    } else if (video.paused && video.readyState >= 2) {
       video.play().catch(() => {});
       if (!animId) animId = requestAnimationFrame(renderFrame);
     }
@@ -1186,14 +1195,14 @@ function initTemanVideoChromaKey() {
     video.addEventListener('canplay', startPlay, { once: true });
   }
 
-  // IntersectionObserver to pause rendering when section is off-screen
+  // IntersectionObserver to pause rendering when section is off-screen or on mobile
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        if (window.innerWidth > 1024 && video.paused) startPlay();
-        else if (window.innerWidth <= 1024) processFrame();
+        if (window.innerWidth > 768 && video.paused) startPlay();
       } else {
         if (!video.paused) video.pause();
+        if (animId) { cancelAnimationFrame(animId); animId = null; }
       }
     });
   }, { threshold: 0.05 });

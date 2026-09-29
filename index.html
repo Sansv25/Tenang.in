@@ -647,7 +647,7 @@
             <div class="teman-avatar">
               <video id="teman-video-source" src="assets/img/anim-mascot/Makot senang.mp4" preload="auto" autoplay loop muted playsinline style="display: none;"></video>
               <canvas id="teman-avatar-canvas" class="teman-avatar-img" width="500" height="500"></canvas>
-              <img id="teman-avatar-mobile-img" src="assets/img/maskots/mascot-listening.png" alt="Teman Mascot" class="teman-avatar-img teman-mobile-static-img" width="260" height="260" loading="lazy" decoding="async">
+              <img id="teman-avatar-mobile-img" src="assets/img/maskots/mascot-cheerful.png" alt="Teman Mascot" class="teman-avatar-img teman-mobile-static-img" width="260" height="260" loading="lazy" decoding="async">
             </div>
           </div>
         </div>
@@ -943,69 +943,56 @@
           </p>
         </div>
 
-        <div class="emergency-grid">
+        <div class="emergency-grid" style="gap: 18px;">
           <!-- Card 1: Kemenkes RI -->
           <div class="emergency-card" data-aos="fade-up" data-aos-delay="100">
             <div>
-              <div class="emergency-icon-wrap icon-cyan">
-                <span class="material-symbols-rounded">phone_in_talk</span>
+              <div class="emergency-icon-box icon-blue" style="margin-bottom: 12px;">
+                <span class="material-symbols-rounded" style="font-size: 26px;">phone_in_talk</span>
               </div>
-              <h3 class="emergency-card-title">Hotline Kemenkes RI</h3>
-              <p class="emergency-card-sub text-cyan">Layanan Kesehatan Jiwa 24 Jam</p>
-              <div class="emergency-number">119 <span class="emergency-ext">ext. 8</span></div>
+              <h3 class="emergency-title">Hotline Kemenkes RI</h3>
+              <p class="emergency-sub text-cyan">Layanan Kesehatan Jiwa 24 Jam</p>
+              <div class="emergency-number-val" style="font-size: 1.35rem; font-weight: 850; margin: 10px 0 14px; color: #FFFFFF;">
+                119 <span class="emergency-ext-tag">ext. 8</span>
+              </div>
             </div>
-            <div class="emergency-btn-group">
-              <a href="tel:119" class="btn-emergency-action btn-blue">
-                <span class="material-symbols-rounded">call</span> Telepon
-              </a>
-              <button type="button" class="btn-copy-num" data-action="copy-emergency" data-number="119" data-label="Hotline Kemenkes 119"
-                title="Salin Nomor">
-                <span class="material-symbols-rounded">content_copy</span>
-              </button>
-            </div>
+            <a href="tel:119" class="btn-emergency-full btn-call-blue">
+              <span class="material-symbols-rounded" style="font-size: 18px;">call</span> Telepon
+            </a>
           </div>
 
           <!-- Card 2: Layanan SEJIWA -->
           <div class="emergency-card" data-aos="fade-up" data-aos-delay="200">
             <div>
-              <div class="emergency-icon-wrap icon-emerald">
-                <span class="material-symbols-rounded">health_and_safety</span>
+              <div class="emergency-icon-box icon-green" style="margin-bottom: 12px;">
+                <span class="material-symbols-rounded" style="font-size: 26px;">health_and_safety</span>
               </div>
-              <h3 class="emergency-card-title">Layanan SEJIWA</h3>
-              <p class="emergency-card-sub text-emerald">Konseling Psikologi HIMPSI & KSP</p>
-              <div class="emergency-number">0811-9700-119</div>
+              <h3 class="emergency-title">Layanan SEJIWA</h3>
+              <p class="emergency-sub text-emerald">Konseling Psikologi HIMPSI & KSP</p>
+              <div class="emergency-number-val" style="font-size: 1.3rem; font-weight: 850; margin: 10px 0 14px; color: #FFFFFF;">
+                0811-9700-119
+              </div>
             </div>
-            <div class="emergency-btn-group">
-              <a href="tel:08119700119" class="btn-emergency-action btn-blue">
-                <span class="material-symbols-rounded">call</span> Telepon
-              </a>
-              <button type="button" class="btn-copy-num" data-action="copy-emergency" data-number="08119700119" data-label="Layanan SEJIWA"
-                title="Salin Nomor">
-                <span class="material-symbols-rounded">content_copy</span>
-              </button>
-            </div>
+            <a href="tel:08119700119" class="btn-emergency-full btn-call-teal">
+              <span class="material-symbols-rounded" style="font-size: 18px;">call</span> Telepon
+            </a>
           </div>
 
           <!-- Card 3: Yayasan Pulih -->
           <div class="emergency-card" data-aos="fade-up" data-aos-delay="300">
             <div>
-              <div class="emergency-icon-wrap icon-amber">
-                <span class="material-symbols-rounded">volunteer_activism</span>
+              <div class="emergency-icon-box icon-amber" style="margin-bottom: 12px;">
+                <span class="material-symbols-rounded" style="font-size: 26px;">volunteer_activism</span>
               </div>
-              <h3 class="emergency-card-title">Yayasan Pulih</h3>
-              <p class="emergency-card-sub text-amber">Konseling & Pemulihan Trauma</p>
-              <div class="emergency-number">0811-8456-724</div>
+              <h3 class="emergency-title">Yayasan Pulih</h3>
+              <p class="emergency-sub text-amber">Konseling & Pemulihan Trauma</p>
+              <div class="emergency-number-val" style="font-size: 1.3rem; font-weight: 850; margin: 10px 0 14px; color: #FFFFFF;">
+                0811-8456-724
+              </div>
             </div>
-            <div class="emergency-btn-group">
-              <a href="https://wa.me/628118456724" target="_blank" rel="noopener"
-                class="btn-emergency-action btn-green">
-                <span class="material-symbols-rounded">chat</span> WhatsApp
-              </a>
-              <button type="button" class="btn-copy-num" data-action="copy-emergency" data-number="08118456724" data-label="Yayasan Pulih"
-                title="Salin Nomor">
-                <span class="material-symbols-rounded">content_copy</span>
-              </button>
-            </div>
+            <a href="https://wa.me/628118456724" target="_blank" rel="noopener" class="btn-emergency-full btn-call-wa">
+              <span class="material-symbols-rounded" style="font-size: 18px;">chat</span> WhatsApp
+            </a>
           </div>
         </div>
 
@@ -1037,7 +1024,7 @@
         penting, kamu hadir, dan itu sudah cukup.</p>
       <a href="#" data-action="mulai-sekarang" class="btn btn-white btn-lg btn-mulai-sekarang"
         style="font-weight:700;">
-        <span>Mulai Sekarang (Gratis)</span>
+        <span>Mulai Sekarang</span>
         <span class="material-symbols-rounded">arrow_forward</span>
       </a>
     </div>
