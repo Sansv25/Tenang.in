@@ -2792,3 +2792,10 @@ body.dark-mode .mood-card-sub {
 .card-prompt-clickable:active {
   transform: translateY(0) scale(0.99);
 }
+
+/* Hide Total Check-in header badge on mobile devices */
+@media (max-width: 768px) {
+  .total-checkin-badge {
+    display: none !important;
+  }
+}

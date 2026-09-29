@@ -255,7 +255,7 @@ function renderProfileCard(type, result) {
   const rawName = (typeof Storage !== 'undefined' && Storage.getRawUserName) ? Storage.getRawUserName() : '';
   const kenaliResult = Storage.getQuizResult('kenali');
   const joinDate = Storage.getQuizResult('profil')?.completedAt;
-  const dateStr = joinDate ? new Date(joinDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : '13 Agustus 2026';
+  const dateStr = joinDate ? new Date(joinDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : '13 September 2026';
   const iconName = result.icon || result.emoji || 'dark_mode';
 
   cardSection.innerHTML = `

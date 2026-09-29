@@ -231,9 +231,16 @@ const Animations = (() => {
     video.autoplay = true;
     video.loop = true;
     video.muted = true;
+    video.defaultMuted = true;
     video.playsInline = true;
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+    video.setAttribute('muted', '');
+    video.setAttribute('autoplay', '');
+    video.setAttribute('loop', '');
     video.setAttribute('aria-hidden', 'true');
-    video.style.cssText = 'position:absolute; width:1px; height:1px; opacity:0.01; pointer-events:none;';
+    // Full container dimensions with opacity 0.001 so mobile engines treat video as active/visible for playback
+    video.style.cssText = 'position:absolute; top:0; left:0; width:100%; height:100%; opacity:0.001; pointer-events:none; z-index:-1;';
 
     const canvas = document.createElement('canvas');
     canvas.width = 480;
@@ -250,17 +257,24 @@ const Animations = (() => {
     let animId = null;
     let hasRenderedFirstFrame = false;
 
-    video.addEventListener('loadedmetadata', () => {
-      canvas.width = video.videoWidth || 300;
-      canvas.height = video.videoHeight || 300;
-    });
+    const setDimensions = () => {
+      if (video.videoWidth > 0 && video.videoHeight > 0) {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+      }
+    };
+
+    video.addEventListener('loadedmetadata', setDimensions);
+    video.addEventListener('loadeddata', setDimensions);
+    video.addEventListener('canplay', setDimensions);
 
     const renderFrame = () => {
-      if (video.paused || video.ended) {
+      if (video.paused || video.ended || video.readyState < 2) {
         animId = requestAnimationFrame(renderFrame);
         return;
       }
 
+      setDimensions();
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
       const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const data = frame.data;
@@ -287,20 +301,43 @@ const Animations = (() => {
       if (!hasRenderedFirstFrame) {
         hasRenderedFirstFrame = true;
         fallbackImg.style.opacity = '0';
-        setTimeout(() => { fallbackImg.style.display = 'none'; }, 350);
+        setTimeout(() => { fallbackImg.style.display = 'none'; }, 300);
       }
 
       animId = requestAnimationFrame(renderFrame);
     };
 
-    video.play().then(() => {
-      renderFrame();
-    }).catch(() => {
-      // Fallback if autoplay is blocked
-      canvas.style.display = 'none';
-      fallbackImg.style.opacity = '1';
-      fallbackImg.style.display = 'block';
-    });
+    video.load();
+
+    const startPlayback = () => {
+      video.muted = true;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          if (!animId) animId = requestAnimationFrame(renderFrame);
+        }).catch((err) => {
+          console.warn('Initial celebration video play failed, retrying muted:', err);
+          setTimeout(() => {
+            video.muted = true;
+            video.play().then(() => {
+              if (!animId) animId = requestAnimationFrame(renderFrame);
+            }).catch((err2) => {
+              console.warn('Retry autoplay failed on mobile, using static mascot fallback:', err2);
+              canvas.style.display = 'none';
+              fallbackImg.style.opacity = '1';
+              fallbackImg.style.display = 'block';
+            });
+          }, 150);
+        });
+      }
+    };
+
+    if (video.readyState >= 2) {
+      startPlayback();
+    } else {
+      video.addEventListener('canplay', startPlayback, { once: true });
+      startPlayback();
+    }
 
     return () => {
       if (animId) cancelAnimationFrame(animId);

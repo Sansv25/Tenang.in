@@ -3294,16 +3294,14 @@ body.preloader-active {
   }
 
   #teman-avatar-canvas {
-    display: none !important;
-  }
-
-  #teman-avatar-mobile-img {
     display: block !important;
     width: 100%;
     height: 100%;
     object-fit: contain;
-    transform: scale(1.18);
-    filter: drop-shadow(0 10px 25px rgba(56, 189, 248, 0.35));
+  }
+
+  #teman-avatar-mobile-img {
+    display: none !important;
   }
 
   .teman-speech-bubble {

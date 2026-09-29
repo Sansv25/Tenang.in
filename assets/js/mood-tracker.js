@@ -480,7 +480,7 @@ function renderInsights() {
               <span class="material-symbols-rounded" style="font-size:20px; color:#6366F1;">bar_chart</span>
               <span style="font-size:0.875rem; font-weight:800; color:var(--text-on-white);">Distribusi Mood</span>
             </div>
-            <span style="font-size:0.72rem; font-weight:700; color:var(--text-secondary); background:rgba(99, 102, 241, 0.12); padding:3px 10px; border-radius:20px;">
+            <span class="total-checkin-badge" style="font-size:0.72rem; font-weight:700; color:var(--text-secondary); background:rgba(99, 102, 241, 0.12); padding:3px 10px; border-radius:20px;">
               Total: ${moods.length} Check-in
             </span>
           </div>
