@@ -160,11 +160,11 @@
             </div>
             <div style="flex: 1; min-width: 0;">
               <div style="font-size: 0.7rem; font-weight: 850; text-transform: uppercase; letter-spacing: 0.8px; color: #0284C7; margin-bottom: 2px;">Inspirasi Harian</div>
-              <h3 style="font-size: clamp(1rem, 3.5vw, 1.25rem); font-weight: 850; color: #0F172A; margin: 0; line-height: 1.25;">Ruang Wisdom & Refleksi</h3>
+              <h3 style="font-size: clamp(1rem, 3.5vw, 1.25rem); font-weight: 850; color: var(--text-primary, #0F172A); margin: 0; line-height: 1.25;">Ruang Wisdom & Refleksi</h3>
             </div>
           </div>
           <div style="flex-shrink: 0;">
-            <button class="btn-rotate-quote header-action-btn" data-action="rotate-inspiration" aria-label="Ganti kutipan inspiratif" title="Inspirasi Baru" style="background: #F0F9FF; border: 1px solid #BAE6FD; color: #0284C7; font-weight: 750; font-size: 0.82rem; padding: 8px 14px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: all 0.2s; white-space: nowrap;">
+            <button class="btn-rotate-quote card-action-btn" data-action="rotate-inspiration" aria-label="Ganti kutipan inspiratif" title="Inspirasi Baru" style="background: #F0F9FF; border: 1px solid #BAE6FD; color: #0284C7; font-weight: 750; font-size: 0.82rem; padding: 8px 14px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; cursor: pointer; transition: all 0.2s; white-space: nowrap;">
               <span class="material-symbols-rounded rotate-icon" style="font-size: 18px;">refresh</span>
               <span class="desktop-btn-label">Inspirasi Baru</span>
             </button>
@@ -306,82 +306,54 @@
 
         <div class="emergency-grid" style="gap: 18px;">
           <!-- Card 1: Kemenkes RI -->
-          <div
-            style="background: var(--card-subtle); border: 1.5px solid var(--card-border); border-radius: 20px; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between;">
+          <div class="emergency-card-clean">
             <div>
-              <div
-                style="width: 44px; height: 44px; border-radius: 12px; background: rgba(56, 189, 248, 0.15); display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">
-                <span class="material-symbols-rounded" style="color: #0284C7; font-size: 26px;">phone_in_talk</span>
+              <div class="emergency-icon-box icon-blue" style="margin-bottom: 12px;">
+                <span class="material-symbols-rounded" style="font-size: 26px;">phone_in_talk</span>
               </div>
-              <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-on-white); margin: 0;">Hotline Kemenkes RI</h3>
-              <p style="font-size: 0.825rem; font-weight: 600; color: #0284C7; margin: 4px 0 10px;">Layanan Kesehatan
-                Jiwa 24 Jam</p>
-              <div style="font-size: 1.35rem; font-weight: 850; color: var(--text-on-white); margin-bottom: 16px;">119 <span
-                  style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);">ext. 8</span></div>
+              <h3 class="emergency-title">Hotline Kemenkes RI</h3>
+              <p class="emergency-sub">Layanan Kesehatan Jiwa 24 Jam</p>
+              <div class="emergency-number-val" style="font-size: 1.35rem; font-weight: 850; margin: 10px 0 14px;">
+                119 <span class="emergency-ext-tag">ext. 8</span>
+              </div>
             </div>
-            <div style="display: flex; gap: 8px;">
-              <a href="tel:119"
-                style="flex: 1; text-decoration: none; text-align: center; background: var(--primary-accent); color: #FFFFFF; font-weight: 750; font-size: 0.85rem; padding: 10px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(45, 91, 168, 0.3); transition: opacity 0.2s;">
-                <span class="material-symbols-rounded" style="font-size: 18px;">call</span> Telepon
-              </a>
-              <button type="button" data-action="copy-emergency" data-number="119" data-label="Hotline Kemenkes 119"
-                style="background: var(--card-subtle); border: 1px solid var(--card-border); color: var(--primary-accent); font-weight: 700; padding: 10px 14px; border-radius: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s;"
-                title="Salin Nomor">
-                <span class="material-symbols-rounded" style="font-size: 18px;">content_copy</span>
-              </button>
-            </div>
+            <a href="tel:119" class="btn-emergency-full btn-call-blue">
+              <span class="material-symbols-rounded" style="font-size: 18px;">call</span> Telepon
+            </a>
           </div>
 
           <!-- Card 2: Layanan SEJIWA -->
-          <div
-            style="background: var(--card-subtle); border: 1.5px solid var(--card-border); border-radius: 20px; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between;">
+          <div class="emergency-card-clean">
             <div>
-              <div
-                style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.15); display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">
-                <span class="material-symbols-rounded" style="color: #16A34A; font-size: 26px;">health_and_safety</span>
+              <div class="emergency-icon-box icon-green" style="margin-bottom: 12px;">
+                <span class="material-symbols-rounded" style="font-size: 26px;">health_and_safety</span>
               </div>
-              <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-on-white); margin: 0;">Layanan SEJIWA</h3>
-              <p style="font-size: 0.825rem; font-weight: 600; color: #16A34A; margin: 4px 0 10px;">Konseling Psikologi HIMPSI & KSP</p>
-              <div style="font-size: 1.25rem; font-weight: 850; color: var(--text-on-white); margin-bottom: 16px;">0811-9700-119
+              <h3 class="emergency-title">Layanan SEJIWA</h3>
+              <p class="emergency-sub">Konseling Psikologi HIMPSI & KSP</p>
+              <div class="emergency-number-val" style="font-size: 1.3rem; font-weight: 850; margin: 10px 0 14px;">
+                0811-9700-119
               </div>
             </div>
-            <div style="display: flex; gap: 8px;">
-              <a href="tel:08119700119"
-                style="flex: 1; text-decoration: none; text-align: center; background: var(--primary-accent); color: #FFFFFF; font-weight: 750; font-size: 0.85rem; padding: 10px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(45, 91, 168, 0.3); transition: opacity 0.2s;">
-                <span class="material-symbols-rounded" style="font-size: 18px;">call</span> Telepon
-              </a>
-              <button type="button" data-action="copy-emergency" data-number="08119700119" data-label="Layanan SEJIWA"
-                style="background: var(--card-subtle); border: 1px solid var(--card-border); color: var(--primary-accent); font-weight: 700; padding: 10px 14px; border-radius: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s;"
-                title="Salin Nomor">
-                <span class="material-symbols-rounded" style="font-size: 18px;">content_copy</span>
-              </button>
-            </div>
+            <a href="tel:08119700119" class="btn-emergency-full btn-call-teal">
+              <span class="material-symbols-rounded" style="font-size: 18px;">call</span> Telepon
+            </a>
           </div>
 
           <!-- Card 3: Yayasan Pulih -->
-          <div
-            style="background: var(--card-subtle); border: 1.5px solid var(--card-border); border-radius: 20px; padding: 20px; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; justify-content: space-between;">
+          <div class="emergency-card-clean">
             <div>
-              <div
-                style="width: 44px; height: 44px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); display: flex; align-items: center; justify-content: center; margin-bottom: 14px;">
-                <span class="material-symbols-rounded" style="color: #D97706; font-size: 26px;">volunteer_activism</span>
+              <div class="emergency-icon-box icon-amber" style="margin-bottom: 12px;">
+                <span class="material-symbols-rounded" style="font-size: 26px;">volunteer_activism</span>
               </div>
-              <h3 style="font-size: 1.1rem; font-weight: 800; color: var(--text-on-white); margin: 0;">Yayasan Pulih</h3>
-              <p style="font-size: 0.825rem; font-weight: 600; color: #D97706; margin: 4px 0 10px;">Konseling & Pemulihan Trauma</p>
-              <div style="font-size: 1.25rem; font-weight: 850; color: var(--text-on-white); margin-bottom: 16px;">0811-8456-724
+              <h3 class="emergency-title">Yayasan Pulih</h3>
+              <p class="emergency-sub">Konseling & Pemulihan Trauma</p>
+              <div class="emergency-number-val" style="font-size: 1.3rem; font-weight: 850; margin: 10px 0 14px;">
+                0811-8456-724
               </div>
             </div>
-            <div style="display: flex; gap: 8px;">
-              <a href="https://wa.me/628118456724" target="_blank" rel="noopener"
-                style="flex: 1; text-decoration: none; text-align: center; background: #16A34A; color: #FFFFFF; font-weight: 750; font-size: 0.85rem; padding: 10px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3); transition: opacity 0.2s;">
-                <span class="material-symbols-rounded" style="font-size: 18px;">chat</span> WhatsApp
-              </a>
-              <button type="button" data-action="copy-emergency" data-number="08118456724" data-label="Yayasan Pulih"
-                style="background: var(--card-subtle); border: 1px solid var(--card-border); color: var(--primary-accent); font-weight: 700; padding: 10px 14px; border-radius: 12px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; transition: background 0.2s;"
-                title="Salin Nomor">
-                <span class="material-symbols-rounded" style="font-size: 18px;">content_copy</span>
-              </button>
-            </div>
+            <a href="https://wa.me/628118456724" target="_blank" rel="noopener" class="btn-emergency-full btn-call-wa">
+              <span class="material-symbols-rounded" style="font-size: 18px;">chat</span> WhatsApp
+            </a>
           </div>
         </div>
 

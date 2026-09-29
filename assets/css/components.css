@@ -2803,28 +2803,25 @@ body.dark-mode .mood-card-sub {
 /* ---- Analisa Teman AI Responsive Layout ---- */
 .ai-analysis-header {
   background: linear-gradient(135deg, var(--bg-deep, #1E4780), var(--primary-accent, #2563EB));
-  padding: 22px 20px;
+  padding: 18px 24px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 10px;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .ai-analysis-title-wrap {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 12px;
-  width: 100%;
+  min-width: 0;
 }
 
 .ai-analysis-mascot-img {
-  width: 60px;
-  height: 60px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
   flex-shrink: 0;
   transition: transform 0.3s ease;
 }
@@ -2835,8 +2832,8 @@ body.dark-mode .mood-card-sub {
 
 .ai-analysis-title {
   color: #FFFFFF;
-  font-weight: 850;
-  font-size: 1.25rem;
+  font-weight: 800;
+  font-size: 1.05rem;
   white-space: nowrap;
   letter-spacing: -0.01em;
 }
@@ -2846,18 +2843,16 @@ body.dark-mode .mood-card-sub {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: #FFFFFF;
-  font-size: 0.76rem;
-  font-weight: 750;
-  padding: 5px 16px;
-  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 20px;
   white-space: nowrap;
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 5px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  gap: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .ai-analysis-body {
@@ -2917,12 +2912,14 @@ body.dark-mode .mood-card-sub {
   }
 
   .ai-analysis-mascot-img {
-    width: 52px !important;
-    height: 52px !important;
+    width: 54px !important;
+    height: 54px !important;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.3)) !important;
   }
 
   .ai-analysis-title {
     font-size: 1.15rem !important;
+    font-weight: 850 !important;
   }
 
   .ai-analysis-badge {
@@ -2988,4 +2985,289 @@ body.dark-mode .mood-card-sub {
   .mobile-only-ulangi-wrap {
     display: block;
   }
+}
+
+/* ---- Emergency Crisis Helpline Redesign Styles ---- */
+.emergency-card-redesign {
+  background: var(--card-surface, #FFFFFF);
+  border: 1.5px solid var(--card-border, #E2E8F0);
+  border-radius: 22px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.05);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.emergency-card-redesign:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.12);
+  border-color: var(--primary-accent, #2D5BA8);
+}
+
+.emergency-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.emergency-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.emergency-icon-box.icon-blue {
+  background: #E0F2FE;
+  border: 1.5px solid #BAE6FD;
+  color: #0284C7;
+}
+
+.emergency-icon-box.icon-green {
+  background: #D1FAE5;
+  border: 1.5px solid #A7F3D0;
+  color: #059669;
+}
+
+.emergency-icon-box.icon-amber {
+  background: #FEF3C7;
+  border: 1.5px solid #FDE68A;
+  color: #D97706;
+}
+
+.emergency-badge {
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  letter-spacing: 0.2px;
+}
+
+.emergency-badge.badge-blue {
+  background: #E0F2FE;
+  border: 1px solid #BAE6FD;
+  color: #0369A1;
+}
+
+.emergency-badge.badge-green {
+  background: #D1FAE5;
+  border: 1px solid #A7F3D0;
+  color: #047857;
+}
+
+.emergency-badge.badge-amber {
+  background: #FEF3C7;
+  border: 1px solid #FDE68A;
+  color: #B45309;
+}
+
+.emergency-title {
+  font-size: 1.15rem;
+  font-weight: 850;
+  color: var(--text-primary, #0F172A);
+  margin: 0 0 3px;
+  line-height: 1.25;
+}
+
+.emergency-sub {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary, #64748B);
+  margin: 0 0 14px;
+}
+
+.emergency-number-box {
+  background: var(--card-subtle, #F8FAFC);
+  border: 1px solid var(--card-border, #E2E8F0);
+  border-radius: 14px;
+  padding: 10px 14px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.emergency-number-val {
+  font-size: 1.25rem;
+  font-weight: 850;
+  color: var(--text-primary, #0F172A);
+  letter-spacing: -0.01em;
+}
+
+.emergency-ext-tag {
+  font-size: 0.75rem;
+  font-weight: 750;
+  background: #E2E8F0;
+  color: #475569;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+
+.emergency-btn-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-emergency-call {
+  flex: 1;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 800;
+  font-size: 0.88rem;
+  padding: 11px 16px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #FFFFFF !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.btn-emergency-call:hover {
+  transform: translateY(-2px);
+  opacity: 0.95;
+}
+
+.btn-emergency-call:active {
+  transform: translateY(0);
+}
+
+.btn-call-blue {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+}
+
+.btn-call-teal {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.35);
+}
+
+.btn-call-wa {
+  background: linear-gradient(135deg, #16A34A 0%, #15803D 100%);
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.35);
+}
+
+.btn-emergency-copy {
+  background: var(--card-subtle, #F8FAFC);
+  border: 1px solid var(--card-border, #E2E8F0);
+  color: var(--text-secondary, #475569);
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.btn-emergency-copy:hover {
+  background: var(--card-border, #E2E8F0);
+  color: var(--text-primary, #0F172A);
+  transform: scale(1.05);
+}
+
+.btn-emergency-copy:active {
+  transform: scale(0.95);
+}
+
+/* Dark Mode Overrides for Emergency Redesign Cards */
+html.dark-mode .emergency-card-redesign,
+body.dark-mode .emergency-card-redesign {
+  background: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+html.dark-mode .emergency-number-box,
+body.dark-mode .emergency-number-box {
+  background: #0F172A !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+html.dark-mode .emergency-ext-tag,
+body.dark-mode .emergency-ext-tag {
+  background: #334155 !important;
+  color: #CBD5E1 !important;
+}
+
+html.dark-mode .btn-emergency-copy,
+body.dark-mode .btn-emergency-copy {
+  background: #0F172A !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  color: #CBD5E1 !important;
+}
+
+html.dark-mode .btn-emergency-copy:hover,
+body.dark-mode .btn-emergency-copy:hover {
+  background: #334155 !important;
+  color: #FFFFFF !important;
+}
+
+/* ---- Emergency Card Clean & Streamlined (Single 100% CTA Button) ---- */
+.emergency-card-clean {
+  background: var(--card-surface, #FFFFFF);
+  border: 1.5px solid var(--card-border, #E2E8F0);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.emergency-card-clean:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.1);
+  border-color: var(--primary-accent, #2D5BA8);
+}
+
+.btn-emergency-full {
+  width: 100%;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 800;
+  font-size: 0.88rem;
+  padding: 12px 16px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #FFFFFF !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  margin-top: 14px;
+  box-sizing: border-box;
+}
+
+.btn-emergency-full:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.btn-emergency-full:active {
+  transform: translateY(0);
+}
+
+html.dark-mode .emergency-card-clean,
+body.dark-mode .emergency-card-clean {
+  background: #1E293B !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
 }

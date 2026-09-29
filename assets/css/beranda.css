@@ -977,13 +977,15 @@
   }
 
   .weekly-detail-link,
-  .header-action-btn {
+  .card-action-btn {
     padding: 8px 10px !important;
     border-radius: 12px !important;
+    width: auto !important;
+    height: auto !important;
   }
 
   .weekly-detail-link .desktop-btn-label,
-  .header-action-btn .desktop-btn-label {
+  .card-action-btn .desktop-btn-label {
     display: none !important;
   }
 
@@ -1073,7 +1075,13 @@ body.dark-mode .mood-title-wrap h2,
 html.dark-mode .nudge-banner-title,
 body.dark-mode .nudge-banner-title,
 html.dark-mode .mood-card-label,
-body.dark-mode .mood-card-label {
+body.dark-mode .mood-card-label,
+html.dark-mode h1, body.dark-mode h1,
+html.dark-mode h2, body.dark-mode h2,
+html.dark-mode h3, body.dark-mode h3,
+html.dark-mode h4, body.dark-mode h4,
+html.dark-mode [style*="color: #0F172A"], body.dark-mode [style*="color: #0F172A"],
+html.dark-mode [style*="color:#0F172A"], body.dark-mode [style*="color:#0F172A"] {
   color: #F8FAFC !important;
 }
 
@@ -1108,6 +1116,21 @@ body.dark-mode .btn-mood-cta {
   background: var(--primary-accent, #2563EB) !important;
   border-color: var(--primary-accent, #2563EB) !important;
   color: #FFFFFF !important;
+}
+
+/* ---- Achievements Stat Grid (Consistent 4-col Desktop / 2x2 Mobile) ---- */
+.achievements-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 640px) {
+  .achievements-stat-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
 }
 
 /* ---- Desktop Container for Beranda (960px Max-Width) ---- */

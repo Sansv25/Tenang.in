@@ -25,11 +25,14 @@
   --secondary-accent: #7EC8E3;
 
   /* Text Colors, High Contrast & Tenang.in rules */
+  --text-primary: #0F172A;
   --text-on-blue: #FFFFFF;
   --text-on-white: #1A2F4E;
   --text-secondary: #475569;
   --text-muted: #94A3B8;
   --text-on-dark: #FFFFFF;
+  --card-bg: #FFFFFF;
+  --bg-muted: #F8FAFC;
 
   /* Status Colors */
   --success: #5BC4A0;
@@ -2033,8 +2036,11 @@ p {
 /* ---- Eye-Friendly Dark Mode Global Overrides ---- */
 html.dark-mode,
 body.dark-mode {
+  --text-primary: #F8FAFC;
+  --card-bg: #1E293B;
   --card-surface: #1E293B;
   --card-subtle: #0F172A;
+  --bg-muted: #0F172A;
   --text-on-white: #F8FAFC;
   --text-secondary: #CBD5E1;
   --text-muted: #94A3B8;

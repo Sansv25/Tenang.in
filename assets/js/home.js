@@ -1203,7 +1203,7 @@ function renderHomePersonalitySection() {
             </div>
             <div>
               <span style="font-size: 0.72rem; font-weight: 850; text-transform: uppercase; letter-spacing: 0.8px; color: ${t.color};">Profil Kepribadian Refleksimu</span>
-              <h2 style="font-size: clamp(1.15rem, 4vw, 1.4rem); font-weight: 850; color: #0F172A; margin: 2px 0 0;">${t.name} <span style="font-size: 0.85rem; font-weight: 600; color: #64748B;">(${t.tagline})</span></h2>
+              <h2 style="font-size: clamp(1.15rem, 4vw, 1.4rem); font-weight: 850; color: var(--text-primary, #0F172A); margin: 2px 0 0;">${t.name} <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary, #64748B);">(${t.tagline})</span></h2>
             </div>
           </div>
           <a href="kenali.html" class="btn btn-sm desktop-only-ulangi" style="background: #F8FAFC; border: 1px solid #E2E8F0; color: #0F172A; font-weight: 750; font-size: 0.8rem; border-radius: 20px; padding: 6px 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
@@ -1239,7 +1239,7 @@ function renderHomePersonalitySection() {
             </div>
             <div>
               <span style="font-size: 0.72rem; font-weight: 850; text-transform: uppercase; letter-spacing: 0.8px; color: #0284C7;">Kuis Self-Discovery (3 Menit)</span>
-              <h2 style="font-size: clamp(1.15rem, 4vw, 1.4rem); font-weight: 850; color: #0F172A; margin: 2px 0 0;">Temukan Tipe Kepribadian Refleksimu</h2>
+              <h2 style="font-size: clamp(1.15rem, 4vw, 1.4rem); font-weight: 850; color: var(--text-primary, #0F172A); margin: 2px 0 0;">Temukan Tipe Kepribadian Refleksimu</h2>
             </div>
           </div>
           <a href="kenali.html" class="btn btn-primary" style="background: #0284C7; border-color: #0284C7; color: #FFFFFF; font-weight: 800; font-size: 0.88rem; padding: 10px 22px; border-radius: 999px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);">
@@ -1253,21 +1253,21 @@ function renderHomePersonalitySection() {
         </p>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px;">
-          <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 10px; text-align: center;">
+          <div style="background: var(--card-surface, #FFFFFF); border: 1px solid var(--card-border, #E2E8F0); border-radius: 14px; padding: 10px; text-align: center;">
             <span class="material-symbols-rounded" style="color: #4F46E5; font-size: 22px;">dark_mode</span>
-            <div style="font-size: 0.8rem; font-weight: 800; color: #0F172A; margin-top: 2px;">Pemikir Tenang</div>
+            <div style="font-size: 0.8rem; font-weight: 800; color: var(--text-primary, #0F172A); margin-top: 2px;">Pemikir Tenang</div>
           </div>
-          <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 10px; text-align: center;">
+          <div style="background: var(--card-surface, #FFFFFF); border: 1px solid var(--card-border, #E2E8F0); border-radius: 14px; padding: 10px; text-align: center;">
             <span class="material-symbols-rounded" style="color: #D97706; font-size: 22px;">favorite</span>
-            <div style="font-size: 0.8rem; font-weight: 800; color: #0F172A; margin-top: 2px;">Perasa Mendalam</div>
+            <div style="font-size: 0.8rem; font-weight: 800; color: var(--text-primary, #0F172A); margin-top: 2px;">Perasa Mendalam</div>
           </div>
-          <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 10px; text-align: center;">
+          <div style="background: var(--card-surface, #FFFFFF); border: 1px solid var(--card-border, #E2E8F0); border-radius: 14px; padding: 10px; text-align: center;">
             <span class="material-symbols-rounded" style="color: #059669; font-size: 22px;">bolt</span>
-            <div style="font-size: 0.8rem; font-weight: 800; color: #0F172A; margin-top: 2px;">Pemimpin Aktif</div>
+            <div style="font-size: 0.8rem; font-weight: 800; color: var(--text-primary, #0F172A); margin-top: 2px;">Pemimpin Aktif</div>
           </div>
-          <div style="background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 14px; padding: 10px; text-align: center;">
+          <div style="background: var(--card-surface, #FFFFFF); border: 1px solid var(--card-border, #E2E8F0); border-radius: 14px; padding: 10px; text-align: center;">
             <span class="material-symbols-rounded" style="color: #9333EA; font-size: 22px;">auto_awesome</span>
-            <div style="font-size: 0.8rem; font-weight: 800; color: #0F172A; margin-top: 2px;">Jiwa Sosial</div>
+            <div style="font-size: 0.8rem; font-weight: 800; color: var(--text-primary, #0F172A); margin-top: 2px;">Jiwa Sosial</div>
           </div>
         </div>
       </div>
@@ -1332,11 +1332,11 @@ function renderHomeAchievementsShowcase() {
           </div>
           <div style="flex: 1; min-width: 0;">
             <div style="font-size: 0.72rem; font-weight: 850; text-transform: uppercase; letter-spacing: 0.8px; color: #7E22CE; margin-bottom: 2px;">Lencana & Medali</div>
-            <h2 style="font-size: clamp(1.05rem, 3.8vw, 1.4rem); font-weight: 850; color: #0F172A; margin: 0; line-height: 1.25;">Medali Pencapaian & Rekor Refleksi</h2>
+            <h2 style="font-size: clamp(1.05rem, 3.8vw, 1.4rem); font-weight: 850; color: var(--text-primary, #0F172A); margin: 0; line-height: 1.25;">Medali Pencapaian & Rekor Refleksi</h2>
           </div>
         </div>
         <div style="flex-shrink: 0;">
-          <a href="dashboard.html#dashboard-badges" class="header-action-btn header-action-purple" style="text-decoration: none; background: #F3E8FF; border: 1px solid #E9D5FF; color: #7E22CE; font-weight: 750; font-size: 0.85rem; padding: 10px 16px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s; white-space: nowrap;" title="Lihat Selengkapnya">
+          <a href="dashboard.html#dashboard-badges" class="card-action-btn card-action-purple" style="text-decoration: none; background: #F3E8FF; border: 1px solid #E9D5FF; color: #7E22CE; font-weight: 750; font-size: 0.85rem; padding: 10px 16px; border-radius: 14px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s; white-space: nowrap;" title="Lihat Selengkapnya">
             <span class="desktop-btn-label">Lihat Selengkapnya</span>
             <span class="material-symbols-rounded" style="font-size: 20px;">chevron_right</span>
           </a>
@@ -1344,7 +1344,7 @@ function renderHomeAchievementsShowcase() {
       </div>
 
       <!-- Stat Counter Pills with Material Symbols Icons -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-bottom: 20px;">
+      <div class="achievements-stat-grid">
         <div style="background: #FFF7ED; border: 1px solid #FFEDD5; border-radius: 16px; padding: 10px 12px; text-align: center;">
           <div style="font-size: 1.25rem; font-weight: 850; color: #EA580C; display: inline-flex; align-items: center; justify-content: center; gap: 4px;">
             <span class="material-symbols-rounded" style="font-size: 22px; color: #EA580C;">local_fire_department</span>
@@ -1381,12 +1381,12 @@ function renderHomeAchievementsShowcase() {
       <!-- Badge Cards -->
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
         ${badges.map(b => `
-          <div style="background: ${b.unlocked ? '#FFFFFF' : '#F8FAFC'}; border: 1.5px solid ${b.unlocked ? b.color + '45' : '#E2E8F0'}; border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; opacity: ${b.unlocked ? 1 : 0.65}; box-shadow: ${b.unlocked ? '0 4px 12px rgba(0,0,0,0.04)' : 'none'}; transition: transform 0.2s;">
+          <div style="background: ${b.unlocked ? 'var(--card-bg, #FFFFFF)' : 'var(--bg-muted, #F8FAFC)'}; border: 1.5px solid ${b.unlocked ? b.color + '45' : '#E2E8F0'}; border-radius: 16px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; opacity: ${b.unlocked ? 1 : 0.65}; box-shadow: ${b.unlocked ? '0 4px 12px rgba(0,0,0,0.04)' : 'none'}; transition: transform 0.2s;">
             <div style="width: 44px; height: 44px; border-radius: 12px; background: ${b.unlocked ? b.color + '1A' : '#E2E8F0'}; border: 1px solid ${b.unlocked ? b.color + '50' : '#CBD5E1'}; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
               <span class="material-symbols-rounded" style="color: ${b.unlocked ? b.color : '#94A3B8'}; font-size: 24px;">${b.symbol}</span>
             </div>
             <div style="flex: 1; min-width: 0;">
-              <div style="font-size: 0.85rem; font-weight: 850; color: ${b.unlocked ? '#0F172A' : '#64748B'}; line-height: 1.25; word-break: break-word;">${b.name}</div>
+              <div style="font-size: 0.85rem; font-weight: 850; color: ${b.unlocked ? 'var(--text-primary, #0F172A)' : 'var(--text-secondary, #64748B)'}; line-height: 1.25; word-break: break-word;">${b.name}</div>
               <div style="font-size: 0.72rem; color: ${b.unlocked ? b.color : '#94A3B8'}; font-weight: 750; margin-top: 2px; display: inline-flex; align-items: center; gap: 3px;">
                 <span class="material-symbols-rounded" style="font-size: 13px;">${b.unlocked ? 'check_circle' : 'lock'}</span>
                 <span>${b.unlocked ? 'Terbuka' : 'Terkunci'}</span>
