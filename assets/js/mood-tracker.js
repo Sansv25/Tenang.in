@@ -404,33 +404,33 @@ function renderInsights() {
     <div class="insight-card" style="border:none; padding:0; overflow:hidden; border-radius:16px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
       
       <!-- Header -->
-      <div style="background:linear-gradient(135deg, var(--bg-deep, #1E4780), var(--primary-accent, #2563EB)); padding:20px 24px; display:flex; align-items:center; justify-content:space-between;">
-        <div style="display:flex; align-items:center; gap:12px;">
-          <img src="assets/img/maskots/mascot-listening.png" alt="Teman AI" style="width:34px; height:34px; object-fit:contain; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.15));">
-          <span style="color:#fff; font-weight:700; font-size:1rem;">Analisa Teman AI</span>
+      <div class="ai-analysis-header">
+        <div class="ai-analysis-title-wrap">
+          <img src="assets/img/maskots/mascot-listening.png" alt="Teman AI" class="ai-analysis-mascot-img">
+          <span class="ai-analysis-title">Analisa Teman AI</span>
         </div>
-        <span style="background:rgba(255,255,255,0.2); backdrop-filter:blur(8px); color:#fff; font-size:0.7rem; font-weight:600; padding:4px 12px; border-radius:20px;">
-          <span class="material-symbols-rounded" style="font-size:14px; vertical-align:middle;">auto_awesome</span>
-          Diperbarui Hari Ini
+        <span class="ai-analysis-badge">
+          <span class="material-symbols-rounded" style="font-size:14px;">auto_awesome</span>
+          <span>Diperbarui Hari Ini</span>
         </span>
       </div>
 
-      <div style="padding:20px 24px;">
+      <div class="ai-analysis-body">
 
         <!-- Status & Trend Row -->
-        <div style="display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap;">
-          <div style="flex:1; min-width:140px; background:${statusColor}12; border:1px solid ${statusColor}30; border-radius:12px; padding:14px 16px; display:flex; align-items:center; gap:12px;">
-            <span class="material-symbols-rounded" style="font-size:32px; color:${statusColor};">${moodEmoji}</span>
+        <div class="ai-status-trend-row">
+          <div class="ai-status-card" style="background:${statusColor}12; border:1px solid ${statusColor}30;">
+            <span class="material-symbols-rounded ai-status-icon" style="color:${statusColor};">${moodEmoji}</span>
             <div>
-              <div style="font-size:0.7rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.5px;">Status Emosi</div>
-              <div style="font-size:1rem; font-weight:700; color:${statusColor};">${moodStatus}</div>
+              <div class="ai-card-sublabel">Status Emosi</div>
+              <div class="ai-card-val" style="color:${statusColor};">${moodStatus}</div>
             </div>
           </div>
-          <div style="flex:1; min-width:140px; background:${trendColor}12; border:1px solid ${trendColor}30; border-radius:12px; padding:14px 16px; display:flex; align-items:center; gap:12px;">
-            <span class="material-symbols-rounded" style="font-size:32px; color:${trendColor};">${trendIcon}</span>
+          <div class="ai-trend-card" style="background:${trendColor}12; border:1px solid ${trendColor}30;">
+            <span class="material-symbols-rounded ai-status-icon" style="color:${trendColor};">${trendIcon}</span>
             <div>
-              <div style="font-size:0.7rem; color:var(--text-secondary); text-transform:uppercase; letter-spacing:0.5px;">Tren Mood</div>
-              <div style="font-size:1rem; font-weight:700; color:${trendColor};">${trendLabel}</div>
+              <div class="ai-card-sublabel">Tren Mood</div>
+              <div class="ai-card-val" style="color:${trendColor};">${trendLabel}</div>
             </div>
           </div>
         </div>
