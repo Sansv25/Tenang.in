@@ -681,7 +681,9 @@
   }
 
   .mood-title-icon {
-    display: none !important;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
   }
 
   .btn-mood-cta {
@@ -950,15 +952,9 @@
     margin-bottom: 18px !important;
   }
 
-  .streak-badge-floating,
   #mood-today-summary,
   .mood-badge-floating {
-    padding: 6px 16px !important;
-  }
-
-  #mood-today-summary span,
-  .mood-badge-floating span {
-    font-size: 0.82rem !important;
+    display: none !important;
   }
 
   .dashboard-hero-floating .greeting-sub {
