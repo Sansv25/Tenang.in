@@ -205,12 +205,12 @@ const Tour = (() => {
       body: 'Modul tes psikologi ringan untuk membantumu menemukan tipe karakter kepribadian dan gaya self-care yang paling efektif bagimu.'
     },
     {
-      page: 'kenali', target: '[data-action="start-kenali-quiz"], #kenali-intro .btn-primary, #kenali-intro', position: 'bottom',
+      page: 'kenali', target: '[data-action="start-kenali-quiz"], #kenali-start-btn, [data-action="retake-kenali-quiz"], .kenali-btn-retake, .kenali-result-hero, #kenali-intro', position: 'bottom',
       title: 'Tombol Mulai Kuis Kepribadian',
       body: 'Klik tombol "Mulai Kuis Sekarang" untuk menjawab 12 pertanyaan refleksi bergambar dan menemukan tipe karaktermu.'
     },
     {
-      page: 'kenali', target: '.personality-grid .personality-card, .personality-grid', position: 'bottom',
+      page: 'kenali', target: '.personality-grid, .kenali-result-cards, .kenali-detail-card, .kenali-result-hero', position: 'bottom',
       title: 'Hasil Profil & Tips Self-Care',
       body: 'Dapatkan penjelasan mendalam mengenai 4 tipe karakter (Pemikir Tenang, Perasa Mendalam, Pemimpin Aktif, Jiwa Sosial) beserta rekomendasi teknik self-care personal.'
     },
@@ -253,7 +253,7 @@ const Tour = (() => {
       body: 'Gunakan tombol foto avatar untuk mengunggah foto profil favoritmu, dan isi kolom nama panggilan untuk personalisasi aplikasi.'
     },
     {
-      page: 'profil', target: '[data-action="start-profil-quiz"], #profil-intro .btn-primary, #profil-intro', position: 'top',
+      page: 'profil', target: '[data-action="start-profil-quiz"], #profil-start-btn, [data-action="retake-profil-quiz"], .profil-btn-retake, .profil-result-hero, #profil-intro', position: 'top',
       title: 'Kuis Gaya Refleksi Jiwa',
       body: 'Klik tombol "Mulai Kuis Refleksi" untuk menjawab 7 pertanyaan dan menemukan ritme refleksi personal yang paling cocok.'
     },
@@ -456,8 +456,17 @@ const Tour = (() => {
   function getTargetEl(sel) {
     if (!sel) return null;
     for (const s of sel.split(',').map(x => x.trim())) {
-      try { const el = document.querySelector(s); if (el) return el; }
-      catch(e) {}
+      try {
+        const elements = document.querySelectorAll(s);
+        for (const el of elements) {
+          if (el) {
+            const r = el.getBoundingClientRect();
+            if (r.width > 0 || r.height > 0 || el.offsetWidth > 0 || el.offsetHeight > 0) {
+              return el;
+            }
+          }
+        }
+      } catch(e) {}
     }
     return null;
   }
