@@ -823,6 +823,17 @@ const Tour = (() => {
       return vo;
     }
 
+    // Detect active Kenali or Profil quiz sections
+    const kenaliQuiz = document.getElementById('kenali-quiz');
+    if (kenaliQuiz && getComputedStyle(kenaliQuiz).display !== 'none') {
+      return kenaliQuiz;
+    }
+
+    const profilQuiz = document.getElementById('profil-quiz');
+    if (profilQuiz && getComputedStyle(profilQuiz).display !== 'none') {
+      return profilQuiz;
+    }
+
     return null;
   }
 
@@ -906,6 +917,8 @@ const Tour = (() => {
     }
   }
 
+  let activeInteractiveEl = null;
+
   function clearAutoTriggers() {
     if (activeAutoTimer) {
       clearTimeout(activeAutoTimer);
@@ -925,6 +938,14 @@ const Tour = (() => {
       activeResizeObserver = null;
     }
     activeWatchedUserModal = null;
+    if (activeInteractiveEl) {
+      try {
+        activeInteractiveEl.style.position = '';
+        activeInteractiveEl.style.zIndex = '';
+        activeInteractiveEl.style.pointerEvents = '';
+      } catch(e) {}
+      activeInteractiveEl = null;
+    }
     const voiceBtn = document.getElementById('teman-voice-btn');
     if (voiceBtn) {
       voiceBtn.style.position = '';
@@ -954,6 +975,12 @@ const Tour = (() => {
     if (tooltipEl) tooltipEl.classList.add('tour-hidden');
 
     const targetEl = getTargetEl(stepData.target);
+    if (targetEl) {
+      activeInteractiveEl = targetEl;
+      targetEl.style.position = 'relative';
+      targetEl.style.zIndex = '10601';
+      targetEl.style.pointerEvents = 'auto';
+    }
     await scrollToTarget(targetEl, stepData.position);
     await new Promise(r => setTimeout(r, 60));
 
