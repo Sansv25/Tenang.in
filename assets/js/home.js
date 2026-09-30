@@ -1206,8 +1206,8 @@ function renderHomePersonalitySection() {
               <h2 style="font-size: clamp(1.15rem, 4vw, 1.4rem); font-weight: 850; color: var(--text-primary, #0F172A); margin: 2px 0 0;">${t.name} <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary, #64748B);">(${t.tagline})</span></h2>
             </div>
           </div>
-          <a href="kenali.html" class="btn btn-sm desktop-only-ulangi" style="background: #F8FAFC; border: 1px solid #E2E8F0; color: #0F172A; font-weight: 750; font-size: 0.8rem; border-radius: 20px; padding: 6px 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
-            <span class="material-symbols-rounded" style="font-size: 16px;">refresh</span>
+          <a href="kenali.html" class="btn btn-sm desktop-only-ulangi" style="background: linear-gradient(135deg, #3B72C4 0%, #2563EB 100%); border: 1.5px solid rgba(37,99,235,0.35); color: #FFFFFF; font-weight: 750; font-size: 0.8rem; border-radius: 20px; padding: 7px 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 3px 10px rgba(37,99,235,0.22); transition: all 0.2s ease;" onmouseover="this.style.background='linear-gradient(135deg,#2563EB,#1D4ED8)';this.style.boxShadow='0 5px 16px rgba(37,99,235,0.35)'" onmouseout="this.style.background='linear-gradient(135deg,#3B72C4,#2563EB)';this.style.boxShadow='0 3px 10px rgba(37,99,235,0.22)'">
+            <span class="material-symbols-rounded" style="font-size: 16px; color: #FFFFFF;">refresh</span>
             <span>Ulangi Tes</span>
           </a>
         </div>

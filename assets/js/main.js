@@ -211,10 +211,10 @@ const Main = (() => {
           </div>
           <div>
             <div class="footer-title">Bantuan Profesional</div>
-            <a href="tel:119" class="footer-link"><span class="material-symbols-rounded">call</span> Hotline 119 ext. 8</a>
-            <a href="tel:02178845555" class="footer-link"><span class="material-symbols-rounded">phone_iphone</span> Into The Light</a>
+            <a href="#" class="footer-link"><span class="material-symbols-rounded">call</span> Hotline 119 ext. 8</a>
+            <a href="#" class="footer-link"><span class="material-symbols-rounded">phone_iphone</span> Into The Light</a>
             <a href="#" class="footer-link"><span class="material-symbols-rounded">chat</span> Sejiwa: 119 ext. 8</a>
-            <a href="https://www.halodoc.com" target="_blank" rel="noopener" class="footer-link"><span class="material-symbols-rounded">language</span> Halodoc</a>
+            <a href="#" class="footer-link"><span class="material-symbols-rounded">language</span> Halodoc</a>
           </div>
         </div>
         <div class="footer-bottom">
@@ -246,9 +246,9 @@ const Main = (() => {
           <div>
             <div class="footer-title">Butuh Teman Cerita?</div>
             <p style="font-size:0.8rem; color:#94A3B8; margin-bottom:12px; line-height:1.5;">Layanan darurat bebas pulsa 24 jam jika kamu membutuhkan bantuan profesional saat ini:</p>
-            <a href="tel:119" class="footer-link" style="color:#F59E0B; font-weight:700;"><span class="material-symbols-rounded" style="color:#F59E0B;">call</span> Layanan Sejiwa: 119 ext. 8</a>
-            <a href="tel:02178845555" class="footer-link"><span class="material-symbols-rounded">phone_iphone</span> Into The Light Indonesia</a>
-            <a href="https://www.halodoc.com" target="_blank" rel="noopener" class="footer-link"><span class="material-symbols-rounded">language</span> Konsultasi Halodoc</a>
+            <a href="#" class="footer-link" style="color:#F59E0B; font-weight:700;"><span class="material-symbols-rounded" style="color:#F59E0B;">call</span> Layanan Sejiwa: 119 ext. 8</a>
+            <a href="#" class="footer-link"><span class="material-symbols-rounded">phone_iphone</span> Into The Light Indonesia</a>
+            <a href="#" class="footer-link"><span class="material-symbols-rounded">language</span> Konsultasi Halodoc</a>
           </div>
         </div>
         <div class="footer-bottom" style="margin-top:24px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">

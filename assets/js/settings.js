@@ -381,6 +381,25 @@ const Settings = (() => {
             </div>
           </div>
 
+          <!-- Notification Toggle Section -->
+          <div class="settings-section" style="margin-bottom:24px;">
+            <div class="settings-section-label" style="margin-bottom:12px;">
+              <span class="material-symbols-rounded notif-title-icon" style="font-size:20px;">notifications</span>
+              <span class="notif-desktop-title">Pemberitahuan &amp; Pengingat</span>
+              <span class="notif-mobile-title">Notifikasi</span>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 16px; background:var(--card-subtle, #F8FAFC); border-radius:16px; border:1px solid rgba(0,0,0,0.06);">
+              <div style="display:flex; flex-direction:column; gap:2px;">
+                <span style="font-size:0.875rem; font-weight:700; color:var(--text-on-white);">Aktifkan Pemberitahuan</span>
+                <span style="font-size:0.75rem; color:var(--text-secondary);">Pengingat streak, check-in mood, dan jurnal harian</span>
+              </div>
+              <button type="button" class="notif-toggle-btn ${localStorage.getItem('tenang_notif_enabled') === 'false' ? 'is-off' : 'is-active'}" id="notif-toggle-btn-settings" onclick="window.toggleTenangNotif(this)" title="Klik untuk mengubah status pemberitahuan" aria-label="Toggle Pemberitahuan">
+                <span class="notif-toggle-status">${localStorage.getItem('tenang_notif_enabled') === 'false' ? 'Nonaktif' : 'Aktif'}</span>
+                <span class="material-symbols-rounded notif-toggle-icon">${localStorage.getItem('tenang_notif_enabled') === 'false' ? 'notifications_off' : 'notifications_active'}</span>
+              </button>
+            </div>
+          </div>
+
           <!-- Theme Color Section -->
           <div class="settings-section">
             <div class="settings-section-label">
@@ -690,3 +709,30 @@ const Settings = (() => {
 // Auto-apply theme & mode on page load (before DOMContentLoaded for faster paint)
 Settings.applyTheme();
 Settings.applyMode();
+
+// Global Notification Toggle handler
+window.toggleTenangNotif = function(btnElement) {
+  const isCurrentlyOff = localStorage.getItem('tenang_notif_enabled') === 'false';
+  const newState = isCurrentlyOff; // if currently off, toggle to true
+  localStorage.setItem('tenang_notif_enabled', newState ? 'true' : 'false');
+
+  const allBtns = document.querySelectorAll('.notif-toggle-btn');
+  allBtns.forEach(btn => {
+    btn.classList.toggle('is-active', newState);
+    btn.classList.toggle('is-off', !newState);
+    
+    const icon = btn.querySelector('.notif-toggle-icon');
+    if (icon) {
+      icon.textContent = newState ? 'notifications_active' : 'notifications_off';
+    }
+    
+    const status = btn.querySelector('.notif-toggle-status');
+    if (status) {
+      status.textContent = newState ? 'Aktif' : 'Nonaktif';
+    }
+  });
+
+  if (typeof Animations !== 'undefined' && Animations.showToast) {
+    Animations.showToast(newState ? 'Pemberitahuan diaktifkan' : 'Pemberitahuan dinonaktifkan', newState ? 'success' : 'info');
+  }
+};

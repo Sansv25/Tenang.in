@@ -337,10 +337,14 @@ function renderProfileCard(type, result) {
       <div style="border-top:1px solid rgba(0,0,0,0.06); padding-top:var(--space-lg);">
         <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--space-md);">
           <div style="display:flex; align-items:center; gap:8px; font-weight:750; color:var(--text-on-white);">
-            <span class="material-symbols-rounded text-primary" style="font-size:22px;">notifications</span>
-            <span>Pemberitahuan & Pengingat</span>
+            <span class="material-symbols-rounded text-primary notif-title-icon" style="font-size:22px;">notifications</span>
+            <span class="notif-desktop-title">Pemberitahuan & Pengingat</span>
+            <span class="notif-mobile-title">Notifikasi</span>
           </div>
-          <span style="font-size:0.75rem; font-weight:700; background:rgba(37,99,235,0.1); color:#2563EB; padding:2px 10px; border-radius:99px;">Aktif</span>
+          <button type="button" class="notif-toggle-btn ${localStorage.getItem('tenang_notif_enabled') === 'false' ? 'is-off' : 'is-active'}" id="notif-toggle-btn-profil" onclick="window.toggleTenangNotif(this)" title="Klik untuk mengubah status pemberitahuan" aria-label="Toggle Pemberitahuan">
+            <span class="notif-toggle-status">${localStorage.getItem('tenang_notif_enabled') === 'false' ? 'Nonaktif' : 'Aktif'}</span>
+            <span class="material-symbols-rounded notif-toggle-icon">${localStorage.getItem('tenang_notif_enabled') === 'false' ? 'notifications_off' : 'notifications_active'}</span>
+          </button>
         </div>
 
         <div style="display:flex; flex-direction:column; gap:10px;">
@@ -444,3 +448,31 @@ window.simulateResultShare = function () {
     }
   }, 1500);
 };
+
+if (!window.toggleTenangNotif) {
+  window.toggleTenangNotif = function(btnElement) {
+    const isCurrentlyOff = localStorage.getItem('tenang_notif_enabled') === 'false';
+    const newState = isCurrentlyOff;
+    localStorage.setItem('tenang_notif_enabled', newState ? 'true' : 'false');
+
+    const allBtns = document.querySelectorAll('.notif-toggle-btn');
+    allBtns.forEach(btn => {
+      btn.classList.toggle('is-active', newState);
+      btn.classList.toggle('is-off', !newState);
+      
+      const icon = btn.querySelector('.notif-toggle-icon');
+      if (icon) {
+        icon.textContent = newState ? 'notifications_active' : 'notifications_off';
+      }
+      
+      const status = btn.querySelector('.notif-toggle-status');
+      if (status) {
+        status.textContent = newState ? 'Aktif' : 'Nonaktif';
+      }
+    });
+
+    if (typeof Animations !== 'undefined' && Animations.showToast) {
+      Animations.showToast(newState ? 'Pemberitahuan diaktifkan' : 'Pemberitahuan dinonaktifkan', newState ? 'success' : 'info');
+    }
+  };
+}
