@@ -219,12 +219,6 @@ const Animations = (() => {
     wrapper.className = 'celebration-video-wrap';
     wrapper.style.cssText = 'position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%;';
 
-    // Instant fallback image while video loads/buffers
-    const fallbackImg = document.createElement('img');
-    fallbackImg.src = 'assets/img/maskots/mascot-cheerful.png';
-    fallbackImg.alt = 'Mascot';
-    fallbackImg.style.cssText = 'position:absolute; width:85%; height:85%; object-fit:contain; filter:drop-shadow(0 18px 40px rgba(0,0,0,0.35)); transition:opacity 0.35s ease; z-index:1;';
-
     const video = document.createElement('video');
     video.src = videoSrc;
     video.preload = 'auto';
@@ -248,14 +242,12 @@ const Animations = (() => {
     canvas.className = 'celebration-canvas';
     canvas.style.cssText = 'position:relative; z-index:2; width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 20px 45px rgba(0,0,0,0.35));';
 
-    wrapper.appendChild(fallbackImg);
     wrapper.appendChild(video);
     wrapper.appendChild(canvas);
     container.appendChild(wrapper);
 
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
     let animId = null;
-    let hasRenderedFirstFrame = false;
 
     const setDimensions = () => {
       if (video.videoWidth > 0 && video.videoHeight > 0) {
@@ -297,13 +289,6 @@ const Animations = (() => {
 
       ctx.putImageData(frame, 0, 0);
 
-      // Smoothly hide fallback image after first video frame renders
-      if (!hasRenderedFirstFrame) {
-        hasRenderedFirstFrame = true;
-        fallbackImg.style.opacity = '0';
-        setTimeout(() => { fallbackImg.style.display = 'none'; }, 300);
-      }
-
       animId = requestAnimationFrame(renderFrame);
     };
 
@@ -322,10 +307,7 @@ const Animations = (() => {
             video.play().then(() => {
               if (!animId) animId = requestAnimationFrame(renderFrame);
             }).catch((err2) => {
-              console.warn('Retry autoplay failed on mobile, using static mascot fallback:', err2);
-              canvas.style.display = 'none';
-              fallbackImg.style.opacity = '1';
-              fallbackImg.style.display = 'block';
+              console.warn('Retry autoplay failed on mobile:', err2);
             });
           }, 150);
         });
