@@ -946,7 +946,10 @@ const Tour = (() => {
     activeWatchedUserModal = null;
     if (activeInteractiveEl) {
       try {
-        activeInteractiveEl.style.position = '';
+        if (activeInteractiveEl.dataset.originalPosWasStatic === 'true') {
+          activeInteractiveEl.style.position = '';
+          delete activeInteractiveEl.dataset.originalPosWasStatic;
+        }
         activeInteractiveEl.style.zIndex = '';
         activeInteractiveEl.style.pointerEvents = '';
       } catch(e) {}
@@ -983,7 +986,11 @@ const Tour = (() => {
     const targetEl = getTargetEl(stepData.target);
     if (targetEl) {
       activeInteractiveEl = targetEl;
-      targetEl.style.position = 'relative';
+      const compPos = window.getComputedStyle(targetEl).position;
+      if (compPos === 'static') {
+        targetEl.style.position = 'relative';
+        targetEl.dataset.originalPosWasStatic = 'true';
+      }
       targetEl.style.zIndex = '10601';
       targetEl.style.pointerEvents = 'auto';
     }
