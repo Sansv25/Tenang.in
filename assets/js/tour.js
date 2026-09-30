@@ -809,6 +809,12 @@ const Tour = (() => {
   }
 
   function getActiveUserModal() {
+    // Detect active celebration video overlay (e.g. mascot quiz completion video)
+    const celeb = document.querySelector('.celebration-overlay');
+    if (celeb && !celeb.classList.contains('closing')) {
+      return celeb;
+    }
+
     const activeModals = Array.from(document.querySelectorAll('.modal-overlay.active, .modal.active, .modal-card.active'));
     for (const m of activeModals) {
       if (m.id === 'onboarding-modal' || m.id === 'welcome-screen') continue;
