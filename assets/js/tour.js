@@ -100,11 +100,6 @@ const Tour = (() => {
             TemanChat.open();
           }
         }
-        const voiceBtn = document.getElementById('teman-voice-btn');
-        if (voiceBtn) {
-          voiceBtn.style.position = 'relative';
-          voiceBtn.style.zIndex = '10601';
-        }
       },
       autoAdvance: true,
       autoAdvanceDelayMs: 2800,
@@ -567,21 +562,22 @@ const Tour = (() => {
   // ─────────────────────────────────────────
   // SPOTLIGHT POSITION
   // ─────────────────────────────────────────
+  function hideSpotlight() {
+    if (!spotlightEl) return;
+    spotlightEl.style.opacity = '0';
+    spotlightEl.style.display = 'none';
+  }
+
   function updateSpotlight(targetEl) {
     if (!spotlightEl) return;
     if (!targetEl) {
-      spotlightEl.style.width   = '0px';
-      spotlightEl.style.height  = '0px';
-      spotlightEl.style.top     = '50%';
-      spotlightEl.style.left    = '50%';
-      spotlightEl.style.borderRadius = '0';
-      spotlightEl.style.opacity = '1';
+      hideSpotlight();
       return;
     }
 
     const node = typeof targetEl === 'string' ? getTargetEl(targetEl) : targetEl;
     if (!node) {
-      spotlightEl.style.opacity = '0';
+      hideSpotlight();
       return;
     }
 
@@ -589,14 +585,14 @@ const Tour = (() => {
     const chatEl = document.getElementById('teman-chat');
     if (chatEl && (node === chatEl || node.classList?.contains('teman-chat') || chatEl.contains(node))) {
       if (!chatEl.classList.contains('active')) {
-        spotlightEl.style.opacity = '0';
+        hideSpotlight();
         return;
       }
     }
 
     const r = node.getBoundingClientRect();
     if (r.width === 0 && r.height === 0) {
-      spotlightEl.style.opacity = '0';
+      hideSpotlight();
       return;
     }
 
@@ -623,6 +619,7 @@ const Tour = (() => {
       }
     }
 
+    spotlightEl.style.display      = 'block';
     spotlightEl.style.top          = `${top}px`;
     spotlightEl.style.left         = `${left}px`;
     spotlightEl.style.width        = `${Math.max(0, width)}px`;
@@ -862,7 +859,7 @@ const Tour = (() => {
       if (openModal) {
         if (!activeWatchedUserModal) {
           activeWatchedUserModal = openModal;
-          if (spotlightEl) spotlightEl.style.opacity = '0';
+          hideSpotlight();
           if (tooltipEl) tooltipEl.classList.add('tour-hidden');
           unlockScroll();
         } else if (activeWatchedUserModal !== openModal) {
@@ -944,22 +941,7 @@ const Tour = (() => {
       activeResizeObserver = null;
     }
     activeWatchedUserModal = null;
-    if (activeInteractiveEl) {
-      try {
-        if (activeInteractiveEl.dataset.originalPosWasStatic === 'true') {
-          activeInteractiveEl.style.position = '';
-          delete activeInteractiveEl.dataset.originalPosWasStatic;
-        }
-        activeInteractiveEl.style.zIndex = '';
-        activeInteractiveEl.style.pointerEvents = '';
-      } catch(e) {}
-      activeInteractiveEl = null;
-    }
-    const voiceBtn = document.getElementById('teman-voice-btn');
-    if (voiceBtn) {
-      voiceBtn.style.position = '';
-      voiceBtn.style.zIndex = '';
-    }
+    activeInteractiveEl = null;
     const chatEl = document.getElementById('teman-chat');
     if (chatEl) chatEl.style.zIndex = '';
   }
@@ -986,13 +968,6 @@ const Tour = (() => {
     const targetEl = getTargetEl(stepData.target);
     if (targetEl) {
       activeInteractiveEl = targetEl;
-      const compPos = window.getComputedStyle(targetEl).position;
-      if (compPos === 'static') {
-        targetEl.style.position = 'relative';
-        targetEl.dataset.originalPosWasStatic = 'true';
-      }
-      targetEl.style.zIndex = '10601';
-      targetEl.style.pointerEvents = 'auto';
     }
     await scrollToTarget(targetEl, stepData.position);
     await new Promise(r => setTimeout(r, 60));

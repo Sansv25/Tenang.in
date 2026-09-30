@@ -60,6 +60,9 @@ function updateProfilStepDots() {
 
 // ---- Start Quiz ----
 function startProfilQuiz() {
+  if (typeof Tour !== 'undefined' && Tour.stop) {
+    Tour.stop();
+  }
   if (!profilData) {
     Animations.showToast('Data kuis belum dimuat...', 'warning');
     return;

@@ -40,6 +40,9 @@ function showExistingResult(result) {
 
 // ---- Start Quiz ----
 function startKenaliQuiz() {
+  if (typeof Tour !== 'undefined' && Tour.stop) {
+    Tour.stop();
+  }
   if (!quizData) {
     Animations.showToast('Data kuis belum dimuat, coba lagi...', 'warning');
     return;
