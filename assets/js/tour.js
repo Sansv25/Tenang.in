@@ -193,7 +193,7 @@ const Tour = (() => {
     {
       page: 'jurnal', target: '#btn-burn, [data-action="simulate-burn"], #bakar-beban-card', position: 'top',
       title: 'Fitur Bakar Beban (Katarsis)',
-      body: 'Ketikkan kekhawatiran atau emosi negatifmu di kolom ini, lalu klik tombol "Siapkan Pembakaran Beban Ini". Tulisanmu akan dibakar dalam simulasi api 3D hingga musnah tanpa tersimpan.'
+      body: 'Ketikkan kekhawatiran atau emosi negatifmu di kolom ini, lalu klik tombol "Bakar Beban Ini". Tulisanmu akan dibakar dalam simulasi api 3D hingga musnah tanpa tersimpan.'
     },
 
     // ══════════════════════════════
@@ -511,10 +511,57 @@ const Tour = (() => {
           <span class="material-symbols-rounded" style="font-size:15px;">${nextIcon}</span>
         </button>
       </div>
-      <button class="tour-skip" onclick="Tour.stop()">Lewati Tour</button>
+      <button class="tour-skip" onclick="Tour.requestSkip()">Lewati Tour</button>
     `;
 
     tooltipEl.classList.toggle('tour-center', isCenter);
+  }
+
+  // ─────────────────────────────────────────
+  // CONFIRMATION DIALOG FOR LEWATI TOUR
+  // ─────────────────────────────────────────
+  let isConfirmingSkip = false;
+
+  function requestSkip() {
+    if (!tooltipEl || !state.active) return;
+    isConfirmingSkip = true;
+
+    const stepIdx = state.step;
+    const total = STEPS.length;
+    const sd = STEPS[stepIdx];
+    const isCenter = sd ? sd.position === 'center' : true;
+
+    tooltipEl.innerHTML = `
+      ${!isCenter ? '<div class="tour-arrow" id="tour-arrow"></div>' : ''}
+      <img src="${MASCOT_IMG}" alt="Milo" class="tour-mascot" loading="lazy" decoding="async">
+      <div class="tour-step-counter" style="color:#EF4444; font-weight:800;">KONFIRMASI LEWATI TOUR</div>
+      <div class="tour-title" style="text-align:center;">Hentikan Tour Panduan?</div>
+      <div class="tour-body" style="text-align:center;">Kamu sedang berada di Langkah ${stepIdx + 1} dari ${total}. Kamu tetap bisa mengulang tour kapan saja melalui menu Pengaturan.</div>
+      <div class="tour-actions" style="flex-direction:column; gap:8px; margin-top:10px;">
+        <button class="tour-btn-next" style="width:100%; justify-content:center;" onclick="Tour.resumeFromSkip()">
+          <span class="material-symbols-rounded" style="font-size:18px;">play_arrow</span>
+          <span>Lanjutkan Tour</span>
+        </button>
+        <button class="tour-btn-prev" style="width:100%; justify-content:center; border-color:rgba(239,68,68,0.3); color:#EF4444; background:rgba(239,68,68,0.06);" onclick="Tour.stop()">
+          <span>Ya, Hentikan Tour</span>
+        </button>
+      </div>
+    `;
+
+    const targetEl = sd ? getTargetEl(sd.target) : null;
+    positionTooltip(targetEl, sd ? sd.position : 'center');
+  }
+
+  function resumeFromSkip() {
+    isConfirmingSkip = false;
+    if (state.active) {
+      const stepData = STEPS[state.step];
+      if (stepData) {
+        renderTooltip(stepData, state.step, STEPS.length);
+        const targetEl = getTargetEl(stepData.target);
+        positionTooltip(targetEl, stepData.position);
+      }
+    }
   }
 
   // ─────────────────────────────────────────
@@ -1036,6 +1083,7 @@ const Tour = (() => {
   // PUBLIC: stop()
   // ─────────────────────────────────────────
   function stop() {
+    isConfirmingSkip = false;
     clearAutoTriggers();
     stopUserModalWatcher();
     if (typeof TemanChat !== 'undefined' && TemanChat.close) {
@@ -1250,6 +1298,8 @@ const Tour = (() => {
     start,
     stop,
     reset,
+    requestSkip,
+    resumeFromSkip,
     detectPage,
     isRunning,
     isDone,

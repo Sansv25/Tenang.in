@@ -2172,6 +2172,23 @@ body.dark-mode .teman-input-field::placeholder {
   justify-content: space-between;
 }
 
+/* ---- Burn Button Responsive Text ---- */
+.btn-burn-text-desktop {
+  display: inline;
+}
+.btn-burn-text-mobile {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .btn-burn-text-desktop {
+    display: none !important;
+  }
+  .btn-burn-text-mobile {
+    display: inline !important;
+  }
+}
+
 /* ---- 3D Realistic Burning Card Styles ---- */
 .burn-3d-wrapper {
   perspective: 1200px;

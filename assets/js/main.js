@@ -257,8 +257,8 @@ const Main = (() => {
             <span>Tenang.in bukan pengganti konsultasi profesional.</span>
           </p>
           <div style="font-size:0.75rem; color:rgba(255,255,255,0.4); display:flex; gap:16px;">
-            <a href="kebijakan.html" style="color:rgba(255,255,255,0.5); text-decoration:none;">Privasi</a>
-            <a href="syarat.html" style="color:rgba(255,255,255,0.5); text-decoration:none;">Syarat & Ketentuan</a>
+            <a href="#" style="color:rgba(255,255,255,0.5); text-decoration:none;">Privasi</a>
+            <a href="#" style="color:rgba(255,255,255,0.5); text-decoration:none;">Syarat & Ketentuan</a>
             <span>© 2026 Tenang.in</span>
           </div>
         </div>
