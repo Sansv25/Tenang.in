@@ -538,7 +538,9 @@ const Tour = (() => {
         if (!state.active) return;
         const openModal = getActiveUserModal();
         if (openModal) {
-          // Modal terdeteksi → langsung sembunyikan tour UI
+          // Hapus class tour-target-el dulu agar elemen tidak mengambang di atas modal
+          el.classList.remove('tour-target-el');
+          // Sembunyikan seluruh tour UI
           hideSpotlight();
           if (tooltipEl) tooltipEl.classList.add('tour-hidden');
           if (overlayBlockerEl) overlayBlockerEl.style.display = 'none';
@@ -552,6 +554,7 @@ const Tour = (() => {
     el.addEventListener('click', onTargetClick);
     currentTourTargetClickFn = onTargetClick;
   }
+
 
   function removeTourTargetEl() {
     if (currentTourTargetEl) {
