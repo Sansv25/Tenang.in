@@ -524,31 +524,75 @@ const Tour = (() => {
   let currentTourTargetEl = null;
   let currentTourTargetClickFn = null;
 
+  let currentTourModalObserver = null; // MutationObserver untuk deteksi modal
+
+  function hideTourUIForModal(targetEl) {
+    // Hapus class tour-target-el agar elemen tidak mengambang di atas modal
+    if (targetEl) targetEl.classList.remove('tour-target-el');
+    // Sembunyikan seluruh tour UI
+    hideSpotlight();
+    if (tooltipEl) tooltipEl.classList.add('tour-hidden');
+    if (overlayBlockerEl) overlayBlockerEl.style.display = 'none';
+    unlockScroll();
+  }
+
   function setTourTargetEl(el) {
     removeTourTargetEl();
     if (!el) return;
     el.classList.add('tour-target-el');
     currentTourTargetEl = el;
 
-    // FIX: Saat target diklik dan membuka modal/popup, langsung sembunyikan
-    // tour UI dalam 30ms agar modal tidak tampil di belakang spotlight/overlay.
-    // UserModalWatcher tetap berjalan dan akan trigger _next() saat modal tutup.
+    // Saat target diklik, pasang MutationObserver untuk mendeteksi modal
+    // yang muncul SEGERA (bukan setTimeout yg tebak-tebakan).
+    // Ini mencegah double-dark: tour overlay + modal overlay tampil bersamaan.
     const onTargetClick = () => {
-      setTimeout(() => {
-        if (!state.active) return;
+      // Disconnect observer lama jika masih aktif
+      if (currentTourModalObserver) {
+        currentTourModalObserver.disconnect();
+        currentTourModalObserver = null;
+      }
+
+      // Cek apakah modal sudah langsung ada (tanpa animasi delay)
+      if (state.active && getActiveUserModal()) {
+        hideTourUIForModal(el);
+        activeWatchedUserModal = getActiveUserModal();
+        return;
+      }
+
+      // Pasang MutationObserver: deteksi modal secara instan saat DOM berubah
+      let safetyTimeout = null;
+      const observer = new MutationObserver(() => {
+        if (!state.active) {
+          observer.disconnect();
+          currentTourModalObserver = null;
+          if (safetyTimeout) clearTimeout(safetyTimeout);
+          return;
+        }
         const openModal = getActiveUserModal();
         if (openModal) {
-          // Hapus class tour-target-el dulu agar elemen tidak mengambang di atas modal
-          el.classList.remove('tour-target-el');
-          // Sembunyikan seluruh tour UI
-          hideSpotlight();
-          if (tooltipEl) tooltipEl.classList.add('tour-hidden');
-          if (overlayBlockerEl) overlayBlockerEl.style.display = 'none';
-          unlockScroll();
-          // Tandai sebagai modal yang sedang diawasi oleh watcher
+          // Modal terdeteksi! Langsung sembunyikan tour UI
+          observer.disconnect();
+          currentTourModalObserver = null;
+          if (safetyTimeout) clearTimeout(safetyTimeout);
+          hideTourUIForModal(el);
           activeWatchedUserModal = openModal;
         }
-      }, 30); // 30ms cukup untuk modal muncul di DOM
+      });
+
+      // Observe: childList (modal ditambah ke DOM) + attributes class (modal dapat .active)
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class', 'style']
+      });
+      currentTourModalObserver = observer;
+
+      // Safety: disconnect setelah 2 detik agar tidak memory leak
+      safetyTimeout = setTimeout(() => {
+        observer.disconnect();
+        currentTourModalObserver = null;
+      }, 2000);
     };
 
     el.addEventListener('click', onTargetClick);
@@ -557,6 +601,11 @@ const Tour = (() => {
 
 
   function removeTourTargetEl() {
+    // Disconnect observer jika masih aktif
+    if (currentTourModalObserver) {
+      currentTourModalObserver.disconnect();
+      currentTourModalObserver = null;
+    }
     if (currentTourTargetEl) {
       currentTourTargetEl.classList.remove('tour-target-el');
       if (currentTourTargetClickFn) {
@@ -570,6 +619,7 @@ const Tour = (() => {
       el.classList.remove('tour-target-el');
     });
   }
+
 
   // ─────────────────────────────────────────
   // TARGET ELEMENT RESOLVER
