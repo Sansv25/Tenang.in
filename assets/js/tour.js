@@ -428,6 +428,28 @@ const Tour = (() => {
     overlayBlockerEl = document.createElement('div');
     overlayBlockerEl.className = 'tour-overlay-blocker';
     overlayBlockerEl.id = 'tour-overlay-blocker';
+
+    // Jika klik terjadi di dalam area target (spotlight), teruskan klik ke elemen asli
+    // bahkan jika stacking context / overlay terhalang CSS
+    overlayBlockerEl.addEventListener('click', (e) => {
+      if (!state.active || !currentTourTargetEl) return;
+      const rect = currentTourTargetEl.getBoundingClientRect();
+      const pad = SPOT_PAD || 10;
+      if (
+        e.clientX >= rect.left - pad &&
+        e.clientX <= rect.right + pad &&
+        e.clientY >= rect.top - pad &&
+        e.clientY <= rect.bottom + pad
+      ) {
+        overlayBlockerEl.style.pointerEvents = 'none';
+        const clickedEl = document.elementFromPoint(e.clientX, e.clientY);
+        overlayBlockerEl.style.pointerEvents = '';
+        if (clickedEl && typeof clickedEl.click === 'function') {
+          clickedEl.click();
+        }
+      }
+    });
+
     document.body.appendChild(overlayBlockerEl);
 
     spotlightEl = document.createElement('div');
@@ -516,13 +538,14 @@ const Tour = (() => {
 
   // ─────────────────────────────────────────
   // TARGET ELEMENT ELEVATION
-  // Tambah/hapus class .tour-target-el agar
-  // elemen yg disorot berada di z-index 10401
-  // (di atas overlay blocker 10400) sehingga
-  // klik in-page tetap berfungsi normal.
+  // Tambah/hapus class .tour-target-el & .tour-target-parent
+  // agar elemen yg disorot dan seluruh rantai parent-nya
+  // berada di z-index 10401 (di atas overlay blocker 10400)
+  // sehingga stacking context tidak mengurung elemen.
   // ─────────────────────────────────────────
   let currentTourTargetEl = null;
   let currentTourTargetClickFn = null;
+  let elevatedParents = [];
 
   function setTourTargetEl(el) {
     removeTourTargetEl();
@@ -530,12 +553,20 @@ const Tour = (() => {
     el.classList.add('tour-target-el');
     currentTourTargetEl = el;
 
+    // Elevasikan seluruh parent ke z-index 10401 agar tidak terperangkap stacking context
+    let p = el.parentElement;
+    while (p && p !== document.body && p !== document.documentElement) {
+      p.classList.add('tour-target-parent');
+      elevatedParents.push(p);
+      p = p.parentElement;
+    }
+
     // Saat tombol diklik: LANGSUNG sembunyikan semua tour UI.
-    // userModalWatcher yang sudah ada akan mendeteksi popup/modal terbuka,
-    // lalu memanggil _next() otomatis saat popup ditutup.
+    // userModalWatcher yang sudah ada akan mendeteksi popup/modal/quiz terbuka,
+    // lalu memanggil _next() otomatis saat ditutup.
     const onTargetClick = () => {
       if (!state.active) return;
-      el.classList.remove('tour-target-el');
+      removeTourTargetEl();
       hideSpotlight();
       if (tooltipEl) tooltipEl.classList.add('tour-hidden');
       if (overlayBlockerEl) overlayBlockerEl.style.display = 'none';
@@ -555,9 +586,17 @@ const Tour = (() => {
       }
       currentTourTargetEl = null;
     }
+    elevatedParents.forEach(p => {
+      try { p.classList.remove('tour-target-parent'); } catch(e) {}
+    });
+    elevatedParents = [];
+
     // Fallback: bersihkan semua elemen yg mungkin tersisa
     document.querySelectorAll('.tour-target-el').forEach(el => {
       el.classList.remove('tour-target-el');
+    });
+    document.querySelectorAll('.tour-target-parent').forEach(el => {
+      el.classList.remove('tour-target-parent');
     });
   }
 

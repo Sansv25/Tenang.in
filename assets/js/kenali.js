@@ -303,7 +303,7 @@ function showResult(type, resultScores, isNew = true) {
         <span class="material-symbols-rounded">share</span>
         Bagikan Hasilku
       </button>
-      <button class="kenali-btn-retake" onclick="retakeQuiz()">
+      <button class="kenali-btn-retake" data-action="retake-kenali-quiz" onclick="retakeQuiz()">
         <span class="material-symbols-rounded">refresh</span>
         Ulangi Kuis
       </button>

@@ -47,6 +47,12 @@ body.tour-active {
   z-index: 10401 !important;
 }
 
+/* Elevasikan seluruh rantai parent agar stacking context tidak mengurung z-index */
+.tour-target-parent {
+  position: relative !important;
+  z-index: 10401 !important;
+}
+
 /* Pastikan semua child element di dalam target juga bisa diklik */
 .tour-target-el,
 .tour-target-el * {
