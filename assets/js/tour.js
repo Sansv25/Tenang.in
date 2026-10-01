@@ -522,17 +522,44 @@ const Tour = (() => {
   // klik in-page tetap berfungsi normal.
   // ─────────────────────────────────────────
   let currentTourTargetEl = null;
+  let currentTourTargetClickFn = null;
 
   function setTourTargetEl(el) {
     removeTourTargetEl();
     if (!el) return;
     el.classList.add('tour-target-el');
     currentTourTargetEl = el;
+
+    // FIX: Saat target diklik dan membuka modal/popup, langsung sembunyikan
+    // tour UI dalam 30ms agar modal tidak tampil di belakang spotlight/overlay.
+    // UserModalWatcher tetap berjalan dan akan trigger _next() saat modal tutup.
+    const onTargetClick = () => {
+      setTimeout(() => {
+        if (!state.active) return;
+        const openModal = getActiveUserModal();
+        if (openModal) {
+          // Modal terdeteksi → langsung sembunyikan tour UI
+          hideSpotlight();
+          if (tooltipEl) tooltipEl.classList.add('tour-hidden');
+          if (overlayBlockerEl) overlayBlockerEl.style.display = 'none';
+          unlockScroll();
+          // Tandai sebagai modal yang sedang diawasi oleh watcher
+          activeWatchedUserModal = openModal;
+        }
+      }, 30); // 30ms cukup untuk modal muncul di DOM
+    };
+
+    el.addEventListener('click', onTargetClick);
+    currentTourTargetClickFn = onTargetClick;
   }
 
   function removeTourTargetEl() {
     if (currentTourTargetEl) {
       currentTourTargetEl.classList.remove('tour-target-el');
+      if (currentTourTargetClickFn) {
+        currentTourTargetEl.removeEventListener('click', currentTourTargetClickFn);
+        currentTourTargetClickFn = null;
+      }
       currentTourTargetEl = null;
     }
     // Fallback: bersihkan semua elemen yg mungkin tersisa
