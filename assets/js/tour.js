@@ -524,88 +524,29 @@ const Tour = (() => {
   let currentTourTargetEl = null;
   let currentTourTargetClickFn = null;
 
-  let currentTourModalObserver = null; // MutationObserver untuk deteksi modal
-
-  function hideTourUIForModal(targetEl) {
-    // Hapus class tour-target-el agar elemen tidak mengambang di atas modal
-    if (targetEl) targetEl.classList.remove('tour-target-el');
-    // Sembunyikan seluruh tour UI
-    hideSpotlight();
-    if (tooltipEl) tooltipEl.classList.add('tour-hidden');
-    if (overlayBlockerEl) overlayBlockerEl.style.display = 'none';
-    unlockScroll();
-  }
-
   function setTourTargetEl(el) {
     removeTourTargetEl();
     if (!el) return;
     el.classList.add('tour-target-el');
     currentTourTargetEl = el;
 
-    // Saat target diklik, pasang MutationObserver untuk mendeteksi modal
-    // yang muncul SEGERA (bukan setTimeout yg tebak-tebakan).
-    // Ini mencegah double-dark: tour overlay + modal overlay tampil bersamaan.
+    // Saat tombol diklik: LANGSUNG sembunyikan semua tour UI.
+    // userModalWatcher yang sudah ada akan mendeteksi popup/modal terbuka,
+    // lalu memanggil _next() otomatis saat popup ditutup.
     const onTargetClick = () => {
-      // Disconnect observer lama jika masih aktif
-      if (currentTourModalObserver) {
-        currentTourModalObserver.disconnect();
-        currentTourModalObserver = null;
-      }
-
-      // Cek apakah modal sudah langsung ada (tanpa animasi delay)
-      if (state.active && getActiveUserModal()) {
-        hideTourUIForModal(el);
-        activeWatchedUserModal = getActiveUserModal();
-        return;
-      }
-
-      // Pasang MutationObserver: deteksi modal secara instan saat DOM berubah
-      let safetyTimeout = null;
-      const observer = new MutationObserver(() => {
-        if (!state.active) {
-          observer.disconnect();
-          currentTourModalObserver = null;
-          if (safetyTimeout) clearTimeout(safetyTimeout);
-          return;
-        }
-        const openModal = getActiveUserModal();
-        if (openModal) {
-          // Modal terdeteksi! Langsung sembunyikan tour UI
-          observer.disconnect();
-          currentTourModalObserver = null;
-          if (safetyTimeout) clearTimeout(safetyTimeout);
-          hideTourUIForModal(el);
-          activeWatchedUserModal = openModal;
-        }
-      });
-
-      // Observe: childList (modal ditambah ke DOM) + attributes class (modal dapat .active)
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-        attributes: true,
-        attributeFilter: ['class', 'style']
-      });
-      currentTourModalObserver = observer;
-
-      // Safety: disconnect setelah 2 detik agar tidak memory leak
-      safetyTimeout = setTimeout(() => {
-        observer.disconnect();
-        currentTourModalObserver = null;
-      }, 2000);
+      if (!state.active) return;
+      el.classList.remove('tour-target-el');
+      hideSpotlight();
+      if (tooltipEl) tooltipEl.classList.add('tour-hidden');
+      if (overlayBlockerEl) overlayBlockerEl.style.display = 'none';
+      unlockScroll();
     };
 
     el.addEventListener('click', onTargetClick);
     currentTourTargetClickFn = onTargetClick;
   }
 
-
   function removeTourTargetEl() {
-    // Disconnect observer jika masih aktif
-    if (currentTourModalObserver) {
-      currentTourModalObserver.disconnect();
-      currentTourModalObserver = null;
-    }
     if (currentTourTargetEl) {
       currentTourTargetEl.classList.remove('tour-target-el');
       if (currentTourTargetClickFn) {
@@ -619,7 +560,6 @@ const Tour = (() => {
       el.classList.remove('tour-target-el');
     });
   }
-
 
   // ─────────────────────────────────────────
   // TARGET ELEMENT RESOLVER
