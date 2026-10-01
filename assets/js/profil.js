@@ -60,9 +60,10 @@ function updateProfilStepDots() {
 
 // ---- Start Quiz ----
 function startProfilQuiz() {
-  if (typeof Tour !== 'undefined' && Tour.stop) {
-    Tour.stop();
-  }
+  // CATATAN: Jangan panggil Tour.stop() di sini.
+  // Tour.userModalWatcher akan otomatis mendeteksi profil-quiz & celebration-overlay
+  // sebagai modal aktif, menyembunyikan UI tour sementara, lalu memanggil _next()
+  // setelah celebration selesai → tour lanjut ke step berikutnya secara otomatis.
   if (!profilData) {
     Animations.showToast('Data kuis belum dimuat...', 'warning');
     return;

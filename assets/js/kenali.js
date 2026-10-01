@@ -40,9 +40,10 @@ function showExistingResult(result) {
 
 // ---- Start Quiz ----
 function startKenaliQuiz() {
-  if (typeof Tour !== 'undefined' && Tour.stop) {
-    Tour.stop();
-  }
+  // CATATAN: Jangan panggil Tour.stop() di sini.
+  // Tour.userModalWatcher akan otomatis mendeteksi kenali-quiz & celebration-overlay
+  // sebagai modal aktif, menyembunyikan UI tour sementara, lalu memanggil _next()
+  // setelah celebration selesai → tour lanjut ke step berikutnya secara otomatis.
   if (!quizData) {
     Animations.showToast('Data kuis belum dimuat, coba lagi...', 'warning');
     return;
