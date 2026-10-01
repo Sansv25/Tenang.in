@@ -418,8 +418,17 @@ const Tour = (() => {
   // ─────────────────────────────────────────
   // DOM: CREATE / DESTROY UI
   // ─────────────────────────────────────────
+  let overlayBlockerEl = null;
+  let targetNavInterceptor = null;   // { el, fn } pasangan untuk cleanup
+
   function createUI() {
     destroyUI();
+
+    // Overlay blocker: blokir semua klik/hover di area gelap (di luar spotlight)
+    overlayBlockerEl = document.createElement('div');
+    overlayBlockerEl.className = 'tour-overlay-blocker';
+    overlayBlockerEl.id = 'tour-overlay-blocker';
+    document.body.appendChild(overlayBlockerEl);
 
     spotlightEl = document.createElement('div');
     spotlightEl.className = 'tour-spotlight-box';
@@ -437,12 +446,73 @@ const Tour = (() => {
 
   function destroyUI() {
     stopUserModalWatcher();
+    removeTargetNavInterceptor();
+    document.getElementById('tour-overlay-blocker')?.remove();
     document.getElementById('tour-spotlight')?.remove();
     document.getElementById('tour-tooltip')?.remove();
+    overlayBlockerEl = null;
     spotlightEl = null;
     tooltipEl   = null;
     document.removeEventListener('keydown', handleKeydown);
   }
+
+  // ─────────────────────────────────────────
+  // NAVIGATION INTERCEPTOR
+  // Pasang event listener pada target element
+  // untuk mencegah navigasi ke halaman lain
+  // (klik pada <a href>, onclick yg redirect)
+  // ─────────────────────────────────────────
+  function attachTargetNavInterceptor(targetEl) {
+    removeTargetNavInterceptor();
+    if (!targetEl) return;
+
+    const interceptFn = (e) => {
+      if (!state.active) return;
+
+      // Cek apakah klik menyebabkan navigasi: target atau ancestor-nya adalah <a href>
+      const anchor = e.target.closest('a[href]');
+      if (anchor) {
+        const href = anchor.getAttribute('href');
+        // Blokir jika href mengarah ke halaman lain (bukan # anchor)
+        if (href && !href.startsWith('#') && !href.startsWith('javascript')) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+      }
+
+      // Cek apakah elemen atau ancestor-nya punya onclick/data-action yg navigasi
+      const navEl = e.target.closest('[onclick*="location"], [onclick*="href"], [onclick*="navigate"], [data-page], [data-href]');
+      if (navEl) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+    };
+
+    // Pasang di capture phase agar berjalan sebelum handler lain
+    targetEl.addEventListener('click', interceptFn, true);
+    // Juga pasang pada semua child <a> elements
+    targetEl.querySelectorAll('a[href]').forEach(a => {
+      const href = a.getAttribute('href');
+      if (href && !href.startsWith('#') && !href.startsWith('javascript')) {
+        a.addEventListener('click', interceptFn, true);
+      }
+    });
+
+    targetNavInterceptor = { el: targetEl, fn: interceptFn };
+  }
+
+  function removeTargetNavInterceptor() {
+    if (!targetNavInterceptor) return;
+    const { el, fn } = targetNavInterceptor;
+    try {
+      el.removeEventListener('click', fn, true);
+      el.querySelectorAll('a[href]').forEach(a => a.removeEventListener('click', fn, true));
+    } catch(e) {}
+    targetNavInterceptor = null;
+  }
+
 
   // ─────────────────────────────────────────
   // TARGET ELEMENT RESOLVER
@@ -566,12 +636,23 @@ const Tour = (() => {
     if (!spotlightEl) return;
     spotlightEl.style.opacity = '0';
     spotlightEl.style.display = 'none';
+    // Sembunyikan overlay blocker juga agar modal/konten bisa berinteraksi
+    if (overlayBlockerEl) overlayBlockerEl.style.display = 'none';
+  }
+
+  function showOverlayBlocker() {
+    if (overlayBlockerEl) overlayBlockerEl.style.display = '';
   }
 
   function updateSpotlight(targetEl) {
     if (!spotlightEl) return;
     if (!targetEl) {
-      hideSpotlight();
+      // Step center: sembunyikan spotlight box tapi overlay blocker tetap aktif
+      // dengan dark backdrop karena tidak ada box-shadow dari spotlight
+      spotlightEl.style.opacity = '0';
+      spotlightEl.style.display = 'none';
+      showOverlayBlocker();
+      if (overlayBlockerEl) overlayBlockerEl.classList.add('has-dark-bg');
       return;
     }
 
@@ -626,6 +707,9 @@ const Tour = (() => {
     spotlightEl.style.height       = `${Math.max(0, height)}px`;
     spotlightEl.style.borderRadius = radius;
     spotlightEl.style.opacity      = '1';
+    // Pastikan overlay blocker aktif, tanpa dark bg (box-shadow spotlight yg handle)
+    showOverlayBlocker();
+    if (overlayBlockerEl) overlayBlockerEl.classList.remove('has-dark-bg');
   }
 
   // ─────────────────────────────────────────
@@ -923,6 +1007,7 @@ const Tour = (() => {
   let activeInteractiveEl = null;
 
   function clearAutoTriggers() {
+    removeTargetNavInterceptor();
     if (activeAutoTimer) {
       clearTimeout(activeAutoTimer);
       activeAutoTimer = null;
@@ -981,6 +1066,12 @@ const Tour = (() => {
     // Trigger smooth gliding transition to new target position post-scroll
     updateSpotlight(targetEl);
     observeTarget(targetEl);
+
+    // Pasang interceptor navigasi pada target: blokir klik yg menyebabkan pindah halaman.
+    // Skip untuk step dgn autoOpen/autoAdvance (mereka handle interaksi sendiri).
+    if (!stepData.autoOpen && !stepData.autoAdvance) {
+      attachTargetNavInterceptor(targetEl);
+    }
 
     if (stepData.noTooltip) {
       if (tooltipEl) tooltipEl.classList.add('tour-hidden');
