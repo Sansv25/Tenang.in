@@ -447,6 +447,7 @@ const Tour = (() => {
   function destroyUI() {
     stopUserModalWatcher();
     removeTargetNavInterceptor();
+    removeTourTargetEl();
     document.getElementById('tour-overlay-blocker')?.remove();
     document.getElementById('tour-spotlight')?.remove();
     document.getElementById('tour-tooltip')?.remove();
@@ -513,6 +514,32 @@ const Tour = (() => {
     targetNavInterceptor = null;
   }
 
+  // ─────────────────────────────────────────
+  // TARGET ELEMENT ELEVATION
+  // Tambah/hapus class .tour-target-el agar
+  // elemen yg disorot berada di z-index 10401
+  // (di atas overlay blocker 10400) sehingga
+  // klik in-page tetap berfungsi normal.
+  // ─────────────────────────────────────────
+  let currentTourTargetEl = null;
+
+  function setTourTargetEl(el) {
+    removeTourTargetEl();
+    if (!el) return;
+    el.classList.add('tour-target-el');
+    currentTourTargetEl = el;
+  }
+
+  function removeTourTargetEl() {
+    if (currentTourTargetEl) {
+      currentTourTargetEl.classList.remove('tour-target-el');
+      currentTourTargetEl = null;
+    }
+    // Fallback: bersihkan semua elemen yg mungkin tersisa
+    document.querySelectorAll('.tour-target-el').forEach(el => {
+      el.classList.remove('tour-target-el');
+    });
+  }
 
   // ─────────────────────────────────────────
   // TARGET ELEMENT RESOLVER
@@ -1008,6 +1035,7 @@ const Tour = (() => {
 
   function clearAutoTriggers() {
     removeTargetNavInterceptor();
+    removeTourTargetEl();
     if (activeAutoTimer) {
       clearTimeout(activeAutoTimer);
       activeAutoTimer = null;
@@ -1066,6 +1094,10 @@ const Tour = (() => {
     // Trigger smooth gliding transition to new target position post-scroll
     updateSpotlight(targetEl);
     observeTarget(targetEl);
+
+    // Naikkan target element ke z-index 10401 agar klik in-page bisa menembus
+    // overlay blocker (10400), tapi navigasi ke halaman lain tetap dicegah interceptor
+    setTourTargetEl(targetEl);
 
     // Pasang interceptor navigasi pada target: blokir klik yg menyebabkan pindah halaman.
     // Skip untuk step dgn autoOpen/autoAdvance (mereka handle interaksi sendiri).
