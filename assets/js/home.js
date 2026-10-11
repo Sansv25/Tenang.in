@@ -80,6 +80,13 @@ function showCheckInModal(preselectedLevel = null) {
 function closeCheckInModal() {
   const overlay = document.getElementById('checkin-modal');
   if (overlay) overlay.classList.remove('active');
+  if (typeof Tour !== 'undefined' && !Tour.isDone() && !Tour.isRunning()) {
+    setTimeout(() => {
+      if (typeof Tour !== 'undefined' && !Tour.isDone() && !Tour.isRunning()) {
+        Tour.autoStart();
+      }
+    }, 400);
+  }
 }
 
 // ---- Mood Selection ----
@@ -627,8 +634,10 @@ const Onboarding = (() => {
     card.classList.remove('scale-100');
     card.classList.add('scale-95');
 
+    window._isOnboardingClosing = true;
     setTimeout(() => {
       modal.style.display = 'none';
+      window._isOnboardingClosing = false;
       if (Storage && typeof Storage.isFirstVisitToday === 'function' && Storage.isFirstVisitToday() && typeof showCheckInModal === 'function') {
         showCheckInModal();
       }

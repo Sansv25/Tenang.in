@@ -11,24 +11,24 @@ const Tour = (() => {
   // CONSTANTS & STORAGE KEYS
   // ─────────────────────────────────────────
   const KEY_RUNNING = 'tenang_tour_running';
-  const KEY_STEP    = 'tenang_tour_step';
-  const KEY_DONE    = 'tenang_tour_done';
+  const KEY_STEP = 'tenang_tour_step';
+  const KEY_DONE = 'tenang_tour_done';
 
-  const MASCOT_IMG    = 'assets/img/maskots/mascot-greeting.png';
+  const MASCOT_IMG = 'assets/img/maskots/mascot-greeting.png';
   const TRANSITION_MS = 280;
-  const SPOT_PAD      = 10;
-  const TIP_GAP       = 16;
+  const SPOT_PAD = 10;
+  const TIP_GAP = 16;
 
   // ─────────────────────────────────────────
   // PAGE URL MAP
   // ─────────────────────────────────────────
   const PAGE_URL = {
-    beranda:        'beranda.html',
+    beranda: 'beranda.html',
     'mood-tracker': 'mood-tracker.html',
-    jurnal:         'jurnal.html',
-    kenali:         'kenali.html',
-    dashboard:      'dashboard.html',
-    profil:         'profil.html'
+    jurnal: 'jurnal.html',
+    kenali: 'kenali.html',
+    dashboard: 'dashboard.html',
+    profil: 'profil.html'
   };
 
   // ─────────────────────────────────────────
@@ -61,78 +61,27 @@ const Tour = (() => {
       body: 'Kutipan reflektif penenang pikiran. Klik tombol "Inspirasi Baru" di bagian atas kartu untuk mengacak dan mendapatkan pesan motivasi segar kapan saja.'
     },
     {
-      page: 'beranda', target: '#quick-teman-ai .btn-ai-start, #quick-teman-ai, [data-action="open-teman-chat"]', position: 'top',
-      noTooltip: true,
-      autoOpen: () => {
-        if (typeof TemanChat !== 'undefined' && TemanChat.open) {
-          if (!document.getElementById('teman-chat')?.classList.contains('active')) {
-            TemanChat.open();
-          }
-        }
-      },
-      autoAdvance: true,
-      autoAdvanceDelayMs: 1200,
-      delayMs: 600
-    },
-    {
-      page: 'beranda', target: '#teman-chat', position: 'left',
-      noTooltip: true,
-      beforeRender: async () => {
-        if (typeof TemanChat !== 'undefined' && TemanChat.open) {
-          if (!document.getElementById('teman-chat')?.classList.contains('active')) {
-            TemanChat.open();
-          }
-        }
-      },
-      autoAdvance: true,
-      autoAdvanceDelayMs: 3000,
-      delayMs: 300
-    },
-    {
       page: 'beranda',
-      target: '#teman-voice-btn',
+      target: '#quick-teman-ai .btn-ai-start, #quick-teman-ai, [data-action="open-teman-chat"]',
       position: 'top',
-      title: 'Percakapan Suara',
-      body: 'Ketuk ikon mikrofon ini untuk berbicara langsung menggunakan suara dengan Teman AI.',
+      title: 'Teman AI — Curhat Privat',
+      body: 'Ruang interaksi cepat dengan Teman AI. Kamu bisa mengetuk "Mulai Sesi Curhat Sekarang" untuk membuka obrolan aman, atau klik Lanjut untuk melanjutkan tour.',
       beforeRender: async () => {
-        if (typeof TemanChat !== 'undefined' && TemanChat.open) {
-          if (!document.getElementById('teman-chat')?.classList.contains('active')) {
-            TemanChat.open();
-          }
+        if (typeof TemanChat !== 'undefined' && TemanChat.close) {
+          TemanChat.close();
         }
-      },
-      autoAdvance: true,
-      autoAdvanceDelayMs: 2800,
-      delayMs: 300
+        await new Promise(r => setTimeout(r, 100));
+      }
     },
     {
       page: 'beranda',
-      target: '#voice-orb-circle, #voice-orb-overlay',
-      position: 'center',
-      noTooltip: true,
+      target: '#quick-mood, .bento-grid',
+      position: 'top',
       beforeRender: async () => {
         if (typeof TemanChat !== 'undefined' && TemanChat.close) {
           TemanChat.close();
         }
-        await new Promise(r => setTimeout(r, 120));
-        if (typeof VoiceOrb !== 'undefined' && VoiceOrb.open) {
-          VoiceOrb.open();
-        }
-      },
-      modalId: 'voice-orb-overlay',
-      autoAdvance: true,
-      autoAdvanceDelayMs: 3200,
-      delayMs: 400
-    },
-    {
-      page: 'beranda', target: '#quick-mood, .bento-grid', position: 'top',
-      beforeRender: async () => {
-        if (typeof VoiceOrb !== 'undefined' && VoiceOrb.close) {
-          VoiceOrb.close();
-        }
-        if (typeof TemanChat !== 'undefined' && TemanChat.close) {
-          TemanChat.close();
-        }
+        await new Promise(r => setTimeout(r, 100));
       },
       title: 'Navigasi Fitur Utama',
       body: 'Empat kartu navigasi cepat: Mood Tracker (lacak emosi), Ruang Jurnal (menulis cerita), Kenali Dirimu (tes kepribadian), dan Dashboard (medali & statistik). Klik kartu mana saja untuk ke fitur tersebut.'
@@ -264,8 +213,9 @@ const Tour = (() => {
   // ─────────────────────────────────────────
   let state = { step: 0, active: false };
   let spotlightEl = null;
-  let tooltipEl   = null;
+  let tooltipEl = null;
   let resizeTimer = null;
+  let isProgrammaticChatClose = false;
 
   // ─────────────────────────────────────────
   // STORAGE HELPERS
@@ -274,14 +224,14 @@ const Tour = (() => {
     try {
       localStorage.setItem(KEY_RUNNING, 'true');
       localStorage.setItem(KEY_STEP, String(step));
-    } catch(e) {}
+    } catch (e) { }
   }
 
   function clearRunning() {
     try {
       localStorage.removeItem(KEY_RUNNING);
       localStorage.removeItem(KEY_STEP);
-    } catch(e) {}
+    } catch (e) { }
   }
 
   function isRunning() {
@@ -293,7 +243,7 @@ const Tour = (() => {
   }
 
   function setDone() {
-    try { localStorage.setItem(KEY_DONE, 'true'); } catch(e) {}
+    try { localStorage.setItem(KEY_DONE, 'true'); } catch (e) { }
   }
 
   function isDone() {
@@ -301,7 +251,7 @@ const Tour = (() => {
   }
 
   function clearDone() {
-    try { localStorage.removeItem(KEY_DONE); } catch(e) {}
+    try { localStorage.removeItem(KEY_DONE); } catch (e) { }
   }
 
   // ─────────────────────────────────────────
@@ -309,12 +259,12 @@ const Tour = (() => {
   // ─────────────────────────────────────────
   function detectPage() {
     const f = window.location.pathname.split('/').pop() || '';
-    if (f === 'beranda.html')      return 'beranda';
+    if (f === 'beranda.html') return 'beranda';
     if (f === 'mood-tracker.html') return 'mood-tracker';
-    if (f === 'jurnal.html')       return 'jurnal';
-    if (f === 'kenali.html')       return 'kenali';
-    if (f === 'dashboard.html')    return 'dashboard';
-    if (f === 'profil.html')       return 'profil';
+    if (f === 'jurnal.html') return 'jurnal';
+    if (f === 'kenali.html') return 'kenali';
+    if (f === 'dashboard.html') return 'dashboard';
+    if (f === 'profil.html') return 'profil';
     return '';
   }
 
@@ -336,7 +286,7 @@ const Tour = (() => {
   }
 
   function handleScroll() {
-    if (!state.active || isProgrammaticScrolling) return;
+    if (!state.active || isProgrammaticScrolling || activeWatchedUserModal || getActiveUserModal()) return;
     const sd = STEPS[state.step];
     if (!sd) return;
     const el = getTargetEl(sd.target);
@@ -375,41 +325,50 @@ const Tour = (() => {
   // ─────────────────────────────────────────
   function closeActiveModals() {
     try {
-      const ci = document.getElementById('checkin-modal');
-      if (ci) ci.classList.remove('active');
-
-      document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
-
-      const onb = document.getElementById('onboarding-modal');
-      if (onb && onb.style.display !== 'none') {
-        onb.classList.add('opacity-0', 'pointer-events-none');
-        onb.classList.remove('opacity-100');
-        setTimeout(() => { onb.style.display = 'none'; }, 300);
-      }
-
-      const sm = document.getElementById('streak-modal');
-      if (sm) sm.classList.remove('active');
-
       const sp = document.getElementById('settings-popup-overlay');
       if (sp) sp.remove();
-    } catch(e) {}
+      document.querySelectorAll('#settings-popup-overlay').forEach(el => el.remove());
+    } catch (e) { }
   }
 
   function isAnyModalOpen() {
+    // 1. Onboarding modal: open if displayed and not fading out
+    const onb = document.getElementById('onboarding-modal');
+    if (onb && onb.style.display !== 'none' && !onb.classList.contains('opacity-0')) return true;
+    if (window._isOnboardingClosing) return true;
+
+    // 2. Check-in modal: open ONLY if it has class 'active'
+    const ci = document.getElementById('checkin-modal');
+    if (ci && ci.classList.contains('active')) return true;
+    if (window._isCheckInPending) return true;
+
+    // 3. Welcome screen: open if present and not faded out
     const welcome = document.getElementById('welcome-screen');
     if (welcome && !welcome.classList.contains('fade-out')) return true;
 
-    const onb = document.getElementById('onboarding-modal');
-    if (onb && onb.style.display !== 'none' && !onb.classList.contains('opacity-0')) return true;
+    // 4. Any modal overlay active (excluding tour UI)
+    const activeModals = document.querySelectorAll('.modal-overlay.active, .modal.active, .modal-card.active');
+    for (const m of activeModals) {
+      if (m.id !== 'tour-root' && !m.classList.contains('tour-element')) {
+        return true;
+      }
+    }
 
-    const ci = document.getElementById('checkin-modal');
-    if (ci && ci.classList.contains('active')) return true;
-
-    if (document.querySelectorAll('.modal-overlay.active').length > 0) return true;
-
+    // 5. Streak and celebration modals
     const sm = document.getElementById('streak-modal');
     if (sm && sm.classList.contains('active')) return true;
 
+    const shareSm = document.getElementById('share-streak-modal');
+    if (shareSm && shareSm.classList.contains('active')) return true;
+
+    const celeb = document.querySelector('.celebration-overlay');
+    if (celeb && !celeb.classList.contains('closing')) return true;
+
+    // 6. Settings popup: only if it has class 'active'
+    const sp = document.getElementById('settings-popup-overlay');
+    if (sp && sp.classList.contains('active')) return true;
+
+    // 7. Pending interventions
     if (window._isCapsuleInterventionPending || window._isStreakMilestonePending) return true;
 
     return false;
@@ -470,12 +429,13 @@ const Tour = (() => {
     stopUserModalWatcher();
     removeTargetNavInterceptor();
     removeTourTargetEl();
+    document.body.classList.remove('tour-modal-open');
     document.getElementById('tour-overlay-blocker')?.remove();
     document.getElementById('tour-spotlight')?.remove();
     document.getElementById('tour-tooltip')?.remove();
     overlayBlockerEl = null;
     spotlightEl = null;
-    tooltipEl   = null;
+    tooltipEl = null;
     document.removeEventListener('keydown', handleKeydown);
   }
 
@@ -532,7 +492,7 @@ const Tour = (() => {
     try {
       el.removeEventListener('click', fn, true);
       el.querySelectorAll('a[href]').forEach(a => a.removeEventListener('click', fn, true));
-    } catch(e) {}
+    } catch (e) { }
     targetNavInterceptor = null;
   }
 
@@ -553,28 +513,23 @@ const Tour = (() => {
     el.classList.add('tour-target-el');
     currentTourTargetEl = el;
 
-    // Elevasikan seluruh parent ke z-index 10401 agar tidak terperangkap stacking context
+    // Elemen fixed/floating tidak perlu rantai parent dinaikkan ke z-index 10401
+    const cs = window.getComputedStyle(el);
+    if (cs.position === 'fixed') {
+      return;
+    }
+
+    // Elevasikan parent terdekat (card/section) ke z-index 10401
+    // Stop sebelum .container dan .page-wrapper agar card lain di halaman tidak ikut terangkat ke z-index 10401
     let p = el.parentElement;
     while (p && p !== document.body && p !== document.documentElement) {
+      if (p.classList.contains('page-wrapper') || p.classList.contains('container') || p.tagName === 'BODY' || p.tagName === 'HTML') {
+        break;
+      }
       p.classList.add('tour-target-parent');
       elevatedParents.push(p);
       p = p.parentElement;
     }
-
-    // Saat tombol diklik: LANGSUNG sembunyikan semua tour UI.
-    // userModalWatcher yang sudah ada akan mendeteksi popup/modal/quiz terbuka,
-    // lalu memanggil _next() otomatis saat ditutup.
-    const onTargetClick = () => {
-      if (!state.active) return;
-      removeTourTargetEl();
-      hideSpotlight();
-      if (tooltipEl) tooltipEl.classList.add('tour-hidden');
-      if (overlayBlockerEl) overlayBlockerEl.style.display = 'none';
-      unlockScroll();
-    };
-
-    el.addEventListener('click', onTargetClick);
-    currentTourTargetClickFn = onTargetClick;
   }
 
   function removeTourTargetEl() {
@@ -587,7 +542,7 @@ const Tour = (() => {
       currentTourTargetEl = null;
     }
     elevatedParents.forEach(p => {
-      try { p.classList.remove('tour-target-parent'); } catch(e) {}
+      try { p.classList.remove('tour-target-parent'); } catch (e) { }
     });
     elevatedParents = [];
 
@@ -617,7 +572,7 @@ const Tour = (() => {
             }
           }
         }
-      } catch(e) {}
+      } catch (e) { }
     }
     return null;
   }
@@ -628,9 +583,9 @@ const Tour = (() => {
   function renderTooltip(stepData, stepIdx, total) {
     if (!tooltipEl) return;
 
-    const isCenter   = stepData.position === 'center';
+    const isCenter = stepData.position === 'center';
     const showMascot = isCenter || !!stepData.mascot;
-    const isLast     = stepIdx === total - 1;
+    const isLast = stepIdx === total - 1;
 
     const dots = Array.from({ length: total }, (_, i) =>
       `<span class="tour-dot${i === stepIdx ? ' active' : ''}"></span>`
@@ -645,7 +600,7 @@ const Tour = (() => {
 
     const nextClass = isLast ? 'tour-btn-next tour-btn-finish' : 'tour-btn-next';
     const nextLabel = isLast ? 'Selesai!' : 'Lanjut';
-    const nextIcon  = isLast ? 'check_circle' : 'arrow_forward';
+    const nextIcon = isLast ? 'check_circle' : 'arrow_forward';
 
     tooltipEl.innerHTML = `
       ${!isCenter ? '<div class="tour-arrow" id="tour-arrow"></div>' : ''}
@@ -722,21 +677,34 @@ const Tour = (() => {
     if (!spotlightEl) return;
     spotlightEl.style.opacity = '0';
     spotlightEl.style.display = 'none';
+    spotlightEl.style.visibility = 'hidden';
+    spotlightEl.style.pointerEvents = 'none';
     // Sembunyikan overlay blocker juga agar modal/konten bisa berinteraksi
-    if (overlayBlockerEl) overlayBlockerEl.style.display = 'none';
+    if (overlayBlockerEl) {
+      overlayBlockerEl.style.display = 'none';
+      overlayBlockerEl.style.pointerEvents = 'none';
+    }
   }
 
   function showOverlayBlocker() {
-    if (overlayBlockerEl) overlayBlockerEl.style.display = '';
+    if (overlayBlockerEl) {
+      overlayBlockerEl.style.display = '';
+      overlayBlockerEl.style.pointerEvents = '';
+    }
   }
 
   function updateSpotlight(targetEl) {
     if (!spotlightEl) return;
+    if (activeWatchedUserModal || getActiveUserModal()) {
+      hideSpotlight();
+      return;
+    }
     if (!targetEl) {
       // Step center: sembunyikan spotlight box tapi overlay blocker tetap aktif
       // dengan dark backdrop karena tidak ada box-shadow dari spotlight
       spotlightEl.style.opacity = '0';
       spotlightEl.style.display = 'none';
+      spotlightEl.style.visibility = 'hidden';
       showOverlayBlocker();
       if (overlayBlockerEl) overlayBlockerEl.classList.add('has-dark-bg');
       return;
@@ -763,6 +731,15 @@ const Tour = (() => {
       return;
     }
 
+    const vh = window.innerHeight;
+    const vw = window.innerWidth;
+
+    // Safety: if target is completely out of viewport, hide spotlight rather than pointing off-screen
+    if (r.top >= vh || r.bottom <= 0) {
+      hideSpotlight();
+      return;
+    }
+
     const isSmallBtn = r.height <= 64;
     const p = isSmallBtn ? 6 : SPOT_PAD;
     let radius = isSmallBtn ? '18px' : '14px';
@@ -772,27 +749,15 @@ const Tour = (() => {
     let width = r.width + p * 2;
     let height = r.height + p * 2;
 
-    // Special handling for Teman Chat modal on mobile (when targeting the chat window itself)
-    if (chatEl && chatEl.classList.contains('active') && (node === chatEl || node.classList?.contains('teman-chat'))) {
-      const vh = window.innerHeight;
-      const vw = window.innerWidth;
-      if (vw <= 768) {
-        const chatRect = chatEl.getBoundingClientRect();
-        top = Math.max(0, chatRect.top - 6);
-        left = 0;
-        width = vw;
-        height = Math.max(0, vh - top);
-        radius = '24px 24px 0 0';
-      }
-    }
-
-    spotlightEl.style.display      = 'block';
-    spotlightEl.style.top          = `${top}px`;
-    spotlightEl.style.left         = `${left}px`;
-    spotlightEl.style.width        = `${Math.max(0, width)}px`;
-    spotlightEl.style.height       = `${Math.max(0, height)}px`;
+    spotlightEl.style.visibility = 'visible';
+    spotlightEl.style.pointerEvents = 'none';
+    spotlightEl.style.display = 'block';
+    spotlightEl.style.top = `${top}px`;
+    spotlightEl.style.left = `${left}px`;
+    spotlightEl.style.width = `${Math.max(0, width)}px`;
+    spotlightEl.style.height = `${Math.max(0, height)}px`;
     spotlightEl.style.borderRadius = radius;
-    spotlightEl.style.opacity      = '1';
+    spotlightEl.style.opacity = '1';
     // Pastikan overlay blocker aktif, tanpa dark bg (box-shadow spotlight yg handle)
     showOverlayBlocker();
     if (overlayBlockerEl) overlayBlockerEl.classList.remove('has-dark-bg');
@@ -804,29 +769,34 @@ const Tour = (() => {
   function positionTooltip(targetEl, position) {
     if (!tooltipEl) return;
 
+    if (activeWatchedUserModal || getActiveUserModal()) {
+      tooltipEl.classList.add('tour-hidden');
+      return;
+    }
+
     const chatEl = document.getElementById('teman-chat');
     if (chatEl && targetEl && (targetEl === chatEl || chatEl.contains(targetEl)) && !chatEl.classList.contains('active')) {
       tooltipEl.classList.add('tour-hidden');
       return;
     }
 
-    const vw  = window.innerWidth;
-    const vh  = window.innerHeight;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
     const isMobile = vw <= 768;
     const pad = isMobile ? 12 : TIP_GAP;
-    const TW  = tooltipEl.offsetWidth  || (isMobile ? Math.min(350, vw - 24) : 360);
-    const TH  = tooltipEl.offsetHeight || 200;
+    const TW = tooltipEl.offsetWidth || (isMobile ? Math.min(350, vw - 24) : 360);
+    const TH = tooltipEl.offsetHeight || 200;
 
     let top, left;
     const arrowEl = tooltipEl.querySelector('#tour-arrow');
 
     if (!targetEl || position === 'center') {
-      top  = (vh - TH) / 2;
+      top = (vh - TH) / 2;
       left = (vw - TW) / 2;
       if (arrowEl) arrowEl.style.display = 'none';
     } else {
-      const r   = targetEl.getBoundingClientRect();
-      const p   = SPOT_PAD;
+      const r = targetEl.getBoundingClientRect();
+      const p = SPOT_PAD;
 
       if (arrowEl) arrowEl.style.display = isMobile ? 'none' : 'block';
 
@@ -862,17 +832,17 @@ const Tour = (() => {
         }
 
         if (pos === 'bottom') {
-          top  = r.bottom + p + pad;
+          top = r.bottom + p + pad;
           if (arrowEl) arrowEl.className = 'tour-arrow arrow-top';
         } else if (pos === 'top') {
-          top  = r.top - p - pad - TH;
+          top = r.top - p - pad - TH;
           if (arrowEl) arrowEl.className = 'tour-arrow arrow-bottom';
         } else if (pos === 'right') {
-          top  = (r.top + r.bottom) / 2 - TH / 2;
+          top = (r.top + r.bottom) / 2 - TH / 2;
           left = r.right + p + pad;
           if (arrowEl) arrowEl.className = 'tour-arrow arrow-right';
         } else {
-          top  = (r.top + r.bottom) / 2 - TH / 2;
+          top = (r.top + r.bottom) / 2 - TH / 2;
           left = r.left - p - pad - TW;
           if (arrowEl) arrowEl.className = 'tour-arrow arrow-left';
         }
@@ -904,7 +874,7 @@ const Tour = (() => {
       top = Math.max(pad, Math.min(top, vh - TH - pad));
     }
 
-    tooltipEl.style.top  = `${Math.max(pad, top)}px`;
+    tooltipEl.style.top = `${Math.max(pad, top)}px`;
     tooltipEl.style.left = `${Math.max(pad, left)}px`;
   }
 
@@ -914,12 +884,19 @@ const Tour = (() => {
   // ─────────────────────────────────────────
   async function scrollToTarget(targetEl, position = 'bottom') {
     if (!targetEl) return;
-    const r      = targetEl.getBoundingClientRect();
-    const vh     = window.innerHeight;
+
+    // Fixed elements (like TemanChat, VoiceOrb, etc.) do NOT move with document scroll!
+    const cs = window.getComputedStyle(targetEl);
+    if (cs.position === 'fixed' || targetEl.closest('.teman-chat, #teman-chat, .voice-orb-overlay, [style*="position: fixed"]')) {
+      return;
+    }
+
+    const r = targetEl.getBoundingClientRect();
+    const vh = window.innerHeight;
     const isMobile = window.innerWidth <= 768;
-    const TH     = tooltipEl ? (tooltipEl.offsetHeight || 200) : 200;
-    const pad    = TIP_GAP;
-    const p      = SPOT_PAD;
+    const TH = tooltipEl ? (tooltipEl.offsetHeight || 200) : 200;
+    const pad = TIP_GAP;
+    const p = SPOT_PAD;
 
     let needsScroll = false;
     let targetY = window.scrollY;
@@ -954,8 +931,8 @@ const Tour = (() => {
       document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
 
-      window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
-      await new Promise(res => setTimeout(res, 450));
+      window.scrollTo({ top: Math.max(0, targetY), behavior: 'instant' });
+      await new Promise(res => setTimeout(res, 80));
 
       lockScroll();
       isProgrammaticScrolling = false;
@@ -966,6 +943,8 @@ const Tour = (() => {
   let activeWatcherInterval = null;
   let userModalWatcherTimer = null;
   let activeWatchedUserModal = null;
+  let onbWaitTimer = null;
+  let autoPollTimer = null;
 
   function stopUserModalWatcher() {
     if (userModalWatcherTimer) {
@@ -985,15 +964,17 @@ const Tour = (() => {
     const activeModals = Array.from(document.querySelectorAll('.modal-overlay.active, .modal.active, .modal-card.active'));
     for (const m of activeModals) {
       if (m.id === 'onboarding-modal' || m.id === 'welcome-screen') continue;
+      if (m.id === 'voice-orb-overlay' || m.classList.contains('voice-orb-overlay')) continue;
       return m;
     }
 
     const sp = document.getElementById('settings-popup-overlay');
-    if (sp && document.body.contains(sp)) return sp;
+    if (sp && sp.classList.contains('active')) return sp;
 
-    const vo = document.getElementById('voice-orb-overlay');
-    if (vo && vo.style.display !== 'none' && getComputedStyle(vo).display !== 'none' && getComputedStyle(vo).opacity !== '0') {
-      return vo;
+    // Detect active Teman Chat
+    const chat = document.getElementById('teman-chat');
+    if (chat && chat.classList.contains('active')) {
+      return chat;
     }
 
     // Detect active Kenali or Profil quiz sections
@@ -1029,15 +1010,21 @@ const Tour = (() => {
       if (openModal) {
         if (!activeWatchedUserModal) {
           activeWatchedUserModal = openModal;
-          hideSpotlight();
-          if (tooltipEl) tooltipEl.classList.add('tour-hidden');
+          document.body.classList.add('tour-modal-open');
+          // PENTING: Hapus class tour-target-el & tour-target-parent agar stacking context modal
+          // tidak terhalang atau tertutup oleh card halaman di bawahnya!
+          removeTourTargetEl();
           unlockScroll();
         } else if (activeWatchedUserModal !== openModal) {
           activeWatchedUserModal = openModal;
         }
+        // Pastikan spotlight & tooltip selalu disembunyikan setiap tick selama modal terbuka
+        hideSpotlight();
+        if (tooltipEl) tooltipEl.classList.add('tour-hidden');
       } else {
         if (activeWatchedUserModal) {
           activeWatchedUserModal = null;
+          document.body.classList.remove('tour-modal-open');
           lockScroll();
           setTimeout(() => {
             if (state.active) {
@@ -1046,7 +1033,7 @@ const Tour = (() => {
           }, 300);
         }
       }
-    }, 200);
+    }, 100);
   }
 
   let activeTargetObserver = null;
@@ -1064,7 +1051,7 @@ const Tour = (() => {
     if (!targetEl) return;
 
     activeTargetObserver = new MutationObserver(() => {
-      if (state.active && spotlightEl) {
+      if (state.active && spotlightEl && !activeWatchedUserModal && !getActiveUserModal()) {
         updateSpotlight(targetEl);
         const sd = STEPS[state.step];
         if (sd) positionTooltip(targetEl, sd.position);
@@ -1080,7 +1067,7 @@ const Tour = (() => {
 
     if (window.ResizeObserver) {
       activeResizeObserver = new ResizeObserver(() => {
-        if (state.active && spotlightEl) {
+        if (state.active && spotlightEl && !activeWatchedUserModal && !getActiveUserModal()) {
           updateSpotlight(targetEl);
           const sd = STEPS[state.step];
           if (sd) positionTooltip(targetEl, sd.position);
@@ -1103,6 +1090,14 @@ const Tour = (() => {
       clearInterval(activeWatcherInterval);
       clearTimeout(activeWatcherInterval);
       activeWatcherInterval = null;
+    }
+    if (onbWaitTimer) {
+      clearInterval(onbWaitTimer);
+      onbWaitTimer = null;
+    }
+    if (autoPollTimer) {
+      clearTimeout(autoPollTimer);
+      autoPollTimer = null;
     }
     if (activeTargetObserver) {
       activeTargetObserver.disconnect();
@@ -1130,7 +1125,7 @@ const Tour = (() => {
     if (typeof stepData.beforeRender === 'function') {
       try {
         await stepData.beforeRender();
-      } catch(e) {}
+      } catch (e) { }
       await new Promise(r => setTimeout(r, 150));
     }
 
@@ -1164,6 +1159,17 @@ const Tour = (() => {
       attachTargetNavInterceptor(targetEl);
     }
 
+    if (stepData.advanceOnClick && targetEl) {
+      const onTargetClick = () => {
+        setTimeout(() => {
+          if (state.active && state.step === globalStep) {
+            _next();
+          }
+        }, 180);
+      };
+      targetEl.addEventListener('click', onTargetClick, { once: true });
+    }
+
     if (stepData.noTooltip) {
       if (tooltipEl) tooltipEl.classList.add('tour-hidden');
     } else {
@@ -1180,7 +1186,7 @@ const Tour = (() => {
       activeAutoTimer = setTimeout(() => {
         if (!state.active) return;
 
-        try { stepData.autoOpen(); } catch(e) {}
+        try { stepData.autoOpen(); } catch (e) { }
 
         if (stepData.autoAdvance) {
           const advDelay = stepData.autoAdvanceDelayMs || 2500;
@@ -1219,6 +1225,11 @@ const Tour = (() => {
           }, 300);
         }
       }, delay);
+    } else if (stepData.autoAdvance) {
+      const advDelay = stepData.autoAdvanceDelayMs || 2500;
+      activeAutoTimer = setTimeout(() => {
+        if (state.active) _next();
+      }, advDelay);
     }
   }
 
@@ -1228,8 +1239,8 @@ const Tour = (() => {
   function navigateTo(page, step) {
     clearAutoTriggers();
     setRunning(step);
-    if (tooltipEl)    tooltipEl.classList.add('tour-hidden');
-    if (spotlightEl)  spotlightEl.style.opacity = '0';
+    if (tooltipEl) tooltipEl.classList.add('tour-hidden');
+    if (spotlightEl) spotlightEl.style.opacity = '0';
     setTimeout(() => {
       window.location.href = PAGE_URL[page] || (page + '.html');
     }, TRANSITION_MS + 30);
@@ -1241,8 +1252,9 @@ const Tour = (() => {
   // ─────────────────────────────────────────
   function _launch(globalStep) {
     clearAutoTriggers();
+    closeActiveModals();
     if (state.active) { destroyUI(); unlockScroll(); }
-    state.step   = globalStep;
+    state.step = globalStep;
     state.active = true;
     setRunning(globalStep);
     lockScroll();
@@ -1263,17 +1275,16 @@ const Tour = (() => {
     clearDone();
     closeActiveModals();
 
-    const firstPage  = STEPS[0].page;
-    const currPage   = detectPage();
-
-    if (firstPage !== currPage) {
-      // Navigate to beranda first
-      setRunning(0);
-      setTimeout(() => { window.location.href = PAGE_URL[firstPage]; }, 120);
-      return;
+    const currPage = detectPage();
+    let startStep = 0;
+    if (currPage && currPage !== 'beranda') {
+      const pageFirstStep = STEPS.findIndex(s => s.page === currPage);
+      if (pageFirstStep !== -1) {
+        startStep = pageFirstStep;
+      }
     }
 
-    _launch(0);
+    _launch(startStep);
   }
 
   // ─────────────────────────────────────────
@@ -1296,7 +1307,7 @@ const Tour = (() => {
     setDone();
     unlockScroll();
 
-    if (tooltipEl)   tooltipEl.classList.add('tour-hidden');
+    if (tooltipEl) tooltipEl.classList.add('tour-hidden');
     if (spotlightEl) spotlightEl.style.opacity = '0';
 
     setTimeout(destroyUI, TRANSITION_MS + 50);
@@ -1306,7 +1317,7 @@ const Tour = (() => {
       if (typeof Animations !== 'undefined' && Animations.showToast) {
         Animations.showToast('Tour selesai! Selamat menjelajahi Tenang.in', 'success');
       }
-    } catch(e) {}
+    } catch (e) { }
   }
 
   // ─────────────────────────────────────────
@@ -1323,36 +1334,23 @@ const Tour = (() => {
   // TEMAN CHAT CLOSED HANDLER
   // ─────────────────────────────────────────
   function onTemanChatClosed() {
+    if (isProgrammaticChatClose) return;
     if (!state.active) return;
     const sd = STEPS[state.step];
     if (!sd) return;
 
+    // Jika modal watcher sedang memantau, biarkan watcher yang menangani transisi ke step berikutnya
+    if (activeWatchedUserModal) {
+      return;
+    }
+
     const targetStr = sd.target || '';
-    if (targetStr.includes('teman-chat') || targetStr.includes('teman-voice-btn') || targetStr.includes('quick-teman-ai')) {
-      clearAutoTriggers();
-      if (typeof VoiceOrb !== 'undefined' && VoiceOrb.close) {
-        VoiceOrb.close();
-      }
-      if (spotlightEl) spotlightEl.style.opacity = '0';
-      if (tooltipEl) tooltipEl.classList.add('tour-hidden');
-
-      // Find the next step that is not a chat/voice step (i.e. step 8: Navigasi Fitur Utama)
-      let nextStep = state.step + 1;
-      while (nextStep < STEPS.length) {
-        const nextTarget = STEPS[nextStep].target || '';
-        if (!nextTarget.includes('teman-chat') && !nextTarget.includes('teman-voice-btn') && !nextTarget.includes('voice-orb')) {
-          break;
-        }
-        nextStep++;
-      }
-
+    if (targetStr.includes('quick-teman-ai')) {
       setTimeout(() => {
-        if (state.active) {
-          state.step = nextStep;
-          setRunning(nextStep);
-          renderStep(nextStep);
+        if (state.active && !activeWatchedUserModal) {
+          _next();
         }
-      }, 120);
+      }, 200);
     }
   }
 
@@ -1399,9 +1397,9 @@ const Tour = (() => {
   function handleKeydown(e) {
     if (!state.active) return;
     if (activeWatchedUserModal) return;
-    if (e.key === 'Escape')     stop();
+    if (e.key === 'Escape') stop();
     if (e.key === 'ArrowRight') _next();
-    if (e.key === 'ArrowLeft')  _prev();
+    if (e.key === 'ArrowLeft') _prev();
   }
 
   function handleResize() {
@@ -1423,9 +1421,32 @@ const Tour = (() => {
     const currPage = detectPage();
     if (!currPage) return;
 
-    // ① Resume ongoing tour
+    if (onbWaitTimer) {
+      clearInterval(onbWaitTimer);
+      onbWaitTimer = null;
+    }
+    if (autoPollTimer) {
+      clearTimeout(autoPollTimer);
+      autoPollTimer = null;
+    }
+
+    const isNewUserDone = localStorage.getItem('isNewUser') === 'false';
+
+    // If new user has NOT finished onboarding, wait politely for onboarding to complete!
+    if (!isNewUserDone) {
+      onbWaitTimer = setInterval(() => {
+        if (localStorage.getItem('isNewUser') === 'false') {
+          clearInterval(onbWaitTimer);
+          onbWaitTimer = null;
+          autoStart();
+        }
+      }, 500);
+      return;
+    }
+
+    // ① Resume ongoing tour (only if onboarding was already completed)
     if (isRunning()) {
-      const savedStep     = getSavedStep();
+      const savedStep = getSavedStep();
       const savedStepData = STEPS[savedStep];
 
       if (!savedStepData) { clearRunning(); return; }
@@ -1436,18 +1457,15 @@ const Tour = (() => {
         return;
       }
 
-      // Wait for any modals to close, then launch
-      let polls = 0;
+      // Wait politely for any modals to close, NEVER force-kill modals!
       const poll = () => {
-        polls++;
-        if (polls > 20 || !isAnyModalOpen()) {
-          closeActiveModals();
+        if (!isAnyModalOpen()) {
           setTimeout(() => _launch(savedStep), 300);
         } else {
-          setTimeout(poll, 500);
+          autoPollTimer = setTimeout(poll, 500);
         }
       };
-      setTimeout(poll, 600);
+      autoPollTimer = setTimeout(poll, 600);
       return;
     }
 
@@ -1458,33 +1476,24 @@ const Tour = (() => {
 
       const poll = () => {
         maxTimeoutPolls++;
-        if (maxTimeoutPolls > 300) return; // 150s absolute safety limit
-
-        const isNewUserDone = localStorage.getItem('isNewUser') === 'false';
-        const isNewUserRaw = localStorage.getItem('isNewUser');
-
-        // For first-ever users: wait for onboarding to complete
-        if ((isNewUserRaw === null || isNewUserRaw === undefined) && !isNewUserDone) {
-          setTimeout(poll, 500);
-          return;
-        }
+        if (maxTimeoutPolls > 600) return; // 300s safety limit
 
         if (isAnyModalOpen()) {
           quietPolls = 0; // Reset quiet count as long as any modal is open or pending
-          setTimeout(poll, 500);
+          autoPollTimer = setTimeout(poll, 500);
         } else {
           quietPolls++;
           if (quietPolls >= 3) {
-            // 1.5s of sustained quiet (no modal open or pending)
+            // 1.5s of sustained quiet (all modals closed and settled)
             if (!isRunning() && !isDone()) {
               start();
             }
-            return; // Tour launched or finished
+            return;
           }
-          setTimeout(poll, 500); // Keep polling until sustained quiet condition is met
+          autoPollTimer = setTimeout(poll, 500);
         }
       };
-      setTimeout(poll, 1500);
+      autoPollTimer = setTimeout(poll, 800);
     }
   }
 

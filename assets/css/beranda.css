@@ -1076,12 +1076,18 @@ html.dark-mode .nudge-banner-title,
 body.dark-mode .nudge-banner-title,
 html.dark-mode .mood-card-label,
 body.dark-mode .mood-card-label,
-html.dark-mode h1, body.dark-mode h1,
-html.dark-mode h2, body.dark-mode h2,
-html.dark-mode h3, body.dark-mode h3,
-html.dark-mode h4, body.dark-mode h4,
-html.dark-mode [style*="color: #0F172A"], body.dark-mode [style*="color: #0F172A"],
-html.dark-mode [style*="color:#0F172A"], body.dark-mode [style*="color:#0F172A"] {
+html.dark-mode h1,
+body.dark-mode h1,
+html.dark-mode h2,
+body.dark-mode h2,
+html.dark-mode h3,
+body.dark-mode h3,
+html.dark-mode h4,
+body.dark-mode h4,
+html.dark-mode [style*="color: #0F172A"],
+body.dark-mode [style*="color: #0F172A"],
+html.dark-mode [style*="color:#0F172A"],
+body.dark-mode [style*="color:#0F172A"] {
   color: #F8FAFC !important;
 }
 
@@ -1135,6 +1141,7 @@ body.dark-mode .btn-mood-cta {
 
 /* ---- Desktop Container for Beranda (960px Max-Width) ---- */
 @media (min-width: 1025px) {
+
   .beranda-page .container,
   .container-beranda {
     max-width: 960px !important;

@@ -43,8 +43,16 @@ body.tour-active {
    mencegah klik yg navigate ke halaman lain.
    ───────────────────────────────────────── */
 .tour-target-el {
-  position: relative !important;
+  position: relative;
   z-index: 10401 !important;
+}
+
+/* Pertahankan position: fixed untuk elemen fixed/floating */
+.tour-target-el.teman-chat,
+#teman-chat.tour-target-el,
+.voice-orb-overlay.tour-target-el,
+.voice-orb-circle.tour-target-el {
+  position: fixed !important;
 }
 
 /* Elevasikan seluruh rantai parent agar stacking context tidak mengurung z-index */
@@ -57,6 +65,108 @@ body.tour-active {
 .tour-target-el,
 .tour-target-el * {
   pointer-events: auto !important;
+}
+
+/* ─────────────────────────────────────────
+   NAVBAR & BOTTOM NAV
+   Harus selalu berada di atas scrollable page
+   content (z-index 10450) agar card halaman
+   tidak pernah menutupi navbar saat di-scroll.
+   ───────────────────────────────────────── */
+body.tour-active .navbar {
+  z-index: 10450 !important;
+  pointer-events: none;
+}
+
+body.tour-active .bottom-nav {
+  z-index: 10450 !important;
+  pointer-events: none;
+}
+
+/* Jika elemen di dalam navbar/bottom-nav disorot oleh tour, aktifkan pointer events */
+body.tour-active .navbar .tour-target-el,
+body.tour-active .navbar .tour-target-el *,
+body.tour-active .bottom-nav .tour-target-el,
+body.tour-active .bottom-nav .tour-target-el * {
+  pointer-events: auto !important;
+}
+
+/* ─────────────────────────────────────────
+   ACTIVE USER MODALS & POPUPS
+   Pastikan popup yg dibuka user saat tour
+   (misal tombol Bagikan, Streak, Teman Chat, dsb)
+   tampil di layer terdepan di atas UI tour.
+   ───────────────────────────────────────── */
+body.tour-active .modal-overlay.active,
+body.tour-active .modal.active,
+body.tour-active .modal-card.active,
+body.tour-active #share-chart-modal.active,
+body.tour-active #streak-modal.active,
+body.tour-active #share-streak-modal.active,
+body.tour-active #low-mood-modal.active,
+body.tour-active #settings-popup-overlay.active,
+body.tour-active #badge-detail-modal.active,
+body.tour-active #prompt-category-modal.active,
+body.tour-active #jurnal-success-modal.active,
+body.tour-active #share-result-modal.active,
+body.tour-active .teman-chat.active,
+body.tour-active #teman-chat.active,
+body.tour-active .voice-orb-overlay.active,
+body.tour-active #voice-orb-overlay.active,
+body.tour-active .celebration-overlay:not(.closing) {
+  z-index: 10700 !important;
+}
+
+body.tour-active .modal-overlay.active .modal,
+body.tour-active #share-chart-modal.active .modal,
+body.tour-active #streak-modal.active .modal,
+body.tour-active #share-streak-modal.active .modal,
+body.tour-active #low-mood-modal.active .modal {
+  position: relative;
+  z-index: 10701 !important;
+}
+
+/* ─────────────────────────────────────────
+   SEMBUNYIKAN SPOTLIGHT, TOOLTIP, & BLOCKER
+   SAAT ADA USER MODAL ATAU KUIS BERLANGSUNG
+   ───────────────────────────────────────── */
+body.tour-active:has(.modal-overlay.active) .tour-spotlight-box,
+body.tour-active:has(.modal.active) .tour-spotlight-box,
+body.tour-active:has(#share-chart-modal.active) .tour-spotlight-box,
+body.tour-active:has(#streak-modal.active) .tour-spotlight-box,
+body.tour-active:has(#share-streak-modal.active) .tour-spotlight-box,
+body.tour-active:has(#low-mood-modal.active) .tour-spotlight-box,
+body.tour-active:has(#settings-popup-overlay.active) .tour-spotlight-box,
+body.tour-active:has(#badge-detail-modal.active) .tour-spotlight-box,
+body.tour-active:has(#prompt-category-modal.active) .tour-spotlight-box,
+body.tour-active:has(#jurnal-success-modal.active) .tour-spotlight-box,
+body.tour-active:has(#share-result-modal.active) .tour-spotlight-box,
+body.tour-active:has(#strength-detail-modal.active) .tour-spotlight-box,
+body.tour-active:has(.teman-chat.active) .tour-spotlight-box,
+body.tour-active:has(.celebration-overlay:not(.closing)) .tour-spotlight-box,
+body.tour-active.tour-modal-open .tour-spotlight-box,
+body.tour-active:has(.modal-overlay.active) .tour-tooltip,
+body.tour-active:has(.modal.active) .tour-tooltip,
+body.tour-active:has(#share-chart-modal.active) .tour-tooltip,
+body.tour-active:has(#streak-modal.active) .tour-tooltip,
+body.tour-active:has(#share-streak-modal.active) .tour-tooltip,
+body.tour-active:has(#low-mood-modal.active) .tour-tooltip,
+body.tour-active:has(#settings-popup-overlay.active) .tour-tooltip,
+body.tour-active:has(#badge-detail-modal.active) .tour-tooltip,
+body.tour-active:has(#prompt-category-modal.active) .tour-tooltip,
+body.tour-active:has(#jurnal-success-modal.active) .tour-tooltip,
+body.tour-active:has(#share-result-modal.active) .tour-tooltip,
+body.tour-active:has(#strength-detail-modal.active) .tour-tooltip,
+body.tour-active:has(.teman-chat.active) .tour-tooltip,
+body.tour-active:has(.celebration-overlay:not(.closing)) .tour-tooltip,
+body.tour-active.tour-modal-open .tour-tooltip,
+body.tour-active:has(.modal-overlay.active) .tour-overlay-blocker,
+body.tour-active:has(.modal.active) .tour-overlay-blocker,
+body.tour-active.tour-modal-open .tour-overlay-blocker {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 /* ─────────────────────────────────────────
